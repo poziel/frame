@@ -1,0 +1,8 @@
+<script setup lang="ts">
+import { ref } from "vue";
+import FrameButton from "./FrameButton.vue";
+withDefaults(defineProps<{ eyebrow?: string; title: string; description: string; usage: string; code: string; showPreview?: boolean; properties?: readonly { name: string; description: string; type?: string; reference?: string }[] }>(), { showPreview: true });
+const copied = ref("");
+async function copy(code: string) { try { await navigator.clipboard.writeText(code); copied.value = "Copied"; } catch { copied.value = "Select the example text to copy it."; } }
+</script>
+<template><article class="component-showcase"><header><p v-if="eyebrow" class="showcase-eyebrow">{{ eyebrow }}</p><h1>{{ title }}</h1><p>{{ description }}</p></header><slot name="navigation"/><section v-if="showPreview !== false" aria-label="Live preview" class="showcase-section"><div class="showcase-section-heading"><h2>Try it</h2><slot name="controls"/></div><div class="showcase-preview"><slot/></div><div class="showcase-feedback" aria-live="polite"><slot name="feedback"/></div></section><section class="showcase-section"><h2>How it works</h2><p>{{ usage }}</p><table v-if="properties?.length"><thead><tr><th>Property / API</th><th>Type</th><th>Behavior</th></tr></thead><tbody><tr v-for="property in properties" :key="property.name"><td><code>{{ property.name }}</code></td><td><slot name="property-type" :property="property"><code>{{ property.type }}</code></slot></td><td>{{ property.description }}</td></tr></tbody></table></section><section class="showcase-section"><div class="showcase-section-heading"><h2>Code example</h2><FrameButton @click="copy(code)">Copy code</FrameButton></div><pre><code>{{ code }}</code></pre><p role="status">{{ copied }}</p></section></article></template>

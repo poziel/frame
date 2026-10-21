@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "tests/library-consumer.ts"
+  ],
+  "references": [],
+  "compilerOptions": {
+    "paths": {
+      "@frame/core": [
+        "./packages/frame/dist/types/frame/index.d.ts"
+      ]
+    }
+  }
+}

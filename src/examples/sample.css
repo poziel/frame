@@ -1,0 +1,47 @@
+.sample-content { padding: 12px; font-size: 12px; line-height: 1.7; }
+.side-content > .sample-content { padding: 4px 0; }
+.sample-content h3 { margin: 0 0 8px; font-size: 12px; font-weight: 500; }
+.sample-content p { color: #9ba5aa; margin: 0 0 14px; max-width: 620px; }
+.sample-button { display: block; padding: 5px 9px; border: 1px solid #3e464a; border-radius: 4px; margin-bottom: 9px; font-size: 11px; text-align: left; background: #23292c; }
+.sample-button:hover { background: #30383c; border-color: #5c656b; }
+.sample-content .sample-note { margin-top: 20px; font-size: 11px; }
+.sample-content .sample-row { margin: 0; padding: 6px 0; border-bottom: 1px solid #ffffff05; max-width: 620px; font-family: Consolas, monospace; font-size: 11px; }
+.sample-row span { color: #889f91; margin-left: 35px; }
+
+.demo-canvas { width: 100%; padding: 30px clamp(20px, 4vw, 60px); box-sizing: border-box; color: #d0d2d4; }
+.demo-canvas > header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.demo-canvas > header > button { margin-left: auto; }
+.demo-eyebrow { font-size: 10px; letter-spacing: .12em; color: #8f9ba1; margin: 0 0 8px; }
+.demo-canvas h1 { font-size: 23px; font-weight: 500; margin: 0; }
+.demo-intro { color: #8f9ba1; line-height: 1.6; margin: 22px 0; }
+.demo-document { border-top: 1px solid #30363a; padding: 24px 0; max-width: 700px; }
+.demo-document h2 { font-size: 26px; font-weight: 400; line-height: 1.3; }
+.demo-document p { line-height: 1.7; }
+.demo-check { display: flex; gap: 10px; margin: 24px 0; align-items: center; }
+.demo-note { border-left: 2px solid #007acc; padding: 10px 18px; background: #ffffff03; margin: 20px 0; }
+.demo-canvas textarea, .demo-inspector textarea, .demo-inspector select { background: #ffffff05; border: 1px solid #3c4246; border-radius: 3px; color: inherit; padding: 10px; width: 100%; box-sizing: border-box; font: inherit; }
+.demo-canvas > footer { display: flex; align-items: center; justify-content: space-between; color: #8f9ba1; border-top: 1px solid #30363a; padding-top: 14px; }
+.demo-list button { display: flex; gap: 10px; width: 100%; padding: 9px 12px; background: transparent; border: 0; text-align: left; color: inherit; cursor: pointer; }
+.demo-list button:hover, .demo-list button.chosen { background: #ffffff09; }
+.demo-muted { color: #8f9ba1; font-size: 11px; line-height: 1.6; padding: 0 10px; }
+.demo-inspector { padding: 18px 14px; }
+.demo-inspector h2 { font-size: 16px; font-weight: 500; }
+.demo-inspector label { display: block; margin: 20px 0; color: #a4a9ac; }
+.demo-inspector select, .demo-inspector textarea { margin-top: 8px; }
+
+.demo-canvas { position: relative; isolation: isolate; }
+.demo-watermark { position: absolute; width: 280px; height: 280px; right: 20px; bottom: 20px; opacity: .025; filter: grayscale(1); z-index: -1; pointer-events: none; }
+
+.demo-banner { display: flex; align-items: center; gap: 14px; padding: 14px 18px; height: 100%; box-sizing: border-box; flex-wrap: wrap; }
+.demo-banner > div { flex: 1; }
+.demo-banner p { margin: 6px 0 0; color: #8f9ba1; }
+
+.demo-properties { display: grid; grid-template-columns: minmax(100px, 160px) minmax(0, 1fr); min-height: 100%; padding: 26px; gap: 30px; }
+.demo-properties nav { border-right: 1px solid #2b2b2b; display: flex; flex-direction: column; gap: 16px; padding: 10px; color: #8e9496; }
+.demo-properties nav strong { color: #eee; }
+.demo-properties h1 { font-size: 23px; font-weight: 500; margin: 4px 0 14px; }
+.demo-properties p { color: #8e9496; line-height: 1.7; }
+.demo-properties label { display: block; margin-top: 24px; }
+.demo-properties label > :is(input:not([type=checkbox]), textarea, select) { display: block; width: min(100%, 480px); background: #ffffff05; color: inherit; border: 1px solid #3c4246; border-radius: 3px; padding: 9px; margin-top: 8px; font: inherit; }
+.demo-properties .demo-check { display: flex; }
+@media (max-width: 600px) { .demo-properties { grid-template-columns: minmax(0,1fr); padding: 18px; } .demo-properties nav { display: none; } }

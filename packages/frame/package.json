@@ -1,0 +1,35 @@
+{
+  "name": "@frame/core",
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "main": "./dist/frame.js",
+  "types": "./dist/types/frame/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/frame/index.d.ts",
+      "import": "./dist/frame.js"
+    },
+    "./style.css": "./dist/frame.css"
+  },
+  "files": [
+    "dist",
+    "licenses",
+    "README.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "peerDependencies": {
+    "vue": "^3.5.13"
+  },
+  "dependencies": {
+    "@iconify/vue": "^5.0.4",
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-opener": "^2"
+  },
+  "scripts": {
+    "build": "bun --cwd ../.. run build:library"
+  }
+}
