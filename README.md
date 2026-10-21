@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/frame.svg" alt="Frame logo" width="120" />
+  <img src="assets/frame.svg" alt="Frame logo" width="120" />
 </p>
 
 <h1 align="center">Frame</h1>
@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat" alt="License: MIT" /></a>
-  <a href="packages/frame"><img src="https://img.shields.io/badge/package-%40frame%2Fcore-0098FF?style=flat" alt="Frame core package" /></a>
+  <a href="packages/core"><img src="https://img.shields.io/badge/package-%40frame%2Fcore-0098FF?style=flat" alt="Frame core package" /></a>
   <a href="https://github.dev/poziel/frame"><img src="https://img.shields.io/badge/Open_in-editor-007ACC?style=flat" alt="Open in browser editor" /></a>
 </p>
 
@@ -23,7 +23,7 @@ Consume Frame as a dependency in your own project. Your application stays in its
 - **A configurable workbench.** Arrange side panels, bottom tabs, split workspace panes, and banners. Resize regions and move views between them.
 - **Commands and navigation.** Register application actions with keyboard shortcuts and expose them through menus and Quick actions.
 - **Reusable Vue controls.** Compose buttons, inputs, selects, sliders, tooltips, context menus, and movable, resizable modals.
-- **Optional settings and notifications.** Supply your own settings sections, persistence hooks, and notification content.
+- **Settings and notifications.** Supply your own settings sections and bottom-left notifications with expiry and action buttons. Add optional notification history through [`@frame/extras`](packages/extras).
 - **A desktop host and browser preview.** Tauri provides the native window; preview the Vue shell in a browser, where native window controls are disabled.
 
 Frame takes visual cues from VS Code’s workbench layout, panels, and controls. It is an independent project, not a fork of VS Code or a Microsoft product. It provides no code editor, terminal, file-handling system, or extension runtime.
@@ -45,20 +45,20 @@ Open Quick actions with **Ctrl+P**, **Ctrl+Shift+P**, or **Ctrl+T**. Use **Sampl
 
 ## Use Frame in your application
 
-The reusable package is [`@frame/core`](packages/frame). It exports the shell, controls, registration APIs, and TypeScript declarations. New instances start without the example app’s views, settings sections, or notifications.
+The reusable package is [`@frame/core`](packages/core). It exports the shell, controls, registration APIs, and TypeScript declarations. New instances start without the example app’s views, settings sections, or notifications.
 
 The package is currently private and built locally. From this repository’s root, build and create an installable archive:
 
 ```sh
 bun run build:library
-cd packages/frame
+cd packages/core
 npm pack
 ```
 
 In your separate Vue 3 application, install the generated archive using its actual path:
 
 ```sh
-bun add /path/to/frame/packages/frame/frame-core-0.1.0.tgz
+bun add /path/to/frame/packages/core/frame-core-0.1.0.tgz
 ```
 
 Create the shell in your application’s `App.vue`:
@@ -81,7 +81,7 @@ onBeforeUnmount(() => frame.dispose());
 </template>
 ```
 
-Register your Vue components as views, add commands, and enable settings or notifications when needed. Your host application owns its data, persistence, backend, and native Tauri configuration. See [Reusing Frame](docs/reusing-frame.md) for registration examples and [Package boundaries](docs/package-boundaries.md) for the core and example application split.
+Register your Vue components as views, add commands, and enable settings or notifications when needed. Your host application owns its data, persistence, backend, and native Tauri configuration. See [Reusing Frame](docs/reusing-frame.md) for registration examples and [Package boundaries](docs/package-boundaries.md) for the Core, Extras, and documentation application split.
 
 ## Development
 
@@ -92,7 +92,7 @@ bun run test
 bun run build
 bun run build:library
 bun run check:consumer
-cargo check --manifest-path src-tauri/Cargo.toml --locked
+cargo check --manifest-path packages/docs/src-tauri/Cargo.toml --locked
 ```
 
 `build` checks TypeScript and builds the example frontend. `build:library` produces the core bundle and declarations, copies license notices, and checks for example-content leakage. `check:consumer` checks a consumer fixture against the generated declarations, so build the library first.
@@ -101,6 +101,7 @@ Use `bun run tauri build` to package the example desktop application.
 
 ## Documentation
 
+- [External package integration and validation](docs/external-integration.md)
 - [Shell integration and commands](docs/reusing-frame.md)
 - [Library boundaries and theme design](docs/library-and-themes.md)
 - [Layout controls](docs/layout.md) and [workspace panes](docs/workspace.md)
@@ -109,4 +110,4 @@ Use `bun run tauri build` to package the example desktop application.
 - [Settings and notifications](docs/settings-and-notifications.md)
 - [Icons and custom icon packs](docs/icons.md)
 
-Frame is available under the [MIT license](LICENSE). Microsoft Codicons and other third-party assets retain their own licenses; see [Third-party notices](THIRD_PARTY_NOTICES.md).
+Frame is available under the [MIT license](LICENSE). Microsoft Codicons and other third-party assets retain their own licenses; see [Third-party notices and licenses](docs/licenses/THIRD_PARTY_NOTICES.md).

@@ -44,7 +44,7 @@ Resize sashes support pointer dragging, arrow keys, Home/double-click reset, and
 
 The sample app registers collections, people, inspector, activity, tools, quick picks, toolbar actions, and a contextual working note. All sample state and layout customization is session-local. The save action demonstrates a host command and records an event; it does not persist a document.
 
-The supplied `public/frame.svg` is the source for the title-bar mark, canvas watermark, favicon, demo, and generated Tauri icons. Regenerate desktop icons with `bun run tauri icon public/frame.svg`.
+The supplied `assets/frame.svg` is the source for the title-bar mark, canvas watermark, favicon, demo, and generated Tauri icons. From packages/docs, regenerate desktop icons with `bun run tauri icon ../../assets/frame.svg`.
 
 
 ## Drag feedback and view regions

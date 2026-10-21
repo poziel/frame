@@ -20,3 +20,7 @@ Import FrameIconButton from frame. icon accepts a Codicon/Iconify name or Vue co
 ```
 
 Import ResizablePane from frame. It fills its parent, which must have a bounded size. axis=x places children side by side; axis=y stacks them. modelValue is the first pane size in pixels; without v-model the pane keeps its size internally. min/max constrain the first pane, minSecond reserves room for the second. Small containers clamp both panes to fit. A temporary container shrink does not overwrite the preferred size. defaultSize controls the initial size and double-click/Home reset. The shared ResizeHandle supplies pointer capture, keyboard arrow resizing, and Escape cancellation. No grip dots are displayed in this component.
+
+## Loading
+
+Use FrameLoader for an LDRS animation, or FrameLoading to cover a region while its content stays mounted. See [Loaders and loading regions](loading.md) for API details, async examples, and accessibility behavior.

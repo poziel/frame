@@ -1,12 +1,20 @@
+import { createNotificationHistory, NotificationPanel, NotificationIndicator } from "@frame/extras";
 import { h } from "vue";
-import { createFrame, FrameShell, FrameIcon, addCollection, FrameMenu, FrameModal, FrameSettings, SettingControl, NotificationCenter, FrameIconButton, ResizablePane, FrameButton, FrameTextInput, FrameCheckbox, FrameSelect, ComponentShowcase, FrameSlider, FrameColorPicker, FrameTextArea, SelectOption, SelectSeparator, type SelectItem, type FrameMenuItem } from "@frame/core";
+import { createFrame, FrameShell, FrameIcon, addCollection, FrameMenu, FrameModal, FrameSettings, SettingControl, FrameNotifications, FrameIconButton, ResizablePane, FrameButton, FrameTextInput, FrameCheckbox, FrameSelect, ComponentShowcase, FrameSlider, FrameColorPicker, FrameTextArea, SelectOption, SelectSeparator, type SelectItem, type FrameMenuItem } from "@frame/core";
 
 // Compile against the built package exports, rather than reaching into src/.
+import { FrameLoader, FrameLoading, frameLoaderVariants, type FrameLoaderVariant, type FrameLoadingProps, type FrameLoadingTextPosition } from "@frame/core";
+const loaderVariant: FrameLoaderVariant = "pinwheel";
+const position: FrameLoadingTextPosition = "above";
+const loadingProps: FrameLoadingProps = { active: true, variant: "newtons-cradle", text: "Preparing…", textPosition: position, showLoader: true, showText: true, bgOpacity: .2, strokeLength: .3 };
+void [h(FrameLoader, { variant: loaderVariant, size: 24 }), h(FrameLoading, loadingProps, () => "Content"), frameLoaderVariants];
 export function consumerFixture() {
   const frame = createFrame({ settings: true, notifications: true });
+  const history = createNotificationHistory(frame);
+  void [NotificationPanel, NotificationIndicator, history];
   frame.registerSettingsSection({ id: "general", title: "General", settings: [{ id: "general.name", label: "Name", type: "text", default: "Artoria" }] });
   frame.notify({ title: "Ready", severity: "success", details: "Workspace is available" });
-  void [FrameSettings, SettingControl, NotificationCenter];
+  void [FrameSettings, SettingControl, FrameNotifications];
   const button = h(FrameIconButton, { label: "Open", icon: "folder-opened", hoverHighlight: false, iconRatio: .6, tooltipPlacement: "right", onClick: () => {} });
   const split = h(ResizablePane, { axis: "x", modelValue: 210, min: 140, minSecond: 180 }, { first: () => "Navigation", second: () => "Content" });
   void [button, split, FrameButton, FrameTextInput, FrameCheckbox, ComponentShowcase];

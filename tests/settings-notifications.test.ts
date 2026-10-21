@@ -1,6 +1,6 @@
 import { test, expect } from "bun:test";
-import { createFrame } from "../src/frame/createFrame";
-import { regionIcon } from "../src/frame/layoutIcons";
+import { createFrame } from "../packages/core/src/frame/createFrame";
+import { regionIcon } from "../packages/core/src/frame/layoutIcons";
 test("settings register nested categories, validate edits, notify hosts, and unregister atomically", () => {
   const frame = createFrame(); const changes: unknown[] = [];
   const section = { id: "editor", title: "Editor", children: [{ id: "font", title: "Font", settings: [{ id: "font.size", label: "Size", type: "number" as const, default: 14, min: 8, max: 40, onChange: (value: unknown) => changes.push(value) }] }] };
@@ -28,14 +28,14 @@ test("settings and notifications are isolated and optional, with configurable ma
 });
 test("notifications preserve severity/details and support individual and bulk dismissal", () => {
   const frame = createFrame(); const other = createFrame();
-  const old = frame.notify({ id: "save", title: "Saved", severity: "success", details: "All changes saved", source: "Editor", show: true });
-  expect(frame.notifications.state.open).toBe(true); expect(other.notifications.state.items).toEqual([]);
+  const old = frame.notify({ id: "save", title: "Saved", severity: "success", details: "All changes saved", source: "Editor", duration: 0 });
+  expect(other.notifications.state.items).toEqual([]);
   expect(frame.notifications.state.items[0]?.severity).toBe("success");
   frame.notify({ title: "Failed", severity: "error" }); expect(frame.notifications.state.items[0]?.title).toBe("Failed");
   expect(() => frame.notify({ id: "save", title: "Duplicate" })).toThrow();
   old.close(); frame.notify({ id: "save", title: "Saved again" }); old.close(); expect(frame.notifications.state.items.length).toBe(2);
   frame.notifications.clear(); expect(frame.notifications.state.items).toEqual([]);
-  frame.dispose(); expect(frame.notifications.state.open).toBe(false);
+  frame.dispose(); expect(frame.notifications.state.items).toEqual([]);
 });
 test("layout icons match visibility and physical sidebar positions", () => {
   expect(regionIcon("panel", false)).toBe("layout-panel-off");

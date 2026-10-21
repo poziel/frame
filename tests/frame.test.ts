@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { createFrame } from "../src/frame/createFrame";
+import { createFrame } from "../packages/core/src/frame/createFrame";
 const component = { render: () => null };
 
 describe("Frame contributions", () => {

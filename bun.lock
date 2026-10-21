@@ -4,14 +4,43 @@
   "workspaces": {
     "": {
       "name": "frame",
+      "devDependencies": {
+        "typescript": "~6.0.3",
+        "vue": "^3.5.13",
+        "vue-tsc": "^3.3.5",
+      },
+    },
+    "packages/core": {
+      "name": "@frame/core",
+      "version": "0.1.0",
       "dependencies": {
-        "@iconify-json/codicon": "^1.2.75",
         "@iconify/vue": "^5.0.4",
         "@tauri-apps/api": "^2",
         "@tauri-apps/plugin-opener": "^2",
+        "ldrs": "^1.1.9",
+      },
+      "devDependencies": {
+        "@iconify-json/codicon": "^1.2.75",
+        "@vitejs/plugin-vue": "^6.0.7",
+        "typescript": "~6.0.3",
+        "vite": "^8.0.16",
+        "vue": "^3.5.13",
+        "vue-tsc": "^3.3.5",
+      },
+      "peerDependencies": {
+        "vue": "^3.5.13",
+      },
+    },
+    "packages/docs": {
+      "name": "@frame/docs",
+      "version": "0.1.0",
+      "dependencies": {
+        "@frame/core": "workspace:*",
+        "@frame/extras": "workspace:*",
         "vue": "^3.5.13",
       },
       "devDependencies": {
+        "@iconify-json/codicon": "^1.2.75",
         "@tauri-apps/cli": "^2",
         "@vitejs/plugin-vue": "^6.0.7",
         "typescript": "~6.0.3",
@@ -19,23 +48,18 @@
         "vue-tsc": "^3.3.5",
       },
     },
-    "apps/docs": {
-      "name": "@frame/docs",
+    "packages/extras": {
+      "name": "@frame/extras",
       "version": "0.1.0",
-      "dependencies": {
-        "@frame/core": "workspace:*",
+      "devDependencies": {
+        "@vitejs/plugin-vue": "^6.0.7",
+        "typescript": "~6.0.3",
+        "vite": "^8.0.16",
         "vue": "^3.5.13",
-      },
-    },
-    "packages/frame": {
-      "name": "@frame/core",
-      "version": "0.1.0",
-      "dependencies": {
-        "@iconify/vue": "^5.0.4",
-        "@tauri-apps/api": "^2",
-        "@tauri-apps/plugin-opener": "^2",
+        "vue-tsc": "^3.3.5",
       },
       "peerDependencies": {
+        "@frame/core": "^0.1.0",
         "vue": "^3.5.13",
       },
     },
@@ -49,9 +73,11 @@
 
     "@babel/types": ["@babel/types@7.29.8", "", { "dependencies": { "@babel/helper-string-parser": "^7.29.7", "@babel/helper-validator-identifier": "^7.29.7" } }, "sha512-Vj1jF3cPfxg7OAfoI7QnVKLoILlm2JF9pnVHrX8qx7AHMiYWT+NDAA7jChlNgRS4WTLc/fD1lXLmPixluj+3Gg=="],
 
-    "@frame/core": ["@frame/core@workspace:packages/frame"],
+    "@frame/core": ["@frame/core@workspace:packages/core"],
 
-    "@frame/docs": ["@frame/docs@workspace:apps/docs"],
+    "@frame/docs": ["@frame/docs@workspace:packages/docs"],
+
+    "@frame/extras": ["@frame/extras@workspace:packages/extras"],
 
     "@iconify-json/codicon": ["@iconify-json/codicon@1.2.75", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-IP/hTOfuawnTLmDzaUF59BVJ3CnILnfK6FIit60IdCNs1x1Wz3Sv5tQJ9xVrHRwb69Liyi/0eM2Gt9o1zN29NA=="],
 
@@ -164,6 +190,8 @@
     "fdir": ["fdir@6.5.0", "", { "peerDependencies": { "picomatch": "^3 || ^4" }, "optionalPeers": ["picomatch"] }, "sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg=="],
 
     "fsevents": ["fsevents@2.3.3", "", { "os": "darwin" }, "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw=="],
+
+    "ldrs": ["ldrs@1.1.9", "", {}, "sha512-JKVdzboxeZrKecA8ovi5iIDgs59wUrtJ+LDrHCgZecNrR0AJi2cJ3ZANJ+UCNS/sHRol73/jlypNCAMCXS+Ung=="],
 
     "lightningcss": ["lightningcss@1.33.0", "", { "dependencies": { "detect-libc": "^2.0.3" }, "optionalDependencies": { "lightningcss-android-arm64": "1.33.0", "lightningcss-darwin-arm64": "1.33.0", "lightningcss-darwin-x64": "1.33.0", "lightningcss-freebsd-x64": "1.33.0", "lightningcss-linux-arm-gnueabihf": "1.33.0", "lightningcss-linux-arm64-gnu": "1.33.0", "lightningcss-linux-arm64-musl": "1.33.0", "lightningcss-linux-x64-gnu": "1.33.0", "lightningcss-linux-x64-musl": "1.33.0", "lightningcss-win32-arm64-msvc": "1.33.0", "lightningcss-win32-x64-msvc": "1.33.0" } }, "sha512-WkUDrojuJs0xkgGf2udWxa3yGBRxPtxUkB79i6aCZLRgc7PM8fZe9TosfPDcvEpQZbuFASnHYmRLBLUbmLOIIA=="],
 

@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
-import { fitModal, initialModal, resizeModal } from "../src/frame/modal";
-import { createFrame } from "../src/frame/createFrame";
+import { fitModal, initialModal, resizeModal } from "../packages/core/src/frame/modal";
+import { createFrame } from "../packages/core/src/frame/createFrame";
 const bounds = { x: 6, y: 40, width: 1188, height: 690 };
 test("modal geometry stays within the workbench and fits small windows", () => {
   const box = initialModal(bounds, 800, 500);

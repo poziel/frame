@@ -22,6 +22,8 @@ Use a distinct ID for each independently open modal. Opening an already-open ID 
 
 Drag the header to move a normal modal. Resize any edge or corner. Maximize fills the workbench body with a 6px inset, excluding the title and status bars. Restore returns to the normal rectangle. Browser/window resize clamps the modal to keep it reachable. Double-click the header or title to maximize/restore.
 
+The modal backdrop is confined to the same body boundary. Dropdowns, menus, and tooltips opened from a modal also stay below the title bar and above the status bar. See the shared [overlay boundary](layout.md#overlay-boundary).
+
 Escape closes the active modal. The background and lower modals are inert. Keyboard focus is contained within the top modal and returns to its opening control on close. Mark a content field `data-modal-autofocus` to give it initial focus. The header is keyboard focusable: Alt+Arrow keys move by 10px, and Alt+Shift+Arrow keys resize the bottom/right edges. Clicking the backdrop does not discard the modal.
 
 For hosts that manage visibility themselves, the exported `FrameModal` component also supports a default content slot, a `header-actions` slot, the same title/icon/actions/size props, an optional `bounds` element, and a `close` event. Mount it only while it is open. `active` defaults to true.

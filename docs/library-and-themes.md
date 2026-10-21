@@ -10,12 +10,12 @@ Frame can be a separate project imported by an existing application. The applica
 | Theme tokens and default styles | Choice of colors and future theme JSON |
 | Optional Tauri window-control calls | Tauri binary, capabilities, config, and backend |
 
-`apps/docs/src/App.vue` and `src/examples/` are a development preview. The library entry point never imports them, and the library build excludes the preview, example styles, Rust project, and desktop executables.
+`packages/docs/src/App.vue` and `packages/docs/src/examples/` are a development preview. The library entry point never imports them, and the library build excludes the preview, example styles, Rust project, and desktop executables.
 
 ## Local package workflow
 
 1. In the Frame repository, run `bun run build:library`.
-2. In the existing application's package.json, add a local dependency such as `"@frame/core": "file:../frame/packages/frame"` and install with that application's package manager. A workspace dependency is another option if both projects belong to a monorepo.
+2. In the existing application's package.json, add a local dependency such as `"@frame/core": "file:../frame/packages/core"` and install with that application's package manager. A workspace dependency is another option if both projects belong to a monorepo.
 3. Import the library and its stylesheet:
 
 ```vue
@@ -38,13 +38,13 @@ frame.registerSidePanel({ id: "artoria.overview", label: "Overview", component: 
 
 Use a compatible Vue 3.5+ installation in the host. Vue and Tauri's JavaScript API remain external to the compiled library. If a linked workspace resolves more than one Vue copy, configure the host's Vite `resolve.dedupe: ['vue']`.
 
-The library output is ESM (`packages/frame/dist/frame.js`), CSS (`packages/frame/dist/frame.css`), and TypeScript declarations. It remains private; nothing is published. Rebuild Frame after changing its source. A local package's copy/link refresh behavior depends on the consuming package manager.
+The library output is ESM (`packages/core/dist/frame.js`), CSS (`packages/core/dist/frame.css`), and TypeScript declarations. It remains private; nothing is published. Rebuild Frame after changing its source. A local package's copy/link refresh behavior depends on the consuming package manager.
 
 `bun run check:consumer` checks a fixture that imports the built package through its public exports. Run it after `build:library`.
 
 ## Tauri remains with the host
 
-The existing application retains its own `src-tauri` directory. To use Frame's custom title bar, the host disables native decorations and grants its main window the minimize, close, toggle-maximize, and start-dragging capabilities. The preview's `src-tauri/tauri.conf.json` and `src-tauri/capabilities/default.json` are examples, not files the library silently changes or distributes.
+The existing application retains its own `src-tauri` directory. To use Frame's custom title bar, the host disables native decorations and grants its main window the minimize, close, toggle-maximize, and start-dragging capabilities. The preview's `packages/docs/src-tauri/tauri.conf.json` and `packages/docs/src-tauri/capabilities/default.json` are examples, not files the library silently changes or distributes.
 
 Browser hosts work too; native window controls and commands are disabled there.
 

@@ -1,6 +1,6 @@
 # Reusing Frame
 
-The public source entry point is `src/frame/index.ts`. Frame can be built as a private local package with `bun run build:library`; see [Library and theme boundaries](library-and-themes.md). It adds no component or icon dependencies.
+The public source entry point is `packages/core/src/frame/index.ts`. Frame can be built as a private local package with `bun run build:library`; see [Library and theme boundaries](library-and-themes.md). It adds no component or icon dependencies.
 
 Create one stable Frame instance per shell. Application components live outside the shell and register themselves with that instance:
 
@@ -41,7 +41,7 @@ onBeforeUnmount(() => {
 </template>
 ```
 
-Omit the default slot to use the quiet welcome canvas. `App.vue` and `src/examples/` contain a working host example, including dynamic additions and removal.
+Omit the default slot to use the quiet welcome canvas. `App.vue` and `packages/docs/src/examples/` contain a working host example, including dynamic additions and removal.
 
 ## Commands
 
@@ -82,7 +82,7 @@ The result retains the caller's item type. Escape, an outside click, replacement
 
 ## Components and tooltips
 
-`FrameShell`, `FrameMenu`, `ActivityRail`, `SidePanel`, `BottomPanel`, `QuickInput`, and `FrameTooltip` are exported for composition. For source imports, `FrameShell` includes the shell stylesheet. For the built library, import `@frame/core/style.css` explicitly. When using individual source components, import `src/style.css` yourself.
+`FrameShell`, `FrameMenu`, `ActivityRail`, `SidePanel`, `BottomPanel`, `QuickInput`, and `FrameTooltip` are exported for composition. For source imports, `FrameShell` includes the shell stylesheet. For the built library, import `@frame/core/style.css` explicitly. When using individual source components, import `packages/core/src/style.css` yourself.
 
 Tooltips share the shell palette, appear after 400ms on hover or immediately on keyboard focus, and dismiss with Escape. They are positioned within the viewport and rendered above containers using Teleport. Use the slot's `describedby` value for an accessible association. Do not also add a native `title` attribute:
 

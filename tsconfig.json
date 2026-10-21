@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "paths": { "@frame/core": ["./src/frame/index.ts"] },
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -21,6 +20,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["apps/docs/src/**/*.vue", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": []
 }

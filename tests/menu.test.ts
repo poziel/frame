@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { fitMenu, selectableMenuItems } from "../src/frame/menu";
+import { fitMenu, selectableMenuItems } from "../packages/core/src/frame/menu";
 
 describe("menu navigation and positioning", () => {
   test("separators and disabled rows cannot receive keyboard selection", () => {
@@ -27,4 +27,19 @@ test("Manage menus stay beside the button when clamped at the bottom", () => {
   expect(result.left).toBeGreaterThan(anchor.right);
   const flipped = fitMenu({ left: 1100, right: 1132, top: 700, bottom: 734 }, { width: 240, height: 120 }, { width: 1180, height: 780 }, false, "right");
   expect(flipped.left).toBe(856);
+});
+
+test("menus respect an offset workbench body instead of the full window", () => {
+  const body = { left: 20, top: 34, width: 800, height: 712 };
+  const bottom = fitMenu({ left: 30, right: 62, top: 700, bottom: 734 }, { width: 240, height: 150 }, body, false, "right");
+  expect(bottom).toEqual({ left: 66, top: 590 });
+  const top = fitMenu({ left: 30, right: 62, top: 0, bottom: 30 }, { width: 240, height: 150 }, body);
+  expect(top).toEqual({ left: 30, top: 40 });
+  const submenu = fitMenu({ left: 760, right: 800, top: 0, bottom: 30 }, { width: 240, height: 150 }, body, true);
+  expect(submenu).toEqual({ left: 516, top: 40 });
+});
+
+test("menu positioning reads measured dimensions even when DOMRect properties are not enumerable", () => {
+  const size = Object.defineProperties({}, { width: { get: () => 240 }, height: { get: () => 150 } }) as { width: number; height: number };
+  expect(fitMenu({ left: 30, right: 62, top: 700, bottom: 734 }, size, { left: 0, top: 34, width: 1180, height: 712 }, false, "right")).toEqual({ left: 66, top: 590 });
 });

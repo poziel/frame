@@ -2,7 +2,7 @@
 
 The demo opens Components as its first sidebar view. Home is the first activity item, followed by Components and the existing sample views. Home is an action without selection state: it calls resetWorkspace(), returning to a single empty canvas while leaving the sidebar available.
 
-The catalog has 24 example pages. Every page uses the exported ComponentShowcase component with live preview, behavior notes, API table, copyable code, and action/value feedback. Catalog definitions and content stay in src/examples; they are not included in the reusable library build.
+Every catalog page uses the exported ComponentShowcase component with live preview, behavior notes, API table, copyable code, and action/value feedback. Catalog definitions and content stay in packages/docs/src/examples; they are not included in the reusable library build. **Loader** previews all 44 LDRS styles with filtering and copyable usage; **Loading region** demonstrates scoped blocking, configurable text placement, optional animation/text, mounted content, and asynchronous completion. See [Loading](loading.md).
 
 ## Activity actions
 
@@ -71,3 +71,11 @@ const options: SelectItem[] = [
 Component pages link to in-app reference pages for `SelectItem`, `FrameMenuItem`, and `SettingDefinition`. References also support direct URLs such as `#/types/FrameMenuItem` in the documentation app. See [Package boundaries](package-boundaries.md) for the core and documentation workspace packages.
 
 The Icons page lists the bundled icons with search, previews, and Vue snippets. Clicking a tile copies its snippet. Icônes online opens the external icon browser inside the workspace, with an external link as a fallback.
+
+## API activity section
+
+The documentation app registers an API activity entry with the bundled references icon. Its searchable, scrollable sidebar lists every documented contract, grouped into runtime classes, object contracts, and value types, with the exporting package shown beside each entry. The class group includes SelectItem, SelectOption, and SelectSeparator.
+
+Component type links open the same API pages and select the API sidebar. Reference pages explain behavior, constructor usage where relevant, code examples, and property types. Nested links retain a Back action that restores the previous page and sidebar. Direct class selections are root API pages and do not show an unrelated Back action.
+
+API URLs use `#/api/Name`; existing `#/types/Name` links remain supported. Catalog entries derive from the shared typeDocs registry, so adding a documented reference exposes it in the sidebar automatically. Core and Extras do not register the catalog or import documentation code.

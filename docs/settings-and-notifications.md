@@ -24,16 +24,23 @@ Section IDs and setting IDs must each be globally unique in a Frame instance. Re
 
 Read `frame.settings.values`, or use `frame.settings.set(id, value)` and `reset(id)`. Validation rejects invalid numeric bounds, value types, and unlisted select values. Optional getValue reads a reactive application-owned preference so changes made elsewhere stay synchronized. onChange applies/persists edits in the host; Frame does not write preferences to disk or browser storage automatically.
 
-## Notifications
+## Notifications (core)
 
 ```ts
 const notification = frame.notify({
   title: "Project saved", severity: "success",
-  details: "All changes are saved.", source: "Editor", priority: "Normal", show: true,
+  details: "All changes are saved.", source: "Editor", duration: 5000,
+  action: { label: "Open settings", run: () => frame.openSettings() },
 });
 notification.close();
 ```
 
-Severity is info (default), success, warning, or error. Notifications remain until dismissed; they do not disappear on a timer. show opens the center; otherwise the bell indicates pending notifications. Newest notifications appear first. IDs may be supplied, but must be unique while present.
+Frame shows notifications in the bottom-left of its shell, above the status bar. Severity is info (default), success, warning, or error. Duration defaults to 5000 milliseconds; zero stays until dismissed. Hover and keyboard focus independently pause the remaining timer. Notifications do not steal focus and use a polite live region. Action callbacks may return promises; duplicate activation is blocked while running, success closes the message, and failure displays an error notification.
 
-Use the status-bar bell or `frame.notifications.state.open` to show/hide the center. `frame.notifications.dismiss(id)` clears one; `clear()` clears all. The center supports expandable details, double-click expansion, Enter/Space expansion, and Escape to hide it. Buttons appear on hover or focus. Clear-all and hide are supplied; no mute control is displayed. Frame owns the presentation and in-memory list; the application owns notification generation and any persistence.
+Use `frame.notifications.dismiss(id)` or `clear()` for active messages. IDs must be unique among active messages. Frame disposal clears timers and subscriptions. `subscribe(listener)` receives future notifications and returns an unsubscribe function; this is how optional features collect events.
+
+## Notification history (Extras)
+
+The notification panel and bell are supplied by @frame/extras. Core does not render or register them. Create a history store before emitting notifications, mount NotificationPanel in FrameShell's overlays slot and NotificationIndicator in status-actions, and dispose the history on host unmount. The panel owns visibility and a bounded history (200 entries by default), independently of notification expiry and dismissal. Clearing history leaves active notifications alone.
+
+See [Frame Extras](../packages/extras/README.md) for a complete composition example and [package boundaries](package-boundaries.md) for migration details and future feature candidates.

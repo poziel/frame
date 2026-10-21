@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { createViewDrag, insertionBefore } from "../src/frame/viewDrag";
+import { createViewDrag, insertionBefore } from "../packages/core/src/frame/viewDrag";
 
 test("drop insertion chooses either side of activities, tabs, and accordion views", () => {
   expect(insertionBefore(["a", "b", "c"], "b", false)).toBe("b");

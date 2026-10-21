@@ -1,0 +1,51 @@
+.component-catalog { display: flex; flex-direction: column; gap: 12px; padding-bottom: 12px; font-size: 12px; }
+.component-catalog h3 { font-size: 10px; text-transform: uppercase; letter-spacing: .6px; color: var(--frame-muted); font-weight: 500; margin: 8px 0; }
+.component-catalog section { display: flex; flex-direction: column; }
+.component-catalog button { width: 100%; padding: 7px 8px; text-align: left; border-radius: 3px; }
+.component-catalog button:hover { background: #ffffff08; }
+.component-catalog button[aria-current=page] { background: #ffffff0d; color: #fff; }
+
+.component-preview-controls { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; min-width: 0; }
+.component-preview-controls > .setting-field { width: 100%; margin-bottom: 8px; }
+.showcase-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.showcase-split { height: 220px; width: 100%; border: 1px solid var(--frame-line); }
+.showcase-pane { height: 100%; padding: 14px; background: var(--frame-canvas); line-height: 1.6; border: 1px solid var(--frame-line); }
+.showcase-context-target { width: 100%; padding: 24px; border: 1px dashed #50575a; border-radius: 3px; }
+.showcase-resize-demo { display: flex; height: 110px; max-width: 100%; }
+.showcase-resize-box { background: #ffffff08; padding: 20px; }
+.showcase-resize-demo > .resize-handle { position: relative; }
+.showcase-modal-content { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px; font-size: 13px; line-height: 1.6; }
+
+.example-tabs { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 20px; border-bottom: 1px solid var(--frame-line); }
+.example-tabs button { padding: 7px 10px; border-bottom: 2px solid transparent; }
+.example-tabs button[aria-selected=true] { color: white; border-bottom-color: var(--frame-accent); }
+.example-type-links { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 15px; }
+.example-type-links a, .online-icons a { color: #65b6e6; }
+.bundled-icon-catalog { width: 100%; }
+.icon-catalog-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(155px,1fr)); gap: 8px; margin: 18px 0; }
+.icon-catalog-item { border: 1px solid var(--frame-line); border-radius: 3px; min-width: 0; }
+.icon-catalog-preview { display: grid; place-items: center; width: 100%; padding: 20px; }
+.icon-catalog-preview:hover { background: #ffffff09; }
+.icon-catalog-name { display: flex; align-items: center; justify-content: center; gap: 4px; padding: 4px 6px; }
+.icon-catalog-name code { font-size: 11px; overflow-wrap: anywhere; }
+.icon-library-page { padding: 24px; font-size: 13px; }
+.icon-library-page > header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+.icon-library-page h1 { font-size: 18px; font-weight: 500; }
+.icon-library-page.online { display: flex; flex-direction: column; flex: 1; min-height: 0; padding: 0; }
+.icon-library-page.online > header { padding: 6px 12px; margin: 0; }
+.online-icons { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.online-icons-toolbar { padding: 6px 12px; display: flex; justify-content: space-between; }
+.online-icons iframe { width: 100%; flex: 1; min-height: 0; border: 0; background: var(--frame-canvas); }
+
+.api-catalog { height: 100%; min-height: 0; overflow: auto; padding: 0 10px 16px; }
+.api-catalog-search { position: sticky; top: 0; z-index: 1; padding: 4px 0 8px; background: var(--frame-surface); }
+.api-catalog button { display: flex; flex-direction: column; gap: 3px; overflow-wrap: anywhere; }
+.api-catalog button small { color: var(--frame-muted); font-size: 10px; }
+
+.side-content:has(> .view-content > .api-catalog),
+.view-content:has(> .api-catalog) { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; }
+.api-catalog { height: auto; flex: 1; }
+
+.side-content:has(> .view-host > .view-content > .api-catalog),
+.view-host:has(> .view-content > .api-catalog) { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; }
+.api-catalog-search, .api-catalog section { flex-shrink: 0; }

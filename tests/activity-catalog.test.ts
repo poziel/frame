@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
-import { createFrame } from "../src/frame/createFrame";
-import { componentExamples } from "../src/examples/componentCatalog";
+import { createFrame } from "../packages/core/src/frame/createFrame";
+import { componentExamples } from "../packages/docs/src/examples/componentCatalog";
 test("activity actions are isolated contributions that do not select a view", () => {
   const first = createFrame(), second = createFrame(); let calls = 0;
   first.registerView({ id: "view", label: "View", component: { render: () => null } }, "primary"); first.openView("view");

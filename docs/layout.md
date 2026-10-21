@@ -74,3 +74,21 @@ The layout commands are also registered in Quick actions, including visibility t
 Default density uses 34px title and status bars; compact keeps a 24px status bar. Centered layout starts at 90% of the available workspace width and remains symmetrically resizable. Grip dots appear only on the primary, secondary, and bottom outer sashes in default density.
 
 See [Workspace panes and Banner](workspace.md) for splitting, pane content, and the banner's independent `bannerAlignment`, `bannerHeight`, and `bannerVisible` settings. A banner is always custom content, never a drop destination for view menus.
+
+## Overlay boundary
+
+Every application overlay stays within its owning shell's workbench body: below the title bar and above the visible status bar. The shell measures this rectangle rather than assuming fixed bar heights. Resizing, compact density, hiding the status bar, and embedding the shell away from the window origin update the boundary automatically.
+
+Menus and submenus, context menus, selects, tooltips, modal surfaces and backdrops, quick input, layout customization, notifications, drag previews, and overlay scrollbars use the same boundary. Oversized menus and selects scroll within the available space. A clipped overlay host also prevents shadows and backdrops from painting over either bar. Menus, selects, and tooltips can appear above a modal without escaping this boundary.
+
+Custom application overlays belong in the shell's `overlays` slot. Its `bounds` value is an `OverlayBounds` rectangle (`left`, `top`, `width`, `height`) in viewport coordinates; its `target` is the shell's clipped overlay host. Slot content is hosted there automatically. If a custom component teleports its own popup, pass this `target` to it instead of teleporting to `body`.
+
+```vue
+<FrameShell :frame="frame">
+  <template #overlays="{ bounds, target }">
+    <MyOverlay :bounds="bounds" :teleport-target="target" />
+  </template>
+</FrameShell>
+```
+
+Standalone Frame controls without a shell retain viewport-based placement. Use `FrameSelect` for application dropdowns; native browser/operating-system dropdowns do not use the shell's positioning system.

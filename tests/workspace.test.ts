@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
-import { createFrame } from "../src/frame/createFrame";
-import { createWorkspace } from "../src/frame/workspace";
-import type { WorkspaceNode } from "../src/types";
+import { createFrame } from "../packages/core/src/frame/createFrame";
+import { createWorkspace } from "../packages/core/src/frame/workspace";
+import type { WorkspaceNode } from "../packages/core/src/types";
 
 function leaves(node: WorkspaceNode): string[] { return node.type === "pane" ? [node.id] : [...leaves(node.first), ...leaves(node.second)]; }
 

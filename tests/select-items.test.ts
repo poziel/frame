@@ -1,8 +1,8 @@
 import { test, expect } from "bun:test";
-import { selectableOptions, isSelectOption } from "../src/frame/select";
-import { createFrame } from "../src/frame/createFrame";
-import type { SelectItem } from "../src/types";
-import * as contracts from "../src/types";
+import { selectableOptions, isSelectOption } from "../packages/core/src/frame/select";
+import { createFrame } from "../packages/core/src/frame/createFrame";
+import type { SelectItem } from "../packages/core/src/types";
+import * as contracts from "../packages/core/src/types";
 test("runtime select classes preserve option metadata and separator behavior", () => {
   expect(typeof contracts.SelectOption).toBe("function");
   const option = new contracts.SelectOption({ value: "remote", label: "Remote", detail: "Cloud", description: "Sync online", disabled: true });

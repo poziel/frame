@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Frame external consumer",
+  "version": "0.0.0",
+  "identifier": "com.poziel.frame-integration",
+  "build": { "frontendDist": "../dist" },
+  "app": {
+    "windows": [{ "label": "main", "title": "Frame external consumer", "url": "index.html?nativeTest=1", "width": 1180, "height": 780, "decorations": false, "visible": false }],
+    "security": { "csp": null }
+  },
+  "bundle": { "active": false }
+}

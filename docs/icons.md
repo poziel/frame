@@ -21,7 +21,7 @@ import { icons } from "@iconify-json/mdi";
 addCollection(icons);
 ```
 
-Frame also exports addIcon for individual bundled/custom icons. Icons are decorative; give the surrounding button an accessible label. Each pack has its own license, shown by Icônes/Iconify. Preserve THIRD_PARTY_NOTICES.md and the Codicons license when redistributing Frame. Iconify software's MIT license does not replace the artwork licenses.
+Frame also exports addIcon for individual bundled/custom icons. Icons are decorative; give the surrounding button an accessible label. Each pack has its own license, shown by Icônes/Iconify. Preserve the [third-party notices](licenses/THIRD_PARTY_NOTICES.md) and [Codicons license](licenses/codicons.txt) when redistributing Frame. Iconify software's MIT license does not replace the artwork licenses.
 
 ## Documentation browser
 
