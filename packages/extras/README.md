@@ -25,6 +25,35 @@ The panel keeps a bounded in-memory history of notifications emitted after subsc
 
 Build core first with `bun run build:library`, then run `bun run build:extras`. Both are private workspace packages; nothing is published.
 
+## Universal viewer
+
+`UniversalViewer` presents a portable file preview in a fullscreen modal with a dark blurred backdrop. It is controlled through `v-model:open` and restores focus on close. `UniversalViewerContent` renders the same preview inside any sized container without requiring a Frame instance. Import Extras styles as usual.
+
+```vue
+<script setup lang="ts">
+import { ref, shallowRef } from 'vue';
+import { UniversalViewer, type ViewerFile } from '@frame/extras';
+const open = ref(false);
+const file = shallowRef<ViewerFile>();
+function preview(source: File) {
+  file.value = { source };
+  open.value = true;
+}
+</script>
+<template>
+  <input type="file" aria-label="Choose a document" @change="event => { const selected = (event.target as HTMLInputElement).files?.[0]; if (selected) preview(selected); }" />
+  <UniversalViewer v-model:open="open" :file="file" />
+</template>
+```
+
+`ViewerFile.source` accepts `File`, `Blob`, URL strings, or `URL` objects. Optional `name`, `mimeType`, and `language` provide metadata for extensionless URLs and blobs. URLs use browser fetch/CORS rules; the host can fetch authenticated resources itself and supply a Blob. Filesystem access stays with the host. Imports and closed dialogs load no files or PDF workers.
+
+Images and videos use the browser's supported formats and codecs. SVG opens as an image with a highlighted XML source toggle; SVG/HTML are never inserted into the DOM as executable markup. Programming files reuse Core's `FrameCodeBlock`. Plain text is selectable; unknown UTF-8 text gets a conservative fallback. Office formats and other binary files show an unsupported message. The `error` event reports loading and rendering failures.
+
+PDF.js loads lazily with a bundled inline worker (no CDN or external service). The reader provides previous/next page navigation and 25–300% zoom. This first pass renders PDF pages to canvas: text selection, search, annotations, password entry, and full screen-reader document text are not included. Encrypted PDFs report an error. Hosts with a strict CSP must allow blob workers. Specialized PDFs requiring external CMaps, standard font assets, or WASM decoders may need additional asset integration.
+
+The content component accepts `maxBytes` (default 100 MiB); fetched responses are bounded while streaming. Requests abort and owned object URLs/workers are released on replacement or unmount. Closing the fullscreen viewer unmounts its content and stops video. Use `target` to choose a portal host. Themes use `--frame-*` tokens plus `--frame-viewer-backdrop`, `--frame-viewer-blur`, and `--frame-viewer-z-index`.
+
 ## Code editor
 
 `CodeEditor` is a standalone Monaco surface. Use it in any sized container, with or without Frame Shell. It uses `@shikijs/monaco` and the same lazy Shiki engine, grammars and `CodeBlockTheme` palette as Core's `FrameCodeBlock`. Monaco itself loads on first mount and stays out of Core.

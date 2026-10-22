@@ -1,0 +1,39 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+import data from '../src/examples/documentation/contracts.json';
+const root=resolve(import.meta.dir,'../../..');
+const sharedFiles=['packages/core/src/style.css','packages/extras/src/style.css','packages/core/src/themes/default.css'];
+const defaults=readFileSync(resolve(root,sharedFiles[2]!), 'utf8');
+const semantic=Object.fromEntries([...defaults.matchAll(/(--frame-[\w-]+):\s*([^;]+);/g)].map(m=>[m[1],m[2]]));
+function variables(value:string) {
+ const found:{name:string,value:string}[]=[];
+ for(const match of value.matchAll(/var\((--frame-[\w-]+)/g)) {
+  let i=match.index!+match[0].length,level=1;const start=i;
+  while(i<value.length&&level){if(value[i]==='(')level++;if(value[i]===')')level--;if(level)i++;}
+  const fallback=value.slice(start,i).replace(/^\s*,\s*/,'').trim();
+  found.push({name:match[1]!,value:fallback||semantic[match[1]!]||'Inherited from the rendering context'});
+ }
+ return found;
+}
+const result:Record<string,unknown>={};
+for(const [file] of Object.entries(data.contracts)) {
+ const source=readFileSync(resolve(root,file),'utf8');
+ const classes=[...new Set([...source.matchAll(/(?<!:)class=["']([^"']+)["']/g)].flatMap(m=>m[1]!.split(/\s+/)).filter(Boolean))];
+ const matches=(selector:string,name:string)=>new RegExp('\\.'+name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?![\\w-])').test(selector.replace(/:(?:not|has)\([^)]*\)/g,''));
+ const tokens=new Map<string,unknown>();const publicClasses=new Map<string,unknown>();
+ for(const cssFile of [...sharedFiles,file]){
+  const css=readFileSync(resolve(root,cssFile),'utf8');
+  for(const rule of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)){
+   const selector=rule[1]!.trim();
+   if(!classes.some(name=>matches(selector,name))||selector.startsWith(':root'))continue;
+   for(const name of classes)if(matches(selector,name))publicClasses.set(name,{name:'.'+name,description:'Styles the '+name.replace(/^frame-/,'').replace(/-/g,' ')+' element.'});
+   for(const decl of rule[2]!.matchAll(/(?:^|;)\s*([\w-]+)\s*:\s*([^;]+)/g)) {
+    if(decl[1]!.startsWith('--'))continue;
+    for(const variable of variables(decl[2]!))tokens.set(variable.name,{...variable,description:decl[1]!.replace(/-/g,' ')+' for '+selector+'.',selector,source:cssFile});
+   }
+  }
+ }
+ result[file]={classes:[...publicClasses.values()],tokens:[...tokens.values()]};
+}
+writeFileSync(resolve(root,'packages/docs/src/examples/documentation/themes.json'),JSON.stringify(result,null,2)+'\n');
+console.log('Recorded theme classes and consumed tokens for',Object.keys(result).length,'surfaces');

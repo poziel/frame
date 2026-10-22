@@ -13,7 +13,8 @@
     "build:library": "bun run --cwd packages/core build",
     "check:consumer": "vue-tsc -p tests/tsconfig.json --noEmit",
     "build:extras": "bun run --cwd packages/extras build",
-    "check:tailwind": "vite build --config tests/fixtures/tailwind/vite.config.ts"
+    "check:tailwind": "vite build --config tests/fixtures/tailwind/vite.config.ts",
+    "docs:contracts": "bun run --cwd packages/docs docs:contracts"
   },
   "devDependencies": {
     "typescript": "~6.0.3",

@@ -1,3 +1,4 @@
+import extractedReferences from './documentation/references.json';
 import { CodeBlockTheme } from "../../../core/src/frame/codeThemes";
 const legacyDocs = {
   FrameMenuItem: { description: "A typed command-menu entry, shared by FrameMenu, ContextMenu, and the Manage menu. A menu item is either an action/submenu or a separator.", code: `import type { FrameMenuItem } from '@frame/core';
@@ -390,3 +391,5 @@ typeDocs.FrameOptions = {
     { name: 'notifications', type: 'boolean', description: 'Enable transient notifications. Default true.' },
   ],
 };
+
+for(const [name,doc] of Object.entries(extractedReferences)) if(!Object.prototype.hasOwnProperty.call(typeDocs,name)) typeDocs[name]=doc;

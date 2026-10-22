@@ -1,0 +1,3039 @@
+{
+  "pageSources": {
+    "buttons": [
+      "packages/core/src/components/FrameButton.vue"
+    ],
+    "icon-buttons": [
+      "packages/core/src/components/FrameIconButton.vue"
+    ],
+    "text-input": [
+      "packages/core/src/components/FrameTextInput.vue"
+    ],
+    "checkbox": [
+      "packages/core/src/components/FrameCheckbox.vue"
+    ],
+    "select": [
+      "packages/core/src/components/FrameSelect.vue"
+    ],
+    "slider": [
+      "packages/core/src/components/FrameSlider.vue"
+    ],
+    "color-picker": [
+      "packages/core/src/components/FrameColorPicker.vue"
+    ],
+    "text-area": [
+      "packages/core/src/components/FrameTextArea.vue"
+    ],
+    "setting-controls": [
+      "packages/core/src/components/SettingControl.vue"
+    ],
+    "icons": [
+      "packages/core/src/components/FrameIcon.vue"
+    ],
+    "tooltips": [
+      "packages/core/src/components/FrameTooltip.vue"
+    ],
+    "menus": [
+      "packages/core/src/components/FrameMenu.vue"
+    ],
+    "context-menu": [
+      "packages/core/src/components/ContextMenu.vue"
+    ],
+    "resizable-panes": [
+      "packages/core/src/components/ResizablePane.vue"
+    ],
+    "resize-handle": [
+      "packages/core/src/components/ResizeHandle.vue"
+    ],
+    "modals": [
+      "packages/core/src/components/FrameModal.vue"
+    ],
+    "settings": [
+      "packages/core/src/components/FrameSettings.vue"
+    ],
+    "notifications": [
+      "packages/core/src/components/FrameNotifications.vue"
+    ],
+    "notification-panel": [
+      "packages/extras/src/NotificationPanel.vue",
+      "packages/extras/src/NotificationIndicator.vue"
+    ],
+    "quick-input": [
+      "packages/core/src/components/CommandPalette.vue"
+    ],
+    "banner": [
+      "packages/core/src/components/FrameShell.vue"
+    ],
+    "workspace": [
+      "packages/core/src/components/WorkspacePanes.vue"
+    ],
+    "views": [
+      "packages/core/src/components/SidePanel.vue",
+      "packages/core/src/components/ViewSections.vue"
+    ],
+    "activity-actions": [
+      "packages/core/src/components/ActivityRail.vue"
+    ],
+    "navigation": [
+      "packages/core/src/components/FrameShell.vue"
+    ],
+    "loader": [
+      "packages/core/src/components/FrameLoader.vue"
+    ],
+    "loading": [
+      "packages/core/src/components/FrameLoading.vue"
+    ],
+    "code-block": [
+      "packages/core/src/components/FrameCodeBlock.vue"
+    ],
+    "code-editor": [
+      "packages/extras/src/CodeEditor.vue"
+    ],
+    "terminal": [
+      "packages/extras/src/Terminal.vue",
+      "packages/extras/src/TerminalView.vue"
+    ],
+    "ai-chat": [
+      "packages/extras/src/AIChat.vue"
+    ]
+  },
+  "contracts": {
+    "packages/core/src/components/FrameButton.vue": {
+      "name": "FrameButton",
+      "source": "packages/core/src/components/FrameButton.vue",
+      "sourceHash": "ee4d86fc0fea23eda48690d8b55aa28e94065a0bb8eaed6cdaf08459df1f92d6",
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"ghost\" | \"primary\" | \"secondary\"",
+          "default": {
+            "kind": "literal",
+            "value": "\"ghost\""
+          },
+          "description": "Selects the visual variant.",
+          "options": [
+            "ghost",
+            "primary",
+            "secondary"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "icon",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Optional leading icon; provide an accessible label for icon-only actions.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Prevents user interaction while retaining the current value.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "type",
+          "type": "\"button\" | \"submit\" | \"reset\"",
+          "default": {
+            "kind": "literal",
+            "value": "\"button\""
+          },
+          "description": "Native input/button behavior.",
+          "options": [
+            "button",
+            "submit",
+            "reset"
+          ],
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "click",
+          "parameters": "event: MouseEvent",
+          "returns": "void",
+          "description": "Emitted on click."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [
+        {
+          "name": "element",
+          "kind": "property",
+          "parameters": "",
+          "returns": "Ref<HTMLButtonElement | undefined, HTMLButtonElement | undefined>",
+          "description": "Exposed element API. Available through the mounted component ref."
+        },
+        {
+          "name": "focus",
+          "kind": "method",
+          "parameters": "",
+          "returns": "void | undefined",
+          "description": "Focuses the rendered control."
+        }
+      ],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameIconButton.vue": {
+      "name": "FrameIconButton",
+      "source": "packages/core/src/components/FrameIconButton.vue",
+      "sourceHash": "723d9d3a4611bd95f2fd0d4c66fca4ec20ac25fe83b37f334e9cae1a95ba1849",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "shortcut",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Shortcut configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "icon",
+          "type": "string | Component",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Optional leading icon; provide an accessible label for icon-only actions.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "size",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "26"
+          },
+          "description": "Rendered size in pixels; string sizes retain their CSS unit.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "iconRatio",
+          "type": "number",
+          "default": {
+            "kind": "derived",
+            "expression": ".62"
+          },
+          "description": "Icon Ratio configuration for this component; see its Features examples for usage.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "iconSize",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Explicit icon size in pixels. When omitted, size is multiplied by iconRatio.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "hoverHighlight",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Hover Highlight configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "tooltip",
+          "type": "string | boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Tooltip configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "tooltipPlacement",
+          "type": "\"top\" | \"bottom\" | \"left\" | \"right\"",
+          "default": {
+            "kind": "literal",
+            "value": "\"bottom\""
+          },
+          "description": "Tooltip Placement configuration for this component; see its Features examples for usage.",
+          "options": [
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Prevents user interaction while retaining the current value.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "click",
+          "parameters": "event: MouseEvent",
+          "returns": "void",
+          "description": "Emitted on click."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [
+        {
+          "name": "element",
+          "kind": "property",
+          "parameters": "",
+          "returns": "ComputedRef<HTMLButtonElement | undefined>",
+          "description": "Exposed element API. Available through the mounted component ref."
+        },
+        {
+          "name": "focus",
+          "kind": "method",
+          "parameters": "",
+          "returns": "void | undefined",
+          "description": "Focuses the rendered control."
+        }
+      ],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameTextInput.vue": {
+      "name": "FrameTextInput",
+      "source": "packages/core/src/components/FrameTextInput.vue",
+      "sourceHash": "a22956f222e72eee339fcf057d2c3add23de22aecd9720c5d41728bdc12b0384",
+      "props": [
+        {
+          "name": "modelValue",
+          "type": "string | number",
+          "default": {
+            "kind": "literal",
+            "value": "\"\""
+          },
+          "description": "Controlled value. Updates are emitted through update:modelValue; the application owns the value.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "type",
+          "type": "\"text\" | \"number\" | \"password\" | \"search\" | \"email\"",
+          "default": {
+            "kind": "literal",
+            "value": "\"text\""
+          },
+          "description": "Native input/button behavior.",
+          "options": [
+            "number",
+            "text",
+            "password",
+            "search",
+            "email"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Prevents user interaction while retaining the current value.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Hint displayed when the field is empty.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "value: string | number",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        }
+      ],
+      "slots": [],
+      "methods": [
+        {
+          "name": "element",
+          "kind": "property",
+          "parameters": "",
+          "returns": "Ref<HTMLInputElement | undefined, HTMLInputElement | undefined>",
+          "description": "Exposed element API. Available through the mounted component ref."
+        },
+        {
+          "name": "focus",
+          "kind": "method",
+          "parameters": "",
+          "returns": "void | undefined",
+          "description": "Focuses the rendered control."
+        }
+      ],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameCheckbox.vue": {
+      "name": "FrameCheckbox",
+      "source": "packages/core/src/components/FrameCheckbox.vue",
+      "sourceHash": "02a9fc445c1780fe99014dad8f3bcd4a886277c2cea4ddbc063162a6c7b6ac70",
+      "props": [
+        {
+          "name": "modelValue",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Controlled value. Updates are emitted through update:modelValue; the application owns the value.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Prevents user interaction while retaining the current value.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "value: boolean",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameSelect.vue": {
+      "name": "FrameSelect",
+      "source": "packages/core/src/components/FrameSelect.vue",
+      "sourceHash": "7e564865e3ea613499d883c2d0c2b6e14e369cfeaa2b436e2d096d25365b7a41",
+      "props": [
+        {
+          "name": "modelValue",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Controlled value. Updates are emitted through update:modelValue; the application owns the value.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "options",
+          "type": "readonly SelectItem[]",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Ordered selectable choices and separators. Only enabled choices can become selected values.",
+          "control": "json",
+          "references": [
+            "SelectItem"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "literal",
+            "value": "\"Select an option\""
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Prevents user interaction while retaining the current value.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Marks the default choice without changing the current selected value.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "value: string",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        }
+      ],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameSlider.vue": {
+      "name": "FrameSlider",
+      "source": "packages/core/src/components/FrameSlider.vue",
+      "sourceHash": "a49560687914cefcbb5b8a3ef5ca07e99fe48050c20ce225043ecd3ca15d5b63",
+      "props": [
+        {
+          "name": "modelValue",
+          "type": "number",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Controlled value. Updates are emitted through update:modelValue; the application owns the value.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "min",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "0"
+          },
+          "description": "Minimum accepted or displayed value.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "100"
+          },
+          "description": "Maximum accepted or displayed value.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "step",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "1"
+          },
+          "description": "Increment used by the control.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Prevents user interaction while retaining the current value.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "value: number",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        }
+      ],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameColorPicker.vue": {
+      "name": "FrameColorPicker",
+      "source": "packages/core/src/components/FrameColorPicker.vue",
+      "sourceHash": "e1d6bfa55a35aea86c3a513ddf78294c20342dbfb0c8c89b746b600b14fb75c1",
+      "props": [
+        {
+          "name": "modelValue",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Controlled value. Updates are emitted through update:modelValue; the application owns the value.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Prevents user interaction while retaining the current value.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "value: string",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        }
+      ],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameTextArea.vue": {
+      "name": "FrameTextArea",
+      "source": "packages/core/src/components/FrameTextArea.vue",
+      "sourceHash": "53dcd7b47de73ecb1c4702f74ea92b34ea234412072bfd709691e43b72cafbce",
+      "props": [
+        {
+          "name": "modelValue",
+          "type": "string",
+          "default": {
+            "kind": "literal",
+            "value": "\"\""
+          },
+          "description": "Controlled value. Updates are emitted through update:modelValue; the application owns the value.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Prevents user interaction while retaining the current value.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Hint displayed when the field is empty.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "rows",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "4"
+          },
+          "description": "Initial visible textarea row count.",
+          "control": "number",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "value: string",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        }
+      ],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/SettingControl.vue": {
+      "name": "SettingControl",
+      "source": "packages/core/src/components/SettingControl.vue",
+      "sourceHash": "e1e128de58a49c7fff08eafa4bd7d15e8635b5b5d121fae0621386118a02faa9",
+      "props": [
+        {
+          "name": "setting",
+          "type": "SettingDefinition",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Setting configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "SettingDefinition"
+          ]
+        },
+        {
+          "name": "modelValue",
+          "type": "SettingValue",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Controlled value. Updates are emitted through update:modelValue; the application owns the value.",
+          "control": "text",
+          "references": [
+            "SettingValue"
+          ]
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "value: SettingValue",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        }
+      ],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameIcon.vue": {
+      "name": "FrameIcon",
+      "source": "packages/core/src/components/FrameIcon.vue",
+      "sourceHash": "f6bdfaf6527d29e597e00b594240a012f65e853b1b7ed599c43fef3e3d16f02c",
+      "props": [
+        {
+          "name": "name",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Icon name, optionally including its Iconify collection prefix.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "pack",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Iconify collection prefix; overrides the prefix in name.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "size",
+          "type": "number | string",
+          "default": {
+            "kind": "literal",
+            "value": "16"
+          },
+          "description": "Rendered size in pixels; string sizes retain their CSS unit.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameTooltip.vue": {
+      "name": "FrameTooltip",
+      "source": "packages/core/src/components/FrameTooltip.vue",
+      "sourceHash": "690c69495cc9a5758700a810f64aa8ecd7fe837878c9f5625ed424e8a7e2d86f",
+      "props": [
+        {
+          "name": "text",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Text displayed by the component.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "shortcut",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Shortcut configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Prevents user interaction while retaining the current value.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "placement",
+          "type": "\"top\" | \"bottom\" | \"left\" | \"right\"",
+          "default": {
+            "kind": "literal",
+            "value": "\"bottom\""
+          },
+          "description": "Preferred overlay placement; the component fits content to available space.",
+          "options": [
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ],
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "describedby: string | undefined",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameMenu.vue": {
+      "name": "FrameMenu",
+      "source": "packages/core/src/components/FrameMenu.vue",
+      "sourceHash": "d11a3e23f6e368ed75cbdf890351d5bf1600a9b71da3acec186218a65eceb6a5",
+      "props": [
+        {
+          "name": "id",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Id configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "anchor",
+          "type": "HTMLElement",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Real HTMLElement used to position the overlay and restore focus.",
+          "control": "fixture",
+          "references": []
+        },
+        {
+          "name": "items",
+          "type": "readonly FrameMenuItem[]",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Ordered application-owned entries.",
+          "control": "json",
+          "references": [
+            "FrameMenuItem"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "placement",
+          "type": "\"bottom\" | \"right\"",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Preferred overlay placement; the component fits content to available space.",
+          "options": [
+            "bottom",
+            "right"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "point",
+          "type": "{ x: number; y: number }",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Point configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "close",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on close."
+        },
+        {
+          "name": "select",
+          "parameters": "item: FrameMenuItem",
+          "returns": "void",
+          "description": "Emitted on select."
+        }
+      ],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/ContextMenu.vue": {
+      "name": "ContextMenu",
+      "source": "packages/core/src/components/ContextMenu.vue",
+      "sourceHash": "1b7ed4db45853250aba19b6c28f0a4cfd28a034bd09eb6cab09647226c0bd8dd",
+      "props": [
+        {
+          "name": "items",
+          "type": "readonly FrameMenuItem[]",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Ordered application-owned entries.",
+          "control": "json",
+          "references": [
+            "FrameMenuItem"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "select",
+          "parameters": "item: FrameMenuItem",
+          "returns": "void",
+          "description": "Emitted on select."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/ResizablePane.vue": {
+      "name": "ResizablePane",
+      "source": "packages/core/src/components/ResizablePane.vue",
+      "sourceHash": "71e93f4227a695955f88cde9a63ab1ee877f02a93b41a13073c54e506ca904ee",
+      "props": [
+        {
+          "name": "modelValue",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Controlled value. Updates are emitted through update:modelValue; the application owns the value.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "axis",
+          "type": "\"x\" | \"y\"",
+          "default": {
+            "kind": "literal",
+            "value": "\"x\""
+          },
+          "description": "Axis configuration for this component; see its Features examples for usage.",
+          "options": [
+            "x",
+            "y"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "min",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "120"
+          },
+          "description": "Minimum accepted or displayed value.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "500"
+          },
+          "description": "Maximum accepted or displayed value.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "minSecond",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "160"
+          },
+          "description": "Min Second configuration for this component; see its Features examples for usage.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "literal",
+            "value": "\"Resize panes\""
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "defaultSize",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "210"
+          },
+          "description": "Default Size configuration for this component; see its Features examples for usage.",
+          "control": "number",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "value: number",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        }
+      ],
+      "slots": [
+        {
+          "name": "first",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the first slot."
+        },
+        {
+          "name": "second",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the second slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/ResizeHandle.vue": {
+      "name": "ResizeHandle",
+      "source": "packages/core/src/components/ResizeHandle.vue",
+      "sourceHash": "b11fedf2f4de039fbfe211d8147b26386caff8d47bf22dd21d33d9288c7255e1",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "axis",
+          "type": "\"x\" | \"y\"",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Axis configuration for this component; see its Features examples for usage.",
+          "options": [
+            "x",
+            "y"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "value",
+          "type": "number",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Value configuration for this component; see its Features examples for usage.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "min",
+          "type": "number",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Minimum accepted or displayed value.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Maximum accepted or displayed value.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "reverse",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Reverse configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "scale",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "1"
+          },
+          "description": "Scale configuration for this component; see its Features examples for usage.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "step",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "10"
+          },
+          "description": "Increment used by the control.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "grip",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Grip configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "change",
+          "parameters": "value: number",
+          "returns": "void",
+          "description": "Emitted on change."
+        },
+        {
+          "name": "reset",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on reset."
+        }
+      ],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameModal.vue": {
+      "name": "FrameModal",
+      "source": "packages/core/src/components/FrameModal.vue",
+      "sourceHash": "c288a0ed611523456d5da68da65f0a21afc292a08323dcfb3df3e1efcf0b0aeb",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Visible heading.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "icon",
+          "type": "Component",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Optional leading icon; provide an accessible label for icon-only actions.",
+          "control": "fixture",
+          "references": []
+        },
+        {
+          "name": "actions",
+          "type": "readonly PanelAction[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Application-owned header actions.",
+          "control": "json",
+          "references": [
+            "PanelAction"
+          ]
+        },
+        {
+          "name": "bounds",
+          "type": "HTMLElement",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Bounds configuration for this component; see its Features examples for usage.",
+          "control": "fixture",
+          "references": []
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Shows the loading presentation while retaining the mounted content.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "width",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Width configuration for this component; see its Features examples for usage.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "height",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Height configuration for this component; see its Features examples for usage.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "maximized",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Maximized configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "layer",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "0"
+          },
+          "description": "Layer configuration for this component; see its Features examples for usage.",
+          "control": "number",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "close",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on close."
+        }
+      ],
+      "slots": [
+        {
+          "name": "header-actions",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the header-actions slot."
+        },
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameSettings.vue": {
+      "name": "FrameSettings",
+      "source": "packages/core/src/components/FrameSettings.vue",
+      "sourceHash": "c6081070783ac55d7c7705078abdf195555849901398e2a0586e34b66af9aa77",
+      "props": [],
+      "emits": [],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameNotifications.vue": {
+      "name": "FrameNotifications",
+      "source": "packages/core/src/components/FrameNotifications.vue",
+      "sourceHash": "b7d6b0be271c1ad88f686d9b7f859e96f3da04f841a1a37d9e21987dbda1684c",
+      "props": [
+        {
+          "name": "bottom",
+          "type": "number",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Distance in pixels from the presentation boundary bottom.",
+          "control": "number",
+          "references": []
+        }
+      ],
+      "emits": [],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/extras/src/NotificationPanel.vue": {
+      "name": "NotificationPanel",
+      "source": "packages/extras/src/NotificationPanel.vue",
+      "sourceHash": "15568f76d8af100a54f05b231e0f910c0031a79a03ee741d1eeb698f466227e6",
+      "props": [
+        {
+          "name": "frame",
+          "type": "Frame",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Frame instance coordinating this presentation.",
+          "control": "fixture",
+          "references": [
+            "Frame"
+          ]
+        },
+        {
+          "name": "history",
+          "type": "NotificationHistory",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Optional history store from createNotificationHistory, independent of active notifications.",
+          "control": "fixture",
+          "references": [
+            "NotificationHistory"
+          ]
+        },
+        {
+          "name": "bottom",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "8"
+          },
+          "description": "Distance in pixels from the presentation boundary bottom.",
+          "control": "number",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "close",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on close."
+        }
+      ],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/extras/src/NotificationIndicator.vue": {
+      "name": "NotificationIndicator",
+      "source": "packages/extras/src/NotificationIndicator.vue",
+      "sourceHash": "9652661782ae6c657f5b07b6cf05ceccf749800563b8d4343dfdbed1c6064d4d",
+      "props": [
+        {
+          "name": "history",
+          "type": "NotificationHistory",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Optional history store from createNotificationHistory, independent of active notifications.",
+          "control": "fixture",
+          "references": [
+            "NotificationHistory"
+          ]
+        }
+      ],
+      "emits": [],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/CommandPalette.vue": {
+      "name": "CommandPalette",
+      "source": "packages/core/src/components/CommandPalette.vue",
+      "sourceHash": "556465fdbbdd9f2631fd0aaac927f8bb78d12f971cd51c07005185a7b465e823",
+      "props": [
+        {
+          "name": "items",
+          "type": "readonly QuickPickItem[]",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Ordered application-owned entries.",
+          "control": "json",
+          "references": [
+            "QuickPickItem"
+          ]
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Visible heading.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Hint displayed when the field is empty.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "searchable",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Searchable configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "position",
+          "type": "\"top\" | \"center\"",
+          "default": {
+            "kind": "literal",
+            "value": "\"top\""
+          },
+          "description": "Position configuration for this component; see its Features examples for usage.",
+          "options": [
+            "top",
+            "center"
+          ],
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "close",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on close."
+        },
+        {
+          "name": "accept",
+          "parameters": "id: string",
+          "returns": "void",
+          "description": "Emitted on accept."
+        }
+      ],
+      "slots": [
+        {
+          "name": "header-actions",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the header-actions slot."
+        },
+        {
+          "name": "content",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the content slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameShell.vue": {
+      "name": "FrameShell",
+      "source": "packages/core/src/components/FrameShell.vue",
+      "sourceHash": "0696986ab5269dc642b44f5054e9516ac76fca3b096ca4eb09c811e247ba78b8",
+      "props": [
+        {
+          "name": "frame",
+          "type": "Frame",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Frame instance coordinating this presentation.",
+          "control": "fixture",
+          "references": [
+            "Frame"
+          ]
+        },
+        {
+          "name": "titleText",
+          "type": "string",
+          "default": {
+            "kind": "literal",
+            "value": "\"Frame (Workspace)\""
+          },
+          "description": "Title Text configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "showSearch",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Show Search configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "menuItems",
+          "type": "readonly FrameMenuItem[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Menu Items configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "FrameMenuItem"
+          ]
+        }
+      ],
+      "emits": [],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "pane: WorkspacePane",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        },
+        {
+          "name": "workspace-pane",
+          "parameters": "pane: WorkspacePane",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the workspace-pane slot."
+        },
+        {
+          "name": "status-actions",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the status-actions slot."
+        },
+        {
+          "name": "overlays",
+          "parameters": "bounds: OverlayBounds, target: HTMLElement | undefined",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the overlays slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/WorkspacePanes.vue": {
+      "name": "WorkspacePanes",
+      "source": "packages/core/src/components/WorkspacePanes.vue",
+      "sourceHash": "78b5ff7bc47db0455757d7f93edbb5e16e8011485ab087e906502a7fb2df5854",
+      "props": [],
+      "emits": [],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "props: { pane: WorkspacePane; }",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        },
+        {
+          "name": "pane",
+          "parameters": "props: { pane: WorkspacePane; }",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the pane slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/SidePanel.vue": {
+      "name": "SidePanel",
+      "source": "packages/core/src/components/SidePanel.vue",
+      "sourceHash": "11457f80d4bec4e221c618c3e4cd6ac5e3cf69c49232a0ecf6c582b105a0caab",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Visible heading.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "actions",
+          "type": "readonly PanelAction[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Application-owned header actions.",
+          "control": "json",
+          "references": [
+            "PanelAction"
+          ]
+        },
+        {
+          "name": "padded",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Padded configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "empty",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Empty configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "close",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on close."
+        }
+      ],
+      "slots": [
+        {
+          "name": "actions",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the actions slot."
+        },
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/ViewSections.vue": {
+      "name": "ViewSections",
+      "source": "packages/core/src/components/ViewSections.vue",
+      "sourceHash": "3f76af25751fa4825870d8903f7b5c5f784eeffc90c05ce233adfad47ad5fe77",
+      "props": [
+        {
+          "name": "viewId",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "View Id configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "menuId",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Menu Id configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/ActivityRail.vue": {
+      "name": "ActivityRail",
+      "source": "packages/core/src/components/ActivityRail.vue",
+      "sourceHash": "d2d319438fe86cef1020c13d4c1adf4f720c36e928351841fb45642a8c8a321b",
+      "props": [
+        {
+          "name": "panels",
+          "type": "readonly SidePanelDefinition[]",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Panels configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "SidePanelDefinition"
+          ]
+        },
+        {
+          "name": "activeId",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Active Id configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "expanded",
+          "type": "boolean",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Expanded configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "select",
+          "parameters": "id: string",
+          "returns": "void",
+          "description": "Emitted on select."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameLoader.vue": {
+      "name": "FrameLoader",
+      "source": "packages/core/src/components/FrameLoader.vue",
+      "sourceHash": "754679c22b03f1627c17e3d1bb7969a80470bd9962e49cc96aad0e2afe6c9bd3",
+      "props": [
+        {
+          "name": "variant",
+          "type": "FrameLoaderVariant",
+          "default": {
+            "kind": "literal",
+            "value": "\"ring\""
+          },
+          "description": "Selects the visual variant.",
+          "options": [
+            "bouncy",
+            "cardio",
+            "grid",
+            "hatch",
+            "helix",
+            "hourglass",
+            "infinity",
+            "jelly",
+            "leapfrog",
+            "metronome",
+            "mirage",
+            "miyagi",
+            "momentum",
+            "orbit",
+            "ping",
+            "pinwheel",
+            "pulsar",
+            "quantum",
+            "reuleaux",
+            "ring",
+            "ripples",
+            "spiral",
+            "square",
+            "squircle",
+            "superballs",
+            "tailspin",
+            "treadmill",
+            "trefoil",
+            "trio",
+            "waveform",
+            "wobble",
+            "zoomies",
+            "ring-2",
+            "line-spinner",
+            "tail-chase",
+            "dot-spinner",
+            "bouncy-arc",
+            "line-wobble",
+            "chaotic-orbit",
+            "dot-wave",
+            "newtons-cradle",
+            "dot-stream",
+            "dot-pulse",
+            "jelly-triangle"
+          ],
+          "control": "text",
+          "references": [
+            "FrameLoaderVariant"
+          ]
+        },
+        {
+          "name": "size",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "32"
+          },
+          "description": "Largest dimension in pixels.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "default": {
+            "kind": "literal",
+            "value": "\"var(--frame-accent, #0078d4)\""
+          },
+          "description": "Color configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Animation loop duration in seconds; 0 pauses the animation.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "stroke",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Stroke width for line-based variants.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "strokeLength",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Track length as a fraction from 0 to 1, for supported styles.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "bgOpacity",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Background track opacity from 0 to 1, for supported styles.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "literal",
+            "value": "\"Loading…\""
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "decorative",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Use when a surrounding loading region supplies its own status.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameLoading.vue": {
+      "name": "FrameLoading",
+      "source": "packages/core/src/components/FrameLoading.vue",
+      "sourceHash": "4de2a662137952b025a9f015d2e5103e47a1557c239c29f2f5c70814eeb85b49",
+      "props": [
+        {
+          "name": "active",
+          "type": "boolean",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Shows the loading presentation while retaining the mounted content.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible message; falls back to label or Loading…. Empty string hides the message.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "textPosition",
+          "type": "FrameLoadingTextPosition",
+          "default": {
+            "kind": "literal",
+            "value": "\"below\""
+          },
+          "description": "Placement of loading text relative to its animation.",
+          "options": [
+            "left",
+            "right",
+            "above",
+            "below"
+          ],
+          "control": "text",
+          "references": [
+            "FrameLoadingTextPosition"
+          ]
+        },
+        {
+          "name": "showLoader",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Shows the loader animation.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "showText",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Shows supporting loading text.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "variant",
+          "type": "FrameLoaderVariant",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Selects the visual variant.",
+          "options": [
+            "bouncy",
+            "cardio",
+            "grid",
+            "hatch",
+            "helix",
+            "hourglass",
+            "infinity",
+            "jelly",
+            "leapfrog",
+            "metronome",
+            "mirage",
+            "miyagi",
+            "momentum",
+            "orbit",
+            "ping",
+            "pinwheel",
+            "pulsar",
+            "quantum",
+            "reuleaux",
+            "ring",
+            "ripples",
+            "spiral",
+            "square",
+            "squircle",
+            "superballs",
+            "tailspin",
+            "treadmill",
+            "trefoil",
+            "trio",
+            "waveform",
+            "wobble",
+            "zoomies",
+            "ring-2",
+            "line-spinner",
+            "tail-chase",
+            "dot-spinner",
+            "bouncy-arc",
+            "line-wobble",
+            "chaotic-orbit",
+            "dot-wave",
+            "newtons-cradle",
+            "dot-stream",
+            "dot-pulse",
+            "jelly-triangle"
+          ],
+          "control": "text",
+          "references": [
+            "FrameLoaderVariant"
+          ]
+        },
+        {
+          "name": "size",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Largest dimension in pixels.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Color configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Animation loop duration in seconds; 0 pauses the animation.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "stroke",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Stroke width for line-based variants.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "strokeLength",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Track length as a fraction from 0 to 1, for supported styles.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "bgOpacity",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Background track opacity from 0 to 1, for supported styles.",
+          "control": "number",
+          "references": []
+        }
+      ],
+      "emits": [],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        },
+        {
+          "name": "overlay",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the overlay slot."
+        },
+        {
+          "name": "loader",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the loader slot."
+        },
+        {
+          "name": "text",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the text slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameCodeBlock.vue": {
+      "name": "FrameCodeBlock",
+      "source": "packages/core/src/components/FrameCodeBlock.vue",
+      "sourceHash": "93892b0d7ec0a1f7c7b7d064c7172a0b158be5db4a28d89a24acb16e59e517e3",
+      "props": [
+        {
+          "name": "code",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Source text displayed without changing its contents.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "language",
+          "type": "string",
+          "default": {
+            "kind": "literal",
+            "value": "\"text\""
+          },
+          "description": "A Shiki language name or alias. Unknown languages are displayed as plain text.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "theme",
+          "type": "CodeBlockTheme",
+          "default": {
+            "kind": "derived",
+            "expression": "CodeBlockTheme.DarkPlus"
+          },
+          "description": "Supported editor or syntax-highlighting theme.",
+          "options": [
+            "andromeeda",
+            "aurora-x",
+            "ayu-dark",
+            "ayu-light",
+            "ayu-mirage",
+            "catppuccin-frappe",
+            "catppuccin-latte",
+            "catppuccin-macchiato",
+            "catppuccin-mocha",
+            "dark-plus",
+            "dracula",
+            "dracula-soft",
+            "everforest-dark",
+            "everforest-light",
+            "github-dark",
+            "github-dark-default",
+            "github-dark-dimmed",
+            "github-dark-high-contrast",
+            "github-light",
+            "github-light-default",
+            "github-light-high-contrast",
+            "gruvbox-dark-hard",
+            "gruvbox-dark-medium",
+            "gruvbox-dark-soft",
+            "gruvbox-light-hard",
+            "gruvbox-light-medium",
+            "gruvbox-light-soft",
+            "horizon",
+            "horizon-bright",
+            "houston",
+            "kanagawa-dragon",
+            "kanagawa-lotus",
+            "kanagawa-wave",
+            "laserwave",
+            "light-plus",
+            "material-theme",
+            "material-theme-darker",
+            "material-theme-lighter",
+            "material-theme-ocean",
+            "material-theme-palenight",
+            "min-dark",
+            "min-light",
+            "monokai",
+            "night-owl",
+            "night-owl-light",
+            "nord",
+            "one-dark-pro",
+            "one-light",
+            "plastic",
+            "poimandres",
+            "red",
+            "rose-pine",
+            "rose-pine-dawn",
+            "rose-pine-moon",
+            "slack-dark",
+            "slack-ochin",
+            "snazzy-light",
+            "solarized-dark",
+            "solarized-light",
+            "synthwave-84",
+            "tokyo-night",
+            "vesper",
+            "vitesse-black",
+            "vitesse-dark",
+            "vitesse-light"
+          ],
+          "control": "text",
+          "references": [
+            "CodeBlockTheme"
+          ]
+        },
+        {
+          "name": "lineNumbers",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Line Numbers configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "highlightOnHover",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Highlight On Hover configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "highlightedLines",
+          "type": "readonly number[]",
+          "default": {
+            "kind": "literal",
+            "value": "[]"
+          },
+          "description": "Displayed line numbers, including the startLine offset.",
+          "control": "json",
+          "references": []
+        },
+        {
+          "name": "startLine",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "1"
+          },
+          "description": "Start Line configuration for this component; see its Features examples for usage.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "wrap",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Wraps source lines in the available width.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "copyable",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Shows the copy action for the displayed source.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "literal",
+            "value": "\"Code block\""
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "error",
+          "parameters": "error: unknown",
+          "returns": "void",
+          "description": "Emitted on error."
+        }
+      ],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/extras/src/CodeEditor.vue": {
+      "name": "CodeEditor",
+      "source": "packages/extras/src/CodeEditor.vue",
+      "sourceHash": "213da100a50c32cee072bfc9bb1a71ee9a3361732624164379e6a4f61b5657a2",
+      "props": [
+        {
+          "name": "modelValue",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Controlled value. Updates are emitted through update:modelValue; the application owns the value.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "editor",
+          "type": "CodeEditorController",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Optional editor controller. A controller can attach to only one editor surface at a time.",
+          "control": "fixture",
+          "references": [
+            "CodeEditorController"
+          ]
+        },
+        {
+          "name": "language",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Syntax language identifier.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "theme",
+          "type": "CodeBlockTheme",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Supported editor or syntax-highlighting theme.",
+          "options": [
+            "andromeeda",
+            "aurora-x",
+            "ayu-dark",
+            "ayu-light",
+            "ayu-mirage",
+            "catppuccin-frappe",
+            "catppuccin-latte",
+            "catppuccin-macchiato",
+            "catppuccin-mocha",
+            "dark-plus",
+            "dracula",
+            "dracula-soft",
+            "everforest-dark",
+            "everforest-light",
+            "github-dark",
+            "github-dark-default",
+            "github-dark-dimmed",
+            "github-dark-high-contrast",
+            "github-light",
+            "github-light-default",
+            "github-light-high-contrast",
+            "gruvbox-dark-hard",
+            "gruvbox-dark-medium",
+            "gruvbox-dark-soft",
+            "gruvbox-light-hard",
+            "gruvbox-light-medium",
+            "gruvbox-light-soft",
+            "horizon",
+            "horizon-bright",
+            "houston",
+            "kanagawa-dragon",
+            "kanagawa-lotus",
+            "kanagawa-wave",
+            "laserwave",
+            "light-plus",
+            "material-theme",
+            "material-theme-darker",
+            "material-theme-lighter",
+            "material-theme-ocean",
+            "material-theme-palenight",
+            "min-dark",
+            "min-light",
+            "monokai",
+            "night-owl",
+            "night-owl-light",
+            "nord",
+            "one-dark-pro",
+            "one-light",
+            "plastic",
+            "poimandres",
+            "red",
+            "rose-pine",
+            "rose-pine-dawn",
+            "rose-pine-moon",
+            "slack-dark",
+            "slack-ochin",
+            "snazzy-light",
+            "solarized-dark",
+            "solarized-light",
+            "synthwave-84",
+            "tokyo-night",
+            "vesper",
+            "vitesse-black",
+            "vitesse-dark",
+            "vitesse-light"
+          ],
+          "control": "text",
+          "references": [
+            "CodeBlockTheme"
+          ]
+        },
+        {
+          "name": "readOnly",
+          "type": "boolean",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Disables editing. When omitted, nested editor options can provide the value.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "autofocus",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Autofocus configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "options",
+          "type": "CodeEditorOptions",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Nested Monaco editor and model options. Direct readOnly and label props take precedence.",
+          "control": "json",
+          "references": [
+            "CodeEditorOptions"
+          ]
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "code: string",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        },
+        {
+          "name": "ready",
+          "parameters": "editor: CodeEditorController",
+          "returns": "void",
+          "description": "Emitted on ready."
+        },
+        {
+          "name": "change",
+          "parameters": "code: string, event: Monaco.editor.IModelContentChangedEvent",
+          "returns": "void",
+          "description": "Emitted on change."
+        },
+        {
+          "name": "selection",
+          "parameters": "event: Monaco.editor.ICursorSelectionChangedEvent",
+          "returns": "void",
+          "description": "Emitted on selection."
+        },
+        {
+          "name": "focus",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on focus."
+        },
+        {
+          "name": "blur",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on blur."
+        },
+        {
+          "name": "error",
+          "parameters": "cause: unknown",
+          "returns": "void",
+          "description": "Emitted on error."
+        }
+      ],
+      "slots": [],
+      "methods": [
+        {
+          "name": "controller",
+          "kind": "property",
+          "parameters": "",
+          "returns": "CodeEditorController",
+          "description": "Exposed controller API. Available through the mounted component ref."
+        },
+        {
+          "name": "focus",
+          "kind": "method",
+          "parameters": "",
+          "returns": "boolean",
+          "description": "Focuses the rendered control."
+        }
+      ],
+      "forwardsAttrs": true
+    },
+    "packages/extras/src/Terminal.vue": {
+      "name": "Terminal",
+      "source": "packages/extras/src/Terminal.vue",
+      "sourceHash": "66270f1e82cf4660c2f496b00e0935bdacf9c7160ce411340cf6fe5e8c797404",
+      "props": [
+        {
+          "name": "terminal",
+          "type": "TerminalController",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Application-owned terminal controller. Dispose it according to its ownership rules.",
+          "control": "fixture",
+          "references": [
+            "TerminalController"
+          ]
+        },
+        {
+          "name": "sessionId",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Attaches to an existing terminal session instead of creating another one.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "profile",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Detected shell profile identifier or name. Shell creation requires explicit activation.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "cwd",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Initial working directory for a new terminal session.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "ready",
+          "parameters": "controller: TerminalController, sessionId: string",
+          "returns": "void",
+          "description": "Emitted on ready."
+        },
+        {
+          "name": "focus",
+          "parameters": "id: string",
+          "returns": "void",
+          "description": "Emitted on focus."
+        },
+        {
+          "name": "find",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on find."
+        },
+        {
+          "name": "error",
+          "parameters": "cause: unknown",
+          "returns": "void",
+          "description": "Emitted on error."
+        }
+      ],
+      "slots": [],
+      "methods": [
+        {
+          "name": "controller",
+          "kind": "property",
+          "parameters": "",
+          "returns": "{ profiles: Readonly<Ref<readonly { readonly id: string; readonly name: string; readonly path: string; readonly default: boolean; }[], readonly { readonly id: string; readonly name: string; readonly path: string; readonly default: boolean; }[]>>; ... 17 more ...; resize(id: string, cols: number, rows: number): Promi...",
+          "description": "Exposed controller API. Available through the mounted component ref."
+        },
+        {
+          "name": "focus",
+          "kind": "method",
+          "parameters": "",
+          "returns": "void",
+          "description": "Focuses the rendered control."
+        },
+        {
+          "name": "search",
+          "kind": "method",
+          "parameters": "query: string, previous: boolean",
+          "returns": "boolean",
+          "description": "Exposed search API. Available through the mounted component ref."
+        },
+        {
+          "name": "clear",
+          "kind": "method",
+          "parameters": "",
+          "returns": "void",
+          "description": "Exposed clear API. Available through the mounted component ref."
+        },
+        {
+          "name": "close",
+          "kind": "method",
+          "parameters": "",
+          "returns": "Promise<void>",
+          "description": "Exposed close API. Available through the mounted component ref."
+        }
+      ],
+      "forwardsAttrs": true
+    },
+    "packages/extras/src/TerminalView.vue": {
+      "name": "TerminalView",
+      "source": "packages/extras/src/TerminalView.vue",
+      "sourceHash": "fc4f69db23a04fa4ac1544d935aed9bb0c27de48a8eed05266333048029f2592",
+      "props": [
+        {
+          "name": "terminal",
+          "type": "TerminalController",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Application-owned terminal controller. Dispose it according to its ownership rules.",
+          "control": "fixture",
+          "references": [
+            "TerminalController"
+          ]
+        },
+        {
+          "name": "toolbar",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Toolbar configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "autoStart",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Auto Start configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "sidebar",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Sidebar configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "sessionLayout",
+          "type": "TerminalSessionLayout",
+          "default": {
+            "kind": "literal",
+            "value": "'sidebar'"
+          },
+          "description": "Session Layout configuration for this component; see its Features examples for usage.",
+          "options": [
+            "sidebar",
+            "tabs"
+          ],
+          "control": "text",
+          "references": [
+            "TerminalSessionLayout"
+          ]
+        }
+      ],
+      "emits": [],
+      "slots": [],
+      "methods": [
+        {
+          "name": "create",
+          "kind": "method",
+          "parameters": "split: boolean",
+          "returns": "Promise<void>",
+          "description": "Exposed create API. Available through the mounted component ref."
+        },
+        {
+          "name": "search",
+          "kind": "method",
+          "parameters": "",
+          "returns": "Promise<void>",
+          "description": "Exposed search API. Available through the mounted component ref."
+        },
+        {
+          "name": "rename",
+          "kind": "method",
+          "parameters": "id: string | undefined",
+          "returns": "Promise<void>",
+          "description": "Exposed rename API. Available through the mounted component ref."
+        },
+        {
+          "name": "openMenu",
+          "kind": "method",
+          "parameters": "anchor: HTMLElement | undefined",
+          "returns": "void",
+          "description": "Exposed openMenu API. Available through the mounted component ref."
+        },
+        {
+          "name": "toggleSidebar",
+          "kind": "method",
+          "parameters": "",
+          "returns": "void",
+          "description": "Exposed toggleSidebar API. Available through the mounted component ref."
+        }
+      ],
+      "forwardsAttrs": true
+    },
+    "packages/extras/src/AIChat.vue": {
+      "name": "AIChat",
+      "source": "packages/extras/src/AIChat.vue",
+      "sourceHash": "ac23e321581ffcca7083e9f4e58be95b4030bc8daba1290242d9c0a8d3bdd53e",
+      "props": [
+        {
+          "name": "chat",
+          "type": "AIChatController",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Application-owned chat controller. Requests start only when explicitly sent.",
+          "control": "fixture",
+          "references": [
+            "AIChatController"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "literal",
+            "value": "\"AI chat\""
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "default": {
+            "kind": "literal",
+            "value": "\"Write a message…\""
+          },
+          "description": "Hint displayed when the field is empty.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "userAlignment",
+          "type": "\"left\" | \"right\"",
+          "default": {
+            "kind": "literal",
+            "value": "\"right\""
+          },
+          "description": "User Alignment configuration for this component; see its Features examples for usage.",
+          "options": [
+            "left",
+            "right"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "assistantAlignment",
+          "type": "\"left\" | \"right\"",
+          "default": {
+            "kind": "literal",
+            "value": "\"left\""
+          },
+          "description": "Assistant Alignment configuration for this component; see its Features examples for usage.",
+          "options": [
+            "left",
+            "right"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "attachmentActions",
+          "type": "readonly FrameMenuItem[]",
+          "default": {
+            "kind": "literal",
+            "value": "[]"
+          },
+          "description": "Attachment Actions configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "FrameMenuItem"
+          ]
+        },
+        {
+          "name": "speechEnabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Speech Enabled configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "forge",
+          "parameters": "messages: ChatMessage[], source: ChatMessage",
+          "returns": "void",
+          "description": "Emitted on forge."
+        },
+        {
+          "name": "attachmentAction",
+          "parameters": "item: FrameMenuItem",
+          "returns": "void",
+          "description": "Emitted on attachment action."
+        },
+        {
+          "name": "speech",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on speech."
+        },
+        {
+          "name": "copy",
+          "parameters": "message: ChatMessage",
+          "returns": "void",
+          "description": "Emitted on copy."
+        }
+      ],
+      "slots": [
+        {
+          "name": "empty",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the empty slot."
+        },
+        {
+          "name": "message-actions",
+          "parameters": "message: ChatMessage",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the message-actions slot."
+        },
+        {
+          "name": "composer-actions",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the composer-actions slot."
+        }
+      ],
+      "methods": [
+        {
+          "name": "focus",
+          "kind": "method",
+          "parameters": "",
+          "returns": "void | undefined",
+          "description": "Focuses the rendered control."
+        }
+      ],
+      "forwardsAttrs": true
+    }
+  }
+}
