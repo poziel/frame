@@ -43,9 +43,17 @@ function keydown(event: KeyboardEvent) {
     else if (!event.shiftKey && (index === items.length - 1 || index < 0)) { event.preventDefault(); items[0]?.focus(); }
   }
 }
+function ownsPopup(target: HTMLElement) {
+  const popup = target.closest<HTMLElement>(".frame-select-popup, .frame-advanced-popup, .frame-date-popover, .frame-color-picker-popover");
+  if (!popup?.id || popup.closest(".frame-overlay-host") !== dialog.value?.closest(".frame-overlay-host")) return false;
+  // Reka portals keep their logical owner through the trigger's ARIA relationship.
+  return Array.from(dialog.value?.querySelectorAll<HTMLElement>("[aria-controls], [aria-owns]") ?? []).some(control =>
+    [control.getAttribute("aria-controls"), control.getAttribute("aria-owns")].some(ids => ids?.split(/\s+/).includes(popup.id)),
+  );
+}
 function focusGuard(event: FocusEvent) {
   const target = event.target as HTMLElement;
-  if (props.active && !dialog.value?.contains(target) && !target.closest('.frame-menu, .palette-backdrop')) focusInitial();
+  if (props.active && !dialog.value?.contains(target) && !target.closest('.frame-menu, .palette-backdrop') && !ownsPopup(target)) focusInitial();
 }
 function toggleMaximize() { stopGesture?.(); maximized.value = !maximized.value; }
 function begin(event: PointerEvent, edge?: ModalEdge) {

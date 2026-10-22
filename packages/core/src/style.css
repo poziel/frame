@@ -659,7 +659,7 @@ button.frame-button.primary:hover:not(:disabled) { filter: brightness(1.12); }
 button.frame-button:disabled { opacity: .45; cursor: default; }
 button.frame-button.frame-icon-button { padding: 0; min-height: 0; border: 0; gap: 0; }
 button.frame-button.frame-icon-button.no-hover-highlight:hover { background: transparent; color: inherit; }
-.frame-text-input { width: min(100%, 340px); padding: 6px 8px; min-height: 28px; color: #d4d4d4; background: #1d1d1d; border: 1px solid #3c4246; border-radius: 3px; font: inherit; }
+.frame-text-input { width: min(100%, 340px); padding: 6px 8px; min-height: 28px; color: var(--frame-control-text); background: var(--frame-control-background); border: 1px solid var(--frame-control-border); border-radius: var(--frame-control-radius); font: inherit; }
 .frame-text-input:disabled { opacity: .45; }
 .frame-checkbox { display: inline-flex; align-items: flex-start; gap: 8px; color: inherit; font: inherit; cursor: pointer; line-height: 18px; }
 .frame-checkbox input[type=checkbox] { appearance: none; position: relative; width: 18px; height: 18px; flex: 0 0 18px; margin: 0; border: 1px solid #6b6b6b; border-radius: 3px; background: #242424; cursor: inherit; }
@@ -697,7 +697,7 @@ button.frame-select { display: inline-flex; align-items: center; justify-content
 .frame-select-options > .frame-select-separator { padding: 0; min-height: 1px; height: 1px; margin: 5px 0; background: var(--frame-line, #3c4246); cursor: default; }
 .frame-slider { width: min(100%, 340px); accent-color: var(--frame-accent); }
 .frame-color-picker { width: 70px; height: 36px; padding: 3px; border: 1px solid #3c4246; border-radius: 3px; background: #1b1d1e; }
-.frame-text-area { width: min(100%, 460px); min-height: 90px; resize: vertical; padding: 8px; color: #d4d4d4; background: #1d1d1d; border: 1px solid #3c4246; border-radius: 3px; font: inherit; }
+.frame-text-area { width: min(100%, 460px); min-height: 90px; resize: vertical; padding: 8px; color: var(--frame-control-text); background: var(--frame-control-background); border: 1px solid var(--frame-control-border); border-radius: var(--frame-control-radius); font: inherit; }
 
 .frame-notifications { position: absolute; left: 8px; z-index: 60; width: min(420px, calc(100% - 16px)); max-height: calc(100% - 80px); overflow: auto; display: flex; flex-direction: column-reverse; gap: 8px; pointer-events: none; }
 .frame-notification { display: flex; align-items: flex-start; gap: 10px; padding: 12px; border: 1px solid var(--frame-line); border-radius: 6px; background: var(--frame-surface); box-shadow: 0 6px 25px #0005; pointer-events: auto; font-size: 12px; line-height: 1.5; }

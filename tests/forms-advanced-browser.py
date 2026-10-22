@@ -1,0 +1,67 @@
+from playwright.sync_api import sync_playwright, expect
+from pathlib import Path
+import os
+URL=os.environ.get("FRAME_DOCS_URL", "http://127.0.0.1:1448")
+FIXTURE=(Path(__file__).resolve().parent / "fixtures/forms-advanced/index.html").as_posix()
+with sync_playwright() as p:
+    browser = p.chromium.launch()
+    page = browser.new_page()
+    errors=[]
+    page.on('pageerror',lambda e: errors.append(str(e)))
+    page.goto(f"{URL}/@fs/{FIXTURE}")
+    expect(page.get_by_role('textbox', name='Email', exact=True)).to_be_visible(timeout=10000)
+    page.get_by_role('button',name='Submit',exact=True).click()
+    expect(page.locator('#submitted')).to_have_text('false')
+    page.get_by_role('textbox',name='Email',exact=True).fill('hello@example.com')
+    page.get_by_role('button',name='Submit',exact=True).click()
+    expect(page.locator('#submitted')).to_have_text('true')
+    page.get_by_role('radiogroup',name='Rating',exact=True).get_by_role('radio',name='4',exact=True).click()
+    expect(page.locator('#rating')).to_have_text('4')
+    page.get_by_role('textbox',name='Color',exact=True).fill('#ff0000')
+    page.get_by_role('textbox',name='Color',exact=True).press('Enter')
+    expect(page.locator('#color')).to_have_text('#ff0000')
+    city=page.get_by_role('combobox',name='City',exact=True)
+    city.fill('Par')
+    expect(page.locator('#advanced-overlay-host').get_by_role('option',name='Paris',exact=True)).to_be_visible()
+    popup=page.locator('.frame-advanced-popup').bounding_box()
+    assert popup['x']>=0 and popup['x']+popup['width']<=page.viewport_size['width']+1
+    page.get_by_role('option',name='Paris',exact=True).click()
+    expect(page.locator('#city')).to_have_text('Paris')
+    page.locator('[role=slider]').first.focus()
+    page.keyboard.press('ArrowRight')
+    expect(page.get_by_role('textbox',name='Custom failure',exact=True)).to_have_attribute('aria-invalid','true')
+    expect(page.get_by_text('Fix this value',exact=True)).to_be_visible()
+    trigger=page.get_by_role('button',name='Brand color',exact=True)
+    expect(trigger).to_have_css('width','70px')
+    expect(trigger).to_have_css('height','36px')
+    trigger.click()
+    expect(page.locator('#advanced-overlay-host').get_by_role('dialog',name='Brand color',exact=True)).to_be_visible()
+    color_input=page.get_by_role('textbox',name='Brand color value',exact=True)
+    color_input.fill('#00ff00');color_input.press('Enter')
+    expect(page.locator('#color')).to_have_text('#00ff00')
+    page.keyboard.press('Escape')
+    expect(trigger).to_be_focused()
+    assert page.evaluate("new FormData(document.getElementById('color-form')).get('accent')")=='#00ff00'
+    assert page.evaluate("new FormData(document.getElementById('color-form')).has('locked')")==False
+    expect(page.get_by_role('dialog',name='Brand color',exact=True)).to_have_count(0)
+    expect(page.get_by_role('button',name='Locked color picker',exact=True)).to_be_disabled()
+    expect(page.get_by_role('textbox',name='Disabled color',exact=True)).to_be_disabled()
+    expect(page.get_by_role('combobox',name='Disabled city',exact=True)).to_be_disabled()
+    assert page.get_by_role('grid',name='Fixed labels',exact=True).get_by_role('button').count()==0
+    expect(page.get_by_role('button',name='Remove Locked',exact=False)).to_be_disabled()
+    for radio in page.get_by_role('radiogroup',name='Disabled rating',exact=True).get_by_role('radio').all(): expect(radio).to_be_disabled()
+    fractional=page.get_by_role('radiogroup',name='Fractional rating',exact=True)
+    fractional.get_by_role('radio',name='2.5',exact=True).focus()
+    page.keyboard.down('ArrowRight')
+    expect(page.locator('#fractional-value')).to_have_text('3')
+    page.keyboard.up('ArrowRight')
+    before=page.locator('.frame-advanced-input').first.evaluate('el=>getComputedStyle(el).backgroundColor')
+    page.evaluate("document.documentElement.style.setProperty('--frame-control-background','#123456')")
+    expect(page.locator('.frame-advanced-input').first).to_have_css('background-color','rgb(18, 52, 86)')
+    assert before!='rgb(18, 52, 86)'
+    expect(page.get_by_role('listbox',name='Palette',exact=True)).to_be_visible()
+    expect(page.get_by_role('listbox',name='Disabled palette',exact=True)).to_have_attribute('aria-disabled','true')
+    assert not errors, errors
+    browser.close()
+    print('Advanced forms verified: validation/errors, fractional rating, accessible names/disabled, tags ownership, native picker FormData, compact color popup/edit/Escape/focus, shell-owned autocomplete/picker portals and themes.')
+

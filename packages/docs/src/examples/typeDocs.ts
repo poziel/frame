@@ -359,9 +359,9 @@ typeDocs.NotificationAction = {
 };
 
 typeDocs.NotificationHistory = {
-  description: 'An optional in-memory store from @frame/extras. It retains notification events independently of core notification expiry.',
+  description: 'An optional in-memory store from @frame/features. It retains notification events independently of core notification expiry.',
   usage: 'Create the store before emitting notifications. Mount NotificationPanel and NotificationIndicator with the same store. Dispose it on host unmount to unsubscribe. This store is not part of @frame/core.',
-  code: `import { createNotificationHistory } from '@frame/extras';
+  code: `import { createNotificationHistory } from '@frame/features';
 const history = createNotificationHistory(frame, { limit: 200 });
 history.toggle();
 // onBeforeUnmount(() => history.dispose());`,
@@ -390,3 +390,9 @@ typeDocs.FrameOptions = {
     { name: 'notifications', type: 'boolean', description: 'Enable transient notifications. Default true.' },
   ],
 };
+for (const [name, description, code] of [
+  ['DateValue', 'Calendar-aware date model used by calendar, date, month and year controls.', "import { CalendarDate, type DateValue } from '@frame/core';\nconst date: DateValue = new CalendarDate(2026, 10, 21);"],
+  ['DateRange', 'Start and end date values used by range calendars, fields and pickers.', "import { CalendarDate, type DateRange } from '@frame/core';\nconst range: DateRange = { start: new CalendarDate(2026, 10, 21), end: new CalendarDate(2026, 10, 26) };"],
+  ['TimeValue', 'Structured time model used by the time field; it is not a formatted display string.', "import { Time, type TimeValue } from '@frame/core';\nconst time: TimeValue = new Time(9, 30);"],
+  ['TimeRange', 'Start and end time values controlled by the application.', "import { Time, type TimeRange } from '@frame/core';\nconst range: TimeRange = { start: new Time(9, 30), end: new Time(17) };"],
+]) typeDocs[name!] = { description: description!, code: code!, properties: [{ name: name!.endsWith('Range') ? 'start / end' : 'value', type: name!.endsWith('Range') ? name!.replace('Range', 'Value') : name!, description: 'Use exported calendar/time constructors and parsers. The application decides storage format, locale and time zone.' }] };

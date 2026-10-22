@@ -14,6 +14,11 @@
   --color-frame-menu-shortcut: var(--frame-menu-shortcut);
   --color-frame-quick-background: var(--frame-quick-background);
   --color-frame-quick-selection: var(--frame-quick-selection);
+  --color-frame-control-background: var(--frame-control-background);
+  --color-frame-control-border: var(--frame-control-border);
+  --color-frame-control-text: var(--frame-control-text);
+  --color-frame-accent-foreground: var(--frame-accent-foreground);
+  --color-frame-danger: var(--frame-danger);
   --font-frame-body: var(--frame-font-body);
   --font-frame-mono: var(--frame-font-mono);
   --text-frame-body: var(--frame-font-size-body);

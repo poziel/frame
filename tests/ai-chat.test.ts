@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
-import { createAIChat, type ChatResponseWriter } from "../packages/extras/src/aiChat";
-import { groupChatParts } from "../packages/extras/src/chatParts";
+import { createAIChat, type ChatResponseWriter } from "../packages/features/src/aiChat";
+import { groupChatParts } from "../packages/features/src/chatParts";
 
 test("presentation merges adjacent parts without changing source IDs or crossing type boundaries", () => {
   const parts = [

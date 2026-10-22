@@ -78,10 +78,12 @@ The documentation app registers an API activity entry with the bundled reference
 
 Component type links open the same API pages and select the API sidebar. Reference pages explain behavior, constructor usage where relevant, code examples, and property types. Nested links retain a Back action that restores the previous page and sidebar. Direct class selections are root API pages and do not show an unrelated Back action.
 
-API URLs use `#/api/Name`; existing `#/types/Name` links remain supported. Catalog entries derive from the shared typeDocs registry, so adding a documented reference exposes it in the sidebar automatically. Core and Extras do not register the catalog or import documentation code.
+API URLs use `#/api/Name`; existing `#/types/Name` links remain supported. Catalog entries derive from the shared typeDocs registry, so adding a documented reference exposes it in the sidebar automatically. Core and Features do not register the catalog or import documentation code.
 
-## Extras documentation
+## Features documentation
 
-Duck has separate Components and Extras activities, with Extras immediately below Components. Components lists core examples; Extras lists all examples in the Extras group, including notification history, terminal, AI chat, and code editor. Both reuse the same documentation page renderer and keep API links and Back navigation available.
+Duck has separate Components and Features activities, with Features immediately below Components. Components lists core examples; Features lists all examples in the Features group, including notification history, terminal, AI chat, and code editor. Both reuse the same documentation page renderer and keep API links and Back navigation available.
 
 Sample tools, Collections, and the sample Activity/Inspector/Session panels are not registered by the documentation host. Interactive examples remain available inside their documentation pages.
+
+Forms, colors, dates, and times have individual live pages. See [Forms coverage and provenance](forms.md) for the complete Reka family inventory, Alpha status, native input boundaries, and public date/time models.

@@ -4,7 +4,7 @@
 
 **Goal:** Give every Duck component page complete Features, API, Theming, and Interactive demo tabs.
 
-**Architecture:** A Docs-owned typed registry drives a shared renderer, explicit feature previews, and per-component demo adapters. Source audits establish complete API contracts and actual styling tokens. Core and Extras expose supported styling variables but never import documentation.
+**Architecture:** A Docs-owned typed registry drives a shared renderer, explicit feature previews, and per-component demo adapters. Source audits establish complete API contracts and actual styling tokens. Core and Features expose supported styling variables but never import documentation.
 
 **Tech Stack:** Vue 3, TypeScript, existing Frame controls and FrameCodeBlock, Bun tests, Vite, browser verification.
 
@@ -35,7 +35,7 @@
 
 - `packages/docs/src/examples/documentation/types.ts`: page, feature, API, style, and demo contracts.
 - `packages/docs/src/examples/documentation/registry.ts`: complete page records keyed by existing catalog IDs.
-- `packages/docs/src/examples/documentation/pages/`: focused records for actions, forms, display, layout, overlays, and Extras.
+- `packages/docs/src/examples/documentation/pages/`: focused records for actions, forms, display, layout, overlays, and Features.
 - `packages/docs/src/examples/documentation/ComponentTabs.vue`: shared accessible top-level tabs.
 - `packages/docs/src/examples/documentation/FeatureSection.vue`: heading, explanation, preview, and highlighted code.
 - `packages/docs/src/examples/documentation/ApiTables.vue`: props, emits, slots, methods, and related references.
@@ -45,7 +45,7 @@
 - `packages/docs/src/examples/documentation/demos/`: per-component/family rendering and fixture adapters.
 - `packages/docs/src/examples/ComponentExamplePage.vue`: integrates the shared page system.
 - Existing `typeDocs.ts`, `TypeLink.vue`, `TypeDocumentationPage.vue`, and `apiNavigation.ts`: retain API routing and restore component tab state.
-- Production component CSS: Core/Extras styling tokens, never documentation imports.
+- Production component CSS: Core/Features styling tokens, never documentation imports.
 
 ## Task 1: Define complete documentation contracts and inventory
 
@@ -73,7 +73,7 @@ Defaults use a discriminated record: `{ kind: 'required' }`, `{ kind: 'omitted' 
 - [ ] Run the focused test and observe failure for missing adapters.
 - [ ] Render each feature as its own section using FrameCodeBlock with copy support. Convert existing select variant tabs into sequential sections. Give every page a basic example plus supported state/composition examples; do not merely duplicate the same preview.
 - [ ] Make copied code self-contained: imports, required state, event handlers, and template match the live example. Keep terminal/provider work explicitly activated.
-- [ ] Run focused tests and build. Manually compare checkbox, select, loading, and one Extras preview against their code.
+- [ ] Run focused tests and build. Manually compare checkbox, select, loading, and one Features preview against their code.
 - [ ] Commit with `feat(docs): add component feature examples`.
 
 ## Task 3: Four-tab page renderer and API navigation
@@ -83,16 +83,16 @@ Defaults use a discriminated record: `{ kind: 'required' }`, `{ kind: 'omitted' 
 **Interfaces:** ComponentTabs accepts `modelValue: DocumentationTab`, emits `update:modelValue`, and provides one slot per tab. ApiTables accepts a component's audited contract. ThemeReference accepts that page's documented classes/tokens. ComponentExamplePage accepts `componentId` and optional `initialTab`.
 
 - [ ] Add browser assertions for four named tabs, Features selected initially, ARIA relationships, ArrowLeft/Right/Home/End behavior, reset on component change, and independent split-pane selections.
-- [ ] Add `component API link restores its originating tab`: open select API, follow SelectItem then SelectOption, go Back twice, and assert API tab plus Components sidebar restored. Repeat from an Extras page.
+- [ ] Add `component API link restores its originating tab`: open select API, follow SelectItem then SelectOption, go Back twice, and assert API tab plus Components sidebar restored. Repeat from an Features page.
 - [ ] Run the browser checks and observe missing-tab failures.
 - [ ] Implement the renderer with a shared header, Features sections, complete API tables, and Theming table. Omit absent emits/slots/methods. Render required/default status accurately and use TypeLink for related contracts.
 - [ ] Save the current tab in the previous workspace-content props when following a reference; preserve existing routes, icon-library navigation, and root API selections. Keep ComponentShowcase public behavior unchanged.
-- [ ] Run browser checks, focused tests, and build. Verify no Docs imports enter Core/Extras.
+- [ ] Run browser checks, focused tests, and build. Verify no Docs imports enter Core/Features.
 - [ ] Commit with `feat(docs): add component documentation tabs`.
 
 ## Task 4: Production theme tokens and accurate theming reference
 
-**Files:** Modify packages/core/src/style.css, affected Core component scoped styles, packages/extras/src/style.css, affected Extras scoped styles, page theming records. Add tests/component-theme-contracts.test.ts.
+**Files:** Modify packages/core/src/style.css, affected Core component scoped styles, packages/features/src/style.css, affected Features scoped styles, page theming records. Add tests/component-theme-contracts.test.ts.
 
 **Interfaces:** Theme records contain class name/description and token name/default/description/element/state. Public variables use `--frame-<component>-<purpose>` and fall back to existing semantic tokens where appropriate.
 
@@ -100,7 +100,7 @@ Defaults use a discriminated record: `{ kind: 'required' }`, `{ kind: 'omitted' 
 - [ ] Run tests to see missing-token failures.
 - [ ] Audit all rendered component styling. Replace configurable literal styling values with component tokens while preserving their current computed defaults. Keep structural display, accessibility rules, calculated geometry, and prop-controlled sizing out of token duplication.
 - [ ] Populate actual class/token records, including state variants and inherited semantic tokens. Document third-party themes through supported adapter configuration rather than claiming arbitrary internal CSS tokens.
-- [ ] Run tests and compare default versus token-overridden screenshots for checkbox, button, select, menu, loading, and Extras chat. Check narrow embedded bounds and inherited token scoping.
+- [ ] Run tests and compare default versus token-overridden screenshots for checkbox, button, select, menu, loading, and Features chat. Check narrow embedded bounds and inherited token scoping.
 - [ ] Commit with `feat: expose documented component styling tokens`.
 
 ## Task 5: Validated interactive demo engine
@@ -128,7 +128,7 @@ Defaults use a discriminated record: `{ kind: 'required' }`, `{ kind: 'omitted' 
 - [ ] Implement action/form controls, structured select/menu/settings fixtures, icon/loader/code-display controls, layout and overlay compositions, then notification history/editor/chat/terminal adapters. Preserve each package's actual defaults and limitations.
 - [ ] Add browser assertions: edit/reset simple props, change enum/number/optional props, reject invalid structured data without destroying preview, inspect emits, exercise slot/method fixtures, and verify generated code changes.
 - [ ] Verify opening terminal/AI tabs starts no shell/provider request. Verify explicit activation, leaving tabs, navigation, and app disposal clean up resources. Test small viewport tables and overlays without clipping.
-- [ ] Run full `bun test`, `bun run build:library`, `bun run build:extras`, `bun run check:consumer`, `bun run build`, and `git diff --check`. Run browser checks against the dev server, recording actual limits if a browser backend is unavailable.
+- [ ] Run full `bun test`, `bun run build:library`, `bun run build:features`, `bun run check:consumer`, `bun run build`, and `git diff --check`. Run browser checks against the dev server, recording actual limits if a browser backend is unavailable.
 - [ ] Review every existing catalog page across all four tabs. Report incomplete coverage explicitly; do not call the project complete while any page lacks its required content.
 - [ ] Update Docs guidance and commit with `feat(docs): complete component reference and demo coverage`.
 

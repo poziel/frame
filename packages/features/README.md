@@ -1,14 +1,16 @@
-# Frame Extras
+# @frame/features
 
-Optional ready-made features for Frame applications. Core never imports Extras. Extras has peer dependencies on @frame/core and Vue, and does not register anything merely by being imported.
+Renamed from `@frame/extras`. Update package dependencies/imports, stylesheet imports, and the build command to `bun run build:features`. Local native hosts must update their terminal plugin path from `packages/extras/tauri` to `packages/features/tauri`. Existing standalone component/controller exports are retained; `.use()` and typed feature factories remain proposed APIs.
+
+Optional ready-made features for Frame applications. Core never imports Features. Features has peer dependencies on @frame/core and Vue, and does not register anything merely by being imported.
 
 ```vue
 <script setup lang="ts">
 import { onBeforeUnmount } from 'vue';
 import { createFrame, FrameShell } from '@frame/core';
-import { createNotificationHistory, NotificationPanel, NotificationIndicator } from '@frame/extras';
+import { createNotificationHistory, NotificationPanel, NotificationIndicator } from '@frame/features';
 import '@frame/core/style.css';
-import '@frame/extras/style.css';
+import '@frame/features/style.css';
 const frame = createFrame();
 const history = createNotificationHistory(frame, { limit: 200 });
 onBeforeUnmount(() => { history.dispose(); frame.dispose(); });
@@ -23,7 +25,7 @@ onBeforeUnmount(() => { history.dispose(); frame.dispose(); });
 
 The panel keeps a bounded in-memory history of notifications emitted after subscription. Expiring or dismissing a core notification does not delete history. Clearing history does not dismiss active messages. No bell, history, commands, or panel are installed by core. The application may register its own command using `history.toggle` and should dispose the history on unmount. Panel `bottom` is a pixel offset; adapt it when changing status-bar visibility or density.
 
-Build core first with `bun run build:library`, then run `bun run build:extras`. Both are private workspace packages; nothing is published.
+Build core first with `bun run build:library`, then run `bun run build:features`. Both are private workspace packages; nothing is published.
 
 ## Code editor
 
@@ -32,9 +34,9 @@ Build core first with `bun run build:library`, then run `bun run build:extras`. 
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
-import { CodeEditor, createCodeEditor, type CodeEditorOptions } from '@frame/extras';
+import { CodeEditor, createCodeEditor, type CodeEditorOptions } from '@frame/features';
 import { CodeBlockTheme } from '@frame/core';
-import '@frame/extras/style.css';
+import '@frame/features/style.css';
 
 const code = ref('const answer = 42;');
 const editor = createCodeEditor(); // Optional: access this surface from application code.
@@ -75,24 +77,24 @@ Monaco themes and token providers are shared across Monaco instances: changing o
 
 The component uses the installed Monaco ESM package and local worker assets. Use a bundler that handles Monaco's module workers (the Docs app uses Vite), and serve the resulting worker files with the application. Monaco 0.57 supplies worker factories; no `MonacoEnvironment` override is needed in the Vite example. If your app already configures `MonacoEnvironment`, its worker factory takes precedence and must support the editor and enabled language services. Other bundlers and desktop webviews have not been browser-verified here.
 
-Verification: `bun test tests/code-editor.test.ts tests/code-block.test.ts`, `bun run build:library`, `bun run build:extras`, `bun run check:consumer`, and, with the Docs server running, `uv run --with playwright python tests/code-editor-browser.py`. The Docs component catalog includes a Code editor example with live Code Block output.
+Verification: `bun test tests/code-editor.test.ts tests/code-block.test.ts`, `bun run build:library`, `bun run build:features`, `bun run check:consumer`, and, with the Docs server running, `uv run --with playwright python tests/code-editor-browser.py`. The Docs component catalog includes a Code editor example with live Code Block output.
 
 ## Desktop terminal
 
-`Terminal` is a terminal surface without a toolbar. `TerminalView` adds shell selection, sessions, a sidebar, side-by-side splits, rename, session colors, search and clear. `createTerminalView` puts those actions in Frame's existing view header. All terminal code, dependencies and the native plugin belong to Extras; Core has no terminal dependency.
+`Terminal` is a terminal surface without a toolbar. `TerminalView` adds shell selection, sessions, a sidebar, side-by-side splits, rename, session colors, search and clear. `createTerminalView` puts those actions in Frame's existing view header. All terminal code, dependencies and the native plugin belong to Features; Core has no terminal dependency.
 
 In the host's `src-tauri/Cargo.toml`, opt into the bundled native crate (adjust the path for your application):
 
 ```toml
 [dependencies]
-tauri-plugin-frame-terminal = { path = "../../extras/tauri" }
+tauri-plugin-frame-terminal = { path = "../../features/tauri" }
 ```
 
 Register `.plugin(tauri_plugin_frame_terminal::init())` on the Tauri builder, and add `"frame-terminal:default"` to the local window's capability permissions. For HTTP links, register `tauri-plugin-opener` and grant its `opener:default` permission too. Grant terminal permissions only to trusted local application content: they allow launching interactive shells with the application's user privileges.
 
 ```ts
-import { createTerminal, createTerminalView } from '@frame/extras';
-import '@frame/extras/style.css';
+import { createTerminal, createTerminalView } from '@frame/features';
+import '@frame/features/style.css';
 
 // Keep this controller in the application owner, outside a disposable view.
 const terminal = createTerminal({ cwd: 'D:\\projects' });
@@ -125,7 +127,7 @@ Ctrl+Shift+C copies selected output; Ctrl+Shift+V and normal paste events paste 
 
 Hiding, moving, or unmounting a surface keeps its shell and terminal buffer alive. Explicit session close and controller disposal terminate processes; native window/application teardown cleans up its sessions. Nothing persists across application restarts. Scrollback is limited to 5,000 lines; output received before the first surface attaches is capped at 1 MiB. Browser use shows a desktop-only error, and no server is started. `TerminalBackend` is an adapter interface for future transports; this release includes only the Tauri backend.
 
-Verification: `bun test tests/terminal.test.ts`, `cargo test --manifest-path packages/extras/tauri/Cargo.toml`, and, with the Docs dev server running, `uv run --with playwright python tests/terminal-browser.py` and `uv run --with playwright python tests/terminal-layout-browser.py`. Browser UI checks use an in-memory adapter; Cargo tests run real native PTYs on the test machine.
+Verification: `bun test tests/terminal.test.ts`, `cargo test --manifest-path packages/features/tauri/Cargo.toml`, and, with the Docs dev server running, `uv run --with playwright python tests/terminal-browser.py` and `uv run --with playwright python tests/terminal-layout-browser.py`. Browser UI checks use an in-memory adapter; Cargo tests run real native PTYs on the test machine.
 
 ## AI chat
 
@@ -134,9 +136,9 @@ Verification: `bun test tests/terminal.test.ts`, `cargo test --manifest-path pac
 ```vue
 <script setup lang="ts">
 import { onBeforeUnmount } from 'vue';
-import { AIChat, createAIChat, type ChatMessage } from '@frame/extras';
+import { AIChat, createAIChat, type ChatMessage } from '@frame/features';
 import '@frame/core/style.css';
-import '@frame/extras/style.css';
+import '@frame/features/style.css';
 
 const chat = createAIChat({
   async respond(request, response) {
@@ -179,6 +181,6 @@ While rewinding, the composer shows a single-line preview of the original prompt
 
 The plus menu uses browser file and folder pickers. Selected `File` objects remain in memory on attachments; no automatic upload or persistence occurs. Folder selection depends on browser support and exposes selected file paths relative to that folder. Hosts can provide native adapters through custom attachment actions. Enter sends, Shift+Enter adds a line, and IME composition does not submit. The waiting border respects reduced motion. The room scrolls with new content when near the bottom and offers a jump action when reading earlier messages.
 
-Run `bun run dev`, then open **Components → Extras → AI chat** for the local streaming mock server. It returns a random sentence and a second message after simulated thinking. The endpoint also runs with `bun run preview`; static hosting needs its own backend. No AI credentials are used.
+Run `bun run dev`, then open **Components → Features → AI chat** for the local streaming mock server. It returns a random sentence and a second message after simulated thinking. The endpoint also runs with `bun run preview`; static hosting needs its own backend. No AI credentials are used.
 
-Future candidates are terminal and file explorer features. Applications must supply process, model-provider, and filesystem adapters; Extras should not start services or configure credentials.
+Future candidates are terminal and file explorer features. Applications must supply process, model-provider, and filesystem adapters; Features should not start services or configure credentials.

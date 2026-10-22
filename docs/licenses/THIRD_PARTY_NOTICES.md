@@ -17,3 +17,6 @@ Retain this attribution and the accompanying license when distributing Frame or 
 ## LDRS
 
 LDRS by Griffin Johnston (https://github.com/GriffinJohnston/ldrs) is MIT licensed. Frame uses its unmodified web components for loading animations. Retain the accompanying ldrs.txt license when distributing Frame.
+## Reka UI
+
+Reka UI (https://github.com/unovue/reka-ui) supplies Frame's accessible form interaction primitives. Its MIT license and the installed dependency licenses, including the internationalized date/number packages, are collected in reka-ui.txt. Retain that file when distributing Frame. Regenerate with `bun packages/core/scripts/collect-reka-licenses.ts` after dependency updates.

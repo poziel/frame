@@ -1,9 +1,20 @@
 """Run with the docs dev server on port 1420; requires Playwright Chromium."""
 from playwright.sync_api import sync_playwright, expect
 from pathlib import Path
+import os
+
+BASE_URL=os.environ.get("FRAME_TEST_URL", "http://localhost:1420").rstrip("/")
 
 
 def contained(page, selector):
+    if selector == ".frame-select-popup":
+        # Floating UI resolves collisions after the Reka content mounts.
+        page.wait_for_function("""() => {
+          const body=document.querySelector('.workbench-body')?.getBoundingClientRect();
+          const boxes=[...document.querySelectorAll('.frame-select-popup')];
+          const box=boxes.at(-1)?.getBoundingClientRect();
+          return body && box && box.y>=body.y-1 && box.bottom<=body.bottom+1 && box.x>=body.x-1 && box.right<=body.right+1;
+        }""")
     bounds = page.locator(".workbench-body").bounding_box()
     box = page.locator(selector).last.bounding_box()
     assert bounds and box, selector
@@ -18,7 +29,7 @@ with sync_playwright() as p:
     page = browser.new_page(viewport={"width": 1180, "height": 780})
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
-    page.goto("http://localhost:1420/")
+    page.goto(f"{BASE_URL}/")
     page.get_by_role("button", name="Manage", exact=True).click()
     expect(page.get_by_role("menu", name="Manage", exact=True)).to_be_visible()
     contained(page, ".frame-menu")
@@ -35,7 +46,7 @@ with sync_playwright() as p:
     page.keyboard.press("Escape")
     # Exercise every overlay primitive at both edges of an actual shell.
     fixture = (Path(__file__).parent / "fixtures/overlays/index.html").resolve().as_posix()
-    page.goto(f"http://localhost:1420/@fs/{fixture}")
+    page.goto(f"{BASE_URL}/@fs/{fixture}")
     page.get_by_role("button", name="External menu", exact=True).click()
     expect(page.get_by_role("menu", name="External menu", exact=True)).to_be_visible()
     contained(page, ".frame-menu")
@@ -60,6 +71,7 @@ with sync_playwright() as p:
         page.get_by_role("option", name="Choice 1", exact=False).first.hover()
         expect(page.locator(".frame-select-popup > .frame-overlay-scrollbar.y")).to_be_visible()
         page.keyboard.press("End")
+        expect(page.get_by_role("option", name="Choice 50", exact=True)).to_be_focused()
         page.keyboard.press("Enter")
         expect(page.get_by_role("combobox", name=label, exact=True)).to_contain_text("Choice 50")
     for label in ["Top tooltip", "Bottom tooltip"]:
@@ -89,8 +101,16 @@ with sync_playwright() as p:
     page.get_by_role("combobox", name="Modal choice", exact=True).click()
     contained(page, ".frame-select-popup")
     page.keyboard.press("End")
+    expect(page.get_by_role("option", name="Choice 50", exact=True)).to_be_focused()
     page.keyboard.press("Enter")
     expect(page.get_by_role("combobox", name="Modal choice", exact=True)).to_contain_text("Choice 50")
+    # An unrelated portal in the same shell must not bypass the active modal's focus guard.
+    page.locator(".frame-overlay-host").evaluate("""host => {
+      const popup=document.createElement('div'); popup.className='frame-select-popup'; popup.id='unrelated-popup';
+      const button=document.createElement('button'); button.textContent='Unrelated portal'; popup.append(button); host.append(popup); button.focus();
+    }""")
+    assert page.get_by_role("dialog", name="Boundary modal", exact=True).evaluate("el => el.contains(document.activeElement)")
+    page.locator("#unrelated-popup").evaluate("el => el.remove()")
     page.get_by_role("button", name="Modal tooltip", exact=True).hover()
     expect(page.get_by_role("tooltip")).to_be_visible()
     contained(page, ".frame-tooltip")
@@ -138,7 +158,7 @@ with sync_playwright() as p:
             page.get_by_role("combobox", name="Bottom choice", exact=True).click()
             contained(page, ".frame-select-popup")
             page.keyboard.press("Escape")
-    page.goto("http://localhost:1420/")
+    page.goto(f"{BASE_URL}/")
     page.get_by_role("button", name="Manage", exact=True).click()
     contained(page, ".frame-menu")
     page.screenshot(path=".tmp/overlay-boundaries.png")

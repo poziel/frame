@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 license = "MIT"
 links = "tauri-plugin-frame-terminal"
-description = "Opt-in native PTY backend for Frame extras"
+description = "Opt-in native PTY backend for Frame features"
 
 [build-dependencies]
 tauri-plugin = { version = "2", features = ["build"] }

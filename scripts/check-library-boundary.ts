@@ -1,7 +1,7 @@
 import { readFile, mkdir, cp } from "node:fs/promises";
 const coreRoot = new URL("../packages/core/", import.meta.url);
 const source = await readFile(new URL("dist/frame.js", coreRoot), "utf8");
-for (const marker of ["FRAME COMPONENTS", "Find a component…", "The demo preferences are live", "Personal workspace", "Sample tools", "@frame/extras", "notification-center", "Notification history"]) {
+for (const marker of ["FRAME COMPONENTS", "Find a component…", "The demo preferences are live", "Personal workspace", "Sample tools", "@frame/features", "notification-center", "Notification history"]) {
   if (source.includes(marker)) throw new Error(`Documentation leaked into core: ${marker}`);
 }
 const css = await readFile(new URL("dist/frame.css", coreRoot), "utf8");

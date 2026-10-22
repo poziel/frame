@@ -5,7 +5,7 @@ export default defineConfig({
   publicDir: false,
   build: {
     outDir: "dist",
-    lib: { entry: "src/index.ts", formats: ["es"], fileName: "extras", cssFileName: "extras" },
+    lib: { entry: "src/index.ts", formats: ["es"], fileName: "features", cssFileName: "features" },
     rolldownOptions: { external: ["vue", "@frame/core", /^monaco-editor(?:\/|$)/] },
   },
 });

@@ -27,18 +27,11 @@ The host can retain its own domain stores. Having one Frame entry point does not
 
 ## Optional features are factories
 
-Installing Extras should make capabilities available on Frame without eagerly creating chats, editors, or terminal processes. Later requests create independent feature instances. For chat, each instance can have its own responder/backend configuration; a single global responder selected at Frame creation is insufficient.
+Installing Features should make capabilities available on Frame without eagerly creating chats, editors, or terminal processes. Later requests create independent feature instances. For chat, each instance can have its own responder/backend configuration; a single global responder selected at Frame creation is insufficient.
 
-The agreed presentation behavior for a future Frame-owned chat capability is:
+The current agreed direction separates feature creation and presentation. Configure self-describing typed descriptors through chained .use(feature) calls; each descriptor supplies its own capability key. Access inferred capabilities under frame.features and create independent instances later. Callers do not name or alias features during installation. The proposed container APIs are frame.views.primarySidebar.register(), frame.views.secondarySidebar.register(), and frame.views.panel.register(). A feature instance can provide a typed view definition registered explicitly through a sidebar or bottom-panel container, or be rendered inside existing workspace content. Creating a controller must not automatically manufacture a sidebar. This supersedes the earlier automatic chat fallback proposal.
 
-1. Create a chat instance when the host requests one.
-2. Let the host explicitly mount a presentation, or request that Frame open the chat.
-3. When opening, reveal/focus an existing registered presentation, including a hidden one.
-4. If no presentation is registered, create a sidebar view containing the chat component.
-5. Repeated opens reuse the existing view. Moving or hiding it preserves the chat's state.
-6. Dispose feature resources explicitly, or when their owning Frame is disposed. Closing a view need not end its conversation.
-
-Presentation registration must be tied to the feature instance and cleaned up with its mounting lifecycle. The precise installer syntax, type augmentation, multiple-presentation selection policy, and creation/disposal APIs still require implementation design. Do not invent those APIs in examples and imply they already ship.
+See [the current design](extension-and-reka-design.md) for the proposed namespaces, typing, and migration of existing features/views properties. Those runtime APIs are still proposals. The package rename to @frame/features is implemented independently.
 
 ## Build integration
 
@@ -55,7 +48,7 @@ At the time of this documentation update:
 - `packages/core/src/frame/createFrame.ts` creates per-instance commands, view registries, layout state, workspace control, settings, notifications, navigation, and disposal. It already provides much of the coordinator model.
 - `FrameOptions` currently includes settings, notifications, and navigation switches. Shell visibility lives in layout state; some presentation options remain `FrameShell` props. A complete unified configuration contract is not implemented.
 - `FrameShell` receives/provides the instance and renders the shell. `useFrame()` accesses the provided instance inside its component tree.
-- Extras currently exports standalone controllers and components, including `createAIChat` and `AIChat`. It does not yet install typed capabilities onto Frame or automatically provide the chat sidebar fallback.
+- Features currently exports standalone controllers and components, including `createAIChat` and `AIChat`. It does not yet install typed capabilities onto Frame or provide the proposed feature-instance view factories.
 - Reka UI is installed, and Tailwind is available as a separate optional package. Existing controls are not all Reka-based, and existing styles are not fully tokenized.
 
 Future work should extend these existing systems deliberately. There is no need to replace the working shell to establish Frame as the public application API.

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { h, onBeforeUnmount, onMounted, ref } from "vue";
 import { createFrame, FrameShell } from "@frame/core";
-import { createNotificationHistory, NotificationPanel, NotificationIndicator } from "@frame/extras";
-import { createTerminal, createTerminalView } from '@frame/extras';
+import { createNotificationHistory, NotificationPanel, NotificationIndicator } from "@frame/features";
+import { createTerminal, createTerminalView } from '@frame/features';
 import ApiCatalog from "./examples/ApiCatalog.vue";
 import { apiViewId, openApiReference } from "./examples/apiNavigation";
 import { typeDocs } from "./examples/typeDocs";
@@ -16,15 +16,15 @@ import "./docs.css";
 const frame = createFrame({ navigation: true });
 const notificationHistory = createNotificationHistory(frame);
 const terminal = createTerminal();
-const removeTerminalView = frame.registerView(createTerminalView({ id: 'extras.terminal', frame, terminal }), 'bottom');
+const removeTerminalView = frame.registerView(createTerminalView({ id: 'features.terminal', frame, terminal }), 'bottom');
 const titleText = ref("Frame (Workspace)");
 const showSearch = ref(true);
 
 const cleanups: (() => void)[] = [];
-cleanups.push(frame.registerCommand({ id: "extras.notifications", label: "Notifications: Toggle history", run: notificationHistory.toggle }));
+cleanups.push(frame.registerCommand({ id: "features.notifications", label: "Notifications: Toggle history", run: notificationHistory.toggle }));
 cleanups.push(frame.registerActivityAction({ id: "demo.home", label: "Home", icon: () => h(FrameIcon, { name: "home", size: 20 }), run: () => { history.replaceState(null, "", location.pathname + location.search); frame.resetWorkspace(); } }));
 cleanups.push(frame.registerView({ id: "demo.components", label: "Components", icon: () => h(FrameIcon, { name: "symbol-class", size: 20 }), component: ComponentCatalog }, "primary"));
-cleanups.push(frame.registerView({ id: "demo.extras", label: "Extras", icon: () => h(FrameIcon, { name: "package", size: 20 }), component: ComponentCatalog, props: { extras: true } }, "primary"));
+cleanups.push(frame.registerView({ id: "demo.features", label: "Features", icon: () => h(FrameIcon, { name: "package", size: 20 }), component: ComponentCatalog, props: { features: true } }, "primary"));
 cleanups.push(frame.registerView({ id: apiViewId, label: "API", icon: () => h(FrameIcon, { name: "references", size: 20 }), component: ApiCatalog, padded: false }, "primary"));
 cleanups.push(frame.registerSettingsSection({ id: "appearance", title: "Appearance", description: "Arrange Frame around the way you work.", settings: [
   { id: "appearance.density", label: "Layout density", type: "select", default: "default", getValue: () => frame.layout.density, options: [{ value: "default", label: "Default", description: "Roomier regions with resize grips." }, { value: "compact", label: "Compact", description: "Tighter regions without resize grips." }], onChange: value => { frame.layout.density = value as "default" | "compact"; } },
@@ -39,7 +39,7 @@ cleanups.push(frame.registerSettingsSection({ id: "application", title: "Applica
   { id: "application.autosave", label: "Autosave interval (seconds)", type: "number", default: 30, min: 5, max: 300, step: 5, description: "Sample preference for applications that provide autosave." },
   { id: "application.color", label: "Project color", type: "color", default: "#0078d4" },
 ] }));
-frame.manageMenuItems.value = [{ id: "settings", label: "Settings", command: "frame.settings", shortcut: "Ctrl+," }, { id: "separator", type: "separator" }, { id: "layout", label: "Customize layout", command: "frame.layout.customize" }, { id: "notifications", label: "Notifications", command: "extras.notifications" }];
+frame.manageMenuItems.value = [{ id: "settings", label: "Settings", command: "frame.settings", shortcut: "Ctrl+," }, { id: "separator", type: "separator" }, { id: "layout", label: "Customize layout", command: "frame.layout.customize" }, { id: "notifications", label: "Notifications", command: "features.notifications" }];
 frame.openSidePanel("demo.components");
 frame.layout.secondarySidebarVisible = false; frame.closeBottomPanel();
 frame.navigation.clear();

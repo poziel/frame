@@ -23,7 +23,7 @@ Consume Frame as a dependency in your own project. Your application stays in its
 - **A configurable workbench.** Arrange side panels, bottom tabs, split workspace panes, and banners. Resize regions and move views between them.
 - **Commands and navigation.** Register application actions with keyboard shortcuts and expose them through menus and Quick actions.
 - **Reusable Vue controls.** Compose buttons, inputs, selects, sliders, tooltips, context menus, and movable, resizable modals.
-- **Settings and notifications.** Supply your own settings sections and bottom-left notifications with expiry and action buttons. Add optional notification history through [`@frame/extras`](packages/extras).
+- **Settings and notifications.** Supply your own settings sections and bottom-left notifications with expiry and action buttons. Add optional notification history through [`@frame/features`](packages/features).
 - **A desktop host and browser preview.** Tauri provides the native window; preview the Vue shell in a browser, where native window controls are disabled.
 
 Frame takes visual cues from VS Code’s workbench layout, panels, and controls. It is an independent project, not a fork of VS Code or a Microsoft product. It provides no code editor, terminal, file-handling system, or extension runtime.
@@ -43,7 +43,7 @@ bun run tauri dev
 
 For the browser preview, use `bun run dev` instead. The example application includes a component catalog and sample views; these contributions are separate from the core package.
 
-Open Quick actions with **Ctrl+P**, **Ctrl+Shift+P**, or **Ctrl+T**. Use **Components**, **Extras**, and **API** to browse documentation and interactive examples. **Ctrl+B** toggles the side panel; **Ctrl+J** toggles the bottom panel. Command works in place of Ctrl on macOS.
+Open Quick actions with **Ctrl+P**, **Ctrl+Shift+P**, or **Ctrl+T**. Use **Components**, **Features**, and **API** to browse documentation and interactive examples. **Ctrl+B** toggles the side panel; **Ctrl+J** toggles the bottom panel. Command works in place of Ctrl on macOS.
 
 ## Use Frame in your application
 
@@ -83,7 +83,7 @@ onBeforeUnmount(() => frame.dispose());
 </template>
 ```
 
-Register your Vue components as views, add commands, and enable settings or notifications when needed. Your host application owns its data, persistence, backend, and native Tauri configuration. See [Reusing Frame](docs/reusing-frame.md) for registration examples and [Package boundaries](docs/package-boundaries.md) for the Core, Extras, and documentation application split.
+Register your Vue components as views, add commands, and enable settings or notifications when needed. Your host application owns its data, persistence, backend, and native Tauri configuration. See [Reusing Frame](docs/reusing-frame.md) for registration examples and [Package boundaries](docs/package-boundaries.md) for the Core, Features, and documentation application split.
 
 ## Development
 

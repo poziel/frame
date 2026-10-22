@@ -1,0 +1,2 @@
+{"extends":"../tsconfig.json","compilerOptions":{"noEmit":true},"include":["../packages/core/src/vite-env.d.ts","../packages/core/src/components/FrameCalendar.vue","../packages/core/src/components/FrameRangeCalendar.vue","../packages/core/src/components/FrameDate*.vue","../packages/core/src/components/FrameTime*.vue","../packages/core/src/components/FrameMonth*.vue","../packages/core/src/components/FrameYear*.vue"]}
+

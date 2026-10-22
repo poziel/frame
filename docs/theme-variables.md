@@ -20,6 +20,11 @@ Frame owns the `--frame-*` namespace. Applications can use `--app-*` (or a produ
 | `--frame-menu-shortcut` | `#929292` | `text-frame-menu-shortcut` |
 | `--frame-quick-background` | `#202020` | `bg-frame-quick-background` |
 | `--frame-quick-selection` | `#267b9b` | `bg-frame-quick-selection` |
+| `--frame-control-background` | `#1d1d1d` | Input background; `bg-frame-control-background` |
+| `--frame-control-border` | `#3c4246` | Input border; `border-frame-control-border` |
+| `--frame-control-text` | `#d4d4d4` | Input foreground; `text-frame-control-text` |
+| `--frame-accent-foreground` | `#ffffff` | Text on accent controls |
+| `--frame-danger` | `#f48771` | Form validation errors |
 | `--frame-font-body` | `"Segoe UI", sans-serif` | Body family; `font-frame-body` |
 | `--frame-font-mono` | `Consolas, monospace` | Code family; `font-frame-mono` |
 | `--frame-font-size-body` | `12px` | Base size; `text-frame-body` |
@@ -53,6 +58,6 @@ The current implementation exposes defaults and the Tailwind mapping, not an upl
 
 ## Current component coverage
 
-Existing color tokens retain their current consumers. Shell and overlay base typography use the body font and size; the panel log uses the mono family. FrameButton uses control padding and radius. FrameModal uses panel radius and overlay shadow. Other existing hard-coded sizes, colors, font overrides, and corners are not all migrated yet. New content spacing, gap, and motion tokens are available to application components but do not globally rescale the shell. Full component token adoption is separate work; this document does not claim all existing components are completely themeable.
+Existing color tokens retain their current consumers. Shell and overlay base typography use the body font and size; the panel log uses the mono family. FrameButton uses control padding and radius. FrameModal uses panel radius and overlay shadow. Other existing hard-coded sizes, colors, font overrides, and corners are not all migrated yet. New content spacing, gap, and motion tokens are available to application components but do not globally rescale the shell. The Reka form, color, and date compositions use these tokens; native text inputs and text areas now use control background/border/text tokens. Full shell component token adoption is separate work; this document does not claim all existing components are completely themeable.
 
 See [optional Tailwind setup](../packages/tailwind/README.md) for consumer imports and Vite configuration.

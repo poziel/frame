@@ -1,6 +1,6 @@
 # Third-party notices
 
-The Extras bundle and its optional editor include these dependencies:
+The Features bundle and its optional editor include these dependencies:
 
 | Dependency | License | Included notice |
 | --- | --- | --- |

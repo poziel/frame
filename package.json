@@ -12,16 +12,17 @@
     "tauri": "bun run --cwd packages/docs tauri",
     "build:library": "bun run --cwd packages/core build",
     "check:consumer": "vue-tsc -p tests/tsconfig.json --noEmit",
-    "build:extras": "bun run --cwd packages/extras build",
+    "build:features": "bun run --cwd packages/features build",
     "check:tailwind": "vite build --config tests/fixtures/tailwind/vite.config.ts"
   },
   "devDependencies": {
-    "typescript": "~6.0.3",
-    "vue-tsc": "^3.3.5",
-    "vue": "^3.5.13",
-    "@frame/tailwind": "workspace:*",
     "@frame/core": "workspace:*",
-    "reka-ui": "^2.11.0"
+    "@frame/tailwind": "workspace:*",
+    "reka-ui": "^2.11.0",
+    "typescript": "~6.0.3",
+    "vite": "^8.0.16",
+    "vue": "^3.5.13",
+    "vue-tsc": "^3.3.5"
   },
   "workspaces": [
     "packages/*"

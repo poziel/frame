@@ -5,8 +5,8 @@
       "@frame/core": [
         "../core/src/frame/index.ts"
       ],
-      "@frame/extras": [
-        "../extras/src/index.ts"
+      "@frame/features": [
+        "../features/src/index.ts"
       ]
     }
   },

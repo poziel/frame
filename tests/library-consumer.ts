@@ -1,8 +1,8 @@
-import { createNotificationHistory, NotificationPanel, NotificationIndicator } from "@frame/extras";
-import { Terminal, TerminalView, createTerminal, createTerminalView, type TerminalController, type TerminalProfile, type TerminalSessionLayout } from '@frame/extras';
-import { AIChat, createAIChat, type ChatResponseWriter, type ChatMessage } from "@frame/extras";
+import { createNotificationHistory, NotificationPanel, NotificationIndicator } from "@frame/features";
+import { Terminal, TerminalView, createTerminal, createTerminalView, type TerminalController, type TerminalProfile, type TerminalSessionLayout } from '@frame/features';
+import { AIChat, createAIChat, type ChatResponseWriter, type ChatMessage } from "@frame/features";
 import { h } from "vue";
-import { CodeEditor, createCodeEditor, type CodeEditorOptions, type CodeEditorProps } from '@frame/extras';
+import { CodeEditor, createCodeEditor, type CodeEditorOptions, type CodeEditorProps } from '@frame/features';
 const editorOptions: CodeEditorOptions = { fontSize: 15, wordWrap: 'on', tabSize: 2, minimap: { enabled: false } };
 const editorProps: CodeEditorProps = { modelValue: '', editor: createCodeEditor(), language: 'typescript', readOnly: false, options: editorOptions };
 void h(CodeEditor, editorProps);
@@ -60,3 +60,10 @@ export function consumerFixture() {
   return { component: h(FrameShell, { frame, titleText: "Artoria", showSearch: false, menuItems: menu }), menuComponent: FrameMenu, modalComponent: FrameModal };
 }
 
+
+// Public form compositions and calendar models must survive declaration emission.
+import { FrameAutocomplete, FrameCheckboxGroup, FrameCombobox, FrameEditable, FrameField, FrameForm, FrameLabel, FrameListbox, FrameNumberField, FramePinInput, FrameRadioGroup, FrameRating, FrameSwitch, FrameTagGroup, FrameTagsInput, FrameToggle, FrameToggleGroup, FrameCalendar, FrameRangeCalendar, FrameDateField, FrameDatePicker, FrameDateRangeField, FrameDateRangePicker, FrameTimeField, FrameTimeRangeField, FrameMonthPicker, FrameMonthRangePicker, FrameYearPicker, FrameYearRangePicker, FrameColorArea, FrameColorField, FrameColorSlider, FrameColorSwatch, FrameColorSwatchPicker, CalendarDate, Time, type DateRange, type TimeRange } from '@frame/core';
+const exampleDay = new CalendarDate(2026, 10, 21);
+const exampleRange: DateRange = { start: exampleDay, end: exampleDay.add({ days: 3 }) };
+const exampleTimeRange: TimeRange = { start: new Time(9), end: new Time(17) };
+void [FrameAutocomplete, FrameCheckboxGroup, FrameCombobox, FrameEditable, FrameField, FrameForm, FrameLabel, FrameListbox, FrameNumberField, FramePinInput, FrameRadioGroup, FrameRating, FrameSwitch, FrameTagGroup, FrameTagsInput, FrameToggle, FrameToggleGroup, FrameCalendar, FrameRangeCalendar, FrameDateField, FrameDatePicker, FrameDateRangeField, FrameDateRangePicker, FrameTimeField, FrameTimeRangeField, FrameMonthPicker, FrameMonthRangePicker, FrameYearPicker, FrameYearRangePicker, FrameColorArea, FrameColorField, FrameColorSlider, FrameColorSwatch, FrameColorSwatchPicker, exampleRange, exampleTimeRange];

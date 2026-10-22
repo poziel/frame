@@ -24,9 +24,9 @@ For each change, identify which responsibility it serves. A feature can include 
 
 ## Optional features
 
-- Extras remains a separate, optional package. The target is that installing an extension adds typed capabilities to the same Frame instance. Core must not import Extras or depend on its implementation.
+- Features remains a separate, optional package. The agreed installer is chained `.use(featureDescriptor)`: each typed descriptor declares its own id, literal capability key, and install behavior; callers do not provide aliases. Proposed container namespaces are `frame.views.primarySidebar`, `frame.views.secondarySidebar`, and `frame.views.panel`. The target is that installing an extension adds typed capabilities to the same Frame instance. Core must not import Features or depend on its implementation.
 - Installing a capability does not create a feature instance. Create chats, terminals, and similar resources lazily through the capability when requested. Multiple instances can have different adapters/configuration and independent state.
-- For the agreed future chat integration, opening a chat reveals its registered presentation. If none exists, Frame creates a sidebar view containing that chat. Reopening must reuse the presentation; a hidden view is not a missing view. An application can explicitly mount its own presentation instead.
+- The latest chat direction separates instance creation from presentation. A chat can be embedded in application content or provide a typed view definition registered explicitly in a chosen Frame container. Do not create a sidebar as a side effect of chat creation. Earlier automatic-fallback proposals are superseded.
 - Imports and capability installation must not automatically start AI requests, authenticate, spawn processes, or create demo content. Explicit feature creation/activation defines when work starts.
 - The extension installer and Frame-owned chat factory are architectural targets, not APIs already available. Implement and verify their contracts before documenting consumer examples as runnable.
 
@@ -35,12 +35,12 @@ For each change, identify which responsibility it serves. A feature can include 
 - Share `--frame-*` variables between Frame controls and application content. Read [theme variables](docs/theme-variables.md); colors, typography, spacing, radii, shadows, and motion are all theme concerns. Preserve current appearance when introducing tokens.
 - Tailwind is optional build tooling, not a runtime feature installed with `frame.use(...)`. Keep it out of Core's runtime dependencies. Its generated utilities reference runtime variables so selected themes affect content and portals consistently.
 - Prefer Reka UI for suitable complex interaction primitives instead of rebuilding focus/keyboard behavior. Do not migrate unrelated existing controls merely because Reka is installed.
-- Follow [package boundaries](docs/package-boundaries.md): Core owns the framework and shared primitives, Extras owns optional features, Tailwind owns its build integration, and Docs owns examples and the development host. Never ship demo registrations or product-specific backend services in library entry points.
+- Follow [package boundaries](docs/package-boundaries.md): Core owns the framework and shared primitives, Features owns optional features, Tailwind owns its build integration, and Docs owns examples and the development host. Never ship demo registrations or product-specific backend services in library entry points.
 
 ## Verification and working practices
 
 - Preserve unrelated and uncommitted work. Make targeted edits; do not commit, push, or publish unless requested.
 - For public behavior, test host API calls as well as UI interactions. Relevant cases include multiple Frame instances, disabled features, repeated registration/opening, state retention, disposal, and portals. Choose checks appropriate to the change rather than running every browser suite indiscriminately.
-- Available checks: `bun test`, `bun run build:library`, `bun run build:extras`, `bun run check:consumer`, and `bun run build`. Build library outputs before checking consumers against them.
+- Available checks: `bun test`, `bun run build:library`, `bun run build:features`, `bun run check:consumer`, and `bun run build`. Build library outputs before checking consumers against them.
 - For Tailwind: `bun run check:tailwind`, then `python tests/tailwind-browser.py` in an environment with Playwright and Chromium. This verifies the compiled consumer and runtime theme changes.
 - Report actual checks and remaining limits. Separate implemented behavior from the architecture direction and future proposals.

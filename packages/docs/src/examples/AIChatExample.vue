@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onBeforeUnmount, shallowRef, ref } from "vue";
-import { AIChat, createAIChat, type ChatMessage, type ChatResponder } from "@frame/extras";
+import { AIChat, createAIChat, type ChatMessage, type ChatResponder } from "@frame/features";
 import { FrameCheckbox } from "@frame/core";
 const emit = defineEmits<{ feedback: [text: string] }>();
 const reversed = ref(false);

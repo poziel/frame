@@ -1,17 +1,17 @@
 {
-  "name": "@frame/extras",
+  "name": "@frame/features",
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
   "type": "module",
-  "main": "./dist/extras.js",
+  "main": "./dist/features.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/extras.js"
+      "import": "./dist/features.js"
     },
-    "./style.css": "./dist/extras.css"
+    "./style.css": "./dist/features.css"
   },
   "files": [
     "dist",

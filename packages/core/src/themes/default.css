@@ -24,6 +24,11 @@
   --frame-control-radius: 3px;
   --frame-panel-radius: 7px;
   --frame-overlay-shadow: 0 14px 50px #0006;
+  --frame-control-background: #1d1d1d;
+  --frame-control-border: #3c4246;
+  --frame-control-text: #d4d4d4;
+  --frame-accent-foreground: #ffffff;
+  --frame-danger: #f48771;
   --frame-duration: 150ms;
   --frame-ease: ease-out;
 }

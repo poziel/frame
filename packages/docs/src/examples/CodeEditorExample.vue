@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { CodeEditor, createCodeEditor } from '@frame/extras';
+import { CodeEditor, createCodeEditor } from '@frame/features';
 import { FrameButton, FrameCheckbox, FrameSelect, FrameCodeBlock, CodeBlockTheme, codeBlockThemeOptions } from '@frame/core';
 const code = ref('function greet(name: string) {\n  return `Hello, ${name}!`;\n}\n\nconsole.log(greet("Frame"));\n');
 const editor = createCodeEditor();
