@@ -99,15 +99,10 @@ Object.assign(typeDocs, {
     ]
   },
   "QuickPickOptions": {
-    "description": "Public object contract exported by @frame/core.",
-    "usage": "Use this contract when calling the corresponding Frame API. Optional fields may be omitted.",
-    "code": "export interface QuickPickOptions {\r\n  searchable?: boolean;\r\n  title?: string;\r\n  placeholder?: string;\r\n}",
+    "description": "Options for the always-searchable frame.showQuickPick service.",
+    "usage": "Supply title and search placeholder. Custom content belongs in FrameQuickPanel rather than a non-searchable picker.",
+    "code": "export interface QuickPickOptions {\r\n  title?: string;\r\n  placeholder?: string;\r\n}",
     "properties": [
-      {
-        "name": "searchable",
-        "type": "boolean | undefined",
-        "description": "Enables text filtering for this picker."
-      },
       {
         "name": "title",
         "type": "string | undefined",
@@ -389,6 +384,8 @@ typeDocs.FrameOptions = {
     { name: 'navigation', type: 'boolean', description: 'Enable page/view navigation history and the Back/Forward arrows. Default false.' },
     { name: 'settings', type: 'boolean', description: 'Enable built-in Settings UI. Default true.' },
     { name: 'notifications', type: 'boolean', description: 'Enable transient notifications. Default true.' },
+    { name: 'toolbar', type: 'ToolbarOptions', reference: 'ToolbarOptions', description: 'Initial title-bar control visibility; runtime changes use frame.toolbar.' },
+    { name: 'activity', type: 'ActivityOptions', reference: 'ActivityOptions', description: 'Initial activity position, size, hidden items and badges; runtime changes use frame.activity.' },
   ],
 };
 
@@ -410,3 +407,43 @@ for (const [name, description, code] of [
 }
 
 for(const [name,doc] of Object.entries(extractedReferences)) if(!Object.prototype.hasOwnProperty.call(typeDocs,name)) typeDocs[name]=doc;
+
+typeDocs.ToolbarOptions = {
+ description: 'Initial visibility of instance-owned title-bar controls.',
+ code: "const frame = createFrame({ toolbar: { primary: true, commandCenter: false } });\nframe.toolbar.setVisible('bottom', true);",
+ properties: ['customize','primary','bottom','secondary','commandCenter','layoutControls'].map(name=>({name,type:'boolean',description:'Whether this title-bar control is rendered; hiding it does not disable its command.'})),
+};
+typeDocs.ActivityOptions = {
+ description: 'Initial activity presentation and contribution visibility, scoped to the Frame instance.',
+ code: "const frame = createFrame({ activity: { position: 'top', size: 'compact' } });\nframe.activity.setPosition('bottom');\nframe.activity.setSize('default');\nframe.activity.movePrimarySide('right');",
+ properties: [
+  {name:'position',type:'ActivityBarPosition',reference:'ActivityBarPosition',description:'Initial placement or hidden state; defaults to default.'},
+  {name:'size',type:'ActivityBarSize',reference:'ActivityBarSize',description:'Initial item size; defaults to default. Independent of position and shell density.'},
+  ...['hidden','hiddenBadges'].map(name=>({name,type:"readonly { kind: 'view' | 'action'; id: string }[]",description:'Contributions whose activity item or badge begins hidden.'})),
+ ],
+};
+typeDocs.ActivityBarPosition = {
+ description: 'Activity-bar placement or visibility selected through options or frame.activity.setPosition.',
+ code: "import type { ActivityBarPosition } from '@frame/core';\nconst position: ActivityBarPosition = 'top';\nframe.activity.setPosition(position);",
+ properties: [
+  {name:'default',type:'literal',description:'Normal activity rail placement.'},
+  {name:'top / bottom',type:'literal',description:'Horizontal activity placement.'},
+  {name:'hidden',type:'literal',description:'Hide through layout.activityBarVisible while retaining the last visible position.'},
+ ],
+};
+typeDocs.ActivityBarSize = {
+ description: 'Activity item size, independent of activity placement and overall shell density.',
+ code: "import type { ActivityBarSize } from '@frame/core';\nconst size: ActivityBarSize = 'compact';\nframe.activity.setSize(size);",
+ properties: [{name:'default / compact',type:'literal',description:'Normal or compact activity item sizing.'}],
+};
+typeDocs.ActivityController = {
+ description: 'Per-instance activity presentation, visibility, and badge controls.',
+ code: "frame.activity.setPosition('top');\nframe.activity.setSize('compact');\nframe.activity.movePrimarySide('right');\nconst position = frame.activity.position.value;",
+ properties: [
+  {name:'position / size',type:'ComputedRef<ActivityBarPosition> / ComputedRef<ActivityBarSize>',description:'Reactive current presentation. Read .value in script.'},
+  {name:'setPosition',type:'(position: ActivityBarPosition) => boolean',reference:'ActivityBarPosition',description:'Change placement or hide; non-hidden positions show the bar.'},
+  {name:'setSize',type:'(size: ActivityBarSize) => boolean',reference:'ActivityBarSize',description:'Change only activity item size.'},
+  {name:'movePrimarySide',type:"(side: 'left' | 'right') => boolean",description:'Move the primary sidebar and activity presentation together.'},
+  {name:'setVisible / setBadgeVisible / setBadge',type:'methods',description:'Control registered contributions by their view/action key; hiding does not dispose content.'},
+ ],
+};

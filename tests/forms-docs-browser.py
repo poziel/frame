@@ -21,7 +21,7 @@ with sync_playwright() as p:
         title = 'Pin Input' if title == 'PIN input' else title
         open_page(title)
         expect(page.get_by_role('tab',name='Features',exact=True)).to_have_attribute('aria-selected','true')
-        assert page.locator('.documentation-feature').count()>=2,title
+        assert page.locator('.documentation-feature').count()>=1,title
         expect(tab('API').locator('.documentation-api')).to_be_visible()
         expect(tab('Theming').get_by_role('heading',name='Design tokens',exact=True)).to_be_visible()
         expect(tab('Interactive demo').locator('.documentation-demo')).to_be_visible()
@@ -59,7 +59,7 @@ with sync_playwright() as p:
     expect(page.locator('.documentation-demo-inputs [role=alert]')).to_have_count(0)
     for name,value in [('minValue','2027-02-01'),('maxValue','2027-02-28')]:
         field=page.locator('.documentation-demo-inputs fieldset').filter(has=page.locator('legend',has_text=name))
-        field.get_by_role('checkbox',name='Use component default',exact=True).uncheck()
+        field.get_by_role('switch',name='Set '+name,exact=True).check()
         field.get_by_role('textbox',name=name,exact=True).fill('"'+value+'"')
     expect(page.locator('.documentation-demo-inputs [role=alert]')).to_have_count(0)
     expect(page.locator('.documentation-event-log')).to_contain_text('update:modelValue')

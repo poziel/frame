@@ -1,6 +1,6 @@
 # Component catalog and activity actions
 
-The demo opens Components as its first sidebar view. Home is the first activity item, followed by Components and the existing sample views. Home is an action without selection state: it calls resetWorkspace(), returning to a single empty canvas while leaving the sidebar available.
+The demo opens Components as its first sidebar view. Home is the first activity item, followed by Components and the existing sample views. Home opens the Frame introduction in the active workspace pane. Guides provides getting-started and architecture pages. These are documentation-owned contributions and preserve the workspace layout.
 
 Catalog pages use the four-tab documentation renderer for features, API contracts, theme tokens, and interactive demos. The exported ComponentShowcase remains available for standalone showcases. Catalog definitions and content stay in packages/docs/src/examples; they are not included in the reusable library build. **Loader** previews all 44 LDRS styles with filtering and copyable usage; **Loading region** demonstrates scoped blocking, configurable text placement, optional animation/text, mounted content, and asynchronous completion. See [Loading](loading.md).
 
@@ -8,7 +8,7 @@ Catalog pages use the four-tab documentation renderer for features, API contract
 
 ```ts
 const removeHome = frame.registerActivityAction({
-  id: "home", label: "Home", icon: HomeIcon,
+  id: "clear-workspace", label: "Clear workspace", icon: HomeIcon,
   run: frame.resetWorkspace,
 });
 ```
@@ -97,3 +97,13 @@ The Docs-only registry and helpers live in `packages/docs/src/examples/documenta
 ## Reka forms
 
 The form, color, and date/time components also use this four-tab documentation structure. See [Forms coverage](forms.md) for the complete component inventory and upstream maturity notes.
+
+## Collection visibility
+
+Collections expose **Views and more** in their header, listing their current direct sub-views. Checked items are visible; hiding a sub-view retains its registration, component instance, collapsed state, and size. Moving a view into a collection updates that list. Empty collections retain the menu, and all-hidden collections can be restored through it. This applies to primary and secondary sidebars, bottom panels, and nested collections.
+
+Applications can set `visible: false` on a registered view, query `frame.isViewVisible(id)`, and call `frame.setViewVisible(id, visible)`. Calling `frame.openView(id)` reveals the requested view and its ancestors. Visibility is presentation state, not feature availability or resource disposal.
+
+The documentation activity **Explorer example** contains Project notes, Outline, and Timeline. Type a note or increment a counter, hide and restore the sub-view, then use **Add Scratchpad sub-view** to move the existing Scratchpad panel into the collection.
+
+See [Sidebar activity bars](sidebar-activity-bars.md) for shared primary/secondary selector behavior and layout controls.

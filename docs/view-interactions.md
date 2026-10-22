@@ -2,6 +2,10 @@
 
 Frame suppresses the browser context menu while a shell is mounted. It does not install content actions. Wrap any host content in the exported `ContextMenu`, pass `FrameMenuItem[]`, and handle `select`. Menus support nested items, separators, checked/disabled states, shortcuts, viewport fitting, arrow navigation, Escape, and focus restoration. The optional `visibility: true` menu-item property displays the reusable `VisibilityIndicator` eye on hover/focus.
 
+FrameMenu keeps its anchor, pointer position, item definitions, and select/close events. Its floating menu now uses Reka DropdownMenu primitives for keyboard navigation, label typeahead, disabled entries, checked items, nested submenus, and dismissal. Frame supplies the menu styling, shared button rows, and portal boundary for each shell instance. Escape and selection return focus to the anchor; clicking another control leaves focus with that control.
+
+Both FrameMenu and ContextMenu accept `itemAlignment: "left" | "center" | "right"` (default `"left"`). It controls the menu label alignment, including nested submenus. The menu retains its checkmark, shortcut, and submenu-arrow columns. This is separate from where the floating menu is positioned.
+
 ```vue
 <ContextMenu :items="[{ id: 'inspect', label: 'Inspect' }]" @select="inspect($event.id)">
   <article tabindex="0">Your content</article>

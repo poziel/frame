@@ -145,7 +145,6 @@ defineExpose({ create, search: searchOpen, rename, openMenu, toggleSidebar: () =
     <FrameIconButton label="Next match" icon="arrow-down" @click="search()"/>
     <FrameIconButton label="Close search" icon="close" @click="searchClose"/>
   </div>
-  <div v-if="terminal.error.value" class="frame-terminal-error" role="alert"><span>{{ terminal.error.value }}</span><FrameIconButton label="Dismiss terminal error" icon="close" @click="terminal.dismissError()"/></div>
   <div v-if="renameId" class="frame-terminal-rename">
     <label :for="`${localId}-rename`">Terminal name</label><FrameTextInput :id="`${localId}-rename`" ref="renameInput" :model-value="renameText" @update:model-value="renameText = String($event)" @keydown.enter.prevent="finishRename" @keydown.esc.stop="renameId = undefined"/>
     <FrameButton @click="finishRename">Save</FrameButton><FrameIconButton label="Cancel rename" icon="close" @click="renameId = undefined"/>
@@ -156,9 +155,9 @@ defineExpose({ create, search: searchOpen, rename, openMenu, toggleSidebar: () =
   </div>
   <div ref="body" class="frame-terminal-body" :class="{ 'with-sidebar': selectorVisible && sessionLayout === 'sidebar', 'with-tabs': selectorVisible && sessionLayout === 'tabs' }" :style="selectorVisible && sessionLayout === 'sidebar' ? { gridTemplateColumns: `minmax(0, 1fr) 0px ${sidebarSize}px` } : undefined">
     <div ref="panes" class="frame-terminal-panes" :style="{ gridTemplateColumns: paneColumns }">
-      <div v-if="!group.length" class="frame-terminal-empty"><FrameIcon name="terminal" :size="32"/><p>No terminal sessions</p><FrameButton :disabled="!selectedProfile" @click="create()">New terminal</FrameButton></div>
+      <div v-if="!group.length" class="frame-terminal-empty"><FrameIcon name="terminal" :size="32"/><p>No terminal sessions</p><p v-if="terminal.error.value" class="frame-terminal-error" role="alert">{{ terminal.error.value }}</p><FrameButton v-else :disabled="!selectedProfile" @click="create()">New terminal</FrameButton></div>
       <template v-for="(id, index) in group" :key="id"><section :id="`${localId}-terminal-${id}`" class="frame-terminal-pane" :class="{ active: terminal.activeId.value === id }" :style="{ gridColumn: index * 2 + 1 }" :role="sessionLayout === 'tabs' && selectorVisible ? 'tabpanel' : undefined" :aria-labelledby="sessionLayout === 'tabs' && selectorVisible ? `${localId}-session-${id}` : undefined">
-        <Terminal :ref="value => { if (value) terminals.set(id, value as InstanceType<typeof Terminal>); else terminals.delete(id); }" :terminal="terminal" :session-id="id" @focus="terminal.activate" @find="searchOpen"/>
+        <Terminal :ref="value => { if (value) terminals.set(id, value as InstanceType<typeof Terminal>); else terminals.delete(id); }" :terminal="terminal" :session-id="id" :error-message="terminal.activeId.value === id ? terminal.error.value : undefined" @focus="terminal.activate" @find="searchOpen"/>
       </section><ResizeHandle v-if="index < group.length - 1" class="frame-terminal-pane-resize" :style="{ gridColumn: index * 2 + 2 }" axis="x" :label="`Resize terminal pane ${index + 1}`" :value="paneSizes[index] ?? 0" :min="Math.min(80, ((paneSizes[index] ?? 0) + (paneSizes[index + 1] ?? 0)) / 2)" :max="(paneSizes[index] ?? 0) + (paneSizes[index + 1] ?? 0) - Math.min(80, ((paneSizes[index] ?? 0) + (paneSizes[index + 1] ?? 0)) / 2)" @change="resizePane(index, $event)" @reset="resetPanes"/></template>
     </div>
     <ResizeHandle v-if="selectorVisible && sessionLayout === 'sidebar'" class="frame-terminal-sidebar-resize" axis="x" label="Resize terminal sidebar" reverse :value="sidebarSize" :min="sidebarMin" :max="sidebarMax" @change="sidebarWidth = $event" @reset="sidebarWidth = 210"/>

@@ -13,14 +13,13 @@ const menuAnchor = shallowRef<HTMLElement>();
 const point = ref({ x: 0, y: 0 });
 let menuPane = "";
 const menuItems = computed<FrameMenuItem[]>(() => [
-  ...(frame.features.navigation ? [{ id: "navigation", label: "Back and Forward", visibility: true, checked: frame.layout.navigationVisible }, { id: "navigation-divider", type: "separator" as const }] : []),
   ...(["left", "right", "up", "down"] as const).map(direction => ({ id: direction, label: `Split ${direction[0]!.toUpperCase()}${direction.slice(1)}` })),
   { id: "divider", type: "separator" },
   { id: "close", label: "Close Pane", disabled: panes.value.length === 1 },
 ]);
 function host(id: string, target: HTMLElement | null) { if (target) hosts.set(id, target); else hosts.delete(id); }
 function openMenu(id: string, event: MouseEvent) { menuPane = id; menuAnchor.value = event.currentTarget as HTMLElement; point.value = { x: event.clientX || menuAnchor.value.getBoundingClientRect().left, y: event.clientY || menuAnchor.value.getBoundingClientRect().top }; }
-function choose(item: FrameMenuItem) { if (item.id === "navigation") frame.layout.navigationVisible = !frame.layout.navigationVisible; else if (item.id === "close") frame.closeWorkspacePane(menuPane); else frame.splitWorkspace(item.id as WorkspaceSplitDirection, menuPane); }
+function choose(item: FrameMenuItem) { if (item.id === "close") frame.closeWorkspacePane(menuPane); else frame.splitWorkspace(item.id as WorkspaceSplitDirection, menuPane); }
 defineSlots<{ default(props: { pane: WorkspacePane }): unknown; pane(props: { pane: WorkspacePane }): unknown }>();
 </script>
 <template>

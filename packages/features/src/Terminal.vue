@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { FrameIcon } from '@frame/core';
 import { createTerminal, type TerminalController } from './terminal';
 import { terminalSurface, type TerminalSurface } from './terminalSurface';
 
-const props = defineProps<{ terminal?: TerminalController; sessionId?: string; profile?: string; cwd?: string; label?: string }>();
+const props = defineProps<{ terminal?: TerminalController; sessionId?: string; profile?: string; cwd?: string; label?: string; errorMessage?: string }>();
 const emit = defineEmits<{ ready: [controller: TerminalController, sessionId: string]; focus: [id: string]; find: []; error: [cause: unknown] }>();
 const controller = props.terminal ?? createTerminal({ profile: props.profile, cwd: props.cwd });
 const host = ref<HTMLElement>(); const createdId = ref<string>(); const localError = ref('');
@@ -31,6 +32,6 @@ defineExpose({ controller, focus, search: (query: string, previous = false) => s
 </script>
 <template><div class="frame-terminal" :aria-label="label ?? session?.name ?? 'Terminal'" @focusin="id && emit('focus', id)" @pointerdown="id && emit('focus', id)">
   <div ref="host" class="frame-terminal-host" />
-  <p v-if="localError || session?.error" class="frame-terminal-status" role="alert">{{ localError || session?.error }}</p>
+  <div v-if="localError || session?.error || errorMessage" class="frame-terminal-failure frame-terminal-empty" role="alert"><FrameIcon name="terminal" :size="32"/><p>{{ session?.name ?? 'Terminal unavailable' }}</p><p class="frame-terminal-error">{{ localError || session?.error || errorMessage }}</p></div>
   <p v-else-if="session?.status === 'exited'" class="frame-terminal-status" role="status">Process exited ({{ session.exitCode }}).</p>
 </div></template>

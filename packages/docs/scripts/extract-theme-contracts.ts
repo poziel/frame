@@ -17,7 +17,7 @@ function variables(value:string) {
 }
 const result:Record<string,unknown>={};
 for(const [file] of Object.entries(data.contracts)) {
- const source=readFileSync(resolve(root,file),'utf8');
+ const source=readFileSync(resolve(root,file),'utf8')+(/FrameQuick(Input|Panel)\.vue$/.test(file)?'\n'+readFileSync(resolve(root,'packages/core/src/components/QuickOverlay.vue'),'utf8'):'');
  const classes=[...new Set([...source.matchAll(/(?<!:)class=["']([^"']+)["']/g)].flatMap(m=>m[1]!.split(/\s+/)).filter(Boolean))];
  const matches=(selector:string,name:string)=>new RegExp('\\.'+name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?![\\w-])').test(selector.replace(/:(?:not|has)\([^)]*\)/g,''));
  const tokens=new Map<string,unknown>();const publicClasses=new Map<string,unknown>();

@@ -5,5 +5,5 @@ export interface ApiCallable { kind?: 'method' | 'property'; name: string; param
 export interface ComponentContract { name: string; source: string; sourceHash?: string; props: ApiProperty[]; emits: ApiCallable[]; slots: ApiCallable[]; methods: ApiCallable[]; forwardsAttrs: boolean }
 export interface ThemeToken { name: string; value: string; description: string; selector: string; source: string }
 export interface ThemeClass { name: string; description: string }
-export interface FeatureExample { id: string; title: string; description: string; variant: string; code: string; values?: Record<string, unknown> }
-export interface ComponentDocumentation { id: string; components: ComponentContract[]; features: FeatureExample[]; classes: ThemeClass[]; tokens: ThemeToken[]; demoId: string }
+export interface FeatureExample { id: string; title: string; description: string; variant: string; code: string; values?: Record<string, unknown>; slots?: Record<string,string> }
+export interface ComponentDocumentation { id: string; components: ComponentContract[]; features: FeatureExample[]; classes: ThemeClass[]; tokens: ThemeToken[]; demoId: string; guide?: import('./formGuides').ComponentGuide }

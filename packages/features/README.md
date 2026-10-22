@@ -17,13 +17,16 @@ onBeforeUnmount(() => { history.dispose(); frame.dispose(); });
 </script>
 <template>
   <FrameShell :frame="frame">
-    <template #overlays><NotificationPanel :frame="frame" :history="history" :bottom="38" /></template>
-    <template #status-actions><NotificationIndicator :history="history" /></template>
+    <template #overlays><NotificationPanel :frame="frame" :history="history" /></template>
+    <template #status-leading-actions><NotificationIndicator v-if="history.state.indicatorPosition === 'bottom-left'" :history="history" /></template>
+    <template #status-actions><NotificationIndicator v-if="history.state.indicatorPosition === 'bottom-right'" :history="history" /></template>
   </FrameShell>
 </template>
 ```
 
-The panel keeps a bounded in-memory history of notifications emitted after subscription. Expiring or dismissing a core notification does not delete history. Clearing history does not dismiss active messages. No bell, history, commands, or panel are installed by core. The application may register its own command using `history.toggle` and should dispose the history on unmount. Panel `bottom` is a pixel offset; adapt it when changing status-bar visibility or density.
+The panel keeps a bounded in-memory history of notifications emitted after subscription. Expiring or dismissing a core notification does not delete history. Clearing history does not dismiss active messages. No bell, history, commands, or panel are installed by core. The application may register its own command using `history.toggle` and should dispose the history on unmount. The panel’s position button selects Bottom Right, Bottom Left, or Top Right. `history.setPosition(position)` exposes the same behavior to the host; initial position, availability, and pinning can be set with `indicatorPosition`, `indicatorEnabled`, and `indicatorPinned` options. Top Right contributes a registered toolbar action: its Notification Center feature toggle controls availability, while the Notifications checkbox pins or unpins the action. An unpinned action stays in More Actions. Moving the icon preserves history and its pin preference. `history.setEnabled(false)` closes the panel without deleting history; disposal removes both the subscription and toolbar registration.
+
+Panel `bottom` is an 8px inset by default, relative to Frame’s overlay boundary, which already excludes the status bar. Do not add the status-bar height again. Empty history renders only the header. Override `--frame-notification-center-header-background` and `--frame-notification-center-header-min-height` to theme the header separately from the notification rows.
 
 Build core first with `bun run build:library`, then run `bun run build:features`. Both are private workspace packages; nothing is published.
 

@@ -44,6 +44,6 @@ function update(value: string | Color) { if (!props.disabled) emit('update:model
 .frame-color-trigger:disabled { opacity:.5; cursor:default; }
 .frame-color-trigger:focus-visible { outline:1px solid var(--frame-accent); outline-offset:2px; }
 .frame-color-trigger-swatch { display:block; width:100%; height:100%; border-radius:var(--frame-control-radius); }
-.frame-color-picker-popover { display:grid; gap:var(--frame-gap); box-sizing:border-box; padding:var(--frame-content-padding); background:var(--frame-surface); color:var(--frame-text); border:1px solid var(--frame-line); border-radius:var(--frame-panel-radius); box-shadow:var(--frame-overlay-shadow); font-family:var(--frame-font-body); font-size:var(--frame-font-size-body); overflow:auto; pointer-events:auto; z-index:125; }
+.frame-color-picker-popover { display:grid; gap:var(--frame-gap); box-sizing:border-box; padding:var(--frame-content-padding); background:var(--frame-overlay-background); color:var(--frame-text); border:1px solid var(--frame-line); border-radius:var(--frame-panel-radius); box-shadow:var(--frame-overlay-shadow); font-family:var(--frame-font-body); font-size:var(--frame-font-size-body); overflow:auto; pointer-events:auto; z-index:125; }
 .frame-color-picker-popover .frame-advanced-input { width:220px; max-width:100%; }
 </style>

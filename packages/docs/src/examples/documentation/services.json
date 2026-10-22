@@ -438,6 +438,18 @@
         "references": []
       },
       {
+        "name": "badge",
+        "type": "ActivityBadge",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Optional activity/view-bar badge; presentation is controlled by frame.activity or frame.secondaryBar.",
+        "control": "json",
+        "references": [
+          "ActivityBadge"
+        ]
+      },
+      {
         "name": "id",
         "type": "string",
         "default": {
@@ -506,6 +518,16 @@
           "kind": "omitted"
         },
         "description": "Collapsed configuration for this component; see its Features examples for usage.",
+        "control": "boolean",
+        "references": []
+      },
+      {
+        "name": "visible",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Initial presentation visibility; hiding does not unregister or dispose the view.",
         "control": "boolean",
         "references": []
       },
@@ -580,6 +602,28 @@
     "name": "frame.registerActivityAction",
     "source": "packages/core/src/types.ts",
     "props": [
+      {
+        "name": "badge",
+        "type": "ActivityBadge",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Badge configuration for this component; see its Features examples for usage.",
+        "control": "json",
+        "references": [
+          "ActivityBadge"
+        ]
+      },
+      {
+        "name": "showInRail",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Show In Rail configuration for this component; see its Features examples for usage.",
+        "control": "boolean",
+        "references": []
+      },
       {
         "name": "id",
         "type": "string",
@@ -660,16 +704,6 @@
     "name": "frame.showQuickPick",
     "source": "packages/core/src/types.ts",
     "props": [
-      {
-        "name": "searchable",
-        "type": "boolean",
-        "default": {
-          "kind": "omitted"
-        },
-        "description": "Searchable configuration for this component; see its Features examples for usage.",
-        "control": "boolean",
-        "references": []
-      },
       {
         "name": "title",
         "type": "string",

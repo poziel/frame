@@ -1,0 +1,5 @@
+.panel-actions.panel-actions-responsive { min-width:0; flex:0 1 auto; }
+.panel-actions-extra { display:inline-flex; flex:0 0 auto; gap:inherit; align-items:center; }
+.panel-actions-extra:empty { display:none; }
+.panel-actions-measure { display:flex; position:fixed; inset-inline-start:-10000px; top:0; width:max-content; visibility:hidden; pointer-events:none; gap:inherit; }
+.panel-actions-measure > span { display:inline-flex; flex-shrink:0; }

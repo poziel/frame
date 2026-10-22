@@ -4,12 +4,14 @@ import type { ComponentPublicInstance } from "vue";
 import { useFrame } from "../frame/createFrame";
 import { fitViewSizes } from "../frame/viewSizes";
 import FrameIcon from "./FrameIcon.vue";
+import ViewVisibilityMenu from "./ViewVisibilityMenu.vue";
 import PanelActions from "./PanelActions.vue";
 import ResizeHandle from "./ResizeHandle.vue";
 const props = defineProps<{ viewId?: string; menuId?: string }>();
 const frame = useFrame();
 const collectionId = computed(() => props.viewId ?? props.menuId ?? "");
-const children = computed(() => frame.getViewChildren(collectionId.value));
+const allChildren = computed(() => frame.getViewChildren(collectionId.value));
+const children = computed(() => allChildren.value.filter(child => frame.isViewVisible(child.id)));
 const region = computed(() => frame.viewRegion(collectionId.value) ?? "primary");
 const closed = frame.viewState.collapsed; const heights = frame.viewState.heights;
 const container = ref<HTMLElement>();
@@ -49,9 +51,9 @@ function childRef(id: string) {
 </script>
 <template><div ref="container" class="panel-sections view-sections" :data-view-parent="collectionId" data-view-axis="y" :data-view-region="region" @dragover.prevent @drop="frame.dropView($event, region)">
   <section v-for="child in children" :key="child.id" class="panel-section" :class="{ expanded: !closed[child.id] }">
-    <header><button class="section-toggle" :data-view-id="child.id" :aria-expanded="!closed[child.id]" :aria-controls="`view-section-${child.id}`" @pointerdown="frame.beginViewDrag($event, child.id, region)" @keydown="frame.viewKey($event, child.id, region)" @click="closed[child.id] = !closed[child.id]"><FrameIcon class="section-chevron" :name="closed[child.id] ? 'chevron-right' : 'chevron-down'"/><component v-if="child.icon" :is="child.icon" class="tab-icon"/>{{ child.label }}</button><PanelActions v-if="!closed[child.id]" :actions="child.actions"/></header>
+    <header><button class="section-toggle" :data-view-id="child.id" :aria-expanded="!closed[child.id]" :aria-controls="`view-section-${child.id}`" @pointerdown="frame.beginViewDrag($event, child.id, region)" @keydown="frame.viewKey($event, child.id, region)" @click="closed[child.id] = !closed[child.id]"><FrameIcon class="section-chevron" :name="closed[child.id] ? 'chevron-right' : 'chevron-down'"/><component v-if="child.icon" :is="child.icon" class="tab-icon"/>{{ child.label }}</button><ViewVisibilityMenu v-if="child.children !== undefined" :view-id="child.id"/><PanelActions v-if="!closed[child.id]" :actions="child.actions"/></header>
     <div v-show="!closed[child.id]" :id="`view-section-${child.id}`" class="accordion-content nested-view-content" :class="{ unpadded: child.padded === false || child.children !== undefined }" :style="{ height: `${sizes[child.id] ?? 0}px` }"><div :ref="childRef(child.id)" class="view-host"/></div>
     <ResizeHandle v-if="!closed[child.id] && opened.findIndex(view => view.id === child.id) < opened.length - 1" axis="y" :label="`Resize ${child.label}`" :value="sizes[child.id] ?? 0" :min="0" :max="available" @change="resize(child.id, $event)" @reset="resetSizes"/>
   </section>
-  <p v-if="!children.length" class="menu-drop-placeholder">Drag a view here to display.</p>
+  <p v-if="!children.length" class="menu-drop-placeholder">{{ allChildren.length ? 'All sub-views are hidden. Use Views and more to show them.' : 'Drag a view here to display.' }}</p>
 </div></template>

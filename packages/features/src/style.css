@@ -43,11 +43,11 @@
 .frame-terminal-error { display: flex; align-items: center; gap: var(--frame-terminal-error-gap, 6px); padding: var(--frame-terminal-error-padding, 4px 8px); color: var(--frame-terminal-error-color, #f48771); overflow-wrap: anywhere; }
 .frame-terminal-error > span { flex: 1; }
 .frame-terminal-empty { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: var(--frame-terminal-empty-gap, 8px); width: var(--frame-terminal-empty-width, 100%); color: var(--frame-muted, #999); }
-.notification-center { position: absolute; right: 8px; z-index: 50; width: var(--frame-notification-center-width, min(450px, calc(100% - 16px))); border: var(--frame-notification-center-border, 1px solid #363c40); border-radius: var(--frame-notification-center-border-radius, 6px); background: var(--frame-surface); box-shadow: var(--frame-notification-center-box-shadow, 0 6px 25px #0005); overflow: hidden; }
-.notification-center > header { display: flex; align-items: center; gap: var(--frame-notification-center-header-gap, 4px); min-height: var(--frame-notification-center-header-min-height, 34px); padding: var(--frame-notification-center-header-padding, 3px 8px); }
-.notification-center h2 { font-size: var(--frame-notification-center-h2-font-size, 12px); font-weight: var(--frame-notification-center-h2-font-weight, 500); }
+.notification-center { display: flex; flex-direction: column; max-height: calc(100% - 16px); position: absolute; right: 8px; z-index: 50; width: var(--frame-notification-center-width, min(450px, calc(100% - 16px))); border: var(--frame-notification-center-border, 1px solid var(--frame-line)); border-radius: var(--frame-notification-center-border-radius, 6px); background: var(--frame-overlay-background); backdrop-filter: var(--frame-overlay-backdrop-filter); -webkit-backdrop-filter: var(--frame-overlay-backdrop-filter); box-shadow: var(--frame-notification-center-box-shadow, 0 6px 25px #0005); overflow: hidden; }
+.notification-center > header { display: flex; align-items: center; gap: var(--frame-notification-center-header-gap, 4px); flex-shrink: 0; background: var(--frame-notification-center-header-background, color-mix(in srgb, var(--frame-surface) 92%, var(--frame-text))); min-height: var(--frame-notification-center-header-min-height, 38px); padding: var(--frame-notification-center-header-padding, 3px 8px); }
+.notification-center h2 { margin: 0; font-size: var(--frame-notification-center-h2-font-size, 12px); font-weight: var(--frame-notification-center-h2-font-weight, 500); }
 .notification-spacer { flex: 1; }
-.notification-list { overflow: auto; max-height: var(--frame-notification-list-max-height, min(420px, 60dvh)); }
+.notification-list { min-height: 0; overflow: auto; max-height: var(--frame-notification-list-max-height, min(420px, 60dvh)); }
 .notification-item { padding: var(--frame-notification-item-padding, 8px); border-top: var(--frame-notification-item-border-top, 1px solid #ffffff0b); outline-offset: var(--frame-notification-item-outline-offset, -1px); }
 .notification-row { display: flex; align-items: flex-start; gap: var(--frame-notification-row-gap, 8px); min-height: var(--frame-notification-row-min-height, 26px); }
 .notification-title { flex: 1; min-width: var(--frame-notification-title-min-width, 0); font-size: var(--frame-notification-title-font-size, 12px); line-height: var(--frame-notification-title-line-height, 24px); overflow-wrap: anywhere; }
@@ -110,3 +110,8 @@
 .frame-code-editor { position: relative; width: var(--frame-code-editor-width, 100%); height: var(--frame-code-editor-height, 100%); min-width: var(--frame-code-editor-min-width, 0); min-height: var(--frame-code-editor-min-height, 0); overflow: hidden; }
 .frame-code-editor-host { width: var(--frame-code-editor-host-width, 100%); height: var(--frame-code-editor-host-height, 100%); }
 .frame-code-editor-status { position: absolute; inset: 0; margin: var(--frame-code-editor-status-margin, 0); padding: var(--frame-code-editor-status-padding, 12px); background: var(--frame-bg, #1e1e1e); color: var(--frame-fg, #d4d4d4); }
+
+.frame-terminal { position: relative; }
+.frame-terminal-failure { position: absolute; inset: 0; padding: var(--frame-space-4, 16px); box-sizing: border-box; background: var(--frame-terminal-background, var(--frame-bg, #181818)); }
+.frame-terminal-empty > p { margin: 0; }
+.frame-terminal-empty .frame-terminal-error { max-width: 48ch; text-align: center; flex: none; }

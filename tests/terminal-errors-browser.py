@@ -1,0 +1,21 @@
+from pathlib import Path
+from playwright.sync_api import sync_playwright, expect
+with sync_playwright() as p:
+    browser = p.chromium.launch()
+    page = browser.new_page()
+    fixture = (Path(__file__).parent / 'fixtures/terminal/index.html').resolve().as_posix()
+    page.goto(f'http://localhost:1448/@fs/{fixture}')
+    view = page.locator('#fixture-terminal')
+    expect(view.locator('.xterm')).to_have_count(1)
+    page.evaluate("window.terminalFixture.terminal.reportError('Session connection failed')")
+    expect(view.locator('.frame-terminal-failure')).to_contain_text('Session connection failed')
+    expect(view.locator('.frame-terminal-status[role=alert]')).to_have_count(0)
+    expect(view.get_by_role('button', name='Dismiss terminal error')).to_have_count(0)
+    page.evaluate('async () => { const t = window.terminalFixture.terminal; for (const s of [...t.sessions.value]) await t.close(s.id); }')
+    expect(view.locator('.frame-terminal-empty')).to_contain_text('No terminal sessions')
+    expect(view.locator('.frame-terminal-empty')).to_contain_text('Session connection failed')
+    expect(view.locator('.frame-terminal-empty').get_by_role('button', name='New terminal')).to_have_count(0)
+    page.evaluate('window.terminalFixture.terminal.dismissError()')
+    expect(view.locator('.frame-terminal-empty').get_by_role('button', name='New terminal')).to_be_visible()
+    browser.close()
+print('Terminal error presentation passed')

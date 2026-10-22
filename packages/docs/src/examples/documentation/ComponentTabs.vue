@@ -8,7 +8,8 @@ const tabs:{id:DocumentationTab;label:string}[]=[{id:'features',label:'Features'
 function key(event:KeyboardEvent){
  if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
  event.preventDefault();const current=tabs.findIndex(tab=>tab.id===props.modelValue);
- const next=event.key==='Home'?0:event.key==='End'?tabs.length-1:(current+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+ const direction=getComputedStyle(event.currentTarget as HTMLElement).direction==='rtl'?-1:1;
+ const next=event.key==='Home'?0:event.key==='End'?tabs.length-1:(current+(event.key==='ArrowRight'?1:-1)*direction+tabs.length)%tabs.length;
  emit('update:modelValue',tabs[next]!.id);
  (event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>('[role=tab]')[next]?.focus();
 }

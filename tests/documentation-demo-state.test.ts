@@ -47,3 +47,15 @@ test('view service examples include their required region and runnable component
  expect(code).toContain('frame.openView(');
  expect(code).toContain('serviceCleanup?.()');
 });
+
+test('multiple selection examples retain array models through UI and editor updates',()=>{
+ for(const id of ['listbox','toggle-group','tag-group']){
+  const state=createDemoState(componentDocumentation[id]!.components[0]!,{modelValue:['first']});
+  expect(state.set('modelValue',['first','second'])).toBe(true);
+  expect(state.values.modelValue).toEqual(['first','second']);
+  expect(state.set('modelValue','["second"]')).toBe(true);
+  expect(state.values.modelValue).toEqual(['second']);
+  expect(state.set('modelValue',[42])).toBe(false);
+  expect(state.values.modelValue).toEqual(['second']);
+ }
+});

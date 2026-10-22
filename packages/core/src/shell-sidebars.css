@@ -1,0 +1,59 @@
+/* Both sidebar containers use the same shell; Default follows their outside edge. */
+.layout-grid > .shell-sidebar { width:auto; min-width:0; min-height:0; display:flex; position:relative; background:transparent; border:0; border-radius:0; overflow:visible; pointer-events:none; }
+.layout-grid > .shell-sidebar[data-sidebar-side=left] { flex-direction:row; }
+.layout-grid > .shell-sidebar[data-sidebar-side=right] { flex-direction:row-reverse; }
+.layout-grid .shell-sidebar > .side-panel { flex:1 1 auto; width:0; min-width:0; min-height:0; height:var(--workspace-height,100%); margin-top:var(--workspace-top,0px); border:1px solid var(--frame-line); border-radius:var(--frame-panel-radius); background:var(--frame-surface); pointer-events:auto; }
+.layout-grid .shell-sidebar > .activity-rail { flex:0 0 var(--rail-width); width:var(--rail-width); box-sizing:border-box; border:1px solid var(--frame-line); border-radius:var(--frame-panel-radius); background:var(--frame-surface); pointer-events:auto; }
+.layout-grid .shell-sidebar > .secondary-resize { pointer-events:auto; }
+.layout-grid .shell-sidebar:not(.sidebar-horizontal).expanded[data-sidebar-side=left] > .activity-rail { border-radius:var(--frame-panel-radius) 0 0 var(--frame-panel-radius); border-right-color:transparent; }
+.layout-grid .shell-sidebar:not(.sidebar-horizontal).expanded[data-sidebar-side=left] > .side-panel { border-radius:0 var(--frame-panel-radius) var(--frame-panel-radius) 0; }
+.layout-grid .shell-sidebar:not(.sidebar-horizontal).expanded[data-sidebar-side=right] > .activity-rail { border-radius:0 var(--frame-panel-radius) var(--frame-panel-radius) 0; border-left-color:transparent; }
+.layout-grid .shell-sidebar:not(.sidebar-horizontal).expanded[data-sidebar-side=right] > .side-panel { border-radius:var(--frame-panel-radius) 0 0 var(--frame-panel-radius); }
+.layout-grid .shell-sidebar.without-rail > .side-panel { border-radius:var(--frame-panel-radius); }
+.layout-grid > .shell-sidebar.sidebar-horizontal { flex-direction:column; }
+.layout-grid > .shell-sidebar.sidebar-horizontal.activity-bottom { flex-direction:column-reverse; }
+.layout-grid .shell-sidebar.sidebar-horizontal > .activity-rail { flex:0 0 var(--activity-height); width:100%; height:var(--activity-height); min-width:0; overflow:hidden; }
+.layout-grid .shell-sidebar.sidebar-horizontal > .side-panel { flex:1 1 auto; width:100%; height:0; margin-top:0; }
+.layout-grid .shell-sidebar.activity-top > .activity-rail { border-radius:var(--frame-panel-radius) var(--frame-panel-radius) 0 0; border-bottom-color:transparent; }
+.layout-grid .shell-sidebar.activity-top > .side-panel { border-radius:0 0 var(--frame-panel-radius) var(--frame-panel-radius); }
+.layout-grid .shell-sidebar.activity-bottom > .activity-rail { border-radius:0 0 var(--frame-panel-radius) var(--frame-panel-radius); border-top-color:transparent; }
+.layout-grid .shell-sidebar.activity-bottom > .side-panel { border-radius:var(--frame-panel-radius) var(--frame-panel-radius) 0 0; }
+.shell-sidebar .side-title { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.compact .layout-grid .shell-sidebar > :is(.side-panel,.activity-rail) { border-radius:0; }
+.layout-grid .shell-sidebar.sidebar-horizontal > .activity-rail { padding:4px; gap:var(--frame-gap,6px); min-height:0; }
+.layout-grid .shell-sidebar.sidebar-horizontal > .activity-rail.activity-compact { padding:3px; }
+.shell-sidebar .activity-rail.activity-horizontal .rail-button { height:34px; }
+.shell-sidebar .activity-rail.activity-horizontal.activity-compact .rail-button { height:28px; }
+.shell-sidebar .activity-rail.activity-horizontal:is(.activity-display-text,.activity-display-both) .rail-button { width:auto; min-width:34px; }
+.shell-sidebar .activity-rail.activity-horizontal.activity-compact:is(.activity-display-text,.activity-display-both) .rail-button { width:auto; min-width:28px; }
+
+/* Intrinsic cross-axis size is measured back into the shell geometry. */
+.layout-grid .shell-sidebar > .activity-rail { flex:0 0 auto;width:max-content;padding:var(--frame-activity-rail-padding,var(--frame-spacing-small,4px));gap:var(--frame-activity-rail-gap,var(--frame-spacing-small,4px)); }
+.layout-grid .shell-sidebar.sidebar-horizontal > .activity-rail,
+.layout-grid .shell-sidebar.sidebar-horizontal > .activity-rail.activity-compact { flex:0 0 auto;width:100%;height:auto;padding:var(--frame-activity-rail-padding,var(--frame-spacing-small,4px)); }
+.shell-sidebar .activity-rail.activity-horizontal .rail-button,
+.shell-sidebar .activity-rail.activity-horizontal.activity-compact .rail-button,
+.shell-sidebar .activity-rail.activity-horizontal:is(.activity-display-text,.activity-display-both) .rail-button,
+.shell-sidebar .activity-rail.activity-horizontal.activity-compact:is(.activity-display-text,.activity-display-both) .rail-button { width:auto;height:auto;min-width:0; }
+
+.layout-grid .shell-sidebar > .activity-rail.activity-compact,
+.layout-grid .shell-sidebar.sidebar-horizontal > .activity-rail.activity-compact {
+ padding:var(--frame-activity-compact-rail-padding,var(--frame-activity-rail-padding,var(--frame-spacing-small,4px)));
+}
+/* Retain density-specific padding with the horizontal selector specificity. */
+.shell-sidebar .activity-rail.activity-horizontal.activity-compact .rail-button {
+ padding:var(--frame-activity-compact-item-padding,calc(var(--frame-spacing-small,4px) * 0.75));
+}
+
+/* Density rules from the base stylesheet must not restore legacy fixed targets. */
+.shell-sidebar .activity-rail.activity-display-icons .rail-button,
+.shell-sidebar .activity-rail.activity-display-icons.activity-compact .rail-button {
+ width:auto;height:auto;min-width:0;min-height:0;aspect-ratio:1;
+}
+
+.shell-sidebar .activity-rail.activity-horizontal.activity-display-icons .rail-button {
+ padding:var(--frame-activity-item-padding,var(--frame-spacing-small,4px));
+}
+.shell-sidebar .activity-rail.activity-horizontal.activity-display-icons.activity-compact .rail-button {
+ padding:var(--frame-activity-compact-item-padding,calc(var(--frame-spacing-small,4px) * 0.75));
+}

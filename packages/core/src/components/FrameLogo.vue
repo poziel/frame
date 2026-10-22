@@ -1,0 +1,12 @@
+<template>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" aria-hidden="true" focusable="false" viewBox="0 0 600 600">
+  
+  <g id="Layer_1" data-name="Layer 1">
+    <path d="M48.148 148.148 L433.333 0 L433.333 123.647 L196.296 214.815 Z" fill="var(--frame-logo-highlight, color-mix(in srgb, var(--frame-accent) 75%, white))"/>
+    <path d="M433.333 0 L551.852 66.667 L551.852 451.852 L433.333 385.185 L433.333 123.647 Z" fill="var(--frame-logo-accent, var(--frame-accent))"/>
+    <path d="M196.296 476.353 L433.333 385.185 L551.852 451.852 L196.296 600 Z" fill="var(--frame-logo-highlight, color-mix(in srgb, var(--frame-accent) 75%, white))"/>
+    <path d="M48.148 148.148 L196.296 214.815 L196.296 476.353 L196.296 600 L48.148 533.333 Z" fill="var(--frame-logo-accent, var(--frame-accent))"/>
+  </g>
+</svg>
+
+</template>

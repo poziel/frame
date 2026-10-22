@@ -150,7 +150,7 @@ Do not replace every Vue component mechanically. Native buttons, text inputs, te
 | FrameSelect | Select | Preserve string values, separators, details/default hints, empty-value behavior, typeahead, focus return, and shell bounds |
 | FrameTooltip | Tooltip | Preserve timing, shortcut content, placement, disabled behavior and portal target; scope provider per shell with standalone fallback |
 | FrameMenu / ContextMenu / MenuBar | DropdownMenu / ContextMenu / Menubar | Shared item contract, check states, disabled entries, nested flyouts, keyboard behavior and commands remain Frame-owned |
-| FrameModal / QuickInput | Dialog where appropriate | Keep draggable/resizable geometry, topmost behavior, nested overlays, focus restoration and shell-specific shortcuts |
+| FrameModal / FrameQuickInput / FrameQuickPanel | Dialog where appropriate | Keep draggable/resizable geometry, topmost behavior, nested overlays, focus restoration and shell-specific shortcuts |
 | Tabs / panel actions | Tabs / Toolbar only where semantics fit | Do not reinterpret draggable view registrations as a local tab-state owner |
 | Custom scrollbars / splitters | Retain initially | Evaluate separately; current shell-aware geometry and scrolling require behavior evidence before replacement |
 | Color picker | Retain initially | Do not introduce an alpha primitive without a separate compatibility decision |
@@ -167,7 +167,7 @@ Special compatibility gates: Select empty string semantics, disabled option navi
 2. Chat capability wrapping the existing controller, typed view factories, managed presentation adapters, and both embedded/sidebar docs demonstrations. Validate the architecture through a real consumer.
 3. Checkbox adapter, then Slider. Each is independently reviewable with standalone and shell examples.
 4. Select and Tooltip, after proving the overlay adapter and portal behavior.
-5. Menus, dialogs, and QuickInput in separate changes. Retain Frame-specific geometry and services. Evaluate remaining categories rather than requiring every component to use Reka.
+5. Menus, dialogs, and quick surfaces in separate changes. Retain Frame-specific geometry and services. Evaluate remaining categories rather than requiring every component to use Reka.
 
 Each stage must preserve the current public exports unless an explicit breaking migration is documented. Test types against packaged public exports as well as source behavior. Docs demonstrates consumption; no extension implementation or backend belongs in Docs.
 

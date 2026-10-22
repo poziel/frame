@@ -17,5 +17,8 @@
 .frame-date-field:focus-within{border-color:var(--frame-accent)}.frame-date-field[data-invalid]{border-color:var(--frame-danger,#f48771)}
 .frame-date-segment{padding:2px;white-space:nowrap;border-radius:var(--frame-control-radius);font-variant-numeric:tabular-nums}.frame-date-segment[data-placeholder]{color:var(--frame-muted)}
 .frame-date-separator{padding:0 var(--frame-gap);color:var(--frame-muted)}.frame-date-picker{display:inline-flex}
-.frame-date-popover{z-index:100;overflow:auto;background:var(--frame-surface);border-radius:var(--frame-panel-radius);box-shadow:var(--frame-overlay-shadow)}
+.frame-date-popover{z-index:100;overflow:auto;background:var(--frame-overlay-background);border-radius:var(--frame-panel-radius);box-shadow:var(--frame-overlay-shadow)}
 .frame-date-popover { pointer-events: auto; }
+
+/* A popup calendar lets its frosted outer surface show through. */
+.frame-date-popover .frame-calendar { background: transparent; }

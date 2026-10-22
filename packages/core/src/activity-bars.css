@@ -1,0 +1,58 @@
+/* Both sidebars use the same selector bar; geometry is owned by FrameShell. */
+.activity-rail { position:relative; min-height:0; min-width:0; display:flex; flex-direction:column; }
+.activity-rail-items { display:flex; flex-direction:column; flex:1 1 auto; min-height:0; min-width:0; overflow:auto; align-items:center; align-self:stretch; gap:var(--frame-activity-rail-gap,4px); }
+.activity-rail button.frame-button.rail-button { flex:0 0 auto; position:relative; }
+.activity-rail-measure { position:absolute; visibility:hidden; pointer-events:none; inset-block-start:0; inset-inline-start:0; display:flex; gap:var(--frame-activity-rail-gap,4px); width:max-content; height:0; overflow:hidden; }
+.activity-rail.activity-horizontal { width:100%; min-width:0; flex-direction:row; overflow:hidden; }
+.activity-rail.activity-horizontal .activity-rail-items { flex-direction:row; align-items:center; gap:var(--frame-activity-rail-gap,4px); overflow:hidden; }
+.activity-rail.activity-horizontal button.frame-button.rail-button { width:auto; min-width:38px; height:38px; padding-inline:8px; display:inline-flex; align-items:center; justify-content:center; gap:6px; white-space:nowrap; }
+.activity-rail.activity-horizontal.activity-display-icons button.frame-button.rail-button { width:38px;  }
+.activity-rail.activity-horizontal.activity-compact button.frame-button.rail-button { min-width:30px; height:30px; padding-inline:6px; }
+.activity-rail.activity-horizontal.activity-compact.activity-display-icons button.frame-button.rail-button { width:30px;  }
+.activity-rail.activity-horizontal .activity-manage { flex:0 0 auto; margin:0; }
+.activity-rail.activity-horizontal .activity-label { display:inline; }
+.activity-rail.activity-horizontal .rail-badge { position:static; min-width:12px; margin-inline-start:2px; }
+.activity-rail.activity-horizontal.activity-display-icons .rail-badge { position:absolute; margin:0; }
+.activity-rail.activity-horizontal .activity-rail-measure { flex-direction:row; }
+.secondary-activity-rail { border-inline-start:1px solid var(--frame-line); }
+.secondary-activity-rail.activity-horizontal { border-inline-start:0; }
+.activity-horizontal .activity-overflow { display:inline-flex; flex:0 0 auto; align-items:center; margin-inline-start:auto; padding-inline-start:var(--frame-activity-overflow-padding,8px); }
+
+/* Content determines targets; padding supplies the shared breathing room. */
+.activity-rail button.frame-button.rail-button,
+.activity-rail.activity-horizontal button.frame-button.rail-button,
+.activity-rail.activity-compact button.frame-button.rail-button,
+.activity-rail.activity-horizontal.activity-compact button.frame-button.rail-button {
+ box-sizing:border-box;width:auto;min-width:0;max-width:none;height:auto;min-height:0;max-height:none;
+ padding:var(--frame-activity-item-padding,var(--frame-spacing-small,4px));
+}
+.activity-rail-items,.activity-rail-measure { gap:var(--frame-activity-rail-gap,var(--frame-spacing-small,4px)); }
+
+/* Typography follows the activity density; flex aligns glyph boxes with labels. */
+.activity-rail button.frame-button.rail-button { font-size:var(--frame-activity-font-size,14px);line-height:1; }
+.activity-rail.activity-compact button.frame-button.rail-button { font-size:var(--frame-activity-compact-font-size,11px);padding:var(--frame-activity-compact-item-padding,calc(var(--frame-spacing-small,4px) * 0.75)); }
+.activity-rail.activity-horizontal button.frame-button.rail-button { gap:var(--frame-activity-label-gap,var(--frame-spacing-small,4px)); }
+.activity-rail.activity-horizontal.activity-compact button.frame-button.rail-button { gap:var(--frame-activity-compact-label-gap,var(--frame-activity-label-gap,var(--frame-spacing-small,4px))); }
+.activity-rail.activity-horizontal .activity-label { display:inline-flex;align-items:center;line-height:1; }
+.activity-rail button.frame-button.rail-button > :is(svg,.frame-icon) { display:block;flex-shrink:0; }
+
+.activity-rail { --activity-icon-dimension:var(--frame-activity-icon-size,28px); }
+.activity-rail.activity-compact { --activity-icon-dimension:var(--frame-activity-compact-icon-size,18px); }
+.activity-rail.activity-display-both { --activity-icon-dimension:var(--frame-activity-labeled-icon-size,var(--frame-activity-icon-size,28px)); }
+.activity-rail.activity-display-both.activity-compact { --activity-icon-dimension:var(--frame-activity-compact-labeled-icon-size,var(--frame-activity-compact-icon-size,18px)); }
+.activity-icon-slot { display:grid;place-items:center;flex:0 0 auto;inline-size:var(--activity-icon-dimension);block-size:var(--activity-icon-dimension);aspect-ratio:1; }
+/* Contribution components may carry inline dimensions; normalize only inside the slot. */
+.activity-icon-slot > :is(svg,.frame-icon) { display:block;width:100% !important;height:100% !important; }
+.activity-rail.activity-display-icons button.frame-button.rail-button { aspect-ratio:1; }
+.activity-rail.activity-display-both .activity-label { padding-inline-end:var(--frame-activity-label-end-padding,var(--frame-icon-button-label-end-padding,2px)); }
+
+.activity-rail.activity-horizontal.activity-display-both:not(.activity-compact) { --activity-icon-dimension:var(--frame-activity-labeled-icon-size,22px); }
+
+/* Activity targets size to their glyph/label content while sharing FrameIconButton behavior. */
+.activity-rail button.frame-button.rail-button { inline-size:auto;block-size:auto;aspect-ratio:auto;border:0;display:inline-flex;align-items:center;justify-content:center;color:var(--frame-rail-button-color,#949ea4); }
+.activity-rail.activity-display-icons button.frame-button.rail-button { aspect-ratio:1; }
+.activity-rail button.frame-button.rail-button.selected { color:var(--frame-rail-button-selected-color,#fff);background:var(--frame-rail-button-selected-background,#333); }
+.activity-rail.activity-display-icons button.frame-button.rail-button { padding:var(--frame-activity-item-padding,var(--frame-spacing-small,4px)); }
+.activity-rail.activity-display-icons.activity-compact button.frame-button.rail-button { padding:var(--frame-activity-compact-item-padding,calc(var(--frame-spacing-small,4px) * 0.75)); }
+
+.activity-rail.activity-horizontal.activity-compact button.frame-button.rail-button { padding:var(--frame-activity-compact-item-padding,calc(var(--frame-spacing-small,4px) * 0.75)); }

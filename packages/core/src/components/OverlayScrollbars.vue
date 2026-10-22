@@ -86,6 +86,19 @@ function wheel(event: WheelEvent, bar: Bar) {
   const scale = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? bar.length : 1;
   bar.host.scrollBy({ left: event.deltaX * scale + (bar.axis === "x" && !event.deltaX ? event.deltaY * scale : 0), top: bar.axis === "y" ? event.deltaY * scale : 0 }); schedule();
 }
+// Filters and transformed popper wrappers establish a local coordinate system for fixed descendants.
+function barPosition(bar: Bar) {
+  let host = typeof scrollbarTarget.value === "string" ? undefined : scrollbarTarget.value;
+  while (host) {
+    const style = getComputedStyle(host);
+    if (style.transform !== "none" || style.perspective !== "none" || style.filter !== "none" || style.backdropFilter !== "none") {
+      const rect = host.getBoundingClientRect();
+      return { left: `${bar.x - rect.left - host.clientLeft + host.scrollLeft}px`, top: `${bar.y - rect.top - host.clientTop + host.scrollTop}px` };
+    }
+    host = host.parentElement ?? undefined;
+  }
+  return { left: `${bar.x}px`, top: `${bar.y}px` };
+}
 function leave() { if (!dragging.value) { hovered = undefined; schedule(); } }
 onMounted(() => {
   window.addEventListener("pointerover", hover); window.addEventListener("scroll", schedule, true); window.addEventListener("resize", schedule);
@@ -103,4 +116,4 @@ onBeforeUnmount(() => {
   document.documentElement.removeEventListener("pointerleave", leave);
 });
 </script>
-<template><Teleport :to="scrollbarTarget"><div v-for="bar in bars" :key="bars.indexOf(bar)" class="frame-overlay-scrollbar" :class="[bar.axis, { dragging }]" aria-hidden="true" :style="{ left: `${bar.x}px`, top: `${bar.y}px`, width: `${bar.axis === 'x' ? bar.length : 12}px`, height: `${bar.axis === 'y' ? bar.length : 12}px` }" @pointerdown="start($event, bar)" @pointermove="move" @pointerup="finish" @pointercancel="finish" @lostpointercapture="finish()" @wheel="wheel($event, bar)"><div class="frame-overlay-thumb" :style="bar.axis === 'y' ? { height: `${bar.thumb}px`, transform: `translateY(${bar.offset}px)` } : { width: `${bar.thumb}px`, transform: `translateX(${bar.offset}px)` }"/></div></Teleport></template>
+<template><Teleport :to="scrollbarTarget"><div v-for="bar in bars" :key="bars.indexOf(bar)" class="frame-overlay-scrollbar" :class="[bar.axis, { dragging }]" aria-hidden="true" :style="{ ...barPosition(bar), width: `${bar.axis === 'x' ? bar.length : 12}px`, height: `${bar.axis === 'y' ? bar.length : 12}px` }" @pointerdown="start($event, bar)" @pointermove="move" @pointerup="finish" @pointercancel="finish" @lostpointercapture="finish()" @wheel="wheel($event, bar)"><div class="frame-overlay-thumb" :style="bar.axis === 'y' ? { height: `${bar.thumb}px`, transform: `translateY(${bar.offset}px)` } : { width: `${bar.thumb}px`, transform: `translateX(${bar.offset}px)` }"/></div></Teleport></template>

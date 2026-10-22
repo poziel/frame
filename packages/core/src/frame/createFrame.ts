@@ -1,5 +1,9 @@
 import { computed, inject, markRaw, nextTick, reactive, shallowReactive, shallowRef, watch } from "vue";
 import type { InjectionKey } from "vue";
+import { createPanel } from './panel';
+import { createSecondaryBar } from './secondaryBar';
+import { createActivity } from "./activity";
+import { createToolbar } from "./toolbar";
 import { createViewDrag } from "./viewDrag";
 import { createSettings } from "./settings";
 import { createNotifications } from "./notifications";
@@ -16,7 +20,7 @@ export function createFrame(options: FrameOptions = {}) {
     if (activityActions.some(item => item.id === action.id)) throw new Error(`Duplicate activity action: ${action.id}`);
     const definition = { ...action, icon: action.icon ? markRaw(action.icon) : undefined };
     activityActions.push(definition);
-    return () => { const index = activityActions.indexOf(definition); if (index >= 0) activityActions.splice(index, 1); };
+    return () => { const index = activityActions.indexOf(definition); if (index >= 0) { activityActions.splice(index, 1); activity.forget({ kind: "action", id: definition.id }); } };
   }
   const features = reactive({ settings: options.settings ?? true, notifications: options.notifications ?? true, navigation: options.navigation ?? false });
   const settings = createSettings();
@@ -51,6 +55,7 @@ export function createFrame(options: FrameOptions = {}) {
   }
   const interaction = reactive({ dragging: true, primary: true, secondary: true, bottom: true });
   const toolbarActions = shallowReactive<ToolbarAction[]>([]);
+  const toolbar = createToolbar(options.toolbar, () => toolbarActions);
   function registerToolbarAction(action: ToolbarAction) {
     if (toolbarActions.some(item => item.id === action.id)) throw new Error(`Toolbar action already registered: ${action.id}`);
     const definition = reactive({ ...action, icon: action.icon ? markRaw(action.icon) : undefined, visible: action.visible ?? false });
@@ -58,7 +63,7 @@ export function createFrame(options: FrameOptions = {}) {
     return () => { const index = toolbarActions.indexOf(definition); if (index >= 0) toolbarActions.splice(index, 1); };
   }
   const layout = reactive(defaultLayout());
-  let beforeZen: Pick<LayoutState, "menuBarVisible" | "activityBarVisible" | "primarySidebarVisible" | "secondarySidebarVisible" | "panelVisible" | "statusBarVisible" | "bannerVisible" | "centered"> | undefined;
+  let beforeZen: Pick<LayoutState, "menuBarVisible" | "activityBarVisible" | "secondaryActivityBarVisible" | "primarySidebarVisible" | "secondarySidebarVisible" | "panelVisible" | "statusBarVisible" | "bannerVisible" | "centered"> | undefined;
   const secondaryMap = shallowReactive(new Map<string, PanelDefinition>());
   const commandMap = shallowReactive(new Map<string, Command>());
   const sideMap = shallowReactive(new Map<string, SidePanelDefinition>());
@@ -68,20 +73,39 @@ export function createFrame(options: FrameOptions = {}) {
   function getViewCommand(id: string) { return viewCommands.get(id); }
   const viewParents = shallowReactive(new Map<string, string>());
   const childIds = shallowReactive(new Map<string, string[]>());
-  const menuState = reactive({ collapsed: {} as Record<string, boolean>, heights: {} as Record<string, number> });
+  const menuState = reactive({ hidden: {} as Record<string, boolean>, collapsed: {} as Record<string, boolean>, heights: {} as Record<string, number> });
   const contentHosts = shallowReactive(new Map<string, HTMLElement>());
   const views = computed(() => [...viewMap.values()]);
   const maps = { primary: sideMap, secondary: secondaryMap, bottom: tabMap };
   function getViewChildren(id: string) { return (childIds.get(id) ?? []).map(child => viewMap.get(child)!).filter(Boolean); }
+  /** Presentation visibility; registrations and component state are retained. */
+  function isViewVisible(id: string) { return viewMap.has(id) && !menuState.hidden[id]; }
+  function setViewVisible(id: string, visible: boolean) {
+    if (!viewMap.has(id)) throw new Error(`Unknown view: ${id}`);
+    menuState.hidden[id] = !visible;
+    if (secondaryMap.has(id) || tabMap.has(id)) {
+      repairSelections();
+      if (secondaryMap.has(id) && !visible && !state.activeSecondaryTab) layout.secondarySidebarVisible = false;
+    }
+  }
   function getViewParent(id: string) { return viewParents.get(id); }
   function viewRegion(id: string): ViewRegion | undefined {
     while (viewParents.has(id)) id = viewParents.get(id)!;
     return (Object.keys(maps) as ViewRegion[]).find(region => maps[region].has(id));
   }
+  const activity = createActivity(() => [
+    ...activityActions.map(action => ({ kind: "action" as const, id: action.id, label: action.label, badge: action.badge, defaultVisible: action.showInRail !== false })),
+    ...[...sideMap.values()].map(view => ({ kind: "view" as const, id: view.id, label: view.label, badge: view.badge, defaultVisible: view.showInRail !== false })),
+  ], options.activity, (item, visible) => {
+    if (item.kind === "view" && !visible && state.activeSidePanel === item.id) {
+      repairSelections();
+      if (!state.activeSidePanel) layout.primarySidebarVisible = false;
+    }
+  }, layout);
   function repairSelections() {
-    if (!sideMap.has(state.activeSidePanel)) state.activeSidePanel = sideMap.keys().next().value ?? "";
-    if (!tabMap.has(state.activeBottomTab)) state.activeBottomTab = tabMap.keys().next().value ?? "";
-    if (!secondaryMap.has(state.activeSecondaryTab)) state.activeSecondaryTab = secondaryMap.keys().next().value ?? "";
+    if (!sideMap.has(state.activeSidePanel) || !activity.isVisible({ kind: "view", id: state.activeSidePanel })) state.activeSidePanel = [...sideMap.keys()].find(id => activity.isVisible({ kind: "view", id })) ?? "";
+    if (!tabMap.has(state.activeBottomTab) || !isViewVisible(state.activeBottomTab)) state.activeBottomTab = [...tabMap.keys()].find(isViewVisible) ?? "";
+    if (!secondaryMap.has(state.activeSecondaryTab) || !isViewVisible(state.activeSecondaryTab)) state.activeSecondaryTab = [...secondaryMap.keys()].find(isViewVisible) ?? "";
   }
   function detachView(id: string) {
     const parent = viewParents.get(id);
@@ -100,6 +124,8 @@ export function createFrame(options: FrameOptions = {}) {
     entries: [] as ActivityEntry[],
     message: "Ready",
   });
+  const panel = createPanel(() => [...tabMap.values()], isViewVisible, setViewVisible, layout, options.panel);
+  const secondaryBar = createSecondaryBar(() => [...secondaryMap.values()], isViewVisible, setViewVisible, layout, options.secondaryBar);
   function captureLocation() {
     return { panes: [...workspace.panes.value], active: workspace.activePane.value,
       primary: state.activeSidePanel, secondary: state.activeSecondaryTab, bottom: state.activeBottomTab,
@@ -128,6 +154,7 @@ export function createFrame(options: FrameOptions = {}) {
       layout.secondarySidebarVisible = location.secondaryVisible;
       layout.panelVisible = location.bottomVisible;
       for (const id of Object.keys(location.collapsed)) if (viewMap.has(id)) menuState.collapsed[id] = location.collapsed[id]!;
+      repairSelections();
     },
   });
   const setPane = workspace.setPane;
@@ -141,7 +168,6 @@ export function createFrame(options: FrameOptions = {}) {
     id: number;
     title: string;
     placeholder: string;
-    searchable: boolean;
     items: readonly QuickPickItem[] | null;
     finish: (item?: QuickPickItem) => void;
   } | null>(null);
@@ -176,6 +202,7 @@ export function createFrame(options: FrameOptions = {}) {
     const parent = viewParents.get(id);
     const view = viewMap.get(id)!;
     if (before === id && parent === parentId && source === destination) return true;
+    if (source === "primary" && !parent && (destination !== "primary" || parentId)) activity.forget({ kind: "view", id });
     detachView(id);
     if (parentId) {
       const ids = [...childIds.get(parentId)!];
@@ -188,7 +215,10 @@ export function createFrame(options: FrameOptions = {}) {
       entries.splice(index < 0 ? entries.length : index, 0, [id, view]);
       maps[destination].clear(); entries.forEach(([key, item]) => maps[destination].set(key, item));
     }
+    const hidden = menuState.hidden[id];
     repairSelections(); openView(id);
+    menuState.hidden[id] = hidden;
+    repairSelections();
     return true;
   }
   async function viewKey(event: KeyboardEvent, id: string, region: ViewRegion) {
@@ -245,8 +275,8 @@ export function createFrame(options: FrameOptions = {}) {
     return navigation.record(() => {
       if (!viewMap.has(id)) throw new Error(`Unknown view: ${id}`);
       let root = id;
-      menuState.collapsed[root] = false;
-      while (viewParents.has(root)) { root = viewParents.get(root)!; menuState.collapsed[root] = false; }
+      menuState.hidden[root] = false; menuState.collapsed[root] = false;
+      while (viewParents.has(root)) { root = viewParents.get(root)!; menuState.hidden[root] = false; menuState.collapsed[root] = false; }
       if (sideMap.has(root)) openSidePanel(root);
       else if (tabMap.has(root)) openBottomPanel(root);
       else if (secondaryMap.has(root)) openSecondaryPanel(root);
@@ -275,7 +305,10 @@ export function createFrame(options: FrameOptions = {}) {
       };
       viewMap.set(view.id, definition); viewCommands.set(view.id, command);
       menuState.collapsed[view.id] = view.collapsed ?? false;
+      menuState.hidden[view.id] = view.visible === false;
       if (parent) viewParents.set(view.id, parent); else maps[region].set(view.id, definition);
+      if (!parent && region === "secondary") secondaryBar.initialize(view.id);
+      if (!parent && region === "bottom") panel.initialize(view.id);
       const removeCommand = registerCommand({ id: command, label: `${parent || region === "primary" ? "View: " : region === "bottom" ? "Panel: Show " : "Secondary panel: Show "}${view.label}`, group: "View", run: () => openView(view.id) });
       owned.push({ definition, removeCommand });
     }
@@ -291,7 +324,7 @@ export function createFrame(options: FrameOptions = {}) {
         }
       }
       for (const { definition, removeCommand } of owned) if (removing.has(definition.id)) {
-        detachView(definition.id); viewMap.delete(definition.id); viewCommands.delete(definition.id); childIds.delete(definition.id); contentHosts.delete(definition.id); delete menuState.collapsed[definition.id]; delete menuState.heights[definition.id]; removeCommand();
+        activity.forget({ kind: "view", id: definition.id }); secondaryBar.forget(definition.id); panel.forget(definition.id); detachView(definition.id); viewMap.delete(definition.id); viewCommands.delete(definition.id); childIds.delete(definition.id); contentHosts.delete(definition.id); delete menuState.collapsed[definition.id]; delete menuState.heights[definition.id]; delete menuState.hidden[definition.id]; removeCommand();
       }
       repairSelections();
     };
@@ -302,46 +335,61 @@ export function createFrame(options: FrameOptions = {}) {
   function openSecondaryPanel(id = state.activeSecondaryTab) {
     return navigation.record(() => {
       if (!id && !secondaryMap.size) { layout.secondarySidebarVisible = true; return; }
+      if (!id) id = [...secondaryMap.keys()].find(isViewVisible) ?? secondaryMap.keys().next().value ?? "";
       if (!secondaryMap.has(id)) throw new Error(`Unknown secondary tab: ${id}`);
+      setViewVisible(id, true);
       state.activeSecondaryTab = id; layout.secondarySidebarVisible = true;
     });
   }
+  function selectSecondaryView(id: string) {
+    if (layout.secondaryActivityBarPosition === 'default' && layout.secondarySidebarVisible && state.activeSecondaryTab === id) closeSecondaryPanel();
+    else openSecondaryPanel(id);
+  }
+  function closeSecondaryPanel() { layout.secondarySidebarVisible = false; }
   function toggleSecondaryPanel() {
-    if (layout.secondarySidebarVisible) layout.secondarySidebarVisible = false;
+    if (layout.secondarySidebarVisible) closeSecondaryPanel();
     else openSecondaryPanel();
   }
   function setZenMode(enabled: boolean) {
     if (enabled === layout.zenMode) return;
     if (enabled) {
       beforeZen = {
-        menuBarVisible: layout.menuBarVisible, activityBarVisible: layout.activityBarVisible,
+        menuBarVisible: layout.menuBarVisible, activityBarVisible: layout.activityBarVisible, secondaryActivityBarVisible: layout.secondaryActivityBarVisible,
         primarySidebarVisible: layout.primarySidebarVisible, secondarySidebarVisible: layout.secondarySidebarVisible,
         panelVisible: layout.panelVisible, bannerVisible: layout.bannerVisible, statusBarVisible: layout.statusBarVisible, centered: layout.centered,
       };
-      Object.assign(layout, { menuBarVisible: false, activityBarVisible: false, primarySidebarVisible: false, secondarySidebarVisible: false, panelVisible: false, bannerVisible: false, statusBarVisible: false, centered: true, zenMode: true });
+      Object.assign(layout, { menuBarVisible: false, activityBarVisible: false, secondaryActivityBarVisible: false, primarySidebarVisible: false, secondarySidebarVisible: false, panelVisible: false, bannerVisible: false, statusBarVisible: false, centered: true, zenMode: true });
     } else {
       if (beforeZen) Object.assign(layout, beforeZen);
       layout.zenMode = false; beforeZen = undefined;
     }
   }
-  function resetLayout() { beforeZen = undefined; Object.assign(layout, defaultLayout()); }
+  function resetLayout() { beforeZen = undefined; Object.assign(layout, defaultLayout()); toolbar.reset(); activity.resetPresentation(); secondaryBar.resetPresentation(); panel.resetPresentation(); }
   function openSidePanel(id = state.activeSidePanel) {
     return navigation.record(() => {
       if (!id && !sideMap.size) { state.sidebarVisible = true; return; }
+      if (!id) id = [...sideMap.keys()].find(candidate => activity.isVisible({ kind: "view", id: candidate })) ?? sideMap.keys().next().value ?? "";
       if (!sideMap.has(id)) throw new Error(`Unknown side panel: ${id}`);
+      activity.setVisible({ kind: "view", id }, true);
       state.activeSidePanel = id;
       state.sidebarVisible = true;
     });
   }
+  function selectSideView(id: string) {
+    if (layout.activityBarPosition === 'default' && state.sidebarVisible && state.activeSidePanel === id) closeSidePanel();
+    else openSidePanel(id);
+  }
   function closeSidePanel() { state.sidebarVisible = false; }
   function toggleSidePanel() {
-    if (!state.sidebarVisible && !sideMap.has(state.activeSidePanel)) state.activeSidePanel = sideMap.keys().next().value ?? "";
+    if (!state.sidebarVisible) repairSelections();
     state.sidebarVisible = !state.sidebarVisible;
   }
   function openBottomPanel(id = state.activeBottomTab) {
     return navigation.record(() => {
       if (!id && !tabMap.size) { state.panelVisible = true; return; }
+      if (!id) id = [...tabMap.keys()].find(isViewVisible) ?? tabMap.keys().next().value ?? "";
       if (!tabMap.has(id)) throw new Error(`Unknown bottom tab: ${id}`);
+      setViewVisible(id, true);
       state.activeBottomTab = id;
       state.panelVisible = true;
     });
@@ -369,7 +417,7 @@ export function createFrame(options: FrameOptions = {}) {
   function openCommands() {
     closeQuickInput();
     quickInput.value = {
-      id: ++requestId, title: "Quick actions", placeholder: "Type a command…", searchable: true, items: null,
+      id: ++requestId, title: "Quick actions", placeholder: "Type a command…", items: null,
       finish: item => { if (item) void executeCommand(item.id); },
     };
   }
@@ -378,7 +426,7 @@ export function createFrame(options: FrameOptions = {}) {
     closeQuickInput();
     return new Promise(resolve => {
       quickInput.value = {
-        id: ++requestId, title: options.title ?? "Choose an action", placeholder: options.placeholder ?? "Type to filter…", searchable: options.searchable ?? true, items,
+        id: ++requestId, title: options.title ?? "Choose an action", placeholder: options.placeholder ?? "Type to filter…", items,
         finish: item => resolve(items.find(candidate => candidate.id === item?.id)),
       };
     });
@@ -398,23 +446,24 @@ export function createFrame(options: FrameOptions = {}) {
     closeQuickInput();
     workspaceBanner.value = undefined; layout.bannerVisible = false; workspace.dispose();
     Object.keys(menuState.collapsed).forEach(id => delete menuState.collapsed[id]);
+    Object.keys(menuState.hidden).forEach(id => delete menuState.hidden[id]);
     Object.keys(menuState.heights).forEach(id => delete menuState.heights[id]);
-    activityActions.splice(0); settings.dispose(); notifications.dispose();
+    activity.dispose(); secondaryBar.dispose(); panel.dispose(); activityActions.splice(0); settings.dispose(); notifications.dispose();
     modals.splice(0);
-    toolbarActions.splice(0);
+    toolbar.dispose(); toolbarActions.splice(0);
     commandMap.clear(); sideMap.clear(); tabMap.clear(); secondaryMap.clear(); viewMap.clear(); viewCommands.clear(); viewParents.clear(); childIds.clear(); contentHosts.clear();
   }
   return {
     navigation,
-    activityActions, registerActivityAction, features, settings, settingsRequest, openSettings, registerSettingsSection: settings.register, manageMenuItems, notifications, notify: notifications.notify,
+    panel, secondaryBar, activity, activityActions, registerActivityAction, features, settings, settingsRequest, openSettings, registerSettingsSection: settings.register, manageMenuItems, notifications, notify: notifications.notify,
     modals, openModal, closeModal, dragState: viewDrag.state, cancelViewDrag: viewDrag.cancel, canMoveView,
-    viewState: menuState, registerView, openView,
+    viewState: menuState, registerView, openView, selectSideView, selectSecondaryView, closeSecondaryPanel,
     banner: workspaceBanner, registerBanner: registerWorkspaceBanner, openBanner: openWorkspaceBanner, closeBanner: closeWorkspaceBanner, toggleBanner: toggleWorkspaceBanner,
     menuState, registerMenu: registerView, openMenu: openView,
-    views, getViewCommand, getViewChildren, getViewParent, viewRegion, contentHosts,
+    views, isViewVisible, setViewVisible, getViewCommand, getViewChildren, getViewParent, viewRegion, contentHosts,
     workspace, workspaceBanner, registerWorkspaceBanner, openWorkspaceBanner, closeWorkspaceBanner, toggleWorkspaceBanner,
     resetWorkspace, splitWorkspace: workspace.split, closeWorkspacePane: workspace.close, setWorkspacePane: workspace.setPane,
-    interaction, toolbarActions, registerToolbarAction, viewKey, beginViewDrag, moveView, dragView, dropView, state, layout, commands, sidePanels, bottomTabs, secondaryTabs, quickInput, quickInputItems,
+    interaction, toolbar, toolbarActions, registerToolbarAction, viewKey, beginViewDrag, moveView, dragView, dropView, state, layout, commands, sidePanels, bottomTabs, secondaryTabs, quickInput, quickInputItems,
     registerCommand, registerSidePanel, registerBottomTab, registerSecondaryTab, openSecondaryPanel, toggleSecondaryPanel, setZenMode, resetLayout, executeCommand,
     openSidePanel, closeSidePanel, toggleSidePanel, openBottomPanel, closeBottomPanel, toggleBottomPanel,
     openCommands, showQuickPick, acceptQuickInput, closeQuickInput, record, dispose,

@@ -59,7 +59,10 @@
       "packages/features/src/NotificationIndicator.vue"
     ],
     "quick-input": [
-      "packages/core/src/components/CommandPalette.vue"
+      "packages/core/src/components/FrameQuickInput.vue"
+    ],
+    "quick-panel": [
+      "packages/core/src/components/FrameQuickPanel.vue"
     ],
     "banner": [
       "packages/core/src/components/FrameShell.vue"
@@ -197,13 +200,82 @@
     ],
     "year-range-picker": [
       "packages/core/src/components/FrameYearRangePicker.vue"
+    ],
+    "general-accordion": [
+      "packages/core/src/components/FrameAccordion.vue"
+    ],
+    "general-aspect-ratio": [
+      "packages/core/src/components/FrameAspectRatio.vue"
+    ],
+    "general-avatar": [
+      "packages/core/src/components/FrameAvatar.vue"
+    ],
+    "general-collapsible": [
+      "packages/core/src/components/FrameCollapsible.vue"
+    ],
+    "general-pagination": [
+      "packages/core/src/components/FramePagination.vue"
+    ],
+    "general-progress": [
+      "packages/core/src/components/FrameProgress.vue"
+    ],
+    "general-scroll-area": [
+      "packages/core/src/components/FrameScrollArea.vue"
+    ],
+    "general-separator": [
+      "packages/core/src/components/FrameSeparator.vue"
+    ],
+    "general-tabs": [
+      "packages/core/src/components/FrameTabs.vue"
+    ],
+    "general-stepper": [
+      "packages/core/src/components/FrameStepper.vue"
+    ],
+    "general-toolbar": [
+      "packages/core/src/components/FrameToolbar.vue"
+    ],
+    "general-tree": [
+      "packages/core/src/components/FrameTree.vue"
+    ],
+    "general-splitter": [
+      "packages/core/src/components/FrameSplitter.vue"
+    ],
+    "general-navigation-menu": [
+      "packages/core/src/components/FrameNavigationMenu.vue"
+    ],
+    "general-menubar": [
+      "packages/core/src/components/FrameMenubar.vue"
+    ],
+    "general-dialog": [
+      "packages/core/src/components/FrameDialog.vue"
+    ],
+    "general-alert-dialog": [
+      "packages/core/src/components/FrameAlertDialog.vue"
+    ],
+    "general-drawer": [
+      "packages/core/src/components/FrameDrawer.vue"
+    ],
+    "general-popover": [
+      "packages/core/src/components/FramePopover.vue"
+    ],
+    "general-hover-card": [
+      "packages/core/src/components/FrameHoverCard.vue"
+    ],
+    "general-dropdown-menu": [
+      "packages/core/src/components/FrameDropdownMenu.vue"
+    ],
+    "general-context-menu": [
+      "packages/core/src/components/FrameContextMenu.vue"
+    ],
+    "general-toast": [
+      "packages/core/src/components/FrameToast.vue"
     ]
   },
   "contracts": {
     "packages/core/src/components/FrameButton.vue": {
       "name": "FrameButton",
       "source": "packages/core/src/components/FrameButton.vue",
-      "sourceHash": "ee4d86fc0fea23eda48690d8b55aa28e94065a0bb8eaed6cdaf08459df1f92d6",
+      "sourceHash": "e14deb2850950ab2d26d03d58932514f1f47300f51cc1e74ad51cb95a754b1ef",
       "props": [
         {
           "name": "variant",
@@ -306,7 +378,7 @@
     "packages/core/src/components/FrameIconButton.vue": {
       "name": "FrameIconButton",
       "source": "packages/core/src/components/FrameIconButton.vue",
-      "sourceHash": "723d9d3a4611bd95f2fd0d4c66fca4ec20ac25fe83b37f334e9cae1a95ba1849",
+      "sourceHash": "c8a1649d680540c5ca635a522dd8a460c8688fbc631d7ca4753c2dac152d9ccc",
       "props": [
         {
           "name": "label",
@@ -316,6 +388,17 @@
           },
           "description": "Visible or accessible label for the control.",
           "control": "text",
+          "references": []
+        },
+        {
+          "name": "showLabel",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Show Label configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
           "references": []
         },
         {
@@ -617,7 +700,7 @@
     "packages/core/src/components/FrameSelect.vue": {
       "name": "FrameSelect",
       "source": "packages/core/src/components/FrameSelect.vue",
-      "sourceHash": "71197a452ec7ef475f6711e3f212b80c0b9ae4e268d230838b2d01cba715cf4d",
+      "sourceHash": "b08f00f28ce9d3435afb026a6950bd223315792b979f48a8c13cc61b84ce754d",
       "props": [
         {
           "name": "modelValue",
@@ -823,7 +906,7 @@
     "packages/core/src/components/FrameColorPicker.vue": {
       "name": "FrameColorPicker",
       "source": "packages/core/src/components/FrameColorPicker.vue",
-      "sourceHash": "89126639a9e1bba718d0495f491c4f052b0c598d9af762aeb7fe5aec1868a699",
+      "sourceHash": "c972dbaecb53bc4436dab0fb14fb77fa5d9a087f5ccf06ccdab29be3afbf8d3d",
       "props": [
         {
           "name": "modelValue",
@@ -1053,7 +1136,7 @@
     "packages/core/src/components/FrameTooltip.vue": {
       "name": "FrameTooltip",
       "source": "packages/core/src/components/FrameTooltip.vue",
-      "sourceHash": "690c69495cc9a5758700a810f64aa8ecd7fe837878c9f5625ed424e8a7e2d86f",
+      "sourceHash": "b95eebca6432b6191c801b73d3c825e4904ee010694250b3f69b76867a2f19b5",
       "props": [
         {
           "name": "text",
@@ -1076,22 +1159,11 @@
           "references": []
         },
         {
-          "name": "disabled",
-          "type": "boolean",
-          "default": {
-            "kind": "literal",
-            "value": "false"
-          },
-          "description": "Prevents user interaction while retaining the current value.",
-          "control": "boolean",
-          "references": []
-        },
-        {
           "name": "placement",
-          "type": "\"top\" | \"bottom\" | \"left\" | \"right\"",
+          "type": "'top'|'bottom'|'left'|'right'",
           "default": {
             "kind": "literal",
-            "value": "\"bottom\""
+            "value": "'bottom'"
           },
           "description": "Preferred overlay placement; the component fits content to available space.",
           "options": [
@@ -1102,9 +1174,89 @@
           ],
           "control": "text",
           "references": []
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "The open state of the tooltip when it is initially rendered.\nUse when you do not need to control its open state.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled open state of the tooltip.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "delayDuration",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "400"
+          },
+          "description": "Override the duration given to the `Provider` to customise\nthe open delay for a specific tooltip.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "disableHoverableContent",
+          "type": "boolean",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Prevents Tooltip.Content from remaining open when hovering.\nDisabling this has accessibility consequences. Inherits\nfrom Tooltip.Provider.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "disableClosingTrigger",
+          "type": "boolean",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "When `true`, clicking on trigger will not close the content.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "When `true`, disable tooltip",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "ignoreNonKeyboardFocus",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Prevent the tooltip from opening if the focus did not come from\nthe keyboard by matching against the `:focus-visible` selector.\nThis is useful if you want to avoid opening it when switching\nbrowser tabs or closing a dialog.",
+          "control": "boolean",
+          "references": []
         }
       ],
-      "emits": [],
+      "emits": [
+        {
+          "name": "update:open",
+          "parameters": "value: boolean",
+          "returns": "void",
+          "description": "Emitted on update:open."
+        }
+      ],
       "slots": [
         {
           "name": "default",
@@ -1119,7 +1271,7 @@
     "packages/core/src/components/FrameMenu.vue": {
       "name": "FrameMenu",
       "source": "packages/core/src/components/FrameMenu.vue",
-      "sourceHash": "d11a3e23f6e368ed75cbdf890351d5bf1600a9b71da3acec186218a65eceb6a5",
+      "sourceHash": "313fc33c49e84c7889c80df9334005b81fcc16d1720105cc09d2956c9c487b35",
       "props": [
         {
           "name": "id",
@@ -1186,6 +1338,22 @@
           "description": "Point configuration for this component; see its Features examples for usage.",
           "control": "json",
           "references": []
+        },
+        {
+          "name": "itemAlignment",
+          "type": "\"left\" | \"center\" | \"right\"",
+          "default": {
+            "kind": "literal",
+            "value": "\"left\""
+          },
+          "description": "Item Alignment configuration for this component; see its Features examples for usage.",
+          "options": [
+            "left",
+            "right",
+            "center"
+          ],
+          "control": "text",
+          "references": []
         }
       ],
       "emits": [
@@ -1209,7 +1377,7 @@
     "packages/core/src/components/ContextMenu.vue": {
       "name": "ContextMenu",
       "source": "packages/core/src/components/ContextMenu.vue",
-      "sourceHash": "1b7ed4db45853250aba19b6c28f0a4cfd28a034bd09eb6cab09647226c0bd8dd",
+      "sourceHash": "e54d0dd87e6479443433e55873854b086e3083789b0c0646ef3dc995f2e62d67",
       "props": [
         {
           "name": "items",
@@ -1230,6 +1398,21 @@
             "kind": "omitted"
           },
           "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "itemAlignment",
+          "type": "\"left\" | \"center\" | \"right\"",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Item Alignment configuration for this component; see its Features examples for usage.",
+          "options": [
+            "left",
+            "right",
+            "center"
+          ],
           "control": "text",
           "references": []
         }
@@ -1489,7 +1672,7 @@
     "packages/core/src/components/FrameModal.vue": {
       "name": "FrameModal",
       "source": "packages/core/src/components/FrameModal.vue",
-      "sourceHash": "5b9b581b807b3cb76b96290794c0f55df7306608529fad0e1a701459ac9465b9",
+      "sourceHash": "61165e933b29ebdaf5d681525e93eaff10e0bf5f0db79fadae8925b8362849d2",
       "props": [
         {
           "name": "title",
@@ -1646,7 +1829,7 @@
     "packages/features/src/NotificationPanel.vue": {
       "name": "NotificationPanel",
       "source": "packages/features/src/NotificationPanel.vue",
-      "sourceHash": "15568f76d8af100a54f05b231e0f910c0031a79a03ee741d1eeb698f466227e6",
+      "sourceHash": "6147302066f9c79ef7b127945339b6a7e22b1e156d3e27efab76ec68aa6cb197",
       "props": [
         {
           "name": "frame",
@@ -1699,7 +1882,7 @@
     "packages/features/src/NotificationIndicator.vue": {
       "name": "NotificationIndicator",
       "source": "packages/features/src/NotificationIndicator.vue",
-      "sourceHash": "9652661782ae6c657f5b07b6cf05ceccf749800563b8d4343dfdbed1c6064d4d",
+      "sourceHash": "dc5e83c1067842b58f265acdb521723d55a2bf1c3342e41b9f514cae4a0f59cd",
       "props": [
         {
           "name": "history",
@@ -1719,10 +1902,10 @@
       "methods": [],
       "forwardsAttrs": true
     },
-    "packages/core/src/components/CommandPalette.vue": {
-      "name": "CommandPalette",
-      "source": "packages/core/src/components/CommandPalette.vue",
-      "sourceHash": "be14eed0dd0bd8e1e60369fb43b862e7f4b5b15123a8498e8b8c6f515f0fa73f",
+    "packages/core/src/components/FrameQuickInput.vue": {
+      "name": "FrameQuickInput",
+      "source": "packages/core/src/components/FrameQuickInput.vue",
+      "sourceHash": "e1e44ce275d388d7d99746ebeba8c8eab131c390561394819d9f037ded39d929",
       "props": [
         {
           "name": "items",
@@ -1750,31 +1933,20 @@
           "name": "placeholder",
           "type": "string",
           "default": {
-            "kind": "required"
+            "kind": "literal",
+            "value": "\"Type to search…\""
           },
           "description": "Hint displayed when the field is empty.",
           "control": "text",
           "references": []
         },
         {
-          "name": "searchable",
-          "type": "boolean",
-          "default": {
-            "kind": "literal",
-            "value": "true"
-          },
-          "description": "Searchable configuration for this component; see its Features examples for usage.",
-          "control": "boolean",
-          "references": []
-        },
-        {
           "name": "position",
           "type": "\"top\" | \"center\"",
           "default": {
-            "kind": "literal",
-            "value": "\"top\""
+            "kind": "omitted"
           },
-          "description": "Position configuration for this component; see its Features examples for usage.",
+          "description": "Explicit top or center placement. When omitted, follows the provided Frame layout.quickInputPosition; standalone defaults to top.",
           "options": [
             "top",
             "center"
@@ -1799,16 +1971,80 @@
       ],
       "slots": [
         {
+          "name": "item",
+          "parameters": "item: QuickPickItem, active: boolean",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the item slot."
+        }
+      ],
+      "methods": [
+        {
+          "name": "element",
+          "kind": "property",
+          "parameters": "",
+          "returns": "HTMLInputElement | undefined",
+          "description": "Exposed element API. Available through the mounted component ref."
+        },
+        {
+          "name": "focus",
+          "kind": "method",
+          "parameters": "",
+          "returns": "void",
+          "description": "Focuses the rendered control."
+        }
+      ],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameQuickPanel.vue": {
+      "name": "FrameQuickPanel",
+      "source": "packages/core/src/components/FrameQuickPanel.vue",
+      "sourceHash": "b32d3a026a15c26de79aeefe54494d9c41fd943b43e2cea524820e14f145f15d",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Visible heading.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "position",
+          "type": "\"top\" | \"center\"",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Explicit top or center placement. When omitted, follows the provided Frame layout.quickInputPosition; standalone defaults to top.",
+          "options": [
+            "top",
+            "center"
+          ],
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "close",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on close."
+        }
+      ],
+      "slots": [
+        {
           "name": "header-actions",
           "parameters": "",
           "returns": "VNodeChild",
           "description": "Content rendered in the header-actions slot."
         },
         {
-          "name": "content",
+          "name": "default",
           "parameters": "",
           "returns": "VNodeChild",
-          "description": "Content rendered in the content slot."
+          "description": "Content rendered in the default slot."
         }
       ],
       "methods": [],
@@ -1817,7 +2053,7 @@
     "packages/core/src/components/FrameShell.vue": {
       "name": "FrameShell",
       "source": "packages/core/src/components/FrameShell.vue",
-      "sourceHash": "0696986ab5269dc642b44f5054e9516ac76fca3b096ca4eb09c811e247ba78b8",
+      "sourceHash": "480bef6efc490877b8cb55159cc9c21e4b04a8fbbf9f1a34c709cede7a2b8aad",
       "props": [
         {
           "name": "frame",
@@ -1881,6 +2117,12 @@
           "description": "Content rendered in the workspace-pane slot."
         },
         {
+          "name": "status-leading-actions",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the status-leading-actions slot."
+        },
+        {
           "name": "status-actions",
           "parameters": "",
           "returns": "VNodeChild",
@@ -1899,7 +2141,7 @@
     "packages/core/src/components/WorkspacePanes.vue": {
       "name": "WorkspacePanes",
       "source": "packages/core/src/components/WorkspacePanes.vue",
-      "sourceHash": "78b5ff7bc47db0455757d7f93edbb5e16e8011485ab087e906502a7fb2df5854",
+      "sourceHash": "80c77ed72f6b0fbad4b06db3bad7381f15cbb05e494b49282cc2565c0ae49674",
       "props": [],
       "emits": [],
       "slots": [
@@ -1922,8 +2164,23 @@
     "packages/core/src/components/SidePanel.vue": {
       "name": "SidePanel",
       "source": "packages/core/src/components/SidePanel.vue",
-      "sourceHash": "11457f80d4bec4e221c618c3e4cd6ac5e3cf69c49232a0ecf6c582b105a0caab",
+      "sourceHash": "1ca0427f36bddd0516093cce795f23011589b44c0754d289c0dcabb0ca5efb0b",
       "props": [
+        {
+          "name": "region",
+          "type": "\"primary\" | \"secondary\"",
+          "default": {
+            "kind": "literal",
+            "value": "\"primary\""
+          },
+          "description": "Region configuration for this component; see its Features examples for usage.",
+          "options": [
+            "primary",
+            "secondary"
+          ],
+          "control": "text",
+          "references": []
+        },
         {
           "name": "title",
           "type": "string",
@@ -1975,6 +2232,12 @@
           "parameters": "",
           "returns": "void",
           "description": "Emitted on close."
+        },
+        {
+          "name": "context",
+          "parameters": "event: MouseEvent",
+          "returns": "void",
+          "description": "Emitted on context."
         }
       ],
       "slots": [
@@ -1997,7 +2260,7 @@
     "packages/core/src/components/ViewSections.vue": {
       "name": "ViewSections",
       "source": "packages/core/src/components/ViewSections.vue",
-      "sourceHash": "3f76af25751fa4825870d8903f7b5c5f784eeffc90c05ce233adfad47ad5fe77",
+      "sourceHash": "ab0006ecbbb8a1305732cf6d125b3c49900fd21b69d4f98d3431b110ee1d75a1",
       "props": [
         {
           "name": "viewId",
@@ -2028,7 +2291,7 @@
     "packages/core/src/components/ActivityRail.vue": {
       "name": "ActivityRail",
       "source": "packages/core/src/components/ActivityRail.vue",
-      "sourceHash": "d2d319438fe86cef1020c13d4c1adf4f720c36e928351841fb45642a8c8a321b",
+      "sourceHash": "3e96f7d9d305c92816f0fc2860456f07962f3623890a7835de109b43b6c8552a",
       "props": [
         {
           "name": "panels",
@@ -2061,6 +2324,21 @@
           "description": "Expanded configuration for this component; see its Features examples for usage.",
           "control": "boolean",
           "references": []
+        },
+        {
+          "name": "region",
+          "type": "'primary'|'secondary'",
+          "default": {
+            "kind": "literal",
+            "value": "'primary'"
+          },
+          "description": "Region configuration for this component; see its Features examples for usage.",
+          "options": [
+            "primary",
+            "secondary"
+          ],
+          "control": "text",
+          "references": []
         }
       ],
       "emits": [
@@ -2069,6 +2347,12 @@
           "parameters": "id: string",
           "returns": "void",
           "description": "Emitted on select."
+        },
+        {
+          "name": "resize",
+          "parameters": "size: { width: number; height: number; }",
+          "returns": "void",
+          "description": "Emitted on resize."
         }
       ],
       "slots": [
@@ -2079,7 +2363,15 @@
           "description": "Content rendered in the default slot."
         }
       ],
-      "methods": [],
+      "methods": [
+        {
+          "name": "openContext",
+          "kind": "method",
+          "parameters": "event: MouseEvent | KeyboardEvent, item: ActivityItemKey | undefined",
+          "returns": "void",
+          "description": "Exposed openContext API. Available through the mounted component ref."
+        }
+      ],
       "forwardsAttrs": true
     },
     "packages/core/src/components/FrameLoader.vue": {
@@ -2239,7 +2531,7 @@
     "packages/core/src/components/FrameLoading.vue": {
       "name": "FrameLoading",
       "source": "packages/core/src/components/FrameLoading.vue",
-      "sourceHash": "4de2a662137952b025a9f015d2e5103e47a1557c239c29f2f5c70814eeb85b49",
+      "sourceHash": "281e7961098c8318728db9b5caae567f22c1c2787a67147ada56af5f76159609",
       "props": [
         {
           "name": "active",
@@ -2323,6 +2615,16 @@
           "references": []
         },
         {
+          "name": "size",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Largest dimension in pixels.",
+          "control": "number",
+          "references": []
+        },
+        {
           "name": "variant",
           "type": "FrameLoaderVariant",
           "default": {
@@ -2379,16 +2681,6 @@
           "references": [
             "FrameLoaderVariant"
           ]
-        },
-        {
-          "name": "size",
-          "type": "number",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "Largest dimension in pixels.",
-          "control": "number",
-          "references": []
         },
         {
           "name": "speed",
@@ -2464,7 +2756,7 @@
     "packages/core/src/components/FrameCodeBlock.vue": {
       "name": "FrameCodeBlock",
       "source": "packages/core/src/components/FrameCodeBlock.vue",
-      "sourceHash": "93892b0d7ec0a1f7c7b7d064c7172a0b158be5db4a28d89a24acb16e59e517e3",
+      "sourceHash": "6f38a6ed1d33ad50f940277f7dd5596ac40105714ae7b187d5a57f855a9ae850",
       "props": [
         {
           "name": "code",
@@ -2883,7 +3175,7 @@
     "packages/features/src/Terminal.vue": {
       "name": "Terminal",
       "source": "packages/features/src/Terminal.vue",
-      "sourceHash": "7537dcfc36b2b0f942bf3b3271bf449aa51425da9f42b00dcc4deee890ae21b0",
+      "sourceHash": "5577d1baf315ec0d3b574d9eaa411623e10fe553721e3c0c83a7e3e331d36c95",
       "props": [
         {
           "name": "terminal",
@@ -2934,6 +3226,16 @@
             "kind": "omitted"
           },
           "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "errorMessage",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Error Message configuration for this component; see its Features examples for usage.",
           "control": "text",
           "references": []
         }
@@ -3007,7 +3309,7 @@
     "packages/features/src/TerminalView.vue": {
       "name": "TerminalView",
       "source": "packages/features/src/TerminalView.vue",
-      "sourceHash": "91712629b9e35383aef84d31875225662240f6981a9127a18008460999b6a72b",
+      "sourceHash": "be3355fe219a8af2dc6bc41ec20d2fbce100326b30b23b3fb83c3ecf85586686",
       "props": [
         {
           "name": "terminal",
@@ -10075,6 +10377,3622 @@
           "parameters": "",
           "returns": "VNodeChild",
           "description": "Content rendered in the footer slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameAccordion.vue": {
+      "name": "FrameAccordion",
+      "source": "packages/core/src/components/FrameAccordion.vue",
+      "sourceHash": "e4d196a0216caf4cbadb875acb321ba16ea8c2d39fcb38be4a2dbb74d74e2858",
+      "props": [
+        {
+          "name": "items",
+          "type": "FrameAccordionItem[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Sections rendered by the built-in trigger and content composition. A default slot replaces this composition.",
+          "control": "json",
+          "references": [
+            "FrameAccordionItem"
+          ]
+        },
+        {
+          "name": "collapsible",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When type is \"single\", allows closing content when clicking trigger for an open item.\nWhen type is \"multiple\", this prop has no effect.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, prevents the user from interacting with the accordion and all its items",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "dir",
+          "type": "Direction",
+          "default": {
+            "kind": "literal",
+            "value": "\"ltr\""
+          },
+          "description": "The reading direction of the accordion when applicable. If omitted, assumes LTR (left-to-right) reading mode.",
+          "options": [
+            "ltr",
+            "rtl"
+          ],
+          "control": "text",
+          "references": [
+            "Direction"
+          ]
+        },
+        {
+          "name": "orientation",
+          "type": "DataOrientation",
+          "default": {
+            "kind": "literal",
+            "value": "\"vertical\""
+          },
+          "description": "The orientation of the accordion.",
+          "options": [
+            "vertical",
+            "horizontal"
+          ],
+          "control": "text",
+          "references": [
+            "DataOrientation"
+          ]
+        },
+        {
+          "name": "unmountOnHide",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "When `true`, the element will be unmounted on closed state.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"div\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        },
+        {
+          "name": "type",
+          "type": "SingleOrMultipleType",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Determines whether a \"single\" or \"multiple\" items can be selected at a time.\n\nThis prop will overwrite the inferred type from `modelValue` and `defaultValue`.",
+          "options": [
+            "single",
+            "multiple"
+          ],
+          "control": "text",
+          "references": [
+            "SingleOrMultipleType"
+          ]
+        },
+        {
+          "name": "modelValue",
+          "type": "string | string[] | undefined",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled value of the active item(s).\n\nUse this when you need to control the state of the items. Can be binded with `v-model`",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "defaultValue",
+          "type": "string | string[] | undefined",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The default active value of the item(s).\n\nUse when you do not need to control the state of the item(s).",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "value: string | string[] | undefined",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "model-value: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        },
+        {
+          "name": "trigger",
+          "parameters": "item: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the trigger slot."
+        },
+        {
+          "name": "content",
+          "parameters": "item: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the content slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameAspectRatio.vue": {
+      "name": "FrameAspectRatio",
+      "source": "packages/core/src/components/FrameAspectRatio.vue",
+      "sourceHash": "c5c12cda9049475d94e8432e985157a871b142b6d62bc41b710812c9cbd6347d",
+      "props": [
+        {
+          "name": "ratio",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "1"
+          },
+          "description": "The desired ratio. Eg: 16/9",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"div\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        }
+      ],
+      "emits": [],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameAvatar.vue": {
+      "name": "FrameAvatar",
+      "source": "packages/core/src/components/FrameAvatar.vue",
+      "sourceHash": "5223a7d7f0db3f70e1a9e34b5e5a84bf5b85603f0545703c277556920a9b45bb",
+      "props": [
+        {
+          "name": "src",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Image URL. The fallback appears while unavailable or loading.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "alt",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Alternative text describing the avatar image.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "fallback",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Initials or text displayed when the image is unavailable.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "delayMs",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Milliseconds before showing the fallback during image loading.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "referrerPolicy",
+          "type": "AvatarImageProps['referrerPolicy']",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Referrer Policy configuration for this component; see its Features examples for usage.",
+          "options": [
+            "",
+            "no-referrer",
+            "no-referrer-when-downgrade",
+            "origin",
+            "origin-when-cross-origin",
+            "same-origin",
+            "strict-origin",
+            "strict-origin-when-cross-origin",
+            "unsafe-url"
+          ],
+          "control": "text",
+          "references": [
+            "AvatarImageProps"
+          ]
+        },
+        {
+          "name": "crossOrigin",
+          "type": "AvatarImageProps['crossOrigin']",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Cross Origin configuration for this component; see its Features examples for usage.",
+          "options": [
+            "",
+            "anonymous",
+            "use-credentials"
+          ],
+          "control": "text",
+          "references": [
+            "AvatarImageProps"
+          ]
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"span\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        }
+      ],
+      "emits": [
+        {
+          "name": "loadingStatusChange",
+          "parameters": "value: ImageLoadingStatus",
+          "returns": "void",
+          "description": "Emitted on loading status change."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameCollapsible.vue": {
+      "name": "FrameCollapsible",
+      "source": "packages/core/src/components/FrameCollapsible.vue",
+      "sourceHash": "a9f23d124b0ff59f6d1bd9bb94e251e812ed1ae9c2a7079d0cb72f6e4d716706",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Accessible visible text for the built-in disclosure trigger. The trigger slot can replace it.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "The open state of the collapsible when it is initially rendered. <br> Use when you do not need to control its open state.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled open state of the collapsible. Can be binded with `v-model`.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, prevents the user from interacting with the collapsible.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "unmountOnHide",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "When `true`, the element will be unmounted on closed state.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"div\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:open",
+          "parameters": "value: boolean",
+          "returns": "void",
+          "description": "Emitted on update:open."
+        }
+      ],
+      "slots": [
+        {
+          "name": "trigger",
+          "parameters": "open: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the trigger slot."
+        },
+        {
+          "name": "default",
+          "parameters": "open: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FramePagination.vue": {
+      "name": "FramePagination",
+      "source": "packages/core/src/components/FramePagination.vue",
+      "sourceHash": "b0f280b27c2b7ce19ca67bc4b614975fae9928d3bf0e203a42cf5201d32b9953",
+      "props": [
+        {
+          "name": "page",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled value of the current page. Can be binded as `v-model:page`.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "defaultPage",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "1"
+          },
+          "description": "The value of the page that should be active when initially rendered.\n\nUse when you do not need to control the value state.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "itemsPerPage",
+          "type": "number",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Number of items per page",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "total",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "0"
+          },
+          "description": "Number of items in your list",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "siblingCount",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "2"
+          },
+          "description": "Number of sibling should be shown around the current page",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, prevents the user from interacting with item",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "showEdges",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, always show first page, last page, and ellipsis",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"nav\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:page",
+          "parameters": "value: number",
+          "returns": "void",
+          "description": "Emitted on update:page."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "page: unknown, page-count: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameProgress.vue": {
+      "name": "FrameProgress",
+      "source": "packages/core/src/components/FrameProgress.vue",
+      "sourceHash": "f4d632b200999ab37820dd21073bb5dd53048de9d428224efed425e87ec0ab2f",
+      "props": [
+        {
+          "name": "modelValue",
+          "type": "number | null",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The progress value. Can be bind as `v-model`.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "default": {
+            "kind": "derived",
+            "expression": "DEFAULT_MAX"
+          },
+          "description": "The maximum progress value.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "getValueLabel",
+          "type": "(value: number | null | undefined, max: number) => string | undefined",
+          "default": {
+            "kind": "derived",
+            "expression": "(value, max) => isNumber(value) ? `${Math.round(value / max * DEFAULT_MAX)}%` : void 0"
+          },
+          "description": "A function to get the accessible label text in a human-readable format.\n\n If not provided, the value label will be read as the numeric value as a percentage of the max value.",
+          "control": "fixture",
+          "references": []
+        },
+        {
+          "name": "getValueText",
+          "type": "(value: number | null | undefined, max: number) => string | undefined",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "A function to get the accessible value text representing the current value in a human-readable format.",
+          "control": "fixture",
+          "references": []
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"div\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "value: string[] | undefined",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        },
+        {
+          "name": "update:max",
+          "parameters": "value: number",
+          "returns": "void",
+          "description": "Emitted on update:max."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "value: unknown, percentage: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameScrollArea.vue": {
+      "name": "FrameScrollArea",
+      "source": "packages/core/src/components/FrameScrollArea.vue",
+      "sourceHash": "725c7078418808883301f7b28341399427b514b573fe14305dbc341397158309",
+      "props": [
+        {
+          "name": "orientation",
+          "type": "'vertical' | 'horizontal' | 'both'",
+          "default": {
+            "kind": "literal",
+            "value": "'vertical'"
+          },
+          "description": "Axes with custom scrollbars.",
+          "options": [
+            "both",
+            "vertical",
+            "horizontal"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "viewportLabel",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Accessible name for the keyboard-focusable scrolling region.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "type",
+          "type": "ScrollType",
+          "default": {
+            "kind": "literal",
+            "value": "\"hover\""
+          },
+          "description": "Describes the nature of scrollbar visibility, similar to how the scrollbar preferences in MacOS control visibility of native scrollbars.\n\n`auto` - means that scrollbars are visible when content is overflowing on the corresponding orientation. <br>\n`always` - means that scrollbars are always visible regardless of whether the content is overflowing.<br>\n`scroll` - means that scrollbars are visible when the user is scrolling along its corresponding orientation.<br>\n`hover` - when the user is scrolling along its corresponding orientation and when the user is hovering over the scroll area.<br>\n`glimpse` - a hybrid approach that briefly shows scrollbars when the user enters the scroll area, then hides them until further interaction.",
+          "options": [
+            "hover",
+            "auto",
+            "always",
+            "scroll",
+            "glimpse"
+          ],
+          "control": "text",
+          "references": [
+            "ScrollType"
+          ]
+        },
+        {
+          "name": "dir",
+          "type": "Direction$2",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The reading direction of the combobox when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+          "options": [
+            "ltr",
+            "rtl"
+          ],
+          "control": "text",
+          "references": [
+            "Direction"
+          ]
+        },
+        {
+          "name": "scrollHideDelay",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "600"
+          },
+          "description": "If type is set to either `scroll` or `hover`, this prop determines the length of time, in milliseconds, <br> before the scrollbars are hidden after the user stops interacting with scrollbars.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"div\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        }
+      ],
+      "emits": [],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameSeparator.vue": {
+      "name": "FrameSeparator",
+      "source": "packages/core/src/components/FrameSeparator.vue",
+      "sourceHash": "62646be461e1c16d90abaf2f05b0f7d26d9f002e0efd1c042968aa97aaf9862b",
+      "props": [
+        {
+          "name": "orientation",
+          "type": "DataOrientation",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Orientation of the component.\n\nEither `vertical` or `horizontal`. Defaults to `horizontal`.",
+          "options": [
+            "vertical",
+            "horizontal"
+          ],
+          "control": "text",
+          "references": [
+            "DataOrientation"
+          ]
+        },
+        {
+          "name": "decorative",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Whether or not the component is purely decorative. <br>When `true`, accessibility-related attributes\nare updated so that that the rendered element is removed from the accessibility tree.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"div\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        }
+      ],
+      "emits": [],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameTabs.vue": {
+      "name": "FrameTabs",
+      "source": "packages/core/src/components/FrameTabs.vue",
+      "sourceHash": "7e14e770723d2dbd0d551cbef3c927a97e02edffdc58c148e424706101788f5f",
+      "props": [
+        {
+          "name": "defaultValue",
+          "type": "StringOrNumber | undefined",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The value of the tab that should be active when initially rendered. Use when you do not need to control the state of the tabs",
+          "control": "text",
+          "references": [
+            "StringOrNumber"
+          ]
+        },
+        {
+          "name": "orientation",
+          "type": "DataOrientation",
+          "default": {
+            "kind": "literal",
+            "value": "\"horizontal\""
+          },
+          "description": "The orientation the tabs are laid out.\nMainly so arrow navigation is done accordingly (left & right vs. up & down)",
+          "options": [
+            "vertical",
+            "horizontal"
+          ],
+          "control": "text",
+          "references": [
+            "DataOrientation"
+          ]
+        },
+        {
+          "name": "dir",
+          "type": "Direction",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The reading direction of the combobox when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+          "options": [
+            "ltr",
+            "rtl"
+          ],
+          "control": "text",
+          "references": [
+            "Direction"
+          ]
+        },
+        {
+          "name": "activationMode",
+          "type": "'automatic' | 'manual'",
+          "default": {
+            "kind": "literal",
+            "value": "\"automatic\""
+          },
+          "description": "Whether a tab is activated automatically (on focus) or manually (on click).",
+          "options": [
+            "automatic",
+            "manual"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "modelValue",
+          "type": "StringOrNumber | undefined",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled value of the tab to activate. Can be bind as `v-model`.",
+          "control": "text",
+          "references": [
+            "StringOrNumber"
+          ]
+        },
+        {
+          "name": "unmountOnHide",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "When `true`, the element will be unmounted on closed state.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"div\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        },
+        {
+          "name": "items",
+          "type": "FrameTabItem[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Ordered application-owned entries.",
+          "control": "json",
+          "references": [
+            "FrameTabItem"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "payload: StringOrNumber",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        },
+        {
+          "name": "trigger",
+          "parameters": "item: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the trigger slot."
+        },
+        {
+          "name": "content",
+          "parameters": "item: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the content slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameStepper.vue": {
+      "name": "FrameStepper",
+      "source": "packages/core/src/components/FrameStepper.vue",
+      "sourceHash": "e0fcfea1664b5317bc4f1eca59219d145f2025774a2ccc6913324988a5ed35fb",
+      "props": [
+        {
+          "name": "defaultValue",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "1"
+          },
+          "description": "The value of the step that should be active when initially rendered. Use when you do not need to control the state of the steps.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "orientation",
+          "type": "DataOrientation",
+          "default": {
+            "kind": "literal",
+            "value": "\"horizontal\""
+          },
+          "description": "The orientation the steps are laid out.\nMainly so arrow navigation is done accordingly (left & right vs. up & down).",
+          "options": [
+            "vertical",
+            "horizontal"
+          ],
+          "control": "text",
+          "references": [
+            "DataOrientation"
+          ]
+        },
+        {
+          "name": "dir",
+          "type": "Direction",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The reading direction of the combobox when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+          "options": [
+            "ltr",
+            "rtl"
+          ],
+          "control": "text",
+          "references": [
+            "Direction"
+          ]
+        },
+        {
+          "name": "modelValue",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled value of the step to activate. Can be bound as `v-model`.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "linear",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Whether or not the steps must be completed in order.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"div\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        },
+        {
+          "name": "items",
+          "type": "FrameStepItem[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Ordered application-owned entries.",
+          "control": "json",
+          "references": [
+            "FrameStepItem"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "payload: number | undefined",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameToolbar.vue": {
+      "name": "FrameToolbar",
+      "source": "packages/core/src/components/FrameToolbar.vue",
+      "sourceHash": "e3555f6b9bf7c81ea37ad7cdde7941126432a6e85c0a7b8b28b8cb647d3d2556",
+      "props": [
+        {
+          "name": "orientation",
+          "type": "DataOrientation",
+          "default": {
+            "kind": "literal",
+            "value": "\"horizontal\""
+          },
+          "description": "The orientation of the toolbar",
+          "options": [
+            "vertical",
+            "horizontal"
+          ],
+          "control": "text",
+          "references": [
+            "DataOrientation"
+          ]
+        },
+        {
+          "name": "dir",
+          "type": "Direction",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The reading direction of the combobox when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+          "options": [
+            "ltr",
+            "rtl"
+          ],
+          "control": "text",
+          "references": [
+            "Direction"
+          ]
+        },
+        {
+          "name": "loop",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, keyboard navigation will loop from last tab to first, and vice versa.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"div\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        },
+        {
+          "name": "items",
+          "type": "FrameToolbarItem[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Ordered application-owned entries.",
+          "control": "json",
+          "references": [
+            "FrameToolbarItem"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "action",
+          "parameters": "item: FrameToolbarItem",
+          "returns": "void",
+          "description": "Emitted on action."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameTree.vue": {
+      "name": "FrameTree",
+      "source": "packages/core/src/components/FrameTree.vue",
+      "sourceHash": "3eef6b35c8ac45ec54231c00ca4ff9073f83185a769eb54af3cd503bfe7ca17f",
+      "props": [
+        {
+          "name": "items",
+          "type": "FrameTreeItem[] | undefined",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "List of items",
+          "control": "json",
+          "references": [
+            "FrameTreeItem"
+          ]
+        },
+        {
+          "name": "modelValue",
+          "type": "FrameTreeItem | FrameTreeItem[] | undefined",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled value of the tree. Can be binded with `v-model`.",
+          "control": "json",
+          "references": [
+            "FrameTreeItem"
+          ]
+        },
+        {
+          "name": "defaultValue",
+          "type": "FrameTreeItem | FrameTreeItem[] | undefined",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The value of the tree when initially rendered. Use when you do not need to control the state of the tree",
+          "control": "json",
+          "references": [
+            "FrameTreeItem"
+          ]
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, prevents the user from interacting with tree",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "dir",
+          "type": "Direction",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The reading direction of the listbox when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+          "options": [
+            "ltr",
+            "rtl"
+          ],
+          "control": "text",
+          "references": [
+            "Direction"
+          ]
+        },
+        {
+          "name": "loop",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, keyboard navigation will loop from last item to first, and vice versa.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"ul\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        },
+        {
+          "name": "multiple",
+          "type": "boolean | undefined",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Whether multiple options can be selected or not.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "selectionBehavior",
+          "type": "'toggle' | 'replace'",
+          "default": {
+            "kind": "literal",
+            "value": "\"toggle\""
+          },
+          "description": "How multiple selection should behave in the collection.",
+          "options": [
+            "replace",
+            "toggle"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "expanded",
+          "type": "string[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled value of the expanded item. Can be binded with `v-model`.",
+          "control": "json",
+          "references": []
+        },
+        {
+          "name": "defaultExpanded",
+          "type": "string[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The value of the expanded tree when initially rendered. Use when you do not need to control the state of the expanded tree",
+          "control": "json",
+          "references": []
+        },
+        {
+          "name": "getChildren",
+          "type": "((val: FrameTreeItem) => FrameTreeItem[] | undefined) | undefined",
+          "default": {
+            "kind": "derived",
+            "expression": "(val) => val.children"
+          },
+          "description": "This function is passed the index of each item and should return a list of children for that item",
+          "control": "fixture",
+          "references": [
+            "FrameTreeItem"
+          ]
+        },
+        {
+          "name": "propagateSelect",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, selecting parent will select the descendants. Requires `multiple` to be `true`.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "bubbleSelect",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, selecting children will update the parent state. Requires `multiple` to be `true`.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "getKey",
+          "type": "(item:FrameTreeItem)=>string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Get Key configuration for this component; see its Features examples for usage.",
+          "control": "fixture",
+          "references": [
+            "FrameTreeItem"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "val: import(\"@frame/core\").FrameTreeItem | import(\"@frame/core\").FrameTreeItem[]",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        },
+        {
+          "name": "update:expanded",
+          "parameters": "val: string[]",
+          "returns": "void",
+          "description": "Emitted on update:expanded."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        },
+        {
+          "name": "item",
+          "parameters": "item: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the item slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameSplitter.vue": {
+      "name": "FrameSplitter",
+      "source": "packages/core/src/components/FrameSplitter.vue",
+      "sourceHash": "17c8cc9cc5c05f077d05f7035b99c5830be099ea37d2bb726cc88c4a47d02e83",
+      "props": [
+        {
+          "name": "id",
+          "type": "string | null",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Group id; falls back to `useId` when not provided.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "autoSaveId",
+          "type": "string | null",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Unique id used to auto-save group arrangement via `localStorage`.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "direction",
+          "type": "Direction$1",
+          "default": {
+            "kind": "required"
+          },
+          "description": "The group orientation of splitter.",
+          "options": [
+            "vertical",
+            "horizontal"
+          ],
+          "control": "text",
+          "references": [
+            "Direction"
+          ]
+        },
+        {
+          "name": "keyboardResizeBy",
+          "type": "number | null",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Step size when arrow key was pressed.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "storage",
+          "type": "PanelGroupStorage",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Custom storage API; defaults to localStorage",
+          "control": "json",
+          "references": [
+            "PanelGroupStorage"
+          ]
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"div\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        },
+        {
+          "name": "panels",
+          "type": "FrameSplitPanel[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Panels configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "FrameSplitPanel"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "layout",
+          "parameters": "val: number[]",
+          "returns": "void",
+          "description": "Emitted on layout."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        },
+        {
+          "name": "panel",
+          "parameters": "panel: unknown, index: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the panel slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameNavigationMenu.vue": {
+      "name": "FrameNavigationMenu",
+      "source": "packages/core/src/components/FrameNavigationMenu.vue",
+      "sourceHash": "85ba6d3787906d9d545a11d52d737ba645d766e7855cb104befe1c08860bf03d",
+      "props": [
+        {
+          "name": "modelValue",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled value of the menu item to activate. Can be used as `v-model`.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The value of the menu item that should be active when initially rendered.\n\nUse when you do not need to control the value state.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "dir",
+          "type": "Direction$3",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The reading direction of the combobox when applicable.\n\n If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+          "options": [
+            "ltr",
+            "rtl"
+          ],
+          "control": "text",
+          "references": [
+            "Direction"
+          ]
+        },
+        {
+          "name": "orientation",
+          "type": "Orientation",
+          "default": {
+            "kind": "literal",
+            "value": "\"horizontal\""
+          },
+          "description": "The orientation of the menu.",
+          "options": [
+            "vertical",
+            "horizontal"
+          ],
+          "control": "text",
+          "references": [
+            "Orientation"
+          ]
+        },
+        {
+          "name": "delayDuration",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "200"
+          },
+          "description": "The duration from when the pointer enters the trigger until the tooltip gets opened.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "skipDelayDuration",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "300"
+          },
+          "description": "How much time a user has to enter another trigger without incurring a delay again.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "disableClickTrigger",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "If `true`, menu cannot be open by click on trigger",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "disableHoverTrigger",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "If `true`, menu cannot be open by hover on trigger",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "disablePointerLeaveClose",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "If `true`, menu will not close during pointer leave event",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "unmountOnHide",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "When `true`, the element will be unmounted on closed state.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"nav\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        },
+        {
+          "name": "items",
+          "type": "FrameNavigationItem[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Ordered application-owned entries.",
+          "control": "json",
+          "references": [
+            "FrameNavigationItem"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "value: string",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        },
+        {
+          "name": "content",
+          "parameters": "item: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the content slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameMenubar.vue": {
+      "name": "FrameMenubar",
+      "source": "packages/core/src/components/FrameMenubar.vue",
+      "sourceHash": "077993316ac2867f9e996626a6fc23fe2edda99a98781935eac5062c30dc798a",
+      "props": [
+        {
+          "name": "modelValue",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled value of the menu to open. Can be used as `v-model`.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The value of the menu that should be open when initially rendered. Use when you do not need to control the value state.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "dir",
+          "type": "Direction",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The reading direction of the combobox when applicable.\n\n If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+          "options": [
+            "ltr",
+            "rtl"
+          ],
+          "control": "text",
+          "references": [
+            "Direction"
+          ]
+        },
+        {
+          "name": "loop",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, keyboard navigation will loop from last item to first, and vice versa.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "items",
+          "type": "FrameMenubarItem[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Ordered application-owned entries.",
+          "control": "json",
+          "references": [
+            "FrameMenubarItem"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "value: string",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        },
+        {
+          "name": "action",
+          "parameters": "item: FrameMenubarAction",
+          "returns": "void",
+          "description": "Emitted on action."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        },
+        {
+          "name": "content",
+          "parameters": "menu: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the content slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameDialog.vue": {
+      "name": "FrameDialog",
+      "source": "packages/core/src/components/FrameDialog.vue",
+      "sourceHash": "fef22482510712b75a99a869d6a4d1ea1aa0de5a45dad1c3cbeff806ee631176",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Visible heading.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Description configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "triggerLabel",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Trigger Label configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "contentProps",
+          "type": "DialogContentProps",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Content Props configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "DialogContentProps"
+          ]
+        },
+        {
+          "name": "confirmLabel",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Confirm Label configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled open state of the dialog. Can be binded as `v-model:open`.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "The open state of the dialog when it is initially rendered. Use when you do not need to control its open state.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "modal",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "The modality of the dialog When set to `true`, <br>\ninteraction with outside elements will be disabled and only dialog content will be visible to screen readers.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "unmountOnHide",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "When set to `false`, the dialog content will not be unmounted when closed, but instead hidden with CSS. <br>\nUseful for SEO or when you want to improve performance by not remounting the component on every open.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:open",
+          "parameters": "value: boolean",
+          "returns": "void",
+          "description": "Emitted on update:open."
+        },
+        {
+          "name": "escapeKeyDown",
+          "parameters": "event: KeyboardEvent",
+          "returns": "void",
+          "description": "Emitted on escape key down."
+        },
+        {
+          "name": "pointerDownOutside",
+          "parameters": "event: PointerDownOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on pointer down outside."
+        },
+        {
+          "name": "focusOutside",
+          "parameters": "event: FocusOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on focus outside."
+        },
+        {
+          "name": "interactOutside",
+          "parameters": "event: PointerDownOutsideEvent | FocusOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on interact outside."
+        },
+        {
+          "name": "openAutoFocus",
+          "parameters": "event: Event",
+          "returns": "void",
+          "description": "Emitted on open auto focus."
+        },
+        {
+          "name": "closeAutoFocus",
+          "parameters": "event: Event",
+          "returns": "void",
+          "description": "Emitted on close auto focus."
+        },
+        {
+          "name": "confirm",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on confirm."
+        }
+      ],
+      "slots": [
+        {
+          "name": "trigger",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the trigger slot."
+        },
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        },
+        {
+          "name": "actions",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the actions slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameAlertDialog.vue": {
+      "name": "FrameAlertDialog",
+      "source": "packages/core/src/components/FrameAlertDialog.vue",
+      "sourceHash": "c1722c99c86886045f2f28383b0f39f646a2c47c8fba4c013ec35ffbcfa76adc",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Visible heading.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Description configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "triggerLabel",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Trigger Label configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "contentProps",
+          "type": "AlertDialogContentProps",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Content Props configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "AlertDialogContentProps"
+          ]
+        },
+        {
+          "name": "confirmLabel",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Confirm Label configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "The controlled open state of the dialog. Can be binded as `v-model:open`.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "The open state of the dialog when it is initially rendered. Use when you do not need to control its open state.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "unmountOnHide",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "When set to `false`, the dialog content will not be unmounted when closed, but instead hidden with CSS. <br>\nUseful for SEO or when you want to improve performance by not remounting the component on every open.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:open",
+          "parameters": "value: boolean",
+          "returns": "void",
+          "description": "Emitted on update:open."
+        },
+        {
+          "name": "escapeKeyDown",
+          "parameters": "event: KeyboardEvent",
+          "returns": "void",
+          "description": "Emitted on escape key down."
+        },
+        {
+          "name": "pointerDownOutside",
+          "parameters": "event: PointerDownOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on pointer down outside."
+        },
+        {
+          "name": "focusOutside",
+          "parameters": "event: FocusOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on focus outside."
+        },
+        {
+          "name": "interactOutside",
+          "parameters": "event: PointerDownOutsideEvent | FocusOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on interact outside."
+        },
+        {
+          "name": "openAutoFocus",
+          "parameters": "event: Event",
+          "returns": "void",
+          "description": "Emitted on open auto focus."
+        },
+        {
+          "name": "closeAutoFocus",
+          "parameters": "event: Event",
+          "returns": "void",
+          "description": "Emitted on close auto focus."
+        },
+        {
+          "name": "confirm",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on confirm."
+        }
+      ],
+      "slots": [
+        {
+          "name": "trigger",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the trigger slot."
+        },
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        },
+        {
+          "name": "actions",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the actions slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameDrawer.vue": {
+      "name": "FrameDrawer",
+      "source": "packages/core/src/components/FrameDrawer.vue",
+      "sourceHash": "5cb4abecf3d01d06c7a4be852a5aef19aa07faa3e38f37855946b4842829db1a",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Visible heading.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Description configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "triggerLabel",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Trigger Label configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "contentProps",
+          "type": "DrawerContentProps",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Content Props configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "DrawerContentProps"
+          ]
+        },
+        {
+          "name": "confirmLabel",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Confirm Label configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "v-model:open",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Default Open configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "modal",
+          "type": "DrawerModal",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Modality of the drawer.\n- `true` (default): modal with focus trap, scroll lock, and outside-press dismiss\n- `'trap-focus'`: traps focus but allows outside pointer events (non-modal side panels)\n- `false`: non-modal",
+          "options": [
+            "trap-focus"
+          ],
+          "control": "text",
+          "references": [
+            "DrawerModal"
+          ]
+        },
+        {
+          "name": "swipeDirection",
+          "type": "SwipeDirection$1",
+          "default": {
+            "kind": "literal",
+            "value": "\"down\""
+          },
+          "description": "Direction to swipe to dismiss.",
+          "options": [
+            "left",
+            "right",
+            "up",
+            "down"
+          ],
+          "control": "text",
+          "references": [
+            "SwipeDirection"
+          ]
+        },
+        {
+          "name": "snapPoints",
+          "type": "DrawerSnapPoint[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Preset snap positions (fractions 0-1, pixels >1, or '148px'/'30rem' strings)",
+          "control": "json",
+          "references": [
+            "DrawerSnapPoint"
+          ]
+        },
+        {
+          "name": "snapPoint",
+          "type": "DrawerSnapPoint | null",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "v-model:snapPoint",
+          "control": "text",
+          "references": [
+            "DrawerSnapPoint"
+          ]
+        },
+        {
+          "name": "defaultSnapPoint",
+          "type": "DrawerSnapPoint | null",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Default Snap Point configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": [
+            "DrawerSnapPoint"
+          ]
+        },
+        {
+          "name": "snapToSequentialPoints",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When true, snaps to the next sequential snap point (one step at a time).\nWhen false, snaps to the nearest snap point by distance.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:open",
+          "parameters": "value: boolean, details: DrawerOpenChangeDetails",
+          "returns": "void",
+          "description": "Emitted on update:open."
+        },
+        {
+          "name": "update:openComplete",
+          "parameters": "value: boolean",
+          "returns": "void",
+          "description": "Emitted on update:open complete."
+        },
+        {
+          "name": "update:snapPoint",
+          "parameters": "value: DrawerSnapPoint | null",
+          "returns": "void",
+          "description": "Emitted on update:snap point."
+        },
+        {
+          "name": "escapeKeyDown",
+          "parameters": "event: KeyboardEvent",
+          "returns": "void",
+          "description": "Emitted on escape key down."
+        },
+        {
+          "name": "pointerDownOutside",
+          "parameters": "event: PointerDownOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on pointer down outside."
+        },
+        {
+          "name": "focusOutside",
+          "parameters": "event: FocusOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on focus outside."
+        },
+        {
+          "name": "interactOutside",
+          "parameters": "event: PointerDownOutsideEvent | FocusOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on interact outside."
+        },
+        {
+          "name": "openAutoFocus",
+          "parameters": "event: Event",
+          "returns": "void",
+          "description": "Emitted on open auto focus."
+        },
+        {
+          "name": "closeAutoFocus",
+          "parameters": "event: Event",
+          "returns": "void",
+          "description": "Emitted on close auto focus."
+        },
+        {
+          "name": "confirm",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on confirm."
+        }
+      ],
+      "slots": [
+        {
+          "name": "trigger",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the trigger slot."
+        },
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        },
+        {
+          "name": "actions",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the actions slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FramePopover.vue": {
+      "name": "FramePopover",
+      "source": "packages/core/src/components/FramePopover.vue",
+      "sourceHash": "a6ddae9aeba0345073b21a7251726850a136399034be27f6b3f10516dc22fbc9",
+      "props": [
+        {
+          "name": "triggerLabel",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Trigger Label configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "contentProps",
+          "type": "PopoverContentProps",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Content Props configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "PopoverContentProps"
+          ]
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "The open state of the popover when it is initially rendered. Use when you do not need to control its open state.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled open state of the popover.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "modal",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "The modality of the popover. When set to true, interaction with outside elements will be disabled and only popover content will be visible to screen readers.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:open",
+          "parameters": "value: boolean",
+          "returns": "void",
+          "description": "Emitted on update:open."
+        },
+        {
+          "name": "escapeKeyDown",
+          "parameters": "event: KeyboardEvent",
+          "returns": "void",
+          "description": "Emitted on escape key down."
+        },
+        {
+          "name": "pointerDownOutside",
+          "parameters": "event: PointerDownOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on pointer down outside."
+        },
+        {
+          "name": "focusOutside",
+          "parameters": "event: FocusOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on focus outside."
+        },
+        {
+          "name": "interactOutside",
+          "parameters": "event: PointerDownOutsideEvent | FocusOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on interact outside."
+        },
+        {
+          "name": "openAutoFocus",
+          "parameters": "event: Event",
+          "returns": "void",
+          "description": "Emitted on open auto focus."
+        },
+        {
+          "name": "closeAutoFocus",
+          "parameters": "event: Event",
+          "returns": "void",
+          "description": "Emitted on close auto focus."
+        }
+      ],
+      "slots": [
+        {
+          "name": "trigger",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the trigger slot."
+        },
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        },
+        {
+          "name": "close",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the close slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameHoverCard.vue": {
+      "name": "FrameHoverCard",
+      "source": "packages/core/src/components/FrameHoverCard.vue",
+      "sourceHash": "fceb34851fdba80c9e5a52f85f5269e38adfa46f5d82b996f9cdb5ec2db48f63",
+      "props": [
+        {
+          "name": "triggerLabel",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Trigger Label configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "contentProps",
+          "type": "HoverCardContentProps",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Content Props configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "HoverCardContentProps"
+          ]
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "The open state of the hover card when it is initially rendered. Use when you do not need to control its open state.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled open state of the hover card. Can be binded as `v-model:open`.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "openDelay",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "700"
+          },
+          "description": "The duration from when the mouse enters the trigger until the hover card opens.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "closeDelay",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "300"
+          },
+          "description": "The duration from when the mouse leaves the trigger or content until the hover card closes.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "enableTouch",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, tapping the trigger on touch devices toggles the hover card open/closed. By default touch interactions are ignored to match pointer hover semantics.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:open",
+          "parameters": "value: boolean",
+          "returns": "void",
+          "description": "Emitted on update:open."
+        }
+      ],
+      "slots": [
+        {
+          "name": "trigger",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the trigger slot."
+        },
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameDropdownMenu.vue": {
+      "name": "FrameDropdownMenu",
+      "source": "packages/core/src/components/FrameDropdownMenu.vue",
+      "sourceHash": "e64054f41b394dd3b2796465f734b7642db673b362409b9298800b0f720873f6",
+      "props": [
+        {
+          "name": "items",
+          "type": "readonly FrameGeneralMenuItem[]",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Ordered application-owned entries.",
+          "control": "json",
+          "references": [
+            "FrameGeneralMenuItem"
+          ]
+        },
+        {
+          "name": "triggerLabel",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Trigger Label configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "contentProps",
+          "type": "DropdownMenuContentProps",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Content Props configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "DropdownMenuContentProps"
+          ]
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "The open state of the dropdown menu when it is initially rendered. Use when you do not need to control its open state.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled open state of the menu. Can be used as `v-model:open`.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "dir",
+          "type": "Direction$4",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The reading direction of the combobox when applicable.\n\nIf omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+          "options": [
+            "ltr",
+            "rtl"
+          ],
+          "control": "text",
+          "references": [
+            "Direction"
+          ]
+        },
+        {
+          "name": "modal",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "The modality of the dropdown menu.\n\nWhen set to `true`, interaction with outside elements will be disabled and only menu content will be visible to screen readers.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:open",
+          "parameters": "payload: boolean",
+          "returns": "void",
+          "description": "Emitted on update:open."
+        },
+        {
+          "name": "escapeKeyDown",
+          "parameters": "event: KeyboardEvent",
+          "returns": "void",
+          "description": "Emitted on escape key down."
+        },
+        {
+          "name": "pointerDownOutside",
+          "parameters": "event: PointerDownOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on pointer down outside."
+        },
+        {
+          "name": "focusOutside",
+          "parameters": "event: FocusOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on focus outside."
+        },
+        {
+          "name": "interactOutside",
+          "parameters": "event: PointerDownOutsideEvent | FocusOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on interact outside."
+        },
+        {
+          "name": "openAutoFocus",
+          "parameters": "event: Event",
+          "returns": "void",
+          "description": "Emitted on open auto focus."
+        },
+        {
+          "name": "closeAutoFocus",
+          "parameters": "event: Event",
+          "returns": "void",
+          "description": "Emitted on close auto focus."
+        },
+        {
+          "name": "select",
+          "parameters": "item: FrameGeneralMenuItem, event: Event",
+          "returns": "void",
+          "description": "Emitted on select."
+        }
+      ],
+      "slots": [
+        {
+          "name": "trigger",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the trigger slot."
+        },
+        {
+          "name": "before",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the before slot."
+        },
+        {
+          "name": "item",
+          "parameters": "item: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the item slot."
+        },
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameContextMenu.vue": {
+      "name": "FrameContextMenu",
+      "source": "packages/core/src/components/FrameContextMenu.vue",
+      "sourceHash": "dec83a82a988b47072d2b483511cb461491ef326bec033cef07bfca11806fed3",
+      "props": [
+        {
+          "name": "items",
+          "type": "readonly FrameGeneralMenuItem[]",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Ordered application-owned entries.",
+          "control": "json",
+          "references": [
+            "FrameGeneralMenuItem"
+          ]
+        },
+        {
+          "name": "triggerLabel",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Trigger Label configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "contentProps",
+          "type": "ContextMenuContentProps",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Content Props configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "ContextMenuContentProps"
+          ]
+        },
+        {
+          "name": "pressOpenDelay",
+          "type": "number",
+          "default": {
+            "kind": "literal",
+            "value": "700"
+          },
+          "description": "The duration from when the trigger is pressed until the menu opens.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled open state of the menu. Can be used as `v-model:open`.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "dir",
+          "type": "Direction$4",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The reading direction of the combobox when applicable.\n\nIf omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+          "options": [
+            "ltr",
+            "rtl"
+          ],
+          "control": "text",
+          "references": [
+            "Direction"
+          ]
+        },
+        {
+          "name": "modal",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "The modality of the dropdown menu.\n\nWhen set to `true`, interaction with outside elements will be disabled and only menu content will be visible to screen readers.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:open",
+          "parameters": "payload: boolean",
+          "returns": "void",
+          "description": "Emitted on update:open."
+        },
+        {
+          "name": "escapeKeyDown",
+          "parameters": "event: KeyboardEvent",
+          "returns": "void",
+          "description": "Emitted on escape key down."
+        },
+        {
+          "name": "pointerDownOutside",
+          "parameters": "event: PointerDownOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on pointer down outside."
+        },
+        {
+          "name": "focusOutside",
+          "parameters": "event: FocusOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on focus outside."
+        },
+        {
+          "name": "interactOutside",
+          "parameters": "event: PointerDownOutsideEvent | FocusOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on interact outside."
+        },
+        {
+          "name": "openAutoFocus",
+          "parameters": "event: Event",
+          "returns": "void",
+          "description": "Emitted on open auto focus."
+        },
+        {
+          "name": "closeAutoFocus",
+          "parameters": "event: Event",
+          "returns": "void",
+          "description": "Emitted on close auto focus."
+        },
+        {
+          "name": "select",
+          "parameters": "item: FrameGeneralMenuItem, event: Event",
+          "returns": "void",
+          "description": "Emitted on select."
+        }
+      ],
+      "slots": [
+        {
+          "name": "trigger",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the trigger slot."
+        },
+        {
+          "name": "before",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the before slot."
+        },
+        {
+          "name": "item",
+          "parameters": "item: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the item slot."
+        },
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameToast.vue": {
+      "name": "FrameToast",
+      "source": "packages/core/src/components/FrameToast.vue",
+      "sourceHash": "1753850cadcca240e6032c47f9c109fb387da0673f4555bca33be37a42409c3c",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Visible heading.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Description configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "actionLabel",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Action Label configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "actionAltText",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Action Alt Text configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "viewportLabel",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Viewport Label configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "The open state of the dialog when it is initially rendered. Use when you do not need to control its open state.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "forceMount",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Used to force mounting when more control is needed. Useful when\ncontrolling animation with Vue animation libraries.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "type",
+          "type": "'foreground' | 'background'",
+          "default": {
+            "kind": "literal",
+            "value": "\"foreground\""
+          },
+          "description": "Control the sensitivity of the toast for accessibility purposes.\n\nFor toasts that are the result of a user action, choose `foreground`. Toasts generated from background tasks should use `background`.",
+          "options": [
+            "foreground",
+            "background"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled open state of the dialog. Can be bind as `v-model:open`.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Time in milliseconds that toast should remain visible for. Overrides value\ngiven to `ToastProvider`.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "toast",
+          "type": "ToastObject",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "A toast from `useToastManager()`. Its `open`, `duration`, `type` and `status` drive the toast,\nand `ToastTitle`, `ToastDescription` and `ToastAction` render its content.",
+          "control": "json",
+          "references": [
+            "ToastObject"
+          ]
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"li\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        }
+      ],
+      "emits": [
+        {
+          "name": "escapeKeyDown",
+          "parameters": "event: KeyboardEvent",
+          "returns": "void",
+          "description": "Emitted on escape key down."
+        },
+        {
+          "name": "pause",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on pause."
+        },
+        {
+          "name": "resume",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on resume."
+        },
+        {
+          "name": "swipeStart",
+          "parameters": "event: SwipeEvent",
+          "returns": "void",
+          "description": "Emitted on swipe start."
+        },
+        {
+          "name": "swipeMove",
+          "parameters": "event: SwipeEvent",
+          "returns": "void",
+          "description": "Emitted on swipe move."
+        },
+        {
+          "name": "swipeCancel",
+          "parameters": "event: SwipeEvent",
+          "returns": "void",
+          "description": "Emitted on swipe cancel."
+        },
+        {
+          "name": "swipeEnd",
+          "parameters": "event: SwipeEvent",
+          "returns": "void",
+          "description": "Emitted on swipe end."
+        },
+        {
+          "name": "update:open",
+          "parameters": "value: boolean",
+          "returns": "void",
+          "description": "Emitted on update:open."
+        },
+        {
+          "name": "action",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on action."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
         }
       ],
       "methods": [],

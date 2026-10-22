@@ -1,4 +1,4 @@
-.frame-advanced-input { box-sizing:border-box; min-height:28px; width:min(100%,340px); padding:var(--frame-control-padding-y) var(--frame-control-padding-x); border:1px solid var(--frame-control-border); border-radius:var(--frame-control-radius); color:var(--frame-control-text); background:var(--frame-control-background); font:inherit; }
+.frame-advanced-input { box-sizing:border-box; min-height:28px; width:min(100%,340px); padding:var(--frame-control-padding-y) var(--frame-control-padding-x); border:1px solid var(--frame-control-border); border-radius:var(--frame-advanced-input-radius,var(--frame-input-radius)); color:var(--frame-control-text); background:var(--frame-control-background); font:inherit; }
 .frame-field { display:flex; flex-direction:column; gap:var(--frame-gap); min-width:0; }
 .frame-form { display:grid; gap:var(--frame-content-padding); }
 .frame-field-label { font-weight:500; color:var(--frame-text); }

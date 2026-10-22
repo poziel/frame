@@ -3,14 +3,15 @@ export type { Frame } from "./createFrame";
 export type { Command, PanelDefinition, SidePanelDefinition, QuickPickItem, QuickPickOptions } from "../types";
 export { default as FrameShell } from "../components/FrameShell.vue";
 export { default as FrameTooltip } from "../components/FrameTooltip.vue";
-export { default as QuickInput } from "../components/CommandPalette.vue";
+export { default as FrameQuickInput } from "../components/FrameQuickInput.vue";
+export { default as FrameQuickPanel } from "../components/FrameQuickPanel.vue";
 export { default as BottomPanel } from "../components/BottomPanel.vue";
 export { default as SidePanel } from "../components/SidePanel.vue";
 
 export { default as ActivityRail } from "../components/ActivityRail.vue";
 export { default as FrameMenu } from "../components/FrameMenu.vue";
 export type { FrameMenuItem } from "../types";
-export type { LayoutState, PanelAlignment } from "./layout";
+export type { LayoutState, PanelAlignment, PanelPosition } from "./layout";
 export { default as ResizeHandle } from "../components/ResizeHandle.vue";
 
 export { default as ContextMenu } from "../components/ContextMenu.vue";
@@ -99,3 +100,40 @@ export { default as FrameColorSwatch } from '../components/FrameColorSwatch.vue'
 export { default as FrameColorSwatchPicker } from '../components/FrameColorSwatchPicker.vue';
 export { CalendarDate, CalendarDateTime, ZonedDateTime, Time, parseDate, parseDateTime, parseTime, parseZonedDateTime, today, getLocalTimeZone } from '../forms/dates';
 export type { DateValue, DateRange, TimeValue, TimeRange } from '../forms/dates';
+
+// Standalone Reka General primitives; shell services remain Frame-owned.
+export { default as FrameAccordion } from '../components/FrameAccordion.vue';
+export { default as FrameAspectRatio } from '../components/FrameAspectRatio.vue';
+export { default as FrameAvatar } from '../components/FrameAvatar.vue';
+export { default as FrameCollapsible } from '../components/FrameCollapsible.vue';
+export { default as FramePagination } from '../components/FramePagination.vue';
+export { default as FrameProgress } from '../components/FrameProgress.vue';
+export { default as FrameScrollArea } from '../components/FrameScrollArea.vue';
+export { default as FrameSeparator } from '../components/FrameSeparator.vue';
+export { default as FrameTabs } from '../components/FrameTabs.vue';
+export { default as FrameStepper } from '../components/FrameStepper.vue';
+export { default as FrameToolbar } from '../components/FrameToolbar.vue';
+export { default as FrameTree } from '../components/FrameTree.vue';
+export { default as FrameSplitter } from '../components/FrameSplitter.vue';
+export { default as FrameNavigationMenu } from '../components/FrameNavigationMenu.vue';
+export { default as FrameMenubar } from '../components/FrameMenubar.vue';
+export { default as FrameDialog } from '../components/FrameDialog.vue';
+export { default as FrameAlertDialog } from '../components/FrameAlertDialog.vue';
+export { default as FrameDrawer } from '../components/FrameDrawer.vue';
+export { default as FramePopover } from '../components/FramePopover.vue';
+export { default as FrameHoverCard } from '../components/FrameHoverCard.vue';
+export { default as FrameDropdownMenu } from '../components/FrameDropdownMenu.vue';
+export { default as FrameContextMenu } from '../components/FrameContextMenu.vue';
+export { default as FrameToast } from '../components/FrameToast.vue';
+export type { FrameAccordionProps, FrameAccordionItem } from '../components/FrameAccordion.vue';
+export type * from '../general-types';
+export type { FrameGeneralMenuItem } from '../components/generalMenu';
+
+export type { ActivityBarPosition, ActivityBarSize, ActivityBarDisplay, ActivityItemKey, ActivityBadge, ActivityOptions, ActivityItem, ActivityController } from "./activity";
+export type { ToolbarControl, ToolbarOptions } from "./toolbar";
+
+export type { ToolbarActionFeature } from '../types';
+
+export type { SecondaryBarOptions, SecondaryBarDisplay, SecondaryBarSize, SecondaryBarItem, SecondaryBarController } from './secondaryBar';
+
+export type { PanelOptions, PanelDisplay, PanelItem, PanelController } from './panel';

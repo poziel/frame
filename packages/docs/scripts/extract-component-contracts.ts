@@ -1,4 +1,5 @@
 import ts from 'typescript';
+import { generalFamilies } from '../src/examples/generalCatalog';
 import { formFamilies } from '../src/examples/formCatalog';
 import {createHash} from 'node:crypto';
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
@@ -14,14 +15,15 @@ export const pageSources: Record<string, string[]> = {
   menus:[core+'FrameMenu.vue'], 'context-menu':[core+'ContextMenu.vue'], 'resizable-panes':[core+'ResizablePane.vue'],
   'resize-handle':[core+'ResizeHandle.vue'], modals:[core+'FrameModal.vue'], settings:[core+'FrameSettings.vue'],
   notifications:[core+'FrameNotifications.vue'], 'notification-panel':[extra+'NotificationPanel.vue',extra+'NotificationIndicator.vue'],
-  'quick-input':[core+'CommandPalette.vue'], banner:[core+'FrameShell.vue'], workspace:[core+'WorkspacePanes.vue'],
+  'quick-input':[core+'FrameQuickInput.vue'], 'quick-panel':[core+'FrameQuickPanel.vue'], banner:[core+'FrameShell.vue'], workspace:[core+'WorkspacePanes.vue'],
   views:[core+'SidePanel.vue',core+'ViewSections.vue'], 'activity-actions':[core+'ActivityRail.vue'], navigation:[core+'FrameShell.vue'],
   loader:[core+'FrameLoader.vue'], loading:[core+'FrameLoading.vue'], 'code-block':[core+'FrameCodeBlock.vue'],
   'code-editor':[extra+'CodeEditor.vue'], terminal:[extra+'Terminal.vue',extra+'TerminalView.vue'], 'ai-chat':[extra+'AIChat.vue'],
 };
 for (const [id, name] of formFamilies) pageSources[id] = [core + 'Frame' + name + '.vue'];
+for (const [id,name] of generalFamilies) pageSources['general-'+id]=[core+'Frame'+name+'.vue'];
 const files = [...new Set(Object.values(pageSources).flat())];
-const script = (file: string) => readFileSync(file,'utf8').match(/<script[^>]*>([\s\S]*?)<\/script>/)?.[1] ?? '';
+const script = (file: string) => [...readFileSync(file,'utf8').matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map(match=>match[1]).join('\n');
 const options: ts.CompilerOptions = { target: ts.ScriptTarget.ES2020, module:ts.ModuleKind.ESNext, moduleResolution:ts.ModuleResolutionKind.Bundler, strict:true, skipLibCheck:true, baseUrl:root, paths:{'@frame/core':['packages/core/src/frame/index.ts']} };
 const host = ts.createCompilerHost(options);
 const originalRead = host.readFile.bind(host), originalExists = host.fileExists.bind(host);
@@ -105,7 +107,7 @@ for (const file of files) {
   const decl=symbol.valueDeclaration ?? symbol.declarations?.[0]!;
   const type=checker.getTypeOfSymbolAtLocation(symbol,decl);
   const declared=(decl as ts.PropertySignature).type?.getText();
-  const display=(declared&&!/\bT\b/.test(declared)?declared:checker.typeToString(type,decl,ts.TypeFormatFlags.NoTruncation | ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)).replace(/import\("[^"]+"\)\./g,'').replace(/\b(?:_internationalized_date\d*|vue\d*|vue_demi\d*)\./g,'');
+  const display=(declared&&!/\b(?:T|U|M)\b/.test(declared)?declared:checker.typeToString(type,decl,ts.TypeFormatFlags.NoTruncation | ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)).replace(/import\("[^"]+"\)\./g,'').replace(/\b(?:_internationalized_date\d*|vue\d*|vue_demi\d*)\./g,'');
   const optional=!!(symbol.flags & ts.SymbolFlags.Optional);
   const tagDefault=symbol.getJsDocTags(checker).find(tag=>tag.name==='defaultValue'||tag.name==='default')?.text?.map(part=>part.text).join('');
   const textDefault=defaultMap.get(symbol.name) ?? tagDefault;
@@ -117,7 +119,7 @@ for (const file of files) {
   const fixture=(/Controller|HTMLElement|\bFrame\b|Component|NotificationHistory/.test(display) || display.includes('=>') || checker.getNonNullableType(type).getCallSignatures().length>0)&&!isText;
   let value:unknown = !optional ? {kind:'required'} : isBoolean ? {kind:'literal',value:'false'} : {kind:'omitted'};
   if(textDefault!==undefined) value=['undefined','void 0'].includes(textDefault)?{kind:'omitted'}:/^['"\d-]|^(true|false|null)$/.test(textDefault)?{kind:'literal',value:textDefault}:textDefault.startsWith('() =>')?{kind:'literal',value:textDefault.replace(/^\(\) =>\s*/,'')}:{kind:'derived',expression:textDefault};
-  return {name:symbol.name,type:display,default:value,description:symbol.name==='options'&&file.endsWith('CodeEditor.vue')?'Nested Monaco editor and model options. Direct readOnly and label props take precedence.':symbol.name==='iconSize'?'Explicit icon size in pixels. When omitted, size is multiplied by iconRatio.':describe(symbol.name,symbol),options:choices.length?choices:undefined,control:fixture?'fixture':isBoolean&&!isText?'boolean':isNumber&&!isText?'number':isText?'text':'json',references:[...new Set(display.match(/\b[A-Z][A-Za-z0-9]+\b/g)??[])].filter(n=>!['Promise','MouseEvent','KeyboardEvent','HTMLElement','Component'].includes(n))};
+  return {name:symbol.name,type:display,default:value,description:symbol.name==='position'&&/FrameQuick(Input|Panel)\.vue$/.test(file)?'Explicit top or center placement. When omitted, follows the provided Frame layout.quickInputPosition; standalone defaults to top.':symbol.name==='options'&&file.endsWith('CodeEditor.vue')?'Nested Monaco editor and model options. Direct readOnly and label props take precedence.':symbol.name==='iconSize'?'Explicit icon size in pixels. When omitted, size is multiplied by iconRatio.':describe(symbol.name,symbol),options:choices.length?choices:undefined,control:fixture?'fixture':isBoolean&&!isText?'boolean':isNumber&&!isText?'number':isText?'text':'json',references:[...new Set(display.match(/\b[A-Z][A-Za-z0-9]+\b/g)??[])].filter(n=>!['Promise','MouseEvent','KeyboardEvent','HTMLElement','Component'].includes(n))};
  }):[];
  const callable=(node:ts.TypeNode|undefined,slot=false)=>node?checker.getPropertiesOfType(checker.getTypeFromTypeNode(node)).map(symbol=>{
   const declaration=symbol.declarations?.[0]!;
@@ -131,7 +133,7 @@ for (const file of files) {
   const name=match[1]!.match(/\bname=['"]([^'"]+)['"]/)?.[1]??'default';
   if(!slots.some(slot=>slot.name===name)) slots.push({name,parameters:[...match[1]!.matchAll(/:([\w-]+)=/g)].map(m=>`${m[1]}: unknown`).join(', '),returns:'VNodeChild',description:`Content rendered in the ${name} slot.`});
  }
- const slotParameters:Record<string,Record<string,string>>={FrameTooltip:{default:'describedby: string | undefined'},FrameShell:{default:'pane: WorkspacePane','workspace-pane':'pane: WorkspacePane',overlays:'bounds: OverlayBounds, target: HTMLElement | undefined'},AIChat:{'message-actions':'message: ChatMessage'}};
+ const slotParameters:Record<string,Record<string,string>>={FrameQuickInput:{item:'item: QuickPickItem, active: boolean'},FrameTooltip:{default:'describedby: string | undefined'},FrameShell:{default:'pane: WorkspacePane','workspace-pane':'pane: WorkspacePane',overlays:'bounds: OverlayBounds, target: HTMLElement | undefined'},AIChat:{'message-actions':'message: ChatMessage'}};
  const componentName=file.split('/').pop()!.replace('.vue','');
  for(const slot of slots)if(slotParameters[componentName]?.[slot.name])slot.parameters=slotParameters[componentName]![slot.name]!;
  const methods=(expose?.properties??[]).map(field=>{
@@ -140,6 +142,7 @@ for (const file of files) {
   const text=field.getText(source);
   return {name,kind:signature?'method':'property',parameters:signature?signature.parameters.map(p=>p.name+': '+checker.typeToString(checker.getTypeOfSymbolAtLocation(p,field))).join(', '):'',returns:signature?checker.typeToString(signature.getReturnType()):text.includes('=>')?'void':checker.typeToString(type),description:name==='focus'?'Focuses the rendered control.':`Exposed ${name} API. Available through the mounted component ref.`};
  });
+ if(componentName==='FrameQuickInput')for(const method of methods){if(method.name==='element')method.returns='HTMLInputElement | undefined';if(method.name==='focus')method.returns='void';}
  contracts[file]={name:file.split('/').pop()!.replace('.vue',''),source:file,sourceHash:createHash('sha256').update(full).digest('hex'),props,emits,slots,methods,forwardsAttrs:full.includes('$attrs') || !/inheritAttrs\s*:\s*false/.test(full)};
 }
 const serviceSpecs:Record<string,{name:string;type:string;source:string;returns:string}>={

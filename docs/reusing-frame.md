@@ -67,7 +67,7 @@ Use `useFrame()` inside any component rendered by the shell to access that insta
 
 ## Custom quick picks
 
-The same quick-input component can display arbitrary application choices. File handling is not involved.
+FrameQuickInput provides an always-searched list of application choices. The Frame service below manages its open/close lifecycle. Use FrameQuickPanel for a titled overlay containing custom application content. See [quick surfaces](quick-surfaces.md) for direct component examples.
 
 ```ts
 const choice = await frame.showQuickPick([
@@ -82,7 +82,7 @@ The result retains the caller's item type. Escape, an outside click, replacement
 
 ## Components and tooltips
 
-`FrameShell`, `FrameMenu`, `ActivityRail`, `SidePanel`, `BottomPanel`, `QuickInput`, and `FrameTooltip` are exported for composition. For source imports, `FrameShell` includes the shell stylesheet. For the built library, import `@frame/core/style.css` explicitly. When using individual source components, import `packages/core/src/style.css` yourself.
+`FrameShell`, `FrameMenu`, `ActivityRail`, `SidePanel`, `BottomPanel`, `FrameQuickInput`, `FrameQuickPanel`, and `FrameTooltip` are exported for composition. For source imports, `FrameShell` includes the shell stylesheet. For the built library, import `@frame/core/style.css` explicitly. When using individual source components, import `packages/core/src/style.css` yourself.
 
 Tooltips share the shell palette, appear after 400ms on hover or immediately on keyboard focus, and dismiss with Escape. They are positioned within the viewport and rendered above containers using Teleport. Use the slot's `describedby` value for an accessible association. Do not also add a native `title` attribute:
 

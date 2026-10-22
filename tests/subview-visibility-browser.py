@@ -1,0 +1,46 @@
+"""Exercise collection visibility and retained content in the documentation host."""
+import os
+from playwright.sync_api import sync_playwright, expect
+with sync_playwright() as p:
+ browser=p.chromium.launch();page=browser.new_page(viewport={'width':1440,'height':1000});errors=[]
+ page.on('pageerror',lambda error:errors.append(str(error)));page.goto(os.environ.get('FRAME_TEST_URL','http://localhost:1448'))
+ page.get_by_role('button',name='Explorer example',exact=True).click()
+ sidebar=page.get_by_role('complementary',name='Explorer example',exact=True)
+ def toggle(name):
+  sidebar.get_by_role('button',name='Views and more',exact=True).click()
+  page.get_by_role('menu',name='Sub-views',exact=True).get_by_role('menuitemcheckbox',name=name,exact=True).click()
+ timeline=sidebar.locator('.panel-section').filter(has=page.get_by_role('button',name='Timeline',exact=True))
+ timeline.get_by_role('textbox',name='Timeline note',exact=True).fill('Keep this note')
+ timeline.get_by_role('button',name='Timeline count: 0',exact=True).click()
+ toggle('Timeline');expect(sidebar.get_by_role('button',name='Timeline',exact=True)).to_have_count(0)
+ toggle('Timeline');expect(timeline.get_by_role('textbox',name='Timeline note',exact=True)).to_have_value('Keep this note')
+ expect(timeline.get_by_role('button',name='Timeline count: 1',exact=True)).to_be_visible()
+ for name in ['Project notes','Outline','Timeline']:toggle(name)
+ expect(sidebar.locator('.panel-section')).to_have_count(0)
+ expect(sidebar.get_by_text('All sub-views are hidden. Use Views and more to show them.',exact=True)).to_be_visible()
+ toggle('Project notes')
+ sidebar.get_by_role('button',name='Add Scratchpad sub-view',exact=True).click()
+ expect(sidebar.get_by_role('button',name='Scratchpad',exact=True)).to_be_visible()
+ sidebar.get_by_role('button',name='Views and more',exact=True).click()
+ expect(page.get_by_role('menuitemcheckbox',name='Scratchpad',exact=True)).to_be_checked()
+ page.get_by_role('menuitemcheckbox',name='Scratchpad',exact=True).click()
+ expect(sidebar.get_by_role('button',name='Scratchpad',exact=True)).to_have_count(0)
+ # The command reveals a hidden view through the same root API used by menus.
+ page.get_by_role('menubar',name='Application menus').get_by_role('menuitem',name='View',exact=True).click()
+ page.get_by_role('menuitem',name='Open view',exact=True).hover()
+ page.get_by_role('menu',name='Open view',exact=True).get_by_role('menuitem',name='Explorer example',exact=True).click()
+ expect(sidebar.get_by_role('button',name='Views and more',exact=True)).to_be_visible()
+ page.screenshot(path='.tmp/subviews-example.png')
+ page.get_by_role('button',name='Explorer example',exact=True).press('Alt+Shift+ArrowRight')
+ secondary=page.locator('#secondary-panel')
+ secondary.get_by_role('button',name='Views and more',exact=True).click()
+ page.get_by_role('menu',name='Sub-views',exact=True).get_by_role('menuitemcheckbox',name='Outline',exact=True).click()
+ expect(secondary.get_by_role('button',name='Outline',exact=True)).to_be_visible()
+ page.locator('.secondary-region').get_by_role('navigation',name='Secondary activity bar',exact=True).get_by_role('button',name='Explorer example',exact=True).press('Alt+Shift+ArrowDown')
+ bottom=page.locator('#bottom-panel')
+ bottom.get_by_role('button',name='Views and more',exact=True).click()
+ expect(page.get_by_role('menu',name='Sub-views',exact=True).get_by_role('menuitemcheckbox',name='Outline',exact=True)).to_be_checked()
+ page.keyboard.press('Escape')
+ assert not errors,errors
+ browser.close()
+print('Collection toggles, all-hidden recovery, retained notes/counters, and moved-in view menu passed.')
