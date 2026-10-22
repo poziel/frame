@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import FrameContextMenu from "./FrameContextMenu.vue";
 import {computed,nextTick,onMounted,onBeforeUnmount,ref,shallowRef,watch} from 'vue';
 import type {PanelDefinition,FrameMenuItem} from '../types';
 import {useFrame} from '../frame/createFrame';
-import FrameMenu from './FrameMenu.vue';
+import FrameDropdownMenu from './FrameDropdownMenu.vue';
 import FrameIconButton from './FrameIconButton.vue';
 import FrameIcon from './FrameIcon.vue';
 import '../panel-view-bar.css';
@@ -97,6 +98,6 @@ defineExpose({openContext});
  </div>
  <FrameIconButton v-if="hidden.length" label="More Views" icon="ellipsis" aria-haspopup="menu" :aria-expanded="!!overflowAnchor" @contextmenu="openContext($event)" @click="contextAnchor=undefined;overflowAnchor=overflowAnchor?undefined:$event.currentTarget as HTMLElement"/>
  <div ref="measureRoot" class="panel-tabs view-bar-measure" aria-hidden="true" inert><button v-for="tab in tabs" :key="tab.id" :data-measure-id="tab.id" tabindex="-1"><component v-if="display!=='text'&&tab.icon" :is="tab.icon" class="tab-icon"/><FrameIcon v-else-if="display==='icons'" name="window" class="tab-icon"/><span v-if="display!=='icons'">{{tab.label}}</span><span v-if="badge(tab.id)!==undefined" class="view-bar-badge">{{badge(tab.id)}}</span></button></div>
- <FrameMenu v-if="overflowAnchor&&hidden.length" :anchor="overflowAnchor" :items="overflowItems" label="More Views" @close="overflowAnchor=undefined" @select="emit('select',$event.id)"/>
- <FrameMenu v-if="contextAnchor" :anchor="contextAnchor" :point="point" :items="contextItems" :label="secondary?'Secondary View Bar':'Panel View Bar'" @close="contextAnchor=undefined" @select="chooseContext"/>
+ <FrameDropdownMenu v-if="overflowAnchor&&hidden.length" :anchor="overflowAnchor" :items="overflowItems" label="More Views" @close="overflowAnchor=undefined" @select="emit('select',$event.id)"/>
+ <FrameContextMenu v-if="contextAnchor" :anchor="contextAnchor" :point="point" :items="contextItems" :label="secondary?'Secondary View Bar':'Panel View Bar'" @close="contextAnchor=undefined" @select="chooseContext"/>
 </div></template>

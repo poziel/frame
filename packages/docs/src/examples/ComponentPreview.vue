@@ -15,7 +15,7 @@ import FrameCheckbox from "../../../core/src/components/FrameCheckbox.vue";
 import FrameSelect from "../../../core/src/components/FrameSelect.vue";
 import FrameIcon from "../../../core/src/components/FrameIcon.vue";
 import FrameTooltip from "../../../core/src/components/FrameTooltip.vue";
-import FrameMenu from "../../../core/src/components/FrameMenu.vue";
+import FrameDropdownMenu from "../../../core/src/components/FrameDropdownMenu.vue";
 import ContextMenu from "../../../core/src/components/ContextMenu.vue";
 import SettingControl from "../../../core/src/components/SettingControl.vue";
 import ResizablePane from "../../../core/src/components/ResizablePane.vue";
@@ -83,7 +83,7 @@ onBeforeUnmount(() => disposers.reverse().forEach(dispose => dispose()));
   <template v-else-if="id === 'color-picker'"><label for="color-example">Project color</label><FrameColorPicker id="color-example" v-model="color" @update:model-value="report($event)"/><code>{{ color }}</code></template>
   <template v-else-if="id === 'text-area'"><label for="notes-example">Notes</label><FrameTextArea id="notes-example" v-model="notes" placeholder="Write a note…" @update:model-value="report($event)"/></template>
   <template v-else-if="id === 'tooltips'"><div class="showcase-row"><FrameTooltip v-for="placement in (['top','bottom','left','right'] as const)" :key="placement" :text="`Tooltip on the ${placement}`" :placement="placement" v-slot="{ describedby }"><FrameButton variant="secondary" :aria-describedby="describedby">{{ placement }}</FrameButton></FrameTooltip></div></template>
-  <template v-else-if="id === 'menus'"><FrameButton ref="trigger" variant="secondary" @click="menuOpen = true">Open actions menu</FrameButton><FrameMenu v-if="menuOpen && trigger?.element" :anchor="trigger.element" :items="items" label="Example actions" @select="select" @close="menuOpen = false"/></template>
+  <template v-else-if="id === 'menus'"><FrameButton ref="trigger" variant="secondary" @click="menuOpen = true">Open actions menu</FrameButton><FrameDropdownMenu v-if="menuOpen && trigger?.element" :anchor="trigger.element" :items="items" label="Example actions" @select="select" @close="menuOpen = false"/></template>
   <template v-else-if="id === 'context-menu'"><ContextMenu :items="items" label="Example context menu" @select="select"><div class="showcase-context-target" tabindex="0">Right-click this surface to choose an action.</div></ContextMenu></template>
   <template v-else-if="id === 'resizable-panes'"><FrameSelect :model-value="axis" label="Pane direction" :options="[{value:'x',label:'Side by side'},{value:'y',label:'Stacked'}]" @update:model-value="axis = $event as 'x' | 'y'"/><div class="showcase-split"><ResizablePane v-model="width" :axis="axis" :min="80" :max="400" :min-second="80" label="Resize example panes"><template #first><div class="showcase-pane">First pane · {{ Math.round(width) }}px preferred</div></template><template #second><div class="showcase-pane">Second pane<br/>Drag the divider or focus it and use arrow keys.</div></template></ResizablePane></div></template>
   <template v-else-if="id === 'resize-handle'"><div class="showcase-resize-demo"><div :style="{ width: `${width}px` }" class="showcase-resize-box">{{ Math.round(width) }}px</div><ResizeHandle axis="x" label="Resize sample width" :value="width" :min="80" :max="320" @change="width = $event; report(`Width: ${Math.round($event)}px`)" @reset="width = 180"/></div></template>

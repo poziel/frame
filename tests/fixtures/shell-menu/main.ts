@@ -1,5 +1,5 @@
 import {createApp,defineComponent,h,ref} from 'vue';
-import {createFrame,FrameShell,FrameButton,FrameMenu,ContextMenu,type FrameMenuItem} from '@frame/core';
+import {createFrame,FrameShell,FrameButton,FrameMenu,ContextMenu,FrameDropdownMenu,FrameContextMenu,FrameMenubar,type FrameMenuItem} from '@frame/core';
 import '../../../packages/core/src/style.css';
 const frames=[createFrame(),createFrame()];
 const selected=ref('none'),events=ref(0);
@@ -10,6 +10,9 @@ for(const [i,frame] of frames.entries()){
  const Content=defineComponent({setup(){const anchor=ref<HTMLElement>(),open=ref(false),point=ref<{x:number;y:number}>();return()=>h('div',{style:'padding:12px'},[
  h(FrameButton,{onClick:(e:MouseEvent)=>{anchor.value=e.currentTarget as HTMLElement;point.value=undefined;open.value=!open.value;}},()=>`Open menu ${i}`),
  h('button',{onClick:()=>selected.value='outside'},'Outside '+i),
+ h(FrameDropdownMenu,{items,label:'Reusable dropdown '+i,triggerLabel:'Dropdown '+i,onSelect:(item:FrameMenuItem)=>selected.value=item.id}),
+ h(FrameContextMenu,{items,label:'Reusable context '+i,triggerLabel:'Context '+i,onSelect:(item:FrameMenuItem)=>selected.value=item.id}),
+ h(FrameMenubar,{menus:[{id:'file',label:'File',children:items},{id:'edit',label:'Edit',children:[{id:'copy',label:'Copy'}]},{id:'help',label:'Help',children:[{id:'about',label:'About'}]},{id:'tools',label:'Tools',children:[{id:'tool',label:'Tool action'}]}],maxVisible:3,label:'Reusable menubar '+i}),
  h(ContextMenu,{items,label:'Wrapped menu '+i,itemAlignment:alignment.value},()=>h('span','Wrapped context area '+i)),
  h('div',{style:'height:200px',onContextmenu:(e:MouseEvent)=>{e.preventDefault();e.stopPropagation();anchor.value=e.currentTarget as HTMLElement;point.value={x:e.clientX,y:e.clientY};open.value=true;}},'Context area '+i),
  open.value&&anchor.value?h(FrameMenu,{anchor:anchor.value,point:point.value,items,itemAlignment:alignment.value,label:'Fixture menu '+i,onClose:()=>{events.value++;open.value=false;},onSelect:(item:FrameMenuItem)=>selected.value=item.id}):null,

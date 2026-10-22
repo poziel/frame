@@ -12,7 +12,7 @@ export const pageSources: Record<string, string[]> = {
   'text-input':[core+'FrameTextInput.vue'], checkbox:[core+'FrameCheckbox.vue'], select:[core+'FrameSelect.vue'],
   slider:[core+'FrameSlider.vue'], 'color-picker':[core+'FrameColorPicker.vue'], 'text-area':[core+'FrameTextArea.vue'],
   'setting-controls':[core+'SettingControl.vue'], icons:[core+'FrameIcon.vue'], tooltips:[core+'FrameTooltip.vue'],
-  menus:[core+'FrameMenu.vue'], 'context-menu':[core+'ContextMenu.vue'], 'resizable-panes':[core+'ResizablePane.vue'],
+  menus:[core+'FrameDropdownMenu.vue'], 'context-menu':[core+'ContextMenu.vue'], 'resizable-panes':[core+'ResizablePane.vue'],
   'resize-handle':[core+'ResizeHandle.vue'], modals:[core+'FrameModal.vue'], settings:[core+'FrameSettings.vue'],
   notifications:[core+'FrameNotifications.vue'], 'notification-panel':[extra+'NotificationPanel.vue',extra+'NotificationIndicator.vue'],
   'quick-input':[core+'FrameQuickInput.vue'], 'quick-panel':[core+'FrameQuickPanel.vue'], banner:[core+'FrameShell.vue'], workspace:[core+'WorkspacePanes.vue'],

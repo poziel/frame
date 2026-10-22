@@ -1,16 +1,17 @@
 <script setup lang="ts">
+import FrameContextMenu from "./FrameContextMenu.vue";
 import type { ToolbarControl } from "../frame/toolbar";
 import type { FrameMenuItem } from "../types";
 import { computed, ref, shallowRef } from "vue";
 import { useFrame } from "../frame/createFrame";
-import FrameMenu from "./FrameMenu.vue";
+import FrameDropdownMenu from "./FrameDropdownMenu.vue";
 import { regionIcon } from "../frame/layoutIcons";
 import FrameLogo from "./FrameLogo.vue";
 import FrameIcon from "./FrameIcon.vue";
 import FrameIconButton from "./FrameIconButton.vue";
 import FrameButton from "./FrameButton.vue";
 import FrameTooltip from "./FrameTooltip.vue";
-import MenuBar from "./MenuBar.vue";
+import FrameMenubar from "./FrameMenubar.vue";
 const props = defineProps<{ sidebarVisible: boolean; panelVisible: boolean; native: boolean; maximized: boolean; menuItems: readonly FrameMenuItem[]; titleText: string; showSearch: boolean; menuBarVisible: boolean; zenMode: boolean; primarySide: "left" | "right"; secondaryVisible: boolean }>();
 const frame = useFrame();
 const menuAnchor=shallowRef<HTMLElement>();
@@ -64,7 +65,7 @@ const emit = defineEmits<{ commands: []; execute: [id: string] }>();
   <header class="titlebar" @contextmenu="openToolbarMenu">
     <div class="titlebar-leading">
       <span v-if="!zenMode" class="app-mark" aria-label="Frame"><FrameLogo/></span>
-      <MenuBar v-if="menuBarVisible && !zenMode" :items="menuItems" @execute="emit('execute', $event)" />
+      <FrameMenubar popup-label="Application menu" label="Application menus" :max-visible="3" v-if="menuBarVisible && !zenMode" :menus="menuItems" @execute="emit('execute', $event)" />
     </div>
     <div class="titlebar-drag" data-tauri-drag-region />
     <div class="titlebar-center">
@@ -99,7 +100,7 @@ const emit = defineEmits<{ commands: []; execute: [id: string] }>();
         <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="m1.5 1.5 9 9m-9 0 9-9" stroke="currentColor" /></svg>
       </FrameIconButton>
     </div>
-    <FrameMenu v-if="overflowAnchor" :anchor="overflowAnchor" :items="overflowMenu" label="More Actions" @select="chooseOverflow" @close="overflowAnchor=undefined"/>
-    <FrameMenu v-if="menuAnchor" :anchor="menuAnchor" :point="menuPoint" :items="toolbarMenu" label="Title bar actions" @select="chooseToolbar" @close="menuAnchor=undefined"/>
+    <FrameDropdownMenu v-if="overflowAnchor" :anchor="overflowAnchor" :items="overflowMenu" label="More Actions" @select="chooseOverflow" @close="overflowAnchor=undefined"/>
+    <component :is="menuPoint ? FrameContextMenu : FrameDropdownMenu" v-if="menuAnchor" :anchor="menuAnchor" :point="menuPoint" :items="toolbarMenu" label="Title bar actions" @select="chooseToolbar" @close="menuAnchor=undefined"/>
   </header>
 </template>

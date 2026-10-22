@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import FrameContextMenu from "./FrameContextMenu.vue";
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue';
 import type { Component } from 'vue';
 import ManageButton from './ManageButton.vue';
-import FrameMenu from './FrameMenu.vue';
+import FrameDropdownMenu from './FrameDropdownMenu.vue';
 import FrameIcon from './FrameIcon.vue';
 import FrameIconButton from './FrameIconButton.vue';
 import { useFrame } from '../frame/createFrame';
@@ -127,7 +128,7 @@ defineExpose({openContext:openMenu});
   </div>
   <ManageButton v-if="!secondary"/>
   <div ref="measureRoot" class="activity-rail-measure" aria-hidden="true" inert><FrameIconButton v-for="entry in entries" :key="key(entry.key)" :label="entry.label" :tooltip="false" class="rail-button" :data-measure-key="key(entry.key)" tabindex="-1"><span v-if="display!=='text'" class="activity-icon-slot"><component v-if="entry.icon" :is="entry.icon"/><FrameIcon v-else name="window" :size="20"/></span><span v-if="display!=='icons'" class="activity-label">{{entry.label}}</span><span v-if="entry.badge!==undefined" class="rail-badge">{{entry.badge}}</span></FrameIconButton></div>
-  <FrameMenu v-if="overflowAnchor&&hidden.length" :anchor="overflowAnchor" :items="overflowItems" label="More Views" @close="overflowAnchor=undefined" @select="selectOverflow"/>
-  <FrameMenu v-if="anchor&&menuItems.length" :anchor="anchor" :point="point" :items="menuItems" :label="label" @close="anchor=undefined" @select="selectMenu"/>
+  <FrameDropdownMenu v-if="overflowAnchor&&hidden.length" :anchor="overflowAnchor" :items="overflowItems" label="More Views" @close="overflowAnchor=undefined" @select="selectOverflow"/>
+  <FrameContextMenu v-if="anchor&&menuItems.length" :anchor="anchor" :point="point" :items="menuItems" :label="label" @close="anchor=undefined" @select="selectMenu"/>
  </nav>
 </template>

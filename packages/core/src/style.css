@@ -339,7 +339,7 @@
 .menu-label { overflow: hidden; text-overflow: ellipsis; }
 .menu-chevron { grid-column: 4; width: var(--frame-menu-chevron-width, 13px); color: var(--frame-menu-chevron-color, #a1a1a1); }
 .frame-menu .menu-row > button.frame-button.active:not(:disabled) { background: var(--frame-menu-hover); }
-.frame-menu .menu-row > button.frame-button:focus-visible, .frame-menu .menu-row > button.frame-button[aria-expanded=true]:not(:disabled) { background: var(--frame-menu-hover); border-color: var(--frame-accent); outline: var(--frame-menu-row-button-active-not-disabled-outline, none); }
+.frame-menu:not([data-menu-input=pointer]) .menu-row > button.frame-button:focus-visible, .frame-menu .menu-row > button.frame-button[aria-expanded=true]:not(:disabled) { background: var(--frame-menu-hover); border-color: var(--frame-accent); outline: var(--frame-menu-row-button-active-not-disabled-outline, none); }
 .frame-menu .menu-row > button.frame-button:disabled { color: var(--frame-menu-disabled); }
 .frame-menu .menu-row > button.frame-button:disabled .menu-chevron { color: inherit; }
 .menu-row > button > kbd { grid-column: 3; font-size: var(--frame-menu-row-button-kbd-font-size, 11px); color: var(--frame-menu-shortcut); background: var(--frame-menu-row-button-kbd-background, none); border: var(--frame-menu-row-button-kbd-border, 0); padding: var(--frame-menu-row-button-kbd-padding, 0 0 0 18px); }
@@ -782,3 +782,11 @@ button.frame-button.frame-icon-button.frame-icon-button-labeled {
 .titlebar button.frame-button.window-control { aspect-ratio: auto; min-height: 0; padding: 0; border: 0; border-radius: 0; }
 .titlebar button.frame-button.workspace-command { min-height: 0; }
 .titlebar button.frame-button.titlebar-button.frame-icon-button-labeled { width: auto; inline-size: auto; display: inline-flex; }
+
+.frame-menubar { padding:0;gap:0; }
+.frame-menubar .menubar-groups > button,.frame-menubar > button {
+ min-height:0;border:0;line-height:normal;background:transparent;font:inherit;
+ height:var(--frame-menubar-button-height,25px);padding:var(--frame-menubar-button-padding,0 8px);
+ color:var(--frame-menubar-button-color,#a9a9a9);font-size:var(--frame-menubar-button-font-size,12px);
+}
+.frame-menubar button[data-state=open] { background:var(--frame-menubar-button-hover-background,#ffffff0b); }

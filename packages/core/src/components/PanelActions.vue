@@ -2,7 +2,7 @@
 import type { PanelAction, FrameMenuItem } from "../types";
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue';
 import FrameIconButton from "./FrameIconButton.vue";
-import FrameMenu from './FrameMenu.vue';
+import FrameDropdownMenu from './FrameDropdownMenu.vue';
 import '../panel-action-overflow.css';
 const props=defineProps<{actions?:readonly PanelAction[]; /** Optional header allocation in pixels. */ maxWidth?:number}>();
 const root=ref<HTMLElement>(),measure=ref<HTMLElement>(),extra=ref<HTMLElement>();
@@ -44,5 +44,5 @@ onBeforeUnmount(()=>{disposed=true;observer?.disconnect();});
  <FrameIconButton v-if="overflowActions.length" ref="more" label="More View Actions" icon="ellipsis" aria-haspopup="menu" :aria-expanded="!!anchor" @click="open"/>
  <span ref="extra" class="panel-actions-extra"><slot/></span>
  <div ref="measure" class="panel-actions-measure" aria-hidden="true" inert><span v-for="action in actions" :key="action.id" data-action-measure><FrameIconButton :label="action.label" :icon="action.icon" :tooltip="false" disabled><span v-if="!action.icon">{{action.label}}</span></FrameIconButton></span></div>
- <FrameMenu v-if="anchor && menu.length" :anchor="anchor" :items="menu" label="View actions" @select="choose" @close="anchor=undefined"/>
+ <FrameDropdownMenu v-if="anchor && menu.length" :anchor="anchor" :items="menu" label="View actions" @select="choose" @close="anchor=undefined"/>
 </div></template>

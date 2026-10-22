@@ -34,7 +34,7 @@
       "packages/core/src/components/FrameTooltip.vue"
     ],
     "menus": [
-      "packages/core/src/components/FrameMenu.vue"
+      "packages/core/src/components/FrameDropdownMenu.vue"
     ],
     "context-menu": [
       "packages/core/src/components/ContextMenu.vue"
@@ -1268,42 +1268,68 @@
       "methods": [],
       "forwardsAttrs": true
     },
-    "packages/core/src/components/FrameMenu.vue": {
-      "name": "FrameMenu",
-      "source": "packages/core/src/components/FrameMenu.vue",
-      "sourceHash": "313fc33c49e84c7889c80df9334005b81fcc16d1720105cc09d2956c9c487b35",
+    "packages/core/src/components/FrameDropdownMenu.vue": {
+      "name": "FrameDropdownMenu",
+      "source": "packages/core/src/components/FrameDropdownMenu.vue",
+      "sourceHash": "b0e7a16b8668a670537207d1d3eea2157e217752164df807d268ece56761a617",
       "props": [
         {
-          "name": "id",
-          "type": "string",
+          "name": "defaultOpen",
+          "type": "boolean",
           "default": {
-            "kind": "omitted"
+            "kind": "literal",
+            "value": "false"
           },
-          "description": "Id configuration for this component; see its Features examples for usage.",
-          "control": "text",
+          "description": "The open state of the dropdown menu when it is initially rendered. Use when you do not need to control its open state.",
+          "control": "boolean",
           "references": []
         },
         {
-          "name": "anchor",
-          "type": "HTMLElement",
+          "name": "open",
+          "type": "boolean",
           "default": {
-            "kind": "required"
+            "kind": "omitted"
           },
-          "description": "Real HTMLElement used to position the overlay and restore focus.",
-          "control": "fixture",
+          "description": "The controlled open state of the menu. Can be used as `v-model:open`.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "dir",
+          "type": "Direction$4",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The reading direction of the combobox when applicable.\n\nIf omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+          "options": [
+            "ltr",
+            "rtl"
+          ],
+          "control": "text",
+          "references": [
+            "Direction"
+          ]
+        },
+        {
+          "name": "modal",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "The modality of the dropdown menu.\n\nWhen set to `true`, interaction with outside elements will be disabled and only menu content will be visible to screen readers.",
+          "control": "boolean",
           "references": []
         },
         {
           "name": "items",
-          "type": "readonly FrameMenuItem[]",
+          "type": "readonly T[]",
           "default": {
             "kind": "required"
           },
           "description": "Ordered application-owned entries.",
           "control": "json",
-          "references": [
-            "FrameMenuItem"
-          ]
+          "references": []
         },
         {
           "name": "label",
@@ -1316,8 +1342,43 @@
           "references": []
         },
         {
+          "name": "itemAlignment",
+          "type": "\"left\" | \"center\" | \"right\"",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Item Alignment configuration for this component; see its Features examples for usage.",
+          "options": [
+            "left",
+            "right",
+            "center"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "anchor",
+          "type": "HTMLElement",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Real HTMLElement used to position the overlay and restore focus.",
+          "control": "fixture",
+          "references": []
+        },
+        {
+          "name": "point",
+          "type": "{x:number;y:number}",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Point configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": []
+        },
+        {
           "name": "placement",
-          "type": "\"bottom\" | \"right\"",
+          "type": "\"bottom\"|\"right\"",
           "default": {
             "kind": "omitted"
           },
@@ -1330,33 +1391,81 @@
           "references": []
         },
         {
-          "name": "point",
-          "type": "{ x: number; y: number }",
+          "name": "id",
+          "type": "string",
           "default": {
             "kind": "omitted"
           },
-          "description": "Point configuration for this component; see its Features examples for usage.",
-          "control": "json",
+          "description": "Id configuration for this component; see its Features examples for usage.",
+          "control": "text",
           "references": []
         },
         {
-          "name": "itemAlignment",
-          "type": "\"left\" | \"center\" | \"right\"",
+          "name": "triggerLabel",
+          "type": "string",
           "default": {
-            "kind": "literal",
-            "value": "\"left\""
+            "kind": "omitted"
           },
-          "description": "Item Alignment configuration for this component; see its Features examples for usage.",
-          "options": [
-            "left",
-            "right",
-            "center"
-          ],
+          "description": "Trigger Label configuration for this component; see its Features examples for usage.",
           "control": "text",
           "references": []
+        },
+        {
+          "name": "contentProps",
+          "type": "DropdownMenuContentProps",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Content Props configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "DropdownMenuContentProps"
+          ]
         }
       ],
       "emits": [
+        {
+          "name": "update:open",
+          "parameters": "payload: boolean",
+          "returns": "void",
+          "description": "Emitted on update:open."
+        },
+        {
+          "name": "escapeKeyDown",
+          "parameters": "event: KeyboardEvent",
+          "returns": "void",
+          "description": "Emitted on escape key down."
+        },
+        {
+          "name": "pointerDownOutside",
+          "parameters": "event: PointerDownOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on pointer down outside."
+        },
+        {
+          "name": "focusOutside",
+          "parameters": "event: FocusOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on focus outside."
+        },
+        {
+          "name": "interactOutside",
+          "parameters": "event: PointerDownOutsideEvent | FocusOutsideEvent",
+          "returns": "void",
+          "description": "Emitted on interact outside."
+        },
+        {
+          "name": "openAutoFocus",
+          "parameters": "event: Event",
+          "returns": "void",
+          "description": "Emitted on open auto focus."
+        },
+        {
+          "name": "closeAutoFocus",
+          "parameters": "event: Event",
+          "returns": "void",
+          "description": "Emitted on close auto focus."
+        },
         {
           "name": "close",
           "parameters": "",
@@ -1365,19 +1474,44 @@
         },
         {
           "name": "select",
-          "parameters": "item: FrameMenuItem",
+          "parameters": "item: T, event?: Event | undefined",
           "returns": "void",
           "description": "Emitted on select."
         }
       ],
-      "slots": [],
+      "slots": [
+        {
+          "name": "trigger",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the trigger slot."
+        },
+        {
+          "name": "before",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the before slot."
+        },
+        {
+          "name": "item",
+          "parameters": "item: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the item slot."
+        },
+        {
+          "name": "default",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        }
+      ],
       "methods": [],
       "forwardsAttrs": true
     },
     "packages/core/src/components/ContextMenu.vue": {
       "name": "ContextMenu",
       "source": "packages/core/src/components/ContextMenu.vue",
-      "sourceHash": "e54d0dd87e6479443433e55873854b086e3083789b0c0646ef3dc995f2e62d67",
+      "sourceHash": "e245d7a54749d3edb168e4cabda568081cee9e46e2f80eda41193e1d185b4ac7",
       "props": [
         {
           "name": "items",
@@ -1403,7 +1537,7 @@
         },
         {
           "name": "itemAlignment",
-          "type": "\"left\" | \"center\" | \"right\"",
+          "type": "'left'|'center'|'right'",
           "default": {
             "kind": "omitted"
           },
@@ -2141,7 +2275,7 @@
     "packages/core/src/components/WorkspacePanes.vue": {
       "name": "WorkspacePanes",
       "source": "packages/core/src/components/WorkspacePanes.vue",
-      "sourceHash": "80c77ed72f6b0fbad4b06db3bad7381f15cbb05e494b49282cc2565c0ae49674",
+      "sourceHash": "a8abbc3c113705ebc5fc24b06659f34e3cc1a6db899d2d68a595c1b026241ab3",
       "props": [],
       "emits": [],
       "slots": [
@@ -2291,7 +2425,7 @@
     "packages/core/src/components/ActivityRail.vue": {
       "name": "ActivityRail",
       "source": "packages/core/src/components/ActivityRail.vue",
-      "sourceHash": "3e96f7d9d305c92816f0fc2860456f07962f3623890a7835de109b43b6c8552a",
+      "sourceHash": "36e48f4faf2724e6423ecc739d568080df05c6b0d3426fce80140a270614d9aa",
       "props": [
         {
           "name": "panels",
@@ -3569,7 +3703,7 @@
     "packages/core/src/components/FrameAutocomplete.vue": {
       "name": "FrameAutocomplete",
       "source": "packages/core/src/components/FrameAutocomplete.vue",
-      "sourceHash": "8e787cd77c9a4da52886c2d100766e4f224533e37c795fb57f6bd096af213e24",
+      "sourceHash": "52e339e68d612f8f488654738c6812cb36d804eae8848bc6faf3dc7d468426f9",
       "props": [
         {
           "name": "modelValue",
@@ -3827,7 +3961,7 @@
     "packages/core/src/components/FrameField.vue": {
       "name": "FrameField",
       "source": "packages/core/src/components/FrameField.vue",
-      "sourceHash": "9217a6af14ecd9ae9abd09cdf8c91c280b570c9f431f14f7fc72ef9c4609b432",
+      "sourceHash": "55abf2d4638f3d22be77c46ab0ea6b4de9351f22f975d0ef14571c87f67f2ca9",
       "props": [
         {
           "name": "name",
@@ -4019,7 +4153,7 @@
     "packages/core/src/components/FrameForm.vue": {
       "name": "FrameForm",
       "source": "packages/core/src/components/FrameForm.vue",
-      "sourceHash": "9fa22621c2af1c7de81ed998ca1410b8f53a4737b37503fe57a01f98370b918a",
+      "sourceHash": "2a9419f05ae60e1b7267888049b8b8c56a4933bfa22e7145fe295d8c5b27e6d0",
       "props": [
         {
           "name": "errors",
@@ -4123,7 +4257,7 @@
     "packages/core/src/components/FrameRating.vue": {
       "name": "FrameRating",
       "source": "packages/core/src/components/FrameRating.vue",
-      "sourceHash": "7730e5602c0c2f6fcfe2c733f221528f1664837f46761cdfe8adde955d4829cb",
+      "sourceHash": "91edcc6ba17c942290c2ab3f512d3658a8102883d2c829e48279a63f71e40074",
       "props": [
         {
           "name": "defaultValue",
@@ -4190,44 +4324,6 @@
           "references": []
         },
         {
-          "name": "name",
-          "type": "string",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
-          "control": "text",
-          "references": []
-        },
-        {
-          "name": "disabled",
-          "type": "boolean",
-          "default": {
-            "kind": "literal",
-            "value": "false"
-          },
-          "description": "When `true`, prevents the user from interacting with radio items.",
-          "control": "boolean",
-          "references": []
-        },
-        {
-          "name": "orientation",
-          "type": "DataOrientation",
-          "default": {
-            "kind": "literal",
-            "value": "\"horizontal\""
-          },
-          "description": "The orientation of the component.",
-          "options": [
-            "vertical",
-            "horizontal"
-          ],
-          "control": "text",
-          "references": [
-            "DataOrientation"
-          ]
-        },
-        {
           "name": "dir",
           "type": "Direction",
           "default": {
@@ -4242,17 +4338,6 @@
           "references": [
             "Direction"
           ]
-        },
-        {
-          "name": "loop",
-          "type": "boolean",
-          "default": {
-            "kind": "literal",
-            "value": "false"
-          },
-          "description": "When `true`, keyboard navigation will loop from last item to first, and vice versa.",
-          "control": "boolean",
-          "references": []
         },
         {
           "name": "asChild",
@@ -4295,6 +4380,55 @@
           "control": "text",
           "references": [
             "AsTag"
+          ]
+        },
+        {
+          "name": "loop",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, keyboard navigation will loop from last item to first, and vice versa.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, prevents the user from interacting with radio items.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "orientation",
+          "type": "DataOrientation",
+          "default": {
+            "kind": "literal",
+            "value": "\"horizontal\""
+          },
+          "description": "The orientation of the component.",
+          "options": [
+            "vertical",
+            "horizontal"
+          ],
+          "control": "text",
+          "references": [
+            "DataOrientation"
           ]
         },
         {
@@ -4835,7 +4969,7 @@
     "packages/core/src/components/FrameColorField.vue": {
       "name": "FrameColorField",
       "source": "packages/core/src/components/FrameColorField.vue",
-      "sourceHash": "1c1d18cf77708b8cb3a8423fe50914188723790ed592680287ca1f9846d98a96",
+      "sourceHash": "8724f652781eb07526e4277d0b9183c9a7a3155cd14b6af40bd2e77337f533e4",
       "props": [
         {
           "name": "modelValue",
@@ -5281,7 +5415,7 @@
     "packages/core/src/components/FrameColorSwatch.vue": {
       "name": "FrameColorSwatch",
       "source": "packages/core/src/components/FrameColorSwatch.vue",
-      "sourceHash": "b154a0d8c0b3cad434e4c2ee54a2a8c81066bed516ce4e27437ce75d27b92188",
+      "sourceHash": "89bb9141384cba12999b36fc93ff2d09477c0f42035fc7d2fcd329004b7ad5e4",
       "props": [
         {
           "name": "color",
@@ -5387,44 +5521,6 @@
           "references": []
         },
         {
-          "name": "name",
-          "type": "string",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
-          "control": "text",
-          "references": []
-        },
-        {
-          "name": "disabled",
-          "type": "boolean",
-          "default": {
-            "kind": "literal",
-            "value": "false"
-          },
-          "description": "When `true`, prevents the user from interacting with listbox",
-          "control": "boolean",
-          "references": []
-        },
-        {
-          "name": "orientation",
-          "type": "DataOrientation",
-          "default": {
-            "kind": "literal",
-            "value": "\"horizontal\""
-          },
-          "description": "The orientation of the listbox. <br>Mainly so arrow navigation is done accordingly (left & right vs. up & down)",
-          "options": [
-            "vertical",
-            "horizontal"
-          ],
-          "control": "text",
-          "references": [
-            "DataOrientation"
-          ]
-        },
-        {
           "name": "dir",
           "type": "Direction",
           "default": {
@@ -5440,17 +5536,6 @@
           "references": [
             "Direction"
           ]
-        },
-        {
-          "name": "loop",
-          "type": "boolean",
-          "default": {
-            "kind": "literal",
-            "value": "false"
-          },
-          "description": "When `true`, keyboard navigation will loop from last item to first, and vice versa.",
-          "control": "boolean",
-          "references": []
         },
         {
           "name": "asChild",
@@ -5493,6 +5578,55 @@
           "control": "text",
           "references": [
             "AsTag"
+          ]
+        },
+        {
+          "name": "loop",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, keyboard navigation will loop from last item to first, and vice versa.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, prevents the user from interacting with listbox",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "orientation",
+          "type": "DataOrientation",
+          "default": {
+            "kind": "literal",
+            "value": "\"horizontal\""
+          },
+          "description": "The orientation of the listbox. <br>Mainly so arrow navigation is done accordingly (left & right vs. up & down)",
+          "options": [
+            "vertical",
+            "horizontal"
+          ],
+          "control": "text",
+          "references": [
+            "DataOrientation"
           ]
         },
         {
@@ -7383,6 +7517,22 @@
       "sourceHash": "5ce911d326b13dda530866818c3f316aaa4cba4e4fce9a23f84857904a9a0dcb",
       "props": [
         {
+          "name": "dir",
+          "type": "Direction",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The reading direction of the date field when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+          "options": [
+            "ltr",
+            "rtl"
+          ],
+          "control": "text",
+          "references": [
+            "Direction"
+          ]
+        },
+        {
           "name": "id",
           "type": "string",
           "default": {
@@ -7448,22 +7598,6 @@
           "description": "Whether or not the date field is disabled",
           "control": "boolean",
           "references": []
-        },
-        {
-          "name": "dir",
-          "type": "Direction",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "The reading direction of the date field when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
-          "options": [
-            "ltr",
-            "rtl"
-          ],
-          "control": "text",
-          "references": [
-            "Direction"
-          ]
         },
         {
           "name": "required",
@@ -8089,6 +8223,22 @@
       "sourceHash": "621d5916dc4b0b70861f04f4fede2fd0a2cf680ae5a518ec15a7723a36514aa6",
       "props": [
         {
+          "name": "dir",
+          "type": "Direction",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The reading direction of the date field when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+          "options": [
+            "ltr",
+            "rtl"
+          ],
+          "control": "text",
+          "references": [
+            "Direction"
+          ]
+        },
+        {
           "name": "id",
           "type": "string",
           "default": {
@@ -8155,22 +8305,6 @@
           "description": "Whether or not the date field is disabled",
           "control": "boolean",
           "references": []
-        },
-        {
-          "name": "dir",
-          "type": "Direction",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "The reading direction of the date field when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
-          "options": [
-            "ltr",
-            "rtl"
-          ],
-          "control": "text",
-          "references": [
-            "Direction"
-          ]
         },
         {
           "name": "required",
@@ -8834,49 +8968,6 @@
       "sourceHash": "2cddd2d5caea22290967f56350f8eee7107f4619d4d8b31fbe602c731852a719",
       "props": [
         {
-          "name": "id",
-          "type": "string",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "Id of the element",
-          "control": "text",
-          "references": []
-        },
-        {
-          "name": "placeholder",
-          "type": "TimeValue",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "The placeholder time, which is used to determine what time to display when no time is selected. This updates as the user navigates the field",
-          "control": "json",
-          "references": [
-            "TimeValue"
-          ]
-        },
-        {
-          "name": "name",
-          "type": "string",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
-          "control": "text",
-          "references": []
-        },
-        {
-          "name": "disabled",
-          "type": "boolean",
-          "default": {
-            "kind": "literal",
-            "value": "false"
-          },
-          "description": "Whether or not the time field is disabled",
-          "control": "boolean",
-          "references": []
-        },
-        {
           "name": "dir",
           "type": "Direction",
           "default": {
@@ -8934,6 +9025,49 @@
           "references": [
             "AsTag"
           ]
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Id of the element",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "placeholder",
+          "type": "TimeValue",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The placeholder time, which is used to determine what time to display when no time is selected. This updates as the user navigates the field",
+          "control": "json",
+          "references": [
+            "TimeValue"
+          ]
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Whether or not the time field is disabled",
+          "control": "boolean",
+          "references": []
         },
         {
           "name": "required",
@@ -11885,6 +12019,76 @@
       "sourceHash": "3eef6b35c8ac45ec54231c00ca4ff9073f83185a769eb54af3cd503bfe7ca17f",
       "props": [
         {
+          "name": "dir",
+          "type": "Direction",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The reading direction of the listbox when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+          "options": [
+            "ltr",
+            "rtl"
+          ],
+          "control": "text",
+          "references": [
+            "Direction"
+          ]
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "as",
+          "type": "AsTag | Component",
+          "default": {
+            "kind": "literal",
+            "value": "\"ul\""
+          },
+          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+          "options": [
+            "button",
+            "label",
+            "a",
+            "div",
+            "form",
+            "h2",
+            "h3",
+            "img",
+            "input",
+            "li",
+            "nav",
+            "ol",
+            "p",
+            "span",
+            "svg",
+            "ul",
+            "template"
+          ],
+          "control": "text",
+          "references": [
+            "AsTag"
+          ]
+        },
+        {
+          "name": "loop",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, keyboard navigation will loop from last item to first, and vice versa.",
+          "control": "boolean",
+          "references": []
+        },
+        {
           "name": "items",
           "type": "FrameTreeItem[] | undefined",
           "default": {
@@ -11930,76 +12134,6 @@
           "description": "When `true`, prevents the user from interacting with tree",
           "control": "boolean",
           "references": []
-        },
-        {
-          "name": "dir",
-          "type": "Direction",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "The reading direction of the listbox when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
-          "options": [
-            "ltr",
-            "rtl"
-          ],
-          "control": "text",
-          "references": [
-            "Direction"
-          ]
-        },
-        {
-          "name": "loop",
-          "type": "boolean",
-          "default": {
-            "kind": "literal",
-            "value": "false"
-          },
-          "description": "When `true`, keyboard navigation will loop from last item to first, and vice versa.",
-          "control": "boolean",
-          "references": []
-        },
-        {
-          "name": "asChild",
-          "type": "boolean",
-          "default": {
-            "kind": "literal",
-            "value": "false"
-          },
-          "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.",
-          "control": "boolean",
-          "references": []
-        },
-        {
-          "name": "as",
-          "type": "AsTag | Component",
-          "default": {
-            "kind": "literal",
-            "value": "\"ul\""
-          },
-          "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
-          "options": [
-            "button",
-            "label",
-            "a",
-            "div",
-            "form",
-            "h2",
-            "h3",
-            "img",
-            "input",
-            "li",
-            "nav",
-            "ol",
-            "p",
-            "span",
-            "svg",
-            "ul",
-            "template"
-          ],
-          "control": "text",
-          "references": [
-            "AsTag"
-          ]
         },
         {
           "name": "multiple",
@@ -12508,7 +12642,7 @@
     "packages/core/src/components/FrameMenubar.vue": {
       "name": "FrameMenubar",
       "source": "packages/core/src/components/FrameMenubar.vue",
-      "sourceHash": "077993316ac2867f9e996626a6fc23fe2edda99a98781935eac5062c30dc798a",
+      "sourceHash": "33fa51f4fe4e9e5a4066f4b654014c559a2d7ac7365efd10bb26faab6e39c748",
       "props": [
         {
           "name": "modelValue",
@@ -12570,12 +12704,45 @@
           ]
         },
         {
+          "name": "menus",
+          "type": "readonly FrameMenuItem[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Menus configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "FrameMenuItem"
+          ]
+        },
+        {
           "name": "label",
           "type": "string",
           "default": {
             "kind": "omitted"
           },
           "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "maxVisible",
+          "type": "number",
+          "default": {
+            "kind": "derived",
+            "expression": "Infinity"
+          },
+          "description": "Max Visible configuration for this component; see its Features examples for usage.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "popupLabel",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Popup Label configuration for this component; see its Features examples for usage.",
           "control": "text",
           "references": []
         }
@@ -12592,6 +12759,12 @@
           "parameters": "item: FrameMenubarAction",
           "returns": "void",
           "description": "Emitted on action."
+        },
+        {
+          "name": "execute",
+          "parameters": "id: string",
+          "returns": "void",
+          "description": "Emitted on execute."
         }
       ],
       "slots": [
@@ -13429,212 +13602,11 @@
       "methods": [],
       "forwardsAttrs": true
     },
-    "packages/core/src/components/FrameDropdownMenu.vue": {
-      "name": "FrameDropdownMenu",
-      "source": "packages/core/src/components/FrameDropdownMenu.vue",
-      "sourceHash": "e64054f41b394dd3b2796465f734b7642db673b362409b9298800b0f720873f6",
-      "props": [
-        {
-          "name": "items",
-          "type": "readonly FrameGeneralMenuItem[]",
-          "default": {
-            "kind": "required"
-          },
-          "description": "Ordered application-owned entries.",
-          "control": "json",
-          "references": [
-            "FrameGeneralMenuItem"
-          ]
-        },
-        {
-          "name": "triggerLabel",
-          "type": "string",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "Trigger Label configuration for this component; see its Features examples for usage.",
-          "control": "text",
-          "references": []
-        },
-        {
-          "name": "contentProps",
-          "type": "DropdownMenuContentProps",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "Content Props configuration for this component; see its Features examples for usage.",
-          "control": "json",
-          "references": [
-            "DropdownMenuContentProps"
-          ]
-        },
-        {
-          "name": "defaultOpen",
-          "type": "boolean",
-          "default": {
-            "kind": "literal",
-            "value": "false"
-          },
-          "description": "The open state of the dropdown menu when it is initially rendered. Use when you do not need to control its open state.",
-          "control": "boolean",
-          "references": []
-        },
-        {
-          "name": "open",
-          "type": "boolean",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "The controlled open state of the menu. Can be used as `v-model:open`.",
-          "control": "boolean",
-          "references": []
-        },
-        {
-          "name": "dir",
-          "type": "Direction$4",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "The reading direction of the combobox when applicable.\n\nIf omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
-          "options": [
-            "ltr",
-            "rtl"
-          ],
-          "control": "text",
-          "references": [
-            "Direction"
-          ]
-        },
-        {
-          "name": "modal",
-          "type": "boolean",
-          "default": {
-            "kind": "literal",
-            "value": "true"
-          },
-          "description": "The modality of the dropdown menu.\n\nWhen set to `true`, interaction with outside elements will be disabled and only menu content will be visible to screen readers.",
-          "control": "boolean",
-          "references": []
-        }
-      ],
-      "emits": [
-        {
-          "name": "update:open",
-          "parameters": "payload: boolean",
-          "returns": "void",
-          "description": "Emitted on update:open."
-        },
-        {
-          "name": "escapeKeyDown",
-          "parameters": "event: KeyboardEvent",
-          "returns": "void",
-          "description": "Emitted on escape key down."
-        },
-        {
-          "name": "pointerDownOutside",
-          "parameters": "event: PointerDownOutsideEvent",
-          "returns": "void",
-          "description": "Emitted on pointer down outside."
-        },
-        {
-          "name": "focusOutside",
-          "parameters": "event: FocusOutsideEvent",
-          "returns": "void",
-          "description": "Emitted on focus outside."
-        },
-        {
-          "name": "interactOutside",
-          "parameters": "event: PointerDownOutsideEvent | FocusOutsideEvent",
-          "returns": "void",
-          "description": "Emitted on interact outside."
-        },
-        {
-          "name": "openAutoFocus",
-          "parameters": "event: Event",
-          "returns": "void",
-          "description": "Emitted on open auto focus."
-        },
-        {
-          "name": "closeAutoFocus",
-          "parameters": "event: Event",
-          "returns": "void",
-          "description": "Emitted on close auto focus."
-        },
-        {
-          "name": "select",
-          "parameters": "item: FrameGeneralMenuItem, event: Event",
-          "returns": "void",
-          "description": "Emitted on select."
-        }
-      ],
-      "slots": [
-        {
-          "name": "trigger",
-          "parameters": "",
-          "returns": "VNodeChild",
-          "description": "Content rendered in the trigger slot."
-        },
-        {
-          "name": "before",
-          "parameters": "",
-          "returns": "VNodeChild",
-          "description": "Content rendered in the before slot."
-        },
-        {
-          "name": "item",
-          "parameters": "item: unknown",
-          "returns": "VNodeChild",
-          "description": "Content rendered in the item slot."
-        },
-        {
-          "name": "default",
-          "parameters": "",
-          "returns": "VNodeChild",
-          "description": "Content rendered in the default slot."
-        }
-      ],
-      "methods": [],
-      "forwardsAttrs": true
-    },
     "packages/core/src/components/FrameContextMenu.vue": {
       "name": "FrameContextMenu",
       "source": "packages/core/src/components/FrameContextMenu.vue",
-      "sourceHash": "dec83a82a988b47072d2b483511cb461491ef326bec033cef07bfca11806fed3",
+      "sourceHash": "394022edc521e8042dee8053c20e6fbac5573d0f5eab511074435d383c046d9d",
       "props": [
-        {
-          "name": "items",
-          "type": "readonly FrameGeneralMenuItem[]",
-          "default": {
-            "kind": "required"
-          },
-          "description": "Ordered application-owned entries.",
-          "control": "json",
-          "references": [
-            "FrameGeneralMenuItem"
-          ]
-        },
-        {
-          "name": "triggerLabel",
-          "type": "string",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "Trigger Label configuration for this component; see its Features examples for usage.",
-          "control": "text",
-          "references": []
-        },
-        {
-          "name": "contentProps",
-          "type": "ContextMenuContentProps",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "Content Props configuration for this component; see its Features examples for usage.",
-          "control": "json",
-          "references": [
-            "ContextMenuContentProps"
-          ]
-        },
         {
           "name": "pressOpenDelay",
           "type": "number",
@@ -13677,11 +13649,112 @@
           "type": "boolean",
           "default": {
             "kind": "literal",
-            "value": "true"
+            "value": "false"
           },
           "description": "The modality of the dropdown menu.\n\nWhen set to `true`, interaction with outside elements will be disabled and only menu content will be visible to screen readers.",
           "control": "boolean",
           "references": []
+        },
+        {
+          "name": "items",
+          "type": "readonly T[]",
+          "default": {
+            "kind": "required"
+          },
+          "description": "Ordered application-owned entries.",
+          "control": "json",
+          "references": []
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "itemAlignment",
+          "type": "\"left\" | \"center\" | \"right\"",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Item Alignment configuration for this component; see its Features examples for usage.",
+          "options": [
+            "left",
+            "right",
+            "center"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "anchor",
+          "type": "HTMLElement",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Real HTMLElement used to position the overlay and restore focus.",
+          "control": "fixture",
+          "references": []
+        },
+        {
+          "name": "point",
+          "type": "{x:number;y:number}",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Point configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": []
+        },
+        {
+          "name": "placement",
+          "type": "\"bottom\"|\"right\"",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Preferred overlay placement; the component fits content to available space.",
+          "options": [
+            "bottom",
+            "right"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Id configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "triggerLabel",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Trigger Label configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "contentProps",
+          "type": "ContextMenuContentProps",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Content Props configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "ContextMenuContentProps"
+          ]
         }
       ],
       "emits": [
@@ -13728,8 +13801,14 @@
           "description": "Emitted on close auto focus."
         },
         {
+          "name": "close",
+          "parameters": "",
+          "returns": "void",
+          "description": "Emitted on close."
+        },
+        {
           "name": "select",
-          "parameters": "item: FrameGeneralMenuItem, event: Event",
+          "parameters": "item: T, event?: Event | undefined",
           "returns": "void",
           "description": "Emitted on select."
         }

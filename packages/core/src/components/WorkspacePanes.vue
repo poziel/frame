@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import FrameContextMenu from "./FrameContextMenu.vue";
 import { computed, ref, shallowReactive, shallowRef } from "vue";
 import type { FrameMenuItem, WorkspacePane, WorkspaceSplitDirection } from "../types";
 import { useFrame } from "../frame/createFrame";
 import WorkspacePaneLayout from "./WorkspacePaneLayout.vue";
 import PanePlaceholder from "./PanePlaceholder.vue";
-import FrameMenu from "./FrameMenu.vue";
 const frame = useFrame();
 const { root, panes, activePane } = frame.workspace;
 const parking = ref<HTMLElement>();
@@ -31,6 +31,6 @@ defineSlots<{ default(props: { pane: WorkspacePane }): unknown; pane(props: { pa
       <slot v-else-if="pane.id === frame.workspace.initialPaneId" :pane="pane"><PanePlaceholder :active="activePane === pane.id"/></slot>
       <slot v-else name="pane" :pane="pane"><PanePlaceholder :active="activePane === pane.id"/></slot>
     </div></Teleport></template>
-    <FrameMenu v-if="menuAnchor" :anchor="menuAnchor" :point="point" :items="menuItems" label="Workspace pane" @select="choose" @close="menuAnchor = undefined"/>
+    <FrameContextMenu v-if="menuAnchor" :anchor="menuAnchor" :point="point" :items="menuItems" label="Workspace pane" @select="choose" @close="menuAnchor = undefined"/>
   </main>
 </template>

@@ -290,8 +290,8 @@
       {
         "name": "--frame-menu-row-button-active-not-disabled-outline",
         "value": "none",
-        "description": "outline for .frame-menu .menu-row > button.frame-button:focus-visible, .frame-menu .menu-row > button.frame-button[aria-expanded=true]:not(:disabled).",
-        "selector": ".frame-menu .menu-row > button.frame-button:focus-visible, .frame-menu .menu-row > button.frame-button[aria-expanded=true]:not(:disabled)",
+        "description": "outline for .frame-menu:not([data-menu-input=pointer]) .menu-row > button.frame-button:focus-visible, .frame-menu .menu-row > button.frame-button[aria-expanded=true]:not(:disabled).",
+        "selector": ".frame-menu:not([data-menu-input=pointer]) .menu-row > button.frame-button:focus-visible, .frame-menu .menu-row > button.frame-button[aria-expanded=true]:not(:disabled)",
         "source": "packages/core/src/style.css"
       },
       {
@@ -2334,11 +2334,19 @@
       }
     ]
   },
-  "packages/core/src/components/FrameMenu.vue": {
+  "packages/core/src/components/FrameDropdownMenu.vue": {
     "classes": [
       {
         "name": ".frame-menu",
         "description": "Styles the menu element."
+      },
+      {
+        "name": ".frame-general-anchor",
+        "description": "Styles the general anchor element."
+      },
+      {
+        "name": ".frame-general-button",
+        "description": "Styles the general button element."
       }
     ],
     "tokens": [
@@ -2359,9 +2367,9 @@
       {
         "name": "--frame-accent",
         "value": "#0078d4",
-        "description": "border color for .frame-menu .menu-row > button.frame-button:focus-visible, .frame-menu .menu-row > button.frame-button[aria-expanded=true]:not(:disabled).",
-        "selector": ".frame-menu .menu-row > button.frame-button:focus-visible, .frame-menu .menu-row > button.frame-button[aria-expanded=true]:not(:disabled)",
-        "source": "packages/core/src/style.css"
+        "description": "outline for .frame-general-button:focus-visible.",
+        "selector": ".frame-general-button:focus-visible",
+        "source": "packages/core/src/general-c.css"
       },
       {
         "name": "--frame-where-workbench-outline-offset",
@@ -2429,9 +2437,9 @@
       {
         "name": "--frame-radius-medium",
         "value": "4px",
-        "description": "border radius for .frame-menu .menu-row > button.frame-button.",
-        "selector": ".frame-menu .menu-row > button.frame-button",
-        "source": "packages/core/src/style.css"
+        "description": "border radius for .frame-general-button.",
+        "selector": ".frame-general-button",
+        "source": "packages/core/src/general-c.css"
       },
       {
         "name": "--frame-where-workbench-background-2",
@@ -2632,8 +2640,8 @@
       {
         "name": "--frame-menu-row-button-active-not-disabled-outline",
         "value": "none",
-        "description": "outline for .frame-menu .menu-row > button.frame-button:focus-visible, .frame-menu .menu-row > button.frame-button[aria-expanded=true]:not(:disabled).",
-        "selector": ".frame-menu .menu-row > button.frame-button:focus-visible, .frame-menu .menu-row > button.frame-button[aria-expanded=true]:not(:disabled)",
+        "description": "outline for .frame-menu:not([data-menu-input=pointer]) .menu-row > button.frame-button:focus-visible, .frame-menu .menu-row > button.frame-button[aria-expanded=true]:not(:disabled).",
+        "selector": ".frame-menu:not([data-menu-input=pointer]) .menu-row > button.frame-button:focus-visible, .frame-menu .menu-row > button.frame-button[aria-expanded=true]:not(:disabled)",
         "source": "packages/core/src/style.css"
       },
       {
@@ -2649,6 +2657,62 @@
         "description": " webkit backdrop filter for /* Shared frosted surface for floating content; backdrop dimming remains separate. */\r\n:is(.frame-menu, .frame-select-popup, .palette, .frame-modal, .frame-date-popover, .frame-color-picker-popover, .frame-advanced-popup, .frame-general-dialog, .frame-general-popup, .frame-general-menu, .frame-general-toast, .frame-navigation-content, .frame-menubar-content, .frame-tooltip, .frame-notification).",
         "selector": "/* Shared frosted surface for floating content; backdrop dimming remains separate. */\r\n:is(.frame-menu, .frame-select-popup, .palette, .frame-modal, .frame-date-popover, .frame-color-picker-popover, .frame-advanced-popup, .frame-general-dialog, .frame-general-popup, .frame-general-menu, .frame-general-toast, .frame-navigation-content, .frame-menubar-content, .frame-tooltip, .frame-notification)",
         "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-control-text",
+        "value": "var(--frame-foreground)",
+        "description": "color for .frame-general-button.",
+        "selector": ".frame-general-button",
+        "source": "packages/core/src/general-c.css"
+      },
+      {
+        "name": "--frame-foreground",
+        "value": "Inherited from the rendering context",
+        "description": "color for .frame-general-button.",
+        "selector": ".frame-general-button",
+        "source": "packages/core/src/general-c.css"
+      },
+      {
+        "name": "--frame-control-background",
+        "value": "var(--frame-background)",
+        "description": "background for .frame-general-button.",
+        "selector": ".frame-general-button",
+        "source": "packages/core/src/general-c.css"
+      },
+      {
+        "name": "--frame-background",
+        "value": "Inherited from the rendering context",
+        "description": "background for .frame-general-button.",
+        "selector": ".frame-general-button",
+        "source": "packages/core/src/general-c.css"
+      },
+      {
+        "name": "--frame-control-border",
+        "value": "var(--frame-border)",
+        "description": "border for .frame-general-button.",
+        "selector": ".frame-general-button",
+        "source": "packages/core/src/general-c.css"
+      },
+      {
+        "name": "--frame-border",
+        "value": "Inherited from the rendering context",
+        "description": "border for .frame-general-button.",
+        "selector": ".frame-general-button",
+        "source": "packages/core/src/general-c.css"
+      },
+      {
+        "name": "--frame-radius",
+        "value": "var(--frame-radius-medium)",
+        "description": "border radius for .frame-general-button.",
+        "selector": ".frame-general-button",
+        "source": "packages/core/src/general-c.css"
+      },
+      {
+        "name": "--frame-focus-border",
+        "value": "var(--frame-accent)",
+        "description": "outline for .frame-general-button:focus-visible.",
+        "selector": ".frame-general-button:focus-visible",
+        "source": "packages/core/src/general-c.css"
       }
     ]
   },
@@ -13160,20 +13224,12 @@
         "description": "Styles the menubar element."
       },
       {
-        "name": ".frame-menubar-content",
-        "description": "Styles the menubar content element."
+        "name": ".menubar-groups",
+        "description": "Styles the menubar groups element."
       },
       {
-        "name": ".frame-menubar-trigger",
-        "description": "Styles the menubar trigger element."
-      },
-      {
-        "name": ".frame-menubar-item",
-        "description": "Styles the menubar item element."
-      },
-      {
-        "name": ".frame-menubar-separator",
-        "description": "Styles the menubar separator element."
+        "name": ".menubar-overflow",
+        "description": "Styles the menubar overflow element."
       }
     ],
     "tokens": [
@@ -13187,22 +13243,22 @@
       {
         "name": "--frame-menubar-button-color",
         "value": "#a9a9a9",
-        "description": "color for .frame-menubar button.",
-        "selector": ".frame-menubar button",
+        "description": "color for .frame-menubar .menubar-groups > button,.frame-menubar > button.",
+        "selector": ".frame-menubar .menubar-groups > button,.frame-menubar > button",
         "source": "packages/core/src/style.css"
       },
       {
         "name": "--frame-menubar-button-height",
         "value": "25px",
-        "description": "height for .frame-menubar button.",
-        "selector": ".frame-menubar button",
+        "description": "height for .frame-menubar .menubar-groups > button,.frame-menubar > button.",
+        "selector": ".frame-menubar .menubar-groups > button,.frame-menubar > button",
         "source": "packages/core/src/style.css"
       },
       {
         "name": "--frame-menubar-button-padding",
         "value": "0 8px",
-        "description": "padding for .frame-menubar button.",
-        "selector": ".frame-menubar button",
+        "description": "padding for .frame-menubar .menubar-groups > button,.frame-menubar > button.",
+        "selector": ".frame-menubar .menubar-groups > button,.frame-menubar > button",
         "source": "packages/core/src/style.css"
       },
       {
@@ -13215,29 +13271,22 @@
       {
         "name": "--frame-radius-medium",
         "value": "4px",
-        "description": "border radius for .frame-menubar-item.",
-        "selector": ".frame-menubar-item",
-        "source": "packages/core/src/general-b.css"
+        "description": "border radius for .frame-menubar button.",
+        "selector": ".frame-menubar button",
+        "source": "packages/core/src/style.css"
       },
       {
         "name": "--frame-menubar-button-font-size",
         "value": "12px",
-        "description": "font size for .frame-menubar button.",
-        "selector": ".frame-menubar button",
+        "description": "font size for .frame-menubar .menubar-groups > button,.frame-menubar > button.",
+        "selector": ".frame-menubar .menubar-groups > button,.frame-menubar > button",
         "source": "packages/core/src/style.css"
       },
       {
         "name": "--frame-menubar-button-hover-background",
         "value": "#ffffff0b",
-        "description": "background for .frame-menubar button:hover, .frame-menubar button.active.",
-        "selector": ".frame-menubar button:hover, .frame-menubar button.active",
-        "source": "packages/core/src/style.css"
-      },
-      {
-        "name": "--frame-overlay-backdrop-filter",
-        "value": "blur(10px) saturate(110%)",
-        "description": " webkit backdrop filter for /* Shared frosted surface for floating content; backdrop dimming remains separate. */\r\n:is(.frame-menu, .frame-select-popup, .palette, .frame-modal, .frame-date-popover, .frame-color-picker-popover, .frame-advanced-popup, .frame-general-dialog, .frame-general-popup, .frame-general-menu, .frame-general-toast, .frame-navigation-content, .frame-menubar-content, .frame-tooltip, .frame-notification).",
-        "selector": "/* Shared frosted surface for floating content; backdrop dimming remains separate. */\r\n:is(.frame-menu, .frame-select-popup, .palette, .frame-modal, .frame-date-popover, .frame-color-picker-popover, .frame-advanced-popup, .frame-general-dialog, .frame-general-popup, .frame-general-menu, .frame-general-toast, .frame-navigation-content, .frame-menubar-content, .frame-tooltip, .frame-notification)",
+        "description": "background for .frame-menubar button[data-state=open].",
+        "selector": ".frame-menubar button[data-state=open]",
         "source": "packages/core/src/style.css"
       },
       {
@@ -13257,92 +13306,15 @@
       {
         "name": "--frame-control-text",
         "value": "var(--frame-text)",
-        "description": "color for .frame-navigation-content,.frame-menubar-content.",
-        "selector": ".frame-navigation-content,.frame-menubar-content",
+        "description": "color for .frame-tabs,.frame-stepper,.frame-toolbar,.frame-tree,.frame-splitter,.frame-navigation-menu,.frame-menubar.",
+        "selector": ".frame-tabs,.frame-stepper,.frame-toolbar,.frame-tree,.frame-splitter,.frame-navigation-menu,.frame-menubar",
         "source": "packages/core/src/general-b.css"
       },
       {
         "name": "--frame-text",
         "value": "#cccccc",
-        "description": "color for .frame-navigation-content,.frame-menubar-content.",
-        "selector": ".frame-navigation-content,.frame-menubar-content",
-        "source": "packages/core/src/general-b.css"
-      },
-      {
-        "name": "--frame-control-radius",
-        "value": "var(--frame-radius-medium)",
-        "description": "border radius for .frame-menubar-item.",
-        "selector": ".frame-menubar-item",
-        "source": "packages/core/src/general-b.css"
-      },
-      {
-        "name": "--frame-hover-background",
-        "value": "rgba(127,127,127,.12)",
-        "description": "background for .frame-tabs-trigger:hover,.frame-toolbar-button:hover,.frame-navigation-trigger:hover,.frame-navigation-link:hover,.frame-menubar-trigger:hover,.frame-menubar-item[data-highlighted],.frame-tree-item:hover.",
-        "selector": ".frame-tabs-trigger:hover,.frame-toolbar-button:hover,.frame-navigation-trigger:hover,.frame-navigation-link:hover,.frame-menubar-trigger:hover,.frame-menubar-item[data-highlighted],.frame-tree-item:hover",
-        "source": "packages/core/src/general-b.css"
-      },
-      {
-        "name": "--frame-accent",
-        "value": "#007acc",
-        "description": "outline for .frame-tabs-trigger:focus-visible,.frame-toolbar-button:focus-visible,.frame-navigation-link:focus-visible,.frame-navigation-trigger:focus-visible,.frame-menubar-trigger:focus-visible,.frame-tree-item:focus-visible,.frame-stepper-trigger:focus-visible,.frame-splitter-handle:focus-visible.",
-        "selector": ".frame-tabs-trigger:focus-visible,.frame-toolbar-button:focus-visible,.frame-navigation-link:focus-visible,.frame-navigation-trigger:focus-visible,.frame-menubar-trigger:focus-visible,.frame-tree-item:focus-visible,.frame-stepper-trigger:focus-visible,.frame-splitter-handle:focus-visible",
-        "source": "packages/core/src/general-b.css"
-      },
-      {
-        "name": "--frame-selection-background",
-        "value": "rgba(0,122,204,.15)",
-        "description": "background for .frame-tabs-trigger[data-state=active],.frame-menubar-trigger[data-state=open],.frame-navigation-trigger[data-state=open],.frame-tree-item[data-selected].",
-        "selector": ".frame-tabs-trigger[data-state=active],.frame-menubar-trigger[data-state=open],.frame-navigation-trigger[data-state=open],.frame-tree-item[data-selected]",
-        "source": "packages/core/src/general-b.css"
-      },
-      {
-        "name": "--frame-focus-border",
-        "value": "var(--frame-accent,#007acc)",
-        "description": "outline for .frame-tabs-trigger:focus-visible,.frame-toolbar-button:focus-visible,.frame-navigation-link:focus-visible,.frame-navigation-trigger:focus-visible,.frame-menubar-trigger:focus-visible,.frame-tree-item:focus-visible,.frame-stepper-trigger:focus-visible,.frame-splitter-handle:focus-visible.",
-        "selector": ".frame-tabs-trigger:focus-visible,.frame-toolbar-button:focus-visible,.frame-navigation-link:focus-visible,.frame-navigation-trigger:focus-visible,.frame-menubar-trigger:focus-visible,.frame-tree-item:focus-visible,.frame-stepper-trigger:focus-visible,.frame-splitter-handle:focus-visible",
-        "source": "packages/core/src/general-b.css"
-      },
-      {
-        "name": "--frame-disabled-opacity",
-        "value": ".5",
-        "description": "opacity for .frame-menubar-item[data-disabled].",
-        "selector": ".frame-menubar-item[data-disabled]",
-        "source": "packages/core/src/general-b.css"
-      },
-      {
-        "name": "--frame-control-border",
-        "value": "#555",
-        "description": "background for .frame-menubar-separator.",
-        "selector": ".frame-menubar-separator",
-        "source": "packages/core/src/general-b.css"
-      },
-      {
-        "name": "--frame-menu-background",
-        "value": "var(--frame-control-background,#252526)",
-        "description": "background for .frame-navigation-content,.frame-menubar-content.",
-        "selector": ".frame-navigation-content,.frame-menubar-content",
-        "source": "packages/core/src/general-b.css"
-      },
-      {
-        "name": "--frame-control-background",
-        "value": "#252526",
-        "description": "background for .frame-navigation-content,.frame-menubar-content.",
-        "selector": ".frame-navigation-content,.frame-menubar-content",
-        "source": "packages/core/src/general-b.css"
-      },
-      {
-        "name": "--frame-overlay-shadow",
-        "value": "0 6px 18px rgba(0,0,0,.2)",
-        "description": "box shadow for .frame-navigation-content,.frame-menubar-content.",
-        "selector": ".frame-navigation-content,.frame-menubar-content",
-        "source": "packages/core/src/general-b.css"
-      },
-      {
-        "name": "--frame-muted",
-        "value": "#888",
-        "description": "color for .frame-menubar-item kbd.",
-        "selector": ".frame-menubar-item kbd",
+        "description": "color for .frame-tabs,.frame-stepper,.frame-toolbar,.frame-tree,.frame-splitter,.frame-navigation-menu,.frame-menubar.",
+        "selector": ".frame-tabs,.frame-stepper,.frame-toolbar,.frame-tree,.frame-splitter,.frame-navigation-menu,.frame-menubar",
         "source": "packages/core/src/general-b.css"
       }
     ]
@@ -14170,171 +14142,11 @@
       }
     ]
   },
-  "packages/core/src/components/FrameDropdownMenu.vue": {
-    "classes": [
-      {
-        "name": ".frame-general-menu",
-        "description": "Styles the general menu element."
-      },
-      {
-        "name": ".frame-advanced-popup",
-        "description": "Styles the advanced popup element."
-      },
-      {
-        "name": ".frame-general-anchor",
-        "description": "Styles the general anchor element."
-      },
-      {
-        "name": ".frame-general-button",
-        "description": "Styles the general button element."
-      },
-      {
-        "name": ".frame-general-menu-item",
-        "description": "Styles the general menu item element."
-      },
-      {
-        "name": ".frame-general-separator",
-        "description": "Styles the general separator element."
-      }
-    ],
-    "tokens": [
-      {
-        "name": "--frame-overlay-backdrop-filter",
-        "value": "blur(10px) saturate(110%)",
-        "description": " webkit backdrop filter for /* Shared frosted surface for floating content; backdrop dimming remains separate. */\r\n:is(.frame-menu, .frame-select-popup, .palette, .frame-modal, .frame-date-popover, .frame-color-picker-popover, .frame-advanced-popup, .frame-general-dialog, .frame-general-popup, .frame-general-menu, .frame-general-toast, .frame-navigation-content, .frame-menubar-content, .frame-tooltip, .frame-notification).",
-        "selector": "/* Shared frosted surface for floating content; backdrop dimming remains separate. */\r\n:is(.frame-menu, .frame-select-popup, .palette, .frame-modal, .frame-date-popover, .frame-color-picker-popover, .frame-advanced-popup, .frame-general-dialog, .frame-general-popup, .frame-general-menu, .frame-general-toast, .frame-navigation-content, .frame-menubar-content, .frame-tooltip, .frame-notification)",
-        "source": "packages/core/src/style.css"
-      },
-      {
-        "name": "--frame-control-text",
-        "value": "var(--frame-foreground,#eee)",
-        "description": "color for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-foreground",
-        "value": "#eee",
-        "description": "color for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-control-background",
-        "value": "var(--frame-background)",
-        "description": "background for .frame-general-button.",
-        "selector": ".frame-general-button",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-background",
-        "value": "Inherited from the rendering context",
-        "description": "background for .frame-general-button.",
-        "selector": ".frame-general-button",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-control-border",
-        "value": "var(--frame-border,#555)",
-        "description": "background for .frame-general-separator.",
-        "selector": ".frame-general-separator",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-border",
-        "value": "#555",
-        "description": "background for .frame-general-separator.",
-        "selector": ".frame-general-separator",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-radius",
-        "value": "var(--frame-radius-medium)",
-        "description": "border radius for .frame-general-menu-item.",
-        "selector": ".frame-general-menu-item",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-radius-medium",
-        "value": "4px",
-        "description": "border radius for .frame-general-menu-item.",
-        "selector": ".frame-general-menu-item",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-focus-border",
-        "value": "var(--frame-accent)",
-        "description": "outline for .frame-general-button:focus-visible.",
-        "selector": ".frame-general-button:focus-visible",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-accent",
-        "value": "#365c85",
-        "description": "background for .frame-general-menu-item[data-highlighted].",
-        "selector": ".frame-general-menu-item[data-highlighted]",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-general-background",
-        "value": "var(--frame-overlay-background)",
-        "description": "background for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-overlay-background",
-        "value": "color-mix(in srgb, var(--frame-overlay-surface) 83%, transparent)",
-        "description": "background for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-general-foreground",
-        "value": "var(--frame-control-text,var(--frame-foreground,#eee))",
-        "description": "color for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-general-border",
-        "value": "var(--frame-control-border,var(--frame-border,#555))",
-        "description": "border for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-general-radius",
-        "value": "var(--frame-radius,var(--frame-radius-medium))",
-        "description": "border radius for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-general-shadow",
-        "value": "0 8px 24px #0004",
-        "description": "box shadow for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-list-active-selection-background",
-        "value": "var(--frame-accent,#365c85)",
-        "description": "background for .frame-general-menu-item[data-highlighted].",
-        "selector": ".frame-general-menu-item[data-highlighted]",
-        "source": "packages/core/src/general-c.css"
-      }
-    ]
-  },
   "packages/core/src/components/FrameContextMenu.vue": {
     "classes": [
       {
-        "name": ".frame-general-menu",
-        "description": "Styles the general menu element."
-      },
-      {
-        "name": ".frame-advanced-popup",
-        "description": "Styles the advanced popup element."
+        "name": ".frame-menu",
+        "description": "Styles the menu element."
       },
       {
         "name": ".frame-general-anchor",
@@ -14343,17 +14155,310 @@
       {
         "name": ".frame-general-button",
         "description": "Styles the general button element."
-      },
-      {
-        "name": ".frame-general-menu-item",
-        "description": "Styles the general menu item element."
-      },
-      {
-        "name": ".frame-general-separator",
-        "description": "Styles the general separator element."
       }
     ],
     "tokens": [
+      {
+        "name": "--frame-where-workbench-border",
+        "value": "0",
+        "description": "border for :where(.workbench, .frame-menu, .palette-backdrop) button.",
+        "selector": ":where(.workbench, .frame-menu, .palette-backdrop) button",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-where-workbench-background",
+        "value": "none",
+        "description": "background for :where(.workbench, .frame-menu, .palette-backdrop) button.",
+        "selector": ":where(.workbench, .frame-menu, .palette-backdrop) button",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-accent",
+        "value": "#0078d4",
+        "description": "outline for .frame-general-button:focus-visible.",
+        "selector": ".frame-general-button:focus-visible",
+        "source": "packages/core/src/general-c.css"
+      },
+      {
+        "name": "--frame-where-workbench-outline-offset",
+        "value": "-2px",
+        "description": "outline offset for :where(.workbench, .frame-menu, .palette-backdrop) :is(button, a, input):focus-visible.",
+        "selector": ":where(.workbench, .frame-menu, .palette-backdrop) :is(button, a, input):focus-visible",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-where-workbench-color",
+        "value": "#eee",
+        "description": "color for :where(.workbench, .frame-menu, .palette-backdrop) button:hover:not(:disabled).",
+        "selector": ":where(.workbench, .frame-menu, .palette-backdrop) button:hover:not(:disabled)",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-where-workbench-margin",
+        "value": "0",
+        "description": "margin for :where(.workbench, .frame-menu, .palette-backdrop) :is(h1, h2, p).",
+        "selector": ":where(.workbench, .frame-menu, .palette-backdrop) :is(h1, h2, p)",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-where-workbench-font-weight",
+        "value": "500",
+        "description": "font weight for :where(.workbench, .frame-menu, .palette-backdrop) strong.",
+        "selector": ":where(.workbench, .frame-menu, .palette-backdrop) strong",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-where-workbench-font-size",
+        "value": "10px",
+        "description": "font size for :where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd.",
+        "selector": ":where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-where-workbench-line-height",
+        "value": "15px",
+        "description": "line height for :where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd.",
+        "selector": ":where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-where-workbench-color-2",
+        "value": "#b8bdc0",
+        "description": "color for :where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd.",
+        "selector": ":where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-where-workbench-border-2",
+        "value": "1px solid #35393b",
+        "description": "border for :where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd.",
+        "selector": ":where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-where-workbench-border-radius",
+        "value": "var(--frame-radius-medium)",
+        "description": "border radius for :where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd.",
+        "selector": ":where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-radius-medium",
+        "value": "4px",
+        "description": "border radius for .frame-general-button.",
+        "selector": ".frame-general-button",
+        "source": "packages/core/src/general-c.css"
+      },
+      {
+        "name": "--frame-where-workbench-background-2",
+        "value": "#242729",
+        "description": "background for :where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd.",
+        "selector": ":where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-where-workbench-padding",
+        "value": "0 4px",
+        "description": "padding for :where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd.",
+        "selector": ":where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-preference-where-workbench-font-size",
+        "value": "11px",
+        "description": "font size for .preference :where(.workbench, .frame-menu, .palette-backdrop) strong.",
+        "selector": ".preference :where(.workbench, .frame-menu, .palette-backdrop) strong",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-where-workbench-width",
+        "value": "0",
+        "description": "width for :where(.workbench, .frame-menu, .palette-backdrop, .frame-modal)::-webkit-scrollbar,\r\n:where(.workbench, .frame-menu, .palette-backdrop, .frame-modal) ::-webkit-scrollbar.",
+        "selector": ":where(.workbench, .frame-menu, .palette-backdrop, .frame-modal)::-webkit-scrollbar,\r\n:where(.workbench, .frame-menu, .palette-backdrop, .frame-modal) ::-webkit-scrollbar",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-where-workbench-height",
+        "value": "0",
+        "description": "height for :where(.workbench, .frame-menu, .palette-backdrop, .frame-modal)::-webkit-scrollbar,\r\n:where(.workbench, .frame-menu, .palette-backdrop, .frame-modal) ::-webkit-scrollbar.",
+        "selector": ":where(.workbench, .frame-menu, .palette-backdrop, .frame-modal)::-webkit-scrollbar,\r\n:where(.workbench, .frame-menu, .palette-backdrop, .frame-modal) ::-webkit-scrollbar",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-font-body",
+        "value": "\"Segoe UI\", sans-serif",
+        "description": "font family for :where(.workbench, .frame-overlay-host, .frame-menu, .palette-backdrop, .frame-tooltip).",
+        "selector": ":where(.workbench, .frame-overlay-host, .frame-menu, .palette-backdrop, .frame-tooltip)",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-font-size-body",
+        "value": "12px",
+        "description": "font size for :where(.workbench, .frame-overlay-host, .frame-menu, .palette-backdrop, .frame-tooltip).",
+        "selector": ":where(.workbench, .frame-overlay-host, .frame-menu, .palette-backdrop, .frame-tooltip)",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-text",
+        "value": "#cccccc",
+        "description": "color for .frame-menu .menu-row > button.frame-button.",
+        "selector": ".frame-menu .menu-row > button.frame-button",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-width",
+        "value": "max-content",
+        "description": "width for .frame-menu.",
+        "selector": ".frame-menu",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-min-width",
+        "value": "240px",
+        "description": "min width for .frame-menu.",
+        "selector": ".frame-menu",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-max-width",
+        "value": "calc(100vw - 12px)",
+        "description": "max width for .frame-menu.",
+        "selector": ".frame-menu",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-max-height",
+        "value": "calc(100dvh - 12px)",
+        "description": "max height for .frame-menu.",
+        "selector": ".frame-menu",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-padding",
+        "value": "var(--frame-spacing-small)",
+        "description": "padding for .frame-menu.",
+        "selector": ".frame-menu",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-spacing-small",
+        "value": "4px",
+        "description": "padding for .frame-menu.",
+        "selector": ".frame-menu",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-border",
+        "value": "var(--frame-border-color)",
+        "description": "border for .frame-menu.",
+        "selector": ".frame-menu",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-border-radius",
+        "value": "var(--frame-radius-large)",
+        "description": "border radius for .frame-menu.",
+        "selector": ".frame-menu",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-radius-large",
+        "value": "7px",
+        "description": "border radius for .frame-menu.",
+        "selector": ".frame-menu",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-background",
+        "value": "#1f1f1f",
+        "description": "background for .frame-menu.",
+        "selector": ".frame-menu",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-box-shadow",
+        "value": "0 6px 22px #0005",
+        "description": "box shadow for .frame-menu.",
+        "selector": ".frame-menu",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-row-button-gap",
+        "value": "6px",
+        "description": "gap for .frame-menu .menu-row > button.frame-button.",
+        "selector": ".frame-menu .menu-row > button.frame-button",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-row-button-width",
+        "value": "100%",
+        "description": "width for .frame-menu .menu-row > button.frame-button.",
+        "selector": ".frame-menu .menu-row > button.frame-button",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-row-button-min-height",
+        "value": "24px",
+        "description": "min height for .frame-menu .menu-row > button.frame-button.",
+        "selector": ".frame-menu .menu-row > button.frame-button",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-row-button-padding",
+        "value": "2px 6px",
+        "description": "padding for .frame-menu .menu-row > button.frame-button.",
+        "selector": ".frame-menu .menu-row > button.frame-button",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-row-button-border",
+        "value": "1px solid transparent",
+        "description": "border for .frame-menu .menu-row > button.frame-button.",
+        "selector": ".frame-menu .menu-row > button.frame-button",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-row-button-border-radius",
+        "value": "var(--frame-radius-medium)",
+        "description": "border radius for .frame-menu .menu-row > button.frame-button.",
+        "selector": ".frame-menu .menu-row > button.frame-button",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-row-button-font-size",
+        "value": "12px",
+        "description": "font size for .frame-menu .menu-row > button.frame-button.",
+        "selector": ".frame-menu .menu-row > button.frame-button",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-row-button-line-height",
+        "value": "18px",
+        "description": "line height for .frame-menu .menu-row > button.frame-button.",
+        "selector": ".frame-menu .menu-row > button.frame-button",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-hover",
+        "value": "#303336",
+        "description": "background for .frame-menu .menu-row > button.frame-button[data-highlighted]:not(:disabled).",
+        "selector": ".frame-menu .menu-row > button.frame-button[data-highlighted]:not(:disabled)",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-row-button-active-not-disabled-outline",
+        "value": "none",
+        "description": "outline for .frame-menu:not([data-menu-input=pointer]) .menu-row > button.frame-button:focus-visible, .frame-menu .menu-row > button.frame-button[aria-expanded=true]:not(:disabled).",
+        "selector": ".frame-menu:not([data-menu-input=pointer]) .menu-row > button.frame-button:focus-visible, .frame-menu .menu-row > button.frame-button[aria-expanded=true]:not(:disabled)",
+        "source": "packages/core/src/style.css"
+      },
+      {
+        "name": "--frame-menu-disabled",
+        "value": "#656565",
+        "description": "color for .frame-menu .menu-row > button.frame-button:disabled.",
+        "selector": ".frame-menu .menu-row > button.frame-button:disabled",
+        "source": "packages/core/src/style.css"
+      },
       {
         "name": "--frame-overlay-backdrop-filter",
         "value": "blur(10px) saturate(110%)",
@@ -14363,16 +14468,16 @@
       },
       {
         "name": "--frame-control-text",
-        "value": "var(--frame-foreground,#eee)",
-        "description": "color for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
+        "value": "var(--frame-foreground)",
+        "description": "color for .frame-general-button.",
+        "selector": ".frame-general-button",
         "source": "packages/core/src/general-c.css"
       },
       {
         "name": "--frame-foreground",
-        "value": "#eee",
-        "description": "color for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
+        "value": "Inherited from the rendering context",
+        "description": "color for .frame-general-button.",
+        "selector": ".frame-general-button",
         "source": "packages/core/src/general-c.css"
       },
       {
@@ -14391,30 +14496,23 @@
       },
       {
         "name": "--frame-control-border",
-        "value": "var(--frame-border,#555)",
-        "description": "background for .frame-general-separator.",
-        "selector": ".frame-general-separator",
+        "value": "var(--frame-border)",
+        "description": "border for .frame-general-button.",
+        "selector": ".frame-general-button",
         "source": "packages/core/src/general-c.css"
       },
       {
         "name": "--frame-border",
-        "value": "#555",
-        "description": "background for .frame-general-separator.",
-        "selector": ".frame-general-separator",
+        "value": "Inherited from the rendering context",
+        "description": "border for .frame-general-button.",
+        "selector": ".frame-general-button",
         "source": "packages/core/src/general-c.css"
       },
       {
         "name": "--frame-radius",
         "value": "var(--frame-radius-medium)",
-        "description": "border radius for .frame-general-menu-item.",
-        "selector": ".frame-general-menu-item",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-radius-medium",
-        "value": "4px",
-        "description": "border radius for .frame-general-menu-item.",
-        "selector": ".frame-general-menu-item",
+        "description": "border radius for .frame-general-button.",
+        "selector": ".frame-general-button",
         "source": "packages/core/src/general-c.css"
       },
       {
@@ -14422,62 +14520,6 @@
         "value": "var(--frame-accent)",
         "description": "outline for .frame-general-button:focus-visible.",
         "selector": ".frame-general-button:focus-visible",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-accent",
-        "value": "#365c85",
-        "description": "background for .frame-general-menu-item[data-highlighted].",
-        "selector": ".frame-general-menu-item[data-highlighted]",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-general-background",
-        "value": "var(--frame-overlay-background)",
-        "description": "background for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-overlay-background",
-        "value": "color-mix(in srgb, var(--frame-overlay-surface) 83%, transparent)",
-        "description": "background for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-general-foreground",
-        "value": "var(--frame-control-text,var(--frame-foreground,#eee))",
-        "description": "color for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-general-border",
-        "value": "var(--frame-control-border,var(--frame-border,#555))",
-        "description": "border for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-general-radius",
-        "value": "var(--frame-radius,var(--frame-radius-medium))",
-        "description": "border radius for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-general-shadow",
-        "value": "0 8px 24px #0004",
-        "description": "box shadow for .frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast.",
-        "selector": ".frame-general-dialog,.frame-general-popup,.frame-general-menu,.frame-general-toast",
-        "source": "packages/core/src/general-c.css"
-      },
-      {
-        "name": "--frame-list-active-selection-background",
-        "value": "var(--frame-accent,#365c85)",
-        "description": "background for .frame-general-menu-item[data-highlighted].",
-        "selector": ".frame-general-menu-item[data-highlighted]",
         "source": "packages/core/src/general-c.css"
       }
     ]

@@ -9,7 +9,8 @@ export { default as BottomPanel } from "../components/BottomPanel.vue";
 export { default as SidePanel } from "../components/SidePanel.vue";
 
 export { default as ActivityRail } from "../components/ActivityRail.vue";
-export { default as FrameMenu } from "../components/FrameMenu.vue";
+/** @deprecated Use FrameDropdownMenu; retained for existing anchored-menu consumers. */
+export { default as FrameMenu } from "../components/AnchoredMenu.vue";
 export type { FrameMenuItem } from "../types";
 export type { LayoutState, PanelAlignment, PanelPosition } from "./layout";
 export { default as ResizeHandle } from "../components/ResizeHandle.vue";

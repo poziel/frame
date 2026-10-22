@@ -923,55 +923,6 @@
     "properties": [],
     "package": "@frame/core"
   },
-  "FrameLoaderVariant": {
-    "description": "Public type declared in packages/core/src/frame/loading.ts.",
-    "usage": "Import FrameLoaderVariant from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export type FrameLoaderVariant = keyof typeof frameLoaderNames;",
-    "properties": [],
-    "package": "@frame/core"
-  },
-  "FrameLoadingTextPosition": {
-    "description": "Public type declared in packages/core/src/frame/loading.ts.",
-    "usage": "Import FrameLoadingTextPosition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export type FrameLoadingTextPosition = \"above\" | \"below\" | \"left\" | \"right\";",
-    "properties": [],
-    "package": "@frame/core"
-  },
-  "CodeBlockTheme": {
-    "description": "Public enum declared in packages/core/src/frame/codeThemes.ts.",
-    "usage": "Import CodeBlockTheme from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export enum CodeBlockTheme {\r\n  Andromeeda = \"andromeeda\",\r\n  AuroraX = \"aurora-x\",\r\n  AyuDark = \"ayu-dark\",\r\n  AyuLight = \"ayu-light\",\r\n  AyuMirage = \"ayu-mirage\",\r\n  CatppuccinFrappe = \"catppuccin-frappe\",\r\n  CatppuccinLatte = \"catppuccin-latte\",\r\n  CatppuccinMacchiato = \"catppuccin-macchiato\",\r\n  CatppuccinMocha = \"catppuccin-mocha\",\r\n  DarkPlus = \"dark-plus\",\r\n  Dracula = \"dracula\",\r\n  DraculaSoft = \"dracula-soft\",\r\n  EverforestDark = \"everforest-dark\",\r\n  EverforestLight = \"everforest-light\",\r\n  GithubDark = \"github-dark\",\r\n  GithubDarkDefault = \"github-dark-default\",\r\n  GithubDarkDimmed = \"github-dark-dimmed\",\r\n  GithubDarkHighContrast = \"github-dark-high-contrast\",\r\n  GithubLight = \"github-light\",\r\n  GithubLightDefault = \"github-light-default\",\r\n  GithubLightHighContrast = \"github-light-high-contrast\",\r\n  GruvboxDarkHard = \"gruvbox-dark-hard\",\r\n  GruvboxDarkMedium = \"gruvbox-dark-medium\",\r\n  GruvboxDarkSoft = \"gruvbox-dark-soft\",\r\n  GruvboxLightHard = \"gruvbox-light-hard\",\r\n  GruvboxLightMedium = \"gruvbox-light-medium\",\r\n  GruvboxLightSoft = \"gruvbox-light-soft\",\r\n  Horizon = \"horizon\",\r\n  HorizonBright = \"horizon-bright\",\r\n  Houston = \"houston\",\r\n  KanagawaDragon = \"kanagawa-dragon\",\r\n  KanagawaLotus = \"kanagawa-lotus\",\r\n  KanagawaWave = \"kanagawa-wave\",\r\n  Laserwave = \"laserwave\",\r\n  LightPlus = \"light-plus\",\r\n  MaterialTheme = \"material-theme\",\r\n  MaterialThemeDarker = \"material-theme-darker\",\r\n  MaterialThemeLighter = \"material-theme-lighter\",\r\n  MaterialThemeOcean = \"material-theme-ocean\",\r\n  MaterialThemePalenight = \"material-theme-palenight\",\r\n  MinDark = \"min-dark\",\r\n  MinLight = \"min-light\",\r\n  Monokai = \"monokai\",\r\n  NightOwl = \"night-owl\",\r\n  NightOwlLight = \"night-owl-light\",\r\n  Nord = \"nord\",\r\n  OneDarkPro = \"one-dark-pro\",\r\n  OneLight = \"one-light\",\r\n  Plastic = \"plastic\",\r\n  Poimandres = \"poimandres\",\r\n  Red = \"red\",\r\n  RosePine = \"rose-pine\",\r\n  RosePineDawn = \"rose-pine-dawn\",\r\n  RosePineMoon = \"rose-pine-moon\",\r\n  SlackDark = \"slack-dark\",\r\n  SlackOchin = \"slack-ochin\",\r\n  SnazzyLight = \"snazzy-light\",\r\n  SolarizedDark = \"solarized-dark\",\r\n  SolarizedLight = \"solarized-light\",\r\n  Synthwave84 = \"synthwave-84\",\r\n  TokyoNight = \"tokyo-night\",\r\n  Vesper = \"vesper\",\r\n  VitesseBlack = \"vitesse-black\",\r\n  VitesseDark = \"vitesse-dark\",\r\n  VitesseLight = \"vitesse-light\",\r\n}",
-    "properties": [],
-    "package": "@frame/core"
-  },
-  "FrameAccordionItem": {
-    "description": "Public interface declared in packages/core/src/components/FrameAccordion.vue.ts.",
-    "usage": "Import FrameAccordionItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface FrameAccordionItem { value: string; title: string; description?: string; disabled?: boolean }",
-    "properties": [
-      {
-        "name": "value",
-        "type": "string",
-        "description": "Value configuration for this component; see its Features examples for usage."
-      },
-      {
-        "name": "title",
-        "type": "string",
-        "description": "Visible heading."
-      },
-      {
-        "name": "description",
-        "type": "string",
-        "description": "Description configuration for this component; see its Features examples for usage."
-      },
-      {
-        "name": "disabled",
-        "type": "boolean",
-        "description": "Prevents user interaction while retaining the current value."
-      }
-    ],
-    "package": "@frame/core"
-  },
   "FrameTabItem": {
     "description": "Public interface declared in packages/core/src/general-types.ts.",
     "usage": "Import FrameTabItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
@@ -1188,35 +1139,51 @@
     ],
     "package": "@frame/core"
   },
-  "FrameGeneralMenuItem": {
-    "description": "Public interface declared in packages/core/src/components/generalMenu.ts.",
-    "usage": "Import FrameGeneralMenuItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface FrameGeneralMenuItem {\r\n  id: string;\r\n  label: string;\r\n  disabled?: boolean;\r\n  shortcut?: string;\r\n  /** Add a separator before this action. */\r\n  separator?: boolean;\r\n}",
+  "FrameLoaderVariant": {
+    "description": "Public type declared in packages/core/src/frame/loading.ts.",
+    "usage": "Import FrameLoaderVariant from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type FrameLoaderVariant = keyof typeof frameLoaderNames;",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "FrameLoadingTextPosition": {
+    "description": "Public type declared in packages/core/src/frame/loading.ts.",
+    "usage": "Import FrameLoadingTextPosition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type FrameLoadingTextPosition = \"above\" | \"below\" | \"left\" | \"right\";",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "CodeBlockTheme": {
+    "description": "Public enum declared in packages/core/src/frame/codeThemes.ts.",
+    "usage": "Import CodeBlockTheme from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export enum CodeBlockTheme {\r\n  Andromeeda = \"andromeeda\",\r\n  AuroraX = \"aurora-x\",\r\n  AyuDark = \"ayu-dark\",\r\n  AyuLight = \"ayu-light\",\r\n  AyuMirage = \"ayu-mirage\",\r\n  CatppuccinFrappe = \"catppuccin-frappe\",\r\n  CatppuccinLatte = \"catppuccin-latte\",\r\n  CatppuccinMacchiato = \"catppuccin-macchiato\",\r\n  CatppuccinMocha = \"catppuccin-mocha\",\r\n  DarkPlus = \"dark-plus\",\r\n  Dracula = \"dracula\",\r\n  DraculaSoft = \"dracula-soft\",\r\n  EverforestDark = \"everforest-dark\",\r\n  EverforestLight = \"everforest-light\",\r\n  GithubDark = \"github-dark\",\r\n  GithubDarkDefault = \"github-dark-default\",\r\n  GithubDarkDimmed = \"github-dark-dimmed\",\r\n  GithubDarkHighContrast = \"github-dark-high-contrast\",\r\n  GithubLight = \"github-light\",\r\n  GithubLightDefault = \"github-light-default\",\r\n  GithubLightHighContrast = \"github-light-high-contrast\",\r\n  GruvboxDarkHard = \"gruvbox-dark-hard\",\r\n  GruvboxDarkMedium = \"gruvbox-dark-medium\",\r\n  GruvboxDarkSoft = \"gruvbox-dark-soft\",\r\n  GruvboxLightHard = \"gruvbox-light-hard\",\r\n  GruvboxLightMedium = \"gruvbox-light-medium\",\r\n  GruvboxLightSoft = \"gruvbox-light-soft\",\r\n  Horizon = \"horizon\",\r\n  HorizonBright = \"horizon-bright\",\r\n  Houston = \"houston\",\r\n  KanagawaDragon = \"kanagawa-dragon\",\r\n  KanagawaLotus = \"kanagawa-lotus\",\r\n  KanagawaWave = \"kanagawa-wave\",\r\n  Laserwave = \"laserwave\",\r\n  LightPlus = \"light-plus\",\r\n  MaterialTheme = \"material-theme\",\r\n  MaterialThemeDarker = \"material-theme-darker\",\r\n  MaterialThemeLighter = \"material-theme-lighter\",\r\n  MaterialThemeOcean = \"material-theme-ocean\",\r\n  MaterialThemePalenight = \"material-theme-palenight\",\r\n  MinDark = \"min-dark\",\r\n  MinLight = \"min-light\",\r\n  Monokai = \"monokai\",\r\n  NightOwl = \"night-owl\",\r\n  NightOwlLight = \"night-owl-light\",\r\n  Nord = \"nord\",\r\n  OneDarkPro = \"one-dark-pro\",\r\n  OneLight = \"one-light\",\r\n  Plastic = \"plastic\",\r\n  Poimandres = \"poimandres\",\r\n  Red = \"red\",\r\n  RosePine = \"rose-pine\",\r\n  RosePineDawn = \"rose-pine-dawn\",\r\n  RosePineMoon = \"rose-pine-moon\",\r\n  SlackDark = \"slack-dark\",\r\n  SlackOchin = \"slack-ochin\",\r\n  SnazzyLight = \"snazzy-light\",\r\n  SolarizedDark = \"solarized-dark\",\r\n  SolarizedLight = \"solarized-light\",\r\n  Synthwave84 = \"synthwave-84\",\r\n  TokyoNight = \"tokyo-night\",\r\n  Vesper = \"vesper\",\r\n  VitesseBlack = \"vitesse-black\",\r\n  VitesseDark = \"vitesse-dark\",\r\n  VitesseLight = \"vitesse-light\",\r\n}",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "FrameAccordionItem": {
+    "description": "Public interface declared in packages/core/src/components/FrameAccordion.vue.ts.",
+    "usage": "Import FrameAccordionItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface FrameAccordionItem { value: string; title: string; description?: string; disabled?: boolean }",
     "properties": [
       {
-        "name": "id",
+        "name": "value",
         "type": "string",
-        "description": "Id configuration for this component; see its Features examples for usage."
+        "description": "Value configuration for this component; see its Features examples for usage."
       },
       {
-        "name": "label",
+        "name": "title",
         "type": "string",
-        "description": "Visible or accessible label for the control."
+        "description": "Visible heading."
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "description": "Description configuration for this component; see its Features examples for usage."
       },
       {
         "name": "disabled",
         "type": "boolean",
         "description": "Prevents user interaction while retaining the current value."
-      },
-      {
-        "name": "shortcut",
-        "type": "string",
-        "description": "Shortcut configuration for this component; see its Features examples for usage."
-      },
-      {
-        "name": "separator",
-        "type": "boolean",
-        "description": "Separator configuration for this component; see its Features examples for usage."
       }
     ],
     "package": "@frame/core"
