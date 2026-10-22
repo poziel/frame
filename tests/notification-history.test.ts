@@ -1,6 +1,6 @@
 import { test, expect } from 'bun:test';
 import { createFrame } from '../packages/core/src/frame/createFrame';
-import { createNotificationHistory } from '../packages/extras/src/notificationHistory';
+import { createNotificationHistory } from '../packages/features/src/notificationHistory';
 
 test('optional history retains expired notifications and clears independently of core', async () => {
   const frame = createFrame(); const other = createFrame();
@@ -30,4 +30,27 @@ test('notification history is bounded and starts only when explicitly created', 
   expect(history.state.items.map(item => item.title)).toEqual(['Three','Two']);
   expect(() => createNotificationHistory(frame, { limit: 0 })).toThrow();
   history.dispose(); frame.dispose();
+});
+
+test('notification indicator placement, availability, and pinning are independent and disposed',()=>{
+ const first=createFrame(),second=createFrame();
+ const history=createNotificationHistory(first);
+ const action=first.toolbarActions.find(item=>item.id===history.toolbarActionId)!;
+ expect(second.toolbarActions).toHaveLength(0);
+ expect(action.showInToolbar?.()).toBe(false);
+ history.setPosition('top-right');expect(action.showInToolbar?.()).toBe(true);
+ expect(action.visible).toBe(true);
+ first.toolbar.setActionVisible(action.id,false);action.run();expect(history.state.open).toBe(true);
+ first.notify({title:'Retained',duration:0});
+ expect(first.toolbar.setActionEnabled(action.id,false)).toBe(true);
+ expect(history.state.indicatorEnabled).toBe(false);expect(history.state.open).toBe(false);
+ action.run();expect(history.state.open).toBe(false);
+ expect(history.state.items).toHaveLength(1);
+ first.toolbar.setActionEnabled(action.id,true);expect(action.feature?.enabled).toBe(true);
+ history.setPosition('bottom-left');expect(action.showInToolbar?.()).toBe(false);expect(action.visible).toBe(false);
+ history.setPosition('top-right');expect(action.visible).toBe(false);
+ const otherHistory=createNotificationHistory(first);expect(otherHistory.toolbarActionId).not.toBe(action.id);
+ history.dispose();history.dispose();expect(first.toolbarActions.some(item=>item.id===action.id)).toBe(false);
+ history.toggle();history.setPosition('bottom-right');expect(history.state.open).toBe(false);expect(history.state.indicatorPosition).toBe('top-right');
+ otherHistory.dispose();first.dispose();second.dispose();
 });

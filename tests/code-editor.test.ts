@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import { createCodeEditor, resolveCodeEditorOptions } from '../packages/extras/src/codeEditor';
+import { createCodeEditor, resolveCodeEditorOptions } from '../packages/features/src/codeEditor';
 
 test('direct settings override nested options only when supplied', () => {
   expect(resolveCodeEditorOptions({ options: { readOnly: true, fontSize: 19, ariaLabel: 'Nested' } })).toMatchObject({ readOnly: true, fontSize: 19, ariaLabel: 'Nested' });

@@ -27,7 +27,7 @@ test('runtime fixtures and slot text serialize into runnable literal examples',(
  expect(code).toContain('const frame = createFrame()');
  const menu=componentDocumentation.menus!.components[0]!;
  const menuCode=serializeUsage(menu,createDemoState(menu).props,{});
- expect(menuCode).toContain('ref="anchor"');expect(menuCode).toContain('v-if="anchor"');
+ expect(menuCode).toContain('FrameDropdownMenu');expect(menuCode).toContain(':trigger-label=');
  const checkbox=componentDocumentation.checkbox!.components[0]!;
  expect(serializeUsage(checkbox,{}, {default:'{{ 1 + 1 }}'})).toContain('v-text=');
  expect(createDemoState(componentDocumentation['color-picker']!.components[0]!).props.modelValue).toBe('#0078d4');
@@ -46,4 +46,16 @@ test('view service examples include their required region and runnable component
  expect(code).toContain('}, "secondary")');
  expect(code).toContain('frame.openView(');
  expect(code).toContain('serviceCleanup?.()');
+});
+
+test('multiple selection examples retain array models through UI and editor updates',()=>{
+ for(const id of ['listbox','toggle-group','tag-group']){
+  const state=createDemoState(componentDocumentation[id]!.components[0]!,{modelValue:['first']});
+  expect(state.set('modelValue',['first','second'])).toBe(true);
+  expect(state.values.modelValue).toEqual(['first','second']);
+  expect(state.set('modelValue','["second"]')).toBe(true);
+  expect(state.values.modelValue).toEqual(['second']);
+  expect(state.set('modelValue',[42])).toBe(false);
+  expect(state.values.modelValue).toEqual(['second']);
+ }
 });

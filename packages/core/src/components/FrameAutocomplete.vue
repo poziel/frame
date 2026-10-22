@@ -1,0 +1,16 @@
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+import { AutocompleteRoot, AutocompleteAnchor, AutocompleteInput, AutocompleteContent, AutocompletePortal, AutocompleteItem, AutocompleteEmpty, useForwardPropsEmits } from 'reka-ui';
+import type { AutocompleteRootProps, AutocompleteRootEmits } from 'reka-ui';
+import { useOverlayBoundary } from '../frame/overlays';
+import '../forms/advanced.css';
+const props=defineProps<AutocompleteRootProps & { options: readonly string[]; label: string; placeholder?: string }>();
+const emit=defineEmits<AutocompleteRootEmits>();
+const forwarded=useForwardPropsEmits(props,emit);
+const anchor=ref<HTMLElement>();
+const {target,bounds}=useOverlayBoundary(()=>anchor.value);
+const filtered=computed(()=>props.options.filter(value=>value.toLocaleLowerCase().includes((props.modelValue??'').toLocaleLowerCase())));
+const limits=computed(()=>({maxHeight:String(Math.min(260,bounds.value.height-16))+'px',maxWidth:String(Math.max(0,bounds.value.width-16))+'px'}));
+const collisionBoundary=computed(()=>typeof target.value==='string'?undefined:target.value);
+</script>
+<template><AutocompleteRoot v-bind="forwarded" class="frame-autocomplete"><AutocompleteAnchor as-child><div ref="anchor"><AutocompleteInput :aria-label="label" :placeholder="placeholder" class="frame-advanced-input" /></div></AutocompleteAnchor><AutocompletePortal :to="target"><AutocompleteContent position="popper" :collision-boundary="collisionBoundary" :collision-padding="8" :style="limits" :side-offset="4" class="frame-advanced-popup"><AutocompleteItem v-for="option in filtered" :key="option" :value="option" class="frame-advanced-option">{{option}}</AutocompleteItem><AutocompleteEmpty class="frame-field-description">No matching suggestions</AutocompleteEmpty></AutocompleteContent></AutocompletePortal></AutocompleteRoot></template>

@@ -16,7 +16,7 @@ Validated on Windows on 2026-10-21:
 | Chromium interaction suite | 10 check groups passed; no browser errors |
 | Independent Tauri/WebView2 native smoke test | 5 check groups passed |
 
-The consumer used Vue 3.5.13, Vite 8.3.5, TypeScript 6.0.3, Tauri JavaScript API 2.12.4, and Rust Tauri 2.12.5. Native compilation reused the local Cargo build cache, not Frame's Rust application source. The fixture imports core only; optional Extras integration was not tested.
+The consumer used Vue 3.5.13, Vite 8.3.5, TypeScript 6.0.3, Tauri JavaScript API 2.12.4, and Rust Tauri 2.12.5. Native compilation reused the local Cargo build cache, not Frame's Rust application source. The fixture imports core only; optional Features integration was not tested.
 
 ## Host requirements confirmed
 

@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@iconify/vue": "^5.0.4",
+    "@internationalized/date": "^3.10.1",
     "@shikijs/langs": "^4.5.0",
     "@shikijs/themes": "^4.5.0",
     "@tauri-apps/api": "^2",

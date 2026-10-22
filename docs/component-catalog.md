@@ -1,14 +1,14 @@
 # Component catalog and activity actions
 
-The demo opens Components as its first sidebar view. Home is the first activity item, followed by Components and the existing sample views. Home is an action without selection state: it calls resetWorkspace(), returning to a single empty canvas while leaving the sidebar available.
+The demo opens Components as its first sidebar view. Home is the first activity item, followed by Components and the existing sample views. Home opens the Frame introduction in the active workspace pane. Guides provides getting-started and architecture pages. These are documentation-owned contributions and preserve the workspace layout.
 
-Every catalog page uses the exported ComponentShowcase component with live preview, behavior notes, API table, copyable code, and action/value feedback. Catalog definitions and content stay in packages/docs/src/examples; they are not included in the reusable library build. **Loader** previews all 44 LDRS styles with filtering and copyable usage; **Loading region** demonstrates scoped blocking, configurable text placement, optional animation/text, mounted content, and asynchronous completion. See [Loading](loading.md).
+Catalog pages use the four-tab documentation renderer for features, API contracts, theme tokens, and interactive demos. The exported ComponentShowcase remains available for standalone showcases. Catalog definitions and content stay in packages/docs/src/examples; they are not included in the reusable library build. **Loader** previews all 44 LDRS styles with filtering and copyable usage; **Loading region** demonstrates scoped blocking, configurable text placement, optional animation/text, mounted content, and asynchronous completion. See [Loading](loading.md).
 
 ## Activity actions
 
 ```ts
 const removeHome = frame.registerActivityAction({
-  id: "home", label: "Home", icon: HomeIcon,
+  id: "clear-workspace", label: "Clear workspace", icon: HomeIcon,
   run: frame.resetWorkspace,
 });
 ```
@@ -78,18 +78,32 @@ The documentation app registers an API activity entry with the bundled reference
 
 Component type links open the same API pages and select the API sidebar. Reference pages explain behavior, constructor usage where relevant, code examples, and property types. Nested links retain a Back action that restores the previous page and sidebar. Direct class selections are root API pages and do not show an unrelated Back action.
 
-API URLs use `#/api/Name`; existing `#/types/Name` links remain supported. Catalog entries derive from the shared typeDocs registry, so adding a documented reference exposes it in the sidebar automatically. Core and Extras do not register the catalog or import documentation code.
+API URLs use `#/api/Name`; existing `#/types/Name` links remain supported. Catalog entries derive from the shared typeDocs registry, so adding a documented reference exposes it in the sidebar automatically. Core and Features do not register the catalog or import documentation code.
 
-## Extras documentation
+## Features documentation
 
-Duck has separate Components and Extras activities, with Extras immediately below Components. Components lists core examples; Extras lists all examples in the Extras group, including notification history, terminal, AI chat, and code editor. Both reuse the same documentation page renderer and keep API links and Back navigation available.
+Duck has separate Components and Features activities, with Features immediately below Components. Components lists core examples; Features lists all examples in the Features group, including notification history, terminal, AI chat, and code editor. Both reuse the same documentation page renderer and keep API links and Back navigation available.
 
 Sample tools, Collections, and the sample Activity/Inspector/Session panels are not registered by the documentation host. Interactive examples remain available inside their documentation pages.
 
 ## Component documentation tabs
 
-Every Components and Extras page provides Features, API, Theming, and Interactive demo tabs. Features contain named examples with highlighted copyable usage. API tables cover source-extracted props, defaults, emits, template slots, exposed members, related types, and public instance operations for service-oriented pages. Empty sections are omitted. The API activity remains the shared destination for type links; Back restores the originating component tab.
+Every Components and Features page provides Features, API, Theming, and Interactive demo tabs. Features contain named examples with highlighted copyable usage. API tables cover source-extracted props, defaults, emits, template slots, exposed members, related types, and public instance operations for service-oriented pages. Empty sections are omitted. The API activity remains the shared destination for type links; Back restores the originating component tab.
 
 Theming lists classes and consumed `--frame-*` variables with their fallback values. Interactive demos let you omit optional props, edit primitive or structured values, choose branches of union props, supply runtime fixtures, edit slot text, call exposed methods, reset the preview, and inspect events plus current usage code. Invalid structured values leave the last valid preview intact. Terminal examples are explicitly activated; local chat fixtures do not contact an AI provider.
 
 The Docs-only registry and helpers live in `packages/docs/src/examples/documentation`. Run `bun run docs:contracts` after changing a component contract or styling. Docs builds run this extraction automatically. Source hashes and theme-contract tests check that checked-in snapshots are current and document variables actually consumed by production CSS. Descriptions and specialized runtime scenarios must still be reviewed when adding a new behavior.
+
+## Reka forms
+
+The form, color, and date/time components also use this four-tab documentation structure. See [Forms coverage](forms.md) for the complete component inventory and upstream maturity notes.
+
+## Collection visibility
+
+Collections expose **Views and more** in their header, listing their current direct sub-views. Checked items are visible; hiding a sub-view retains its registration, component instance, collapsed state, and size. Moving a view into a collection updates that list. Empty collections retain the menu, and all-hidden collections can be restored through it. This applies to primary and secondary sidebars, bottom panels, and nested collections.
+
+Applications can set `visible: false` on a registered view, query `frame.isViewVisible(id)`, and call `frame.setViewVisible(id, visible)`. Calling `frame.openView(id)` reveals the requested view and its ancestors. Visibility is presentation state, not feature availability or resource disposal.
+
+The documentation activity **Explorer example** contains Project notes, Outline, and Timeline. Type a note or increment a counter, hide and restore the sub-view, then use **Add Scratchpad sub-view** to move the existing Scratchpad panel into the collection.
+
+See [Sidebar activity bars](sidebar-activity-bars.md) for shared primary/secondary selector behavior and layout controls.

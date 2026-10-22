@@ -3,14 +3,16 @@ export type { Frame } from "./createFrame";
 export type { Command, PanelDefinition, SidePanelDefinition, QuickPickItem, QuickPickOptions } from "../types";
 export { default as FrameShell } from "../components/FrameShell.vue";
 export { default as FrameTooltip } from "../components/FrameTooltip.vue";
-export { default as QuickInput } from "../components/CommandPalette.vue";
+export { default as FrameQuickInput } from "../components/FrameQuickInput.vue";
+export { default as FrameQuickPanel } from "../components/FrameQuickPanel.vue";
 export { default as BottomPanel } from "../components/BottomPanel.vue";
 export { default as SidePanel } from "../components/SidePanel.vue";
 
 export { default as ActivityRail } from "../components/ActivityRail.vue";
-export { default as FrameMenu } from "../components/FrameMenu.vue";
+/** @deprecated Use FrameDropdownMenu; retained for existing anchored-menu consumers. */
+export { default as FrameMenu } from "../components/AnchoredMenu.vue";
 export type { FrameMenuItem } from "../types";
-export type { LayoutState, PanelAlignment } from "./layout";
+export type { LayoutState, PanelAlignment, PanelPosition } from "./layout";
 export { default as ResizeHandle } from "../components/ResizeHandle.vue";
 
 export { default as ContextMenu } from "../components/ContextMenu.vue";
@@ -62,3 +64,77 @@ export async function loadCodeHighlight(language: string, theme: import('./codeT
   return (await import('./codeHighlight')).loadCodeHighlight(language, theme);
 }
 export type { FrameCodeBlockProps } from "./codeBlock";
+
+export { default as FrameCombobox } from '../components/FrameCombobox.vue';
+export { default as FrameEditable } from '../components/FrameEditable.vue';
+export { default as FrameListbox } from '../components/FrameListbox.vue';
+export { default as FrameNumberField } from '../components/FrameNumberField.vue';
+export { default as FrameLabel } from '../components/FrameLabel.vue';
+export { default as FramePinInput } from '../components/FramePinInput.vue';
+export { default as FrameRadioGroup } from '../components/FrameRadioGroup.vue';
+export { default as FrameSwitch } from '../components/FrameSwitch.vue';
+export { default as FrameTagsInput } from '../components/FrameTagsInput.vue';
+export { default as FrameToggle } from '../components/FrameToggle.vue';
+export { default as FrameToggleGroup } from '../components/FrameToggleGroup.vue';
+export { default as FrameCheckboxGroup } from '../components/FrameCheckboxGroup.vue';
+export { default as FrameCalendar } from '../components/FrameCalendar.vue';
+export { default as FrameRangeCalendar } from '../components/FrameRangeCalendar.vue';
+export { default as FrameDateField } from '../components/FrameDateField.vue';
+export { default as FrameDatePicker } from '../components/FrameDatePicker.vue';
+export { default as FrameDateRangeField } from '../components/FrameDateRangeField.vue';
+export { default as FrameDateRangePicker } from '../components/FrameDateRangePicker.vue';
+export { default as FrameTimeField } from '../components/FrameTimeField.vue';
+export { default as FrameTimeRangeField } from '../components/FrameTimeRangeField.vue';
+export { default as FrameMonthPicker } from '../components/FrameMonthPicker.vue';
+export { default as FrameMonthRangePicker } from '../components/FrameMonthRangePicker.vue';
+export { default as FrameYearPicker } from '../components/FrameYearPicker.vue';
+export { default as FrameYearRangePicker } from '../components/FrameYearRangePicker.vue';
+export { default as FrameAutocomplete } from '../components/FrameAutocomplete.vue';
+export { default as FrameField } from '../components/FrameField.vue';
+export { default as FrameForm } from '../components/FrameForm.vue';
+export { default as FrameRating } from '../components/FrameRating.vue';
+export { default as FrameTagGroup } from '../components/FrameTagGroup.vue';
+export { default as FrameColorArea } from '../components/FrameColorArea.vue';
+export { default as FrameColorField } from '../components/FrameColorField.vue';
+export { default as FrameColorSlider } from '../components/FrameColorSlider.vue';
+export { default as FrameColorSwatch } from '../components/FrameColorSwatch.vue';
+export { default as FrameColorSwatchPicker } from '../components/FrameColorSwatchPicker.vue';
+export { CalendarDate, CalendarDateTime, ZonedDateTime, Time, parseDate, parseDateTime, parseTime, parseZonedDateTime, today, getLocalTimeZone } from '../forms/dates';
+export type { DateValue, DateRange, TimeValue, TimeRange } from '../forms/dates';
+
+// Standalone Reka General primitives; shell services remain Frame-owned.
+export { default as FrameAccordion } from '../components/FrameAccordion.vue';
+export { default as FrameAspectRatio } from '../components/FrameAspectRatio.vue';
+export { default as FrameAvatar } from '../components/FrameAvatar.vue';
+export { default as FrameCollapsible } from '../components/FrameCollapsible.vue';
+export { default as FramePagination } from '../components/FramePagination.vue';
+export { default as FrameProgress } from '../components/FrameProgress.vue';
+export { default as FrameScrollArea } from '../components/FrameScrollArea.vue';
+export { default as FrameSeparator } from '../components/FrameSeparator.vue';
+export { default as FrameTabs } from '../components/FrameTabs.vue';
+export { default as FrameStepper } from '../components/FrameStepper.vue';
+export { default as FrameToolbar } from '../components/FrameToolbar.vue';
+export { default as FrameTree } from '../components/FrameTree.vue';
+export { default as FrameSplitter } from '../components/FrameSplitter.vue';
+export { default as FrameNavigationMenu } from '../components/FrameNavigationMenu.vue';
+export { default as FrameMenubar } from '../components/FrameMenubar.vue';
+export { default as FrameDialog } from '../components/FrameDialog.vue';
+export { default as FrameAlertDialog } from '../components/FrameAlertDialog.vue';
+export { default as FrameDrawer } from '../components/FrameDrawer.vue';
+export { default as FramePopover } from '../components/FramePopover.vue';
+export { default as FrameHoverCard } from '../components/FrameHoverCard.vue';
+export { default as FrameDropdownMenu } from '../components/FrameDropdownMenu.vue';
+export { default as FrameContextMenu } from '../components/FrameContextMenu.vue';
+export { default as FrameToast } from '../components/FrameToast.vue';
+export type { FrameAccordionProps, FrameAccordionItem } from '../components/FrameAccordion.vue';
+export type * from '../general-types';
+export type { FrameGeneralMenuItem } from '../components/generalMenu';
+
+export type { ActivityBarPosition, ActivityBarSize, ActivityBarDisplay, ActivityItemKey, ActivityBadge, ActivityOptions, ActivityItem, ActivityController } from "./activity";
+export type { ToolbarControl, ToolbarOptions } from "./toolbar";
+
+export type { ToolbarActionFeature } from '../types';
+
+export type { SecondaryBarOptions, SecondaryBarDisplay, SecondaryBarSize, SecondaryBarItem, SecondaryBarController } from './secondaryBar';
+
+export type { PanelOptions, PanelDisplay, PanelItem, PanelController } from './panel';

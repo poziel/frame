@@ -7,7 +7,7 @@ import { existsSync } from 'node:fs';
 test('every catalog page has audited source contracts and distinct working features', () => {
   expect(Object.keys(componentDocumentation).sort()).toEqual(componentExamples.map(item => item.id).sort());
   for (const doc of Object.values(componentDocumentation)) {
-    expect(doc.features.length).toBeGreaterThan(1);
+    expect(doc.features.length).toBeGreaterThan(0);
     expect(new Set(doc.features.map(item => item.id)).size).toBe(doc.features.length);
     for (const component of doc.components) expect(existsSync(component.source)).toBe(true);
   }

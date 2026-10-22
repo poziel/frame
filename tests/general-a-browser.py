@@ -1,0 +1,48 @@
+from playwright.sync_api import sync_playwright, expect
+from pathlib import Path
+import os
+URL=os.environ.get('FRAME_DOCS_URL','http://127.0.0.1:1448')
+FIXTURE=(Path(__file__).resolve().parent/'fixtures/general-a/index.html').as_posix()
+with sync_playwright() as p:
+    browser=p.chromium.launch()
+    page=browser.new_page()
+    errors=[]
+    page.on('pageerror',lambda error:errors.append(str(error)))
+    page.goto(f'{URL}/@fs/{FIXTURE}')
+    first=page.get_by_role('button',name='First section',exact=True)
+    second=page.get_by_role('button',name='Second section',exact=True)
+    expect(first).to_have_attribute('aria-expanded','true')
+    first.focus();page.keyboard.press('ArrowDown')
+    expect(second).to_be_focused()
+    second.press('Enter')
+    expect(page.locator('#accordion-state')).to_have_text('two')
+    expect(page.get_by_text('Second content',exact=True)).to_be_visible()
+    expect(page.get_by_role('button',name='Locked section')).to_be_disabled()
+    page.locator('#open-first').click()
+    expect(first).to_have_attribute('aria-expanded','true')
+    page.get_by_role('button',name='Show details').click()
+    expect(page.locator('#open-state')).to_have_text('true')
+    expect(page.get_by_text('Details body')).to_be_visible()
+    page.get_by_role('button',name='Next page',exact=True).first.click()
+    expect(page.locator('#page-state')).to_have_text('2')
+    expect(page.get_by_role('button',name='Page 2',exact=True).first).to_have_attribute('aria-current','page')
+    expect(page.locator('#disabled-pagination').get_by_role('button',name='Next page',exact=True)).to_be_disabled()
+    progress=page.get_by_role('progressbar',name='Upload')
+    expect(progress).to_have_attribute('aria-valuenow','40')
+    page.locator('#indeterminate').click()
+    expect(progress).to_have_attribute('data-state','indeterminate')
+    expect(progress).not_to_have_attribute('aria-valuenow','40')
+    expect(page.get_by_text('JD',exact=True)).to_be_visible()
+    ratio=page.locator('#ratio').bounding_box()
+    assert abs(ratio['width']/ratio['height']-2)<.02
+    viewport=page.get_by_role('region',name='History')
+    viewport.focus();page.keyboard.press('ArrowDown')
+    page.wait_for_timeout(200)
+    assert viewport.evaluate('(el)=>el.scrollTop')>0
+    expect(page.get_by_role('separator',name='Sections')).to_have_attribute('data-orientation','horizontal')
+    expect(page.locator('#decorative')).to_have_attribute('role','none')
+    page.locator('main').evaluate("el=>el.style.setProperty('--frame-progress-color','rgb(255, 0, 0)')")
+    expect(page.locator('.frame-progress-indicator')).to_have_css('background-color','rgb(255, 0, 0)')
+    assert not errors,errors
+    browser.close()
+print('General A controls passed: keyboard, controlled state, disabled controls, ARIA, aspect ratio, scroll and runtime theme.')

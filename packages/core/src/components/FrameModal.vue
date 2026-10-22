@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import OverlayScrollbars from "./OverlayScrollbars.vue";
-import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, useId, watch } from "vue";
+import { computed, defineComponent, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from "vue";
+import { DialogRoot, DialogContent, DialogTitle, injectDialogRootContext } from 'reka-ui';
 import type { Component } from "vue";
 import type { PanelAction } from "../types";
 import { fitModal, initialModal, resizeModal, type ModalEdge, type ModalRect } from "../frame/modal";
@@ -10,7 +11,12 @@ import { insetOverlayBounds, intersectOverlayBounds, overlayLayerStyle, useOverl
 
 const props = withDefaults(defineProps<{ title: string; icon?: Component; actions?: readonly PanelAction[]; bounds?: HTMLElement; active?: boolean; width?: number; height?: number; maximized?: boolean; layer?: number }>(), { active: true, layer: 0 });
 const emit = defineEmits<{ close: [] }>();
-const titleId = useId();
+// Frame restores focus when a presentation is disposed, not when another modal activates.
+const FrameFocusOwner = defineComponent({ setup() {
+  const context = injectDialogRootContext();
+  onMounted(() => { context.triggerElement.value = undefined; });
+  return () => null;
+} });
 const dialog = ref<HTMLElement>();
 const { bounds: boundary, target, getBounds } = useOverlayBoundary(() => props.bounds ?? dialog.value);
 const layerBounds = ref(viewportBounds());
@@ -32,20 +38,23 @@ function measure() {
   else Object.assign(rect, fitModal(rect, area));
 }
 function focusInitial() { (dialog.value?.querySelector<HTMLElement>('[data-modal-autofocus], [autofocus], input:not(:disabled), textarea:not(:disabled), select:not(:disabled)') ?? dialog.value)?.focus(); }
-function controls() { return Array.from(dialog.value?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), textarea:not(:disabled), select:not(:disabled), a[href], [tabindex="0"]') ?? []).filter(element => element.getClientRects().length && element.tabIndex >= 0); }
-function keydown(event: KeyboardEvent) {
-  if (!props.active || event.isComposing || event.defaultPrevented) return;
-  if (event.key === "Escape") { event.preventDefault(); event.stopPropagation(); emit("close"); return; }
-  if (event.key === "Tab") {
-    const items = controls(); const index = items.indexOf(document.activeElement as HTMLElement);
-    if (!items.length) { event.preventDefault(); dialog.value?.focus(); }
-    else if (event.shiftKey && index <= 0) { event.preventDefault(); items[items.length - 1]?.focus(); }
-    else if (!event.shiftKey && (index === items.length - 1 || index < 0)) { event.preventDefault(); items[0]?.focus(); }
-  }
+function escape(event: KeyboardEvent) {
+  if (event.defaultPrevented) return;
+  event.preventDefault();
+  if (!props.active || event.isComposing) return;
+  event.stopPropagation(); emit('close');
+}
+function ownsPopup(target: HTMLElement) {
+  const popup = target.closest<HTMLElement>(".frame-select-popup, .frame-advanced-popup, .frame-date-popover, .frame-color-picker-popover");
+  if (!popup?.id || popup.closest(".frame-overlay-host") !== dialog.value?.closest(".frame-overlay-host")) return false;
+  // Reka portals keep their logical owner through the trigger's ARIA relationship.
+  return Array.from(dialog.value?.querySelectorAll<HTMLElement>("[aria-controls], [aria-owns]") ?? []).some(control =>
+    [control.getAttribute("aria-controls"), control.getAttribute("aria-owns")].some(ids => ids?.split(/\s+/).includes(popup.id)),
+  );
 }
 function focusGuard(event: FocusEvent) {
   const target = event.target as HTMLElement;
-  if (props.active && !dialog.value?.contains(target) && !target.closest('.frame-menu, .palette-backdrop')) focusInitial();
+  if (props.active && !dialog.value?.contains(target) && !target.closest('.frame-menu, .palette-backdrop') && !ownsPopup(target)) focusInitial();
 }
 function toggleMaximize() { stopGesture?.(); maximized.value = !maximized.value; }
 function begin(event: PointerEvent, edge?: ModalEdge) {
@@ -71,16 +80,16 @@ function headerKey(event: KeyboardEvent) {
 onMounted(() => {
   previousFocus = document.activeElement as HTMLElement; measure();
   observer = new ResizeObserver(measure); if (props.bounds) observer.observe(props.bounds);
-  window.addEventListener("resize", measure); window.addEventListener("keydown", keydown); document.addEventListener("focusin", focusGuard);
+  window.addEventListener("resize", measure); document.addEventListener("focusin", focusGuard);
   if (props.active) focusInitial();
 });
 watch(() => props.bounds, () => { measure(); observer?.disconnect(); if (props.bounds) observer?.observe(props.bounds); }, { flush: "post" });
 if (boundary) watch(boundary, measure);
 watch(() => props.active, async active => { if (active) { await nextTick(); focusInitial(); } });
-onBeforeUnmount(() => { stopGesture?.(); observer?.disconnect(); window.removeEventListener("resize", measure); window.removeEventListener("keydown", keydown); document.removeEventListener("focusin", focusGuard); if (props.active) void nextTick(() => { if (previousFocus?.isConnected && !previousFocus.closest('[inert]')) previousFocus.focus(); }); });
+onBeforeUnmount(() => { stopGesture?.(); observer?.disconnect(); window.removeEventListener("resize", measure); document.removeEventListener("focusin", focusGuard); if (props.active) void nextTick(() => { if (previousFocus?.isConnected && !previousFocus.closest('[inert]')) previousFocus.focus(); }); });
 </script>
-<template><Teleport :to="target"><div class="frame-modal-layer" :style="layerStyle" :inert="!active || undefined" @contextmenu.prevent><div class="frame-modal-backdrop"/><section ref="dialog" role="dialog" :aria-modal="active ? true : undefined" :aria-labelledby="titleId" tabindex="-1" class="frame-modal" :class="{ maximized }" :style="style">
-  <header class="frame-modal-header" tabindex="0" aria-label="Move or resize modal" @pointerdown="begin($event)" @dblclick.self="toggleMaximize" @keydown="headerKey"><component v-if="icon" :is="icon" class="modal-icon"/><h2 :id="titleId" @dblclick="toggleMaximize">{{ title }}</h2><PanelActions :actions="actions"/><slot name="header-actions"/><FrameIconButton :label="maximized ? 'Restore modal' : 'Maximize modal'" :icon="maximized ? 'screen-normal' : 'screen-full'" tooltip-placement="bottom" @click="toggleMaximize"/><FrameIconButton label="Close modal" icon="close" @click="emit('close')"/></header>
+<template><DialogRoot :open="active" :modal="false"><Teleport :to="target"><div class="frame-modal-layer" :style="layerStyle" :inert="!active || undefined" @contextmenu.prevent><div class="frame-modal-backdrop"/><DialogContent force-mount as-child :aria-describedby="undefined" @escape-key-down="escape" @pointer-down-outside.prevent @interact-outside.prevent @open-auto-focus.prevent="focusInitial" @close-auto-focus.prevent><section ref="dialog" :aria-modal="active ? true : undefined" tabindex="-1" class="frame-modal" :class="{ maximized }" :style="style">
+  <header class="frame-modal-header" tabindex="0" aria-label="Move or resize modal" @pointerdown="begin($event)" @dblclick.self="toggleMaximize" @keydown="headerKey"><component v-if="icon" :is="icon" class="modal-icon"/><DialogTitle as="h2" @dblclick="toggleMaximize">{{ title }}</DialogTitle><PanelActions :actions="actions"/><slot name="header-actions"/><FrameIconButton :label="maximized ? 'Restore modal' : 'Maximize modal'" :icon="maximized ? 'screen-normal' : 'screen-full'" tooltip-placement="bottom" @click="toggleMaximize"/><FrameIconButton label="Close modal" icon="close" @click="emit('close')"/></header>
   <div class="frame-modal-content"><slot/></div>
   <template v-if="!maximized"><div v-for="edge in (['n','s','e','w','ne','nw','se','sw'] as const)" :key="edge" class="modal-resize" :class="edge" aria-hidden="true" @pointerdown="begin($event, edge)"/></template>
-</section></div><OverlayScrollbars :root="dialog"/></Teleport></template>
+</section></DialogContent></div><OverlayScrollbars :root="dialog"/></Teleport><FrameFocusOwner/></DialogRoot></template>

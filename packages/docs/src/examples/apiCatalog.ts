@@ -2,10 +2,10 @@ import extractedReferences from './documentation/references.json';
 import { typeDocs } from "./typeDocs";
 export type ApiKind = "Class" | "Object contract" | "Value type";
 const classes = new Set(["SelectItem", "SelectOption", "SelectSeparator"]);
-const values = new Set(["FrameMenuItem", "SettingValue", "WorkspaceSplitDirection", "CodeBlockTheme"]);
+const values = new Set(["FrameMenuItem", "SettingValue", "WorkspaceSplitDirection", "CodeBlockTheme", "DateValue", "DateRange", "TimeValue", "TimeRange", "ActivityBarPosition", "ActivityBarSize"]);
 export const apiEntries = Object.keys(typeDocs).sort().map(name => ({
   name, kind: (classes.has(name) ? "Class" : values.has(name) ? "Value type" : "Object contract") as ApiKind,
-  package: (extractedReferences as Record<string,{package:string}>)[name]?.package ?? (name === "NotificationHistory" ? "@frame/extras" : "@frame/core"),
+  package: (extractedReferences as Record<string,{package:string}>)[name]?.package ?? (name === "NotificationHistory" ? "@frame/features" : "@frame/core"),
 }));
 export function filterApiEntries(query: string) {
   const search = query.trim().toLowerCase();

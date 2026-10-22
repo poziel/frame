@@ -2,6 +2,10 @@
 
 Frame suppresses the browser context menu while a shell is mounted. It does not install content actions. Wrap any host content in the exported `ContextMenu`, pass `FrameMenuItem[]`, and handle `select`. Menus support nested items, separators, checked/disabled states, shortcuts, viewport fitting, arrow navigation, Escape, and focus restoration. The optional `visibility: true` menu-item property displays the reusable `VisibilityIndicator` eye on hover/focus.
 
+FrameMenu keeps its anchor, pointer position, item definitions, and select/close events. Its floating menu now uses Reka DropdownMenu primitives for keyboard navigation, label typeahead, disabled entries, checked items, nested submenus, and dismissal. Frame supplies the menu styling, shared button rows, and portal boundary for each shell instance. Escape and selection return focus to the anchor; clicking another control leaves focus with that control.
+
+Both FrameMenu and ContextMenu accept `itemAlignment: "left" | "center" | "right"` (default `"left"`). It controls the menu label alignment, including nested submenus. The menu retains its checkmark, shortcut, and submenu-arrow columns. This is separate from where the floating menu is positioned.
+
 ```vue
 <ContextMenu :items="[{ id: 'inspect', label: 'Inspect' }]" @select="inspect($event.id)">
   <article tabindex="0">Your content</article>
@@ -62,3 +66,9 @@ See [Modals](modals.md) for host-owned draggable properties dialogs.
 Collection subviews share the full available height. Collapsed headers remain visible; open views shrink proportionally when necessary, with a 60px content minimum when space permits. Preferred heights survive collapse and window resizing. Resizing a separator transfers height between the adjacent open views; double-clicking restores equal proportions. In extremely short regions content can shrink below 60px so opening another view remains possible.
 
 Frame uses arrowless overlay scrollbars in its workbench, menus, and modals. Hovering a scrollable element reveals a 12px transparent track with an 8px thumb; leaving hides it. The overlay never reserves content width or height. Native wheel, touch, and keyboard scrolling remain available, and the thumb supports dragging and track clicks. Both axes are supported.
+
+## Shared Reka menus
+
+The shell title bar renders FrameMenubar with Reka Menubar interaction. FrameDropdownMenu and FrameContextMenu use the corresponding Reka families. Their popup surfaces, recursive rows, checkbox/visibility indicators, shortcuts, alignment, theme variables, and overlay boundaries share Frame presentation. NavigationMenu remains a separate navigation-link primitive.
+
+FrameMenu.vue and the custom MenuBar.vue have been removed. The public FrameMenu export is a deprecated compatibility alias for the anchored popup contract; new code should use FrameDropdownMenu. ContextMenu remains a thin compatibility wrapper around FrameContextMenu. Installing these replacements does not register or execute host commands; shell command selections continue through Frame's existing command execution path.

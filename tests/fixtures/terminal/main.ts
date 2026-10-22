@@ -1,8 +1,8 @@
 import { createApp, h, ref } from 'vue';
 import { createFrame, FrameShell, FrameButton } from '@frame/core';
-import { TerminalView, createTerminal, createTerminalView, type TerminalBackend, type TerminalEvent } from '@frame/extras';
+import { TerminalView, createTerminal, createTerminalView, type TerminalBackend, type TerminalEvent } from '@frame/features';
 import '../../../packages/core/src/style.css';
-import '../../../packages/extras/src/style.css';
+import '../../../packages/features/src/style.css';
 
 let count = 0;
 const receivers = new Map<string, (event: TerminalEvent) => void>();

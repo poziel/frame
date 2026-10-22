@@ -1,4 +1,12 @@
+import type { PanelOptions } from './frame/panel';
+export type { PanelOptions, PanelDisplay, PanelItem, PanelController } from './frame/panel';
+import type { SecondaryBarOptions } from './frame/secondaryBar';
+export type { SecondaryBarOptions, SecondaryBarDisplay, SecondaryBarSize, SecondaryBarItem, SecondaryBarController } from './frame/secondaryBar';
 import type { Component } from "vue";
+import type { ActivityBadge, ActivityOptions } from "./frame/activity";
+import type { ToolbarOptions } from "./frame/toolbar";
+export type { ActivityBadge, ActivityOptions, ActivityBarPosition, ActivityBarSize, ActivityBarDisplay, ActivityItemKey, ActivityItem, ActivityController } from "./frame/activity";
+export type { ToolbarOptions } from "./frame/toolbar";
 
 export interface Command {
   id: string;
@@ -17,11 +25,12 @@ export interface QuickPickItem {
   disabled?: boolean;
 }
 export interface QuickPickOptions {
-  searchable?: boolean;
   title?: string;
   placeholder?: string;
 }
 export interface PanelDefinition {
+  /** Optional activity/view-bar badge; presentation is controlled by frame.activity or frame.secondaryBar. */
+  badge?: ActivityBadge;
   id: string;
   label: string;
   icon?: Component;
@@ -30,6 +39,8 @@ export interface PanelDefinition {
   draggable?: boolean;
   movable?: boolean;
   collapsed?: boolean;
+  /** Initial presentation visibility; hiding does not unregister or dispose the view. */
+  visible?: boolean;
   component?: Component;
   children?: readonly PanelDefinition[];
   props?: Record<string, unknown>;
@@ -47,7 +58,19 @@ export type FrameMenuItem =
 
 export type ViewRegion = "primary" | "secondary" | "bottom";
 export interface PanelAction { id: string; label: string; icon?: Component; run: () => void; disabled?: boolean }
-export interface ToolbarAction extends PanelAction { visible?: boolean }
+export interface ToolbarActionFeature {
+  label: string;
+  readonly enabled: boolean;
+  setEnabled(enabled: boolean): void;
+}
+export interface ToolbarAction extends PanelAction {
+  /** Whether the available action is pinned on the title bar. */
+  visible?: boolean;
+  /** Optional feature availability, independent of pinning. */
+  feature?: ToolbarActionFeature;
+  /** Whether this action currently belongs to the title bar (for movable indicators). */
+  showInToolbar?: () => boolean;
+}
 
 export interface WorkspaceBannerDefinition {
   id: string;
@@ -99,9 +122,9 @@ export interface NotificationOptions {
   id?: string; title: string; severity?: NotificationSeverity; details?: string; source?: string;
   priority?: string; duration?: number; action?: NotificationAction;
 }
-export interface FrameOptions { settings?: boolean; notifications?: boolean; /** Enable application navigation history and title-bar arrows. Default: false. */ navigation?: boolean }
+export interface FrameOptions { panel?: PanelOptions; secondaryBar?: SecondaryBarOptions; toolbar?: ToolbarOptions; activity?: ActivityOptions; settings?: boolean; notifications?: boolean; /** Enable application navigation history and title-bar arrows. Default: false. */ navigation?: boolean }
 
-export interface ActivityAction { id: string; label: string; icon?: Component; run: () => void; disabled?: boolean; active?: boolean | (() => boolean) }
+export interface ActivityAction { badge?: ActivityBadge; showInRail?: boolean; id: string; label: string; icon?: Component; run: () => void; disabled?: boolean; active?: boolean | (() => boolean) }
 /** Shared runtime base. The SelectItem type narrows to an option or separator. */
 export const SelectItem = class SelectItem {};
 export class SelectOption extends SelectItem {

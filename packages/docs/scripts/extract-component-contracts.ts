@@ -1,25 +1,29 @@
 import ts from 'typescript';
+import { generalFamilies } from '../src/examples/generalCatalog';
+import { formFamilies } from '../src/examples/formCatalog';
 import {createHash} from 'node:crypto';
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { resolve, relative } from 'node:path';
 const root = resolve(import.meta.dir, '../../..');
 const core = 'packages/core/src/components/';
-const extra = 'packages/extras/src/';
+const extra = 'packages/features/src/';
 export const pageSources: Record<string, string[]> = {
   buttons: [core+'FrameButton.vue'], 'icon-buttons':[core+'FrameIconButton.vue'],
   'text-input':[core+'FrameTextInput.vue'], checkbox:[core+'FrameCheckbox.vue'], select:[core+'FrameSelect.vue'],
   slider:[core+'FrameSlider.vue'], 'color-picker':[core+'FrameColorPicker.vue'], 'text-area':[core+'FrameTextArea.vue'],
   'setting-controls':[core+'SettingControl.vue'], icons:[core+'FrameIcon.vue'], tooltips:[core+'FrameTooltip.vue'],
-  menus:[core+'FrameMenu.vue'], 'context-menu':[core+'ContextMenu.vue'], 'resizable-panes':[core+'ResizablePane.vue'],
+  menus:[core+'FrameDropdownMenu.vue'], 'context-menu':[core+'ContextMenu.vue'], 'resizable-panes':[core+'ResizablePane.vue'],
   'resize-handle':[core+'ResizeHandle.vue'], modals:[core+'FrameModal.vue'], settings:[core+'FrameSettings.vue'],
   notifications:[core+'FrameNotifications.vue'], 'notification-panel':[extra+'NotificationPanel.vue',extra+'NotificationIndicator.vue'],
-  'quick-input':[core+'CommandPalette.vue'], banner:[core+'FrameShell.vue'], workspace:[core+'WorkspacePanes.vue'],
+  'quick-input':[core+'FrameQuickInput.vue'], 'quick-panel':[core+'FrameQuickPanel.vue'], banner:[core+'FrameShell.vue'], workspace:[core+'WorkspacePanes.vue'],
   views:[core+'SidePanel.vue',core+'ViewSections.vue'], 'activity-actions':[core+'ActivityRail.vue'], navigation:[core+'FrameShell.vue'],
   loader:[core+'FrameLoader.vue'], loading:[core+'FrameLoading.vue'], 'code-block':[core+'FrameCodeBlock.vue'],
   'code-editor':[extra+'CodeEditor.vue'], terminal:[extra+'Terminal.vue',extra+'TerminalView.vue'], 'ai-chat':[extra+'AIChat.vue'],
 };
+for (const [id, name] of formFamilies) pageSources[id] = [core + 'Frame' + name + '.vue'];
+for (const [id,name] of generalFamilies) pageSources['general-'+id]=[core+'Frame'+name+'.vue'];
 const files = [...new Set(Object.values(pageSources).flat())];
-const script = (file: string) => readFileSync(file,'utf8').match(/<script[^>]*>([\s\S]*?)<\/script>/)?.[1] ?? '';
+const script = (file: string) => [...readFileSync(file,'utf8').matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map(match=>match[1]).join('\n');
 const options: ts.CompilerOptions = { target: ts.ScriptTarget.ES2020, module:ts.ModuleKind.ESNext, moduleResolution:ts.ModuleResolutionKind.Bundler, strict:true, skipLibCheck:true, baseUrl:root, paths:{'@frame/core':['packages/core/src/frame/index.ts']} };
 const host = ts.createCompilerHost(options);
 const originalRead = host.readFile.bind(host), originalExists = host.fileExists.bind(host);
@@ -80,28 +84,48 @@ for (const file of files) {
  }
  walk(source);
  const defaultMap=new Map<string,string>();
+ // Forwarded roots keep their upstream defaults, including inherited primitive props.
+ const sourceText=readFileSync(resolve(root,file),'utf8');
+ const rootName=sourceText.match(/import\s*\{[^}]*?\b([A-Za-z]+Root)\b[^}]*\}\s*from\s*['"]reka-ui['"]/)?.[1];
+ if(rootName){
+  const family=rootName.replace(/Root$/,'');
+  const upstream=resolve(root,'node_modules/reka-ui/dist',family,rootName+'.js');
+  if(existsSync(upstream)){
+   const sf=ts.createSourceFile(upstream,readFileSync(upstream,'utf8'),ts.ScriptTarget.Latest,true,ts.ScriptKind.JS);
+   function defaultsFrom(node:ts.Node){
+    if(ts.isPropertyAssignment(node)&&node.name.getText(sf)==='props'&&ts.isObjectLiteralExpression(node.initializer))for(const prop of node.initializer.properties){
+     if(ts.isPropertyAssignment(prop)&&ts.isObjectLiteralExpression(prop.initializer))for(const part of prop.initializer.properties)if(ts.isPropertyAssignment(part)&&part.name.getText(sf)==='default')defaultMap.set(unquote(prop.name.getText(sf)),part.initializer.getText(sf));
+    }
+    ts.forEachChild(node,defaultsFrom);
+   }
+   defaultsFrom(sf);
+  }
+ }
+
  for(const field of defaults?.properties ?? []) if(ts.isPropertyAssignment(field)) defaultMap.set(unquote(field.name.getText(source)),field.initializer.getText(source));
  const props=propsType ? checker.getPropertiesOfType(checker.getTypeFromTypeNode(propsType)).map(symbol=>{
   const decl=symbol.valueDeclaration ?? symbol.declarations?.[0]!;
   const type=checker.getTypeOfSymbolAtLocation(symbol,decl);
-  const display=(decl as ts.PropertySignature).type?.getText() ?? checker.typeToString(type,undefined,ts.TypeFormatFlags.NoTruncation);
+  const declared=(decl as ts.PropertySignature).type?.getText();
+  const display=(declared&&!/\b(?:T|U|M)\b/.test(declared)?declared:checker.typeToString(type,decl,ts.TypeFormatFlags.NoTruncation | ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)).replace(/import\("[^"]+"\)\./g,'').replace(/\b(?:_internationalized_date\d*|vue\d*|vue_demi\d*)\./g,'');
   const optional=!!(symbol.flags & ts.SymbolFlags.Optional);
-  const textDefault=defaultMap.get(symbol.name);
+  const tagDefault=symbol.getJsDocTags(checker).find(tag=>tag.name==='defaultValue'||tag.name==='default')?.text?.map(part=>part.text).join('');
+  const textDefault=defaultMap.get(symbol.name) ?? tagDefault;
   const branches=type.isUnion()?type.types:[type];
   const choices=branches.filter(t=>t.isStringLiteral()).map(t=>(t as ts.StringLiteralType).value);
   const isBoolean=branches.some(t=>!!(t.flags&(ts.TypeFlags.Boolean|ts.TypeFlags.BooleanLiteral)));
   const isNumber=branches.some(t=>!!(t.flags&(ts.TypeFlags.Number|ts.TypeFlags.NumberLiteral)));
   const isText=branches.some(t=>!!(t.flags&ts.TypeFlags.String)) || choices.length>0;
-  const fixture=(/Controller|HTMLElement|\bFrame\b|Component|NotificationHistory/.test(display) || display.includes('=>'))&&!isText;
+  const fixture=(/Controller|HTMLElement|\bFrame\b|Component|NotificationHistory/.test(display) || display.includes('=>') || checker.getNonNullableType(type).getCallSignatures().length>0)&&!isText;
   let value:unknown = !optional ? {kind:'required'} : isBoolean ? {kind:'literal',value:'false'} : {kind:'omitted'};
-  if(textDefault!==undefined) value=textDefault==='undefined'?{kind:'omitted'}:/^['"\d-]|^(true|false|null)$/.test(textDefault)?{kind:'literal',value:textDefault}:textDefault.startsWith('() =>')?{kind:'literal',value:textDefault.replace(/^\(\) =>\s*/,'')}:{kind:'derived',expression:textDefault};
-  return {name:symbol.name,type:display,default:value,description:symbol.name==='options'&&file.endsWith('CodeEditor.vue')?'Nested Monaco editor and model options. Direct readOnly and label props take precedence.':symbol.name==='iconSize'?'Explicit icon size in pixels. When omitted, size is multiplied by iconRatio.':describe(symbol.name,symbol),options:choices.length?choices:undefined,control:fixture?'fixture':isBoolean&&!isText?'boolean':isNumber&&!isText?'number':isText?'text':'json',references:[...new Set(display.match(/\b[A-Z][A-Za-z0-9]+\b/g)??[])].filter(n=>!['Promise','MouseEvent','KeyboardEvent','HTMLElement','Component'].includes(n))};
+  if(textDefault!==undefined) value=['undefined','void 0'].includes(textDefault)?{kind:'omitted'}:/^['"\d-]|^(true|false|null)$/.test(textDefault)?{kind:'literal',value:textDefault}:textDefault.startsWith('() =>')?{kind:'literal',value:textDefault.replace(/^\(\) =>\s*/,'')}:{kind:'derived',expression:textDefault};
+  return {name:symbol.name,type:display,default:value,description:symbol.name==='position'&&/FrameQuick(Input|Panel)\.vue$/.test(file)?'Explicit top or center placement. When omitted, follows the provided Frame layout.quickInputPosition; standalone defaults to top.':symbol.name==='options'&&file.endsWith('CodeEditor.vue')?'Nested Monaco editor and model options. Direct readOnly and label props take precedence.':symbol.name==='iconSize'?'Explicit icon size in pixels. When omitted, size is multiplied by iconRatio.':describe(symbol.name,symbol),options:choices.length?choices:undefined,control:fixture?'fixture':isBoolean&&!isText?'boolean':isNumber&&!isText?'number':isText?'text':'json',references:[...new Set(display.match(/\b[A-Z][A-Za-z0-9]+\b/g)??[])].filter(n=>!['Promise','MouseEvent','KeyboardEvent','HTMLElement','Component'].includes(n))};
  }):[];
  const callable=(node:ts.TypeNode|undefined,slot=false)=>node?checker.getPropertiesOfType(checker.getTypeFromTypeNode(node)).map(symbol=>{
   const declaration=symbol.declarations?.[0]!;
   const value=checker.getTypeOfSymbolAtLocation(symbol,declaration);
   const signature=value.getCallSignatures()[0];
-  return {name:symbol.name,parameters:!slot && ts.isPropertySignature(declaration) && declaration.type ? declaration.type.getText().replace(/^\[|\]$/g,'') : signature?signature.parameters.map(p=>`${p.name}: ${checker.typeToString(checker.getTypeOfSymbolAtLocation(p,declaration),undefined,ts.TypeFormatFlags.NoTruncation)}`).join(', '):checker.typeToString(value),returns:slot?'VNodeChild':'void',description:slot?`Content rendered in the ${symbol.name} slot.`:symbol.name==='update:modelValue'?'Emitted when the user changes the controlled value.':`Emitted on ${symbol.name.replace(/([A-Z])/g,' $1').toLowerCase()}.`};
+  return {name:symbol.name,parameters:!slot && ts.isPropertySignature(declaration) && declaration.type ? checker.typeToString(value,declaration,ts.TypeFormatFlags.NoTruncation).replace(/^\[|\]$/g,'').replace(/\b(?:_internationalized_date\d*|vue\d*)\./g,'') : signature?signature.parameters.map(p=>`${p.name}: ${checker.typeToString(checker.getTypeOfSymbolAtLocation(p,declaration),undefined,ts.TypeFormatFlags.NoTruncation)}`).join(', '):checker.typeToString(value),returns:slot?'VNodeChild':'void',description:slot?`Content rendered in the ${symbol.name} slot.`:symbol.name==='update:modelValue'?'Emitted when the user changes the controlled value.':`Emitted on ${symbol.name.replace(/([A-Z])/g,' $1').toLowerCase()}.`};
  }):[];
  const emits=callable(emitsType), slots=callable(slotsType,true);
  const full=readFileSync(resolve(root,file),'utf8');
@@ -109,7 +133,7 @@ for (const file of files) {
   const name=match[1]!.match(/\bname=['"]([^'"]+)['"]/)?.[1]??'default';
   if(!slots.some(slot=>slot.name===name)) slots.push({name,parameters:[...match[1]!.matchAll(/:([\w-]+)=/g)].map(m=>`${m[1]}: unknown`).join(', '),returns:'VNodeChild',description:`Content rendered in the ${name} slot.`});
  }
- const slotParameters:Record<string,Record<string,string>>={FrameTooltip:{default:'describedby: string | undefined'},FrameShell:{default:'pane: WorkspacePane','workspace-pane':'pane: WorkspacePane',overlays:'bounds: OverlayBounds, target: HTMLElement | undefined'},AIChat:{'message-actions':'message: ChatMessage'}};
+ const slotParameters:Record<string,Record<string,string>>={FrameQuickInput:{item:'item: QuickPickItem, active: boolean'},FrameTooltip:{default:'describedby: string | undefined'},FrameShell:{default:'pane: WorkspacePane','workspace-pane':'pane: WorkspacePane',overlays:'bounds: OverlayBounds, target: HTMLElement | undefined'},AIChat:{'message-actions':'message: ChatMessage'}};
  const componentName=file.split('/').pop()!.replace('.vue','');
  for(const slot of slots)if(slotParameters[componentName]?.[slot.name])slot.parameters=slotParameters[componentName]![slot.name]!;
  const methods=(expose?.properties??[]).map(field=>{
@@ -118,7 +142,8 @@ for (const file of files) {
   const text=field.getText(source);
   return {name,kind:signature?'method':'property',parameters:signature?signature.parameters.map(p=>p.name+': '+checker.typeToString(checker.getTypeOfSymbolAtLocation(p,field))).join(', '):'',returns:signature?checker.typeToString(signature.getReturnType()):text.includes('=>')?'void':checker.typeToString(type),description:name==='focus'?'Focuses the rendered control.':`Exposed ${name} API. Available through the mounted component ref.`};
  });
- contracts[file]={name:file.split('/').pop()!.replace('.vue',''),source:file,sourceHash:createHash('sha256').update(full).digest('hex'),props,emits,slots,methods,forwardsAttrs:full.includes('$attrs') || !full.includes('inheritAttrs: false')};
+ if(componentName==='FrameQuickInput')for(const method of methods){if(method.name==='element')method.returns='HTMLInputElement | undefined';if(method.name==='focus')method.returns='void';}
+ contracts[file]={name:file.split('/').pop()!.replace('.vue',''),source:file,sourceHash:createHash('sha256').update(full).digest('hex'),props,emits,slots,methods,forwardsAttrs:full.includes('$attrs') || !/inheritAttrs\s*:\s*false/.test(full)};
 }
 const serviceSpecs:Record<string,{name:string;type:string;source:string;returns:string}>={
  notifications:{name:'frame.notify',type:'NotificationOptions',source:'packages/core/src/types.ts',returns:'{ id: string; close: () => void }'},
@@ -153,11 +178,11 @@ for(const contract of [...Object.values(contracts),...Object.values(services)] a
 const references:Record<string,unknown>={};
 for(const sf of program.getSourceFiles()){
  const path=relative(root,sf.fileName).replace(/\\/g,'/');
- if(!path.startsWith('packages/core/src/')&&!path.startsWith('packages/extras/src/'))continue;
+ if(!path.startsWith('packages/core/src/')&&!path.startsWith('packages/features/src/')&&!path.includes('/reka-ui/')&&!path.includes('/@internationalized/date/'))continue;
  for(const node of sf.statements){
   if(!(ts.isInterfaceDeclaration(node)||ts.isTypeAliasDeclaration(node)||ts.isEnumDeclaration(node))||!referenced.has(node.name.text))continue;
   const name=node.name.text;const props=ts.isInterfaceDeclaration(node)?node.members.filter(ts.isPropertySignature).map(member=>({name:member.name.getText(sf),type:member.type?.getText(sf)??'unknown',description:describe(member.name.getText(sf)),...(member.questionToken?{}:{})})):[];
-  references[name]={description:`Public ${ts.isInterfaceDeclaration(node)?'interface':ts.isEnumDeclaration(node)?'enum':'type'} declared in ${path}.`,usage:`Import ${name} from ${path.includes('/extras/')?'@frame/extras':'@frame/core'}. The definition below is the source contract; optional fields may be omitted.`,code:node.getText(sf),properties:props,package:path.includes('/extras/')?'@frame/extras':'@frame/core'};
+  references[name]={description:`Public ${ts.isInterfaceDeclaration(node)?'interface':ts.isEnumDeclaration(node)?'enum':'type'} declared in ${path}.`,usage:`Import ${name} from ${path.includes('/reka-ui/')?'reka-ui':path.includes('/@internationalized/date/')?'@internationalized/date':path.includes('/features/')?'@frame/features':'@frame/core'}. The definition below is the source contract; optional fields may be omitted.`,code:node.getText(sf),properties:props,package:['DateValue','DateRange','TimeValue','TimeRange'].includes(name)?'@frame/core':path.includes('/reka-ui/')?'reka-ui':path.includes('/@internationalized/date/')?'@internationalized/date':path.includes('/features/')?'@frame/features':'@frame/core'};
  }
 }
 writeFileSync(resolve(root,'packages/docs/src/examples/documentation/references.json'),JSON.stringify(references,null,2)+'\n');

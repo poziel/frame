@@ -1,11 +1,11 @@
 # Component documentation tabs
 
 Date: 2026-10-21
-Scope: Duck documentation, plus public styling tokens in Core and Extras.
+Scope: Duck documentation, plus public styling tokens in Core and Features.
 
 ## Outcome
 
-Every component page in Components and Extras has four tabs: Features, API, Theming, and Interactive demo. Features is initially selected. Pages use Frame's existing visual language and controls. API references remain distinct pages in the API activity section. Documentation data, editors, and examples stay in packages/docs.
+Every component page in Components and Features has four tabs: Features, API, Theming, and Interactive demo. Features is initially selected. Pages use Frame's existing visual language and controls. API references remain distinct pages in the API activity section. Documentation data, editors, and examples stay in packages/docs.
 
 The PrimeVue Checkbox page is the structural reference: named feature sections with descriptions, live examples, and adjacent code. It does not define Frame's supported properties or styling. Actual Frame source is authoritative.
 
@@ -19,7 +19,7 @@ Keep the generic ComponentShowcase export compatible for existing consumers and 
 
 A common header shows package, component name, and description. A single top-level tablist follows it. It has roving keyboard focus, ArrowLeft/ArrowRight/Home/End support, aria-selected, aria-controls, and associated tab panels. Tab selection is local to each workspace page. Changing the component resets its tab to Features and scrolls to the start.
 
-Existing component and Extras activity separation remains. Existing API links still open the API activity, preserve the previous page/sidebar, and support Back. Back restores the component tab that contained the link. Icon-library links stay on the Icons Features tab. Existing icon catalog behavior remains intact.
+Existing component and Features activity separation remains. Existing API links still open the API activity, preserve the previous page/sidebar, and support Back. Back restores the component tab that contained the link. Icon-library links stay on the Icons Features tab. Existing icon catalog behavior remains intact.
 
 ## Features
 
@@ -75,7 +75,7 @@ Source-derived inventories can help collect declarations, but descriptions and c
 
 ## Verification and acceptance
 
-- Every Components and Extras catalog entry renders all four tabs with meaningful content.
+- Every Components and Features catalog entry renders all four tabs with meaningful content.
 - Features have matching preview/code pairs and multiple supported use cases.
 - API tables cover public props, defaults, emits, slots, and exposed APIs; absent sections are omitted.
 - Type links resolve and Back restores the source page/tab/sidebar.
@@ -83,8 +83,8 @@ Source-derived inventories can help collect declarations, but descriptions and c
 - Interactive controls update actual props, reset correctly, and report emits; invalid inputs do not break previews.
 - No unexpected process launch, provider request, or persistent demo registration occurs on page load.
 - Keyboard tab navigation and narrow workspace layouts work without clipping controls or API tables.
-- Unit checks cover contract inventories and demo-state handling where meaningful; browser checks cover representative simple, structured, overlay, asynchronous, and Extras examples.
-- Run the full test suite, Docs/Core/Extras builds, consumer type checks, and package-boundary checks.
+- Unit checks cover contract inventories and demo-state handling where meaningful; browser checks cover representative simple, structured, overlay, asynchronous, and Features examples.
+- Run the full test suite, Docs/Core/Features builds, consumer type checks, and package-boundary checks.
 
 ## Boundaries
 

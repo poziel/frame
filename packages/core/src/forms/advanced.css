@@ -1,0 +1,34 @@
+.frame-advanced-input { box-sizing:border-box; min-height:28px; width:min(100%,340px); padding:var(--frame-control-padding-y) var(--frame-control-padding-x); border:1px solid var(--frame-control-border); border-radius:var(--frame-advanced-input-radius,var(--frame-input-radius)); color:var(--frame-control-text); background:var(--frame-control-background); font:inherit; }
+.frame-field { display:flex; flex-direction:column; gap:var(--frame-gap); min-width:0; }
+.frame-form { display:grid; gap:var(--frame-content-padding); }
+.frame-field-label { font-weight:500; color:var(--frame-text); }
+.frame-field-description { font-size:11px; color:var(--frame-muted); }
+.frame-field-error { font-size:11px; color:var(--frame-danger,#f48771); }
+.frame-field [data-invalid],.frame-field [aria-invalid=true] { border-color:var(--frame-danger,#f48771); }
+.frame-field :is(input,textarea,select) { font:inherit; }
+.frame-rating { display:inline-flex; gap:3px; }
+.frame-rating-item { display:inline-block; position:relative; width:24px; height:28px; }
+.frame-rating-step { position:absolute; inset:0; width:var(--reka-rating-item-step-width); opacity:var(--reka-rating-item-step-opacity); z-index:var(--reka-rating-item-step-z-index); overflow:hidden; border:0; background:transparent; padding:0; text-align:left; font-size:24px; line-height:28px; color:var(--frame-muted); cursor:pointer; }
+.frame-rating-step[data-state=active] { color:var(--frame-accent); }
+.frame-tag-group { display:flex; gap:var(--frame-gap); flex-wrap:wrap; }
+.frame-tag { display:inline-flex; align-items:center; gap:var(--frame-gap); padding:3px 7px; border:1px solid var(--frame-line); border-radius:var(--frame-control-radius); color:var(--frame-text); background:var(--frame-surface); }
+.frame-tag[data-state=checked] { border-color:var(--frame-accent); }
+.frame-tag-delete { border:0; background:transparent; color:var(--frame-muted); cursor:pointer; padding:0 2px; }
+.frame-color-plane { position:relative; width:220px; max-width:100%; height:160px; border-radius:var(--frame-control-radius); touch-action:none; }
+.frame-color-thumb { display:block; width:14px; height:14px; border:2px solid white; border-radius:50%; box-shadow:0 0 0 1px #0009; background:transparent; }
+.frame-color-slider { display:flex; position:relative; align-items:center; width:220px; height:22px; touch-action:none; }
+.frame-color-slider[data-orientation=vertical] { width:22px; height:160px; }
+.frame-color-track { display:block; flex:1; height:12px; border-radius:var(--frame-control-radius); }
+.frame-color-slider[data-orientation=vertical] .frame-color-track { height:100%; width:12px; flex:initial; }
+.frame-color-swatch { display:inline-block; width:26px; height:26px; border:1px solid var(--frame-line); border-radius:var(--frame-control-radius); flex-shrink:0; }
+.frame-swatch-picker { display:flex; flex-wrap:wrap; gap:var(--frame-gap); }
+.frame-swatch-item { position:relative; display:inline-flex; padding:2px; border:1px solid transparent; border-radius:var(--frame-control-radius); cursor:pointer; }
+.frame-swatch-item[data-state=checked] { border-color:var(--frame-accent); }
+.frame-swatch-indicator { position:absolute; inset:0; display:grid; place-items:center; color:white; text-shadow:0 1px 3px black; }
+.frame-advanced-popup { z-index:125; box-sizing:border-box; min-width:var(--reka-autocomplete-trigger-width,180px); overflow:auto; padding:4px; border:1px solid var(--frame-menu-border); border-radius:var(--frame-control-radius); background:var(--frame-menu-background); color:var(--frame-text); box-shadow:var(--frame-overlay-shadow); font-family:var(--frame-font-body); font-size:var(--frame-font-size-body); }
+.frame-advanced-option { padding:6px 10px; cursor:default; outline:none; border-radius:var(--frame-control-radius); }
+.frame-advanced-option[data-highlighted] { background:var(--frame-menu-hover); }
+:is(.frame-advanced-input,.frame-rating-step,.frame-tag,.frame-tag-delete,.frame-color-thumb,.frame-swatch-item):focus-visible { outline:1px solid var(--frame-accent); outline-offset:2px; }
+:is(.frame-color-area,.frame-color-slider,.frame-rating,.frame-tag-group)[data-disabled], .frame-advanced-input:disabled { opacity:.5; cursor:default; }
+
+.frame-advanced-popup { pointer-events:auto; }

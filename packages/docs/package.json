@@ -7,7 +7,7 @@
   "dependencies": {
     "@frame/core": "workspace:*",
     "vue": "^3.5.13",
-    "@frame/extras": "workspace:*"
+    "@frame/features": "workspace:*"
   },
   "scripts": {
     "dev": "vite",

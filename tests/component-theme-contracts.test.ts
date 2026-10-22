@@ -3,7 +3,7 @@ import {readFileSync} from 'node:fs';
 import {componentDocumentation} from '../packages/docs/src/examples/documentation/registry';
 test('documented theme variables are consumed by production component CSS',()=>{
  for(const doc of Object.values(componentDocumentation))for(const token of doc.tokens){
-  expect(token.source.startsWith('packages/core/')||token.source.startsWith('packages/extras/')).toBe(true);
+  expect(token.source.startsWith('packages/core/')||token.source.startsWith('packages/features/')).toBe(true);
   expect(readFileSync(token.source,'utf8')).toContain('var('+token.name);
   expect(token.value.length).toBeGreaterThan(0);
  }

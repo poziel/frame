@@ -1,8 +1,8 @@
 import { createApp, h, ref } from 'vue';
-import { CodeEditor, createCodeEditor } from '@frame/extras';
+import { CodeEditor, createCodeEditor } from '@frame/features';
 import { CodeBlockTheme, FrameCodeBlock, loadCodeHighlight } from '@frame/core';
-import { loadMonaco } from '../../../packages/extras/src/codeEditorRuntime';
-import '../../../packages/extras/src/style.css';
+import { loadMonaco } from '../../../packages/features/src/codeEditorRuntime';
+import '../../../packages/features/src/style.css';
 const code = ref('const greeting: string = "Hello";\nconsole.log(greeting);\n');
 const theme = ref(CodeBlockTheme.DarkPlus), language = ref('typescript'), readOnly = ref<boolean | undefined>(false), shown = ref(true), width = ref(800);
 const editor = createCodeEditor();

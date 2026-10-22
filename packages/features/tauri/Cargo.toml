@@ -1,0 +1,19 @@
+[package]
+name = "tauri-plugin-frame-terminal"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+links = "tauri-plugin-frame-terminal"
+description = "Opt-in native PTY backend for Frame features"
+
+[build-dependencies]
+tauri-plugin = { version = "2", features = ["build"] }
+
+[dependencies]
+tauri = { version = "2", default-features = false }
+serde = { version = "1", features = ["derive"] }
+portable-pty = "0.9"
+
+[target.'cfg(windows)'.dependencies]
+winreg = "0.55"
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_System_Threading"] }

@@ -1,6 +1,10 @@
+import {generalFeatures} from '../generalCatalog';
+import { coreFeatures } from './coreFeatures';
+import { componentGuides, formFeatures } from './formFeatures';
 import contracts from './contracts.json';
 import themes from './themes.json';
 import serviceContracts from './services.json';
+import { formExamples } from '../formCatalog';
 import { componentExamples } from '../componentCatalog';
 import { variantsFor } from '../exampleVariants';
 import { exampleValue, serializeUsage } from './demoState';
@@ -21,10 +25,10 @@ export const componentDocumentation:Record<string,ComponentDocumentation> = Obje
   if(main.name==='Terminal'){delete values.sessionId;values.label='Local terminal';}
   features.push({id:'configured',title:disabled?'Disabled state':variant?'Visual variants':'Composition and configuration',description:configurable?`Set ${configurable.name} explicitly to override its default. The interactive demo exposes every public property.`:'Compose this API with application-owned content. Use the actions in this example to inspect the behavior.',variant:'configured',code:serializeUsage(main,values,slots),...{values}});
  }
- const simple=!['terminal','ai-chat','code-editor','settings','notifications','notification-panel','quick-input','banner','workspace','views','activity-actions','navigation','select'].includes(example.id);
- if(simple){features[0]!.values=baseline;features[0]!.code=serializeUsage(main,baseline,slots);}
+ const simple=!['terminal','ai-chat','code-editor','settings','notifications','notification-panel','quick-input','quick-panel','banner','workspace','views','activity-actions','navigation','select'].includes(example.id);
+ if(simple){features[0]!.values=baseline;features[0]!.code=formExamples.some(item=>item.id===example.id)?example.code:serializeUsage(main,baseline,slots);}
  const service=(serviceContracts as unknown as Record<string,ComponentContract>)[example.id];
  if(service)components.push(service);
  const relevant=sources[example.id]!.flatMap(source=>styling[source]?.tokens??[]);
- return [example.id,{id:example.id,components,features,classes:[...new Map(sources[example.id]!.flatMap(source=>styling[source]?.classes??[]).map(item=>[item.name,item])).values()],tokens:[...new Map(relevant.map(item=>[item.name,item])).values()],demoId:example.id}];
+ return [example.id,{id:example.id,components,guide:componentGuides[example.id],features:generalFeatures(main.name,main)??formFeatures(example.id,main)??coreFeatures(example.id,main)??features,classes:[...new Map(sources[example.id]!.flatMap(source=>styling[source]?.classes??[]).map(item=>[item.name,item])).values()],tokens:[...new Map(relevant.map(item=>[item.name,item])).values()],demoId:example.id}];
 }));

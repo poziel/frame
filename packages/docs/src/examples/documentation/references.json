@@ -1,4 +1,387 @@
 {
+  "DateValue": {
+    "description": "Public type declared in node_modules/.bun/@internationalized+date@3.12.4/node_modules/@internationalized/date/dist/types/src/CalendarDate.d.ts.",
+    "usage": "Import DateValue from @internationalized/date. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type DateValue = CalendarDate | CalendarDateTime | ZonedDateTime;",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "Matcher": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import Matcher from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type Matcher = (date: DateValue$2) => boolean;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "TimeValue": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import TimeValue from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type TimeValue = Time | CalendarDateTime | ZonedDateTime;",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "Granularity": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import Granularity from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type Granularity = 'day' | 'hour' | 'minute' | 'second';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "DateStep": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import DateStep from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type DateStep = {\n  year?: number;\n  month?: number;\n  day?: number;\n  hour?: number;\n  minute?: number;\n  second?: number;\n  millisecond?: number;\n};",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "DateRange": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import DateRange from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type DateRange = {\n  start: DateValue$1 | undefined;\n  end: DateValue$1 | undefined;\n};",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "TimeRange": {
+    "description": "Public interface declared in packages/core/src/forms/dates.ts.",
+    "usage": "Import TimeRange from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface TimeRange { start: TimeValue | undefined; end: TimeValue | undefined }",
+    "properties": [
+      {
+        "name": "start",
+        "type": "TimeValue | undefined",
+        "description": "Start configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "end",
+        "type": "TimeValue | undefined",
+        "description": "End configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "HourCycle": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import HourCycle from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type HourCycle = 12 | 24 | undefined;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "DataOrientation": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import DataOrientation from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type DataOrientation = 'vertical' | 'horizontal';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "Direction": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import Direction from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type Direction = 'ltr' | 'rtl';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "SingleOrMultipleType": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import SingleOrMultipleType from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type SingleOrMultipleType = 'single' | 'multiple';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "AcceptableValue": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import AcceptableValue from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type AcceptableValue = string | number | bigint | Record<string, any> | null;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "StringOrNumber": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import StringOrNumber from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type StringOrNumber = string | number;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "WeekDayFormat": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import WeekDayFormat from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type WeekDayFormat = 'narrow' | 'short' | 'long';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "WeekStartsOn": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import WeekStartsOn from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type WeekStartsOn = 0 | 1 | 2 | 3 | 4 | 5 | 6;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "AsTag": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import AsTag from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type AsTag = 'a' | 'button' | 'div' | 'form' | 'h2' | 'h3' | 'img' | 'input' | 'label' | 'li' | 'nav' | 'ol' | 'p' | 'span' | 'svg' | 'ul' | 'template' | ({} & string);",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "DialogContentProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import DialogContentProps from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "interface DialogContentProps extends Omit<DialogContentImplProps, 'trapFocus'> {\n  /**\n   * Used to force mounting when more control is needed. Useful when\n   * controlling animation with Vue animation libraries.\n   */\n  forceMount?: boolean;\n}",
+    "properties": [
+      {
+        "name": "forceMount",
+        "type": "boolean",
+        "description": "Force Mount configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "reka-ui"
+  },
+  "AlertDialogContentProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import AlertDialogContentProps from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "interface AlertDialogContentProps extends DialogContentProps {}",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "AvatarImageProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import AvatarImageProps from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "interface AvatarImageProps extends PrimitiveProps {\n  src: string;\n  referrerPolicy?: ImgHTMLAttributes['referrerpolicy'];\n  crossOrigin?: ImgHTMLAttributes['crossorigin'];\n}",
+    "properties": [
+      {
+        "name": "src",
+        "type": "string",
+        "description": "Src configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "referrerPolicy",
+        "type": "ImgHTMLAttributes['referrerpolicy']",
+        "description": "Referrer Policy configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "crossOrigin",
+        "type": "ImgHTMLAttributes['crossorigin']",
+        "description": "Cross Origin configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "reka-ui"
+  },
+  "ColorSpace": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import ColorSpace from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type ColorSpace = 'rgb' | 'hsl' | 'hsb';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "Color": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import Color from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type Color = RGBColor | HSLColor | HSBColor;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "ColorChannel": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import ColorChannel from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type ColorChannel = RGBChannel | HSLChannel | HSBChannel;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "ContextMenuContentProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import ContextMenuContentProps from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "interface ContextMenuContentProps extends Omit<MenuContentProps, 'side' | 'sideOffset' | 'align' | 'arrowPadding' | 'updatePositionStrategy'> {}",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "DrawerContentProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import DrawerContentProps from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "interface DrawerContentProps extends Omit<DrawerContentImplProps, 'trapFocus'> {\n  forceMount?: boolean;\n}",
+    "properties": [
+      {
+        "name": "forceMount",
+        "type": "boolean",
+        "description": "Force Mount configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "reka-ui"
+  },
+  "DrawerSnapPoint": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import DrawerSnapPoint from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type DrawerSnapPoint = number | string;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "DrawerModal": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import DrawerModal from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type DrawerModal = boolean | 'trap-focus';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "DropdownMenuContentProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import DropdownMenuContentProps from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "interface DropdownMenuContentProps extends MenuContentProps {}",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "FieldValidationMode": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import FieldValidationMode from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type FieldValidationMode = 'onSubmit' | 'onBlur' | 'onChange';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "FieldValidateFn": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import FieldValidateFn from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type FieldValidateFn = (value: unknown, formValues: Record<string, unknown>) => FieldValidateResult | Promise<FieldValidateResult>;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "HoverCardContentProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import HoverCardContentProps from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "interface HoverCardContentProps extends HoverCardContentImplProps {\n  /**\n   * Used to force mounting when more control is needed. Useful when\n   * controlling animation with Vue animation libraries.\n   */\n  forceMount?: boolean;\n}",
+    "properties": [
+      {
+        "name": "forceMount",
+        "type": "boolean",
+        "description": "Force Mount configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "reka-ui"
+  },
+  "Orientation": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import Orientation from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type Orientation = 'vertical' | 'horizontal';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "PopoverContentProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import PopoverContentProps from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "interface PopoverContentProps extends PopoverContentImplProps {\n  /**\n   * Used to force mounting when more control is needed. Useful when\n   * controlling animation with Vue animation libraries.\n   */\n  forceMount?: boolean;\n}",
+    "properties": [
+      {
+        "name": "forceMount",
+        "type": "boolean",
+        "description": "Force Mount configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "reka-ui"
+  },
+  "ScrollType": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import ScrollType from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type ScrollType = 'auto' | 'always' | 'scroll' | 'hover' | 'glimpse';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "PanelGroupStorage": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import PanelGroupStorage from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type PanelGroupStorage = {\n  getItem: (name: string) => string | null;\n  setItem: (name: string, value: string) => void;\n};",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "TagGroupSelectionMode": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import TagGroupSelectionMode from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type TagGroupSelectionMode = 'none' | 'single' | 'multiple';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "ToastObject": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import ToastObject from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "interface ToastObject<Data extends object = any> {\n  /** The unique identifier for the toast. */\n  id: string;\n  /** Whether the toast is open. Closed toasts stay in the list until their exit animation ends. */\n  open: boolean;\n  /** The title of the toast. Rendered by `ToastTitle` when it has no slot content. */\n  title?: string;\n  /** The description of the toast. Rendered by `ToastDescription` when it has no slot content. */\n  description?: string;\n  /**\n   * The sensitivity of the toast for accessibility purposes. Overrides the `type` prop of `ToastRoot`.\n   * `foreground` toasts are announced immediately, `background` toasts politely.\n   */\n  type?: 'foreground' | 'background';\n  /** The status of the toast. Exposed as `data-status` on `ToastRoot`. */\n  status?: ToastStatus;\n  /**\n   * Time in milliseconds before the toast is dismissed automatically. Overrides\n   * the `duration` of `ToastRoot` and `ToastProvider`. `0` or `Infinity` keeps it open.\n   */\n  duration?: number;\n  /** Props for `ToastAction` inside the toast. */\n  actionProps?: ToastActionOptions;\n  /** Props for `ToastPositioner`, used to anchor the toast to an element. */\n  positionerProps?: ToastPositionerOptions;\n  /** Custom data for the toast. */\n  data?: Data;\n  /** Called when the toast is closed. */\n  onClose?: () => void;\n  /** Called when the toast is removed from the list, after its exit animation. */\n  onRemove?: () => void;\n  /** Increments whenever the toast is updated, or added again with the same `id`. */\n  updateKey: number;\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "description": "Open configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "description": "Visible heading."
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "description": "Description configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "type",
+        "type": "'foreground' | 'background'",
+        "description": "Native input/button behavior."
+      },
+      {
+        "name": "status",
+        "type": "ToastStatus",
+        "description": "Status configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "duration",
+        "type": "number",
+        "description": "Duration configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "actionProps",
+        "type": "ToastActionOptions",
+        "description": "Action Props configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "positionerProps",
+        "type": "ToastPositionerOptions",
+        "description": "Positioner Props configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "data",
+        "type": "Data",
+        "description": "Data configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "description": "On Close configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "onRemove",
+        "type": "() => void",
+        "description": "On Remove configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "updateKey",
+        "type": "number",
+        "description": "Update Key configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "reka-ui"
+  },
+  "SwipeDirection": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import SwipeDirection from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type SwipeDirection = 'up' | 'down' | 'left' | 'right';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "ActivityBadge": {
+    "description": "Public type declared in packages/core/src/frame/activity.ts.",
+    "usage": "Import ActivityBadge from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type ActivityBadge = string | number;",
+    "properties": [],
+    "package": "@frame/core"
+  },
   "QuickPickItem": {
     "description": "Public interface declared in packages/core/src/types.ts.",
     "usage": "Import QuickPickItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
@@ -35,13 +418,8 @@
   "QuickPickOptions": {
     "description": "Public interface declared in packages/core/src/types.ts.",
     "usage": "Import QuickPickOptions from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface QuickPickOptions {\r\n  searchable?: boolean;\r\n  title?: string;\r\n  placeholder?: string;\r\n}",
+    "code": "export interface QuickPickOptions {\r\n  title?: string;\r\n  placeholder?: string;\r\n}",
     "properties": [
-      {
-        "name": "searchable",
-        "type": "boolean",
-        "description": "Searchable configuration for this component; see its Features examples for usage."
-      },
       {
         "name": "title",
         "type": "string",
@@ -58,8 +436,13 @@
   "PanelDefinition": {
     "description": "Public interface declared in packages/core/src/types.ts.",
     "usage": "Import PanelDefinition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface PanelDefinition {\r\n  id: string;\r\n  label: string;\r\n  icon?: Component;\r\n  actions?: readonly PanelAction[];\r\n  padded?: boolean;\r\n  draggable?: boolean;\r\n  movable?: boolean;\r\n  collapsed?: boolean;\r\n  component?: Component;\r\n  children?: readonly PanelDefinition[];\r\n  props?: Record<string, unknown>;\r\n}",
+    "code": "export interface PanelDefinition {\r\n  /** Optional activity/view-bar badge; presentation is controlled by frame.activity or frame.secondaryBar. */\r\n  badge?: ActivityBadge;\r\n  id: string;\r\n  label: string;\r\n  icon?: Component;\r\n  actions?: readonly PanelAction[];\r\n  padded?: boolean;\r\n  draggable?: boolean;\r\n  movable?: boolean;\r\n  collapsed?: boolean;\r\n  /** Initial presentation visibility; hiding does not unregister or dispose the view. */\r\n  visible?: boolean;\r\n  component?: Component;\r\n  children?: readonly PanelDefinition[];\r\n  props?: Record<string, unknown>;\r\n}",
     "properties": [
+      {
+        "name": "badge",
+        "type": "ActivityBadge",
+        "description": "Badge configuration for this component; see its Features examples for usage."
+      },
       {
         "name": "id",
         "type": "string",
@@ -99,6 +482,11 @@
         "name": "collapsed",
         "type": "boolean",
         "description": "Collapsed configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "visible",
+        "type": "boolean",
+        "description": "Visible configuration for this component; see its Features examples for usage."
       },
       {
         "name": "component",
@@ -476,8 +864,18 @@
   "ActivityAction": {
     "description": "Public interface declared in packages/core/src/types.ts.",
     "usage": "Import ActivityAction from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface ActivityAction { id: string; label: string; icon?: Component; run: () => void; disabled?: boolean; active?: boolean | (() => boolean) }",
+    "code": "export interface ActivityAction { badge?: ActivityBadge; showInRail?: boolean; id: string; label: string; icon?: Component; run: () => void; disabled?: boolean; active?: boolean | (() => boolean) }",
     "properties": [
+      {
+        "name": "badge",
+        "type": "ActivityBadge",
+        "description": "Badge configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "showInRail",
+        "type": "boolean",
+        "description": "Show In Rail configuration for this component; see its Features examples for usage."
+      },
       {
         "name": "id",
         "type": "string",
@@ -525,6 +923,222 @@
     "properties": [],
     "package": "@frame/core"
   },
+  "FrameTabItem": {
+    "description": "Public interface declared in packages/core/src/general-types.ts.",
+    "usage": "Import FrameTabItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface FrameTabItem { value: string | number; label: string; disabled?: boolean; content?: string; icon?: string; }",
+    "properties": [
+      {
+        "name": "value",
+        "type": "string | number",
+        "description": "Value configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "description": "Content configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "description": "Optional leading icon; provide an accessible label for icon-only actions."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "FrameStepItem": {
+    "description": "Public interface declared in packages/core/src/general-types.ts.",
+    "usage": "Import FrameStepItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface FrameStepItem { step: number; label: string; description?: string; disabled?: boolean; completed?: boolean; }",
+    "properties": [
+      {
+        "name": "step",
+        "type": "number",
+        "description": "Increment used by the control."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "description": "Description configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      },
+      {
+        "name": "completed",
+        "type": "boolean",
+        "description": "Completed configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "FrameToolbarItem": {
+    "description": "Public interface declared in packages/core/src/general-types.ts.",
+    "usage": "Import FrameToolbarItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface FrameToolbarItem { id: string; label: string; icon?: string; disabled?: boolean; href?: string; separator?: boolean; }",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "description": "Optional leading icon; provide an accessible label for icon-only actions."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "description": "Href configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "separator",
+        "type": "boolean",
+        "description": "Separator configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "FrameTreeItem": {
+    "description": "Public interface declared in packages/core/src/general-types.ts.",
+    "usage": "Import FrameTreeItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface FrameTreeItem { id: string; label: string; icon?: string; disabled?: boolean; children?: FrameTreeItem[]; }",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "description": "Optional leading icon; provide an accessible label for icon-only actions."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      },
+      {
+        "name": "children",
+        "type": "FrameTreeItem[]",
+        "description": "Nested application-owned contributions."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "FrameSplitPanel": {
+    "description": "Public interface declared in packages/core/src/general-types.ts.",
+    "usage": "Import FrameSplitPanel from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface FrameSplitPanel extends SplitterPanelProps { label?: string; content?: string; }",
+    "properties": [
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "description": "Content configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "FrameNavigationItem": {
+    "description": "Public interface declared in packages/core/src/general-types.ts.",
+    "usage": "Import FrameNavigationItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface FrameNavigationItem { value: string; label: string; href?: string; disabled?: boolean; children?: FrameNavigationItem[]; }",
+    "properties": [
+      {
+        "name": "value",
+        "type": "string",
+        "description": "Value configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "description": "Href configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      },
+      {
+        "name": "children",
+        "type": "FrameNavigationItem[]",
+        "description": "Nested application-owned contributions."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "FrameMenubarItem": {
+    "description": "Public interface declared in packages/core/src/general-types.ts.",
+    "usage": "Import FrameMenubarItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface FrameMenubarItem { value: string; label: string; disabled?: boolean; items: FrameMenubarAction[]; }",
+    "properties": [
+      {
+        "name": "value",
+        "type": "string",
+        "description": "Value configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      },
+      {
+        "name": "items",
+        "type": "FrameMenubarAction[]",
+        "description": "Ordered application-owned entries."
+      }
+    ],
+    "package": "@frame/core"
+  },
   "FrameLoaderVariant": {
     "description": "Public type declared in packages/core/src/frame/loading.ts.",
     "usage": "Import FrameLoaderVariant from @frame/core. The definition below is the source contract; optional fields may be omitted.",
@@ -546,24 +1160,52 @@
     "properties": [],
     "package": "@frame/core"
   },
+  "FrameAccordionItem": {
+    "description": "Public interface declared in packages/core/src/components/FrameAccordion.vue.ts.",
+    "usage": "Import FrameAccordionItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface FrameAccordionItem { value: string; title: string; description?: string; disabled?: boolean }",
+    "properties": [
+      {
+        "name": "value",
+        "type": "string",
+        "description": "Value configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "description": "Visible heading."
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "description": "Description configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      }
+    ],
+    "package": "@frame/core"
+  },
   "NotificationHistory": {
-    "description": "Public type declared in packages/extras/src/notificationHistory.ts.",
-    "usage": "Import NotificationHistory from @frame/extras. The definition below is the source contract; optional fields may be omitted.",
+    "description": "Public type declared in packages/features/src/notificationHistory.ts.",
+    "usage": "Import NotificationHistory from @frame/features. The definition below is the source contract; optional fields may be omitted.",
     "code": "export type NotificationHistory = ReturnType<typeof createNotificationHistory>;",
     "properties": [],
-    "package": "@frame/extras"
+    "package": "@frame/features"
   },
   "CodeEditorOptions": {
-    "description": "Public type declared in packages/extras/src/codeEditor.ts.",
-    "usage": "Import CodeEditorOptions from @frame/extras. The definition below is the source contract; optional fields may be omitted.",
+    "description": "Public type declared in packages/features/src/codeEditor.ts.",
+    "usage": "Import CodeEditorOptions from @frame/features. The definition below is the source contract; optional fields may be omitted.",
     "code": "export type CodeEditorOptions = Omit<Monaco.editor.IStandaloneEditorConstructionOptions, 'value' | 'model' | 'language' | 'theme'> & Monaco.editor.ITextModelUpdateOptions;",
     "properties": [],
-    "package": "@frame/extras"
+    "package": "@frame/features"
   },
   "CodeEditorController": {
-    "description": "Public interface declared in packages/extras/src/codeEditor.ts.",
-    "usage": "Import CodeEditorController from @frame/extras. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface CodeEditorController {\n  readonly instance: Readonly<ShallowRef<Monaco.editor.IStandaloneCodeEditor | undefined>>;\n  focus(): boolean;\n  undo(): boolean;\n  redo(): boolean;\n  find(): boolean;\n  replaceCode(code: string): boolean;\n  runAction(id: string): Promise<boolean>;\n  format(): Promise<boolean>;\n  layout(): void;\n  /** Used by CodeEditor to claim one mounted surface. Returns an idempotent release. */\n  attach(instance: Monaco.editor.IStandaloneCodeEditor): () => void;\n}",
+    "description": "Public interface declared in packages/features/src/codeEditor.ts.",
+    "usage": "Import CodeEditorController from @frame/features. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface CodeEditorController {\r\n  readonly instance: Readonly<ShallowRef<Monaco.editor.IStandaloneCodeEditor | undefined>>;\r\n  focus(): boolean;\r\n  undo(): boolean;\r\n  redo(): boolean;\r\n  find(): boolean;\r\n  replaceCode(code: string): boolean;\r\n  runAction(id: string): Promise<boolean>;\r\n  format(): Promise<boolean>;\r\n  layout(): void;\r\n  /** Used by CodeEditor to claim one mounted surface. Returns an idempotent release. */\r\n  attach(instance: Monaco.editor.IStandaloneCodeEditor): () => void;\r\n}",
     "properties": [
       {
         "name": "instance",
@@ -571,27 +1213,27 @@
         "description": "Instance configuration for this component; see its Features examples for usage."
       }
     ],
-    "package": "@frame/extras"
+    "package": "@frame/features"
   },
   "TerminalSessionLayout": {
-    "description": "Public type declared in packages/extras/src/terminal.ts.",
-    "usage": "Import TerminalSessionLayout from @frame/extras. The definition below is the source contract; optional fields may be omitted.",
+    "description": "Public type declared in packages/features/src/terminal.ts.",
+    "usage": "Import TerminalSessionLayout from @frame/features. The definition below is the source contract; optional fields may be omitted.",
     "code": "export type TerminalSessionLayout = 'sidebar' | 'tabs';",
     "properties": [],
-    "package": "@frame/extras"
+    "package": "@frame/features"
   },
   "TerminalController": {
-    "description": "Public type declared in packages/extras/src/terminal.ts.",
-    "usage": "Import TerminalController from @frame/extras. The definition below is the source contract; optional fields may be omitted.",
+    "description": "Public type declared in packages/features/src/terminal.ts.",
+    "usage": "Import TerminalController from @frame/features. The definition below is the source contract; optional fields may be omitted.",
     "code": "export type TerminalController = ReturnType<typeof createTerminal>;",
     "properties": [],
-    "package": "@frame/extras"
+    "package": "@frame/features"
   },
   "AIChatController": {
-    "description": "Public type declared in packages/extras/src/aiChat.ts.",
-    "usage": "Import AIChatController from @frame/extras. The definition below is the source contract; optional fields may be omitted.",
+    "description": "Public type declared in packages/features/src/aiChat.ts.",
+    "usage": "Import AIChatController from @frame/features. The definition below is the source contract; optional fields may be omitted.",
     "code": "export type AIChatController = ReturnType<typeof createAIChat>;",
     "properties": [],
-    "package": "@frame/extras"
+    "package": "@frame/features"
   }
 }

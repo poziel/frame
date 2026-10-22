@@ -39,8 +39,8 @@ Frame shows notifications in the bottom-left of its shell, above the status bar.
 
 Use `frame.notifications.dismiss(id)` or `clear()` for active messages. IDs must be unique among active messages. Frame disposal clears timers and subscriptions. `subscribe(listener)` receives future notifications and returns an unsubscribe function; this is how optional features collect events.
 
-## Notification history (Extras)
+## Notification history (Features)
 
-The notification panel and bell are supplied by @frame/extras. Core does not render or register them. Create a history store before emitting notifications, mount NotificationPanel in FrameShell's overlays slot and NotificationIndicator in status-actions, and dispose the history on host unmount. The panel owns visibility and a bounded history (200 entries by default), independently of notification expiry and dismissal. Clearing history leaves active notifications alone.
+The notification panel and bell are supplied by @frame/features. Core does not render or register them. Create a history store before emitting notifications, mount NotificationPanel in FrameShell's overlays slot and NotificationIndicator in status-actions, and dispose the history on host unmount. The panel owns visibility and a bounded history (200 entries by default), independently of notification expiry and dismissal. Clearing history leaves active notifications alone.
 
-See [Frame Extras](../packages/extras/README.md) for a complete composition example and [package boundaries](package-boundaries.md) for migration details and future feature candidates.
+See [Frame Features](../packages/features/README.md) for a complete composition example and [package boundaries](package-boundaries.md) for migration details and future feature candidates.

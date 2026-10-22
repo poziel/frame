@@ -1,0 +1,21 @@
+import { h } from 'vue';
+import { FrameAccordion,FrameAspectRatio,FrameAvatar,FrameCollapsible,FramePagination,FrameProgress,FrameScrollArea,FrameSeparator,FrameTabs,FrameStepper,FrameToolbar,FrameTree,FrameSplitter,FrameNavigationMenu,FrameMenubar,FrameDialog,FrameAlertDialog,FrameDrawer,FramePopover,FrameHoverCard,FrameDropdownMenu,FrameContextMenu,FrameToast,FrameTooltip, type FrameAccordionItem,type FrameAccordionProps,type FrameTabItem,type FrameStepItem,type FrameToolbarItem,type FrameTreeItem,type FrameSplitPanel,type FrameNavigationItem,type FrameMenubarItem,type FrameGeneralMenuItem } from '@frame/core';
+const sections:FrameAccordionItem[]=[{value:'one',title:'One',description:'Content'}];
+const accordion:FrameAccordionProps={type:'single',items:sections,collapsible:true};
+h(FrameAccordion,accordion);
+h(FrameAspectRatio,{ratio:16/9});h(FrameAvatar,{alt:'Jane Doe',fallback:'JD'});h(FrameCollapsible,{label:'Details'});
+h(FramePagination,{total:100,itemsPerPage:10,'onUpdate:page':(_page:number)=>{}});
+h(FrameProgress,{modelValue:null,max:100});h(FrameScrollArea,{viewportLabel:'Activity'});h(FrameSeparator,{orientation:'horizontal'});
+const tabs:FrameTabItem[]=[{value:'one',label:'One',content:'Content'}];h(FrameTabs,{items:tabs});
+const steps:FrameStepItem[]=[{step:1,label:'Details'}];h(FrameStepper,{items:steps});
+const tools:FrameToolbarItem[]=[{id:'save',label:'Save'}];h(FrameToolbar,{items:tools});
+const tree:FrameTreeItem[]=[{id:'file',label:'File'}];h(FrameTree,{items:tree,label:'Files'});
+const panels:FrameSplitPanel[]=[{id:'one',label:'One',defaultSize:50},{id:'two',label:'Two',defaultSize:50}];h(FrameSplitter,{direction:'horizontal',panels});
+const links:FrameNavigationItem[]=[{value:'docs',label:'Docs',href:'/docs'}];h(FrameNavigationMenu,{items:links});
+const menu:FrameMenubarItem[]=[{value:'file',label:'File',items:[{id:'save',label:'Save'}]}];h(FrameMenubar,{items:menu});
+h(FrameDialog,{title:'Details'});h(FrameAlertDialog,{title:'Delete?'});h(FrameDrawer,{title:'Activity'});h(FramePopover,{triggerLabel:'Summary'});h(FrameHoverCard,{triggerLabel:'Preview'});
+const actions:FrameGeneralMenuItem[]=[{id:'save',label:'Save'}];h(FrameDropdownMenu,{items:actions});h(FrameContextMenu,{items:actions});
+h(FrameToast,{title:'Saved',open:false,'onUpdate:open':(_open:boolean)=>{}});h(FrameTooltip,{text:'Save',delayDuration:200});
+// @ts-expect-error Accordion sections require a stable value and visible title.
+const invalidSection:FrameAccordionItem={label:'Missing value and title'};
+void invalidSection;

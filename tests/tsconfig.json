@@ -1,10 +1,10 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["library-consumer.ts", "viewer-consumer.ts"],
+  "include": ["library-consumer.ts", "viewer-consumer.ts", "general-consumer.ts", "notification-consumer.ts", "secondary-bar-consumer.ts", "panel-consumer.ts"],
   "compilerOptions": {
     "paths": {
       "@frame/core": ["../packages/core/dist/types/frame/index.d.ts"],
-      "@frame/extras": ["../packages/extras/dist/types/index.d.ts"]
+      "@frame/features": ["../packages/features/dist/types/index.d.ts"]
     }
   }
 }

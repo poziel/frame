@@ -1,5 +1,7 @@
 """Run against the Vite dev server: uv run --with playwright python tests/loading-browser.py."""
 from playwright.sync_api import sync_playwright, expect
+import os
+BASE_URL=os.environ.get("FRAME_TEST_URL", "http://localhost:1420").rstrip("/")
 from pathlib import Path
 
 with sync_playwright() as p:
@@ -8,7 +10,7 @@ with sync_playwright() as p:
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     fixture = (Path(__file__).parent / "fixtures/loading/index.html").resolve().as_posix()
-    page.goto(f"http://localhost:1420/@fs/{fixture}")
+    page.goto(f"{BASE_URL}/@fs/{fixture}")
     region = page.locator("#region")
     expect(region).to_have_attribute("aria-busy", "false")
     expect(page.locator("#counts")).to_have_text("1/0/0")
@@ -67,7 +69,7 @@ with sync_playwright() as p:
     expect(page.locator("#gallery .frame-loader").first.locator("[aria-hidden]")).to_have_attribute("speed", "0")
     page.screenshot(path=".tmp/loading-components.png")
     assert not errors, errors
-    page.goto("http://localhost:1420/")
+    page.goto(BASE_URL+"/")
     page.get_by_role("button", name="Loader", exact=True).click()
     expect(page.get_by_role("heading", name="Loader", exact=True)).to_be_visible()
     expect(page.locator(".loader-gallery .frame-loader")).to_have_count(44)

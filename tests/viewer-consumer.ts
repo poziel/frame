@@ -1,4 +1,4 @@
-import { UniversalViewer, UniversalViewerContent, detectViewerType, type ViewerFile, type ViewerSource } from '@frame/extras';
+import { UniversalViewer, UniversalViewerContent, detectViewerType, type ViewerFile, type ViewerSource } from '@frame/features';
 import { h } from 'vue';
 const sources: ViewerSource[] = [new Blob(['hello']), new File(['hello'], 'hello.txt'), 'https://example.com/test.pdf', new URL('https://example.com/image.svg')];
 for (const source of sources) {

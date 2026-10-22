@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { detectViewerType, isViewerText, sniffViewerType, viewerFileName } from '../packages/extras/src/viewer';
+import { detectViewerType, isViewerText, sniffViewerType, viewerFileName } from '../packages/features/src/viewer';
 
 describe('portable viewer file detection', () => {
   test('unlabelled blobs use common image, SVG, PDF, and video signatures', () => {

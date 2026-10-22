@@ -13,7 +13,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@frame/core": fileURLToPath(new URL("../core/src/frame/index.ts", import.meta.url)),
-      "@frame/extras": fileURLToPath(new URL("../extras/src/index.ts", import.meta.url)),
+      "@frame/features": fileURLToPath(new URL("../features/src/index.ts", import.meta.url)),
     },
   },
   clearScreen: false,
