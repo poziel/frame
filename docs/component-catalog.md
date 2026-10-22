@@ -85,3 +85,11 @@ API URLs use `#/api/Name`; existing `#/types/Name` links remain supported. Catal
 Duck has separate Components and Extras activities, with Extras immediately below Components. Components lists core examples; Extras lists all examples in the Extras group, including notification history, terminal, AI chat, and code editor. Both reuse the same documentation page renderer and keep API links and Back navigation available.
 
 Sample tools, Collections, and the sample Activity/Inspector/Session panels are not registered by the documentation host. Interactive examples remain available inside their documentation pages.
+
+## Component documentation tabs
+
+Every Components and Extras page provides Features, API, Theming, and Interactive demo tabs. Features contain named examples with highlighted copyable usage. API tables cover source-extracted props, defaults, emits, template slots, exposed members, related types, and public instance operations for service-oriented pages. Empty sections are omitted. The API activity remains the shared destination for type links; Back restores the originating component tab.
+
+Theming lists classes and consumed `--frame-*` variables with their fallback values. Interactive demos let you omit optional props, edit primitive or structured values, choose branches of union props, supply runtime fixtures, edit slot text, call exposed methods, reset the preview, and inspect events plus current usage code. Invalid structured values leave the last valid preview intact. Terminal examples are explicitly activated; local chat fixtures do not contact an AI provider.
+
+The Docs-only registry and helpers live in `packages/docs/src/examples/documentation`. Run `bun run docs:contracts` after changing a component contract or styling. Docs builds run this extraction automatically. Source hashes and theme-contract tests check that checked-in snapshots are current and document variables actually consumed by production CSS. Descriptions and specialized runtime scenarios must still be reviewed when adding a new behavior.

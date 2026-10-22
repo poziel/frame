@@ -1,0 +1,24 @@
+.frame-viewer-backdrop {
+  position: fixed; inset: 0; z-index: var(--frame-viewer-z-index, 1000);
+  background: var(--frame-viewer-backdrop, rgb(0 0 0 / 80%));
+  backdrop-filter: blur(var(--frame-viewer-blur, 10px));
+}
+.frame-viewer-dialog {
+  position: fixed; inset: 0; z-index: var(--frame-viewer-z-index, 1000);
+  display: flex; flex-direction: column; padding: var(--frame-content-padding, 12px);
+  color: var(--frame-text); font: var(--frame-font-size-body, 12px) var(--frame-font-body, sans-serif);
+}
+.frame-viewer-header, .frame-viewer-toolbar { display: flex; align-items: center; gap: var(--frame-gap, 6px); flex-wrap: wrap; }
+.frame-viewer-header { flex: none; justify-content: space-between; margin-bottom: var(--frame-gap, 6px); }
+.frame-viewer-title { margin: 0; font-size: inherit; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; flex: 1; }
+.frame-viewer-button { color: var(--frame-text); background: var(--frame-surface, #181818); border: 1px solid var(--frame-line, #333); border-radius: var(--frame-control-radius, 3px); padding: var(--frame-control-padding-y, 5px) var(--frame-control-padding-x, 10px); font: inherit; cursor: pointer; }
+.frame-viewer-button:disabled { opacity: .5; cursor: default; }
+.frame-viewer-button:focus-visible, .frame-viewer-content :focus-visible { outline: 2px solid var(--frame-accent); outline-offset: 2px; }
+.frame-viewer-close { font-size: 24px; line-height: 1; }
+.frame-viewer-content { display: flex; flex: 1; flex-direction: column; align-items: stretch; min-height: 0; min-width: 0; overflow: auto; gap: var(--frame-gap, 6px); color: var(--frame-text); }
+.frame-viewer-image, .frame-viewer-video { display: block; margin: auto; width: 100%; height: 100%; min-height: 0; object-fit: contain; flex: 1; }
+.frame-viewer-text { margin: 0; padding: var(--frame-content-padding, 12px); overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--frame-font-mono, monospace); background: var(--frame-canvas, #101112); flex: 1; }
+.frame-viewer-code { flex: 1; min-height: 0; }
+.frame-viewer-pdf { display: flex; flex-direction: column; flex: 1; min-height: 0; gap: var(--frame-gap, 6px); }
+.frame-viewer-pdf-page { overflow: auto; flex: 1; min-height: 0; text-align: center; }
+.frame-viewer-pdf-page canvas { display: block; margin: 0 auto; background: white; }

@@ -3,6 +3,11 @@ export type { NotificationHistory, HistoryNotification } from "./notificationHis
 export { default as NotificationPanel } from "./NotificationPanel.vue";
 export { default as NotificationIndicator } from "./NotificationIndicator.vue";
 import "./style.css";
+import './viewer.css';
+export { default as UniversalViewer } from './UniversalViewer.vue';
+export { default as UniversalViewerContent } from './UniversalViewerContent.vue';
+export { detectViewerType, viewerFileName } from './viewer';
+export type { ViewerSource, ViewerFile, ViewerKind, ViewerType } from './viewer';
 export { default as CodeEditor } from './CodeEditor.vue';
 export { createCodeEditor } from './codeEditor';
 export type { CodeEditorProps, CodeEditorOptions, CodeEditorController } from './codeEditor';
