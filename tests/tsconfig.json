@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["library-consumer.ts"],
+  "include": ["library-consumer.ts", "viewer-consumer.ts"],
   "compilerOptions": {
     "paths": {
       "@frame/core": ["../packages/core/dist/types/frame/index.d.ts"],

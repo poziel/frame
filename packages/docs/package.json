@@ -11,9 +11,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -p tsconfig.json --noEmit && vite build",
+    "build": "bun run docs:contracts && vue-tsc -p tsconfig.json --noEmit && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "docs:contracts": "bun scripts/extract-component-contracts.ts && bun scripts/extract-theme-contracts.ts"
   },
   "devDependencies": {
     "@iconify-json/codicon": "^1.2.75",

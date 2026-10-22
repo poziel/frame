@@ -2,7 +2,7 @@
 
 The demo opens Components as its first sidebar view. Home is the first activity item, followed by Components and the existing sample views. Home is an action without selection state: it calls resetWorkspace(), returning to a single empty canvas while leaving the sidebar available.
 
-Every catalog page uses the exported ComponentShowcase component with live preview, behavior notes, API table, copyable code, and action/value feedback. Catalog definitions and content stay in packages/docs/src/examples; they are not included in the reusable library build. **Loader** previews all 44 LDRS styles with filtering and copyable usage; **Loading region** demonstrates scoped blocking, configurable text placement, optional animation/text, mounted content, and asynchronous completion. See [Loading](loading.md).
+Catalog pages use the four-tab documentation renderer for features, API contracts, theme tokens, and interactive demos. The exported ComponentShowcase remains available for standalone showcases. Catalog definitions and content stay in packages/docs/src/examples; they are not included in the reusable library build. **Loader** previews all 44 LDRS styles with filtering and copyable usage; **Loading region** demonstrates scoped blocking, configurable text placement, optional animation/text, mounted content, and asynchronous completion. See [Loading](loading.md).
 
 ## Activity actions
 
@@ -86,4 +86,14 @@ Duck has separate Components and Features activities, with Features immediately 
 
 Sample tools, Collections, and the sample Activity/Inspector/Session panels are not registered by the documentation host. Interactive examples remain available inside their documentation pages.
 
-Forms, colors, dates, and times have individual live pages. See [Forms coverage and provenance](forms.md) for the complete Reka family inventory, Alpha status, native input boundaries, and public date/time models.
+## Component documentation tabs
+
+Every Components and Features page provides Features, API, Theming, and Interactive demo tabs. Features contain named examples with highlighted copyable usage. API tables cover source-extracted props, defaults, emits, template slots, exposed members, related types, and public instance operations for service-oriented pages. Empty sections are omitted. The API activity remains the shared destination for type links; Back restores the originating component tab.
+
+Theming lists classes and consumed `--frame-*` variables with their fallback values. Interactive demos let you omit optional props, edit primitive or structured values, choose branches of union props, supply runtime fixtures, edit slot text, call exposed methods, reset the preview, and inspect events plus current usage code. Invalid structured values leave the last valid preview intact. Terminal examples are explicitly activated; local chat fixtures do not contact an AI provider.
+
+The Docs-only registry and helpers live in `packages/docs/src/examples/documentation`. Run `bun run docs:contracts` after changing a component contract or styling. Docs builds run this extraction automatically. Source hashes and theme-contract tests check that checked-in snapshots are current and document variables actually consumed by production CSS. Descriptions and specialized runtime scenarios must still be reviewed when adding a new behavior.
+
+## Reka forms
+
+The form, color, and date/time components also use this four-tab documentation structure. See [Forms coverage](forms.md) for the complete component inventory and upstream maturity notes.

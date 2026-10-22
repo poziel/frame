@@ -61,3 +61,9 @@ The current implementation exposes defaults and the Tailwind mapping, not an upl
 Existing color tokens retain their current consumers. Shell and overlay base typography use the body font and size; the panel log uses the mono family. FrameButton uses control padding and radius. FrameModal uses panel radius and overlay shadow. Other existing hard-coded sizes, colors, font overrides, and corners are not all migrated yet. New content spacing, gap, and motion tokens are available to application components but do not globally rescale the shell. The Reka form, color, and date compositions use these tokens; native text inputs and text areas now use control background/border/text tokens. Full shell component token adoption is separate work; this document does not claim all existing components are completely themeable.
 
 See [optional Tailwind setup](../packages/tailwind/README.md) for consumer imports and Vite configuration.
+
+## Component-specific styling
+
+Component styles now expose configurable literal presentation values through `--frame-<element>-<state>-<property>` variables with their original values as CSS fallbacks. Existing shared semantic variables remain supported. The Theming tab on each Duck component page lists the actual consumed variables, element selectors, and fallback values. Override the variables you need on the document root; omitted values keep the original appearance. Structural layout rules and geometry calculated from props or shell state remain outside this token surface.
+
+Third-party Monaco and syntax-highlighting colors continue to use their supported theme APIs. Component variables style Frame's surrounding surfaces rather than pretending to override all third-party internals.

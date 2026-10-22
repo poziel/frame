@@ -1,3 +1,4 @@
+import extractedReferences from './documentation/references.json';
 import { CodeBlockTheme } from "../../../core/src/frame/codeThemes";
 const legacyDocs = {
   FrameMenuItem: { description: "A typed command-menu entry, shared by FrameMenu, ContextMenu, and the Manage menu. A menu item is either an action/submenu or a separator.", code: `import type { FrameMenuItem } from '@frame/core';
@@ -390,9 +391,22 @@ typeDocs.FrameOptions = {
     { name: 'notifications', type: 'boolean', description: 'Enable transient notifications. Default true.' },
   ],
 };
+
 for (const [name, description, code] of [
   ['DateValue', 'Calendar-aware date model used by calendar, date, month and year controls.', "import { CalendarDate, type DateValue } from '@frame/core';\nconst date: DateValue = new CalendarDate(2026, 10, 21);"],
   ['DateRange', 'Start and end date values used by range calendars, fields and pickers.', "import { CalendarDate, type DateRange } from '@frame/core';\nconst range: DateRange = { start: new CalendarDate(2026, 10, 21), end: new CalendarDate(2026, 10, 26) };"],
   ['TimeValue', 'Structured time model used by the time field; it is not a formatted display string.', "import { Time, type TimeValue } from '@frame/core';\nconst time: TimeValue = new Time(9, 30);"],
   ['TimeRange', 'Start and end time values controlled by the application.', "import { Time, type TimeRange } from '@frame/core';\nconst range: TimeRange = { start: new Time(9, 30), end: new Time(17) };"],
-]) typeDocs[name!] = { description: description!, code: code!, properties: [{ name: name!.endsWith('Range') ? 'start / end' : 'value', type: name!.endsWith('Range') ? name!.replace('Range', 'Value') : name!, description: 'Use exported calendar/time constructors and parsers. The application decides storage format, locale and time zone.' }] };
+]) {
+  const range = name!.endsWith('Range');
+  const valueType = name!.replace('Range', 'Value');
+  typeDocs[name!] = {
+    description: description!, code: code!,
+    usage: 'Import the model type and its constructors or parsers from @frame/core. The application chooses its storage format, locale and time zone.',
+    properties: range
+      ? ['start', 'end'].map(property => ({ name: property, type: `${valueType} | undefined`, reference: valueType, description: 'A structured value, or undefined while this end of the range is incomplete.' }))
+      : (name === 'DateValue' ? ['year', 'month', 'day'] : ['hour', 'minute', 'second']).map(property => ({ name: property, type: 'number', description: 'A numeric part of the structured calendar or time value. Use exported constructors and parsers to create values.' })),
+  };
+}
+
+for(const [name,doc] of Object.entries(extractedReferences)) if(!Object.prototype.hasOwnProperty.call(typeDocs,name)) typeDocs[name]=doc;

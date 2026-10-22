@@ -1,0 +1,707 @@
+{
+  "notifications": {
+    "name": "frame.notify",
+    "source": "packages/core/src/types.ts",
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Id configuration for this component; see its Features examples for usage.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Visible heading.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "severity",
+        "type": "NotificationSeverity",
+        "default": {
+          "kind": "literal",
+          "value": "\"info\""
+        },
+        "description": "Severity configuration for this component; see its Features examples for usage.",
+        "options": [
+          "error",
+          "info",
+          "success",
+          "warning"
+        ],
+        "control": "text",
+        "references": [
+          "NotificationSeverity"
+        ]
+      },
+      {
+        "name": "details",
+        "type": "string",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Details configuration for this component; see its Features examples for usage.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "source",
+        "type": "string",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Source configuration for this component; see its Features examples for usage.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "priority",
+        "type": "string",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Priority configuration for this component; see its Features examples for usage.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "duration",
+        "type": "number",
+        "default": {
+          "kind": "literal",
+          "value": "5000"
+        },
+        "description": "Duration configuration for this component; see its Features examples for usage.",
+        "control": "number",
+        "references": []
+      },
+      {
+        "name": "action",
+        "type": "NotificationAction",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Action configuration for this component; see its Features examples for usage.",
+        "control": "fixture",
+        "references": [
+          "NotificationAction"
+        ]
+      }
+    ],
+    "emits": [],
+    "slots": [],
+    "forwardsAttrs": false,
+    "methods": [
+      {
+        "name": "frame.notify",
+        "kind": "method",
+        "parameters": "options: NotificationOptions",
+        "returns": "{ id: string; close: () => void }",
+        "description": "Call this public Frame API with application-owned configuration."
+      }
+    ]
+  },
+  "modals": {
+    "name": "frame.openModal",
+    "source": "packages/core/src/types.ts",
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Id configuration for this component; see its Features examples for usage.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Visible heading.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "component",
+        "type": "Component",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Component configuration for this component; see its Features examples for usage.",
+        "control": "fixture",
+        "references": [
+          "Component"
+        ]
+      },
+      {
+        "name": "props",
+        "type": "Record<string, unknown>",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Props configuration for this component; see its Features examples for usage.",
+        "control": "json",
+        "references": [
+          "Record"
+        ]
+      },
+      {
+        "name": "icon",
+        "type": "Component",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Optional leading icon; provide an accessible label for icon-only actions.",
+        "control": "fixture",
+        "references": [
+          "Component"
+        ]
+      },
+      {
+        "name": "actions",
+        "type": "readonly PanelAction[]",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Application-owned header actions.",
+        "control": "json",
+        "references": [
+          "PanelAction"
+        ]
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Width configuration for this component; see its Features examples for usage.",
+        "control": "number",
+        "references": []
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Height configuration for this component; see its Features examples for usage.",
+        "control": "number",
+        "references": []
+      },
+      {
+        "name": "maximized",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Maximized configuration for this component; see its Features examples for usage.",
+        "control": "boolean",
+        "references": []
+      }
+    ],
+    "emits": [],
+    "slots": [],
+    "forwardsAttrs": false,
+    "methods": [
+      {
+        "name": "frame.openModal",
+        "kind": "method",
+        "parameters": "options: ModalDefinition",
+        "returns": "{ id: string; close: () => void }",
+        "description": "Call this public Frame API with application-owned configuration."
+      }
+    ]
+  },
+  "settings": {
+    "name": "frame.registerSettingsSection",
+    "source": "packages/core/src/types.ts",
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Id configuration for this component; see its Features examples for usage.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Visible heading.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Description configuration for this component; see its Features examples for usage.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "settings",
+        "type": "readonly SettingDefinition[]",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Settings configuration for this component; see its Features examples for usage.",
+        "control": "json",
+        "references": [
+          "SettingDefinition"
+        ]
+      },
+      {
+        "name": "children",
+        "type": "readonly SettingsSection[]",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Nested application-owned contributions.",
+        "control": "json",
+        "references": [
+          "SettingsSection"
+        ]
+      }
+    ],
+    "emits": [],
+    "slots": [],
+    "forwardsAttrs": false,
+    "methods": [
+      {
+        "name": "frame.registerSettingsSection",
+        "kind": "method",
+        "parameters": "options: SettingsSection",
+        "returns": "() => void",
+        "description": "Call this public Frame API with application-owned configuration."
+      }
+    ]
+  },
+  "banner": {
+    "name": "frame.registerBanner",
+    "source": "packages/core/src/types.ts",
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Id configuration for this component; see its Features examples for usage.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Visible or accessible label for the control.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "component",
+        "type": "Component",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Component configuration for this component; see its Features examples for usage.",
+        "control": "fixture",
+        "references": [
+          "Component"
+        ]
+      },
+      {
+        "name": "props",
+        "type": "Record<string, unknown>",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Props configuration for this component; see its Features examples for usage.",
+        "control": "json",
+        "references": [
+          "Record"
+        ]
+      }
+    ],
+    "emits": [],
+    "slots": [],
+    "forwardsAttrs": false,
+    "methods": [
+      {
+        "name": "frame.registerBanner",
+        "kind": "method",
+        "parameters": "options: WorkspaceBannerDefinition",
+        "returns": "() => void",
+        "description": "Call this public Frame API with application-owned configuration."
+      }
+    ]
+  },
+  "workspace": {
+    "name": "frame.setWorkspacePane",
+    "source": "packages/core/src/types.ts",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Visible or accessible label for the control.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "component",
+        "type": "Component",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Component configuration for this component; see its Features examples for usage.",
+        "control": "fixture",
+        "references": [
+          "Component"
+        ]
+      },
+      {
+        "name": "props",
+        "type": "Record<string, unknown>",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Props configuration for this component; see its Features examples for usage.",
+        "control": "json",
+        "references": [
+          "Record"
+        ]
+      }
+    ],
+    "emits": [],
+    "slots": [],
+    "forwardsAttrs": false,
+    "methods": [
+      {
+        "name": "frame.setWorkspacePane",
+        "kind": "method",
+        "parameters": "id: string, content: WorkspacePaneContent",
+        "returns": "void",
+        "description": "Call this public Frame API with application-owned configuration."
+      }
+    ]
+  },
+  "views": {
+    "name": "frame.registerView",
+    "source": "packages/core/src/types.ts",
+    "props": [
+      {
+        "name": "icon",
+        "type": "Component",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Optional leading icon; provide an accessible label for icon-only actions.",
+        "control": "fixture",
+        "references": [
+          "Component"
+        ]
+      },
+      {
+        "name": "showInRail",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Show In Rail configuration for this component; see its Features examples for usage.",
+        "control": "boolean",
+        "references": []
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Id configuration for this component; see its Features examples for usage.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Visible or accessible label for the control.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "actions",
+        "type": "readonly PanelAction[]",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Application-owned header actions.",
+        "control": "json",
+        "references": [
+          "PanelAction"
+        ]
+      },
+      {
+        "name": "padded",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Padded configuration for this component; see its Features examples for usage.",
+        "control": "boolean",
+        "references": []
+      },
+      {
+        "name": "draggable",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Draggable configuration for this component; see its Features examples for usage.",
+        "control": "boolean",
+        "references": []
+      },
+      {
+        "name": "movable",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Movable configuration for this component; see its Features examples for usage.",
+        "control": "boolean",
+        "references": []
+      },
+      {
+        "name": "collapsed",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Collapsed configuration for this component; see its Features examples for usage.",
+        "control": "boolean",
+        "references": []
+      },
+      {
+        "name": "component",
+        "type": "Component",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Component configuration for this component; see its Features examples for usage.",
+        "control": "fixture",
+        "references": [
+          "Component"
+        ]
+      },
+      {
+        "name": "children",
+        "type": "readonly PanelDefinition[]",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Nested application-owned contributions.",
+        "control": "json",
+        "references": [
+          "PanelDefinition"
+        ]
+      },
+      {
+        "name": "props",
+        "type": "Record<string, unknown>",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Props configuration for this component; see its Features examples for usage.",
+        "control": "json",
+        "references": [
+          "Record"
+        ]
+      },
+      {
+        "name": "region",
+        "type": "ViewRegion",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Shell region in which to register the view.",
+        "options": [
+          "primary",
+          "secondary",
+          "bottom"
+        ],
+        "control": "text",
+        "references": [
+          "ViewRegion"
+        ]
+      }
+    ],
+    "emits": [],
+    "slots": [],
+    "forwardsAttrs": false,
+    "methods": [
+      {
+        "name": "frame.registerView",
+        "kind": "method",
+        "parameters": "input: SidePanelDefinition, region: ViewRegion",
+        "returns": "() => void",
+        "description": "Call this public Frame API with application-owned configuration."
+      }
+    ]
+  },
+  "activity-actions": {
+    "name": "frame.registerActivityAction",
+    "source": "packages/core/src/types.ts",
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Id configuration for this component; see its Features examples for usage.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Visible or accessible label for the control.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "icon",
+        "type": "Component",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Optional leading icon; provide an accessible label for icon-only actions.",
+        "control": "fixture",
+        "references": [
+          "Component"
+        ]
+      },
+      {
+        "name": "run",
+        "type": "() => void",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Run configuration for this component; see its Features examples for usage.",
+        "control": "fixture",
+        "references": []
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Prevents user interaction while retaining the current value.",
+        "control": "boolean",
+        "references": []
+      },
+      {
+        "name": "active",
+        "type": "boolean | (() => boolean)",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Shows the loading presentation while retaining the mounted content.",
+        "control": "fixture",
+        "references": []
+      }
+    ],
+    "emits": [],
+    "slots": [],
+    "forwardsAttrs": false,
+    "methods": [
+      {
+        "name": "frame.registerActivityAction",
+        "kind": "method",
+        "parameters": "options: ActivityAction",
+        "returns": "() => void",
+        "description": "Call this public Frame API with application-owned configuration."
+      }
+    ]
+  },
+  "quick-input": {
+    "name": "frame.showQuickPick",
+    "source": "packages/core/src/types.ts",
+    "props": [
+      {
+        "name": "searchable",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Searchable configuration for this component; see its Features examples for usage.",
+        "control": "boolean",
+        "references": []
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Visible heading.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Hint displayed when the field is empty.",
+        "control": "text",
+        "references": []
+      }
+    ],
+    "emits": [],
+    "slots": [],
+    "forwardsAttrs": false,
+    "methods": [
+      {
+        "name": "frame.showQuickPick",
+        "kind": "method",
+        "parameters": "items: readonly QuickPickItem[], options?: QuickPickOptions",
+        "returns": "Promise<QuickPickItem | undefined>",
+        "description": "Call this public Frame API with application-owned configuration."
+      }
+    ]
+  }
+}

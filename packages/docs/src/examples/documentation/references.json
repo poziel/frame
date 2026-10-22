@@ -1,0 +1,748 @@
+{
+  "DateValue": {
+    "description": "Public type declared in node_modules/.bun/@internationalized+date@3.12.4/node_modules/@internationalized/date/dist/types/src/CalendarDate.d.ts.",
+    "usage": "Import DateValue from @internationalized/date. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type DateValue = CalendarDate | CalendarDateTime | ZonedDateTime;",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "Matcher": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import Matcher from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type Matcher = (date: DateValue$2) => boolean;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "TimeValue": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import TimeValue from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type TimeValue = Time | CalendarDateTime | ZonedDateTime;",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "Granularity": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import Granularity from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type Granularity = 'day' | 'hour' | 'minute' | 'second';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "DateStep": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import DateStep from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type DateStep = {\n  year?: number;\n  month?: number;\n  day?: number;\n  hour?: number;\n  minute?: number;\n  second?: number;\n  millisecond?: number;\n};",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "DateRange": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import DateRange from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type DateRange = {\n  start: DateValue$1 | undefined;\n  end: DateValue$1 | undefined;\n};",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "TimeRange": {
+    "description": "Public interface declared in packages/core/src/forms/dates.ts.",
+    "usage": "Import TimeRange from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface TimeRange { start: TimeValue | undefined; end: TimeValue | undefined }",
+    "properties": [
+      {
+        "name": "start",
+        "type": "TimeValue | undefined",
+        "description": "Start configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "end",
+        "type": "TimeValue | undefined",
+        "description": "End configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "HourCycle": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import HourCycle from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type HourCycle = 12 | 24 | undefined;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "DataOrientation": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import DataOrientation from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type DataOrientation = 'vertical' | 'horizontal';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "Direction": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import Direction from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type Direction = 'ltr' | 'rtl';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "AcceptableValue": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import AcceptableValue from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type AcceptableValue = string | number | bigint | Record<string, any> | null;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "WeekDayFormat": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import WeekDayFormat from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type WeekDayFormat = 'narrow' | 'short' | 'long';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "WeekStartsOn": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "usage": "Import WeekStartsOn from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type WeekStartsOn = 0 | 1 | 2 | 3 | 4 | 5 | 6;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "AsTag": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import AsTag from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type AsTag = 'a' | 'button' | 'div' | 'form' | 'h2' | 'h3' | 'img' | 'input' | 'label' | 'li' | 'nav' | 'ol' | 'p' | 'span' | 'svg' | 'ul' | 'template' | ({} & string);",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "ColorSpace": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import ColorSpace from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type ColorSpace = 'rgb' | 'hsl' | 'hsb';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "Color": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import Color from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type Color = RGBColor | HSLColor | HSBColor;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "ColorChannel": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import ColorChannel from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type ColorChannel = RGBChannel | HSLChannel | HSBChannel;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "FieldValidationMode": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import FieldValidationMode from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type FieldValidationMode = 'onSubmit' | 'onBlur' | 'onChange';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "FieldValidateFn": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import FieldValidateFn from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type FieldValidateFn = (value: unknown, formValues: Record<string, unknown>) => FieldValidateResult | Promise<FieldValidateResult>;",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "TagGroupSelectionMode": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "usage": "Import TagGroupSelectionMode from reka-ui. The definition below is the source contract; optional fields may be omitted.",
+    "code": "type TagGroupSelectionMode = 'none' | 'single' | 'multiple';",
+    "properties": [],
+    "package": "reka-ui"
+  },
+  "QuickPickItem": {
+    "description": "Public interface declared in packages/core/src/types.ts.",
+    "usage": "Import QuickPickItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface QuickPickItem {\r\n  id: string;\r\n  label: string;\r\n  detail?: string;\r\n  shortcut?: string;\r\n  disabled?: boolean;\r\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "detail",
+        "type": "string",
+        "description": "Detail configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "shortcut",
+        "type": "string",
+        "description": "Shortcut configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "QuickPickOptions": {
+    "description": "Public interface declared in packages/core/src/types.ts.",
+    "usage": "Import QuickPickOptions from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface QuickPickOptions {\r\n  searchable?: boolean;\r\n  title?: string;\r\n  placeholder?: string;\r\n}",
+    "properties": [
+      {
+        "name": "searchable",
+        "type": "boolean",
+        "description": "Searchable configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "description": "Visible heading."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "description": "Hint displayed when the field is empty."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "PanelDefinition": {
+    "description": "Public interface declared in packages/core/src/types.ts.",
+    "usage": "Import PanelDefinition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface PanelDefinition {\r\n  id: string;\r\n  label: string;\r\n  icon?: Component;\r\n  actions?: readonly PanelAction[];\r\n  padded?: boolean;\r\n  draggable?: boolean;\r\n  movable?: boolean;\r\n  collapsed?: boolean;\r\n  component?: Component;\r\n  children?: readonly PanelDefinition[];\r\n  props?: Record<string, unknown>;\r\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "icon",
+        "type": "Component",
+        "description": "Optional leading icon; provide an accessible label for icon-only actions."
+      },
+      {
+        "name": "actions",
+        "type": "readonly PanelAction[]",
+        "description": "Application-owned header actions."
+      },
+      {
+        "name": "padded",
+        "type": "boolean",
+        "description": "Padded configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "draggable",
+        "type": "boolean",
+        "description": "Draggable configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "movable",
+        "type": "boolean",
+        "description": "Movable configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "collapsed",
+        "type": "boolean",
+        "description": "Collapsed configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "component",
+        "type": "Component",
+        "description": "Component configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "children",
+        "type": "readonly PanelDefinition[]",
+        "description": "Nested application-owned contributions."
+      },
+      {
+        "name": "props",
+        "type": "Record<string, unknown>",
+        "description": "Props configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "SidePanelDefinition": {
+    "description": "Public interface declared in packages/core/src/types.ts.",
+    "usage": "Import SidePanelDefinition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface SidePanelDefinition extends PanelDefinition {\r\n  icon?: Component;\r\n  showInRail?: boolean;\r\n}",
+    "properties": [
+      {
+        "name": "icon",
+        "type": "Component",
+        "description": "Optional leading icon; provide an accessible label for icon-only actions."
+      },
+      {
+        "name": "showInRail",
+        "type": "boolean",
+        "description": "Show In Rail configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "FrameMenuItem": {
+    "description": "Public type declared in packages/core/src/types.ts.",
+    "usage": "Import FrameMenuItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type FrameMenuItem =\r\n  | { id: string; type: \"separator\" }\r\n  | { id: string; type?: \"item\"; label: string; command?: string; shortcut?: string; disabled?: boolean; checked?: boolean; visibility?: boolean; children?: readonly FrameMenuItem[] };",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "ViewRegion": {
+    "description": "Public type declared in packages/core/src/types.ts.",
+    "usage": "Import ViewRegion from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type ViewRegion = \"primary\" | \"secondary\" | \"bottom\";",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "PanelAction": {
+    "description": "Public interface declared in packages/core/src/types.ts.",
+    "usage": "Import PanelAction from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface PanelAction { id: string; label: string; icon?: Component; run: () => void; disabled?: boolean }",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "icon",
+        "type": "Component",
+        "description": "Optional leading icon; provide an accessible label for icon-only actions."
+      },
+      {
+        "name": "run",
+        "type": "() => void",
+        "description": "Run configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "WorkspaceBannerDefinition": {
+    "description": "Public interface declared in packages/core/src/types.ts.",
+    "usage": "Import WorkspaceBannerDefinition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface WorkspaceBannerDefinition {\r\n  id: string;\r\n  label: string;\r\n  component: Component;\r\n  props?: Record<string, unknown>;\r\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "component",
+        "type": "Component",
+        "description": "Component configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "props",
+        "type": "Record<string, unknown>",
+        "description": "Props configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "WorkspacePaneContent": {
+    "description": "Public interface declared in packages/core/src/types.ts.",
+    "usage": "Import WorkspacePaneContent from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface WorkspacePaneContent {\r\n  label: string;\r\n  component?: Component;\r\n  props?: Record<string, unknown>;\r\n}",
+    "properties": [
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "component",
+        "type": "Component",
+        "description": "Component configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "props",
+        "type": "Record<string, unknown>",
+        "description": "Props configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "ModalDefinition": {
+    "description": "Public interface declared in packages/core/src/types.ts.",
+    "usage": "Import ModalDefinition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface ModalDefinition {\r\n  id: string;\r\n  title: string;\r\n  component: Component;\r\n  props?: Record<string, unknown>;\r\n  icon?: Component;\r\n  actions?: readonly PanelAction[];\r\n  width?: number;\r\n  height?: number;\r\n  maximized?: boolean;\r\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "description": "Visible heading."
+      },
+      {
+        "name": "component",
+        "type": "Component",
+        "description": "Component configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "props",
+        "type": "Record<string, unknown>",
+        "description": "Props configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "icon",
+        "type": "Component",
+        "description": "Optional leading icon; provide an accessible label for icon-only actions."
+      },
+      {
+        "name": "actions",
+        "type": "readonly PanelAction[]",
+        "description": "Application-owned header actions."
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "description": "Width configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "description": "Height configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "maximized",
+        "type": "boolean",
+        "description": "Maximized configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "SettingValue": {
+    "description": "Public type declared in packages/core/src/types.ts.",
+    "usage": "Import SettingValue from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type SettingValue = string | number | boolean;",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "SettingDefinition": {
+    "description": "Public interface declared in packages/core/src/types.ts.",
+    "usage": "Import SettingDefinition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface SettingDefinition {\r\n  id: string; label: string; description?: string;\r\n  type: \"text\" | \"textarea\" | \"number\" | \"checkbox\" | \"select\" | \"range\" | \"color\";\r\n  default: SettingValue; placeholder?: string; min?: number; max?: number; step?: number;\r\n  options?: readonly SelectItem[];\r\n  disabled?: boolean; getValue?: () => SettingValue; onChange?: (value: SettingValue) => void;\r\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "description": "Description configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "type",
+        "type": "\"text\" | \"textarea\" | \"number\" | \"checkbox\" | \"select\" | \"range\" | \"color\"",
+        "description": "Native input/button behavior."
+      },
+      {
+        "name": "default",
+        "type": "SettingValue",
+        "description": "Default configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "description": "Hint displayed when the field is empty."
+      },
+      {
+        "name": "min",
+        "type": "number",
+        "description": "Minimum accepted or displayed value."
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "description": "Maximum accepted or displayed value."
+      },
+      {
+        "name": "step",
+        "type": "number",
+        "description": "Increment used by the control."
+      },
+      {
+        "name": "options",
+        "type": "readonly SelectItem[]",
+        "description": "Ordered selectable choices and separators. Only enabled choices can become selected values."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      },
+      {
+        "name": "getValue",
+        "type": "() => SettingValue",
+        "description": "Get Value configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "onChange",
+        "type": "(value: SettingValue) => void",
+        "description": "On Change configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "SettingsSection": {
+    "description": "Public interface declared in packages/core/src/types.ts.",
+    "usage": "Import SettingsSection from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface SettingsSection { id: string; title: string; description?: string; settings?: readonly SettingDefinition[]; children?: readonly SettingsSection[] }",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "description": "Visible heading."
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "description": "Description configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "settings",
+        "type": "readonly SettingDefinition[]",
+        "description": "Settings configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "children",
+        "type": "readonly SettingsSection[]",
+        "description": "Nested application-owned contributions."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "NotificationSeverity": {
+    "description": "Public type declared in packages/core/src/types.ts.",
+    "usage": "Import NotificationSeverity from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type NotificationSeverity = \"info\" | \"success\" | \"warning\" | \"error\";",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "NotificationAction": {
+    "description": "Public interface declared in packages/core/src/types.ts.",
+    "usage": "Import NotificationAction from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface NotificationAction { label: string; run: () => void | Promise<void> }",
+    "properties": [
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "run",
+        "type": "() => void | Promise<void>",
+        "description": "Run configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "NotificationOptions": {
+    "description": "Public interface declared in packages/core/src/types.ts.",
+    "usage": "Import NotificationOptions from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface NotificationOptions {\r\n  id?: string; title: string; severity?: NotificationSeverity; details?: string; source?: string;\r\n  priority?: string; duration?: number; action?: NotificationAction;\r\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "description": "Visible heading."
+      },
+      {
+        "name": "severity",
+        "type": "NotificationSeverity",
+        "description": "Severity configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "details",
+        "type": "string",
+        "description": "Details configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "source",
+        "type": "string",
+        "description": "Source configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "priority",
+        "type": "string",
+        "description": "Priority configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "duration",
+        "type": "number",
+        "description": "Duration configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "action",
+        "type": "NotificationAction",
+        "description": "Action configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "ActivityAction": {
+    "description": "Public interface declared in packages/core/src/types.ts.",
+    "usage": "Import ActivityAction from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface ActivityAction { id: string; label: string; icon?: Component; run: () => void; disabled?: boolean; active?: boolean | (() => boolean) }",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "icon",
+        "type": "Component",
+        "description": "Optional leading icon; provide an accessible label for icon-only actions."
+      },
+      {
+        "name": "run",
+        "type": "() => void",
+        "description": "Run configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      },
+      {
+        "name": "active",
+        "type": "boolean | (() => boolean)",
+        "description": "Shows the loading presentation while retaining the mounted content."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "SelectItem": {
+    "description": "Public type declared in packages/core/src/types.ts.",
+    "usage": "Import SelectItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type SelectItem = SelectOption | SelectSeparator;",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "Frame": {
+    "description": "Public type declared in packages/core/src/frame/createFrame.ts.",
+    "usage": "Import Frame from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type Frame = ReturnType<typeof createFrame>;",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "FrameLoaderVariant": {
+    "description": "Public type declared in packages/core/src/frame/loading.ts.",
+    "usage": "Import FrameLoaderVariant from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type FrameLoaderVariant = keyof typeof frameLoaderNames;",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "FrameLoadingTextPosition": {
+    "description": "Public type declared in packages/core/src/frame/loading.ts.",
+    "usage": "Import FrameLoadingTextPosition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type FrameLoadingTextPosition = \"above\" | \"below\" | \"left\" | \"right\";",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "CodeBlockTheme": {
+    "description": "Public enum declared in packages/core/src/frame/codeThemes.ts.",
+    "usage": "Import CodeBlockTheme from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export enum CodeBlockTheme {\r\n  Andromeeda = \"andromeeda\",\r\n  AuroraX = \"aurora-x\",\r\n  AyuDark = \"ayu-dark\",\r\n  AyuLight = \"ayu-light\",\r\n  AyuMirage = \"ayu-mirage\",\r\n  CatppuccinFrappe = \"catppuccin-frappe\",\r\n  CatppuccinLatte = \"catppuccin-latte\",\r\n  CatppuccinMacchiato = \"catppuccin-macchiato\",\r\n  CatppuccinMocha = \"catppuccin-mocha\",\r\n  DarkPlus = \"dark-plus\",\r\n  Dracula = \"dracula\",\r\n  DraculaSoft = \"dracula-soft\",\r\n  EverforestDark = \"everforest-dark\",\r\n  EverforestLight = \"everforest-light\",\r\n  GithubDark = \"github-dark\",\r\n  GithubDarkDefault = \"github-dark-default\",\r\n  GithubDarkDimmed = \"github-dark-dimmed\",\r\n  GithubDarkHighContrast = \"github-dark-high-contrast\",\r\n  GithubLight = \"github-light\",\r\n  GithubLightDefault = \"github-light-default\",\r\n  GithubLightHighContrast = \"github-light-high-contrast\",\r\n  GruvboxDarkHard = \"gruvbox-dark-hard\",\r\n  GruvboxDarkMedium = \"gruvbox-dark-medium\",\r\n  GruvboxDarkSoft = \"gruvbox-dark-soft\",\r\n  GruvboxLightHard = \"gruvbox-light-hard\",\r\n  GruvboxLightMedium = \"gruvbox-light-medium\",\r\n  GruvboxLightSoft = \"gruvbox-light-soft\",\r\n  Horizon = \"horizon\",\r\n  HorizonBright = \"horizon-bright\",\r\n  Houston = \"houston\",\r\n  KanagawaDragon = \"kanagawa-dragon\",\r\n  KanagawaLotus = \"kanagawa-lotus\",\r\n  KanagawaWave = \"kanagawa-wave\",\r\n  Laserwave = \"laserwave\",\r\n  LightPlus = \"light-plus\",\r\n  MaterialTheme = \"material-theme\",\r\n  MaterialThemeDarker = \"material-theme-darker\",\r\n  MaterialThemeLighter = \"material-theme-lighter\",\r\n  MaterialThemeOcean = \"material-theme-ocean\",\r\n  MaterialThemePalenight = \"material-theme-palenight\",\r\n  MinDark = \"min-dark\",\r\n  MinLight = \"min-light\",\r\n  Monokai = \"monokai\",\r\n  NightOwl = \"night-owl\",\r\n  NightOwlLight = \"night-owl-light\",\r\n  Nord = \"nord\",\r\n  OneDarkPro = \"one-dark-pro\",\r\n  OneLight = \"one-light\",\r\n  Plastic = \"plastic\",\r\n  Poimandres = \"poimandres\",\r\n  Red = \"red\",\r\n  RosePine = \"rose-pine\",\r\n  RosePineDawn = \"rose-pine-dawn\",\r\n  RosePineMoon = \"rose-pine-moon\",\r\n  SlackDark = \"slack-dark\",\r\n  SlackOchin = \"slack-ochin\",\r\n  SnazzyLight = \"snazzy-light\",\r\n  SolarizedDark = \"solarized-dark\",\r\n  SolarizedLight = \"solarized-light\",\r\n  Synthwave84 = \"synthwave-84\",\r\n  TokyoNight = \"tokyo-night\",\r\n  Vesper = \"vesper\",\r\n  VitesseBlack = \"vitesse-black\",\r\n  VitesseDark = \"vitesse-dark\",\r\n  VitesseLight = \"vitesse-light\",\r\n}",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "NotificationHistory": {
+    "description": "Public type declared in packages/features/src/notificationHistory.ts.",
+    "usage": "Import NotificationHistory from @frame/features. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type NotificationHistory = ReturnType<typeof createNotificationHistory>;",
+    "properties": [],
+    "package": "@frame/features"
+  },
+  "CodeEditorOptions": {
+    "description": "Public type declared in packages/features/src/codeEditor.ts.",
+    "usage": "Import CodeEditorOptions from @frame/features. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type CodeEditorOptions = Omit<Monaco.editor.IStandaloneEditorConstructionOptions, 'value' | 'model' | 'language' | 'theme'> & Monaco.editor.ITextModelUpdateOptions;",
+    "properties": [],
+    "package": "@frame/features"
+  },
+  "CodeEditorController": {
+    "description": "Public interface declared in packages/features/src/codeEditor.ts.",
+    "usage": "Import CodeEditorController from @frame/features. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface CodeEditorController {\r\n  readonly instance: Readonly<ShallowRef<Monaco.editor.IStandaloneCodeEditor | undefined>>;\r\n  focus(): boolean;\r\n  undo(): boolean;\r\n  redo(): boolean;\r\n  find(): boolean;\r\n  replaceCode(code: string): boolean;\r\n  runAction(id: string): Promise<boolean>;\r\n  format(): Promise<boolean>;\r\n  layout(): void;\r\n  /** Used by CodeEditor to claim one mounted surface. Returns an idempotent release. */\r\n  attach(instance: Monaco.editor.IStandaloneCodeEditor): () => void;\r\n}",
+    "properties": [
+      {
+        "name": "instance",
+        "type": "Readonly<ShallowRef<Monaco.editor.IStandaloneCodeEditor | undefined>>",
+        "description": "Instance configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "@frame/features"
+  },
+  "TerminalSessionLayout": {
+    "description": "Public type declared in packages/features/src/terminal.ts.",
+    "usage": "Import TerminalSessionLayout from @frame/features. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type TerminalSessionLayout = 'sidebar' | 'tabs';",
+    "properties": [],
+    "package": "@frame/features"
+  },
+  "TerminalController": {
+    "description": "Public type declared in packages/features/src/terminal.ts.",
+    "usage": "Import TerminalController from @frame/features. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type TerminalController = ReturnType<typeof createTerminal>;",
+    "properties": [],
+    "package": "@frame/features"
+  },
+  "AIChatController": {
+    "description": "Public type declared in packages/features/src/aiChat.ts.",
+    "usage": "Import AIChatController from @frame/features. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type AIChatController = ReturnType<typeof createAIChat>;",
+    "properties": [],
+    "package": "@frame/features"
+  }
+}
