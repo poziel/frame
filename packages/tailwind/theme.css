@@ -1,0 +1,28 @@
+/* Also usable with a host's existing Tailwind installation. */
+@theme inline {
+  --color-frame-bg: var(--frame-bg);
+  --color-frame-canvas: var(--frame-canvas);
+  --color-frame-surface: var(--frame-surface);
+  --color-frame-line: var(--frame-line);
+  --color-frame-text: var(--frame-text);
+  --color-frame-muted: var(--frame-muted);
+  --color-frame-accent: var(--frame-accent);
+  --color-frame-menu-background: var(--frame-menu-background);
+  --color-frame-menu-border: var(--frame-menu-border);
+  --color-frame-menu-hover: var(--frame-menu-hover);
+  --color-frame-menu-disabled: var(--frame-menu-disabled);
+  --color-frame-menu-shortcut: var(--frame-menu-shortcut);
+  --color-frame-quick-background: var(--frame-quick-background);
+  --color-frame-quick-selection: var(--frame-quick-selection);
+  --font-frame-body: var(--frame-font-body);
+  --font-frame-mono: var(--frame-font-mono);
+  --text-frame-body: var(--frame-font-size-body);
+  --spacing-frame-content: var(--frame-content-padding);
+  --spacing-frame-control-x: var(--frame-control-padding-x);
+  --spacing-frame-control-y: var(--frame-control-padding-y);
+  --spacing-frame-gap: var(--frame-gap);
+  --radius-frame-control: var(--frame-control-radius);
+  --radius-frame-panel: var(--frame-panel-radius);
+  --shadow-frame-overlay: var(--frame-overlay-shadow);
+  --ease-frame: var(--frame-ease);
+}

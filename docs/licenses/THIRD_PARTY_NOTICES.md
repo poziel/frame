@@ -1,5 +1,9 @@
 # Third-party notices
 
+## Shiki
+
+Shiki (https://github.com/shikijs/shiki) provides code syntax highlighting, language grammars, and themes. The viewer uses its JavaScript regular expression engine. Retain shiki.txt, which includes the installed dependency licenses, when distributing Frame. Regenerate it with `bun packages/core/scripts/collect-shiki-licenses.ts` after dependency updates.
+
 ## Microsoft Codicons
 
 The Codicons artwork is by Microsoft Corporation, from https://github.com/microsoft/vscode-codicons, distributed through @iconify-json/codicon. Licensed under Creative Commons Attribution 4.0 International: https://creativecommons.org/licenses/by/4.0/ . Original artwork is used without path modifications; size and color are controlled by Frame. No Microsoft endorsement is implied.

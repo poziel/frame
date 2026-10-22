@@ -1,4 +1,9 @@
 const propertyTypes: Record<string, string[]> = {
+  'code-editor': ['string', 'CodeEditorController', 'string', 'CodeBlockTheme', 'boolean', 'CodeEditorOptions', 'string', 'boolean', 'event'],
+  terminal: ['TerminalController', 'string', 'string', 'string', 'ViewDefinition', 'TerminalSessionLayout'],
+  'code-block': ['string', 'string', 'CodeBlockTheme', 'boolean', 'boolean', 'readonly number[]', 'number', 'boolean', 'boolean', 'string', 'event'],
+  navigation: ['boolean', 'boolean', '() => boolean', 'boolean', '() => void'],
+  'ai-chat': ['AIChatController', '"left" | "right"', 'readonly FrameMenuItem[] / event', '(messages: ChatMessage[], source: ChatMessage) => void', 'boolean / event', 'slot'],
   loader: ['FrameLoaderVariant', 'number', 'string', 'number | undefined', 'number | undefined', 'string', 'boolean', 'number', 'number'],
   loading: ['boolean', 'FrameLoaderVariant', 'string', 'number / string / number / number / number / number', 'slot', 'slot', 'string', 'FrameLoadingTextPosition', 'boolean', 'boolean', 'slot', 'slot'],
   buttons: ['"ghost" | "secondary" | "primary"', 'string', 'boolean', '(event: MouseEvent) => void'],
@@ -20,11 +25,58 @@ const propertyTypes: Record<string, string[]> = {
   views: ['Component / readonly PanelDefinition[]', 'boolean'], 'activity-actions': ['() => void', 'boolean | (() => boolean)', 'boolean'],
 };
 const propertyReferences: Record<string, Record<number, string>> = {
+  "code-block": { 2: "CodeBlockTheme" },
   "notification-panel": { 0: "NotificationHistory" }, notifications: { 3: "NotificationAction" }, modals: { 0: 'ModalDefinition', 1: 'PanelAction' }, settings: { 0: 'SettingsSection', 1: 'SettingValue' }, 'quick-input': { 0: 'QuickPickItem', 1: 'QuickPickOptions' }, workspace: { 0: 'WorkspaceSplitDirection', 1: 'WorkspacePaneContent' }, views: { 0: 'PanelDefinition' }, select: { 0: 'SelectItem' }, menus: { 0: 'FrameMenuItem' }, 'context-menu': { 0: 'FrameMenuItem' }, 'setting-controls': { 0: 'SettingDefinition' },
 };
 export interface ComponentExample { id: string; title: string; group: string; description: string; usage: string; code: string; properties: { name: string; description: string; type: string; reference?: string }[] }
 function example(id: string, title: string, group: string, description: string, usage: string, code: string, properties: [string, string][] = []): ComponentExample { return { id, title, group, description, usage, code, properties: properties.map(([name, description], index) => ({ name, description, type: propertyTypes[id]?.[index] ?? "void", reference: propertyReferences[id]?.[index] })) }; }
 export const componentExamples: ComponentExample[] = [
+  example('code-editor', 'Code editor', 'Extras', 'A standalone Monaco editor with the same Shiki grammars and themes as Code Block.', 'Place the editor in any container with a defined height. Direct props override matching options. Monaco loads on first mount; each surface owns its model and undo history. A controller can attach to one surface at a time. Monaco themes apply globally across mounted editors. Formatting and semantic assistance depend on available language providers.', `import { CodeEditor, createCodeEditor } from '@frame/extras';
+import { CodeBlockTheme } from '@frame/core';
+import '@frame/extras/style.css';
+
+const editor = createCodeEditor();
+// <CodeEditor v-model="code" :editor="editor" language="typescript"
+//   :theme="CodeBlockTheme.DarkPlus" :read-only="false"
+//   :options="{ fontSize: 14, wordWrap: 'on', tabSize: 2 }"
+//   style="height: 400px" />`, [['v-model', 'Optional source text; starts empty and updates on edits'], ['editor', 'Optional controller for focus, undo/redo, find, formatting and native Monaco access'], ['language', 'Shiki language name or alias; unknown names use plain text'], ['theme', 'Shared CodeBlockTheme enum; defaults to DarkPlus'], ['readOnly', 'Optional direct override of options.readOnly'], ['options', 'Typed Monaco editor and model options; updated reactively'], ['label', 'Accessible name; overrides options.ariaLabel'], ['autofocus', 'Focus once the editor is ready; defaults to false'], ['events', 'ready, update:modelValue, change, selection, focus, blur and error']]),
+  example('terminal', 'Terminal', 'Extras', 'Desktop terminal sessions with detected shells, side-by-side panes, search, and a session sidebar.', 'Open the desktop app to run local shells. The browser displays an explicit desktop-only message. Closing or moving a Frame view keeps its shells alive; the trash action terminates a session. Sidebar connector lines identify split groups. Right-click a session to rename it or change its color; hover reveals its close button.', `import { createTerminal, createTerminalView, Terminal } from '@frame/extras';
+import '@frame/extras/style.css';
+
+const terminal = createTerminal();
+frame.registerView(createTerminalView({
+  id: 'terminal', frame, terminal,
+}), 'bottom');
+
+// Or place the simple component in any container with a defined height:
+// <Terminal :terminal="terminal" profile="pwsh" />
+// Keep terminal in the application owner. Dispose it on app teardown.`, [['terminal', 'Application-owned controller shared by simple terminals and terminal views'], ['profile', 'Detected profile ID or display name; defaults to the preferred installed shell'], ['sessionId', 'Attach to an existing session without launching another shell'], ['cwd', 'Optional initial working directory'], ['createTerminalView', 'Creates a view definition using Frame header actions and Quick input'], ['sessionLayout', 'sidebar (default) or tabs, on TerminalView or createTerminalView; selectors hide with one session. Drag dividers to resize panes and sidebar. The terminal fills its parent height.']]),
+  example("code-block", "Code block", "Display", "Read-only syntax highlighting powered by Shiki with 65 selectable themes.", "Languages and themes load on demand. Highlighted lines use displayed numbers, including the startLine offset. Unknown languages fall back to plain text. Copy preserves the original source. This component displays code; the host owns the source text.", `import { FrameCodeBlock, CodeBlockTheme } from '@frame/core';
+
+<FrameCodeBlock :code="source" language="typescript"
+  :theme="CodeBlockTheme.DarkPlus" :line-numbers="true"
+  :highlight-on-hover="true" :highlighted-lines="[12]" :start-line="10" />`, [["code", "Required source text"], ["language", "Shiki language name or alias; defaults to text"], ["theme", "CodeBlockTheme enum; defaults to DarkPlus"], ["lineNumbers", "Show line numbers; defaults to false"], ["highlightOnHover", "Highlight hovered rows; defaults to true"], ["highlightedLines", "Displayed line numbers to emphasize"], ["startLine", "First displayed number; defaults to 1"], ["wrap", "Wrap long lines; defaults to false"], ["copyable", "Show the copy toolbar; defaults to true"], ["label", "Accessible viewer name"], ["error", "Emitted when highlighting fails; plain text remains visible"]]),
+  example("navigation", "Back and forward", "Workspace", "Navigate through opened pages and registered views using title-bar arrows.", "Enable navigation when creating your frame. Opening workspace content or a registered view records a destination. Back preserves the forward path until a different destination opens. Right-click the workspace or use Customize Layout to hide the arrows while keeping history. History belongs to this frame instance and is cleared on disposal. It does not undo edits or workspace geometry.", `const frame = createFrame({ navigation: true });
+frame.setWorkspacePane(frame.workspace.activePane.value, { label: 'Page', component: Page });
+frame.navigation.back();
+frame.navigation.forward();
+frame.layout.navigationVisible = false;
+frame.navigation.clear();`, [["navigation", "createFrame option; false by default"], ["layout.navigationVisible", "Show or hide both arrows without discarding history"], ["navigation.back / forward", "Navigate one destination; returns false at a boundary or when disabled"], ["navigation.canGoBack / canGoForward", "Reactive availability flags"], ["navigation.clear", "Discard the current history"]]),
+  example("ai-chat", "AI chat", "Extras", "A compact chat room with ordered thinking and message parts, attachments, reversible prompt editing, and conversation forging.", "Send a message to try the local mock server. Enter sends; Shift+Enter inserts a line. Expand thinking to inspect the demo trace. Rewind previews an edit without discarding replies until you send; Escape, X, or the same rewind button cancels. Forge emits a conversation snapshot for the host to open. Files and folders remain local. Voice input is a host integration hook, disabled until configured.", `import { AIChat, createAIChat } from '@frame/extras';
+import '@frame/extras/style.css';
+
+const chat = createAIChat({
+  async respond(request, response) {
+    const thought = response.thinking('Checking the request…');
+    // Await your backend here; forward request.signal to support Stop.
+    response.finishThinking(thought);
+    response.message('First message');
+    response.message('Another message in the same generation');
+    response.complete();
+  }
+});
+// Dispose the controller when its owner unmounts.
+// <AIChat :chat="chat" @forge="openConversation" />`, [["chat", "Controller from createAIChat; owns draft, messages, attachments and generation state"], ["userAlignment / assistantAlignment", "Independently select left or right alignment"], ["attachmentActions / attachmentAction", "Additional host-specific menu actions; files and folders are built in"], ["forge", "Emits an independent snapshot through the selected assistant response"], ["speechEnabled / speech", "Enable and handle voice input in the host"], ["message-actions / composer-actions / empty", "Slots for host actions and empty content"]]),
   example("loader", "Loader", "Display", "All 44 LDRS loading animations, available independently wherever you need an indicator.", "Browse all 44 styles below, select one, and copy its usage. The default is a 32px ring in the theme accent color. Reduced-motion preferences pause the animation. Use decorative when a surrounding component supplies the status.", `import { FrameLoader } from '@frame/core';
 
 // In your template:

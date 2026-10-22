@@ -1,12 +1,15 @@
 # Workspace packages
 
+See [the architecture direction](architecture.md) for the root Frame ownership model and the distinction between shell capabilities and reusable view components. The sections below describe current package behavior; the Frame-owned Extras installer and feature factories remain future work.
+
 | Package | Owns | Does not own |
 | --- | --- | --- |
 | @frame/core (`packages/core`) | Empty shell, layout, view registration, commands, controls, settings primitives, transient notifications | Notification history panel/bell, example registrations, terminal processes, AI providers, filesystem trees |
-| @frame/extras (`packages/extras`) | Optional ready-made features: notification history store, panel, and indicator | Shell ownership, backend services, automatic registration |
+| @frame/extras (`packages/extras`) | Optional notification history, AI chat, Monaco code editor, terminal components/controller and opt-in native terminal plugin | Application shell composition, AI backend services, automatic registration |
+| @frame/tailwind (`packages/tailwind`) | Optional Tailwind v4 Vite integration and mappings to Core theme variables | Core runtime, global Preflight reset, uploaded-theme loader |
 | @frame/docs (`packages/docs`) | Documentation, examples, and explicit composition of Core and Extras | Library contracts or production application content |
 
-The dependency direction is Docs → Extras → Core. Docs may also import Core directly. Core must never import Extras. All packages are private. The root orchestrates builds and Tauri; it is not the install target for consumer applications.
+The runtime dependency direction is Docs → Extras → Core. Docs also opts into the optional Tailwind build integration; Core never depends on Tailwind. Docs may also import Core directly. Core must never import Extras. All packages are private. The root orchestrates builds and Tauri; it is not the install target for consumer applications.
 
 Build Core with `bun run build:library`, Extras with `bun run build:extras`, and Docs with `bun run build`. `bun run check:consumer` compiles a consumer against both built packages. The core boundary check rejects documentation and notification-panel code/CSS leakage.
 
@@ -22,12 +25,14 @@ Notification history, its bottom-right panel, bell/count control, history expans
 
 ## Future Extras candidates
 
-- Terminal: sessions, tabs, output and input UI; the host supplies the PTY/process adapter.
-- AI assistant/chat: messages, composer, streaming and cancel controls; the host supplies the provider and credentials.
 - File explorer: tree, selection, rename and contextual actions; the host supplies filesystem operations and permissions.
 - Settings UI is another possible extraction; keep its metadata and standalone controls reusable. It remains in Core in this change.
 
 These future features are proposals, not shipped implementations. Sample inspector, session log, collections, and banners remain Docs examples until there is a reusable contract worth exporting.
+
+AI chat is available in Extras as `AIChat` and `createAIChat`. The host supplies the responder, persistence, speech adapter, and conversation/session management. The room renders ordered thinking/message parts and completion metadata; importing it starts no services. The Docs Vite server owns the simulated streaming endpoint used by its example, which is not part of the Extras bundle.
+
+Desktop terminals are available in Extras as `Terminal`, `TerminalView`, `createTerminal`, and `createTerminalView`. The host explicitly registers the bundled `packages/extras/tauri` plugin and its capability. It provides native PTYs; the controller retains sessions while views are hidden or moved. The view factory uses Core's existing view header actions and Quick input. Browser terminals, persisted custom profiles, and font/theme settings are outside this version. The Docs desktop host opts in and registers a bottom Terminal view; Core remains unchanged.
 
 ## Build configuration
 

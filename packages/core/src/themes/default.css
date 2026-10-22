@@ -1,0 +1,29 @@
+/* Public runtime theme tokens. Themes override values, never utility names. */
+:root {
+  --frame-bg: #181818;
+  --frame-canvas: #101112;
+  --frame-surface: #181818;
+  --frame-line: #2b2b2b;
+  --frame-muted: #8e9496;
+  --frame-accent: #0078d4;
+  --frame-text: #cccccc;
+  --frame-menu-background: rgb(31 31 31 / 94%);
+  --frame-menu-border: #303030;
+  --frame-menu-hover: #303336;
+  --frame-menu-disabled: #656565;
+  --frame-menu-shortcut: #929292;
+  --frame-quick-background: #202020;
+  --frame-quick-selection: #267b9b;
+  --frame-font-body: "Segoe UI", sans-serif;
+  --frame-font-mono: Consolas, monospace;
+  --frame-font-size-body: 12px;
+  --frame-content-padding: 12px;
+  --frame-control-padding-x: 10px;
+  --frame-control-padding-y: 5px;
+  --frame-gap: 6px;
+  --frame-control-radius: 3px;
+  --frame-panel-radius: 7px;
+  --frame-overlay-shadow: 0 14px 50px #0006;
+  --frame-duration: 150ms;
+  --frame-ease: ease-out;
+}

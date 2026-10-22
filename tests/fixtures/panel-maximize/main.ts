@@ -1,0 +1,12 @@
+import { createApp, h } from "vue";
+import { createFrame, FrameShell } from "@frame/core";
+import "../../../packages/core/src/style.css";
+const frame = createFrame();
+const content = { render: () => h("input", { "aria-label": "Retained input", value: "Original" }) };
+frame.registerView({ id: "primary", label: "Primary", component: content }, "primary");
+frame.registerView({ id: "secondary", label: "Secondary", component: content, actions: [{ id: "extra", label: "Extra action", run() {} }] }, "secondary");
+frame.registerView({ id: "bottom", label: "Bottom", component: content, actions: [{ id: "extra", label: "Extra action", run() {} }] }, "bottom");
+frame.registerView({ id: "empty", label: "No actions", component: content }, "bottom");
+frame.openSidePanel("primary"); frame.openSecondaryPanel("secondary"); frame.openBottomPanel("bottom");
+Object.assign(window, { fixtureFrame: frame });
+createApp({ render: () => h(FrameShell, { frame }) }).mount("#app");

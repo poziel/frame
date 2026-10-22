@@ -99,7 +99,7 @@ export interface NotificationOptions {
   id?: string; title: string; severity?: NotificationSeverity; details?: string; source?: string;
   priority?: string; duration?: number; action?: NotificationAction;
 }
-export interface FrameOptions { settings?: boolean; notifications?: boolean }
+export interface FrameOptions { settings?: boolean; notifications?: boolean; /** Enable application navigation history and title-bar arrows. Default: false. */ navigation?: boolean }
 
 export interface ActivityAction { id: string; label: string; icon?: Component; run: () => void; disabled?: boolean; active?: boolean | (() => boolean) }
 /** Shared runtime base. The SelectItem type narrows to an option or separator. */

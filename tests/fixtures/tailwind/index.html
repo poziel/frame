@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8"><title>Frame Tailwind consumer</title><link rel="stylesheet" href="./style.css"></head>
+  <body>
+    <div id="sample" class="bg-frame-surface text-frame-body p-frame-content rounded-frame-control font-frame-body shadow-frame-overlay duration-[var(--frame-duration)] ease-frame">Themed application component</div>
+    <div id="ordinary" class="flex gap-4 p-4">Ordinary Tailwind utilities</div>
+    <button id="native">Native button keeps its browser styling</button>
+    <div id="portal"></div>
+    <script type="module">
+      import { createApp, h } from 'vue';
+      import { PopoverRoot, PopoverTrigger, PopoverPortal, PopoverContent } from 'reka-ui';
+      createApp({ render: () => h(PopoverRoot, {}, { default: () => [
+        h(PopoverTrigger, {}, { default: () => 'Reka trigger' }),
+        h(PopoverPortal, {}, { default: () => h(PopoverContent, { id: 'overlay', class: 'bg-frame-surface p-frame-content rounded-frame-control font-frame-body' }, { default: () => 'Portalled theme' }) }),
+      ] }) }).mount('#portal');
+    </script>
+  </body>
+</html>

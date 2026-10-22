@@ -18,7 +18,7 @@ import FrameModal from "./FrameModal.vue";
 import ViewDragOverlay from "./ViewDragOverlay.vue";
 import type { Command, FrameMenuItem } from "../types";
 import "../style.css";
-import { layoutGeometry } from "../frame/layout";
+import { layoutGeometry, maximizedRegionBounds } from "../frame/layout";
 import LayoutCustomizer from "./LayoutCustomizer.vue";
 import ResizeHandle from "./ResizeHandle.vue";
 import ActivityMenu from "./ActivityMenu.vue";
@@ -51,9 +51,17 @@ const overlayHost = ref<HTMLElement>();
 const { bounds: overlayBounds, style: overlayStyle } = provideOverlayBoundary(body, overlayHost);
 const bodyWidth = ref(1180);
 const bodyHeight = ref(720);
+const bodyPadding = ref({ left: 5, right: 5, top: 1, bottom: 0 });
 const layoutOpen = ref(false);
 let observer: ResizeObserver | undefined;
 const geometry = computed(() => layoutGeometry({ ...frame.layout, bannerVisible: frame.layout.bannerVisible && !!frame.workspaceBanner.value }, bodyWidth.value, bodyHeight.value));
+const maximizedBounds = computed(() => maximizedRegionBounds(frame.layout, bodyWidth.value, bodyHeight.value));
+function maximizedStyle(region: "secondary" | "bottom") {
+  const bounds = maximizedBounds.value;
+  if (!bounds || frame.layout.maximizedRegion !== region) return {};
+  const padding = bodyPadding.value;
+  return { position: "absolute" as const, gridColumn: "auto", gridRow: "auto", top: `${padding.top}px`, bottom: `${padding.bottom}px`, left: `${bounds.left + padding.left}px`, right: `${bounds.right + padding.right}px`, width: "auto", marginLeft: "0px", marginRight: "0px", zIndex: 10 };
+}
 const bodyStyle = computed(() => {
   const g = geometry.value;
   return { gridTemplateColumns: `${g.left}px ${g.leftGap}px minmax(0,1fr) ${g.rightGap}px ${g.right}px`, gridTemplateRows: `${g.banner}px ${g.banner ? g.gap : 0}px minmax(0,1fr) ${g.panel ? g.gap : 0}px ${g.panel}px`, rowGap: "0px" };
@@ -155,7 +163,14 @@ function onKey(event: KeyboardEvent) {
 }
 onMounted(() => {
   window.addEventListener("keydown", onKey); frame.record("Workspace ready");
-  observer = new ResizeObserver(entries => { const rect = entries[0]?.contentRect; if (rect) { bodyWidth.value = rect.width; bodyHeight.value = rect.height; } });
+  observer = new ResizeObserver(entries => {
+    const rect = entries[0]?.contentRect;
+    if (rect && body.value) {
+      bodyWidth.value = rect.width; bodyHeight.value = rect.height;
+      const style = getComputedStyle(body.value);
+      bodyPadding.value = { left: parseFloat(style.paddingLeft) || 0, right: parseFloat(style.paddingRight) || 0, top: parseFloat(style.paddingTop) || 0, bottom: parseFloat(style.paddingBottom) || 0 };
+    }
+  });
   if (body.value) observer.observe(body.value);
 });
 onBeforeUnmount(() => {
@@ -177,27 +192,27 @@ onBeforeUnmount(() => {
         <ActivityRail v-show="frame.layout.activityBarVisible" :panels="sidePanels" :active-id="frame.state.activeSidePanel" :expanded="frame.state.sidebarVisible" @select="selectSide">
           <ActivityMenu v-if="!frame.layout.menuBarVisible" :items="menuItems" @execute="frame.executeCommand" />
         </ActivityRail>
-        <SidePanel v-show="frame.state.sidebarVisible" :empty="!activeSide" :title="activeSide?.label ?? 'Views'" :actions="activeSide?.actions" :padded="activeSide?.children !== undefined ? false : activeSide?.padded" @close="frame.closeSidePanel()">
+        <SidePanel v-show="frame.state.sidebarVisible" :inert="maximizedBounds?.primary || undefined" :empty="!activeSide" :title="activeSide?.label ?? 'Views'" :actions="activeSide?.actions" :padded="activeSide?.children !== undefined ? false : activeSide?.padded" @close="frame.closeSidePanel()">
           <div :id="`${contentId}-primary`" class="view-host"/>
         </SidePanel>
       </div>
         <ResizeHandle v-if="frame.state.sidebarVisible" class="primary-gap-resize" grip :style="primarySashStyle" label="Resize primary sidebar" axis="x" :value="geometry.primary" :min="160" :max="Math.max(160, bodyWidth - geometry.rail - 160)"
           :reverse="frame.layout.primarySide === 'right'" @change="frame.layout.primaryWidth = $event" @reset="frame.layout.primaryWidth = 236" />
       <section v-if="frame.workspaceBanner.value" v-show="frame.layout.bannerVisible" class="workspace-banner" :aria-label="frame.workspaceBanner.value.label" :style="{ gridColumn: geometry.bannerColumn, marginLeft: `${geometry.bannerLeftInset}px`, marginRight: `${geometry.bannerRightInset}px` }"><component :is="frame.workspaceBanner.value.component" v-bind="frame.workspaceBanner.value.props"/></section>
-      <div class="canvas-container workspace-region">
+      <div class="canvas-container workspace-region" :inert="!!maximizedBounds || undefined">
         <div class="canvas-centering" :class="{ centered: frame.layout.centered }" :style="{ '--center-width': `${frame.layout.centeredRatio * 100}%` }">
           <ResizeHandle v-if="frame.layout.centered" class="center-left" label="Resize centered content from left" axis="x" :value="frame.layout.centeredRatio" :min=".3" :max="1" reverse :scale="2 / Math.max(240, geometry.center)" :step=".02" @change="frame.layout.centeredRatio = $event" @reset="frame.layout.centeredRatio = .9" />
           <WorkspacePanes><template v-if="$slots.default" #default="scope"><slot :pane="scope.pane"/></template><template v-if="$slots['workspace-pane']" #pane="scope"><slot name="workspace-pane" :pane="scope.pane"/></template></WorkspacePanes>
           <ResizeHandle v-if="frame.layout.centered" class="center-right" label="Resize centered content from right" axis="x" :value="frame.layout.centeredRatio" :min=".3" :max="1" :scale="2 / Math.max(240, geometry.center)" :step=".02" @change="frame.layout.centeredRatio = $event" @reset="frame.layout.centeredRatio = .9" />
         </div>
       </div>
-      <div v-show="frame.layout.secondarySidebarVisible" class="secondary-region" :style="secondaryStyle">
+      <div v-show="frame.layout.secondarySidebarVisible" class="secondary-region" :class="{ 'region-maximized': frame.layout.maximizedRegion === 'secondary' }" :inert="frame.layout.maximizedRegion === 'bottom' && maximizedBounds?.secondary || undefined" :style="{ ...secondaryStyle, ...maximizedStyle('secondary') }">
         <BottomPanel managed :content-id="`${contentId}-secondary`" :tabs="secondaryTabs" :active-id="frame.state.activeSecondaryTab" region-id="secondary-panel" label="Secondary sidebar" close-label="Hide secondary sidebar"
           @select="frame.openSecondaryPanel" @close="frame.layout.secondarySidebarVisible = false" />
-        <ResizeHandle class="secondary-resize" grip label="Resize secondary sidebar" axis="x" :value="geometry.secondary" :min="160" :max="Math.max(160, bodyWidth - 160)" :reverse="frame.layout.primarySide === 'left'" @change="frame.layout.secondaryWidth = $event" @reset="frame.layout.secondaryWidth = 280" />
+        <ResizeHandle v-show="frame.layout.maximizedRegion !== 'secondary'" class="secondary-resize" grip label="Resize secondary sidebar" axis="x" :value="geometry.secondary" :min="160" :max="Math.max(160, bodyWidth - 160)" :reverse="frame.layout.primarySide === 'left'" @change="frame.layout.secondaryWidth = $event" @reset="frame.layout.secondaryWidth = 280" />
       </div>
-      <div v-show="frame.state.panelVisible" class="bottom-region" :style="{ gridColumn: geometry.panelColumn, marginLeft: `${geometry.panelLeftInset}px`, marginRight: `${geometry.panelRightInset}px` }">
-        <ResizeHandle class="panel-resize" grip label="Resize bottom panel" axis="y" :value="geometry.panel" :min="90" :max="Math.max(90, bodyHeight - 120)" reverse @change="frame.layout.panelHeight = $event" @reset="frame.layout.panelHeight = 240" />
+      <div v-show="frame.state.panelVisible" class="bottom-region" :class="{ 'region-maximized': frame.layout.maximizedRegion === 'bottom' }" :inert="frame.layout.maximizedRegion === 'secondary' && !!maximizedBounds || undefined" :style="{ gridColumn: geometry.panelColumn, marginLeft: `${geometry.panelLeftInset}px`, marginRight: `${geometry.panelRightInset}px`, ...maximizedStyle('bottom') }">
+        <ResizeHandle v-show="frame.layout.maximizedRegion !== 'bottom'" class="panel-resize" grip label="Resize bottom panel" axis="y" :value="geometry.panel" :min="90" :max="Math.max(90, bodyHeight - 120)" reverse @change="frame.layout.panelHeight = $event" @reset="frame.layout.panelHeight = 240" />
         <BottomPanel managed :content-id="`${contentId}-bottom`" :tabs="bottomTabs" :active-id="frame.state.activeBottomTab" @select="frame.openBottomPanel" @close="frame.closeBottomPanel()" />
       </div>
     </div>

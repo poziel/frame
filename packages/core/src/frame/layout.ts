@@ -1,5 +1,7 @@
 export type PanelAlignment = "left" | "right" | "center" | "justify";
 export interface LayoutState {
+  maximizedRegion: "secondary" | "bottom" | null;
+  navigationVisible: boolean;
   menuBarVisible: boolean;
   activityBarVisible: boolean;
   primarySidebarVisible: boolean;
@@ -22,6 +24,8 @@ export interface LayoutState {
 }
 export function defaultLayout(): LayoutState {
   return {
+    maximizedRegion: null,
+    navigationVisible: true,
     menuBarVisible: true, activityBarVisible: true, primarySidebarVisible: false,
     secondarySidebarVisible: false, bannerVisible: false, bannerAlignment: "center", bannerHeight: 100, panelVisible: false, statusBarVisible: true,
     primarySide: "left", panelAlignment: "center", quickInputPosition: "top", density: "default",
@@ -29,6 +33,19 @@ export function defaultLayout(): LayoutState {
   };
 }
 export const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(value, Math.max(min, max)));
+/** Maximize inside the workbench, leaving the activity rail and uncovered regions intact. */
+export function maximizedRegionBounds(layout: LayoutState, width: number, height: number) {
+  const region = layout.maximizedRegion;
+  if (!region || (region === "bottom" ? !layout.panelVisible : !layout.secondarySidebarVisible)) return undefined;
+  const g = layoutGeometry(layout, width, height);
+  const primary = region === "secondary" || layout.panelAlignment === "left" || layout.panelAlignment === "justify";
+  const secondary = region === "secondary" || layout.panelAlignment === "right" || layout.panelAlignment === "justify";
+  const primaryInset = primary ? (g.rail ? g.rail + g.gap : 0) : layout.primarySide === "left" ? g.left + g.leftGap : g.right + g.rightGap;
+  const secondaryInset = secondary ? 0 : layout.primarySide === "left" ? g.right + g.rightGap : g.left + g.leftGap;
+  const left = layout.primarySide === "left" ? primaryInset : secondaryInset;
+  const right = layout.primarySide === "right" ? primaryInset : secondaryInset;
+  return { left, right, top: 0, height, width: Math.max(0, width - left - right), primary, secondary };
+}
 /** Physical panel coverage is independent of which sidebar is primary. */
 export function panelCoverage(alignment: PanelAlignment) {
   return { left: alignment === "left" || alignment === "justify", right: alignment === "right" || alignment === "justify" };

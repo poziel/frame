@@ -20,7 +20,11 @@ import ResizablePane from "../../../core/src/components/ResizablePane.vue";
 import ResizeHandle from "../../../core/src/components/ResizeHandle.vue";
 import ShowcaseModalContent from "./ShowcaseModalContent.vue";
 import LoaderExample from "./LoaderExample.vue";
+import CodeBlockExample from "./CodeBlockExample.vue";
+import CodeEditorExample from './CodeEditorExample.vue';
 import LoadingExample from "./LoadingExample.vue";
+import AIChatExample from "./AIChatExample.vue";
+import TerminalExample from './TerminalExample.vue';
 const props = defineProps<{ id: string; variant?: string }>();
 const emit = defineEmits<{ feedback: [text: string] }>();
 const frame = useFrame(), instance = useId();
@@ -61,6 +65,10 @@ onBeforeUnmount(() => disposers.reverse().forEach(dispose => dispose()));
 </script>
 <template><div class="component-preview-controls">
   <template v-if="id === 'loader'"><LoaderExample /></template>
+  <template v-else-if="id === 'code-block'"><CodeBlockExample /></template>
+  <template v-else-if="id === 'code-editor'"><CodeEditorExample /></template>
+  <template v-else-if="id === 'ai-chat'"><AIChatExample @feedback="report"/></template>
+  <template v-else-if="id === 'terminal'"><TerminalExample/></template>
   <template v-else-if="id === 'loading'"><LoadingExample /></template>
   <template v-else-if="id === 'buttons'"><div class="showcase-row"><FrameButton :disabled="disabled" @click="click('Ghost')">Quiet action</FrameButton><FrameButton variant="secondary" :disabled="disabled" @click="click('Secondary')">Secondary action</FrameButton><FrameButton variant="primary" icon="check" :disabled="disabled" @click="click('Primary')">Primary action</FrameButton></div><FrameCheckbox v-model="disabled" label="Disable the buttons"/></template>
   <template v-else-if="id === 'icon-buttons'"><div class="showcase-row"><FrameIconButton label="Refresh preview" icon="refresh" :size="size" :tooltip="tooltip" :hover-highlight="highlight" @click="click('Refresh')"/><FrameIconButton label="Add item" icon="add" :size="size" :tooltip="tooltip" :hover-highlight="highlight" @click="click('Add')"/><FrameIconButton label="Disabled action" icon="close" disabled/></div><SettingControl :setting="{ id: 'size', label: 'Button size', type: 'range', min: 24, max: 48, default: 28 }" :model-value="size" @update:model-value="size = Number($event)"/><FrameCheckbox v-model="tooltip" label="Show tooltips"/><FrameCheckbox v-model="highlight" label="Highlight on hover"/></template>

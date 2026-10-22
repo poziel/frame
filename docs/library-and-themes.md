@@ -64,36 +64,12 @@ Menus support keyboard arrows, Home/End, Escape, disabled rows, and flyouts that
 
 The Customize Layout button opens the shared quick-input component without a search field. It now exposes visibility, sidebar position, panel alignment, quick-input position, density, fullscreen, Zen, and centered-layout settings. See [Layout controls](layout.md).
 
-## Theme JSON: proposed contract
+## Themes and optional Tailwind
 
-The current implementation exposes named `--frame-*` CSS color tokens. This pass establishes the default neutral dark palette and menu tokens; it does **not** add a JSON theme loader or theme-switching UI.
+Frame's public theme variables now cover colors, fonts, spacing, radii, shadows, and motion. See [Theme variables](theme-variables.md) for the defaults, precedence, and current component coverage. Themes override CSS variables at the document root so shell content and portalled overlays inherit the same values.
 
-A suitable next step is a versioned JSON contract with semantic colors and partial overrides:
+The earlier colors-only JSON proposal is superseded by that broader contract. An uploaded-theme loader and selection UI remain future work. Existing components are not yet fully migrated from hard-coded visual values.
 
-```json
-{
-  "version": 1,
-  "id": "artoria-dark",
-  "name": "Artoria Dark",
-  "colors": {
-    "application.background": "#181818",
-    "workspace.background": "#101112",
-    "surface.background": "#181818",
-    "border": "#2b2b2b",
-    "text": "#cccccc",
-    "focus": "#0078d4",
-    "menu.background": "#1f1f1ff0",
-    "menu.hover": "#303336",
-    "menu.disabled": "#656565",
-    "quickInput.selection": "#267b9b"
-  }
-}
-```
+Tailwind is an optional, separate package. See [@frame/tailwind](../packages/tailwind/README.md) for local installation, the Vite plugin, stylesheet imports, and integration with applications that already use Tailwind. Core works without it.
 
-Frame would validate the schema version and supported color values, merge supplied colors over the default theme, and translate semantic keys into CSS variables. Missing keys inherit defaults. The same resolved theme must reach portalled menus, quick input, and tooltips as well as the shell itself. Theme data should not contain executable code or arbitrary CSS.
-
-Keep typography, spacing, and layout separate from color overrides so a palette change does not unexpectedly alter window geometry. App-specific colors can live in a separate app namespace. A light theme will also need explicit foreground, disabled, border, selection, scrollbar, and translucency values; changing the background alone is insufficient.
-
-Until that loader is implemented, a consuming application can override the published `--frame-*` variables in its own stylesheet after importing `@frame/core/style.css`. Apply shared overrides at the document root so teleported overlays inherit them too.
-
-
+Reka UI is installed as a Core dependency for future interaction primitives; existing controls retain their behavior in this change. Reka is installed through the package manager and lockfile, rather than copying its upstream source into this repository.

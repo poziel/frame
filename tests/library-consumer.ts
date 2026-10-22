@@ -1,5 +1,14 @@
 import { createNotificationHistory, NotificationPanel, NotificationIndicator } from "@frame/extras";
+import { Terminal, TerminalView, createTerminal, createTerminalView, type TerminalController, type TerminalProfile, type TerminalSessionLayout } from '@frame/extras';
+import { AIChat, createAIChat, type ChatResponseWriter, type ChatMessage } from "@frame/extras";
 import { h } from "vue";
+import { CodeEditor, createCodeEditor, type CodeEditorOptions, type CodeEditorProps } from '@frame/extras';
+const editorOptions: CodeEditorOptions = { fontSize: 15, wordWrap: 'on', tabSize: 2, minimap: { enabled: false } };
+const editorProps: CodeEditorProps = { modelValue: '', editor: createCodeEditor(), language: 'typescript', readOnly: false, options: editorOptions };
+void h(CodeEditor, editorProps);
+import { FrameCodeBlock, CodeBlockTheme, type FrameCodeBlockProps } from "@frame/core";
+const viewerProps: FrameCodeBlockProps = { code: "const value = 1;", language: "typescript", theme: CodeBlockTheme.DarkPlus, lineNumbers: true, highlightedLines: [40], startLine: 40 };
+void h(FrameCodeBlock, viewerProps);
 import { createFrame, FrameShell, FrameIcon, addCollection, FrameMenu, FrameModal, FrameSettings, SettingControl, FrameNotifications, FrameIconButton, ResizablePane, FrameButton, FrameTextInput, FrameCheckbox, FrameSelect, ComponentShowcase, FrameSlider, FrameColorPicker, FrameTextArea, SelectOption, SelectSeparator, type SelectItem, type FrameMenuItem } from "@frame/core";
 
 // Compile against the built package exports, rather than reaching into src/.
@@ -9,7 +18,17 @@ const position: FrameLoadingTextPosition = "above";
 const loadingProps: FrameLoadingProps = { active: true, variant: "newtons-cradle", text: "Preparing…", textPosition: position, showLoader: true, showText: true, bgOpacity: .2, strokeLength: .3 };
 void [h(FrameLoader, { variant: loaderVariant, size: 24 }), h(FrameLoading, loadingProps, () => "Content"), frameLoaderVariants];
 export function consumerFixture() {
-  const frame = createFrame({ settings: true, notifications: true });
+  const chat = createAIChat({ respond(_request, writer: ChatResponseWriter) { writer.message("Hello"); writer.complete(); } });
+  const conversation: ChatMessage[] = chat.fork("response");
+  void [h(AIChat, { chat, userAlignment: "right", assistantAlignment: "left", onForge: (messages: ChatMessage[]) => { void messages; } }), conversation];
+  chat.dispose();
+  const frame = createFrame({ settings: true, notifications: true, navigation: true });
+  const terminal: TerminalController = createTerminal({ profile: 'pwsh' });
+  const terminalProfiles: readonly TerminalProfile[] = terminal.profiles.value;
+  const sessionLayout: TerminalSessionLayout = 'tabs';
+  frame.registerView(createTerminalView({ id: 'consumer.terminal', frame, terminal, sessionLayout }), 'bottom');
+  void [h(Terminal, { terminal, profile: 'cmd' }), h(TerminalView, { terminal, sessionLayout }), terminalProfiles];
+  void [frame.navigation.canGoBack, frame.navigation.canGoForward, frame.navigation.back(), frame.navigation.forward(), frame.layout.navigationVisible];
   const history = createNotificationHistory(frame);
   void [NotificationPanel, NotificationIndicator, history];
   frame.registerSettingsSection({ id: "general", title: "General", settings: [{ id: "general.name", label: "Name", type: "text", default: "Artoria" }] });

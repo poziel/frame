@@ -12,8 +12,9 @@ defineProps<{ sidebarVisible: boolean; panelVisible: boolean; native: boolean; m
 const frame = useFrame();
 const visible = reactive(new Set<string>());
 const builtins = [ { id: "primary", label: "Toggle Primary Side Bar" }, { id: "bottom", label: "Toggle Panel" }, { id: "secondary", label: "Toggle Secondary Side Bar" } ];
-const toolbarMenu = computed<FrameMenuItem[]>(() => [...builtins.map(item => ({ ...item, visibility: true, checked: visible.has(item.id) })), ...frame.toolbarActions.map(item => ({ id: item.id, label: item.label, visibility: true, checked: !!item.visible }))]);
+const toolbarMenu = computed<FrameMenuItem[]>(() => [...(frame.features.navigation ? [{ id: "navigation", label: "Back and Forward", visibility: true, checked: frame.layout.navigationVisible }] : []), ...builtins.map(item => ({ ...item, visibility: true, checked: visible.has(item.id) })), ...frame.toolbarActions.map(item => ({ id: item.id, label: item.label, visibility: true, checked: !!item.visible }))]);
 function chooseToolbar(item: FrameMenuItem) {
+  if (item.id === "navigation") { frame.layout.navigationVisible = !frame.layout.navigationVisible; return; }
   const action = frame.toolbarActions.find(action => action.id === item.id);
   if (action) action.visible = !action.visible;
   else if (visible.has(item.id)) visible.delete(item.id); else visible.add(item.id);
@@ -27,12 +28,18 @@ const emit = defineEmits<{ commands: []; execute: [id: string] }>();
       <MenuBar v-if="menuBarVisible && !zenMode" :items="menuItems" @execute="emit('execute', $event)" />
     </div>
     <div class="titlebar-drag" data-tauri-drag-region />
+    <div class="titlebar-center">
+    <nav v-if="frame.features.navigation && frame.layout.navigationVisible" class="titlebar-navigation" aria-label="Navigation history">
+      <FrameTooltip text="Back" v-slot="{ describedby }"><button class="titlebar-button" aria-label="Back" :aria-describedby="describedby" :disabled="!frame.navigation.canGoBack" @click="frame.navigation.back()"><AppIcon name="arrow-left" :size="16"/></button></FrameTooltip>
+      <FrameTooltip text="Forward" v-slot="{ describedby }"><button class="titlebar-button" aria-label="Forward" :aria-describedby="describedby" :disabled="!frame.navigation.canGoForward" @click="frame.navigation.forward()"><AppIcon name="arrow-right" :size="16"/></button></FrameTooltip>
+    </nav>
     <FrameTooltip v-if="showSearch" text="Quick actions" shortcut="Ctrl+P" class="command-tooltip" v-slot="{ describedby }">
       <button class="workspace-command" aria-label="Open quick actions" :aria-describedby="describedby" @click="emit('commands')">
         <span>{{ titleText }}</span><AppIcon name="chevron" :size="12" />
       </button>
     </FrameTooltip>
     <div v-if="!showSearch" class="titlebar-text" data-tauri-drag-region>{{ titleText }}</div>
+    </div>
     <div class="titlebar-drag" data-tauri-drag-region />
     <div class="titlebar-layout">
       <ContextMenu :items="toolbarMenu" label="Title bar actions" @select="chooseToolbar"><FrameTooltip text="Customize layout" v-slot="{ describedby }"><button class="titlebar-button" aria-label="Customize layout" :aria-describedby="describedby" @click="emit('execute', 'frame.layout.customize')"><AppIcon name="layout" :size="16"/></button></FrameTooltip></ContextMenu>

@@ -1,10 +1,11 @@
-import { computed, inject, markRaw, nextTick, reactive, shallowReactive, shallowRef } from "vue";
+import { computed, inject, markRaw, nextTick, reactive, shallowReactive, shallowRef, watch } from "vue";
 import type { InjectionKey } from "vue";
 import { createViewDrag } from "./viewDrag";
 import { createSettings } from "./settings";
 import { createNotifications } from "./notifications";
 import type { ActivityAction, FrameOptions, FrameMenuItem } from "../types";
 import { createWorkspace } from "./workspace";
+import { createNavigation } from "./navigation";
 import { defaultLayout, type LayoutState } from "./layout";
 import type { ActivityEntry, Command, PanelDefinition, QuickPickItem, QuickPickOptions, SidePanelDefinition, ViewRegion, ToolbarAction, WorkspaceBannerDefinition, ModalDefinition } from "../types";
 
@@ -17,7 +18,7 @@ export function createFrame(options: FrameOptions = {}) {
     activityActions.push(definition);
     return () => { const index = activityActions.indexOf(definition); if (index >= 0) activityActions.splice(index, 1); };
   }
-  const features = reactive({ settings: options.settings ?? true, notifications: options.notifications ?? true });
+  const features = reactive({ settings: options.settings ?? true, notifications: options.notifications ?? true, navigation: options.navigation ?? false });
   const settings = createSettings();
   const notifications = createNotifications();
   const settingsRequest = shallowRef(0);
@@ -99,6 +100,43 @@ export function createFrame(options: FrameOptions = {}) {
     entries: [] as ActivityEntry[],
     message: "Ready",
   });
+  function captureLocation() {
+    return { panes: [...workspace.panes.value], active: workspace.activePane.value,
+      primary: state.activeSidePanel, secondary: state.activeSecondaryTab, bottom: state.activeBottomTab,
+      primaryVisible: layout.primarySidebarVisible, secondaryVisible: layout.secondarySidebarVisible, bottomVisible: layout.panelVisible,
+      collapsed: { ...menuState.collapsed } };
+  }
+  const navigation = createNavigation({
+    enabled: () => features.navigation,
+    capture: captureLocation,
+    equal: (a, b) => a.active === b.active && a.primary === b.primary && a.secondary === b.secondary && a.bottom === b.bottom
+      && a.primaryVisible === b.primaryVisible && a.secondaryVisible === b.secondaryVisible && a.bottomVisible === b.bottomVisible
+      && a.panes.length === b.panes.length && a.panes.every((pane, i) => {
+        const other = b.panes[i];
+        return other && pane.id === other.id && pane.component === other.component && pane.label === other.label
+          && Object.keys(pane.props ?? {}).length === Object.keys(other.props ?? {}).length
+          && Object.entries(pane.props ?? {}).every(([key, value]) => Object.is(value, other.props?.[key]));
+      }) && Object.keys(a.collapsed).every(id => a.collapsed[id] === b.collapsed[id]),
+    restore: location => {
+      // Navigate content without undoing splits, resizing, or closing panes.
+      for (const pane of location.panes) if (workspace.panes.value.some(current => current.id === pane.id)) setPane(pane.id, pane);
+      workspace.focus(location.active);
+      if (sideMap.has(location.primary)) state.activeSidePanel = location.primary;
+      if (secondaryMap.has(location.secondary)) state.activeSecondaryTab = location.secondary;
+      if (tabMap.has(location.bottom)) state.activeBottomTab = location.bottom;
+      layout.primarySidebarVisible = location.primaryVisible;
+      layout.secondarySidebarVisible = location.secondaryVisible;
+      layout.panelVisible = location.bottomVisible;
+      for (const id of Object.keys(location.collapsed)) if (viewMap.has(id)) menuState.collapsed[id] = location.collapsed[id]!;
+    },
+  });
+  const setPane = workspace.setPane;
+  workspace.setPane = (id, content) => navigation.record(() => setPane(id, content));
+  const resetWorkspace = () => navigation.record(workspace.reset);
+  const stopNavigationWatch = watch(() => features.navigation, enabled => { if (!enabled) navigation.clear(); }, { flush: "sync" });
+  const stopMaximizedWatch = watch(() => [layout.panelVisible, layout.secondarySidebarVisible], () => {
+    if ((layout.maximizedRegion === "bottom" && !layout.panelVisible) || (layout.maximizedRegion === "secondary" && !layout.secondarySidebarVisible)) layout.maximizedRegion = null;
+  }, { flush: "sync" });
   const quickInput = shallowRef<{
     id: number;
     title: string;
@@ -204,13 +242,15 @@ export function createFrame(options: FrameOptions = {}) {
     return () => { if (commandMap.get(command.id) === definition) commandMap.delete(command.id); };
   }
   function openView(id: string) {
-    if (!viewMap.has(id)) throw new Error(`Unknown view: ${id}`);
-    let root = id;
-    menuState.collapsed[root] = false;
-    while (viewParents.has(root)) { root = viewParents.get(root)!; menuState.collapsed[root] = false; }
-    if (sideMap.has(root)) openSidePanel(root);
-    else if (tabMap.has(root)) openBottomPanel(root);
-    else if (secondaryMap.has(root)) openSecondaryPanel(root);
+    return navigation.record(() => {
+      if (!viewMap.has(id)) throw new Error(`Unknown view: ${id}`);
+      let root = id;
+      menuState.collapsed[root] = false;
+      while (viewParents.has(root)) { root = viewParents.get(root)!; menuState.collapsed[root] = false; }
+      if (sideMap.has(root)) openSidePanel(root);
+      else if (tabMap.has(root)) openBottomPanel(root);
+      else if (secondaryMap.has(root)) openSecondaryPanel(root);
+    });
   }
   function registerView(input: SidePanelDefinition, region: ViewRegion) {
     const inputs: { view: SidePanelDefinition; parent?: string; command: string }[] = [];
@@ -260,9 +300,11 @@ export function createFrame(options: FrameOptions = {}) {
   function registerBottomTab(tab: PanelDefinition) { return registerView(tab, "bottom"); }
   function registerSecondaryTab(tab: PanelDefinition) { return registerView(tab, "secondary"); }
   function openSecondaryPanel(id = state.activeSecondaryTab) {
-    if (!id && !secondaryMap.size) { layout.secondarySidebarVisible = true; return; }
-    if (!secondaryMap.has(id)) throw new Error(`Unknown secondary tab: ${id}`);
-    state.activeSecondaryTab = id; layout.secondarySidebarVisible = true;
+    return navigation.record(() => {
+      if (!id && !secondaryMap.size) { layout.secondarySidebarVisible = true; return; }
+      if (!secondaryMap.has(id)) throw new Error(`Unknown secondary tab: ${id}`);
+      state.activeSecondaryTab = id; layout.secondarySidebarVisible = true;
+    });
   }
   function toggleSecondaryPanel() {
     if (layout.secondarySidebarVisible) layout.secondarySidebarVisible = false;
@@ -284,10 +326,12 @@ export function createFrame(options: FrameOptions = {}) {
   }
   function resetLayout() { beforeZen = undefined; Object.assign(layout, defaultLayout()); }
   function openSidePanel(id = state.activeSidePanel) {
-    if (!id && !sideMap.size) { state.sidebarVisible = true; return; }
-    if (!sideMap.has(id)) throw new Error(`Unknown side panel: ${id}`);
-    state.activeSidePanel = id;
-    state.sidebarVisible = true;
+    return navigation.record(() => {
+      if (!id && !sideMap.size) { state.sidebarVisible = true; return; }
+      if (!sideMap.has(id)) throw new Error(`Unknown side panel: ${id}`);
+      state.activeSidePanel = id;
+      state.sidebarVisible = true;
+    });
   }
   function closeSidePanel() { state.sidebarVisible = false; }
   function toggleSidePanel() {
@@ -295,10 +339,12 @@ export function createFrame(options: FrameOptions = {}) {
     state.sidebarVisible = !state.sidebarVisible;
   }
   function openBottomPanel(id = state.activeBottomTab) {
-    if (!id && !tabMap.size) { state.panelVisible = true; return; }
-    if (!tabMap.has(id)) throw new Error(`Unknown bottom tab: ${id}`);
-    state.activeBottomTab = id;
-    state.panelVisible = true;
+    return navigation.record(() => {
+      if (!id && !tabMap.size) { state.panelVisible = true; return; }
+      if (!tabMap.has(id)) throw new Error(`Unknown bottom tab: ${id}`);
+      state.activeBottomTab = id;
+      state.panelVisible = true;
+    });
   }
   function closeBottomPanel() { state.panelVisible = false; }
   function toggleBottomPanel() {
@@ -345,6 +391,9 @@ export function createFrame(options: FrameOptions = {}) {
     current?.finish(item);
   }
   function dispose() {
+    stopMaximizedWatch();
+    stopNavigationWatch();
+    navigation.clear();
     viewDrag.cancel();
     closeQuickInput();
     workspaceBanner.value = undefined; layout.bannerVisible = false; workspace.dispose();
@@ -356,6 +405,7 @@ export function createFrame(options: FrameOptions = {}) {
     commandMap.clear(); sideMap.clear(); tabMap.clear(); secondaryMap.clear(); viewMap.clear(); viewCommands.clear(); viewParents.clear(); childIds.clear(); contentHosts.clear();
   }
   return {
+    navigation,
     activityActions, registerActivityAction, features, settings, settingsRequest, openSettings, registerSettingsSection: settings.register, manageMenuItems, notifications, notify: notifications.notify,
     modals, openModal, closeModal, dragState: viewDrag.state, cancelViewDrag: viewDrag.cancel, canMoveView,
     viewState: menuState, registerView, openView,
@@ -363,7 +413,7 @@ export function createFrame(options: FrameOptions = {}) {
     menuState, registerMenu: registerView, openMenu: openView,
     views, getViewCommand, getViewChildren, getViewParent, viewRegion, contentHosts,
     workspace, workspaceBanner, registerWorkspaceBanner, openWorkspaceBanner, closeWorkspaceBanner, toggleWorkspaceBanner,
-    resetWorkspace: workspace.reset, splitWorkspace: workspace.split, closeWorkspacePane: workspace.close, setWorkspacePane: workspace.setPane,
+    resetWorkspace, splitWorkspace: workspace.split, closeWorkspacePane: workspace.close, setWorkspacePane: workspace.setPane,
     interaction, toolbarActions, registerToolbarAction, viewKey, beginViewDrag, moveView, dragView, dropView, state, layout, commands, sidePanels, bottomTabs, secondaryTabs, quickInput, quickInputItems,
     registerCommand, registerSidePanel, registerBottomTab, registerSecondaryTab, openSecondaryPanel, toggleSecondaryPanel, setZenMode, resetLayout, executeCommand,
     openSidePanel, closeSidePanel, toggleSidePanel, openBottomPanel, closeBottomPanel, toggleBottomPanel,

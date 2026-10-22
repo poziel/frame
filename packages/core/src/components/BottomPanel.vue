@@ -3,13 +3,15 @@ import ViewSections from "./ViewSections.vue";
 import PanelActions from "./PanelActions.vue";
 import { useFrame } from "../frame/createFrame";
 import type { PanelDefinition } from "../types";
-import { nextTick, ref, useId } from "vue";
+import { computed, nextTick, ref, useId } from "vue";
 import FrameIconButton from "./FrameIconButton.vue";
 
 const props = defineProps<{ tabs: readonly PanelDefinition[]; activeId: string; label?: string; regionId?: string; closeLabel?: string; managed?: boolean; contentId?: string }>();
 const emit = defineEmits<{ select: [id: string]; close: [] }>();
 const frame = useFrame();
 const region = () => props.regionId === "secondary-panel" ? "secondary" as const : "bottom" as const;
+const maximized = computed(() => frame.layout.maximizedRegion === region());
+const maximizeLabel = computed(() => `${maximized.value ? 'Restore' : 'Maximize'} ${region() === 'secondary' ? 'secondary sidebar' : 'bottom panel'}`);
 const uid = useId();
 const tablist = ref<HTMLElement>();
 async function onKey(event: KeyboardEvent) {
@@ -35,6 +37,8 @@ async function onKey(event: KeyboardEvent) {
           :tabindex="activeId === tab.id ? 0 : -1" @click="emit('select', tab.id)"><component v-if="tab.icon" :is="tab.icon" class="tab-icon"/>{{ tab.label }}</button>
       </div>
       <PanelActions :actions="tabs.find(tab => tab.id === activeId)?.actions"/>
+      <span v-if="tabs.find(tab => tab.id === activeId)?.actions?.length" class="panel-action-separator" role="separator" aria-orientation="vertical"/>
+      <FrameIconButton :label="maximizeLabel" :icon="maximized ? 'screen-normal' : 'screen-full'" :aria-pressed="maximized" tooltip-placement="top" @click="frame.layout.maximizedRegion = maximized ? null : region()"/>
       <FrameIconButton :label="closeLabel ?? 'Hide bottom panel'" icon="close" :shortcut="regionId === 'secondary-panel' ? 'Ctrl+Alt+B' : 'Ctrl+J'" tooltip-placement="top" @click="emit('close')"/>
     </header>
     <p v-if="!tabs.length" class="empty-view-region">Drag a view here to display.</p>

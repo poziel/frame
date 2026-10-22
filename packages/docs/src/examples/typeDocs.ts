@@ -1,3 +1,4 @@
+import { CodeBlockTheme } from "../../../core/src/frame/codeThemes";
 const legacyDocs = {
   FrameMenuItem: { description: "A typed command-menu entry, shared by FrameMenu, ContextMenu, and the Manage menu. A menu item is either an action/submenu or a separator.", code: `import type { FrameMenuItem } from '@frame/core';
 const items: FrameMenuItem[] = [
@@ -371,5 +372,21 @@ history.toggle();
     { name: 'dismiss', type: '(historyId: number) => void', description: 'Removes one history entry without dismissing an active core notification.' },
     { name: 'clear', type: '() => void', description: 'Clears history without changing active notifications.' },
     { name: 'dispose', type: '() => void', description: 'Unsubscribes, clears history, and closes its panel.' },
+  ],
+};
+
+typeDocs.CodeBlockTheme = {
+  description: 'Runtime enum containing every theme bundled with the installed Shiki version.',
+  usage: 'Import the enum from core and pass a member to FrameCodeBlock. codeBlockThemeOptions supplies labels and light/dark metadata for a theme selector. Theme modules load only when selected.',
+  code: "import { CodeBlockTheme } from '@frame/core';\nconst theme = CodeBlockTheme.DarkPlus;",
+  properties: Object.entries(CodeBlockTheme).map(([name, value]) => ({ name: `CodeBlockTheme.${name}`, type: JSON.stringify(value), description: 'Available syntax highlighting theme.' })),
+};
+typeDocs.FrameOptions = {
+  description: 'Optional built-in features chosen when creating an isolated Frame instance.',
+  code: 'const frame = createFrame({ navigation: true, settings: true, notifications: true });',
+  properties: [
+    { name: 'navigation', type: 'boolean', description: 'Enable page/view navigation history and the Back/Forward arrows. Default false.' },
+    { name: 'settings', type: 'boolean', description: 'Enable built-in Settings UI. Default true.' },
+    { name: 'notifications', type: 'boolean', description: 'Enable transient notifications. Default true.' },
   ],
 };

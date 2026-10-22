@@ -1,0 +1,5 @@
+/* Opt-in utilities without a global Preflight reset of the host application. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "./theme.css";

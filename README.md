@@ -28,6 +28,8 @@ Consume Frame as a dependency in your own project. Your application stays in its
 
 Frame takes visual cues from VS Code’s workbench layout, panels, and controls. It is an independent project, not a fork of VS Code or a Microsoft product. It provides no code editor, terminal, file-handling system, or extension runtime.
 
+Optional [Tailwind integration](packages/tailwind/README.md) supplies Tailwind and its Vite plugin for application developers. [Theme variables](docs/theme-variables.md) are shared between ordinary CSS and Tailwind utilities.
+
 ## Try the workbench
 
 Install [Bun](https://bun.sh/) and, for the desktop application, Rust and the [Tauri platform prerequisites](https://v2.tauri.app/start/prerequisites/).
@@ -41,7 +43,7 @@ bun run tauri dev
 
 For the browser preview, use `bun run dev` instead. The example application includes a component catalog and sample views; these contributions are separate from the core package.
 
-Open Quick actions with **Ctrl+P**, **Ctrl+Shift+P**, or **Ctrl+T**. Use **Sample tools** to add views, explore the component catalog, and try settings, notifications, and modals. **Ctrl+B** toggles the side panel; **Ctrl+J** toggles the bottom panel. Command works in place of Ctrl on macOS.
+Open Quick actions with **Ctrl+P**, **Ctrl+Shift+P**, or **Ctrl+T**. Use **Components**, **Extras**, and **API** to browse documentation and interactive examples. **Ctrl+B** toggles the side panel; **Ctrl+J** toggles the bottom panel. Command works in place of Ctrl on macOS.
 
 ## Use Frame in your application
 

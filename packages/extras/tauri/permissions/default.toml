@@ -1,0 +1,3 @@
+[default]
+description = "Discover installed shells and manage terminal sessions owned by this webview."
+permissions = ["allow-profiles", "allow-spawn", "allow-write", "allow-resize", "allow-close"]

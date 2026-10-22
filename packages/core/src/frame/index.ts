@@ -56,3 +56,9 @@ export { default as FrameLoading } from "../components/FrameLoading.vue";
 export { frameLoaderVariants } from "./loading";
 export type { FrameLoaderVariant, FrameLoaderProps, FrameLoadingProps, FrameLoadingTextPosition } from "./loading";
 export type { OverlayBounds } from "./overlays";
+export { default as FrameCodeBlock } from "../components/FrameCodeBlock.vue";
+export { CodeBlockTheme, codeBlockThemes, codeBlockThemeOptions } from "./codeThemes";
+export async function loadCodeHighlight(language: string, theme: import('./codeThemes').CodeBlockTheme) {
+  return (await import('./codeHighlight')).loadCodeHighlight(language, theme);
+}
+export type { FrameCodeBlockProps } from "./codeBlock";

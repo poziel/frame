@@ -13,6 +13,7 @@ const selected = ref("menu");
 const options = computed(() => {
   const l = frame.layout;
   return [
+    ...(frame.features.navigation ? [{ id: "navigation", label: "Back and Forward", checked: l.navigationVisible, run: () => { l.navigationVisible = !l.navigationVisible; } }] : []),
     { id: "menu", label: "Menu Bar", checked: l.menuBarVisible, group: "Visibility", run: () => { l.menuBarVisible = !l.menuBarVisible; } },
     { id: "activity", label: "Activity Bar", checked: l.activityBarVisible, run: () => { l.activityBarVisible = !l.activityBarVisible; } },
     { id: "primary", label: "Primary Side Bar", checked: l.primarySidebarVisible, shortcut: "Ctrl+B", run: frame.toggleSidePanel },
@@ -31,6 +32,7 @@ const options = computed(() => {
   ];
 });
 function optionIcon(id: string) {
+  if (id === "navigation") return "arrow-both";
   if (id === "primary") return regionIcon("primary", frame.layout.primarySidebarVisible, frame.layout.primarySide);
   if (id === "secondary") return regionIcon("secondary", frame.layout.secondarySidebarVisible, frame.layout.primarySide);
   if (id === "panel") return regionIcon("panel", frame.layout.panelVisible, frame.layout.primarySide);

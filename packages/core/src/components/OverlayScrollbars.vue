@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, shallowRef } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, shallowRef } from "vue";
 import { useOverlayBoundary } from "../frame/overlays";
 const props = defineProps<{ root?: HTMLElement }>();
 const { target } = useOverlayBoundary(() => props.root);
+// Keep an overlay's scrollbars inside its own stacking context.
+const scrollbarTarget = computed(() => props.root?.closest<HTMLElement>(".frame-menu, .frame-select-popup, .frame-modal-layer, .palette-backdrop, .frame-notifications, .frame-custom-overlays") ?? target.value);
 type Bar = { host: HTMLElement; axis: "x" | "y"; x: number; y: number; length: number; thumb: number; offset: number; range: number };
 const bars = shallowRef<Bar[]>([]);
 const dragging = ref(false);
@@ -89,7 +91,11 @@ onMounted(() => {
   window.addEventListener("pointerover", hover); window.addEventListener("scroll", schedule, true); window.addEventListener("resize", schedule);
   document.documentElement.addEventListener("pointerleave", leave);
   resize = new ResizeObserver(schedule); if (props.root) resize.observe(props.root);
-  mutation = new MutationObserver(schedule); if (props.root) mutation.observe(props.root, { childList: true, subtree: true, characterData: true, attributes: true });
+  mutation = new MutationObserver(records => {
+    const isBar = (node: Node) => node instanceof Element && !!node.closest(".frame-overlay-scrollbar");
+    if (records.some(record => !isBar(record.target) && (record.type !== "childList" || [...record.addedNodes, ...record.removedNodes].some(node => !isBar(node))))) schedule();
+  });
+  if (props.root) mutation.observe(props.root, { childList: true, subtree: true, characterData: true, attributes: true });
 });
 onBeforeUnmount(() => {
   finish(); cancelAnimationFrame(raf); resize?.disconnect(); mutation?.disconnect();
@@ -97,4 +103,4 @@ onBeforeUnmount(() => {
   document.documentElement.removeEventListener("pointerleave", leave);
 });
 </script>
-<template><Teleport :to="target"><div v-for="bar in bars" :key="bars.indexOf(bar)" class="frame-overlay-scrollbar" :class="[bar.axis, { dragging }]" aria-hidden="true" :style="{ left: `${bar.x}px`, top: `${bar.y}px`, width: `${bar.axis === 'x' ? bar.length : 12}px`, height: `${bar.axis === 'y' ? bar.length : 12}px` }" @pointerdown="start($event, bar)" @pointermove="move" @pointerup="finish" @pointercancel="finish" @lostpointercapture="finish()" @wheel="wheel($event, bar)"><div class="frame-overlay-thumb" :style="bar.axis === 'y' ? { height: `${bar.thumb}px`, transform: `translateY(${bar.offset}px)` } : { width: `${bar.thumb}px`, transform: `translateX(${bar.offset}px)` }"/></div></Teleport></template>
+<template><Teleport :to="scrollbarTarget"><div v-for="bar in bars" :key="bars.indexOf(bar)" class="frame-overlay-scrollbar" :class="[bar.axis, { dragging }]" aria-hidden="true" :style="{ left: `${bar.x}px`, top: `${bar.y}px`, width: `${bar.axis === 'x' ? bar.length : 12}px`, height: `${bar.axis === 'y' ? bar.length : 12}px` }" @pointerdown="start($event, bar)" @pointermove="move" @pointerup="finish" @pointercancel="finish" @lostpointercapture="finish()" @wheel="wheel($event, bar)"><div class="frame-overlay-thumb" :style="bar.axis === 'y' ? { height: `${bar.thumb}px`, transform: `translateY(${bar.offset}px)` } : { width: `${bar.thumb}px`, transform: `translateX(${bar.offset}px)` }"/></div></Teleport></template>

@@ -1,0 +1,13 @@
+@import "@frame/core/tokens.css";
+@import "@frame/tailwind/style.css";
+@source "./index.html";
+:root[data-theme="custom"] {
+  --frame-surface: #123456;
+  --frame-content-padding: 24px;
+  --frame-control-radius: 13px;
+  --frame-font-body: monospace;
+  --frame-font-size-body: 18px;
+  --frame-overlay-shadow: 0 1px 2px #000;
+  --frame-duration: 250ms;
+  --frame-ease: linear;
+}
