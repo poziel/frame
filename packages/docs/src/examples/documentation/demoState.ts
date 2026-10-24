@@ -101,7 +101,7 @@ export function serializeUsage(contract:ComponentContract, values:Record<string,
    const fixture=fixtureFor(prop);const variable=fixture==='component'?'PreviewContent':fixture;
    if(fixture==='frame')lines.push('const frame = createFrame();');
    if(fixture==='history')lines.push('const history = createNotificationHistory(frame);');
-   if(fixture==='terminal')lines.push('const terminal = createTerminal(); // Dispose on host teardown.');
+   if(fixture==='terminal')lines.push('const terminal = createTerminal({ backend }); // Supply your application-owned TerminalBackend. // Dispose on host teardown.');
    if(fixture==='editor')lines.push('const editor = createCodeEditor();');
    if(fixture==='chat')lines.push('const chat = createAIChat({ respond: async (_request, writer) => { writer.message("Local demo reply"); writer.complete(); } });');
    if(fixture==='anchor')lines.push('const anchor = ref<HTMLElement>(); // Bind ref="anchor" on the trigger.');
@@ -133,7 +133,7 @@ export function serializeUsage(contract:ComponentContract, values:Record<string,
  if(fixtures.includes('history')&&!fixtures.includes('frame'))lines.unshift('const frame = createFrame();');
  const coreImports=fixtures.includes('frame')||fixtures.includes('history')?['createFrame']:[];
  const service=contract.name.startsWith('frame.');
- const needsShell=service||['FrameSettings','FrameNotifications','WorkspacePanes','ViewSections','ActivityRail','FrameMenu','ContextMenu','FrameModal','NotificationPanel','FrameLoading','FrameTooltip','TerminalView'].includes(contract.name);
+ const needsShell=service||['FrameSettings','FrameNotifications','WorkspacePanes','ViewSections','ViewBar','FrameMenu','ContextMenu','FrameModal','NotificationPanel','FrameLoading','FrameTooltip','TerminalView'].includes(contract.name);
  if(needsShell){imports.add('FrameShell');if(!coreImports.includes('createFrame'))coreImports.push('createFrame');if(!lines.includes('const frame = createFrame();'))lines.unshift('const frame = createFrame();');}
  if(needsShell&&contract.name==='ViewSections')lines.push(`frame.registerSidePanel({ id: 'docs-demo-view', label: 'Example collection', children: [{ id: 'docs-demo-child', label: 'Section', component: { render: () => 'Example content' } }] });`);
  let markup=`<${tag} ${fixtures.includes('anchor')?'v-if="anchor" ':''}${attrs.join(' ')}${content?`>\n${content}\n</${tag}>`:' />'}`;
@@ -160,7 +160,7 @@ export function serializeUsage(contract:ComponentContract, values:Record<string,
   imports.delete(contract.name);imports.add('FrameShell');
   const valuesCode=Object.entries(values).filter(([name,value])=>value!==undefined&&!(contract.name==='frame.registerView'&&name==='region')).map(([name,value])=>JSON.stringify(name)+': '+(contract.props.find(prop=>prop.name===name)?.control==='fixture'?(fixtureFor(contract.props.find(prop=>prop.name===name)!)==='component'?'PreviewContent':fixtureFor(contract.props.find(prop=>prop.name===name)!)):JSON.stringify(value))).join(', ');
   let call=contract.name==='frame.registerView'?`serviceCleanup = frame.registerView({ ${valuesCode} }, ${JSON.stringify(values.region??'secondary')}); frame.openView(${JSON.stringify(values.id)});`:contract.name==='frame.setWorkspacePane'?`frame.setWorkspacePane(frame.workspace.activePane.value, { ${valuesCode} });`:contract.name==='frame.showQuickPick'?`void frame.showQuickPick([{ id: 'one', label: 'First' }, { id: 'two', label: 'Second' }], { ${valuesCode} });`:`${contract.name}({ ${valuesCode} });`;
-  if(['frame.registerBanner','frame.registerSettingsSection','frame.registerActivityAction'].includes(contract.name)){call='serviceCleanup = '+call;if(contract.name==='frame.registerBanner')call+=' frame.openBanner();';if(contract.name==='frame.registerSettingsSection')call+=' frame.openSettings();';}
+  if(['frame.registerBanner','frame.registerSettingsSection','frame.registerNavigationItem'].includes(contract.name)){call='serviceCleanup = '+call;if(contract.name==='frame.registerBanner')call+=' frame.openBanner();';if(contract.name==='frame.registerSettingsSection')call+=' frame.openSettings();';}
   lines.push('let serviceCleanup: (() => void) | undefined;');
   lines.push('onBeforeUnmount(() => serviceCleanup?.());');
   lines.push(`function runExample() { serviceCleanup?.(); serviceCleanup = undefined; ${call} }`);

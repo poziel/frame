@@ -12,9 +12,9 @@ const frame = useFrame();
   <template v-else-if="view === 'preferences'">
     <div class="side-group-label">LAYOUT</div>
     <div class="preference">
-      <div><strong>Bottom panel</strong><p>Show session output.</p></div>
+      <div><strong>Panel</strong><p>Show session output.</p></div>
       <button class="switch" :class="{ on: frame.state.panelVisible }" role="switch" :aria-checked="frame.state.panelVisible"
-        aria-label="Show bottom panel" @click="frame.executeCommand('frame.panel.toggle')"><span /></button>
+        aria-label="Show panel" @click="frame.executeCommand('frame.panel.toggle')"><span /></button>
     </div>
     <p class="side-description">Layout changes apply to this session.</p>
   </template>

@@ -54,7 +54,7 @@ describe("layout arrangements", () => {
     expect(frame.layout.secondarySidebarVisible).toBe(true);
     remove();
     expect(frame.layout.secondarySidebarVisible).toBe(true);
-    expect(frame.commands.value).toHaveLength(0);
+    expect(frame.commands.get("frame.secondary.app.secondary")).toBeUndefined();
   });
 });
 

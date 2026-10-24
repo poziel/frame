@@ -109,7 +109,7 @@ with sync_playwright() as p:
         terminal_box = managed.bounding_box()
         assert abs(content['height'] - terminal_box['height']) < 2, (content, terminal_box)
     fits_panel()
-    outer = page.get_by_role('separator', name='Resize bottom panel', exact=True)
+    outer = page.get_by_role('separator', name='Resize panel', exact=True)
     outer.focus()
     outer.press('ArrowUp')
     fits_panel()

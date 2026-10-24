@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { useFrame } from "../frame/createFrame";
-import FrameIcon from "./FrameIcon.vue";
-import FrameDropdownMenu from "./FrameDropdownMenu.vue";
-import FrameIconButton from "./FrameIconButton.vue";
-import type { FrameMenuItem } from "../types";
+import StatusBarItem from './StatusBarItem.vue';
 const frame = useFrame();
-const button = ref<{element?: HTMLButtonElement}>(); const anchor = computed(() => button.value?.element); const open = ref(false);
-function select(item: FrameMenuItem) { if (item.type !== "separator" && item.command) void frame.executeCommand(item.command); }
+const item = computed(() => frame.status.items.value.find(item => item.id === 'frame.manage'));
 </script>
-<template><div v-if="frame.features.settings" class="activity-manage"><FrameIconButton ref="button" class="rail-button" label="Manage" tooltip-placement="right" aria-haspopup="menu" :aria-expanded="open" @click="open = !open"><FrameIcon name="settings-gear" :size="20"/></FrameIconButton><FrameDropdownMenu v-if="open && anchor" :anchor="anchor" placement="right" :items="frame.manageMenuItems.value" label="Manage" @select="select" @close="open = false"/></div></template>
+<template>
+  <StatusBarItem v-if="item?.available && item.visible" :item="item" placement="title" />
+</template>

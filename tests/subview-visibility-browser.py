@@ -36,7 +36,7 @@ with sync_playwright() as p:
  secondary.get_by_role('button',name='Views and more',exact=True).click()
  page.get_by_role('menu',name='Sub-views',exact=True).get_by_role('menuitemcheckbox',name='Outline',exact=True).click()
  expect(secondary.get_by_role('button',name='Outline',exact=True)).to_be_visible()
- page.locator('.secondary-region').get_by_role('navigation',name='Secondary activity bar',exact=True).get_by_role('button',name='Explorer example',exact=True).press('Alt+Shift+ArrowDown')
+ page.locator('.secondary-region').get_by_role('navigation',name='Secondary view bar',exact=True).get_by_role('button',name='Explorer example',exact=True).press('Alt+Shift+ArrowDown')
  bottom=page.locator('#bottom-panel')
  bottom.get_by_role('button',name='Views and more',exact=True).click()
  expect(page.get_by_role('menu',name='Sub-views',exact=True).get_by_role('menuitemcheckbox',name='Outline',exact=True)).to_be_checked()

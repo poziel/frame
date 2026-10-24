@@ -3,7 +3,7 @@ import { readonly, ref, shallowRef } from 'vue';
 export interface TerminalProfile { id: string; name: string; path: string; default: boolean }
 export type TerminalEvent = { type: 'data'; data: number[] } | { type: 'exit'; code: number } | { type: 'error'; message: string } | { type: 'clear' } | { type: 'closed' };
 export interface TerminalSpawnOptions { profile: string; cwd?: string; cols: number; rows: number }
-/** The native bridge is replaceable so a future remote backend need not change the UI. */
+/** The host supplies execution; rendering does not depend on a native runtime. */
 export interface TerminalBackend {
   profiles(): Promise<TerminalProfile[]>;
   spawn(options: TerminalSpawnOptions, receive: (event: TerminalEvent) => void): Promise<string>;
@@ -15,10 +15,11 @@ export interface TerminalSession {
   id: string; profile: string; name: string; color?: string;
   status: 'running' | 'exited' | 'error'; exitCode?: number; error?: string;
 }
-export interface TerminalOptions { backend?: TerminalBackend; profile?: string; cwd?: string }
+export interface TerminalOptions { backend: TerminalBackend; profile?: string; cwd?: string; openUrl?: (url: string) => Promise<void> }
 export type TerminalSessionLayout = 'sidebar' | 'tabs';
 
-export function createTerminal(options: TerminalOptions = {}) {
+export function createTerminal(options: TerminalOptions) {
+  if (!options?.backend) throw new Error('A TerminalBackend must be supplied explicitly');
   const profiles = shallowRef<TerminalProfile[]>([]);
   const sessions = shallowRef<TerminalSession[]>([]);
   const groups = shallowRef<string[][]>([]);
@@ -31,7 +32,7 @@ export function createTerminal(options: TerminalOptions = {}) {
   let backendPromise: Promise<TerminalBackend> | undefined;
   let profilePromise: Promise<readonly TerminalProfile[]> | undefined;
   let disposed = false;
-  const backend = () => backendPromise ??= options.backend ? Promise.resolve(options.backend) : import('./terminalTauri').then(m => m.createTauriTerminalBackend());
+  const backend = () => backendPromise ??= Promise.resolve(options.backend);
   function update(id: string, patch: Partial<TerminalSession>) {
     sessions.value = sessions.value.map(s => s.id === id ? { ...s, ...patch } : s);
   }
@@ -109,6 +110,11 @@ export function createTerminal(options: TerminalOptions = {}) {
   return {
     profiles: readonly(profiles), sessions: readonly(sessions), groups: readonly(groups), activeId: readonly(activeId), error: readonly(error),
     detectProfiles, create, close, activate, unsplit, subscribe, clear, dispose, reportError,
+    async openUrl(url: string) {
+      if (!/^https?:\/\//i.test(url)) throw new Error('Unsupported terminal link');
+      if (options.openUrl) await options.openUrl(url);
+      else if (typeof window !== 'undefined') window.open(url, '_blank', 'noopener,noreferrer');
+    },
     dismissError: () => { error.value = ''; },
     rename(id: string, name: string) { if (name.trim()) update(id, { name: name.trim().slice(0, 120) }); },
     setColor(id: string, color: string) { if (/^#[\da-f]{6}$/i.test(color)) update(id, { color }); },

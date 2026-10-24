@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { createDemoTerminalBackend } from "../terminalDemo";
 import { computed, defineComponent, h, onBeforeUnmount, ref, shallowRef, useId } from 'vue';
 import type {Component} from 'vue';
 import * as Core from '@frame/core';
@@ -19,10 +20,10 @@ let active=true;
 const Blank=defineComponent({setup:()=>()=>h('p','Application-owned preview content')});
 local.registerSidePanel({id:'docs-demo-view',label:'Example collection',children:[{id:'docs-demo-child',label:'Example section',component:Blank}]});local.layout.secondarySidebarVisible=false;local.closeBottomPanel();
 local.registerSettingsSection({id:'docs-demo-settings',title:'Example settings',settings:[{id:'docs-demo-name',label:'Workspace name',type:'text',default:'Preview workspace'},{id:'docs-demo-enabled',label:'Enabled',type:'checkbox',default:true}]});
-const fixtures:Record<string,()=>unknown>={frame:()=>local,history:()=>history,editor:()=>editor,chat:()=>chat,terminal:()=>terminal??=Extras.createTerminal(),anchor:()=>anchor.value,component:()=>Blank,action:()=>({label:'Acknowledge',run:()=>emit('event','acknowledge',[])}),matcher:()=>()=>false,datePage:()=>(value:{add:(duration:{months:number})=>unknown})=>value.add({months:1}),validator:()=>()=>undefined,callback:()=>()=>emit('event','callback',[])};
+const fixtures:Record<string,()=>unknown>={frame:()=>local,history:()=>history,editor:()=>editor,chat:()=>chat,terminal:()=>terminal??=Extras.createTerminal({ backend: createDemoTerminalBackend() }),anchor:()=>anchor.value,component:()=>Blank,action:()=>({label:'Acknowledge',run:()=>emit('event','acknowledge',[])}),matcher:()=>()=>false,datePage:()=>(value:{add:(duration:{months:number})=>unknown})=>value.add({months:1}),validator:()=>()=>undefined,callback:()=>()=>emit('event','callback',[])};
 const target=computed(()=> ((props.contract.source.includes('/features/')?Extras:Core) as unknown as Record<string,Component>)[props.contract.name]);
 const service=computed(()=>props.contract.name.startsWith('frame.'));
-const shell=computed(()=>service.value||['FrameShell','WorkspacePanes','FrameSettings','ViewSections','FrameNotifications','ActivityRail'].includes(props.contract.name));
+const shell=computed(()=>service.value||['FrameShell','WorkspacePanes','FrameSettings','ViewSections','FrameNotifications','ViewBar'].includes(props.contract.name));
 const popup=computed(()=>['FrameMenu','FrameModal','FrameQuickInput','FrameQuickPanel','NotificationPanel'].includes(props.contract.name));
 const liveProps=computed(()=>{
  const values:Record<string,unknown>={};for(const [name,value] of Object.entries(props.values)){
@@ -74,7 +75,7 @@ async function runService(){
   else if(name==='frame.registerBanner'){serviceCleanup=local.registerBanner(options as unknown as Core.WorkspaceBannerDefinition);local.openBanner();}
   else if(name==='frame.setWorkspacePane')local.setWorkspacePane(local.workspace.activePane.value,options as unknown as Core.WorkspacePaneContent);
   else if(name==='frame.registerView'){serviceCleanup=local.registerView(options as unknown as Core.ViewDefinition,(region??'secondary') as Core.ViewRegion);local.openView(String(options.id));}
-  else if(name==='frame.registerActivityAction')serviceCleanup=local.registerActivityAction(options as unknown as Core.ActivityAction);
+  else if(name==='frame.registerNavigationItem'){serviceCleanup=local.registerNavigationItem(options as unknown as Core.NavigationItem);local.navigationBar.setVisible(true);}
   else if(name==='frame.showQuickPick'){const choice=await local.showQuickPick([{id:'one',label:'First'},{id:'two',label:'Second'}],options as Core.QuickPickOptions);if(active)emit('event','accept',[choice]);}
   if(active)emit('event',name,[options]);
  }catch(error){emit('event','error',[String(error)]);}

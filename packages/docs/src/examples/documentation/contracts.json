@@ -1,5 +1,15 @@
 {
   "pageSources": {
+    "file-upload": [
+      "packages/core/src/components/FrameFileUpload.vue"
+    ],
+    "file-drop-zone": [
+      "packages/core/src/components/FrameFileDropZone.vue"
+    ],
+    "universal-viewer": [
+      "packages/features/src/UniversalViewer.vue",
+      "packages/features/src/UniversalViewerContent.vue"
+    ],
     "buttons": [
       "packages/core/src/components/FrameButton.vue"
     ],
@@ -74,8 +84,9 @@
       "packages/core/src/components/SidePanel.vue",
       "packages/core/src/components/ViewSections.vue"
     ],
-    "activity-actions": [
-      "packages/core/src/components/ActivityRail.vue"
+    "navigation-items": [
+      "packages/core/src/components/NavigationBar.vue",
+      "packages/core/src/components/NavigationItemMenu.vue"
     ],
     "navigation": [
       "packages/core/src/components/FrameShell.vue"
@@ -272,6 +283,418 @@
     ]
   },
   "contracts": {
+    "packages/core/src/components/FrameFileUpload.vue": {
+      "name": "FrameFileUpload",
+      "source": "packages/core/src/components/FrameFileUpload.vue",
+      "sourceHash": "684259a7ff0100aa24c4b4e23996f5bbc0b9bc9cf72d0796bd851295226a803c",
+      "props": [
+        {
+          "name": "accept",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Accept configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Multiple configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "maxSize",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Maximum bytes per file.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "maxFiles",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Maximum accepted files per selection.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "modelValue",
+          "type": "File[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Controlled value. Updates are emitted through update:modelValue; the application owns the value.",
+          "control": "json",
+          "references": [
+            "File"
+          ]
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Prevents user interaction while retaining the current value.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "literal",
+            "value": "'Choose file'"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "showFiles",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Show Files configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:modelValue",
+          "parameters": "files: File[]",
+          "returns": "void",
+          "description": "Emitted when the user changes the controlled value."
+        },
+        {
+          "name": "accepted",
+          "parameters": "files: File[]",
+          "returns": "void",
+          "description": "Emitted on accepted."
+        },
+        {
+          "name": "rejected",
+          "parameters": "files: FileRejection[]",
+          "returns": "void",
+          "description": "Emitted on rejected."
+        }
+      ],
+      "slots": [
+        {
+          "name": "trigger",
+          "parameters": "open: unknown, disabled: unknown, files: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the trigger slot."
+        },
+        {
+          "name": "files",
+          "parameters": "files: unknown, remove: unknown, clear: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the files slot."
+        },
+        {
+          "name": "errors",
+          "parameters": "errors: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the errors slot."
+        }
+      ],
+      "methods": [
+        {
+          "name": "open",
+          "kind": "method",
+          "parameters": "",
+          "returns": "void",
+          "description": "Exposed open API. Available through the mounted component ref."
+        },
+        {
+          "name": "clear",
+          "kind": "method",
+          "parameters": "",
+          "returns": "void",
+          "description": "Exposed clear API. Available through the mounted component ref."
+        },
+        {
+          "name": "focus",
+          "kind": "method",
+          "parameters": "",
+          "returns": "any",
+          "description": "Focuses the rendered control."
+        }
+      ],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/FrameFileDropZone.vue": {
+      "name": "FrameFileDropZone",
+      "source": "packages/core/src/components/FrameFileDropZone.vue",
+      "sourceHash": "ac1f443cd0b22a9f028dff38a618dac94b7cd22e4e0914c645bab49e262f12fe",
+      "props": [
+        {
+          "name": "accept",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Accept configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Multiple configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "maxSize",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Maximum bytes per file.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "maxFiles",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Maximum accepted files per selection.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Prevents user interaction while retaining the current value.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "appearance",
+          "type": "'zone' | 'overlay'",
+          "default": {
+            "kind": "literal",
+            "value": "'zone'"
+          },
+          "description": "Appearance configuration for this component; see its Features examples for usage.",
+          "options": [
+            "zone",
+            "overlay"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "default": {
+            "kind": "literal",
+            "value": "'Drop files here'"
+          },
+          "description": "Message configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "browseLabel",
+          "type": "string",
+          "default": {
+            "kind": "literal",
+            "value": "'Choose file'"
+          },
+          "description": "Browse Label configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "accepted",
+          "parameters": "files: File[]",
+          "returns": "void",
+          "description": "Emitted on accepted."
+        },
+        {
+          "name": "rejected",
+          "parameters": "files: FileRejection[]",
+          "returns": "void",
+          "description": "Emitted on rejected."
+        },
+        {
+          "name": "update:dragging",
+          "parameters": "dragging: boolean",
+          "returns": "void",
+          "description": "Emitted on update:dragging."
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "parameters": "dragging: unknown, open: unknown, disabled: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the default slot."
+        },
+        {
+          "name": "presentation",
+          "parameters": "dragging: unknown, open: unknown, disabled: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the presentation slot."
+        },
+        {
+          "name": "overlay",
+          "parameters": "dragging: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the overlay slot."
+        },
+        {
+          "name": "errors",
+          "parameters": "errors: unknown",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the errors slot."
+        }
+      ],
+      "methods": [
+        {
+          "name": "open",
+          "kind": "method",
+          "parameters": "",
+          "returns": "void",
+          "description": "Exposed open API. Available through the mounted component ref."
+        },
+        {
+          "name": "reset",
+          "kind": "method",
+          "parameters": "",
+          "returns": "void",
+          "description": "Exposed reset API. Available through the mounted component ref."
+        }
+      ],
+      "forwardsAttrs": true
+    },
+    "packages/features/src/UniversalViewer.vue": {
+      "name": "UniversalViewer",
+      "source": "packages/features/src/UniversalViewer.vue",
+      "sourceHash": "c95e91830a5a93e67a2910feed53e278a4663700fdfd41bb7f73c5fd1aaa59cc",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Open configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "file",
+          "type": "ViewerFile",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "File configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "ViewerFile"
+          ]
+        },
+        {
+          "name": "target",
+          "type": "string | HTMLElement",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Target configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "update:open",
+          "parameters": "open: boolean",
+          "returns": "void",
+          "description": "Emitted on update:open."
+        },
+        {
+          "name": "error",
+          "parameters": "error: unknown",
+          "returns": "void",
+          "description": "Emitted on error."
+        }
+      ],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/features/src/UniversalViewerContent.vue": {
+      "name": "UniversalViewerContent",
+      "source": "packages/features/src/UniversalViewerContent.vue",
+      "sourceHash": "33a951881586773c116f154459759a6c154f1325add4cdacdf8748cd440bf478",
+      "props": [
+        {
+          "name": "file",
+          "type": "ViewerFile",
+          "default": {
+            "kind": "required"
+          },
+          "description": "File configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "ViewerFile"
+          ]
+        },
+        {
+          "name": "maxBytes",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Max Bytes configuration for this component; see its Features examples for usage.",
+          "control": "number",
+          "references": []
+        }
+      ],
+      "emits": [
+        {
+          "name": "error",
+          "parameters": "error: unknown",
+          "returns": "void",
+          "description": "Emitted on error."
+        }
+      ],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
     "packages/core/src/components/FrameButton.vue": {
       "name": "FrameButton",
       "source": "packages/core/src/components/FrameButton.vue",
@@ -333,9 +756,9 @@
           },
           "description": "Native input/button behavior.",
           "options": [
+            "reset",
             "button",
-            "submit",
-            "reset"
+            "submit"
           ],
           "control": "text",
           "references": []
@@ -378,7 +801,7 @@
     "packages/core/src/components/FrameIconButton.vue": {
       "name": "FrameIconButton",
       "source": "packages/core/src/components/FrameIconButton.vue",
-      "sourceHash": "c8a1649d680540c5ca635a522dd8a460c8688fbc631d7ca4753c2dac152d9ccc",
+      "sourceHash": "1b0e39a5ff5578ef1ab8cd8875726654242e36b1e2bd8527b31a54395662ea3f",
       "props": [
         {
           "name": "label",
@@ -387,6 +810,52 @@
             "kind": "required"
           },
           "description": "Visible or accessible label for the control.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "angle",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Angle configuration for this component; see its Features examples for usage.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "flipHorizontal",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Flip Horizontal configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "flipVertical",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Flip Vertical configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "variant",
+          "type": "\"ghost\" | \"icon\"",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Selects the visual variant.",
+          "options": [
+            "ghost",
+            "icon"
+          ],
           "control": "text",
           "references": []
         },
@@ -564,9 +1033,9 @@
           "description": "Native input/button behavior.",
           "options": [
             "number",
+            "reset",
             "button",
             "submit",
-            "reset",
             "checkbox",
             "color",
             "date",
@@ -1094,7 +1563,7 @@
     "packages/core/src/components/FrameIcon.vue": {
       "name": "FrameIcon",
       "source": "packages/core/src/components/FrameIcon.vue",
-      "sourceHash": "f6bdfaf6527d29e597e00b594240a012f65e853b1b7ed599c43fef3e3d16f02c",
+      "sourceHash": "8ed073dc3e0118e008d69ecf59a3d9fc4548014b4eda7e7fd403f59fff59b444",
       "props": [
         {
           "name": "name",
@@ -1125,6 +1594,38 @@
           },
           "description": "Rendered size in pixels; string sizes retain their CSS unit.",
           "control": "text",
+          "references": []
+        },
+        {
+          "name": "angle",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Angle configuration for this component; see its Features examples for usage.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "flipHorizontal",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Flip Horizontal configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "flipVertical",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Flip Vertical configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
           "references": []
         }
       ],
@@ -1271,7 +1772,7 @@
     "packages/core/src/components/FrameDropdownMenu.vue": {
       "name": "FrameDropdownMenu",
       "source": "packages/core/src/components/FrameDropdownMenu.vue",
-      "sourceHash": "b0e7a16b8668a670537207d1d3eea2157e217752164df807d268ece56761a617",
+      "sourceHash": "818551f6d48bfc8f3bee1e20d5b8421211ee01eaa846ce476229b983b4ca7ad6",
       "props": [
         {
           "name": "defaultOpen",
@@ -1480,6 +1981,12 @@
         }
       ],
       "slots": [
+        {
+          "name": "item-actions",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the item-actions slot."
+        },
         {
           "name": "trigger",
           "parameters": "",
@@ -1806,7 +2313,7 @@
     "packages/core/src/components/FrameModal.vue": {
       "name": "FrameModal",
       "source": "packages/core/src/components/FrameModal.vue",
-      "sourceHash": "61165e933b29ebdaf5d681525e93eaff10e0bf5f0db79fadae8925b8362849d2",
+      "sourceHash": "5f33f434a6e62e1687b0a4c82e783bd907d37ebbaee6e51c4f3f961fcd7c4386",
       "props": [
         {
           "name": "title",
@@ -1882,6 +2389,16 @@
           "references": []
         },
         {
+          "name": "minHeight",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Min Height configuration for this component; see its Features examples for usage.",
+          "control": "number",
+          "references": []
+        },
+        {
           "name": "maximized",
           "type": "boolean",
           "default": {
@@ -1889,6 +2406,49 @@
             "value": "false"
           },
           "description": "Maximized configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "contentPadding",
+          "type": "number | string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Content Padding configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "draggable",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Draggable configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "resizable",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Resizable configuration for this component; see its Features examples for usage.",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "maximizable",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "true"
+          },
+          "description": "Maximizable configuration for this component; see its Features examples for usage.",
           "control": "boolean",
           "references": []
         },
@@ -1924,6 +2484,12 @@
           "parameters": "",
           "returns": "VNodeChild",
           "description": "Content rendered in the default slot."
+        },
+        {
+          "name": "footer",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the footer slot."
         }
       ],
       "methods": [],
@@ -2039,7 +2605,7 @@
     "packages/core/src/components/FrameQuickInput.vue": {
       "name": "FrameQuickInput",
       "source": "packages/core/src/components/FrameQuickInput.vue",
-      "sourceHash": "e1e44ce275d388d7d99746ebeba8c8eab131c390561394819d9f037ded39d929",
+      "sourceHash": "e9cbbb1ccb60ff584ff0f97aec11ccc7ce6fdd86763289fb53adfdd3d4e95443",
       "props": [
         {
           "name": "items",
@@ -2087,6 +2653,43 @@
           ],
           "control": "text",
           "references": []
+        },
+        {
+          "name": "mode",
+          "type": "\"application\" | \"frame\" | \"pick\"",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Mode configuration for this component; see its Features examples for usage.",
+          "options": [
+            "application",
+            "frame",
+            "pick"
+          ],
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "category",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Category configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "categories",
+          "type": "readonly import('../frame/commands').CommandCategory[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Categories configuration for this component; see its Features examples for usage.",
+          "control": "json",
+          "references": [
+            "CommandCategory"
+          ]
         }
       ],
       "emits": [
@@ -2101,6 +2704,12 @@
           "parameters": "id: string",
           "returns": "void",
           "description": "Emitted on accept."
+        },
+        {
+          "name": "mode",
+          "parameters": "mode: string",
+          "returns": "void",
+          "description": "Emitted on mode."
         }
       ],
       "slots": [
@@ -2187,7 +2796,7 @@
     "packages/core/src/components/FrameShell.vue": {
       "name": "FrameShell",
       "source": "packages/core/src/components/FrameShell.vue",
-      "sourceHash": "480bef6efc490877b8cb55159cc9c21e4b04a8fbbf9f1a34c709cede7a2b8aad",
+      "sourceHash": "e8a0517205a8cff2b1867e317644b74be94a45c827bbb161c8c7b5204e2be79e",
       "props": [
         {
           "name": "frame",
@@ -2209,6 +2818,26 @@
             "value": "\"Frame (Workspace)\""
           },
           "description": "Title Text configuration for this component; see its Features examples for usage.",
+          "control": "text",
+          "references": []
+        },
+        {
+          "name": "appIcon",
+          "type": "Component",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "App Icon configuration for this component; see its Features examples for usage.",
+          "control": "fixture",
+          "references": []
+        },
+        {
+          "name": "appName",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "App Name configuration for this component; see its Features examples for usage.",
           "control": "text",
           "references": []
         },
@@ -2251,6 +2880,24 @@
           "description": "Content rendered in the workspace-pane slot."
         },
         {
+          "name": "workspace-tab",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the workspace-tab slot."
+        },
+        {
+          "name": "workspace-tab-empty",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the workspace-tab-empty slot."
+        },
+        {
+          "name": "workspace-tab-actions",
+          "parameters": "",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the workspace-tab-actions slot."
+        },
+        {
           "name": "status-leading-actions",
           "parameters": "",
           "returns": "VNodeChild",
@@ -2275,7 +2922,7 @@
     "packages/core/src/components/WorkspacePanes.vue": {
       "name": "WorkspacePanes",
       "source": "packages/core/src/components/WorkspacePanes.vue",
-      "sourceHash": "a8abbc3c113705ebc5fc24b06659f34e3cc1a6db899d2d68a595c1b026241ab3",
+      "sourceHash": "075fe3102a0348007121830a8d4cffd1bbfe89cc00b60616b514299d478b5585",
       "props": [],
       "emits": [],
       "slots": [
@@ -2290,6 +2937,24 @@
           "parameters": "props: { pane: WorkspacePane; }",
           "returns": "VNodeChild",
           "description": "Content rendered in the pane slot."
+        },
+        {
+          "name": "tab",
+          "parameters": "props: { tab: WorkspaceTab; active: boolean; }",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the tab slot."
+        },
+        {
+          "name": "empty",
+          "parameters": "props: { pane: WorkspacePane; }",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the empty slot."
+        },
+        {
+          "name": "actions",
+          "parameters": "props: { pane: WorkspacePane; }",
+          "returns": "VNodeChild",
+          "description": "Content rendered in the actions slot."
         }
       ],
       "methods": [],
@@ -2298,7 +2963,7 @@
     "packages/core/src/components/SidePanel.vue": {
       "name": "SidePanel",
       "source": "packages/core/src/components/SidePanel.vue",
-      "sourceHash": "1ca0427f36bddd0516093cce795f23011589b44c0754d289c0dcabb0ca5efb0b",
+      "sourceHash": "1b3a2309d9e21a7ca6925b0ad6a17dd210fc648ba6a6b88e164969c41d7c22a8",
       "props": [
         {
           "name": "region",
@@ -2394,7 +3059,7 @@
     "packages/core/src/components/ViewSections.vue": {
       "name": "ViewSections",
       "source": "packages/core/src/components/ViewSections.vue",
-      "sourceHash": "ab0006ecbbb8a1305732cf6d125b3c49900fd21b69d4f98d3431b110ee1d75a1",
+      "sourceHash": "32b248242241be894859371cb582438272fca4f84a6e9e574c58586161466c41",
       "props": [
         {
           "name": "viewId",
@@ -2422,90 +3087,47 @@
       "methods": [],
       "forwardsAttrs": true
     },
-    "packages/core/src/components/ActivityRail.vue": {
-      "name": "ActivityRail",
-      "source": "packages/core/src/components/ActivityRail.vue",
-      "sourceHash": "36e48f4faf2724e6423ecc739d568080df05c6b0d3426fce80140a270614d9aa",
+    "packages/core/src/components/NavigationBar.vue": {
+      "name": "NavigationBar",
+      "source": "packages/core/src/components/NavigationBar.vue",
+      "sourceHash": "dc08fc75d08c6658535b86a9d9a982ab53d0d505dd2375fa8982147ad7a3c29c",
+      "props": [],
+      "emits": [],
+      "slots": [],
+      "methods": [],
+      "forwardsAttrs": true
+    },
+    "packages/core/src/components/NavigationItemMenu.vue": {
+      "name": "NavigationItemMenu",
+      "source": "packages/core/src/components/NavigationItemMenu.vue",
+      "sourceHash": "8453e651bb10e9c758b4e1a40aef0e6553ccfb85eb457e0094de214f990128e8",
       "props": [
         {
-          "name": "panels",
-          "type": "readonly SidePanelDefinition[]",
+          "name": "items",
+          "type": "readonly NavigationItem[]",
           "default": {
             "kind": "required"
           },
-          "description": "Panels configuration for this component; see its Features examples for usage.",
+          "description": "Ordered application-owned entries.",
           "control": "json",
           "references": [
-            "SidePanelDefinition"
+            "NavigationItem"
           ]
         },
         {
-          "name": "activeId",
-          "type": "string",
+          "name": "anchor",
+          "type": "HTMLElement",
           "default": {
-            "kind": "required"
+            "kind": "omitted"
           },
-          "description": "Active Id configuration for this component; see its Features examples for usage.",
-          "control": "text",
-          "references": []
-        },
-        {
-          "name": "expanded",
-          "type": "boolean",
-          "default": {
-            "kind": "required"
-          },
-          "description": "Expanded configuration for this component; see its Features examples for usage.",
-          "control": "boolean",
-          "references": []
-        },
-        {
-          "name": "region",
-          "type": "'primary'|'secondary'",
-          "default": {
-            "kind": "literal",
-            "value": "'primary'"
-          },
-          "description": "Region configuration for this component; see its Features examples for usage.",
-          "options": [
-            "primary",
-            "secondary"
-          ],
-          "control": "text",
+          "description": "Real HTMLElement used to position the overlay and restore focus.",
+          "control": "fixture",
           "references": []
         }
       ],
-      "emits": [
-        {
-          "name": "select",
-          "parameters": "id: string",
-          "returns": "void",
-          "description": "Emitted on select."
-        },
-        {
-          "name": "resize",
-          "parameters": "size: { width: number; height: number; }",
-          "returns": "void",
-          "description": "Emitted on resize."
-        }
-      ],
-      "slots": [
-        {
-          "name": "default",
-          "parameters": "",
-          "returns": "VNodeChild",
-          "description": "Content rendered in the default slot."
-        }
-      ],
-      "methods": [
-        {
-          "name": "openContext",
-          "kind": "method",
-          "parameters": "event: MouseEvent | KeyboardEvent, item: ActivityItemKey | undefined",
-          "returns": "void",
-          "description": "Exposed openContext API. Available through the mounted component ref."
-        }
-      ],
+      "emits": [],
+      "slots": [],
+      "methods": [],
       "forwardsAttrs": true
     },
     "packages/core/src/components/FrameLoader.vue": {
@@ -2739,16 +3361,6 @@
           "references": []
         },
         {
-          "name": "label",
-          "type": "string",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "Visible or accessible label for the control.",
-          "control": "text",
-          "references": []
-        },
-        {
           "name": "size",
           "type": "number",
           "default": {
@@ -2756,6 +3368,16 @@
           },
           "description": "Largest dimension in pixels.",
           "control": "number",
+          "references": []
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Visible or accessible label for the control.",
+          "control": "text",
           "references": []
         },
         {
@@ -3309,13 +3931,13 @@
     "packages/features/src/Terminal.vue": {
       "name": "Terminal",
       "source": "packages/features/src/Terminal.vue",
-      "sourceHash": "5577d1baf315ec0d3b574d9eaa411623e10fe553721e3c0c83a7e3e331d36c95",
+      "sourceHash": "7757adee43408ed98a29e7f14195706c5f79978b7ec8f71097feb68b33a55e49",
       "props": [
         {
           "name": "terminal",
           "type": "TerminalController",
           "default": {
-            "kind": "omitted"
+            "kind": "required"
           },
           "description": "Application-owned terminal controller. Dispose it according to its ownership rules.",
           "control": "fixture",
@@ -3377,7 +3999,7 @@
       "emits": [
         {
           "name": "ready",
-          "parameters": "controller: { profiles: Readonly<import(\"vue\").Ref<readonly { readonly id: string; readonly name: string; readonly path: string; readonly default: boolean; }[], readonly { readonly id: string; readonly name: string; readonly path: string; readonly default: boolean; }[]>>; sessions: Readonly<import(\"vue\").Ref<readonly { readonly id: string; readonly profile: string; readonly name: string; readonly color?: string | undefined; readonly status: \"running\" | \"exited\" | \"error\"; readonly exitCode?: number | undefined; readonly error?: string | undefined; }[], readonly { readonly id: string; readonly profile: string; readonly name: string; readonly color?: string | undefined; readonly status: \"running\" | \"exited\" | \"error\"; readonly exitCode?: number | undefined; readonly error?: string | undefined; }[]>>; groups: Readonly<import(\"vue\").Ref<readonly (readonly string[])[], readonly (readonly string[])[]>>; activeId: Readonly<import(\"vue\").Ref<string | undefined, string | undefined>>; error: Readonly<import(\"vue\").Ref<string, string>>; detectProfiles: () => Promise<readonly import(\"./terminal\").TerminalProfile[]>; create: (profile?: string | undefined, config?: { split?: boolean; cwd?: string; }) => Promise<import(\"./terminal\").TerminalSession>; close: (id: string) => Promise<void>; activate: (id: string) => void; unsplit: () => void; subscribe: (id: string, listener: (event: import(\"./terminal\").TerminalEvent) => void) => () => void; clear: (id?: string | undefined) => void; dispose: () => Promise<void>; reportError: (cause: unknown) => void; dismissError: () => void; rename(id: string, name: string): void; setColor(id: string, color: string): void; write(id: string, data: string): Promise<void>; resize(id: string, cols: number, rows: number): Promise<void>; }, sessionId: string",
+          "parameters": "controller: { profiles: Readonly<import(\"vue\").Ref<readonly { readonly id: string; readonly name: string; readonly path: string; readonly default: boolean; }[], readonly { readonly id: string; readonly name: string; readonly path: string; readonly default: boolean; }[]>>; sessions: Readonly<import(\"vue\").Ref<readonly { readonly id: string; readonly profile: string; readonly name: string; readonly color?: string | undefined; readonly status: \"running\" | \"exited\" | \"error\"; readonly exitCode?: number | undefined; readonly error?: string | undefined; }[], readonly { readonly id: string; readonly profile: string; readonly name: string; readonly color?: string | undefined; readonly status: \"running\" | \"exited\" | \"error\"; readonly exitCode?: number | undefined; readonly error?: string | undefined; }[]>>; groups: Readonly<import(\"vue\").Ref<readonly (readonly string[])[], readonly (readonly string[])[]>>; activeId: Readonly<import(\"vue\").Ref<string | undefined, string | undefined>>; error: Readonly<import(\"vue\").Ref<string, string>>; detectProfiles: () => Promise<readonly import(\"./terminal\").TerminalProfile[]>; create: (profile?: string | undefined, config?: { split?: boolean; cwd?: string; }) => Promise<import(\"./terminal\").TerminalSession>; close: (id: string) => Promise<void>; activate: (id: string) => void; unsplit: () => void; subscribe: (id: string, listener: (event: import(\"./terminal\").TerminalEvent) => void) => () => void; clear: (id?: string | undefined) => void; dispose: () => Promise<void>; reportError: (cause: unknown) => void; openUrl(url: string): Promise<void>; dismissError: () => void; rename(id: string, name: string): void; setColor(id: string, color: string): void; write(id: string, data: string): Promise<void>; resize(id: string, cols: number, rows: number): Promise<void>; }, sessionId: string",
           "returns": "void",
           "description": "Emitted on ready."
         },
@@ -3406,7 +4028,7 @@
           "name": "controller",
           "kind": "property",
           "parameters": "",
-          "returns": "{ profiles: Readonly<Ref<readonly { readonly id: string; readonly name: string; readonly path: string; readonly default: boolean; }[], readonly { readonly id: string; readonly name: string; readonly path: string; readonly default: boolean; }[]>>; ... 17 more ...; resize(id: string, cols: number, rows: number): Promi...",
+          "returns": "{ profiles: Readonly<Ref<readonly { readonly id: string; readonly name: string; readonly path: string; readonly default: boolean; }[], readonly { readonly id: string; readonly name: string; readonly path: string; readonly default: boolean; }[]>>; ... 18 more ...; resize(id: string, cols: number, rows: number): Promi...",
           "description": "Exposed controller API. Available through the mounted component ref."
         },
         {
@@ -3499,8 +4121,8 @@
           },
           "description": "Session Layout configuration for this component; see its Features examples for usage.",
           "options": [
-            "sidebar",
-            "tabs"
+            "tabs",
+            "sidebar"
           ],
           "control": "text",
           "references": [
@@ -3552,7 +4174,7 @@
     "packages/features/src/AIChat.vue": {
       "name": "AIChat",
       "source": "packages/features/src/AIChat.vue",
-      "sourceHash": "2acf9dd6f7959b4ed6d3e7d98e26d6dc5c2c863a45c2dca108f3d6fef0a9af0c",
+      "sourceHash": "5d1457247a659cb9678579a9706984bced6b9ab744ba0fcdca7339088a90b84b",
       "props": [
         {
           "name": "chat",
@@ -4394,16 +5016,6 @@
           "references": []
         },
         {
-          "name": "name",
-          "type": "string",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
-          "control": "text",
-          "references": []
-        },
-        {
           "name": "disabled",
           "type": "boolean",
           "default": {
@@ -4412,6 +5024,16 @@
           },
           "description": "When `true`, prevents the user from interacting with radio items.",
           "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
+          "control": "text",
           "references": []
         },
         {
@@ -5592,16 +6214,6 @@
           "references": []
         },
         {
-          "name": "name",
-          "type": "string",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
-          "control": "text",
-          "references": []
-        },
-        {
           "name": "disabled",
           "type": "boolean",
           "default": {
@@ -5610,6 +6222,16 @@
           },
           "description": "When `true`, prevents the user from interacting with listbox",
           "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
+          "control": "text",
           "references": []
         },
         {
@@ -7543,6 +8165,27 @@
           "references": []
         },
         {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Whether or not the date field is disabled",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
+          "control": "text",
+          "references": []
+        },
+        {
           "name": "placeholder",
           "type": "DateValue",
           "default": {
@@ -7567,16 +8210,6 @@
           ]
         },
         {
-          "name": "name",
-          "type": "string",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
-          "control": "text",
-          "references": []
-        },
-        {
           "name": "defaultValue",
           "type": "DateValue",
           "default": {
@@ -7587,17 +8220,6 @@
           "references": [
             "DateValue"
           ]
-        },
-        {
-          "name": "disabled",
-          "type": "boolean",
-          "default": {
-            "kind": "literal",
-            "value": "false"
-          },
-          "description": "Whether or not the date field is disabled",
-          "control": "boolean",
-          "references": []
         },
         {
           "name": "required",
@@ -8249,6 +8871,27 @@
           "references": []
         },
         {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "Whether or not the date field is disabled",
+          "control": "boolean",
+          "references": []
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
+          "control": "text",
+          "references": []
+        },
+        {
           "name": "placeholder",
           "type": "DateValue",
           "default": {
@@ -8273,16 +8916,6 @@
           ]
         },
         {
-          "name": "name",
-          "type": "string",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
-          "control": "text",
-          "references": []
-        },
-        {
           "name": "defaultValue",
           "type": "DateRange",
           "default": {
@@ -8294,17 +8927,6 @@
           "references": [
             "DateRange"
           ]
-        },
-        {
-          "name": "disabled",
-          "type": "boolean",
-          "default": {
-            "kind": "literal",
-            "value": "false"
-          },
-          "description": "Whether or not the date field is disabled",
-          "control": "boolean",
-          "references": []
         },
         {
           "name": "required",
@@ -9037,16 +9659,15 @@
           "references": []
         },
         {
-          "name": "placeholder",
-          "type": "TimeValue",
+          "name": "disabled",
+          "type": "boolean",
           "default": {
-            "kind": "omitted"
+            "kind": "literal",
+            "value": "false"
           },
-          "description": "The placeholder time, which is used to determine what time to display when no time is selected. This updates as the user navigates the field",
-          "control": "json",
-          "references": [
-            "TimeValue"
-          ]
+          "description": "Whether or not the time field is disabled",
+          "control": "boolean",
+          "references": []
         },
         {
           "name": "name",
@@ -9059,15 +9680,16 @@
           "references": []
         },
         {
-          "name": "disabled",
-          "type": "boolean",
+          "name": "placeholder",
+          "type": "TimeValue",
           "default": {
-            "kind": "literal",
-            "value": "false"
+            "kind": "omitted"
           },
-          "description": "Whether or not the time field is disabled",
-          "control": "boolean",
-          "references": []
+          "description": "The placeholder time, which is used to determine what time to display when no time is selected. This updates as the user navigates the field",
+          "control": "json",
+          "references": [
+            "TimeValue"
+          ]
         },
         {
           "name": "required",
@@ -12089,6 +12711,27 @@
           "references": []
         },
         {
+          "name": "expanded",
+          "type": "string[]",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "The controlled value of the expanded item. Can be binded with `v-model`.",
+          "control": "json",
+          "references": []
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": {
+            "kind": "literal",
+            "value": "false"
+          },
+          "description": "When `true`, prevents the user from interacting with tree",
+          "control": "boolean",
+          "references": []
+        },
+        {
           "name": "items",
           "type": "FrameTreeItem[] | undefined",
           "default": {
@@ -12125,17 +12768,6 @@
           ]
         },
         {
-          "name": "disabled",
-          "type": "boolean",
-          "default": {
-            "kind": "literal",
-            "value": "false"
-          },
-          "description": "When `true`, prevents the user from interacting with tree",
-          "control": "boolean",
-          "references": []
-        },
-        {
           "name": "multiple",
           "type": "boolean | undefined",
           "default": {
@@ -12159,16 +12791,6 @@
             "toggle"
           ],
           "control": "text",
-          "references": []
-        },
-        {
-          "name": "expanded",
-          "type": "string[]",
-          "default": {
-            "kind": "omitted"
-          },
-          "description": "The controlled value of the expanded item. Can be binded with `v-model`.",
-          "control": "json",
           "references": []
         },
         {
@@ -12642,7 +13264,7 @@
     "packages/core/src/components/FrameMenubar.vue": {
       "name": "FrameMenubar",
       "source": "packages/core/src/components/FrameMenubar.vue",
-      "sourceHash": "33fa51f4fe4e9e5a4066f4b654014c559a2d7ac7365efd10bb26faab6e39c748",
+      "sourceHash": "d10c6ad020f791f0f4d986871d46f961bad87ac62e54fd14e16186dc77f007c8",
       "props": [
         {
           "name": "modelValue",
@@ -12733,6 +13355,16 @@
             "expression": "Infinity"
           },
           "description": "Max Visible configuration for this component; see its Features examples for usage.",
+          "control": "number",
+          "references": []
+        },
+        {
+          "name": "availableWidth",
+          "type": "number",
+          "default": {
+            "kind": "omitted"
+          },
+          "description": "Available Width configuration for this component; see its Features examples for usage.",
           "control": "number",
           "references": []
         },
@@ -13605,7 +14237,7 @@
     "packages/core/src/components/FrameContextMenu.vue": {
       "name": "FrameContextMenu",
       "source": "packages/core/src/components/FrameContextMenu.vue",
-      "sourceHash": "394022edc521e8042dee8053c20e6fbac5573d0f5eab511074435d383c046d9d",
+      "sourceHash": "429522fe1134c6b8977dffcd9a3810f92ac78d1790a2d4617e04afb4e6f60269",
       "props": [
         {
           "name": "pressOpenDelay",

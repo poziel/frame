@@ -1,5 +1,6 @@
 <script setup lang="ts" generic="T extends FrameGeneralMenuItem | FrameMenuItem">
-import { computed, ref } from 'vue';
+import { computed, ref, inject } from 'vue';
+import { frameKey } from '../frame/createFrame';
 import { ContextMenuRoot, ContextMenuTrigger, ContextMenuPortal, ContextMenuContent, useForwardPropsEmits, useEmitAsProps, type ContextMenuRootProps, type ContextMenuRootEmits, type ContextMenuContentProps, type ContextMenuContentEmits } from 'reka-ui';
 import {normalizeMenuItems, type FrameGeneralMenuItem} from './generalMenu';
 import type { FrameMenuItem } from '../types';
@@ -10,6 +11,7 @@ import AnchoredMenu from './AnchoredMenu.vue';
 import { useId } from 'vue';
 import {useOverlayBoundary} from '../frame/overlays';
 import '../general-c.css';
+const commandFrame = inject(frameKey, undefined);
 defineOptions({inheritAttrs:false});
 
 const props=withDefaults(defineProps<ContextMenuRootProps & {items: readonly T[]; label?:string; itemAlignment?: "left" | "center" | "right"; anchor?:HTMLElement; point?:{x:number;y:number}; placement?:"bottom"|"right"; id?:string; triggerLabel?: string; contentProps?: ContextMenuContentProps}>(),{open:undefined,modal:false});
@@ -22,7 +24,7 @@ const menuOpen=computed({get:()=>props.open ?? localOpen.value,set:(value:boolea
 const rootBindings = computed(() => Object.fromEntries(Object.entries(forwarded.value).filter(([key]) => !key.startsWith('on') || key.startsWith('onUpdate:'))));
 const triggerAnchor=ref<HTMLElement>();
 const owner=useId();
-const normalized=computed(()=>normalizeMenuItems(props.items));
+const normalized=computed(()=>commandFrame ? commandFrame.resolveMenuItems(normalizeMenuItems(props.items)) : normalizeMenuItems(props.items));
 const content=ref<{ $el:HTMLElement }>();
 const surface=computed(()=>{const element=content.value?.$el;return element instanceof HTMLElement ? element.querySelector<HTMLElement>('[data-reka-menu-content]') ?? element : undefined;});
 function selected(item:FrameMenuItem,event?:Event){emit("select",(props.items.find(original=>original.id===item.id) ?? item) as T,event);}

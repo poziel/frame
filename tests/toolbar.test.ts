@@ -28,3 +28,20 @@ test('custom toolbar actions use their existing registration and cannot collide 
  expect(frame.toolbar.setActionVisible('later',true)).toBe(false);
  expect(frame.toolbarActions.length).toBe(0);unregister();
 });
+
+test('hosts can keep only the primary toggle and still open customization by command', async()=>{
+ const frame=createFrame({toolbar:{customize:false,primary:true},features:{panel:false,secondarySidebar:false}});
+ const other=createFrame();
+ expect(frame.toolbar.isVisible('customize')).toBe(false);
+ expect(frame.toolbar.isVisible('primary')).toBe(true);
+ expect(frame.toolbar.isVisible('bottom')).toBe(false);
+ expect(frame.toolbar.isVisible('secondary')).toBe(false);
+ expect(frame.commands.isEnabled('frame.layout.customize')).toBe(true);
+ expect(other.toolbar.isVisible('customize')).toBe(true);
+ frame.toolbar.setVisible('layoutControls',false);
+ frame.resetLayout();
+ expect(frame.toolbar.isVisible('customize')).toBe(false);
+ expect(frame.toolbar.isVisible('primary')).toBe(true);
+ expect(frame.toolbar.isVisible('layoutControls')).toBe(true);
+ frame.dispose();other.dispose();
+});

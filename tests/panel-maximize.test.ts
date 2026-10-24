@@ -14,10 +14,10 @@ test("maximized panel coverage follows alignment and preserves the activity rail
     expect(layout.panelHeight).toBe(240);
   }
 });
-test("secondary maximizes across all regions, and disabling the activity bar removes its reserved space", () => {
+test("secondary maximizes across all regions, and disabling the view bar removes its reserved space", () => {
   const layout = { ...defaultLayout(), maximizedRegion: "secondary" as const, secondarySidebarVisible: true };
   expect(maximizedRegionBounds(layout, 1000, 800)?.width).toBe(954);
-  layout.activityBarVisible = false;
+  layout.primaryViewBarVisible = false;
   expect(maximizedRegionBounds(layout, 1000, 800)?.width).toBe(1000);
   layout.secondarySidebarVisible = false;
   expect(maximizedRegionBounds(layout, 1000, 800)).toBeUndefined();

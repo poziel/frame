@@ -1,0 +1,18 @@
+import { createFrame, type PresentationController, type ViewContainerController, type CommandCategory } from '@frame/core';
+const frame = createFrame({ features: { secondarySidebar: false } });
+const stopCloseHook = frame.commands.hook('frame.workspace.tab.close', event => { const id: string = event.id; void id; });
+const stopCommandHooks = frame.commands.hook(async event => { await Promise.resolve(event.label); });
+stopCloseHook(); stopCommandHooks();
+const controllers: readonly PresentationController[] = [frame.primarySidebar, frame.secondarySidebar, frame.panel, frame.primaryViewBar, frame.secondaryViewBar, frame.panelViewBar];
+controllers.forEach(controller => { controller.disable(); controller.enable(); controller.setAvailable(false); void controller.available; void controller.visible.value; });
+const views: ViewContainerController = frame.secondarySidebar;
+views.register({ id: 'details', label: 'Details', component: { render: () => null } });
+views.open('details'); views.close(); views.select('details');
+const category: CommandCategory = { prefix: '!', label: 'Artwork' };
+const removeCategory = frame.commands.categories.register(category);
+const remove = frame.commands.register({ id: 'save', label: 'Save', feature: 'documents', quickInput: '!', enabled: () => true, run() {} });
+frame.commands.disable('save'); frame.commands.enable('save'); frame.commands.setAvailable('save', false);
+frame.features.setAvailable('documents', false);
+void frame.commands.execute('save'); void frame.commands.get('save'); void frame.commands.list();
+void frame.commands.isAvailable('save'); void frame.commands.isEnabled('save');
+remove(); removeCategory(); frame.dispose();

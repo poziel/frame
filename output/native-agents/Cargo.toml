@@ -1,0 +1,27 @@
+[package]
+name = "frame-agent-connectors"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Explicit local agent connectors for Frame applications"
+
+[lib]
+name = "frame_agent_connectors"
+
+[[bin]]
+name = "frame-agent-server"
+path = "src/main.rs"
+
+[dependencies]
+async-trait = "0.1"
+futures-util = "0.3"
+reqwest = { version = "0.12", default-features = false, features = ["json", "stream", "rustls-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tokio = { version = "1", features = ["full"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+github-copilot-sdk = { version = "=1.0.26", default-features = false, features = ["runtime"] }
+
+[dev-dependencies]
+tempfile = "3"

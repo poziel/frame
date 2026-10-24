@@ -4,7 +4,7 @@
 
 Frame is an application framework controlled through a root `Frame` instance. `FrameShell` renders that instance. Applications contribute Vue components, menus, commands, configuration, and backend adapters; Frame coordinates their presentation, shared state, and lifecycle.
 
-Read [the architecture direction](docs/architecture.md) before changing shell behavior, public APIs, optional features, or component ownership. It distinguishes existing APIs from the agreed target; do not present proposed methods as implemented.
+Read the [library documentation](docs/README.md), especially [shell ownership](docs/shell/README.md) and [configuration](docs/configuration/frame-options.md), before changing shell behavior, public APIs, optional features, or component ownership. Do not present architectural targets as implemented methods.
 
 ## Two kinds of UI
 
@@ -32,10 +32,10 @@ For each change, identify which responsibility it serves. A feature can include 
 
 ## Themes, styling, and package boundaries
 
-- Share `--frame-*` variables between Frame controls and application content. Read [theme variables](docs/theme-variables.md); colors, typography, spacing, radii, shadows, and motion are all theme concerns. Preserve current appearance when introducing tokens.
+- Share `--frame-*` variables between Frame controls and application content. Read [theme variables](docs/styling/theme-variables.md); colors, typography, spacing, radii, shadows, and motion are all theme concerns. Preserve current appearance when introducing tokens.
 - Tailwind is optional build tooling, not a runtime feature installed with `frame.use(...)`. Keep it out of Core's runtime dependencies. Its generated utilities reference runtime variables so selected themes affect content and portals consistently.
 - Prefer Reka UI for suitable complex interaction primitives instead of rebuilding focus/keyboard behavior. Do not migrate unrelated existing controls merely because Reka is installed.
-- Follow [package boundaries](docs/package-boundaries.md): Core owns the framework and shared primitives, Features owns optional features, Tailwind owns its build integration, and Docs owns examples and the development host. Never ship demo registrations or product-specific backend services in library entry points.
+- Follow [package boundaries](docs/reference/packages.md): Core owns the framework and shared primitives, Features owns optional features, Tailwind owns its build integration, and Docs owns examples and the development host. Never ship demo registrations or product-specific backend services in library entry points.
 
 ## Verification and working practices
 

@@ -1,6 +1,6 @@
 # @frame/features
 
-Renamed from `@frame/extras`. Update package dependencies/imports, stylesheet imports, and the build command to `bun run build:features`. Local native hosts must update their terminal plugin path from `packages/extras/tauri` to `packages/features/tauri`. Existing standalone component/controller exports are retained; `.use()` and typed feature factories remain proposed APIs.
+Renamed from `@frame/extras`. Update package dependencies/imports, stylesheet imports, and the build command to `bun run build:features`. Existing standalone component/controller exports are retained; `.use()` and typed feature factories remain proposed APIs.
 
 Optional ready-made features for Frame applications. Core never imports Features. Features has peer dependencies on @frame/core and Vue, and does not register anything merely by being imported.
 
@@ -8,29 +8,31 @@ Optional ready-made features for Frame applications. Core never imports Features
 <script setup lang="ts">
 import { onBeforeUnmount } from 'vue';
 import { createFrame, FrameShell } from '@frame/core';
-import { createNotificationHistory, NotificationPanel, NotificationIndicator } from '@frame/features';
+import { createNotificationHistory, NotificationPanel } from '@frame/features';
 import '@frame/core/style.css';
 import '@frame/features/style.css';
 const frame = createFrame();
-const history = createNotificationHistory(frame, { limit: 200 });
+const history = createNotificationHistory(frame, { limit: 200, statusBar: true });
 onBeforeUnmount(() => { history.dispose(); frame.dispose(); });
 </script>
 <template>
   <FrameShell :frame="frame">
     <template #overlays><NotificationPanel :frame="frame" :history="history" /></template>
-    <template #status-leading-actions><NotificationIndicator v-if="history.state.indicatorPosition === 'bottom-left'" :history="history" /></template>
-    <template #status-actions><NotificationIndicator v-if="history.state.indicatorPosition === 'bottom-right'" :history="history" /></template>
   </FrameShell>
 </template>
 ```
 
-The panel keeps a bounded in-memory history of notifications emitted after subscription. Expiring or dismissing a core notification does not delete history. Clearing history does not dismiss active messages. No bell, history, commands, or panel are installed by core. The application may register its own command using `history.toggle` and should dispose the history on unmount. The panel’s position button selects Bottom Right, Bottom Left, or Top Right. `history.setPosition(position)` exposes the same behavior to the host; initial position, availability, and pinning can be set with `indicatorPosition`, `indicatorEnabled`, and `indicatorPinned` options. Top Right contributes a registered toolbar action: its Notification Center feature toggle controls availability, while the Notifications checkbox pins or unpins the action. An unpinned action stays in More Actions. Moving the icon preserves history and its pin preference. `history.setEnabled(false)` closes the panel without deleting history; disposal removes both the subscription and toolbar registration.
+The panel keeps a bounded in-memory history of notifications emitted after subscription. Expiring or dismissing a core notification does not delete history. Clearing history does not dismiss active messages. No bell, history, commands, or panel are installed by core. The application may register its own command using `history.toggle` and should dispose the history on unmount. The panel’s position button selects Bottom Right, Bottom Left, or Top Right. `history.setPosition(position)` exposes the same behavior to the host; initial position, availability, and pinning can be set with `indicatorPosition`, `indicatorEnabled`, and `indicatorPinned` options. Top Right contributes a registered toolbar action: its Notification Center feature toggle controls availability, while the Notifications checkbox pins or unpins the action. An unpinned action stays in More Actions. Moving the icon preserves history and its pin preference. `history.setEnabled(false)` closes the panel without deleting history; disposal removes the subscription and all installed presentations.
+
+With `statusBar: true`, `history.statusItemId` identifies a registered status button. Its context menu shares item visibility, badge visibility, and left/right moves with other Frame status items. The badge shows the current history count, and moving sides updates the panel corner. Do not also mount NotificationIndicator when opting into this registration. For existing standalone indicator consumers, omit `statusBar` (default false) and keep mounting NotificationIndicator in the footer slots.
 
 Panel `bottom` is an 8px inset by default, relative to Frame’s overlay boundary, which already excludes the status bar. Do not add the status-bar height again. Empty history renders only the header. Override `--frame-notification-center-header-background` and `--frame-notification-center-header-min-height` to theme the header separately from the notification rows.
 
 Build core first with `bun run build:library`, then run `bun run build:features`. Both are private workspace packages; nothing is published.
 
 ## Universal viewer
+
+Run `bun run dev`, then open **Features → Universal file viewer → Interactive demo** in the documentation website. Choose a local file or try the text, code, SVG, two-page PDF, and unsupported-file samples. The demo includes inline and fullscreen previews and does not upload selected files.
 
 `UniversalViewer` presents a portable file preview in a fullscreen modal with a dark blurred backdrop. It is controlled through `v-model:open` and restores focus on close. `UniversalViewerContent` renders the same preview inside any sized container without requiring a Frame instance. Import Extras styles as usual.
 
@@ -111,59 +113,31 @@ The component uses the installed Monaco ESM package and local worker assets. Use
 
 Verification: `bun test tests/code-editor.test.ts tests/code-block.test.ts`, `bun run build:library`, `bun run build:features`, `bun run check:consumer`, and, with the Docs server running, `uv run --with playwright python tests/code-editor-browser.py`. The Docs component catalog includes a Code editor example with live Code Block output.
 
-## Desktop terminal
+## Terminal
 
-`Terminal` is a terminal surface without a toolbar. `TerminalView` adds shell selection, sessions, a sidebar, side-by-side splits, rename, session colors, search and clear. `createTerminalView` puts those actions in Frame's existing view header. All terminal code, dependencies and the native plugin belong to Features; Core has no terminal dependency.
+`Terminal` renders xterm.js; `TerminalView` and `createTerminalView` add session management and shell presentation. Features contains no native runtime or Rust implementation.
 
-In the host's `src-tauri/Cargo.toml`, opt into the bundled native crate (adjust the path for your application):
-
-```toml
-[dependencies]
-tauri-plugin-frame-terminal = { path = "../../features/tauri" }
-```
-
-Register `.plugin(tauri_plugin_frame_terminal::init())` on the Tauri builder, and add `"frame-terminal:default"` to the local window's capability permissions. For HTTP links, register `tauri-plugin-opener` and grant its `opener:default` permission too. Grant terminal permissions only to trusted local application content: they allow launching interactive shells with the application's user privileges.
+Supply an explicit `TerminalBackend` to `createTerminal({ backend })`, and pass that controller to `<Terminal :terminal="terminal" />`. A backend implements `profiles`, `spawn`, `write`, `resize`, and `close`. It may execute through a local native companion, Node.js, or a remote service. There is no automatic Tauri fallback.
 
 ```ts
-import { createTerminal, createTerminalView } from '@frame/features';
-import '@frame/features/style.css';
-
-// Keep this controller in the application owner, outside a disposable view.
-const terminal = createTerminal({ cwd: 'D:\\projects' });
-const removeView = frame.registerView(createTerminalView({
-  id: 'app.terminal', frame, terminal,
-}), 'bottom');
-frame.openView('app.terminal');
-
-// At application teardown, not when the view is hidden:
-// removeView(); await terminal.dispose();
+const terminal = createTerminal({
+  backend, // Application-owned TerminalBackend
+  openUrl: frame.host.external?.openUrl,
+});
+frame.registerView(createTerminalView({ id: 'terminal', frame, terminal }), 'bottom');
 ```
 
-For a simple surface in any sized container:
+The host owns controller disposal. Hiding/moving a view retains sessions; closing a session terminates it through the backend. Call `await terminal.dispose()` on host teardown. Frame does not dispose externally supplied backend services.
 
-```vue
-<Terminal :terminal="terminal" profile="pwsh" style="height: 320px" />
-```
+The browser Docs example supplies a simulated backend with help, echo, and clear commands. It never executes operating-system commands. The extracted Rust PTY plugin and Tauri terminal transport are maintained in the separate Frame Native companion, outside this workspace.
 
-Omit `profile` to use the detected preferred shell. Pass a profile ID or its exact display name. `await terminal.detectProfiles()` returns installed shells with executable paths and a default flag. Windows detection prefers PowerShell 7, then Windows PowerShell, Command Prompt, Git Bash and configured WSL. This detects installed shells; it does not import Windows Terminal settings, saved profiles or custom executables. macOS/Linux detection and PTY support are included but untested on those platforms.
+Migration: supply `backend` explicitly, supply a controller to `Terminal`, update native crate paths to the companion, and route terminal links through the host adapter when needed.
 
-Use `const session = await terminal.create('cmd')` and `<Terminal :terminal="terminal" :session-id="session.id" />` to reattach without spawning a second process. A simple terminal can also create its own controller; its `ready(controller, sessionId)` event exposes ownership. Keep that controller if you need to reattach or close it later. Changing `profile` or `cwd` after mount does not replace an existing shell.
-
-`TerminalView` accepts `terminal`, `toolbar` (default true), `sidebar` (initial selector visibility, default true), `autoStart` (default true), and `sessionLayout` (`'sidebar'` by default, or `'tabs'`). `createTerminalView` accepts `id`, `frame`, `terminal`, optional `label`, `autoStart`, and `sessionLayout`. For example, `createTerminalView({ id: 'app.terminal', frame, terminal, sessionLayout: 'tabs' })` puts the session selector above the terminal panes. The options dropdown switches between sidebar and tabs. Its Show terminal sidebar / Show terminal tabs checkbox controls the selected layout; both stay hidden when only one session is open, even when enabled.
-
-The header uses Frame's standard tooltips and anchored dropdown; its profile picker uses Quick input. Right-click a session (or press Shift+F10 while its button is focused) to rename it or change its color. Split creates an independent process next to the active session; connected sidebar lines identify sessions in the same split group. Selection tracks terminal focus, and choosing a session focuses that shell. Tabs support Left/Right and Home/End navigation. The close action overlays a session only on hover or keyboard focus, without reserving space. Separate split terminals returns sessions to individual groups.
-
-Drag the vertical dividers to resize adjacent terminal panes or the sidebar. Resize handles support arrow keys; double-click or Home resets pane widths or the sidebar width. Pane proportions and the sidebar's preferred width survive parent resizing within the mounted view. Give the parent a defined height (or a constrained flex/grid area); the terminal fills that height and updates the shell's row/column dimensions as its container changes. Frame-managed terminal views fill the panel content automatically.
-
-Ctrl+Shift+C copies selected output; Ctrl+Shift+V and normal paste events paste into the shell. Ctrl+C remains the interrupt key. Ctrl+F searches the active terminal buffer; Enter/Shift+Enter find the next/previous match. Clear clears the active screen and scrollback without killing its shell. Ctrl+click opens HTTP/HTTPS links through the host opener; other URI schemes are ignored. The fixed terminal font and dark palette have no user settings in this version.
-
-Hiding, moving, or unmounting a surface keeps its shell and terminal buffer alive. Explicit session close and controller disposal terminate processes; native window/application teardown cleans up its sessions. Nothing persists across application restarts. Scrollback is limited to 5,000 lines; output received before the first surface attaches is capped at 1 MiB. Browser use shows a desktop-only error, and no server is started. `TerminalBackend` is an adapter interface for future transports; this release includes only the Tauri backend.
-
-Verification: `bun test tests/terminal.test.ts`, `cargo test --manifest-path packages/features/tauri/Cargo.toml`, and, with the Docs dev server running, `uv run --with playwright python tests/terminal-browser.py` and `uv run --with playwright python tests/terminal-layout-browser.py`. Browser UI checks use an in-memory adapter; Cargo tests run real native PTYs on the test machine.
+Verification: `bun test tests/terminal.test.ts`, `bun run build:features`, and the browser terminal suites.
 
 ## AI chat
 
-`AIChat` is a chat room with a multiline composer, local file/folder attachments, ordered thinking and message parts, stop, copy, forge, and reversible prompt editing. It does not connect to an AI service or start one.
+`AIChat` is a chat room with a multiline composer, local file/folder attachments, ordered responses and activity, approval and question cards, stop, copy, forge, and reversible prompt editing. It does not connect to an AI service or start one.
 
 ```vue
 <script setup lang="ts">
@@ -192,13 +166,64 @@ onBeforeUnmount(() => chat.dispose());
 <template><div style="height: 600px"><AIChat :chat="chat" @forge="forge" /></div></template>
 ```
 
-`respond(request, writer)` receives a snapshot of the conversation through the latest user prompt, attachments, and an abort signal. Return a promise covering the whole generation. Writer calls append parts in order; `append(id, text)` streams text into an existing message part. `complete()` closes unfinished thinking, records the generation duration, and ignores late events. Returning from the responder also completes the generation. Thrown errors are displayed inline; Stop aborts the signal and ignores subsequent writes. Dispose the controller when its owning conversation closes; unmounting a room alone does not stop a host-owned conversation.
+`respond(request, writer)` receives a snapshot of the conversation through the latest user prompt, attachments, and an abort signal. Return a promise covering the whole generation. Writer calls append parts in order; `append(id, text)` streams text into an existing message part. `complete()` returns `true` when it finishes the turn, or `false` while user requests remain pending or the writer is inactive. It closes unfinished thinking and activities, records the duration, and ignores late events. Returning from the responder also completes the generation once all interactions are settled. Thrown errors and `writer.fail(message)` display inline; Stop aborts the signal and ignores subsequent writes. `send()` settles on completion, failure or stop even if a responder ignores cancellation. Dispose the controller when its owner is destroyed; disposal permanently blocks sending. Unmounting a room alone does not stop a host-owned conversation. `chat.clear()` stops work and clears the transcript, draft and attachments while retaining a reusable controller.
 
-`chat.state` exposes `messages`, `draft`, `attachments`, `busy`, and `rewindId`. Initial `messages` can be passed to `createAIChat`. Messages contain ordered `ChatPart` objects (`message` or `thinking`) plus timestamps, attachments, and completion status. Thinking text is provider-supplied display content; the component does not invent it. Plain text is rendered safely without interpreting HTML.
+`chat.state` exposes `messages`, `draft`, `attachments`, `busy`, and `rewindId`. Initial `messages` can be passed to `createAIChat`. Messages contain ordered `ChatPart` objects (`message`, `thinking`, `commentary`, `activityGroup`, `activity`, `approval`, `question`, or `artifact`) plus timestamps, attachments, and completion status. Thinking text is provider-supplied display content; the component does not invent it. Plain text is rendered safely without interpreting HTML. Copy includes only answer text, excluding activities, reasoning, requests and artifacts.
+
+### Rich responses and user input
+
+| Writer method | Behavior |
+| --- | --- |
+| `message(text, { phase? }?)` | Adds answer text; phase defaults to `final`. Use `intermediate` for a message that belongs to the work history |
+| `commentary(text)` | Adds progress text distinct from answer text; returns a part ID |
+| `activityGroup({ label })` | Creates a named group in this turn and returns its ID |
+| `activity({ label, text?, output?, outputLanguage?, groupId? })` | Starts a timed activity with optional named-group membership and returns its ID |
+| `updateActivity(id, { label?, text?, output?, outputLanguage? })` | Replaces supplied fields on a running activity; append output in the adapter if needed |
+| `finishActivity(id, status?)` | Ends an activity with `completed` (default) or `failed` |
+| `requestApproval({ text, detail? })` | Returns `{ id, result }`; await `result` for `{ status: 'answered', decision: 'allow' \| 'deny' }` or `{ status: 'cancelled' }` |
+| `askQuestions({ text?, questions })` | Returns `{ id, result }`; await a structured answer or cancellation |
+| `artifact({ name, url, kind, mimeType?, size?, text? })` | Adds an image/file card; `size` is optional bytes and `text` is a caption |
+| `fail(message)` | Fails the turn, closes active work and cancels pending interactions |
+
+Approval is permission to perform an action. Questions gather preferences or other input, with no implied permission. A `ChatQuestion` has `id`, `text`, `choices: { id, label, description? }[]`, and optional `multiple`, `required`, `allowCustom` flags. Defaults are single selection, required, no custom answer. IDs must be unique within their request/question. An empty choices list is valid when custom answers are enabled (or the question is optional).
+
+```ts
+const chat = createAIChat({
+  async respond(request, writer) {
+    const question = writer.askQuestions({ questions: [{
+      id: 'format', text: 'Which export format?',
+      choices: [{ id: 'png', label: 'PNG' }, { id: 'gif', label: 'GIF' }],
+      allowCustom: true,
+    }] });
+    const result = await question.result;
+    if (result.status === 'cancelled' || request.signal.aborted) return;
+    // result.answers: [{ questionId, choiceIds, customText? }]
+    writer.message('Thanks for choosing an export format.');
+  },
+});
+```
+
+Single selection treats custom text as an alternative to a named choice. Multiple selection allows custom text alongside named choices. Submission is explicit; no option is automatically answered. Optional unanswered questions return an empty `choiceIds` array. Host integrations use `chat.resolveApproval(id, decision)`, `chat.answerQuestions(id, answers)`, and `chat.cancelInteraction(id)`; these are the same validated paths the UI uses, returning `false` for invalid, duplicate, stale or wrong-controller submissions. Unknown choices, duplicate IDs, and missing required answers never settle the request. Multiple requests can be pending independently. Stop, failure, clear and disposal settle outstanding promises as cancelled; the transcript retains resolved/cancelled cards until cleared. Answer snapshots and request schemas are copied independently.
+
+The host owns artifact URLs, authorization, and persistence. Keep a URL valid as long as any conversation or fork uses it; revoke object URLs only after removing those presentations. The component renders HTTP(S), blob URLs, and base64 PNG/JPEG/GIF/WebP/AVIF image data. Executable schemes and raw local file paths are not links. A native adapter must expose local files through an authorized asset transport. No automatic saving, downloading or uploading occurs.
+
+Each artifact card shows an image thumbnail or file icon, name, type and supplied size. Open uses the existing universal viewer content in a Frame dialog, with keyboard focus restored on close. Files load only when explicitly opened. Download saves the requested name; HTTP(S) sources are fetched into an owned Blob first so cross-origin links cannot replace the app. Preview/download follow browser CORS rules and have a 100 MB fetch limit. Failed downloads report an inline error; pending downloads and owned URLs are cleaned up on source change or unmount.
 
 `rewind(id)` previews editing a user message, retaining its replies until Send commits the replacement. Cancel with the same rewind button, the composer X, Escape, or `cancelRewind()`; the previous draft and attachments are restored. `fork(id)` returns an independent prefix snapshot ending at an assistant response. The `forge(messages, source)` event lets the host open it; the room does not manage sessions. The docs demo opens the forged snapshot in the same room.
 
-While rewinding, the composer shows a single-line preview of the original prompt. Click it to scroll back to that message; editing the draft does not change the preview. Message actions fade in on hover or keyboard focus and stay available on touch devices. Consecutive thinking parts share one compact muted accordion; consecutive message parts share one text block with paragraph spacing. Grouping affects only presentation, preserving the original part IDs and order for streaming updates.
+Each assistant turn begins with **Working for …** and an expanded work timeline containing thoughts, commentary, intermediate messages, activities and requests. Successful completion automatically collapses this history under **Worked for …**. Final messages and delivered artifacts stay visible below it. Click or keyboard-activate the summary to reopen the work; stopped and failed turns remain expanded with an explicit outcome. Completion does not invent a final answer when the provider supplies none.
+
+When a turn has no retained work (for example a short streamed answer with transient thoughts only), its duration is plain text with no empty disclosure. Commentary and intermediate messages share the normal foreground color. Activities use compact muted rows; their details and `FrameCodeBlock` output expand in place. `outputLanguage` defaults to `text` and can select a supported code language such as `html`, `json` or `bash`. Output is rendered as code, never executed as HTML. Group elapsed time spans the earliest activity start through the latest finish, including concurrent activity; running groups use the current clock and completed groups freeze their duration.
+
+Consecutive activities share an expandable group. Commentary, intermediate messages and input requests separate automatic groups. A group keeps its identity as output streams; operations in an earlier group can keep running after commentary starts a new group. Opening an individual activity shows its details and output. Running and failed/cancelled groups start expanded; successfully finished groups collapse and can be reopened.
+
+For explicit membership, call `const groupId = writer.activityGroup({ label: 'Project checks' })`, then `writer.activity({ label: 'Run tests', groupId })`. Named groups appear when created, including before their first activity. An activity assigned to a named group remains there, including when added after later commentary. Omit `groupId` for automatic grouping. Group IDs belong to the current turn; unknown or earlier-turn IDs are rejected. Updating an activity changes its details/output without moving it between groups. Snapshots retain group definitions and membership.
+
+Thoughts are provider-supplied reasoning summaries. Only one current thought is displayed, as a single changing line at the bottom of the live work. `thinking(text)` starts it and supersedes any previous thought, `updateThinking(id, text)` replaces its text, and `finishThinking(id)` clears it. Publishing a new commentary, activity, message, request or artifact also clears the current thought. Output/status updates to an existing activity leave it intact. Completion, stop and failure remove it; reopening completed work does not display old thoughts as permanent blocks. Raw thought records and timestamps remain available in source snapshots.
+
+Activities describe actions such as commands, searches and file edits; adapters translate provider-specific tool events into this common type. Raw part IDs and source chronology remain intact for adapters and snapshots. Copy includes final answer text only.
+
+While rewinding, the composer shows a single-line preview of the original prompt. Click it to scroll back to that message; editing the draft does not change the preview. Message actions fade in on hover or keyboard focus and stay available on touch devices.
 
 | Prop / event / slot | Behavior |
 | --- | --- |
@@ -216,3 +241,9 @@ The plus menu uses browser file and folder pickers. Selected `File` objects rema
 Run `bun run dev`, then open **Components → Features → AI chat** for the local streaming mock server. It returns a random sentence and a second message after simulated thinking. The endpoint also runs with `bun run preview`; static hosting needs its own backend. No AI credentials are used.
 
 Future candidates are terminal and file explorer features. Applications must supply process, model-provider, and filesystem adapters; Features should not start services or configure credentials.
+
+## Local AI agent connectors
+
+`createAgentChatSession(connection, options)` connects the existing AI chat controller to a native agent session. `createJsonLineAgentConnection(transport)` adapts a host-owned JSONL channel. Supported provider identifiers are `codex`, `claude`, `gemini`, `copilot`, and `opencode`; the native implementation is in the Frame Native companion's `agents` module. Claude uses the Python Agent SDK helper.
+
+See [agent connector integration](../../docs/guides/agent-connectors.md) for ownership, history scope, setup, and capability limits. Imports do not start processes or model requests. Render the returned chat explicitly; the factory does not register a shell view.

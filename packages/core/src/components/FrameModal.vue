@@ -9,7 +9,7 @@ import PanelActions from "./PanelActions.vue";
 import FrameIconButton from "./FrameIconButton.vue";
 import { insetOverlayBounds, intersectOverlayBounds, overlayLayerStyle, useOverlayBoundary, viewportBounds } from "../frame/overlays";
 
-const props = withDefaults(defineProps<{ title: string; icon?: Component; actions?: readonly PanelAction[]; bounds?: HTMLElement; active?: boolean; width?: number; height?: number; maximized?: boolean; layer?: number }>(), { active: true, layer: 0 });
+const props = withDefaults(defineProps<{ title: string; icon?: Component; actions?: readonly PanelAction[]; bounds?: HTMLElement; active?: boolean; width?: number; height?: number; minHeight?: number; maximized?: boolean; contentPadding?: number | string; draggable?: boolean; resizable?: boolean; maximizable?: boolean; layer?: number }>(), { active: true, layer: 0, draggable: true, resizable: true, maximizable: true });
 const emit = defineEmits<{ close: [] }>();
 // Frame restores focus when a presentation is disposed, not when another modal activates.
 const FrameFocusOwner = defineComponent({ setup() {
@@ -34,8 +34,8 @@ function measure() {
   layerBounds.value = requested ? intersectOverlayBounds(getBounds(), requested) : getBounds();
   const bounds = insetOverlayBounds(layerBounds.value);
   Object.assign(area, { x: bounds.left, y: bounds.top, width: bounds.width, height: bounds.height });
-  if (!initialized) { Object.assign(rect, initialModal(area, props.width, props.height)); initialized = true; }
-  else Object.assign(rect, fitModal(rect, area));
+  if (!initialized) { Object.assign(rect, initialModal(area, props.width, props.height, props.minHeight)); initialized = true; }
+  else Object.assign(rect, fitModal(rect, area, props.minHeight));
 }
 function focusInitial() { (dialog.value?.querySelector<HTMLElement>('[data-modal-autofocus], [autofocus], input:not(:disabled), textarea:not(:disabled), select:not(:disabled)') ?? dialog.value)?.focus(); }
 function escape(event: KeyboardEvent) {
@@ -56,26 +56,26 @@ function focusGuard(event: FocusEvent) {
   const target = event.target as HTMLElement;
   if (props.active && !dialog.value?.contains(target) && !target.closest('.frame-menu, .palette-backdrop') && !ownsPopup(target)) focusInitial();
 }
-function toggleMaximize() { stopGesture?.(); maximized.value = !maximized.value; }
+function toggleMaximize() { if (!props.maximizable) return; stopGesture?.(); maximized.value = !maximized.value; }
 function begin(event: PointerEvent, edge?: ModalEdge) {
-  if (!props.active || maximized.value || event.button !== 0) return;
+  if (!props.active || (edge ? !props.resizable : !props.draggable) || maximized.value || event.button !== 0) return;
   if (!edge && (event.target as HTMLElement).closest('button, input, a, select, textarea')) return;
   event.preventDefault(); stopGesture?.();
   const element = event.currentTarget as HTMLElement;
   element.setPointerCapture(event.pointerId);
   const origin = { ...rect }; const x = event.clientX, y = event.clientY;
-  function move(next: PointerEvent) { if (next.pointerId !== event.pointerId) return; Object.assign(rect, edge ? resizeModal(origin, edge, next.clientX - x, next.clientY - y, area) : fitModal({ ...origin, x: origin.x + next.clientX - x, y: origin.y + next.clientY - y }, area)); }
+  function move(next: PointerEvent) { if (next.pointerId !== event.pointerId) return; Object.assign(rect, edge ? resizeModal(origin, edge, next.clientX - x, next.clientY - y, area, props.minHeight) : fitModal({ ...origin, x: origin.x + next.clientX - x, y: origin.y + next.clientY - y }, area, props.minHeight)); }
   function finish(next: PointerEvent) { if (next.pointerId === event.pointerId) stopGesture?.(); }
   function cancel() { Object.assign(rect, origin); stopGesture?.(); }
   stopGesture = () => { element.removeEventListener("pointermove", move); element.removeEventListener("pointerup", finish); element.removeEventListener("pointercancel", cancel); element.removeEventListener("lostpointercapture", finish); if (element.hasPointerCapture(event.pointerId)) element.releasePointerCapture(event.pointerId); stopGesture = undefined; };
   element.addEventListener("pointermove", move); element.addEventListener("pointerup", finish); element.addEventListener("pointercancel", cancel); element.addEventListener("lostpointercapture", finish);
 }
 function headerKey(event: KeyboardEvent) {
-  if (!event.altKey || maximized.value || !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
+  if (!props.active || (event.shiftKey ? !props.resizable : !props.draggable) || !event.altKey || maximized.value || !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
   event.preventDefault(); event.stopPropagation();
   const dx = event.key === "ArrowLeft" ? -10 : event.key === "ArrowRight" ? 10 : 0;
   const dy = event.key === "ArrowUp" ? -10 : event.key === "ArrowDown" ? 10 : 0;
-  Object.assign(rect, event.shiftKey ? resizeModal(rect, "se", dx, dy, area) : fitModal({ ...rect, x: rect.x + dx, y: rect.y + dy }, area));
+  Object.assign(rect, event.shiftKey ? resizeModal(rect, "se", dx, dy, area, props.minHeight) : fitModal({ ...rect, x: rect.x + dx, y: rect.y + dy }, area, props.minHeight));
 }
 onMounted(() => {
   previousFocus = document.activeElement as HTMLElement; measure();
@@ -88,8 +88,8 @@ if (boundary) watch(boundary, measure);
 watch(() => props.active, async active => { if (active) { await nextTick(); focusInitial(); } });
 onBeforeUnmount(() => { stopGesture?.(); observer?.disconnect(); window.removeEventListener("resize", measure); document.removeEventListener("focusin", focusGuard); if (props.active) void nextTick(() => { if (previousFocus?.isConnected && !previousFocus.closest('[inert]')) previousFocus.focus(); }); });
 </script>
-<template><DialogRoot :open="active" :modal="false"><Teleport :to="target"><div class="frame-modal-layer" :style="layerStyle" :inert="!active || undefined" @contextmenu.prevent><div class="frame-modal-backdrop"/><DialogContent force-mount as-child :aria-describedby="undefined" @escape-key-down="escape" @pointer-down-outside.prevent @interact-outside.prevent @open-auto-focus.prevent="focusInitial" @close-auto-focus.prevent><section ref="dialog" :aria-modal="active ? true : undefined" tabindex="-1" class="frame-modal" :class="{ maximized }" :style="style">
-  <header class="frame-modal-header" tabindex="0" aria-label="Move or resize modal" @pointerdown="begin($event)" @dblclick.self="toggleMaximize" @keydown="headerKey"><component v-if="icon" :is="icon" class="modal-icon"/><DialogTitle as="h2" @dblclick="toggleMaximize">{{ title }}</DialogTitle><PanelActions :actions="actions"/><slot name="header-actions"/><FrameIconButton :label="maximized ? 'Restore modal' : 'Maximize modal'" :icon="maximized ? 'screen-normal' : 'screen-full'" tooltip-placement="bottom" @click="toggleMaximize"/><FrameIconButton label="Close modal" icon="close" @click="emit('close')"/></header>
-  <div class="frame-modal-content"><slot/></div>
-  <template v-if="!maximized"><div v-for="edge in (['n','s','e','w','ne','nw','se','sw'] as const)" :key="edge" class="modal-resize" :class="edge" aria-hidden="true" @pointerdown="begin($event, edge)"/></template>
+<template><DialogRoot :open="active" :modal="false"><Teleport :to="target"><div class="frame-modal-layer" :style="layerStyle" :inert="!active || undefined" @contextmenu.prevent><div class="frame-modal-backdrop"/><DialogContent force-mount as-child :aria-describedby="undefined" @escape-key-down="escape" @pointer-down-outside.prevent @interact-outside.prevent @open-auto-focus.prevent="focusInitial" @close-auto-focus.prevent><section ref="dialog" :aria-modal="active ? true : undefined" tabindex="-1" class="frame-modal" :class="{ maximized, 'no-drag': !draggable }" :style="style">
+  <header class="frame-modal-header" tabindex="0" :aria-label="draggable || resizable ? 'Move or resize modal' : title" @pointerdown="begin($event)" @dblclick.self="toggleMaximize" @keydown="headerKey"><component v-if="icon" :is="icon" class="modal-icon"/><DialogTitle as="h2" @dblclick="toggleMaximize">{{ title }}</DialogTitle><PanelActions :actions="actions"/><slot name="header-actions"/><FrameIconButton v-if="maximizable" :label="maximized ? 'Restore modal' : 'Maximize modal'" :icon="maximized ? 'screen-normal' : 'screen-full'" tooltip-placement="bottom" @click="toggleMaximize"/><FrameIconButton label="Close modal" icon="close" @click="emit('close')"/></header>
+  <div class="frame-modal-content" :style="{ padding: typeof contentPadding === 'number' ? `${contentPadding}px` : contentPadding }"><slot/></div><footer v-if="$slots.footer" class="frame-modal-footer"><slot name="footer"/></footer>
+  <template v-if="resizable && !maximized"><div v-for="edge in (['n','s','e','w','ne','nw','se','sw'] as const)" :key="edge" class="modal-resize" :class="edge" aria-hidden="true" @pointerdown="begin($event, edge)"/></template>
 </section></DialogContent></div><OverlayScrollbars :root="dialog"/></Teleport><FrameFocusOwner/></DialogRoot></template>

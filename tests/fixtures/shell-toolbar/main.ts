@@ -2,6 +2,7 @@ import {createApp,defineComponent,h,ref} from 'vue';
 import {createFrame,FrameShell} from '@frame/core';
 import '../../../packages/core/src/style.css';
 const frame=createFrame({navigation:true});
+(window as any).toolbarFixture = frame;
 frame.registerToolbarAction({id:'primary',label:'Custom action',run(){runs.value++;}});
 const runs=ref(0), mounted=ref(true);
 frame.registerSidePanel({id:'sample',label:'Sample',component:defineComponent({render:()=>h('p','Sample content')})});

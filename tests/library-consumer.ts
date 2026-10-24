@@ -1,6 +1,31 @@
 import { createNotificationHistory, NotificationPanel, NotificationIndicator } from "@frame/features";
+import { vscodeLight2026, vscodeHighContrastBlack, vscodeHighContrastWhite } from '@frame/themes';
+import { defineTheme, parseTheme, themeTokens, FrameThemeError, type FrameTheme, type FrameThemeTokenName, type FrameThemeTokens, type FrameThemeController } from '@frame/core';
+const themeToken: FrameThemeTokenName = '--frame-spacing-unit';
+const themeOverrides: Partial<FrameThemeTokens> = { [themeToken]: '5px' };
+const authoredTheme: FrameTheme = defineTheme({ version: 1, id: 'consumer', name: 'Consumer', appearance: 'dark', tokens: themeOverrides });
+const importedTheme = parseTheme(JSON.stringify(authoredTheme));
+void [themeTokens[themeToken].value, FrameThemeError, importedTheme];
+// @ts-expect-error Unknown tokens are rejected during typed authoring as well as import.
+const unknownThemeToken: FrameThemeTokenName = '--app-theme';
+void unknownThemeToken;
+import { themeFormats, parseThemeFile, type FrameThemeFormat, type FrameTokenPath, type FrameTokenTree } from '@frame/core';
+const tokenPath: FrameTokenPath = 'frame.text.input.padding';
+const tokenTree: FrameTokenTree = { frame: { text: { input: { padding: '24px' } } } };
+const tokenFormat: FrameThemeFormat = 'toml';
+const nestedTheme = defineTheme({ version: 1, id: 'nested', name: 'Nested', appearance: 'dark', tokens: tokenTree });
+const fileTheme = parseTheme('[frame.text.input]\npadding = "24px"', { format: tokenFormat });
+void [tokenPath, nestedTheme, fileTheme, themeFormats];
+void parseThemeFile(new File(['frame.accent: "#123456"'], 'theme.yaml'));
+// @ts-expect-error Token paths must exist in Frame's catalog.
+const unknownTokenPath: FrameTokenPath = 'frame.missing.token';
+void unknownTokenPath;
+import type { ToolbarPlacement, ToolbarItemId } from '@frame/core';
+const sidebarPlacement: ToolbarPlacement = { area: 'statusBar', side: 'left', order: -100 };
+const sidebarControl: ToolbarItemId = 'primary';
+void [sidebarPlacement, sidebarControl];
 import { Terminal, TerminalView, createTerminal, createTerminalView, type TerminalController, type TerminalProfile, type TerminalSessionLayout } from '@frame/features';
-import { AIChat, createAIChat, type ChatResponseWriter, type ChatMessage } from "@frame/features";
+import { AIChat, createAIChat, type ChatResponseWriter, type ChatMessage, type ChatQuestion, type ChatQuestionAnswer, type ChatApprovalResult, type ChatQuestionsResult } from "@frame/features";
 import { h } from "vue";
 import { CodeEditor, createCodeEditor, type CodeEditorOptions, type CodeEditorProps } from '@frame/features';
 const editorOptions: CodeEditorOptions = { fontSize: 15, wordWrap: 'on', tabSize: 2, minimap: { enabled: false } };
@@ -22,8 +47,35 @@ export function consumerFixture() {
   const conversation: ChatMessage[] = chat.fork("response");
   void [h(AIChat, { chat, userAlignment: "right", assistantAlignment: "left", onForge: (messages: ChatMessage[]) => { void messages; } }), conversation];
   chat.dispose();
-  const frame = createFrame({ settings: true, notifications: true, navigation: true });
-  const terminal: TerminalController = createTerminal({ profile: 'pwsh' });
+  const richChat = createAIChat({ async respond(request, writer) {
+    writer.commentary('Checking the request');
+    writer.message('An intermediate observation', { phase: 'intermediate' });
+    const groupId = writer.activityGroup({ label: 'Project checks' });
+    const activity = writer.activity({ label: 'Inspect files', output: 'Reading…', outputLanguage: 'text', groupId });
+    writer.updateActivity(activity, { output: 'Done' }); writer.finishActivity(activity);
+    const questions: ChatQuestion[] = [{ id: 'format', text: 'Format?', choices: [{ id: 'png', label: 'PNG' }], allowCustom: true, multiple: true }];
+    const question = writer.askQuestions({ text: 'Export options', questions });
+    const answers: ChatQuestionAnswer[] = [{ questionId: 'format', choiceIds: ['png'], customText: 'WebP' }];
+    richChat.answerQuestions(question.id, answers);
+    const result: ChatQuestionsResult = await question.result;
+    const approval = writer.requestApproval({ text: 'Export files?', detail: 'Writes to the export folder' });
+    richChat.resolveApproval(approval.id, 'allow');
+    const decision: ChatApprovalResult = await approval.result;
+    if (request.signal.aborted || result.status === 'cancelled' || decision.status === 'cancelled') return;
+    writer.artifact({ name: 'image.png', kind: 'image', url: 'https://example.com/image.png', mimeType: 'image/png', size: 1024 });
+    writer.complete();
+  } });
+  richChat.cancelInteraction('request'); richChat.clear(); richChat.dispose();
+  const frame = createFrame({ settings: true, notifications: true, navigation: true, theme: authoredTheme });
+  const themeController: FrameThemeController = frame.theme;
+  themeController.set(vscodeLight2026);
+  themeController.set(vscodeHighContrastBlack);
+  themeController.set(vscodeHighContrastWhite);
+  themeController.set(importedTheme);
+  const currentTheme: FrameTheme | null = themeController.current.value;
+  themeController.reset();
+  void currentTheme;
+  const terminal: TerminalController = createTerminal({ backend: { async profiles() { return []; }, async spawn() { return 'consumer'; }, async write() {}, async resize() {}, async close() {} }, profile: 'pwsh' });
   const terminalProfiles: readonly TerminalProfile[] = terminal.profiles.value;
   const sessionLayout: TerminalSessionLayout = 'tabs';
   frame.registerView(createTerminalView({ id: 'consumer.terminal', frame, terminal, sessionLayout }), 'bottom');
@@ -40,7 +92,7 @@ export function consumerFixture() {
   const grouped: SelectItem[] = [new SelectOption({ value: "one", label: "One" }), new SelectSeparator("group"), new SelectOption({ value: "two", label: "Two" })];
   void [FrameSlider, FrameColorPicker, FrameTextArea, grouped];
   const select = h(FrameSelect, { modelValue: "one", label: "Choice", options: [{ value: "one", label: "One" }] }); void select;
-  frame.registerActivityAction({ id: "home", label: "Home", run: frame.resetWorkspace });
+  frame.registerNavigationItem({ id: "home", type:"action", label: "Home", run: frame.resetWorkspace });
   const icon = h(FrameIcon, { pack: "codicon", name: "layout-panel-justify", size: 16 });
   void icon; void addCollection;
   const menu: FrameMenuItem[] = [
@@ -68,29 +120,29 @@ const exampleRange: DateRange = { start: exampleDay, end: exampleDay.add({ days:
 const exampleTimeRange: TimeRange = { start: new Time(9), end: new Time(17) };
 void [FrameAutocomplete, FrameCheckboxGroup, FrameCombobox, FrameEditable, FrameField, FrameForm, FrameLabel, FrameListbox, FrameNumberField, FramePinInput, FrameRadioGroup, FrameRating, FrameSwitch, FrameTagGroup, FrameTagsInput, FrameToggle, FrameToggleGroup, FrameCalendar, FrameRangeCalendar, FrameDateField, FrameDatePicker, FrameDateRangeField, FrameDateRangePicker, FrameTimeField, FrameTimeRangeField, FrameMonthPicker, FrameMonthRangePicker, FrameYearPicker, FrameYearRangePicker, FrameColorArea, FrameColorField, FrameColorSlider, FrameColorSwatch, FrameColorSwatchPicker, exampleRange, exampleTimeRange];
 
-import type { ToolbarControl, ToolbarOptions, ActivityItemKey, ActivityOptions, ActivityBarPosition, ActivityBarSize } from '@frame/core';
-const activityKey: ActivityItemKey = { kind:'view', id:'consumer.details' };
-const activityOptions: ActivityOptions = { position:'top', size:'compact', hidden:[activityKey] };
+import type { ToolbarControl, ToolbarOptions,  PrimaryViewBarOptions, ViewBarPosition, ViewBarSize } from '@frame/core';
+const viewId = 'consumer.details';
+const activityOptions: PrimaryViewBarOptions = { position:'top', size:'compact', hidden:[viewId] };
 const toolbarOptions: ToolbarOptions = { primary:true };
 const toolbarControl: ToolbarControl = 'bottom';
-const chromeFrame=createFrame({activity:activityOptions,toolbar:toolbarOptions});
+const chromeFrame=createFrame({primaryViewBar:activityOptions,toolbar:toolbarOptions});
 chromeFrame.toolbar.setVisible(toolbarControl,true);
 chromeFrame.toolbar.setActionVisible('consumer.action',true);
-chromeFrame.activity.setVisible(activityKey,false);
-chromeFrame.activity.setBadge(activityKey,4);
-chromeFrame.activity.setBadgeVisible(activityKey,false);
-const consumerPosition:ActivityBarPosition='bottom';
-const consumerActivitySize:ActivityBarSize='compact';
-chromeFrame.activity.setPosition(consumerPosition);
-chromeFrame.activity.setSize(consumerActivitySize);
-chromeFrame.activity.movePrimarySide('right');
-const currentActivityPosition:ActivityBarPosition=chromeFrame.activity.position.value;
-const currentActivitySize:ActivityBarSize=chromeFrame.activity.size.value;
+chromeFrame.primaryViewBar.setVisible(viewId,false);
+chromeFrame.primaryViewBar.setBadge(viewId,4);
+chromeFrame.primaryViewBar.setBadgeVisible(viewId,false);
+const consumerPosition:ViewBarPosition='bottom';
+const consumerActivitySize:ViewBarSize='compact';
+chromeFrame.primaryViewBar.setPosition(consumerPosition);
+chromeFrame.primaryViewBar.setSize(consumerActivitySize);
+chromeFrame.primaryViewBar.movePrimarySide('right');
+const currentActivityPosition:ViewBarPosition=chromeFrame.primaryViewBar.position.value;
+const currentActivitySize:ViewBarSize=chromeFrame.primaryViewBar.size.value;
 void [currentActivityPosition,currentActivitySize];
 // @ts-expect-error Position must be a supported literal.
-chromeFrame.activity.setPosition('floating');
+chromeFrame.primaryViewBar.setPosition('floating');
 // @ts-expect-error Activity size is independent of arbitrary CSS sizes.
-chromeFrame.activity.setSize('large');
+chromeFrame.primaryViewBar.setSize('large');
 chromeFrame.dispose();
 
 const visibilityConsumer = createFrame();
@@ -101,16 +153,27 @@ visibilityConsumer.setViewVisible('visibility.child',!childVisible);
 visibilityConsumer.setViewVisible('visibility.child','none');
 unregisterVisibility();visibilityConsumer.dispose();
 
-const matchingSidebars = createFrame({activity:{position:'top',display:'both'},secondaryBar:{position:'default',display:'icons'}});
-matchingSidebars.activity.setDisplay('text');
-matchingSidebars.secondaryBar.setPosition('bottom');
-matchingSidebars.secondaryBar.setDisplay('both');
+const matchingSidebars = createFrame({primaryViewBar:{position:'top',display:'both'},secondaryViewBar:{position:'default',display:'icons'}});
+matchingSidebars.primaryViewBar.setDisplay('text');
+matchingSidebars.secondaryViewBar.setPosition('bottom');
+matchingSidebars.secondaryViewBar.setDisplay('both');
 matchingSidebars.closeSecondaryPanel();
 // @ts-expect-error An activity display is a fixed presentation mode.
-matchingSidebars.activity.setDisplay('labels');
+matchingSidebars.primaryViewBar.setDisplay('labels');
 matchingSidebars.dispose();
 
 // Quick input is always searched; custom content uses the separate quick panel.
 import { FrameQuickInput, FrameQuickPanel } from '@frame/core';
 void h(FrameQuickInput,{items:[{id:'open',label:'Open workspace'}],title:'Choose command',position:'center',onAccept:(id:string)=>{void id;},onClose:()=>{}},{item:({item}:{item:{label:string}})=>item.label});
 void h(FrameQuickPanel,{title:'Workspace summary',position:'top',onClose:()=>{}},{default:()=>h('p','Workspace content'),'header-actions':()=>h(FrameButton,{label:'Done'})});
+
+// Quick input and extension command contributions use the public package declarations.
+const quickInputFrame = createFrame();
+quickInputFrame.registerCommand({ id: 'extension.preferences', label: 'Extension preferences', icon: 'settings-gear', scope: 'frame', shortcut: 'Ctrl+Shift+Y', quickInput: true, run() {} });
+quickInputFrame.openQuickInput('application');
+quickInputFrame.setQuickInputMode('frame');
+quickInputFrame.openCommands();
+const availableThemes: readonly FrameTheme[] = quickInputFrame.theme.available.value;
+const removeQuickTheme: () => void = quickInputFrame.theme.register(authoredTheme);
+void [availableThemes, removeQuickTheme];
+quickInputFrame.dispose();

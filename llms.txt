@@ -1,0 +1,73 @@
+# Frame
+
+> A Vue and TypeScript application framework with a persistent workbench shell, reusable themed controls, and optional features. A root Frame instance coordinates the shell; the host application supplies content and business logic.
+
+Read Getting started, Frame configuration, and the guide for the area being changed. Links are relative to this repository root. This index points to existing Markdown documentation; it does not replace the installed package's TypeScript declarations.
+
+Use public imports from `@frame/core` and `@frame/features`. Create one stable `createFrame()` instance per shell and render it with `FrameShell`. Use instance APIs for shell behavior; ordinary controls work without a Frame instance. The host owns domain state, backend adapters, credentials, and persistence. Registration, opening, hiding, and disposal are distinct operations.
+
+The packages are currently private and installed locally. The proposed `.use(feature)` installer and `frame.views.primarySidebar` namespaces are not implemented. Optional Features currently use explicit factories and components. Reka UI provides underlying primitives, but its full API is not automatically exposed by Frame wrappers. Component documentation is being expanded; verify anatomy, forwarded attributes, and unsupported capabilities against the implementation when needed.
+
+## Start here
+
+- [Documentation index](docs/README.md): Reading order and topic map for library consumers.
+- [Getting started](docs/guides/getting-started.md): Build and install local packages, mount a shell, and create a small application.
+- [Frame configuration](docs/configuration/frame-options.md): Creation options, defaults, runtime controls, and FrameShell props and slots.
+- [Existing applications](docs/guides/existing-app.md): Integrate with host routing, stores, styles, and browser or Tauri applications.
+- [Package responsibilities](docs/reference/packages.md): Core, Features, Tailwind, documentation, and resource ownership.
+
+## Shell
+
+- [Contribution map](docs/shell/README.md): Choose a sidebar, panel, workspace, navigation item, menu, toolbar, status item, or service.
+- [Views and sidebars](docs/shell/views.md): Register content, pass props, group views, open, hide, move, and unregister.
+- [View bars](docs/shell/view-bars.md): Configure selectors for primary, secondary, and panel views.
+- [Navigation bar](docs/shell/navigation-bar.md): Register actions, links, dropdowns, and separators.
+- [Menus and toolbar](docs/shell/menus-and-toolbar.md): Contribute command menus and title-bar actions.
+- [Status bar](docs/shell/status-bar.md): Register footer contributions and update centered status messages.
+- [Commands](docs/shell/commands.md): Register actions, shortcuts, quick picks, and navigation history.
+- [Workspace](docs/shell/workspace.md): Supply screen content, split panes, create document tabs, and configure lifecycle policies.
+- [Shell services](docs/shell/services.md): Present banners, modals, settings, notifications, and custom overlays.
+- [Layout](docs/configuration/layout.md): Control visibility, placement, dimensions, density, Zen, and overlay boundaries.
+
+## Form components
+
+- [Component index](docs/components/README.md): Available Markdown references and documentation scope.
+- [FrameLabel](docs/components/forms/label.md): Associate visible text with a control.
+- [FrameTextInput](docs/components/forms/text-input.md): Single-line input, native attributes, numeric values, and focus access.
+- [FrameTextArea](docs/components/forms/text-area.md): Multiline plain text, native attributes, resizing, and focus access.
+- [FrameCheckbox](docs/components/forms/checkbox.md): Boolean checkbox, inline labels, native form attributes, and wrapper limitations.
+- [FrameSwitch](docs/components/forms/switch.md): Boolean on/off setting, inline labels, native form attributes, and styling.
+- [FrameSelect](docs/components/forms/select.md): Single string selection, options, separators, descriptions, and native form helpers.
+- [FrameNumberField](docs/components/forms/number-field.md): Numeric editing, stepping, formatting, bounds, empty values, and native form behavior.
+- [FrameRadioGroup](docs/components/forms/radio-group.md): Single string selection, generated options, roving focus, and internal indicator APIs.
+- [FrameCheckboxGroup](docs/components/forms/checkbox-group.md): String-array selection, selection limits, group semantics, and native form serialization.
+- [FramePinInput](docs/components/forms/pin-input.md): Code cells, string-array models, masking, OTP hints, completion, and keyboard behavior.
+- [FrameTagsInput](docs/components/forms/tags-input.md): Committed string tags, delimiters, forwarded events, keyboard removal, and part APIs.
+- [FrameAutocomplete](docs/components/forms/autocomplete.md): Free text, suggestion filtering, popup lifecycle, and inherited Reka APIs.
+- [FrameCombobox](docs/components/forms/combobox.md): Searchable single string selection, input attribute routing, and native form helpers.
+- [FrameEditable](docs/components/forms/editable.md): Inline editing, draft commit/cancellation, and internal preview/input parts.
+- [FrameField](docs/components/forms/field.md): Control composition, accessible metadata, validation timing, and error messages.
+- [FrameForm](docs/components/forms/form.md): Registered values, validation gating, submission events, reset, and server errors.
+- [FrameListbox](docs/components/forms/listbox.md): Visible string choices, multiple selection, keyboard navigation, and composition limits.
+- [FrameRating](docs/components/forms/rating.md): Fractional scores, hover previews, clearing, and indicator content.
+- [FrameSlider](docs/components/forms/slider.md): Single numeric model, bounds, thumb attributes, and submission helpers.
+- [FrameTagGroup](docs/components/forms/tag-group.md): Host-owned tags, selection modes, and explicit removal handling.
+- [FrameToggle](docs/components/forms/toggle.md): Boolean pressed state, button content, and native accessibility semantics.
+- [FrameToggleGroup](docs/components/forms/toggle-group.md): Generated toggle buttons, model-based selection modes, and roving focus.
+
+## Styling and optional packages
+
+- [Theme tokens](docs/styling/theme-variables.md): Shared and component tokens, CSS variables, validation and precedence.
+- [Theme files](docs/styling/theme-files.md): JSON, JSONC, JSON5, YAML, TOML and INI imports; nested/dotted token paths.
+- [Features](packages/features/README.md): Explicit setup for notification history, viewer, editor, chat, and native terminal integrations.
+- [Tailwind](packages/tailwind/README.md): Optional build integration; not a runtime Frame capability.
+
+## Optional
+
+- [Contributor instructions](AGENTS.md): Rules for modifying Frame itself rather than consuming it in another application.
+- [Third-party notices](docs/licenses/THIRD_PARTY_NOTICES.md): License information for distributed dependencies and assets.
+
+- [Host integration](docs/guides/hosts.md): browser, Tauri and Electron contracts, capabilities and migration.
+## File selection
+
+- [File upload and drop zone](docs/components/forms/file-upload.md): Standalone picker, validation, and visible or invisible file drop targets.

@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import { defineComponent, h, onBeforeUnmount, onMounted, ref } from 'vue';
+import { defineComponent, h, onBeforeUnmount, ref } from 'vue';
 import { createFrame, FrameShell, FrameButton, FrameTextInput, FrameIcon, useFrame } from '@frame/core';
 import '@frame/core/style.css';
-import { invoke, isTauri } from '@tauri-apps/api/core';
-import { getCurrentWindow } from '@tauri-apps/api/window';
 
 const frame = createFrame({ settings: true, notifications: true });
 const name = ref('External application');
 const count = ref(0);
-const nativeResult = ref('Browser preview');
+const nativeResult = ref('Browser application');
 const Navigation = defineComponent({
   setup() {
     const injected = useFrame();
@@ -25,40 +23,6 @@ frame.registerSettingsSection({ id: 'consumer', title: 'Host preferences', setti
 function notify() { frame.notify({ title: 'Host notification', severity: 'success', details: 'Created by the external application', duration: 0 }); }
 function openModal() { frame.openModal({ id: 'consumer.modal', title: 'Host dialog', component: defineComponent({ render: () => h('p', 'External modal content') }) }); }
 onBeforeUnmount(() => frame.dispose());
-onMounted(async () => {
-  if (!isTauri()) return;
-  const checks: string[] = [];
-  try {
-    nativeResult.value = await invoke<string>('consumer_ping');
-    if (nativeResult.value !== 'External Rust host connected') throw new Error('Rust command response mismatch');
-    checks.push('host Rust command');
-    const win = getCurrentWindow();
-    await win.isMaximized();
-    await win.isFullscreen();
-    checks.push('native window state');
-    await win.toggleMaximize();
-    await win.toggleMaximize();
-    await win.setFullscreen(true);
-    await win.setFullscreen(false);
-    await win.minimize();
-    await win.unminimize();
-    checks.push('maximize/fullscreen/minimize permissions');
-    await frame.executeCommand('consumer.increment');
-    if (count.value !== 1) throw new Error('Host command did not run');
-    checks.push('host command');
-    if (!document.querySelector('[data-testid="consumer-sidebar"]')) throw new Error('Host sidebar missing');
-    if (!document.querySelector('.frame-button')) throw new Error('Frame controls missing');
-    const background = getComputedStyle(document.querySelector('.workbench')!).backgroundColor;
-    if (background === 'rgba(0, 0, 0, 0)') throw new Error('Frame stylesheet missing');
-    checks.push('mounted shell, host view, controls and stylesheet');
-    if (new URLSearchParams(location.search).has('nativeTest')) {
-      await invoke('consumer_complete', { result: { ok: true, checks } });
-    }
-  } catch (error) {
-    nativeResult.value = String(error);
-    if (new URLSearchParams(location.search).has('nativeTest')) await invoke('consumer_complete', { result: { ok: false, checks, error: String(error) } });
-  }
-});
 </script>
 <template>
   <FrameShell :frame="frame" title-text="External consumer">

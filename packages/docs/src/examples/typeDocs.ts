@@ -385,7 +385,36 @@ typeDocs.FrameOptions = {
     { name: 'settings', type: 'boolean', description: 'Enable built-in Settings UI. Default true.' },
     { name: 'notifications', type: 'boolean', description: 'Enable transient notifications. Default true.' },
     { name: 'toolbar', type: 'ToolbarOptions', reference: 'ToolbarOptions', description: 'Initial title-bar control visibility; runtime changes use frame.toolbar.' },
-    { name: 'activity', type: 'ActivityOptions', reference: 'ActivityOptions', description: 'Initial activity position, size, hidden items and badges; runtime changes use frame.activity.' },
+    { name: 'primaryViewBar', type: 'PrimaryViewBarOptions', reference: 'PrimaryViewBarOptions', description: 'Initial view-bar position, size, hidden items and badges; runtime changes use frame.primaryViewBar.' },
+    { name: 'secondaryViewBar', type: 'SecondaryViewBarOptions', reference:'SecondaryViewBarOptions', description:'Initial secondary view-bar display, size, position, and item visibility.' },
+    { name: 'panelViewBar', type: 'PanelViewBarOptions', reference:'PanelViewBarOptions', description:'Panel view-item presentation, independent of its container.' },
+    { name: 'navigationBar', type: 'boolean | NavigationBarOptions', reference:'NavigationBarOptions', description:'Optional navigation-only bar; supports all four docking edges.' },
+    { name: 'status', type: 'StatusOptions', reference: 'StatusOptions', description: 'Initial status text, bar visibility, hidden items and hidden badges; runtime changes use frame.status.' },
+  ],
+};
+
+typeDocs.StatusOptions = {
+  description: 'Initial presentation for the three-section status bar owned by a Frame instance.',
+  code: "const frame = createFrame({ status: { message: 'Ready', visible: true, hidden: ['app.version'], hiddenBadges: [] } });",
+  properties: [
+    { name: 'message', type: 'string', description: 'Initial persistent center text. Defaults to Ready.' },
+    { name: 'visible', type: 'boolean', description: 'Initial status-bar visibility. Defaults to true.' },
+    { name: 'hidden', type: 'readonly string[]', description: 'Ids whose item presentation starts hidden.' },
+    { name: 'hiddenBadges', type: 'readonly string[]', description: 'Ids whose badges start hidden.' },
+  ],
+};
+typeDocs.StatusController = {
+  description: 'Frame-owned text/button registration, side placement and centered application status.',
+  code: "frame.status.register({ id: 'app.save', kind: 'button', label: 'Save', text: 'Save', side: 'right', run: save });\nframe.status.set('Saving document');\nframe.status.show('Could not save', { severity: 'error', duration: 4000 });",
+  properties: [
+    { name: 'register', type: '(item: StatusItemDefinition) => () => void', description: 'Register a text or button item and return an idempotent disposer.' },
+    { name: 'update', type: '(id: string, patch: StatusItemUpdate) => boolean', description: 'Update an item; getter-backed values remain owned by their source.' },
+    { name: 'move', type: '(id: string, side: "left" | "right") => boolean', description: 'Move a side item without replacing its registration.' },
+    { name: 'setVisible / setBadgeVisible', type: '(id: string, visible: boolean) => boolean', description: 'Control item and badge presentation independently.' },
+    { name: 'set', type: '(text: string) => void', description: 'Update the persistent center status.' },
+    { name: 'show', type: '(text: string, options?: StatusMessageOptions) => () => void', description: 'Show temporary status text. Defaults to 4000 ms, then restores the persistent status.' },
+    { name: 'clear', type: '() => void', description: 'Clear persistent and temporary status text.' },
+    { name: 'setBarVisible', type: '(visible: boolean) => boolean', description: 'Show or hide the entire status bar through its existing layout state.' },
   ],
 };
 
@@ -413,37 +442,59 @@ typeDocs.ToolbarOptions = {
  code: "const frame = createFrame({ toolbar: { primary: true, commandCenter: false } });\nframe.toolbar.setVisible('bottom', true);",
  properties: ['customize','primary','bottom','secondary','commandCenter','layoutControls'].map(name=>({name,type:'boolean',description:'Whether this title-bar control is rendered; hiding it does not disable its command.'})),
 };
-typeDocs.ActivityOptions = {
- description: 'Initial activity presentation and contribution visibility, scoped to the Frame instance.',
- code: "const frame = createFrame({ activity: { position: 'top', size: 'compact' } });\nframe.activity.setPosition('bottom');\nframe.activity.setSize('default');\nframe.activity.movePrimarySide('right');",
- properties: [
-  {name:'position',type:'ActivityBarPosition',reference:'ActivityBarPosition',description:'Initial placement or hidden state; defaults to default.'},
-  {name:'size',type:'ActivityBarSize',reference:'ActivityBarSize',description:'Initial item size; defaults to default. Independent of position and shell density.'},
-  ...['hidden','hiddenBadges'].map(name=>({name,type:"readonly { kind: 'view' | 'action'; id: string }[]",description:'Contributions whose activity item or badge begins hidden.'})),
+typeDocs.PrimaryViewBarOptions = {
+ description: 'Initial view-bar presentation and contribution visibility, scoped to the Frame instance.',
+ code: "const frame = createFrame({ primaryViewBar: { position: 'top', size: 'compact' } });\nframe.primaryViewBar.setPosition('bottom');\nframe.primaryViewBar.setSize('default');\nframe.primaryViewBar.movePrimarySide('right');",
+ properties: [{name:'allowAddSeparator',type:'boolean',description:'Opt-in user separator creation; defaults to false.'},
+  {name:'position',type:'ViewBarPosition',reference:'ViewBarPosition',description:'Initial placement or hidden state; defaults to default.'},
+  {name:'size',type:'ViewBarSize',reference:'ViewBarSize',description:'Initial item size; defaults to default. Independent of position and shell density.'},
+  ...['hidden','hiddenBadges'].map(name=>({name,type:"readonly string[]",description:'Contributions whose view item or badge begins hidden.'})),
  ],
 };
-typeDocs.ActivityBarPosition = {
- description: 'Activity-bar placement or visibility selected through options or frame.activity.setPosition.',
- code: "import type { ActivityBarPosition } from '@frame/core';\nconst position: ActivityBarPosition = 'top';\nframe.activity.setPosition(position);",
+typeDocs.ViewBarPosition = {
+ description: 'View-bar placement or visibility selected through options or frame.primaryViewBar.setPosition.',
+ code: "import type { ViewBarPosition } from '@frame/core';\nconst position: ViewBarPosition = 'top';\nframe.primaryViewBar.setPosition(position);",
  properties: [
-  {name:'default',type:'literal',description:'Normal activity rail placement.'},
-  {name:'top / bottom',type:'literal',description:'Horizontal activity placement.'},
-  {name:'hidden',type:'literal',description:'Hide through layout.activityBarVisible while retaining the last visible position.'},
+  {name:'default',type:'literal',description:'Normal view bar placement.'},
+  {name:'top / bottom',type:'literal',description:'Horizontal view-bar placement.'},
+  {name:'hidden',type:'literal',description:'Hide through layout.primaryViewBarVisible while retaining the last visible position.'},
  ],
 };
-typeDocs.ActivityBarSize = {
- description: 'Activity item size, independent of activity placement and overall shell density.',
- code: "import type { ActivityBarSize } from '@frame/core';\nconst size: ActivityBarSize = 'compact';\nframe.activity.setSize(size);",
- properties: [{name:'default / compact',type:'literal',description:'Normal or compact activity item sizing.'}],
+typeDocs.ViewBarSize = {
+ description: 'View item size, independent of view-bar placement and overall shell density.',
+ code: "import type { ViewBarSize } from '@frame/core';\nconst size: ViewBarSize = 'compact';\nframe.primaryViewBar.setSize(size);",
+ properties: [{name:'default / compact',type:'literal',description:'Normal or compact view item sizing.'}],
 };
-typeDocs.ActivityController = {
- description: 'Per-instance activity presentation, visibility, and badge controls.',
- code: "frame.activity.setPosition('top');\nframe.activity.setSize('compact');\nframe.activity.movePrimarySide('right');\nconst position = frame.activity.position.value;",
+typeDocs.PrimaryViewBarController = {
+ description: 'Per-instance view-bar presentation, visibility, and badge controls.',
+ code: "frame.primaryViewBar.setPosition('top');\nframe.primaryViewBar.setSize('compact');\nframe.primaryViewBar.movePrimarySide('right');\nconst position = frame.primaryViewBar.position.value;",
  properties: [
-  {name:'position / size',type:'ComputedRef<ActivityBarPosition> / ComputedRef<ActivityBarSize>',description:'Reactive current presentation. Read .value in script.'},
-  {name:'setPosition',type:'(position: ActivityBarPosition) => boolean',reference:'ActivityBarPosition',description:'Change placement or hide; non-hidden positions show the bar.'},
-  {name:'setSize',type:'(size: ActivityBarSize) => boolean',reference:'ActivityBarSize',description:'Change only activity item size.'},
-  {name:'movePrimarySide',type:"(side: 'left' | 'right') => boolean",description:'Move the primary sidebar and activity presentation together.'},
+  {name:'position / size',type:'ComputedRef<ViewBarPosition> / ComputedRef<ViewBarSize>',description:'Reactive current presentation. Read .value in script.'},
+  {name:'setPosition',type:'(position: ViewBarPosition) => boolean',reference:'ViewBarPosition',description:'Change placement or hide; non-hidden positions show the bar.'},
+  {name:'setSize',type:'(size: ViewBarSize) => boolean',reference:'ViewBarSize',description:'Change only view item size.'},
+  {name:'movePrimarySide',type:"(side: 'left' | 'right') => boolean",description:'Move the primary sidebar and view-bar presentation together.'},
   {name:'setVisible / setBadgeVisible / setBadge',type:'methods',description:'Control registered contributions by their view/action key; hiding does not dispose content.'},
  ],
+};
+
+
+typeDocs.NavigationItem = {
+ description:'A navigation-only union: action, link, dropdown, or separator. Navigation items never own sidebar/panel content.',
+ code:"frame.registerNavigationItem({ id: 'home', type: 'link', label: 'Home', href: '#/home' });",
+ properties:[{name:'type',type:"'action' | 'link' | 'dropdown' | 'separator'",description:'Explicit behavior discriminator.'},{name:'id',type:'string',description:'Unique throughout one navigation tree; separate from view ids.'},{name:'run',type:'() => void | Promise<void>',description:'Required only for an action.'},{name:'href / onNavigate',type:'string / optional callback',description:'A link destination and optional host router integration.'},{name:'items',type:'readonly NavigationItem[]',description:'Required for dropdowns; nested dropdowns are supported.'}],
+};
+typeDocs.NavigationBarOptions = {
+ description:'Initial optional navigation-bar presentation and docking.',
+ code:"const frame = createFrame({ navigationBar: { position: 'left', display: 'both', size: 'compact' } });",
+ properties:[{name:'allowAddSeparator',type:'boolean',description:'Opt-in user separator creation; defaults to false.'},{name:'collapsed',type:'boolean',description:'Independent collapsed state for vertical icons-and-text navigation; defaults false.'},{name:'position',type:"'top' | 'bottom' | 'left' | 'right'",description:'Dock outside the entire workbench body; defaults to top.'},{name:'visible',type:'boolean',description:'An options object shows the bar unless false.'},{name:'display',type:"'icons' | 'text' | 'both'",description:'Works in every docking orientation.'},{name:'justification',type:"'left' | 'center' | 'right'",description:'Side-docked item alignment; defaults to left on either side. Also controlled by setJustification.'},{name:'size',type:"'default' | 'compact'",description:'Independent of overall shell density.'},{name:'hidden / hiddenBadges',type:'readonly string[]',description:'Initial navigation-item presentation preferences.'}],
+};
+typeDocs.PanelViewBarOptions = {
+ description:'Presentation of panel view items, separate from panel docking/alignment.',
+ code:"const frame = createFrame({ panelViewBar: { visible: true, size: 'compact', display: 'both' } });",
+ properties:[{name:'allowAddSeparator',type:'boolean',description:'Opt-in user separator creation; defaults to false.'},{name:'visible',type:'boolean',description:'Hides only the selector when false; retains panel content.'},{name:'size',type:"'default' | 'compact'",description:'Panel view-bar item size.'},{name:'display',type:"'icons' | 'text' | 'both'",description:'Panel view-item display.'},{name:'hidden / hiddenBadges',type:'readonly string[]',description:'Initial view-item or badge visibility.'}],
+};
+typeDocs.SecondaryViewBarOptions = {
+ description:'Initial secondary sidebar view-bar presentation and item preferences.',
+ code:"const frame = createFrame({ secondaryViewBar: { position: 'top', display: 'both', size: 'default' } });",
+ properties:[{name:'allowAddSeparator',type:'boolean',description:'Opt-in user separator creation; defaults to false.'},{name:'position',type:'ViewBarPosition',reference:'ViewBarPosition',description:'Defaults to top; default follows the outer sidebar edge.'},{name:'display',type:"'icons' | 'text' | 'both'",description:'Available in vertical and horizontal placements.'},{name:'size',type:'ViewBarSize',reference:'ViewBarSize',description:'Independent default or compact item sizing.'},{name:'hidden / hiddenBadges',type:'readonly string[]',description:'Initial secondary-view or badge visibility.'}],
 };

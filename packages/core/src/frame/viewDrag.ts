@@ -1,3 +1,5 @@
+import {startPointerDrag} from "./pointerDrag";
+import { barGapAt,barGapMarker } from "./barInsertion";
 import { reactive } from "vue";
 import type { ViewDefinition, ViewRegion } from "../types";
 export interface DropMarker { left: number; top: number; width: number; height: number; kind: "insert" | "inside" }
@@ -25,10 +27,10 @@ export function createViewDrag(context: {
     const shell = (event.currentTarget as HTMLElement).closest<HTMLElement>(".workbench");
     if (!shell || !view || event.button !== 0 || !context.enabled(region) || view.draggable === false) return;
     stop?.();
-    const startX = event.clientX, startY = event.clientY;
+
     let hoverKey = "";
     let timer: ReturnType<typeof setTimeout> | undefined;
-    let point = { x: startX, y: startY };
+    let point = { x: event.clientX, y: event.clientY };
     function cancelHover() { clearTimeout(timer); timer = undefined; hoverKey = ""; }
     function schedule(key: string, action: () => void, delay: number) {
       if (key === hoverKey) return;
@@ -65,7 +67,11 @@ export function createViewDrag(context: {
       const parent = collection?.dataset.viewParent;
       if (!context.canMove(id, destination, parent)) return;
       const list = hit.closest<HTMLElement>("[data-view-axis]");
-      if (list && item && list.contains(item)) {
+      const barList = hit.closest<HTMLElement>('.bar-drop-list') ?? (list?.matches?.('.view-bar') ? list.querySelector<HTMLElement>('.bar-drop-list') : null);
+      const gap = barList && barGapAt(barList, barList.dataset.barAxis === 'x' ? 'x' : 'y', barList.dataset.barAxis === 'x' ? point.x : point.y);
+      if (gap) {
+        state.drop = {region:destination,before:gap.before,marker:barGapMarker(gap,barList!.dataset.barAxis==='x'?'x':'y')};
+      } else if (list && item && list.contains(item)) {
         const axis = list.dataset.viewAxis;
         const box = item.getBoundingClientRect();
         const after = axis === "x" ? point.x > box.left + box.width / 2 : point.y > box.top + box.height / 2;
@@ -97,31 +103,12 @@ export function createViewDrag(context: {
         state.drop = { region: destination, marker: { kind: "inside", left: bounds.left + 2, top: bounds.top + 2, width: Math.max(0, bounds.width - 4), height: Math.max(0, bounds.height - 4) } };
       }
     }
-    function move(next: PointerEvent) {
-      if (next.pointerId !== event.pointerId) return;
-      if (!state.active && Math.hypot(next.clientX - startX, next.clientY - startY) < 5) return;
-      state.active = true; state.id = id; state.x = next.clientX; state.y = next.clientY;
-      point = { x: next.clientX, y: next.clientY }; next.preventDefault(); update();
-    }
-    function finish(next: PointerEvent) {
-      if (next.pointerId !== event.pointerId) return;
-      if (state.active) {
-        point = { x: next.clientX, y: next.clientY }; update();
-        const drop = state.drop;
-        if (drop) { context.reveal(drop.region); context.move(id, drop.region, drop.before, drop.parent); }
-        window.addEventListener("click", suppressClick, { capture: true, once: true });
-        setTimeout(() => window.removeEventListener("click", suppressClick, true), 0);
-      }
-      stop?.();
-    }
-    function suppressClick(next: MouseEvent) { next.preventDefault(); next.stopPropagation(); }
-    function cancel() { stop?.(); }
-    function key(next: KeyboardEvent) { if (next.key === "Escape") { next.preventDefault(); next.stopPropagation(); cancel(); } }
-    stop = () => {
-      cancelHover(); state.active = false; state.id = ""; state.drop = null;
-      window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", finish); window.removeEventListener("pointercancel", cancel); window.removeEventListener("keydown", key); window.removeEventListener("blur", cancel); window.removeEventListener("scroll", update, true); window.removeEventListener("resize", update); stop = undefined;
-    };
-    window.addEventListener("pointermove", move, { passive: false }); window.addEventListener("pointerup", finish); window.addEventListener("pointercancel", cancel); window.addEventListener("keydown", key); window.addEventListener("blur", cancel); window.addEventListener("scroll", update, true); window.addEventListener("resize", update);
+    stop = startPointerDrag(event,{
+      scope:shell,
+      move(next){state.active=true;state.id=id;state.x=next.x;state.y=next.y;point=next;update();},
+      drop(){const drop=state.drop;if(drop){context.reveal(drop.region);context.move(id,drop.region,drop.before,drop.parent);}},
+      end(){cancelHover();state.active=false;state.id='';state.drop=null;stop=undefined;},
+    });
   }
   return { state, begin, cancel: () => stop?.() };
 }

@@ -1,6 +1,14 @@
 export { createFrame, useFrame } from "./createFrame";
+export type { CommandHookEvent, CommandHookListener } from './commands';
+export { defineTheme, parseTheme, parseThemeFile, FrameThemeError } from '../themes/theme';
+export type { FrameTheme, FrameThemeFile, FrameThemeDefinition, FrameTokenTree, FrameThemeFormat, ParseThemeOptions, FrameThemeTokens, FrameThemeTokenName } from '../themes/theme';
+export { themeFormats } from '../themes/formats';
+export type { FrameTokenPath } from '../themes/tokens';
+export type { FrameThemeController } from '../themes/controller';
+export { themeTokens } from '../themes/tokens';
 export type { Frame } from "./createFrame";
-export type { Command, PanelDefinition, SidePanelDefinition, QuickPickItem, QuickPickOptions } from "../types";
+export type { StatusController, StatusItemDefinition, StatusItem, StatusItemUpdate, StatusOptions, StatusSide, StatusMessage, StatusMessageOptions, StatusSeverity } from './status';
+export type { Command, ViewContentSlot, PanelDefinition, SidePanelDefinition, QuickPickItem, QuickPickOptions } from "../types";
 export { default as FrameShell } from "../components/FrameShell.vue";
 export { default as FrameTooltip } from "../components/FrameTooltip.vue";
 export { default as FrameQuickInput } from "../components/FrameQuickInput.vue";
@@ -8,7 +16,7 @@ export { default as FrameQuickPanel } from "../components/FrameQuickPanel.vue";
 export { default as BottomPanel } from "../components/BottomPanel.vue";
 export { default as SidePanel } from "../components/SidePanel.vue";
 
-export { default as ActivityRail } from "../components/ActivityRail.vue";
+export { default as ViewBar } from "../components/ViewBar.vue";
 /** @deprecated Use FrameDropdownMenu; retained for existing anchored-menu consumers. */
 export { default as FrameMenu } from "../components/AnchoredMenu.vue";
 export type { FrameMenuItem } from "../types";
@@ -47,7 +55,7 @@ export { default as FrameTextInput } from "../components/FrameTextInput.vue";
 export { default as FrameCheckbox } from "../components/FrameCheckbox.vue";
 export { default as FrameSelect } from "../components/FrameSelect.vue";
 export { default as ComponentShowcase } from "../components/ComponentShowcase.vue";
-export type { ActivityAction } from "../types";
+export type { NavigationItem, NavigationActionItem, NavigationLinkItem, NavigationDropdownItem, NavigationSeparatorItem, NavigationBarOptions, NavigationBarPosition, NavigationBarJustification, PanelViewBarOptions, PanelViewBarController } from "../types";
 
 export { default as FrameSlider } from "../components/FrameSlider.vue";
 export { default as FrameColorPicker } from "../components/FrameColorPicker.vue";
@@ -130,11 +138,30 @@ export type { FrameAccordionProps, FrameAccordionItem } from '../components/Fram
 export type * from '../general-types';
 export type { FrameGeneralMenuItem } from '../components/generalMenu';
 
-export type { ActivityBarPosition, ActivityBarSize, ActivityBarDisplay, ActivityItemKey, ActivityBadge, ActivityOptions, ActivityItem, ActivityController } from "./activity";
-export type { ToolbarControl, ToolbarOptions } from "./toolbar";
+export type { ViewBarPosition, ViewBarSize, ViewBarDisplay,  ViewBadge, PrimaryViewBarOptions, ViewItem, PrimaryViewBarController } from "./primaryViewBar";
+export type { ToolbarControl, ToolbarOptions, ToolbarButton, ToolbarItemId, ToolbarPlacement } from "./toolbar";
 
 export type { ToolbarActionFeature } from '../types';
 
-export type { SecondaryBarOptions, SecondaryBarDisplay, SecondaryBarSize, SecondaryBarItem, SecondaryBarController } from './secondaryBar';
+export type { SecondaryViewBarOptions, SecondaryViewBarDisplay, SecondaryViewBarSize, SecondaryViewBarItem, SecondaryViewBarController } from './secondaryViewBar';
 
-export type { PanelOptions, PanelDisplay, PanelItem, PanelController } from './panel';
+export type { PanelOptions, PanelDisplay, PanelController } from './panel';
+
+export type {BarDisplay,BarSize} from "./barTypes";
+
+export type * from './workspaceTypes';
+
+export type {BarSeparator,BarSeparatorOptions} from './barSeparators';
+
+export { createBrowserHost, assertExternalUrl } from './host';
+export type { FrameHost, HostWindow, HostWindowState, HostCleanup, HostFile, HostFileOptions, HostFiles, HostExternal } from './host';
+
+export { CommandRegistry, CommandCategories } from './commands';
+export type { CommandCategory } from './commands';
+export { FeatureRegistry, ShellPresentation, ShellViewContainer } from './features';
+export type { FeatureController, PresentationController, ViewContainerController } from './features';
+export type { ModalOptions } from "../types";
+
+export { default as FrameFileUpload } from '../components/FrameFileUpload.vue';
+export { default as FrameFileDropZone } from '../components/FrameFileDropZone.vue';
+export type { FileUploadOptions, FileRejection, FileSelection } from '../forms/files';

@@ -4,8 +4,9 @@
 .catalog-toolbar { position: sticky; top: 0; z-index: 1; display: flex; flex-direction: column; flex: 0 0 auto; gap: 8px; padding: 4px 0 8px; background: var(--frame-surface); }
 .catalog-toolbar > .frame-text-input, .catalog-toolbar > .frame-select, .api-catalog-search > .frame-text-input { width: 100%; max-width: none; min-width: 0; box-sizing: border-box; flex-shrink: 0; }
 .component-catalog button:not(.frame-select) { width: 100%; padding: 7px 8px; text-align: left; border-radius: 3px; }
-.component-catalog button:hover { background: #ffffff08; }
-.component-catalog button[aria-current=page] { background: #ffffff0d; color: #fff; }
+.component-catalog section > button:hover { background: var(--frame-list-hover-background); }
+.component-catalog section > button[aria-current=page] { background: var(--frame-list-selection-background); color: var(--frame-list-selection-foreground); outline: 1px solid var(--frame-list-selection-border); outline-offset: -1px; }
+.component-catalog section > button:focus-visible { outline: 1px solid var(--frame-accent); outline-offset: -1px; }
 
 .component-preview-controls { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; min-width: 0; }
 .component-preview-controls > .setting-field { width: 100%; margin-bottom: 8px; }
@@ -20,7 +21,7 @@
 
 .example-tabs { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 20px; border-bottom: 1px solid var(--frame-line); }
 .example-tabs button { padding: 7px 10px; border-bottom: 2px solid transparent; }
-.example-tabs button[aria-selected=true] { color: white; border-bottom-color: var(--frame-accent); }
+.example-tabs button[aria-selected=true] { color: var(--frame-text); border-bottom-color: var(--frame-accent); }
 .example-type-links { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 15px; }
 .example-type-links a, .online-icons a { color: #65b6e6; }
 .bundled-icon-catalog { width: 100%; }

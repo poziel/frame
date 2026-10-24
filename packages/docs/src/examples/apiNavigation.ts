@@ -1,3 +1,4 @@
+import { showWorkspaceContent } from './workspaceContent';
 import type { Frame, WorkspacePaneContent } from "@frame/core";
 import TypeDocumentationPage from "./TypeDocumentationPage.vue";
 import { typeDocs } from "./typeDocs";
@@ -10,7 +11,7 @@ export function openApiReference(frame: Frame, name: string, rememberPrevious = 
   const pane = frame.workspace.panes.value.find(pane => pane.id === frame.workspace.activePane.value);
   const previous: WorkspacePaneContent | undefined = rememberPrevious && pane?.component ? { label: pane.label, component: pane.component, props: { ...pane.props, ...previousProps } } : undefined;
   const previousView = frame.state.activeSidePanel;
-  frame.setWorkspacePane(frame.workspace.activePane.value, { label: name, component: TypeDocumentationPage, props: { name, previous, previousView } });
+  showWorkspaceContent(frame, { label: name, component: TypeDocumentationPage, props: { name, previous, previousView } });
   frame.openSidePanel(apiViewId);
   updateReferenceUrl(name);
 }

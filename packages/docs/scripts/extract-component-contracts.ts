@@ -8,6 +8,8 @@ const root = resolve(import.meta.dir, '../../..');
 const core = 'packages/core/src/components/';
 const extra = 'packages/features/src/';
 export const pageSources: Record<string, string[]> = {
+  'file-upload': [core+'FrameFileUpload.vue'], 'file-drop-zone': [core+'FrameFileDropZone.vue'],
+  'universal-viewer': [extra+'UniversalViewer.vue', extra+'UniversalViewerContent.vue'],
   buttons: [core+'FrameButton.vue'], 'icon-buttons':[core+'FrameIconButton.vue'],
   'text-input':[core+'FrameTextInput.vue'], checkbox:[core+'FrameCheckbox.vue'], select:[core+'FrameSelect.vue'],
   slider:[core+'FrameSlider.vue'], 'color-picker':[core+'FrameColorPicker.vue'], 'text-area':[core+'FrameTextArea.vue'],
@@ -16,7 +18,7 @@ export const pageSources: Record<string, string[]> = {
   'resize-handle':[core+'ResizeHandle.vue'], modals:[core+'FrameModal.vue'], settings:[core+'FrameSettings.vue'],
   notifications:[core+'FrameNotifications.vue'], 'notification-panel':[extra+'NotificationPanel.vue',extra+'NotificationIndicator.vue'],
   'quick-input':[core+'FrameQuickInput.vue'], 'quick-panel':[core+'FrameQuickPanel.vue'], banner:[core+'FrameShell.vue'], workspace:[core+'WorkspacePanes.vue'],
-  views:[core+'SidePanel.vue',core+'ViewSections.vue'], 'activity-actions':[core+'ActivityRail.vue'], navigation:[core+'FrameShell.vue'],
+  views:[core+'SidePanel.vue',core+'ViewSections.vue'], 'navigation-items':[core+'NavigationBar.vue',core+'NavigationItemMenu.vue'], navigation:[core+'FrameShell.vue'],
   loader:[core+'FrameLoader.vue'], loading:[core+'FrameLoading.vue'], 'code-block':[core+'FrameCodeBlock.vue'],
   'code-editor':[extra+'CodeEditor.vue'], terminal:[extra+'Terminal.vue',extra+'TerminalView.vue'], 'ai-chat':[extra+'AIChat.vue'],
 };
@@ -152,7 +154,7 @@ const serviceSpecs:Record<string,{name:string;type:string;source:string;returns:
  banner:{name:'frame.registerBanner',type:'WorkspaceBannerDefinition',source:'packages/core/src/types.ts',returns:'() => void'},
  workspace:{name:'frame.setWorkspacePane',type:'WorkspacePaneContent',source:'packages/core/src/types.ts',returns:'void'},
  views:{name:'frame.registerView',type:'SidePanelDefinition',source:'packages/core/src/types.ts',returns:'() => void'},
- 'activity-actions':{name:'frame.registerActivityAction',type:'ActivityAction',source:'packages/core/src/types.ts',returns:'() => void'},
+ 'navigation-items':{name:'frame.registerNavigationItem',type:'NavigationActionItem',source:'packages/core/src/frame/navigationItems.ts',returns:'() => void'},
  'quick-input':{name:'frame.showQuickPick',type:'QuickPickOptions',source:'packages/core/src/types.ts',returns:'Promise<QuickPickItem | undefined>'},
 };
 const services:Record<string,unknown>={};

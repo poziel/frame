@@ -1,24 +1,37 @@
 import type { PanelOptions } from './frame/panel';
-export type { PanelOptions, PanelDisplay, PanelItem, PanelController } from './frame/panel';
-import type { SecondaryBarOptions } from './frame/secondaryBar';
-export type { SecondaryBarOptions, SecondaryBarDisplay, SecondaryBarSize, SecondaryBarItem, SecondaryBarController } from './frame/secondaryBar';
+import type { StatusOptions } from './frame/status';
+export type { PanelOptions, PanelDisplay, PanelController } from './frame/panel';
+import type { SecondaryViewBarOptions } from './frame/secondaryViewBar';
+export type { SecondaryViewBarOptions, SecondaryViewBarDisplay, SecondaryViewBarSize, SecondaryViewBarItem, SecondaryViewBarController } from './frame/secondaryViewBar';
 import type { Component } from "vue";
-import type { ActivityBadge, ActivityOptions } from "./frame/activity";
+import type { WorkspaceOptions } from './frame/workspaceTypes';
+export type * from './frame/workspaceTypes';
+import type { ViewBadge, PrimaryViewBarOptions } from "./frame/primaryViewBar";
 import type { ToolbarOptions } from "./frame/toolbar";
-export type { ActivityBadge, ActivityOptions, ActivityBarPosition, ActivityBarSize, ActivityBarDisplay, ActivityItemKey, ActivityItem, ActivityController } from "./frame/activity";
+export type { ViewBadge, PrimaryViewBarOptions, ViewBarPosition, ViewBarSize, ViewBarDisplay, ViewItem, PrimaryViewBarController } from "./frame/primaryViewBar";
 export type { ToolbarOptions } from "./frame/toolbar";
 
 export interface Command {
   id: string;
+  icon?: string | Component;
   label: string;
   detail?: string;
   group?: string;
   shortcut?: string;
-  enabled?: () => boolean;
+  /** Picker destination; defaults to application. Shortcuts work in either mode. */
+  scope?: "application" | "frame";
+  /** Hide from pickers while retaining command and shortcut access. */
+  quickInput?: boolean | string;
+  /** Owning feature. A resolver supports views that move between regions. */
+  feature?: string | (() => string);
+  available?: boolean | (() => boolean);
+  visible?: boolean | (() => boolean);
+  enabled?: boolean | (() => boolean);
   run: () => void | Promise<void>;
 }
 export interface QuickPickItem {
   id: string;
+  icon?: string | Component;
   label: string;
   detail?: string;
   shortcut?: string;
@@ -28,14 +41,21 @@ export interface QuickPickOptions {
   title?: string;
   placeholder?: string;
 }
+export interface ViewContentSlot {
+  component: Component;
+  props?: Record<string, unknown>;
+  padded?: boolean;
+}
 export interface PanelDefinition {
-  /** Optional activity/view-bar badge; presentation is controlled by frame.activity or frame.secondaryBar. */
-  badge?: ActivityBadge;
+  /** Optional view-item badge; presentation is controlled by frame.primaryViewBar or frame.secondaryViewBar. */
+  badge?: ViewBadge;
   id: string;
   label: string;
   icon?: Component;
   actions?: readonly PanelAction[];
   padded?: boolean;
+  top?: ViewContentSlot;
+  bottom?: ViewContentSlot;
   draggable?: boolean;
   movable?: boolean;
   collapsed?: boolean;
@@ -57,13 +77,19 @@ export type FrameMenuItem =
 
 
 export type ViewRegion = "primary" | "secondary" | "bottom";
-export interface PanelAction { id: string; label: string; icon?: Component; run: () => void; disabled?: boolean }
+export interface PanelAction { id: string; label: string; icon?: Component; run: () => void; disabled?: boolean; menu?: readonly FrameMenuItem[]; onSelect?: (item: FrameMenuItem) => void }
 export interface ToolbarActionFeature {
   label: string;
   readonly enabled: boolean;
   setEnabled(enabled: boolean): void;
 }
 export interface ToolbarAction extends PanelAction {
+  /** Choose title-bar or status-bar presentation without changing the action. */
+  placement?: import('./frame/toolbar').ToolbarPlacement;
+  /** Bridge features that already own an alternate status presentation. */
+  onPlacementChange?: (placement: import('./frame/toolbar').ToolbarPlacement) => void;
+  /** Override automatic status presentation, independently of the title-bar gate. */
+  showInStatusBar?: () => boolean;
   /** Whether the available action is pinned on the title bar. */
   visible?: boolean;
   /** Optional feature availability, independent of pinning. */
@@ -91,7 +117,18 @@ export type MenuDefinition = PanelDefinition;
 
 export type ViewDefinition = SidePanelDefinition;
 export type BannerDefinition = WorkspaceBannerDefinition;
-export interface ModalDefinition {
+export interface ModalOptions {
+  /** Minimum height in pixels, capped by available shell space. Default: 160. */
+  minHeight?: number;
+  width?: number;
+  height?: number;
+  /** CSS padding shorthand or pixels; zero removes padding. */
+  contentPadding?: number | string;
+  draggable?: boolean;
+  resizable?: boolean;
+  maximizable?: boolean;
+}
+export interface ModalDefinition extends ModalOptions {
   id: string;
   title: string;
   component: Component;
@@ -101,6 +138,8 @@ export interface ModalDefinition {
   width?: number;
   height?: number;
   maximized?: boolean;
+  footer?: Component;
+  footerProps?: Record<string, unknown>;
 }
 
 export type SettingValue = string | number | boolean;
@@ -122,9 +161,13 @@ export interface NotificationOptions {
   id?: string; title: string; severity?: NotificationSeverity; details?: string; source?: string;
   priority?: string; duration?: number; action?: NotificationAction;
 }
-export interface FrameOptions { panel?: PanelOptions; secondaryBar?: SecondaryBarOptions; toolbar?: ToolbarOptions; activity?: ActivityOptions; settings?: boolean; notifications?: boolean; /** Enable application navigation history and title-bar arrows. Default: false. */ navigation?: boolean }
+export type { NavigationBarOptions, NavigationBarPosition, NavigationBarJustification } from './frame/navigationBar';
+import type { NavigationBarOptions } from './frame/navigationBar';
+import type { PanelViewBarOptions } from './frame/panelViewBar';
+export type { PanelViewBarOptions, PanelViewBarController } from './frame/panelViewBar';
+export type { NavigationItem, NavigationActionItem, NavigationLinkItem, NavigationDropdownItem, NavigationSeparatorItem } from './frame/navigationItems';
+export interface FrameOptions { modal?: ModalOptions; features?: Readonly<Record<string, boolean>>; host?: import('./frame/host').FrameHost; /** Initial per-instance theme. Omitted: inherit document CSS tokens. */ theme?: import('./themes/theme').FrameTheme | import('./themes/theme').FrameThemeDefinition; workspace?: WorkspaceOptions; panelViewBar?: PanelViewBarOptions; status?: StatusOptions; navigationBar?: boolean | NavigationBarOptions; /** Manage button location. Default: bottom (status bar). */ manageButtonPosition?: "top" | "bottom"; panel?: PanelOptions; secondaryViewBar?: SecondaryViewBarOptions; toolbar?: ToolbarOptions; primaryViewBar?: PrimaryViewBarOptions; settings?: boolean; notifications?: boolean; /** Enable application navigation history and title-bar arrows. Default: false. */ navigation?: boolean }
 
-export interface ActivityAction { badge?: ActivityBadge; showInRail?: boolean; id: string; label: string; icon?: Component; run: () => void; disabled?: boolean; active?: boolean | (() => boolean) }
 /** Shared runtime base. The SelectItem type narrows to an option or separator. */
 export const SelectItem = class SelectItem {};
 export class SelectOption extends SelectItem {
@@ -149,3 +192,5 @@ export class SelectSeparator extends SelectItem {
 }
 /** Value-bearing option or non-selectable separator. Plain object inputs remain compatible. */
 export type SelectItem = SelectOption | SelectSeparator;
+
+export type {BarSeparator,BarSeparatorOptions} from './frame/barSeparators';

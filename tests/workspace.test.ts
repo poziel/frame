@@ -69,7 +69,8 @@ describe("nested menu contributions", () => {
     expect(frame.menuState.collapsed.child).toBe(false);
     remove();
     expect(frame.views.value).toHaveLength(0);
-    expect(frame.commands.value).toHaveLength(0);
+    expect(frame.commands.get("frame.side.group")).toBeUndefined();
+    expect(frame.commands.get("frame.view.child")).toBeUndefined();
   });
   test("collections reject cycles and plain content rejects nested drops", () => {
     const frame = createFrame();

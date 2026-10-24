@@ -28,10 +28,10 @@ with sync_playwright() as p:
     else:near(work['y']+work['height']+6,box['y'])
     if position in ['top','bottom'] and alignment=='center':near(box['x'],work['x']);near(box['width'],work['width'])
     expect(panel.get_by_role('textbox',name='Panel draft',exact=True)).to_have_value('Retained through docking')
-    panel.get_by_role('button',name='Maximize bottom panel',exact=True).click()
-    expect(panel.get_by_role('button',name='Restore bottom panel',exact=True)).to_be_visible()
+    panel.get_by_role('button',name='Maximize panel',exact=True).click()
+    expect(panel.get_by_role('button',name='Restore panel',exact=True)).to_be_visible()
     expect(panel.get_by_role('textbox',name='Panel draft',exact=True)).to_have_value('Retained through docking')
-    panel.get_by_role('button',name='Restore bottom panel',exact=True).click()
+    panel.get_by_role('button',name='Restore panel',exact=True).click()
     page.wait_for_timeout(20)
     restored=panel.bounding_box()
     for key in ['x','y','width','height']:near(restored[key],box[key])
@@ -40,16 +40,16 @@ with sync_playwright() as p:
   page.set_viewport_size({'width':viewport,'height':850})
   for rail in ['default','top','hidden']:
    for alignment in ['center','left','right','justify']:
-    page.evaluate('([rail,alignment])=>Object.assign(window.panelFixture.layout,{primarySide:"left",panelPosition:"top",panelAlignment:alignment,activityBarVisible:rail!=="hidden",activityBarPosition:rail==="top"?"top":"default",secondaryActivityBarVisible:rail!=="hidden",secondaryActivityBarPosition:rail==="top"?"top":"default"})',[rail,alignment]);page.wait_for_timeout(30)
+    page.evaluate('([rail,alignment])=>Object.assign(window.panelFixture.layout,{primarySide:"left",panelPosition:"top",panelAlignment:alignment,primaryViewBarVisible:rail!=="hidden",primaryViewBarPosition:rail==="top"?"top":"default",secondaryViewBarVisible:rail!=="hidden",secondaryViewBarPosition:rail==="top"?"top":"default"})',[rail,alignment]);page.wait_for_timeout(30)
     box=panel.bounding_box()
     for selector,covered in [('.primary-region>.side-panel',alignment in ['left','justify']),('.secondary-region>.side-panel',alignment in ['right','justify'])]:
      actual=page.locator(selector).bounding_box()
      if covered:assert actual['y']>=box['y']+box['height'],(viewport,rail,alignment,selector,box,actual)
  page.set_viewport_size({'width':1500,'height':850})
- page.evaluate("Object.assign(window.panelFixture.layout,{activityBarVisible:true,activityBarPosition:'default',secondaryActivityBarVisible:true,secondaryActivityBarPosition:'default'})")
+ page.evaluate("Object.assign(window.panelFixture.layout,{primaryViewBarVisible:true,primaryViewBarPosition:'default',secondaryViewBarVisible:true,secondaryViewBarPosition:'default'})")
  # Vertical resize uses width while top resize uses height.
  page.evaluate("Object.assign(window.panelFixture.layout,{panelPosition:'right',panelWidth:320})");page.wait_for_timeout(25)
- handle=panel.get_by_role('separator',name='Resize bottom panel',exact=True);handle.focus();before=panel.bounding_box()['width'];page.keyboard.press('ArrowLeft');page.wait_for_timeout(25);assert panel.bounding_box()['width']>before
+ handle=panel.get_by_role('separator',name='Resize panel',exact=True);handle.focus();before=panel.bounding_box()['width'];page.keyboard.press('ArrowLeft');page.wait_for_timeout(25);assert panel.bounding_box()['width']>before
  page.evaluate("window.panelFixture.layout.panelPosition='top'");page.wait_for_timeout(25)
  handle.focus();before=panel.bounding_box()['height'];page.keyboard.press('ArrowDown');page.wait_for_timeout(25);assert panel.bounding_box()['height']>before
  # Hidden sidebar states must not change vertical docking's workspace boundary.

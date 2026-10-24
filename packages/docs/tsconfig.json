@@ -7,6 +7,9 @@
       ],
       "@frame/features": [
         "../features/src/index.ts"
+      ],
+      "@frame/themes": [
+        "../themes/src/index.ts"
       ]
     }
   },

@@ -14,6 +14,11 @@ const surfaces=contracts.contracts as unknown as Record<string,ComponentContract
 const styling=themes as Record<string,{classes:ThemeClass[];tokens:ThemeToken[]}>;
 export const componentDocumentation:Record<string,ComponentDocumentation> = Object.fromEntries(componentExamples.map(example=>{
  const components=sources[example.id]!.map(source=>surfaces[source]!);const main=components[0]!;
+ if(example.id==='file-upload'||example.id==='file-drop-zone')return [example.id,{
+  id:example.id,components,features:[{id:'basic',title:example.id==='file-upload'?'Choose and validate files':'Visible drop zone',description:example.usage,variant:'default',code:example.code},...(example.id==='file-drop-zone'?[{id:'overlay',title:'Invisible workspace drop target',description:'Edit the workspace normally, then drag files over it to reveal an overlay. Dropping or leaving keeps your edits.',variant:'overlay',code:example.code}]:[])],
+  classes:sources[example.id]!.flatMap(source=>styling[source]?.classes??[]),tokens:sources[example.id]!.flatMap(source=>styling[source]?.tokens??[]),demoId:example.id,
+ }];
+ if(example.id==='universal-viewer')return [example.id,{id:example.id,components,features:[{id:'basic',title:'Try the file viewer',description:example.usage,variant:'default',code:example.code}],classes:sources[example.id]!.flatMap(source=>styling[source]?.classes??[]),tokens:sources[example.id]!.flatMap(source=>styling[source]?.tokens??[]),demoId:example.id}];
  const baseline=Object.fromEntries(main.props.filter(p=>p.default.kind==='required'||p.name==='modelValue'||p.name==='label').map(p=>[p.name,exampleValue(p,main.name)]));
  const slots=Object.fromEntries(main.slots.filter(slot=>['default','first','second'].includes(slot.name)).map(slot=>[slot.name,slot.name==='default'?'Example content':slot.name+' pane']));
  const variants=variantsFor(example.id);
@@ -25,7 +30,7 @@ export const componentDocumentation:Record<string,ComponentDocumentation> = Obje
   if(main.name==='Terminal'){delete values.sessionId;values.label='Local terminal';}
   features.push({id:'configured',title:disabled?'Disabled state':variant?'Visual variants':'Composition and configuration',description:configurable?`Set ${configurable.name} explicitly to override its default. The interactive demo exposes every public property.`:'Compose this API with application-owned content. Use the actions in this example to inspect the behavior.',variant:'configured',code:serializeUsage(main,values,slots),...{values}});
  }
- const simple=!['terminal','ai-chat','code-editor','settings','notifications','notification-panel','quick-input','quick-panel','banner','workspace','views','activity-actions','navigation','select'].includes(example.id);
+ const simple=!['terminal','ai-chat','code-editor','settings','notifications','notification-panel','quick-input','quick-panel','banner','workspace','views','navigation-items','navigation','select'].includes(example.id);
  if(simple){features[0]!.values=baseline;features[0]!.code=formExamples.some(item=>item.id===example.id)?example.code:serializeUsage(main,baseline,slots);}
  const service=(serviceContracts as unknown as Record<string,ComponentContract>)[example.id];
  if(service)components.push(service);

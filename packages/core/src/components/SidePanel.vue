@@ -12,7 +12,7 @@ defineEmits<{ close: []; context: [event:MouseEvent] }>();
   <aside :id="region==='primary'?'side-panel':'secondary-panel'" class="side-panel" :data-view-region="region" :aria-label="title">
     <header class="section-header" @contextmenu="$emit('context',$event)">
       <h2 class="side-title">{{ title }}</h2>
-      <PanelActions :actions="actions"/><slot name="actions"/>
+      <PanelActions :actions="actions" :feature="region==='primary'?'primarySidebar':'secondarySidebar'"/><slot name="actions"/>
       <FrameIconButton :label="region==='primary'?'Hide primary sidebar':'Hide secondary sidebar'" :icon="(region==='primary'?frame.layout.primarySide==='left':frame.layout.primarySide==='right')?'layout-sidebar-left':'layout-sidebar-right'" :shortcut="region==='primary'?'Ctrl+B':'Ctrl+Alt+B'" :icon-size="15" @click="$emit('close')"/>
     </header>
     <p v-if="empty" class="empty-view-region">Drag a view here to display.</p>

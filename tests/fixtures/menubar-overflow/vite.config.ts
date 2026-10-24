@@ -1,0 +1,1 @@
+import {defineConfig} from 'vite';import vue from '@vitejs/plugin-vue';export default defineConfig({plugins:[vue()],resolve:{dedupe:['vue']},optimizeDeps:{entries:['tests/fixtures/menubar-overflow/index.html'],include:['vue','reka-ui']}});

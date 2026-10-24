@@ -32,10 +32,10 @@
         },
         "description": "Severity configuration for this component; see its Features examples for usage.",
         "options": [
-          "error",
           "info",
           "success",
-          "warning"
+          "warning",
+          "error"
         ],
         "control": "text",
         "references": [
@@ -208,6 +208,80 @@
           "kind": "omitted"
         },
         "description": "Maximized configuration for this component; see its Features examples for usage.",
+        "control": "boolean",
+        "references": []
+      },
+      {
+        "name": "footer",
+        "type": "Component",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Footer configuration for this component; see its Features examples for usage.",
+        "control": "fixture",
+        "references": [
+          "Component"
+        ]
+      },
+      {
+        "name": "footerProps",
+        "type": "Record<string, unknown>",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Footer Props configuration for this component; see its Features examples for usage.",
+        "control": "json",
+        "references": [
+          "Record"
+        ]
+      },
+      {
+        "name": "minHeight",
+        "type": "number",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Minimum height in pixels, capped by available shell space. Default: 160.",
+        "control": "number",
+        "references": []
+      },
+      {
+        "name": "contentPadding",
+        "type": "number | string",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "CSS padding shorthand or pixels; zero removes padding.",
+        "control": "json",
+        "references": []
+      },
+      {
+        "name": "draggable",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Draggable configuration for this component; see its Features examples for usage.",
+        "control": "boolean",
+        "references": []
+      },
+      {
+        "name": "resizable",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Resizable configuration for this component; see its Features examples for usage.",
+        "control": "boolean",
+        "references": []
+      },
+      {
+        "name": "maximizable",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Maximizable configuration for this component; see its Features examples for usage.",
         "control": "boolean",
         "references": []
       }
@@ -439,14 +513,14 @@
       },
       {
         "name": "badge",
-        "type": "ActivityBadge",
+        "type": "ViewBadge",
         "default": {
           "kind": "omitted"
         },
-        "description": "Optional activity/view-bar badge; presentation is controlled by frame.activity or frame.secondaryBar.",
+        "description": "Optional view-item badge; presentation is controlled by frame.primaryViewBar or frame.secondaryViewBar.",
         "control": "json",
         "references": [
-          "ActivityBadge"
+          "ViewBadge"
         ]
       },
       {
@@ -490,6 +564,30 @@
         "description": "Padded configuration for this component; see its Features examples for usage.",
         "control": "boolean",
         "references": []
+      },
+      {
+        "name": "top",
+        "type": "ViewContentSlot",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Top configuration for this component; see its Features examples for usage.",
+        "control": "json",
+        "references": [
+          "ViewContentSlot"
+        ]
+      },
+      {
+        "name": "bottom",
+        "type": "ViewContentSlot",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Distance in pixels from the presentation boundary bottom.",
+        "control": "json",
+        "references": [
+          "ViewContentSlot"
+        ]
       },
       {
         "name": "draggable",
@@ -598,40 +696,43 @@
       }
     ]
   },
-  "activity-actions": {
-    "name": "frame.registerActivityAction",
-    "source": "packages/core/src/types.ts",
+  "navigation-items": {
+    "name": "frame.registerNavigationItem",
+    "source": "packages/core/src/frame/navigationItems.ts",
     "props": [
       {
-        "name": "badge",
-        "type": "ActivityBadge",
-        "default": {
-          "kind": "omitted"
-        },
-        "description": "Badge configuration for this component; see its Features examples for usage.",
-        "control": "json",
-        "references": [
-          "ActivityBadge"
-        ]
-      },
-      {
-        "name": "showInRail",
-        "type": "boolean",
-        "default": {
-          "kind": "omitted"
-        },
-        "description": "Show In Rail configuration for this component; see its Features examples for usage.",
-        "control": "boolean",
-        "references": []
-      },
-      {
-        "name": "id",
-        "type": "string",
+        "name": "type",
+        "type": "'action'",
         "default": {
           "kind": "required"
         },
-        "description": "Id configuration for this component; see its Features examples for usage.",
+        "description": "Native input/button behavior.",
+        "options": [
+          "action"
+        ],
         "control": "text",
+        "references": []
+      },
+      {
+        "name": "run",
+        "type": "() => void | Promise<void>",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Run configuration for this component; see its Features examples for usage.",
+        "control": "fixture",
+        "references": [
+          "Promise"
+        ]
+      },
+      {
+        "name": "active",
+        "type": "boolean | (() => boolean)",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Shows the loading presentation while retaining the mounted content.",
+        "control": "fixture",
         "references": []
       },
       {
@@ -657,14 +758,16 @@
         ]
       },
       {
-        "name": "run",
-        "type": "() => void",
+        "name": "badge",
+        "type": "ViewBadge",
         "default": {
-          "kind": "required"
+          "kind": "omitted"
         },
-        "description": "Run configuration for this component; see its Features examples for usage.",
-        "control": "fixture",
-        "references": []
+        "description": "Badge configuration for this component; see its Features examples for usage.",
+        "control": "json",
+        "references": [
+          "ViewBadge"
+        ]
       },
       {
         "name": "disabled",
@@ -677,13 +780,33 @@
         "references": []
       },
       {
-        "name": "active",
-        "type": "boolean | (() => boolean)",
+        "name": "id",
+        "type": "string",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Id configuration for this component; see its Features examples for usage.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "visible",
+        "type": "boolean",
         "default": {
           "kind": "omitted"
         },
-        "description": "Shows the loading presentation while retaining the mounted content.",
-        "control": "fixture",
+        "description": "Visible configuration for this component; see its Features examples for usage.",
+        "control": "boolean",
+        "references": []
+      },
+      {
+        "name": "draggable",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Draggable configuration for this component; see its Features examples for usage.",
+        "control": "boolean",
         "references": []
       }
     ],
@@ -692,9 +815,9 @@
     "forwardsAttrs": false,
     "methods": [
       {
-        "name": "frame.registerActivityAction",
+        "name": "frame.registerNavigationItem",
         "kind": "method",
-        "parameters": "options: ActivityAction",
+        "parameters": "options: NavigationActionItem",
         "returns": "() => void",
         "description": "Call this public Frame API with application-owned configuration."
       }

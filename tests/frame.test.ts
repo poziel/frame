@@ -7,7 +7,7 @@ describe("Frame contributions", () => {
     const first = createFrame();
     const second = createFrame();
     first.registerCommand({ id: "app.action", label: "Action", run() {} });
-    expect(second.commands.value).toHaveLength(0);
+    expect(second.commands.get("app.action")).toBeUndefined();
     expect(() => first.registerCommand({ id: "app.action", label: "Duplicate", run() {} })).toThrow();
   });
   test("a stale disposer cannot remove a newer contribution with the same ID", () => {
@@ -16,7 +16,7 @@ describe("Frame contributions", () => {
     remove();
     frame.registerCommand({ id: "app.action", label: "Replacement", run() {} });
     remove();
-    expect(frame.commands.value[0]?.label).toBe("Replacement");
+    expect(frame.commands.get("app.action")?.label).toBe("Replacement");
   });
   test("removing selected contributions leaves valid panel selections", () => {
     const frame = createFrame();
@@ -70,10 +70,10 @@ describe("Frame contributions", () => {
   test("commands registered while quick input is open appear without reopening", () => {
     const frame = createFrame();
     frame.openCommands();
-    const remove = frame.registerCommand({ id: "late", label: "Late action", run() {} });
+    const remove = frame.registerCommand({ id: "late", label: "Late action", scope: "frame", run() {} });
     expect(frame.quickInputItems.value.map(item => item.id)).toContain("late");
     remove();
-    expect(frame.quickInputItems.value).toHaveLength(0);
+    expect(frame.quickInputItems.value.some(item => item.id === "late")).toBe(false);
   });
 });
 
@@ -88,7 +88,8 @@ test("panel contributions automatically add and remove searchable actions", asyn
   expect(frame.state.activeBottomTab).toBe("app.tab");
   expect(frame.state.panelVisible).toBe(true);
   removeSide(); removeTab();
-  expect(frame.commands.value).toHaveLength(0);
+  expect(frame.commands.get("frame.side.app.side")).toBeUndefined();
+  expect(frame.commands.get("frame.tab.app.tab")).toBeUndefined();
   expect(frame.bottomTabs.value).toHaveLength(0);
   expect(frame.state.panelVisible).toBe(true);
 });

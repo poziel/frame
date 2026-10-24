@@ -1,0 +1,8 @@
+@layer theme, base, components, utilities;
+@import '@frame/core/tokens.css';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+@import '@frame/tailwind/theme.css';
+@source './additive.html';
+@theme { --color-brand: #abcdef; }
+:root { --frame-spacing-unit: 5px; --frame-radius-medium: 9px; }

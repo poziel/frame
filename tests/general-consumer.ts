@@ -19,3 +19,12 @@ h(FrameToast,{title:'Saved',open:false,'onUpdate:open':(_open:boolean)=>{}});h(F
 // @ts-expect-error Accordion sections require a stable value and visible title.
 const invalidSection:FrameAccordionItem={label:'Missing value and title'};
 void invalidSection;
+
+import { createFrame, type NavigationBarOptions } from '@frame/core';
+const navigationOptions: NavigationBarOptions = { display: 'both', size: 'compact' };
+const navigationFrame = createFrame({ navigationBar: navigationOptions });
+navigationFrame.registerNavigationItem({ id: 'action', type:'action', label: 'Action', run() {} });
+navigationFrame.navigationBar.setItemVisible('action', false);
+navigationFrame.navigationBar.activate('action');
+navigationFrame.navigationBar.setPosition('bottom');
+navigationFrame.dispose();

@@ -18,4 +18,7 @@ export { default as TerminalView } from './TerminalView.vue';
 export { createTerminal } from './terminal';
 export { createTerminalView } from './terminalView';
 export type { TerminalController, TerminalOptions, TerminalProfile, TerminalSession, TerminalBackend, TerminalEvent, TerminalSpawnOptions, TerminalSessionLayout } from './terminal';
-export type { AIChatController, ChatOptions, ChatResponder, ChatRequest, ChatResponseWriter, ChatMessage, ChatPart, ChatTextPart, ChatThinkingPart, ChatAttachment } from "./aiChat";
+export type { AIChatController } from "./aiChat";
+export type * from "./chatTypes";
+export { createAgentChatSession, createJsonLineAgentConnection } from "./agentChat";
+export type * from "./agentTypes";

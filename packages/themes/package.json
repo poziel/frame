@@ -1,0 +1,20 @@
+{
+  "name": "@frame/themes",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "main": "./dist/themes.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/types/index.d.ts", "import": "./dist/themes.js" },
+    "./vscode-light-2026.json": "./src/presets/vscode-light-2026.json",
+    "./vscode-high-contrast-black.json": "./src/presets/vscode-high-contrast-black.json",
+    "./vscode-high-contrast-white.json": "./src/presets/vscode-high-contrast-white.json"
+  },
+  "files": ["dist", "src/presets", "provenance", "licenses", "README.md"],
+  "sideEffects": false,
+  "peerDependencies": { "@frame/core": "^0.1.0" },
+  "devDependencies": { "vite": "^8.0.16", "typescript": "~6.0.3" },
+  "scripts": { "build": "vite build && tsc -p tsconfig.json" }
+}

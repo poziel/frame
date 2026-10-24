@@ -5,7 +5,7 @@
 <h1 align="center">Frame</h1>
 
 <p align="center">
-  An open-source application shell inspired by VS Code’s visual design, built with Rust, Tauri, Vue, and TypeScript as a reusable foundation for desktop apps.
+  A Vue and TypeScript application framework for building VS Code–inspired interfaces, with optional host integrations and feature backends.
 </p>
 
 <p align="center">
@@ -24,26 +24,26 @@ Consume Frame as a dependency in your own project. Your application stays in its
 - **Commands and navigation.** Register application actions with keyboard shortcuts and expose them through menus and Quick actions.
 - **Reusable Vue controls.** Compose buttons, inputs, selects, sliders, tooltips, context menus, and movable, resizable modals.
 - **Settings and notifications.** Supply your own settings sections and bottom-left notifications with expiry and action buttons. Add optional notification history through [`@frame/features`](packages/features).
-- **A desktop host and browser preview.** Tauri provides the native window; preview the Vue shell in a browser, where native window controls are disabled.
+- **Explicit host integration.** Run in a browser, or supply an optional Tauri or Electron adapter for native window controls and file operations.
 
-Frame takes visual cues from VS Code’s workbench layout, panels, and controls. It is an independent project, not a fork of VS Code or a Microsoft product. It provides no code editor, terminal, file-handling system, or extension runtime.
+Frame takes visual cues from VS Code’s workbench layout, panels, and controls. It is an independent project, not a fork of VS Code or a Microsoft product. Core focuses on the shell and shared controls. Optional editor, terminal, chat, and viewer components are provided by `@frame/features`.
 
-Optional [Tailwind integration](packages/tailwind/README.md) supplies Tailwind and its Vite plugin for application developers. [Theme variables](docs/theme-variables.md) are shared between ordinary CSS and Tailwind utilities.
+Optional [Tailwind integration](packages/tailwind/README.md) supplies Tailwind and its Vite plugin for application developers. [Theme variables](docs/styling/theme-variables.md) are shared between ordinary CSS and Tailwind utilities.
 
 ## Try the workbench
 
-Install [Bun](https://bun.sh/) and, for the desktop application, Rust and the [Tauri platform prerequisites](https://v2.tauri.app/start/prerequisites/).
+Install [Bun](https://bun.sh/). Frame and its browser documentation require no Rust toolchain.
 
 ```sh
 git clone https://github.com/poziel/frame.git
 cd frame
 bun install
-bun run tauri dev
+bun run dev
 ```
 
-For the browser preview, use `bun run dev` instead. The example application includes a component catalog and sample views; these contributions are separate from the core package.
+The example application includes a component catalog and sample views; these contributions are separate from the core package.
 
-Open Quick actions with **Ctrl+P**, **Ctrl+Shift+P**, or **Ctrl+T**. Use **Components**, **Features**, and **API** to browse documentation and interactive examples. **Ctrl+B** toggles the side panel; **Ctrl+J** toggles the bottom panel. Command works in place of Ctrl on macOS.
+Open Quick actions with **Ctrl+P** or **Ctrl+Shift+P**. Use **Components**, **Features**, and **API** to browse documentation and interactive examples. **Ctrl+B** toggles the side panel; **Ctrl+J** toggles the bottom panel. Command works in place of Ctrl on macOS.
 
 ## Use Frame in your application
 
@@ -83,7 +83,7 @@ onBeforeUnmount(() => frame.dispose());
 </template>
 ```
 
-Register your Vue components as views, add commands, and enable settings or notifications when needed. Your host application owns its data, persistence, backend, and native Tauri configuration. See [Reusing Frame](docs/reusing-frame.md) for registration examples and [Package boundaries](docs/package-boundaries.md) for the Core, Features, and documentation application split.
+Register your Vue components as views, add commands, and enable settings or notifications when needed. Your host application owns its data, persistence, backend, and native host configuration. See [Reusing Frame](docs/shell/commands.md) for registration examples and [Package boundaries](docs/reference/packages.md) for the Core, Features, and documentation application split.
 
 ## Development
 
@@ -94,22 +94,24 @@ bun run test
 bun run build
 bun run build:library
 bun run check:consumer
-cargo check --manifest-path packages/docs/src-tauri/Cargo.toml --locked
+bun run build:hosts
 ```
 
 `build` checks TypeScript and builds the example frontend. `build:library` produces the core bundle and declarations, copies license notices, and checks for example-content leakage. `check:consumer` checks a consumer fixture against the generated declarations, so build the library first.
 
-Use `bun run tauri build` to package the example desktop application.
+Docs is a browser application in `packages/docs`. Native terminal execution lives in the separate Frame Native companion. See [host integration](docs/guides/hosts.md) for Tauri, Electron, browser behavior, and migration.
 
 ## Documentation
 
-- [External package integration and validation](docs/external-integration.md)
-- [Shell integration and commands](docs/reusing-frame.md)
-- [Library boundaries and theme design](docs/library-and-themes.md)
-- [Layout controls](docs/layout.md) and [workspace panes](docs/workspace.md)
-- [View interactions](docs/view-interactions.md) and [modals](docs/modals.md)
-- [Component catalog](docs/component-catalog.md) and [reusable controls](docs/reusable-controls.md)
-- [Settings and notifications](docs/settings-and-notifications.md)
-- [Icons and custom icon packs](docs/icons.md)
+Start with the [documentation index](docs/README.md).
+
+AI coding assistants can start with [llms.txt](llms.txt), a focused index of the library guides and component references.
+
+- [Build a small application](docs/guides/getting-started.md)
+- [Creation options and runtime configuration](docs/configuration/frame-options.md)
+- [Shell contributions](docs/shell/README.md)
+- [Integrate an existing application](docs/guides/existing-app.md)
+- [Theme variables](docs/styling/theme-variables.md)
+- [Package responsibilities](docs/reference/packages.md)
 
 Frame is available under the [MIT license](LICENSE). Microsoft Codicons and other third-party assets retain their own licenses; see [Third-party notices and licenses](docs/licenses/THIRD_PARTY_NOTICES.md).

@@ -41,7 +41,11 @@ with sync_playwright() as p:
     expect(view.get_by_role('button', name='Build', exact=True)).to_be_visible()
     view.get_by_role('button', name='Build', exact=True).click(button='right')
     page.get_by_role('menuitem', name='Change terminal color', exact=True).click()
-    view.get_by_label('Color for Build', exact=True).fill('#24aa77')
+    view.locator('.frame-terminal-color .frame-color-trigger').click()
+    color = page.get_by_role('textbox', name='Color value', exact=True)
+    color.fill('#24aa77')
+    color.press('Enter')
+    page.keyboard.press('Escape')
     view.get_by_role('button', name='Done', exact=True).click()
     assert page.evaluate('window.terminalFixture.terminal.sessions.value[1].color') == '#24aa77'
     # Keyboard find and no-match feedback.

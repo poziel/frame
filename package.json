@@ -9,16 +9,18 @@
     "test": "bun test",
     "build": "bun run --cwd packages/docs build",
     "preview": "bun run --cwd packages/docs preview",
-    "tauri": "bun run --cwd packages/docs tauri",
     "build:library": "bun run --cwd packages/core build",
     "check:consumer": "vue-tsc -p tests/tsconfig.json --noEmit",
     "build:features": "bun run --cwd packages/features build",
+    "build:themes": "bun run --cwd packages/themes build",
     "check:tailwind": "vite build --config tests/fixtures/tailwind/vite.config.ts",
-    "docs:contracts": "bun run --cwd packages/docs docs:contracts"
+    "docs:contracts": "bun run --cwd packages/docs docs:contracts",
+    "build:hosts": "bun run --cwd packages/tauri build && bun run --cwd packages/electron build"
   },
   "devDependencies": {
     "@frame/core": "workspace:*",
     "@frame/tailwind": "workspace:*",
+    "@frame/themes": "workspace:*",
     "reka-ui": "^2.11.0",
     "typescript": "~6.0.3",
     "vite": "^8.0.16",

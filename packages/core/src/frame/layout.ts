@@ -1,22 +1,25 @@
-import type { ActivityBarDisplay } from './activity';
-import type { SecondaryBarDisplay, SecondaryBarSize } from './secondaryBar';
+import type { ViewBarDisplay } from './primaryViewBar';
+import type { SecondaryViewBarDisplay, SecondaryViewBarSize } from './secondaryViewBar';
 export type PanelPosition = "top" | "bottom" | "left" | "right";
 export type PanelDisplay = "icons" | "text" | "both";
 export type PanelAlignment = "left" | "right" | "center" | "justify";
 export interface LayoutState {
+  manageButtonPosition: "top" | "bottom";
   maximizedRegion: "secondary" | "bottom" | null;
   navigationVisible: boolean;
   menuBarVisible: boolean;
-  activityBarVisible: boolean;
-  activityBarPosition: "default" | "top" | "bottom";
-  activityBarSize: "default" | "compact";
-  activityBarDisplay: ActivityBarDisplay;
+  primaryViewBarVisible: boolean;
+  primaryViewBarPosition: "default" | "top" | "bottom";
+  primaryViewBarSize: "default" | "compact";
+  primaryViewBarDisplay: ViewBarDisplay;
   primarySidebarVisible: boolean;
   secondarySidebarVisible: boolean;
-  secondaryActivityBarVisible: boolean;
-  secondaryActivityBarPosition: "default" | "top" | "bottom";
-  secondaryBarDisplay: SecondaryBarDisplay;
-  secondaryBarSize: SecondaryBarSize;
+  secondaryViewBarVisible: boolean;
+  secondaryViewBarPosition: "default" | "top" | "bottom";
+  secondaryViewBarDisplay: SecondaryViewBarDisplay;
+  secondaryViewBarSize: SecondaryViewBarSize;
+  panelViewBarVisible: boolean;
+  panelViewBarSize: "default" | "compact";
   panelVisible: boolean;
   statusBarVisible: boolean;
   bannerVisible: boolean;
@@ -25,7 +28,7 @@ export interface LayoutState {
   primarySide: "left" | "right";
   panelAlignment: PanelAlignment;
   panelPosition: PanelPosition;
-  panelDisplay: PanelDisplay;
+  panelViewBarDisplay: PanelDisplay;
   quickInputPosition: "top" | "center";
   density: "default" | "compact";
   centered: boolean;
@@ -38,18 +41,19 @@ export interface LayoutState {
 }
 export function defaultLayout(): LayoutState {
   return {
+    manageButtonPosition: "bottom",
     maximizedRegion: null,
     navigationVisible: true,
-    menuBarVisible: true, activityBarVisible: true, activityBarPosition: "default", activityBarSize: "default", activityBarDisplay: "icons", primarySidebarVisible: false,
-    secondarySidebarVisible: false, secondaryActivityBarVisible: true, secondaryActivityBarPosition: 'top', secondaryBarDisplay: 'both', secondaryBarSize: 'default', bannerVisible: false, bannerAlignment: "center", bannerHeight: 100, panelVisible: false, statusBarVisible: true,
-    primarySide: "left", panelAlignment: "center", panelPosition: "bottom", panelDisplay: "both", quickInputPosition: "top", density: "default",
+    menuBarVisible: true, primaryViewBarVisible: true, primaryViewBarPosition: "default", primaryViewBarSize: "default", primaryViewBarDisplay: "icons", primarySidebarVisible: false,
+    secondarySidebarVisible: false, secondaryViewBarVisible: true, secondaryViewBarPosition: 'top', secondaryViewBarDisplay: 'both', secondaryViewBarSize: 'default', bannerVisible: false, bannerAlignment: "center", bannerHeight: 100, panelViewBarVisible: true, panelViewBarSize:"default", panelVisible: false, statusBarVisible: true,
+    primarySide: "left", panelAlignment: "center", panelPosition: "bottom", panelViewBarDisplay: "both", quickInputPosition: "top", density: "default",
     centered: false, zenMode: false, primaryWidth: 236, secondaryWidth: 280, panelHeight: 240, panelWidth: 320, centeredRatio: .9,
   };
 }
 export const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(value, Math.max(min, max)));
 /** Maximize inside the workbench, leaving the activity rail and uncovered regions intact. */
-export interface ActivityMeasurements { primary?: {width?:number;height?:number}; secondary?: {width?:number;height?:number} }
-export function maximizedRegionBounds(layout: LayoutState, width: number, height: number, measurements: ActivityMeasurements = {}) {
+export interface ViewBarMeasurements { primary?: {width?:number;height?:number}; secondary?: {width?:number;height?:number} }
+export function maximizedRegionBounds(layout: LayoutState, width: number, height: number, measurements: ViewBarMeasurements = {}) {
   const region = layout.maximizedRegion;
   if (!region || (region === "bottom" ? !layout.panelVisible : !layout.secondarySidebarVisible)) return undefined;
   const g = layoutGeometry(layout, width, height, measurements);
@@ -66,14 +70,14 @@ export function maximizedRegionBounds(layout: LayoutState, width: number, height
 export function panelCoverage(alignment: PanelAlignment) {
   return { left: alignment === "left" || alignment === "justify", right: alignment === "right" || alignment === "justify" };
 }
-export function layoutGeometry(layout: LayoutState, width: number, height: number, measurements: ActivityMeasurements = {}) {
+export function layoutGeometry(layout: LayoutState, width: number, height: number, measurements: ViewBarMeasurements = {}) {
   const gap = layout.density === "compact" ? 0 : 6;
-  const activityHorizontal = layout.activityBarPosition === "top" || layout.activityBarPosition === "bottom";
-  const secondaryActivityHorizontal = layout.secondaryActivityBarPosition === "top" || layout.secondaryActivityBarPosition === "bottom";
-  const activityHeight = activityHorizontal && layout.activityBarVisible && layout.primarySidebarVisible ? (measurements.primary?.height ?? (layout.activityBarSize === "compact" ? 38 : 46)) : 0;
-  const rail = layout.activityBarVisible && !activityHorizontal ? (measurements.primary?.width ?? (layout.activityBarSize === "compact" ? 32 : 40)) : 0;
-  const secondaryRail = layout.secondaryActivityBarVisible && !secondaryActivityHorizontal ? (measurements.secondary?.width ?? (layout.secondaryBarSize === "compact" ? 32 : 40)) : 0;
-  const secondaryActivityHeight = secondaryActivityHorizontal && layout.secondaryActivityBarVisible && layout.secondarySidebarVisible ? (measurements.secondary?.height ?? (layout.secondaryBarSize === "compact" ? 38 : 46)) : 0;
+  const viewBarHorizontal = layout.primaryViewBarPosition === "top" || layout.primaryViewBarPosition === "bottom";
+  const secondaryViewBarHorizontal = layout.secondaryViewBarPosition === "top" || layout.secondaryViewBarPosition === "bottom";
+  const viewBarHeight = viewBarHorizontal && layout.primaryViewBarVisible && layout.primarySidebarVisible ? (measurements.primary?.height ?? (layout.primaryViewBarSize === "compact" ? 38 : 46)) : 0;
+  const rail = layout.primaryViewBarVisible && !viewBarHorizontal ? (measurements.primary?.width ?? (layout.primaryViewBarSize === "compact" ? 32 : 40)) : 0;
+  const secondaryRail = layout.secondaryViewBarVisible && !secondaryViewBarHorizontal ? (measurements.secondary?.width ?? (layout.secondaryViewBarSize === "compact" ? 32 : 40)) : 0;
+  const secondaryViewBarHeight = secondaryViewBarHorizontal && layout.secondaryViewBarVisible && layout.secondarySidebarVisible ? (measurements.secondary?.height ?? (layout.secondaryViewBarSize === "compact" ? 38 : 46)) : 0;
   const narrow = width < 760;
   const available = Math.max(160, width - rail - secondaryRail - 240 - gap * 2);
   let primary = layout.primarySidebarVisible ? clamp(layout.primaryWidth, 160, narrow ? width - rail - secondaryRail - 20 : available) : 0;
@@ -101,7 +105,7 @@ export function layoutGeometry(layout: LayoutState, width: number, height: numbe
   const panelAboveSecondary=layout.panelVisible&&!panelVertical&&panelTop&&coverage[layout.primarySide === "left" ? "right" : "left"];
   const underPrimary = layout.panelVisible&&!panelVertical&&!panelTop && coverage[layout.primarySide];
   const underSecondary = layout.panelVisible&&!panelVertical&&!panelTop && coverage[layout.primarySide === "left" ? "right" : "left"];
-  return { panelVertical,panelTop,panelWidth,centerAvailable,panelAbovePrimary,panelAboveSecondary, activityHorizontal, activityHeight, secondaryActivityHorizontal, secondaryActivityHeight, banner, abovePrimary: layout.bannerVisible && bannerCoverage[layout.primarySide], aboveSecondary: layout.bannerVisible && bannerCoverage[layout.primarySide === "left" ? "right" : "left"],
+  return { panelVertical,panelTop,panelWidth,centerAvailable,panelAbovePrimary,panelAboveSecondary, viewBarHorizontal, viewBarHeight, secondaryViewBarHorizontal, secondaryViewBarHeight, banner, abovePrimary: layout.bannerVisible && bannerCoverage[layout.primarySide], aboveSecondary: layout.bannerVisible && bannerCoverage[layout.primarySide === "left" ? "right" : "left"],
     bannerColumn: `${bannerCoverage.left ? 1 : 3} / ${bannerCoverage.right ? 6 : 4}`,
     bannerLeftInset: bannerCoverage.left ? (layout.primarySide === "left" ? rail : secondaryRail) + ((layout.primarySide === "left" ? rail : secondaryRail) ? gap : 0) : 0,
     bannerRightInset: bannerCoverage.right ? (layout.primarySide === "right" ? rail : secondaryRail) + ((layout.primarySide === "right" ? rail : secondaryRail) ? gap : 0) : 0,

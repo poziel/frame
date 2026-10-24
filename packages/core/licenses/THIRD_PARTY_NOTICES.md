@@ -1,5 +1,9 @@
 # Third-party notices
 
+## Confbox
+
+Confbox (https://github.com/unjs/confbox) parses JSON, JSONC, JSON5, YAML, TOML and INI theme files. Its MIT license and bundled parser notices are collected in confbox.txt. Retain that file when distributing Frame. Regenerate it with `bun packages/core/scripts/collect-confbox-licenses.ts` after dependency updates.
+
 ## Shiki
 
 Shiki (https://github.com/shikijs/shiki) provides code syntax highlighting, language grammars, and themes. The viewer uses its JavaScript regular expression engine. Retain shiki.txt, which includes the installed dependency licenses, when distributing Frame. Regenerate it with `bun packages/core/scripts/collect-shiki-licenses.ts` after dependency updates.

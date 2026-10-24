@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { FrameIcon } from '@frame/core';
-import { createTerminal, type TerminalController } from './terminal';
+import type { TerminalController } from './terminal';
 import { terminalSurface, type TerminalSurface } from './terminalSurface';
 
-const props = defineProps<{ terminal?: TerminalController; sessionId?: string; profile?: string; cwd?: string; label?: string; errorMessage?: string }>();
+const props = defineProps<{ terminal: TerminalController; sessionId?: string; profile?: string; cwd?: string; label?: string; errorMessage?: string }>();
 const emit = defineEmits<{ ready: [controller: TerminalController, sessionId: string]; focus: [id: string]; find: []; error: [cause: unknown] }>();
-const controller = props.terminal ?? createTerminal({ profile: props.profile, cwd: props.cwd });
+const controller = props.terminal;
 const host = ref<HTMLElement>(); const createdId = ref<string>(); const localError = ref('');
 const id = computed(() => props.sessionId ?? createdId.value);
 const session = computed(() => controller.sessions.value.find(s => s.id === id.value));

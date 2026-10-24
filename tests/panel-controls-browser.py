@@ -32,7 +32,7 @@ with sync_playwright() as p:
   expect(panel.get_by_role('textbox',name='Panel draft',exact=True)).to_have_value('Retained through docking')
  for display,label in [('icons','Icons Only'),('text','Text Only'),('both','Icons and Text')]:
   context().get_by_role('menuitem',name='Show Labels',exact=True).hover()
-  page.get_by_role('menuitemcheckbox',name=label,exact=True).click();assert api('layout.panelDisplay')==display
+  page.get_by_role('menuitemcheckbox',name=label,exact=True).click();assert api('layout.panelViewBarDisplay')==display
  # Customize Layout uses the same state and disables side-dock alignment.
  page.get_by_role('button',name='Customize layout',exact=True).click()
  options=page.get_by_role('menu',name='Layout options',exact=True)

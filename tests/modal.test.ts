@@ -2,6 +2,12 @@ import { expect, test } from "bun:test";
 import { fitModal, initialModal, resizeModal } from "../packages/core/src/frame/modal";
 import { createFrame } from "../packages/core/src/frame/createFrame";
 const bounds = { x: 6, y: 40, width: 1188, height: 690 };
+test('custom minimum height applies to initial sizing, resizing, and small bounds', () => {
+  const box = initialModal(bounds, 480, 200, 300);
+  expect(box.height).toBe(300);
+  expect(resizeModal(box, 'se', 0, -1000, bounds, 300).height).toBe(300);
+  expect(fitModal(box, { ...bounds, height: 180 }, 300).height).toBe(180);
+});
 test("modal geometry stays within the workbench and fits small windows", () => {
   const box = initialModal(bounds, 800, 500);
   expect(box).toEqual({ x: 200, y: 135, width: 800, height: 500 });
@@ -47,4 +53,18 @@ test("unregistering the last view leaves its open region available for a drop", 
   removePrimary(); removeSecondary(); removeBottom();
   expect(frame.views.value).toHaveLength(0);
   expect(frame.layout.primarySidebarVisible).toBe(true); expect(frame.layout.secondarySidebarVisible).toBe(true); expect(frame.layout.panelVisible).toBe(true);
+});
+
+test("modal defaults are per Frame and explicit false and zero override them", () => {
+  const component = { render: () => null };
+  const footer = { render: () => null };
+  const frame = createFrame({ modal: { width: 440, height: 240, contentPadding: 16, draggable: false, resizable: false, maximizable: false } });
+  frame.openModal({ id: 'form', title: 'Form', component, footer });
+  expect(frame.modals[0]).toMatchObject({ width: 440, height: 240, contentPadding: 16, draggable: false, resizable: false, maximizable: false, footer });
+  frame.openModal({ id: 'edge', title: 'Edge', component, contentPadding: 0, draggable: true });
+  expect(frame.modals[1]).toMatchObject({ contentPadding: 0, draggable: true, resizable: false });
+  const other = createFrame();
+  other.openModal({ id: 'form', title: 'Form', component });
+  expect(other.modals[0]?.contentPadding).toBeUndefined();
+  frame.dispose(); other.dispose();
 });

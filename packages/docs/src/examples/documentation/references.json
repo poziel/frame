@@ -375,22 +375,57 @@
     "properties": [],
     "package": "reka-ui"
   },
-  "ActivityBadge": {
-    "description": "Public type declared in packages/core/src/frame/activity.ts.",
-    "usage": "Import ActivityBadge from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export type ActivityBadge = string | number;",
+  "ViewBadge": {
+    "description": "Public type declared in packages/core/src/frame/barTypes.ts.",
+    "usage": "Import ViewBadge from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type ViewBadge = string | number;",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "NavigationActionItem": {
+    "description": "Public interface declared in packages/core/src/frame/navigationItems.ts.",
+    "usage": "Import NavigationActionItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface NavigationActionItem extends NamedNavigationItem { type: 'action'; run: () => void | Promise<void>; active?: boolean | (() => boolean) }",
+    "properties": [
+      {
+        "name": "type",
+        "type": "'action'",
+        "description": "Native input/button behavior."
+      },
+      {
+        "name": "run",
+        "type": "() => void | Promise<void>",
+        "description": "Run configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "active",
+        "type": "boolean | (() => boolean)",
+        "description": "Shows the loading presentation while retaining the mounted content."
+      }
+    ],
+    "package": "@frame/core"
+  },
+  "NavigationItem": {
+    "description": "Public type declared in packages/core/src/frame/navigationItems.ts.",
+    "usage": "Import NavigationItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type NavigationItem = NavigationActionItem | NavigationLinkItem | NavigationDropdownItem | NavigationSeparatorItem;",
     "properties": [],
     "package": "@frame/core"
   },
   "QuickPickItem": {
     "description": "Public interface declared in packages/core/src/types.ts.",
     "usage": "Import QuickPickItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface QuickPickItem {\r\n  id: string;\r\n  label: string;\r\n  detail?: string;\r\n  shortcut?: string;\r\n  disabled?: boolean;\r\n}",
+    "code": "export interface QuickPickItem {\r\n  id: string;\r\n  icon?: string | Component;\r\n  label: string;\r\n  detail?: string;\r\n  shortcut?: string;\r\n  disabled?: boolean;\r\n}",
     "properties": [
       {
         "name": "id",
         "type": "string",
         "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "icon",
+        "type": "string | Component",
+        "description": "Optional leading icon; provide an accessible label for icon-only actions."
       },
       {
         "name": "label",
@@ -433,14 +468,37 @@
     ],
     "package": "@frame/core"
   },
+  "ViewContentSlot": {
+    "description": "Public interface declared in packages/core/src/types.ts.",
+    "usage": "Import ViewContentSlot from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface ViewContentSlot {\r\n  component: Component;\r\n  props?: Record<string, unknown>;\r\n  padded?: boolean;\r\n}",
+    "properties": [
+      {
+        "name": "component",
+        "type": "Component",
+        "description": "Component configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "props",
+        "type": "Record<string, unknown>",
+        "description": "Props configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "padded",
+        "type": "boolean",
+        "description": "Padded configuration for this component; see its Features examples for usage."
+      }
+    ],
+    "package": "@frame/core"
+  },
   "PanelDefinition": {
     "description": "Public interface declared in packages/core/src/types.ts.",
     "usage": "Import PanelDefinition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface PanelDefinition {\r\n  /** Optional activity/view-bar badge; presentation is controlled by frame.activity or frame.secondaryBar. */\r\n  badge?: ActivityBadge;\r\n  id: string;\r\n  label: string;\r\n  icon?: Component;\r\n  actions?: readonly PanelAction[];\r\n  padded?: boolean;\r\n  draggable?: boolean;\r\n  movable?: boolean;\r\n  collapsed?: boolean;\r\n  /** Initial presentation visibility; hiding does not unregister or dispose the view. */\r\n  visible?: boolean;\r\n  component?: Component;\r\n  children?: readonly PanelDefinition[];\r\n  props?: Record<string, unknown>;\r\n}",
+    "code": "export interface PanelDefinition {\r\n  /** Optional view-item badge; presentation is controlled by frame.primaryViewBar or frame.secondaryViewBar. */\r\n  badge?: ViewBadge;\r\n  id: string;\r\n  label: string;\r\n  icon?: Component;\r\n  actions?: readonly PanelAction[];\r\n  padded?: boolean;\r\n  top?: ViewContentSlot;\r\n  bottom?: ViewContentSlot;\r\n  draggable?: boolean;\r\n  movable?: boolean;\r\n  collapsed?: boolean;\r\n  /** Initial presentation visibility; hiding does not unregister or dispose the view. */\r\n  visible?: boolean;\r\n  component?: Component;\r\n  children?: readonly PanelDefinition[];\r\n  props?: Record<string, unknown>;\r\n}",
     "properties": [
       {
         "name": "badge",
-        "type": "ActivityBadge",
+        "type": "ViewBadge",
         "description": "Badge configuration for this component; see its Features examples for usage."
       },
       {
@@ -467,6 +525,16 @@
         "name": "padded",
         "type": "boolean",
         "description": "Padded configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "top",
+        "type": "ViewContentSlot",
+        "description": "Top configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "bottom",
+        "type": "ViewContentSlot",
+        "description": "Distance in pixels from the presentation boundary bottom."
       },
       {
         "name": "draggable",
@@ -541,7 +609,7 @@
   "PanelAction": {
     "description": "Public interface declared in packages/core/src/types.ts.",
     "usage": "Import PanelAction from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface PanelAction { id: string; label: string; icon?: Component; run: () => void; disabled?: boolean }",
+    "code": "export interface PanelAction { id: string; label: string; icon?: Component; run: () => void; disabled?: boolean; menu?: readonly FrameMenuItem[]; onSelect?: (item: FrameMenuItem) => void }",
     "properties": [
       {
         "name": "id",
@@ -567,6 +635,16 @@
         "name": "disabled",
         "type": "boolean",
         "description": "Prevents user interaction while retaining the current value."
+      },
+      {
+        "name": "menu",
+        "type": "readonly FrameMenuItem[]",
+        "description": "Menu configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "onSelect",
+        "type": "(item: FrameMenuItem) => void",
+        "description": "On Select configuration for this component; see its Features examples for usage."
       }
     ],
     "package": "@frame/core"
@@ -625,7 +703,7 @@
   "ModalDefinition": {
     "description": "Public interface declared in packages/core/src/types.ts.",
     "usage": "Import ModalDefinition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface ModalDefinition {\r\n  id: string;\r\n  title: string;\r\n  component: Component;\r\n  props?: Record<string, unknown>;\r\n  icon?: Component;\r\n  actions?: readonly PanelAction[];\r\n  width?: number;\r\n  height?: number;\r\n  maximized?: boolean;\r\n}",
+    "code": "export interface ModalDefinition extends ModalOptions {\r\n  id: string;\r\n  title: string;\r\n  component: Component;\r\n  props?: Record<string, unknown>;\r\n  icon?: Component;\r\n  actions?: readonly PanelAction[];\r\n  width?: number;\r\n  height?: number;\r\n  maximized?: boolean;\r\n  footer?: Component;\r\n  footerProps?: Record<string, unknown>;\r\n}",
     "properties": [
       {
         "name": "id",
@@ -671,6 +749,16 @@
         "name": "maximized",
         "type": "boolean",
         "description": "Maximized configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "footer",
+        "type": "Component",
+        "description": "Footer configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "footerProps",
+        "type": "Record<string, unknown>",
+        "description": "Footer Props configuration for this component; see its Features examples for usage."
       }
     ],
     "package": "@frame/core"
@@ -861,25 +949,22 @@
     ],
     "package": "@frame/core"
   },
-  "ActivityAction": {
-    "description": "Public interface declared in packages/core/src/types.ts.",
-    "usage": "Import ActivityAction from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface ActivityAction { badge?: ActivityBadge; showInRail?: boolean; id: string; label: string; icon?: Component; run: () => void; disabled?: boolean; active?: boolean | (() => boolean) }",
+  "SelectItem": {
+    "description": "Public type declared in packages/core/src/types.ts.",
+    "usage": "Import SelectItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export type SelectItem = SelectOption | SelectSeparator;",
+    "properties": [],
+    "package": "@frame/core"
+  },
+  "CommandCategory": {
+    "description": "Public interface declared in packages/core/src/frame/commands.ts.",
+    "usage": "Import CommandCategory from @frame/core. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface CommandCategory { prefix: string; label: string; placeholder?: string }",
     "properties": [
       {
-        "name": "badge",
-        "type": "ActivityBadge",
-        "description": "Badge configuration for this component; see its Features examples for usage."
-      },
-      {
-        "name": "showInRail",
-        "type": "boolean",
-        "description": "Show In Rail configuration for this component; see its Features examples for usage."
-      },
-      {
-        "name": "id",
+        "name": "prefix",
         "type": "string",
-        "description": "Id configuration for this component; see its Features examples for usage."
+        "description": "Prefix configuration for this component; see its Features examples for usage."
       },
       {
         "name": "label",
@@ -887,33 +972,11 @@
         "description": "Visible or accessible label for the control."
       },
       {
-        "name": "icon",
-        "type": "Component",
-        "description": "Optional leading icon; provide an accessible label for icon-only actions."
-      },
-      {
-        "name": "run",
-        "type": "() => void",
-        "description": "Run configuration for this component; see its Features examples for usage."
-      },
-      {
-        "name": "disabled",
-        "type": "boolean",
-        "description": "Prevents user interaction while retaining the current value."
-      },
-      {
-        "name": "active",
-        "type": "boolean | (() => boolean)",
-        "description": "Shows the loading presentation while retaining the mounted content."
+        "name": "placeholder",
+        "type": "string",
+        "description": "Hint displayed when the field is empty."
       }
     ],
-    "package": "@frame/core"
-  },
-  "SelectItem": {
-    "description": "Public type declared in packages/core/src/types.ts.",
-    "usage": "Import SelectItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export type SelectItem = SelectOption | SelectSeparator;",
-    "properties": [],
     "package": "@frame/core"
   },
   "Frame": {
@@ -1187,6 +1250,34 @@
       }
     ],
     "package": "@frame/core"
+  },
+  "ViewerFile": {
+    "description": "Public interface declared in packages/features/src/viewer.ts.",
+    "usage": "Import ViewerFile from @frame/features. The definition below is the source contract; optional fields may be omitted.",
+    "code": "export interface ViewerFile {\r\n  source: ViewerSource;\r\n  name?: string;\r\n  mimeType?: string;\r\n  language?: string;\r\n}",
+    "properties": [
+      {
+        "name": "source",
+        "type": "ViewerSource",
+        "description": "Source configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "description": "Icon name, optionally including its Iconify collection prefix."
+      },
+      {
+        "name": "mimeType",
+        "type": "string",
+        "description": "Mime Type configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "language",
+        "type": "string",
+        "description": "Syntax language identifier."
+      }
+    ],
+    "package": "@frame/features"
   },
   "NotificationHistory": {
     "description": "Public type declared in packages/features/src/notificationHistory.ts.",

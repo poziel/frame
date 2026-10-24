@@ -2,6 +2,7 @@
 import { onBeforeUnmount, shallowRef, ref } from "vue";
 import { AIChat, createAIChat, type ChatMessage, type ChatResponder } from "@frame/features";
 import { FrameCheckbox } from "@frame/core";
+withDefaults(defineProps<{ sidebar?: boolean }>(), { sidebar: false });
 const emit = defineEmits<{ feedback: [text: string] }>();
 const reversed = ref(false);
 const respond: ChatResponder = async (request, writer) => {
@@ -40,8 +41,8 @@ function context() { chat.value.state.attachments.push({ id: crypto.randomUUID()
 onBeforeUnmount(() => chat.value.dispose());
 </script>
 <template>
-  <div class="frame-chat-demo">
-    <div class="frame-chat-demo-toolbar"><FrameCheckbox v-model="reversed" label="Reverse message alignment"/><span>Local demo · random replies · no AI connection</span></div>
+  <div class="frame-chat-demo" :class="{ 'frame-chat-demo-sidebar': sidebar }">
+    <div class="frame-chat-demo-toolbar"><FrameCheckbox v-model="reversed" label="Reverse message alignment"/><span>Local demo · random replies · no AI connection</span><a href="#/playground/ai-chat">Open the manual AI chat playground</a></div>
     <div class="frame-chat-demo-room"><AIChat :chat="chat" :user-alignment="reversed ? 'left' : 'right'" :assistant-alignment="reversed ? 'right' : 'left'" :attachment-actions="[{ id: 'workspace', label: 'Current workspace' }]" @forge="forge" @attachment-action="context"><template #empty><div class="frame-chat-demo-empty"><strong>A little room to think.</strong><p>Send a prompt to see thinking unfold, followed by two messages in one response.</p></div></template></AIChat></div>
   </div>
 </template>
@@ -53,4 +54,7 @@ onBeforeUnmount(() => chat.value.dispose());
 .frame-chat-demo-empty { padding: 28px 10px; max-width: 350px; color: var(--frame-muted); }
 .frame-chat-demo-empty strong { font-weight: 500; font-size: 16px; color: var(--frame-text); }
 .frame-chat-demo-empty p { margin-top: 8px; }
+.frame-chat-demo-sidebar { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+.frame-chat-demo-sidebar .frame-chat-demo-toolbar { padding: 10px; margin: 0; gap: 8px; }
+.frame-chat-demo-sidebar .frame-chat-demo-room { flex: 1; height: auto; min-height: 0; max-height: none; border: 0; border-radius: 0; }
 </style>

@@ -96,3 +96,8 @@ test('disposing during spawn closes the late process', async () => {
   await disposal;
   expect(closed).toEqual(['late']);
 });
+
+ test('terminal creation requires an explicit execution backend', () => {
+  // @ts-expect-error Exercise a JavaScript caller without a backend.
+  expect(() => createTerminal()).toThrow('TerminalBackend must be supplied');
+});

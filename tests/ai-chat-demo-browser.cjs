@@ -1,0 +1,42 @@
+// playwright-cli -s=chat-playground run-code --filename tests/ai-chat-demo-browser.cjs
+async page => {
+  const check = (ok, message) => { if (!ok) throw new Error(message); };
+  const errors = []; page.on('pageerror', error => errors.push(String(error)));
+  await page.goto('http://localhost:1420/#/playground/ai-chat'); await page.reload();
+  await page.setViewportSize({ width: 1550, height: 1000 });
+  const work = page.getByRole('main', { name: 'AI chat playground', exact: true });
+  const chat = page.getByRole('region', { name: 'AI chat', exact: true });
+  const prompt = chat.getByRole('textbox', { name: 'Message', exact: true });
+  const choose = async (label, option) => { await work.getByRole('combobox', { name: label, exact: true }).click(); await page.getByRole('option', { name: option, exact: true }).click(); };
+  await prompt.fill('An empty manual turn'); await prompt.press('Enter');
+  check(await chat.locator('.frame-chat-work-events').count() === 0, 'Empty work must have no floating border container');
+  await chat.getByRole('button', { name: 'Stop response', exact: true }).click();
+  await work.getByRole('button', { name: 'Reset session', exact: true }).click();
+  await choose('Demo pace', 'Fast');
+  await work.getByRole('button', { name: 'Run demo example', exact: true }).click();
+  check(await work.getByRole('button', { name: 'Send text', exact: true }).isDisabled(), 'Manual controls must be disabled during a scripted response');
+  const questions = chat.locator('.frame-chat-interaction.pending').filter({ has: page.getByText('A couple of preferences', { exact: true }) });
+  await questions.waitFor({ state: 'visible' });
+  await questions.getByRole('radio', { name: 'Pixel art', exact: true }).click();
+  await questions.getByRole('checkbox', { name: 'PNG', exact: true }).click();
+  await questions.getByRole('button', { name: 'Submit answers', exact: true }).click();
+  await chat.getByRole('button', { name: 'Allow', exact: true }).waitFor({ state: 'visible' });
+  await chat.getByRole('button', { name: 'Allow', exact: true }).click();
+  await chat.locator('.frame-chat-work-summary').filter({ hasText: 'Worked for' }).waitFor({ state: 'visible' });
+  check(!(await chat.locator('.frame-chat-work').evaluate(element => element.open)), 'Demo must collapse completed work');
+  check((await chat.locator('.frame-chat-answer').textContent()).includes('interactive tour is complete'), 'Tour must end with an answer');
+  await chat.getByRole('img', { name: 'demo-icon.png', exact: true }).waitFor({ state: 'visible' });
+  await page.waitForFunction(() => { const image = document.querySelector('.frame-chat-artifact img'); return image?.complete && image.naturalWidth > 0; });
+  check(await chat.getByRole('button', { name: 'Download demo-notes.txt', exact: true }).isVisible(), 'Demo must deliver a downloadable document');
+  await prompt.fill('Show me another idea'); await prompt.press('Enter');
+  check((await work.locator('.playground-feedback').textContent()).includes('Quick streamed answer'), 'The next prompt must advance the cycle');
+  await chat.locator('.frame-chat-message.assistant').last().locator('.frame-chat-work-summary').filter({ hasText: 'Worked for' }).waitFor({ state: 'visible' });
+  check((await chat.locator('.frame-chat-answer').last().textContent()).includes('weather journal'), 'Second example must respond automatically to a user prompt');
+  await choose('Responder mode', 'Manual controls');
+  await prompt.fill('Back to manual'); await prompt.press('Enter');
+  check(await work.getByRole('button', { name: 'Send text', exact: true }).isEnabled(), 'Manual controls must become available again');
+  check(await chat.locator('.frame-chat-work').last().locator('.frame-chat-work-events').count() === 0, 'New empty work must still omit the border');
+  await chat.getByRole('button', { name: 'Stop response', exact: true }).click();
+  if (errors.length) throw new Error(errors.join('\n'));
+  return 'Interactive tour, user decisions, valid image/document delivery, cycle-on-prompt, manual takeover and empty-border fix passed.';
+}

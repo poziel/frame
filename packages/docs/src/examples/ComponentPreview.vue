@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import FormExamples from './FormExamples.vue';
+import FileUploadExample from './FileUploadExample.vue';
 import { formExamples } from './formCatalog';
 import { computed, h, onBeforeUnmount, ref, useId } from "vue";
 import { useFrame } from "../../../core/src/frame/createFrame";
@@ -27,6 +28,7 @@ import CodeEditorExample from './CodeEditorExample.vue';
 import LoadingExample from "./LoadingExample.vue";
 import AIChatExample from "./AIChatExample.vue";
 import TerminalExample from './TerminalExample.vue';
+import UniversalViewerExample from './UniversalViewerExample.vue';
 const props = defineProps<{ id: string; variant?: string }>();
 const emit = defineEmits<{ feedback: [text: string] }>();
 const frame = useFrame(), instance = useId();
@@ -52,7 +54,7 @@ const options = computed<SelectItem[]>(() => {
 if (props.variant === "separators") choice.value = "first-0";
 const items: FrameMenuItem[] = [{ id: "new", label: "New item" }, { id: "views", label: "Open view", children: [{ id: "outline", label: "Outline" }, { id: "preview", label: "Preview" }] }, { id: "separator", type: "separator" }, { id: "disabled", label: "Unavailable action", disabled: true }];
 function select(item: FrameMenuItem) { if (item.type !== "separator") report(`Selected: ${item.label}`); }
-function modal() { frame.openModal({ id: `showcase-modal-${instance}`, title: "Component example", component: ShowcaseModalContent, icon: () => h(FrameIcon, { name: "window" }), width: 620, height: 360 }); }
+function modal() { frame.openModal({ id: `showcase-modal-${instance}`, title: "Component example", component: ShowcaseModalContent, icon: () => h(FrameIcon, { name: "window" }), width: 620, height: 360, contentPadding: 16, footer: { render: () => h(FrameButton, { variant: "primary", onClick: () => frame.closeModal(`showcase-modal-${instance}`) }, () => "Done") } }); }
 async function pick() { const item = await frame.showQuickPick([{ id: "one", label: "First choice", detail: "A normal choice" }, { id: "two", label: "Second choice" }, { id: "disabled", label: "Unavailable", disabled: true }], { title: "Try Quick input" }); report(item ? `Selected: ${item.label}` : "Picker cancelled"); }
 function openViews() {
   const viewId = `showcase-collection-${instance}`;
@@ -60,17 +62,20 @@ function openViews() {
   frame.openView(viewId); report("Example collection opened in the secondary sidebar. It is removed when you leave this example.");
 }
 function addAction() {
-  if (!actionAdded) { disposers.push(frame.registerActivityAction({ id: `showcase-action-${instance}`, label: "Example action", icon: () => h(FrameIcon, { name: "zap" }), run: () => click("Activity action") })); actionAdded = true; }
-  report("A lightning action is now in the activity bar. Click it without switching views; it is removed when you leave this example.");
+  frame.navigationBar.setVisible(true);
+  if (!actionAdded) { disposers.push(frame.registerNavigationItem({ type:"action", id: `showcase-action-${instance}`, label: "Example action", icon: () => h(FrameIcon, { name: "zap" }), run: () => click("Navigation action") })); actionAdded = true; }
+  report("A lightning action is now in the navigation bar. Click it without switching views; it is removed when you leave this example.");
 }
 onBeforeUnmount(() => disposers.reverse().forEach(dispose => dispose()));
 </script>
 <template><div class="component-preview-controls">
-  <template v-if="formExamples.some(item => item.id === id)"><FormExamples :id="id" @feedback="report"/></template><template v-else-if="id === 'loader'"><LoaderExample /></template>
+  <FileUploadExample v-if="id === 'file-upload' || id === 'file-drop-zone'" :id="id" :variant="variant" />
+  <template v-else-if="formExamples.some(item => item.id === id)"><FormExamples :id="id" @feedback="report"/></template><template v-else-if="id === 'loader'"><LoaderExample /></template>
   <template v-else-if="id === 'code-block'"><CodeBlockExample /></template>
   <template v-else-if="id === 'code-editor'"><CodeEditorExample /></template>
   <template v-else-if="id === 'ai-chat'"><AIChatExample @feedback="report"/></template>
   <template v-else-if="id === 'terminal'"><TerminalExample/></template>
+  <template v-else-if="id === 'universal-viewer'"><UniversalViewerExample/></template>
   <template v-else-if="id === 'loading'"><LoadingExample /></template>
   <template v-else-if="id === 'buttons'"><div class="showcase-row"><FrameButton :disabled="disabled" @click="click('Ghost')">Quiet action</FrameButton><FrameButton variant="secondary" :disabled="disabled" @click="click('Secondary')">Secondary action</FrameButton><FrameButton variant="primary" icon="check" :disabled="disabled" @click="click('Primary')">Primary action</FrameButton></div><FrameCheckbox v-model="disabled" label="Disable the buttons"/></template>
   <template v-else-if="id === 'icon-buttons'"><div class="showcase-row"><FrameIconButton label="Refresh preview" icon="refresh" :size="size" :tooltip="tooltip" :hover-highlight="highlight" @click="click('Refresh')"/><FrameIconButton label="Add item" icon="add" :size="size" :tooltip="tooltip" :hover-highlight="highlight" @click="click('Add')"/><FrameIconButton label="Disabled action" icon="close" disabled/></div><SettingControl :setting="{ id: 'size', label: 'Button size', type: 'range', min: 24, max: 48, default: 28 }" :model-value="size" @update:model-value="size = Number($event)"/><FrameCheckbox v-model="tooltip" label="Show tooltips"/><FrameCheckbox v-model="highlight" label="Highlight on hover"/></template>
@@ -95,5 +100,5 @@ onBeforeUnmount(() => disposers.reverse().forEach(dispose => dispose()));
   <template v-else-if="id === 'banner'"><div class="showcase-row"><FrameButton variant="secondary" :disabled="!frame.banner.value" @click="frame.openBanner(); report('Banner opened above the workspace')">Show banner</FrameButton><FrameButton @click="frame.closeBanner()">Hide banner</FrameButton></div></template>
   <template v-else-if="id === 'workspace'"><div class="showcase-row"><FrameButton v-for="direction in (['left','right','up','down'] as const)" :key="direction" variant="secondary" @click="frame.splitWorkspace(direction)">Split {{ direction }}</FrameButton></div><p>resetWorkspace returns to a single empty workspace.</p></template>
   <template v-else-if="id === 'views'"><FrameButton variant="secondary" @click="openViews">Open a live collection in the secondary sidebar</FrameButton></template>
-  <template v-else-if="id === 'activity-actions'"><FrameButton variant="secondary" @click="addAction">Add a temporary activity action</FrameButton><FrameButton @click="frame.resetWorkspace()">Clear the workspace</FrameButton></template>
+  <template v-else-if="id === 'navigation-items'"><FrameButton variant="secondary" @click="addAction">Add a temporary navigation action</FrameButton><FrameButton @click="frame.resetWorkspace()">Clear the workspace</FrameButton></template>
 </div></template>

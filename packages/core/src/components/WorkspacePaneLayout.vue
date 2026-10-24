@@ -4,6 +4,8 @@ import type { ComponentPublicInstance } from "vue";
 import type { WorkspaceNode, WorkspacePane } from "../types";
 import ResizeHandle from "./ResizeHandle.vue";
 import AppIcon from "./AppIcon.vue";
+import {useFrame} from "../frame/createFrame";
+const workspace=useFrame().workspace;
 const props = defineProps<{ node: WorkspaceNode; panes: readonly WorkspacePane[]; activeId: string; multiple: boolean }>();
 const emit = defineEmits<{ focus: [id: string]; close: [id: string]; resize: [id: string, ratio: number]; host: [id: string, element: HTMLElement | null]; menu: [id: string, event: MouseEvent] }>();
 const element = ref<HTMLElement>();
@@ -25,7 +27,7 @@ onBeforeUnmount(() => { observer?.disconnect(); if (hostId) emit("host", hostId,
 </script>
 <template>
   <section v-if="node.type === 'pane'" ref="element" class="workspace-pane" :class="{ active: activeId === node.id, multiple }" :aria-label="label" @pointerdown="emit('focus', node.id)" @focusin="emit('focus', node.id)" @contextmenu="context">
-    <button v-if="multiple" class="icon-button pane-close" :aria-label="`Close pane: ${label}`" @click="emit('close', node.id)"><AppIcon name="close" :size="16"/></button>
+    <button v-if="multiple && workspace.paneMode(node.id) !== 'tabs'" class="icon-button pane-close" :aria-label="`Close pane: ${label}`" @click="emit('close', node.id)"><AppIcon name="close" :size="16"/></button>
     <div :ref="hostRef" class="workspace-pane-host" :data-pane-id="node.id"/>
   </section>
   <div v-else ref="element" class="workspace-split" :class="node.axis" :style="node.axis === 'x' ? { gridTemplateColumns: `minmax(0, ${node.ratio}fr) var(--workspace-pane-gap) minmax(0, ${1 - node.ratio}fr)` } : { gridTemplateRows: `minmax(0, ${node.ratio}fr) var(--workspace-pane-gap) minmax(0, ${1 - node.ratio}fr)` }">

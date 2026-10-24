@@ -1,6 +1,5 @@
 param(
     [switch]$Browser,
-    [switch]$Native,
     [string]$Python = "python"
 )
 $ErrorActionPreference = "Stop"
@@ -21,7 +20,7 @@ try {
     $packOutput = npm pack ./packages/core --pack-destination $artifactPath --json | Out-String
     Assert-Exit "Core archive creation"
     $archive = @($packOutput | ConvertFrom-Json)[0]
-    if (@($archive.files | Where-Object { $_.path -match '(^src/|^node_modules/|^apps/)' }).Count) {
+    if (@($archive.files | Where-Object { ($_.path -match '(^src/|^node_modules/|^apps/)') -and $_.path -ne 'src/themes/default.css' }).Count) {
         throw "Source, dependency, or application files leaked into the archive."
     }
     New-Item -ItemType Directory $consumerPath | Out-Null
@@ -48,31 +47,5 @@ try {
         Assert-Exit "Browser integration"
     }
 
-    if ($Native) {
-        if (-not $IsWindows) { throw "The native smoke test currently supports Windows only." }
-        $previousTarget = $env:CARGO_TARGET_DIR
-        $previousResult = $env:FRAME_CONSUMER_RESULT
-        try {
-            $env:CARGO_TARGET_DIR = Join-Path $repositoryRoot "packages/docs/src-tauri/target"
-            cargo build --manifest-path (Join-Path $consumerPath "src-tauri/Cargo.toml") --features tauri/custom-protocol
-            Assert-Exit "Independent native host build"
-            $env:FRAME_CONSUMER_RESULT = Join-Path $consumerPath "native-result.json"
-            $process = Start-Process -FilePath (Join-Path $env:CARGO_TARGET_DIR "debug/frame-external-consumer.exe") -WindowStyle Hidden -PassThru
-            try {
-                if (-not $process.WaitForExit(30000)) { throw "Native smoke test timed out after 30 seconds." }
-                if (-not (Test-Path -LiteralPath $env:FRAME_CONSUMER_RESULT)) { throw "Native host exited without a report." }
-                $result = Get-Content -LiteralPath $env:FRAME_CONSUMER_RESULT -Raw | ConvertFrom-Json
-                Copy-Item -LiteralPath $env:FRAME_CONSUMER_RESULT -Destination (Join-Path $artifactPath "external-consumer-native.json")
-                if (-not $result.ok) { throw "Native smoke test failed: $($result.error)" }
-                $result | ConvertTo-Json -Depth 5
-            } finally {
-                if (-not $process.HasExited) { $process.Kill() }
-                $process.Dispose()
-            }
-        } finally {
-            $env:CARGO_TARGET_DIR = $previousTarget
-            $env:FRAME_CONSUMER_RESULT = $previousResult
-        }
-    }
     Write-Host "External consumer validation passed. Consumer retained at: $consumerPath"
 } finally { Pop-Location }

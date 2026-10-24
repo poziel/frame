@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["library-consumer.ts", "viewer-consumer.ts", "general-consumer.ts", "notification-consumer.ts", "secondary-bar-consumer.ts", "panel-consumer.ts"],
+  "include": ["agent-consumer.ts", "commands-consumer.ts", "library-consumer.ts", "workspace-consumer.ts", "navigation-items-consumer.ts", "viewer-consumer.ts", "general-consumer.ts", "notification-consumer.ts", "secondary-bar-consumer.ts", "panel-consumer.ts", "status-consumer.ts"],
   "compilerOptions": {
     "paths": {
       "@frame/core": ["../packages/core/dist/types/frame/index.d.ts"],

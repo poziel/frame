@@ -4,8 +4,14 @@
   <body>
     <div id="sample" class="bg-frame-surface text-frame-body p-frame-content rounded-frame-control font-frame-body shadow-frame-overlay duration-[var(--frame-duration)] ease-frame">Themed application component</div>
     <div id="ordinary" class="flex gap-4 p-4">Ordinary Tailwind utilities</div>
+    <div id="scales" class="bg-surface text-foreground p-4 rounded-md font-sans text-sm shadow-md font-medium tracking-wide ease-out transition">Frame scales</div>
+    <div id="leading" class="font-serif leading-relaxed">Named line height</div>
     <button id="native">Native button keeps its browser styling</button>
     <div id="portal"></div>
+    <div id="instances"></div>
+    <section id="standalone"><div id="standalone-sample" class="bg-surface p-4 rounded-md font-sans text-sm">Standalone root</div><div id="standalone-control"></div></section>
+    <div id="stock" class="bg-red-500">Stock palette is opt-in</div>
+    <script type="module" src="./instances.ts"></script>
     <script type="module">
       import { createApp, h } from 'vue';
       import { PopoverRoot, PopoverTrigger, PopoverPortal, PopoverContent } from 'reka-ui';

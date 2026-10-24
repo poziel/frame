@@ -31,14 +31,15 @@
     "@internationalized/date": "^3.10.1",
     "@shikijs/langs": "^4.5.0",
     "@shikijs/themes": "^4.5.0",
-    "@tauri-apps/api": "^2",
-    "@tauri-apps/plugin-opener": "^2",
+    "confbox": "^0.3.1",
     "ldrs": "^1.1.9",
     "reka-ui": "^2.11.0",
     "shiki": "^4.5.0"
   },
   "scripts": {
-    "build": "vite build && vue-tsc -p tsconfig.json && bun ../../scripts/check-library-boundary.ts"
+    "tokens:generate": "bun scripts/generate-component-tokens.ts && bun scripts/generate-theme-css.ts",
+    "tokens:check": "bun scripts/generate-component-tokens.ts --check",
+    "build": "bun run tokens:generate && vite build && vue-tsc -p tsconfig.json && bun ../../scripts/check-library-boundary.ts"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.7",

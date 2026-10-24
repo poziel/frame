@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { h, onBeforeUnmount, onMounted, reactive, ref } from "vue";
+import { createDemoTerminalBackend } from "./examples/terminalDemo";
+import { h, markRaw, onBeforeUnmount, onMounted, reactive, ref } from "vue";
 import { createFrame, FrameShell } from "@frame/core";
-import { createNotificationHistory, NotificationPanel, NotificationIndicator } from "@frame/features";
+import { vscodeLight2026, vscodeHighContrastBlack, vscodeHighContrastWhite } from '@frame/themes';
+import { createNotificationHistory, NotificationPanel } from "@frame/features";
 import { createTerminal, createTerminalView } from '@frame/features';
 import AccentPalette from "./examples/AccentPalette.vue";
 import ApiCatalog from "./examples/ApiCatalog.vue";
@@ -9,6 +11,9 @@ import { apiViewId, openApiReference } from "./examples/apiNavigation";
 import { typeDocs } from "./examples/typeDocs";
 import SubViewExample from "./examples/SubViewExample.vue";
 import ComponentCatalog from "./examples/ComponentCatalog.vue";
+import AIChatPlaygroundChat from "./examples/AIChatPlaygroundChat.vue";
+import { createChatPlayground } from "./examples/chatPlayground";
+import { openChatPlayground } from "./examples/chatPlaygroundNavigation";
 import SecondarySidebarExample from "./examples/SecondarySidebarExample.vue";
 import FrameIcon from "../../core/src/components/FrameIcon.vue";
 import GuideCatalog from "./guides/GuideCatalog.vue";
@@ -19,16 +24,41 @@ import "./examples/sample.css";
 import "./docs.css";
 
 // The host application owns its contributions; Frame only renders and routes them.
-const frame = createFrame({ navigation: true });
-const notificationHistory = createNotificationHistory(frame);
-const terminal = createTerminal();
+const frame = createFrame({ navigation: true, navigationBar: { display: "both", allowAddSeparator: true }, primaryViewBar: { allowAddSeparator: true }, secondaryViewBar: { allowAddSeparator: true }, panelViewBar: { allowAddSeparator: true } });
+const notificationHistory = createNotificationHistory(frame, { statusBar: true });
+const removeStatusName = frame.status.register({ id: 'docs.name', kind: 'text', label: 'Application name', text: 'Frame documentation', side: 'left' });
+const removeStatusVersion = frame.status.register({ id: 'docs.version', kind: 'text', label: 'Version', text: 'Frame 0.1', side: 'right' });
+const terminal = createTerminal({ backend: createDemoTerminalBackend() });
 const removeTerminalView = frame.registerView(createTerminalView({ id: 'features.terminal', frame, terminal }), 'bottom');
 const titleText = ref("Frame (Workspace)");
 const showSearch = ref(true);
 
 const cleanups: (() => void)[] = [];
-cleanups.push(frame.registerCommand({ id: "features.notifications", label: "Notifications: Toggle history", run: notificationHistory.toggle }));
-cleanups.push(frame.registerActivityAction({ id: "demo.home", label: "Home", icon: () => h(FrameIcon, { name: "home", size: 20 }), active: () => frame.workspace.panes.value.find(pane => pane.id === frame.workspace.activePane.value)?.props?.pageId === "overview", run: () => openGuide(frame) }));
+const chatPlayground = markRaw(createChatPlayground());
+const showChatPlayground = () => openChatPlayground(frame, chatPlayground);
+cleanups.push(() => chatPlayground.dispose());
+cleanups.push(frame.registerCommand({ id: 'demo.chat.playground', label: 'Demo: Open AI chat playground', group: 'Features', run: showChatPlayground }));
+const themePresets = [vscodeLight2026, vscodeHighContrastBlack, vscodeHighContrastWhite];
+for (const theme of themePresets) cleanups.push(frame.theme.register(theme));
+cleanups.push(frame.registerCommand({
+  id: 'demo.workspace.tabs', label: 'Demo: Open workspace tabs', group: 'Workspace',
+  enabled: () => frame.workspace.canSplit(),
+  run: async () => {
+    frame.workspace.configure({ tabs: { allowCreate: true, allowClose: true, allowMove: true, lastTab: 'allow-empty' } });
+    const paneId = frame.splitWorkspace('right');
+    frame.workspace.setPaneMode(paneId, 'tabs');
+    await frame.workspace.requestTab(paneId);
+  },
+}));
+cleanups.push(removeStatusName, removeStatusVersion);
+const navigationSelection = ref('home');
+for (const item of [{id:'home',label:'Home',icon:'home',href:'#/guide/overview'},{id:'reference',label:'Reference',icon:'book',href:'#/api/Frame'}]) cleanups.push(frame.registerNavigationItem({id:`demo.navigation.${item.id}`,type:'link',href:item.href,label:item.label,icon:()=>h(FrameIcon,{name:item.icon,size:20}),active:()=>navigationSelection.value===item.id,onNavigate:()=>{navigationSelection.value=item.id;if(item.id==='home')openGuide(frame);else openApiReference(frame,'Frame');}}));
+cleanups.push(frame.registerNavigationItem({id:'demo.nav.separator',type:'separator',label:'Navigation divider'}));
+cleanups.push(frame.registerNavigationItem({id:'demo.nav.commands',type:'action',label:'Quick actions',icon:()=>h(FrameIcon,{name:'search',size:20}),run:()=>frame.openCommands()}));
+cleanups.push(frame.registerNavigationItem({ id: 'demo.nav.chat-playground', type: 'action', label: 'AI chat playground', icon: () => h(FrameIcon, { name: 'beaker', size: 20 }), run: showChatPlayground }));
+cleanups.push(frame.registerNavigationItem({id:'demo.nav.layout',type:'dropdown',label:'Layout',icon:()=>h(FrameIcon,{name:'layout',size:20}),items:[{id:'demo.nav.dock',type:'dropdown',label:'Navigation bar position',items:(['top','bottom','left','right']as const).map(position=>({id:`demo.nav.dock.${position}`,type:'action' as const,label:position[0]!.toUpperCase()+position.slice(1),run:()=>{frame.navigationBar.setPosition(position);}}))},{id:'demo.nav.docs',type:'link',label:'Frame reference',href:'#/api/Frame',onNavigate:()=>openApiReference(frame,'Frame') }]}));
+
+cleanups.push(frame.registerCommand({ id: "features.notifications", scope: "frame", label: "Notifications: Toggle history", run: notificationHistory.toggle }));
 cleanups.push(frame.registerView({ id: guidesViewId, label: "Guides", icon: () => h(FrameIcon, { name: "book", size: 20 }), component: GuideCatalog }, "primary"));
 cleanups.push(frame.registerView({ id: "demo.accent-palette", label: "Accent palette", icon: () => h(FrameIcon, { name: "symbol-color", size: 20 }), component: AccentPalette }, "primary"));
 cleanups.push(frame.registerView({ id: "demo.components", label: "Components", icon: () => h(FrameIcon, { name: "symbol-class", size: 20 }), component: ComponentCatalog }, "primary"));
@@ -40,6 +70,7 @@ cleanups.push(frame.registerView({ id: 'demo.explorer', label: 'Explorer example
   { id: 'demo.timeline', label: 'Timeline', component: SubViewExample, props: { title: 'Timeline' } },
 ] }, 'primary'));
 cleanups.push(frame.registerView({ id: 'demo.scratchpad', label: 'Scratchpad', component: SubViewExample, props: { title: 'Scratchpad' } }, 'bottom'));
+cleanups.push(frame.registerView({ id: "demo.secondary.chat", label: "AI chat", icon: () => h(FrameIcon, { name: "comment-discussion", size: 16 }), component: AIChatPlaygroundChat, props: { session: chatPlayground, openPlayground: showChatPlayground }, padded: false }, "secondary"));
 for (const view of [
   {id:'demo.secondary.info',label:'Info',icon:'info',description:'Inspect details for the current selection.'},
   {id:'demo.secondary.outline',label:'Outline',icon:'list-tree',description:'Review the structure of the current document.'},
@@ -59,6 +90,7 @@ for (const view of [
 }
 
 cleanups.push(frame.registerSettingsSection({ id: "appearance", title: "Appearance", description: "Arrange Frame around the way you work.", settings: [
+  { id: 'appearance.theme', label: 'Theme', type: 'select', default: 'default', getValue: () => frame.theme.current.value?.id ?? 'default', options: [{ value: 'default', label: 'Frame default' }, ...themePresets.map(theme => ({ value: theme.id, label: theme.name }))], onChange: value => { const theme = themePresets.find(theme => theme.id === value); if (theme) frame.theme.set(theme); else frame.theme.reset(); } },
   { id: "appearance.density", label: "Layout density", type: "select", default: "default", getValue: () => frame.layout.density, options: [{ value: "default", label: "Default", description: "Roomier regions with resize grips." }, { value: "compact", label: "Compact", description: "Tighter regions without resize grips." }], onChange: value => { frame.layout.density = value as "default" | "compact"; } },
   { id: "appearance.sidebar", label: "Primary sidebar position", type: "select", default: "left", getValue: () => frame.layout.primarySide, options: [{ value: "left", label: "Left" }, { value: "right", label: "Right" }], onChange: value => { frame.layout.primarySide = value as "left" | "right"; } },
   { id: "appearance.centered", label: "Center the workspace", description: "Keep workspace content within a centered column.", type: "checkbox", default: false, getValue: () => frame.layout.centered, onChange: value => { frame.layout.centered = Boolean(value); } },
@@ -73,11 +105,12 @@ cleanups.push(frame.registerSettingsSection({ id: "application", title: "Applica
 ] }));
 frame.manageMenuItems.value = [{ id: "settings", label: "Settings", command: "frame.settings", shortcut: "Ctrl+," }, { id: "separator", type: "separator" }, { id: "layout", label: "Customize layout", command: "frame.layout.customize" }, { id: "notifications", label: "Notifications", command: "features.notifications" }];
 frame.openSidePanel("demo.components");
-frame.openSecondaryPanel("demo.secondary.info"); frame.closeBottomPanel();
+frame.openSecondaryPanel("demo.secondary.chat"); frame.closeBottomPanel();
 frame.layout.primaryWidth = 245; frame.layout.secondaryWidth = 460; frame.layout.panelHeight = 190;
 frame.record("Documentation opened");
 if (!location.hash) openGuide(frame, "overview", false);
 function loadTypeReference() {
+  if (location.hash === '#/playground/ai-chat') { showChatPlayground(); return; }
   const guide = location.hash.match(/^#\/guide\/(.+)$/);
   if (guide && isGuidePageId(guide[1]!)) { openGuide(frame, guide[1]!, false); return; }
   const match = location.hash.match(/^#\/(?:api|types)\/(.+)$/);
@@ -89,4 +122,4 @@ function loadTypeReference() {
 onMounted(() => { window.addEventListener("hashchange", loadTypeReference); loadTypeReference(); frame.navigation.clear(); });
 onBeforeUnmount(() => { window.removeEventListener("hashchange", loadTypeReference); removeTerminalView(); void terminal.dispose().catch(terminal.reportError); cleanups.reverse().forEach(cleanup => cleanup()); notificationHistory.dispose(); frame.dispose(); });
 </script>
-<template><FrameShell :frame="frame" :title-text="titleText" :show-search="showSearch"><template #overlays><NotificationPanel :frame="frame" :history="notificationHistory" /></template><template #status-leading-actions><NotificationIndicator v-if="notificationHistory.state.indicatorPosition==='bottom-left'" :history="notificationHistory"/></template><template #status-actions><span>Frame documentation</span><span>Frame 0.1</span><NotificationIndicator v-if="notificationHistory.state.indicatorPosition==='bottom-right'" :history="notificationHistory"/></template></FrameShell></template>
+<template><FrameShell :frame="frame" :title-text="titleText" :show-search="showSearch"><template #overlays><NotificationPanel :frame="frame" :history="notificationHistory" /></template></FrameShell></template>

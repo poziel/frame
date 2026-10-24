@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { showWorkspaceContent } from './workspaceContent';
 import { computed } from "vue";
 import type { WorkspacePaneContent } from "../../../core/src/types";
 import { useFrame } from "../../../core/src/frame/createFrame";
@@ -14,7 +15,7 @@ const doc = computed(() => typeDocs[props.name]);
 const entry = computed(() => apiEntries.find(entry => entry.name === props.name));
 function back() {
   if (!props.previous) return;
-  frame.setWorkspacePane(frame.workspace.activePane.value, props.previous);
+  showWorkspaceContent(frame, props.previous);
   if (props.previousView) frame.openSidePanel(props.previousView);
   updateReferenceUrl(typeof props.previous.props?.name === "string" ? props.previous.props.name : undefined);
 }
