@@ -8,6 +8,7 @@
         "@frame/core": "workspace:*",
         "@frame/tailwind": "workspace:*",
         "@frame/themes": "workspace:*",
+        "@vue/compiler-sfc": "^3.5.13",
         "prettier": "3.9.10",
         "reka-ui": "^2.11.0",
         "typescript": "~6.0.3",
