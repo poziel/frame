@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { defaultLayout, layoutGeometry, panelCoverage } from "../packages/core/src/frame/layout";
-import { createFrame } from "../packages/core/src/frame/createFrame";
+import { defaultLayout, layoutGeometry, panelCoverage } from "../packages/core/src/framework/layout/layout";
+import {createFrame} from '../packages/core/src/framework/frame';
 
 describe("layout arrangements", () => {
   test("each alignment covers the correct physical edges", () => {

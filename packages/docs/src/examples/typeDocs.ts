@@ -1,5 +1,5 @@
 import extractedReferences from './documentation/references.json';
-import { CodeBlockTheme } from "../../../core/src/frame/codeThemes";
+import { CodeBlockTheme } from "../../../core/src/components/data-display/codeThemes";
 const legacyDocs = {
   FrameMenuItem: { description: "A typed command-menu entry, shared by FrameMenu, ContextMenu, and the Manage menu. A menu item is either an action/submenu or a separator.", code: `import type { FrameMenuItem } from '@frame/core';
 const items: FrameMenuItem[] = [
@@ -26,7 +26,12 @@ const types: Record<string, string[]> = {
   FrameMenuItem: ['string', '"item" | "separator"', 'string', 'string', 'string', 'readonly FrameMenuItem[]', 'boolean', 'boolean', 'boolean'],
   SettingDefinition: ['string', '"text" | "textarea" | "number" | "checkbox" | "select" | "range" | "color"', 'SettingValue', 'string', 'readonly SelectItem[]', 'number', '(() => SettingValue) / ((value: SettingValue) => void)', 'boolean'],
 };
-export const typeDocs: Record<string, TypeDocumentation> = Object.fromEntries(Object.entries(legacyDocs).filter(([name]) => name !== 'SelectItem').map(([name, doc]) => [name, { ...doc, properties: doc.rows.map(([property, description], i) => ({ name: property, description, type: types[name]?.[i] ?? 'string', reference: property === 'children' ? 'FrameMenuItem' : property === 'options' ? 'SelectItem' : property === 'default' || property === 'getValue / onChange' ? 'SettingValue' : undefined })) }]));
+export const typeDocs: Record<string, TypeDocumentation> = Object.fromEntries(Object.entries(legacyDocs).filter((
+  [name]
+) => name !== 'SelectItem').map(([name, doc]) => [name, { ...doc, properties: doc.rows.map((
+  [property, description],
+  i
+) => ({ name: property, description, type: types[name]?.[i] ?? 'string', reference: property === 'children' ? 'FrameMenuItem' : property === 'options' ? 'SelectItem' : property === 'default' || property === 'getValue / onChange' ? 'SettingValue' : undefined })) }]));
 typeDocs.SelectItem = {
   description: 'The shared runtime base for SelectOption and SelectSeparator. In TypeScript, SelectItem is the union of these two concrete classes.',
   usage: 'Construct options and separators, then pass a SelectItem array to FrameSelect or SettingDefinition.options. Options hold values; separators only divide groups. Existing plain object inputs remain supported. Use the concrete subclasses rather than constructing the empty base directly.',
@@ -355,9 +360,9 @@ typeDocs.NotificationAction = {
 };
 
 typeDocs.NotificationHistory = {
-  description: 'An optional in-memory store from @frame/features. It retains notification events independently of core notification expiry.',
+  description: 'An optional in-memory store from @frame/core/modules/notifications. It retains notification events independently of core notification expiry.',
   usage: 'Create the store before emitting notifications. Mount NotificationPanel and NotificationIndicator with the same store. Dispose it on host unmount to unsubscribe. This store is not part of @frame/core.',
-  code: `import { createNotificationHistory } from '@frame/features';
+  code: `import { createNotificationHistory } from '@frame/core/modules/notifications';
 const history = createNotificationHistory(frame, { limit: 200 });
 history.toggle();
 // onBeforeUnmount(() => history.dispose());`,

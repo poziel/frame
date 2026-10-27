@@ -2,10 +2,10 @@
 import {
   FrameButton,
   FrameCheckbox,
-  FrameTextInput,
+  FrameTextField,
   FrameTextArea,
 } from "@frame/core";
-import type { ChatQuestion } from "@frame/features";
+import type { ChatQuestion } from '@frame/core/modules/chat';
 defineProps<{ modelValue: ChatQuestion[] }>();
 const emit = defineEmits<{
   "update:modelValue": [questions: ChatQuestion[]];
@@ -62,7 +62,7 @@ function addChoice(question: ChatQuestion) {
         :key="choice.id"
         class="playground-choice-editor"
       >
-        <FrameTextInput
+        <FrameTextField
           v-model="choice.label"
           :aria-label="`Question ${index + 1} option ${choiceIndex + 1}`"
           :maxlength="500"

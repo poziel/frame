@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, shallowRef, useId } from 'vue';
 import { FrameButton } from '@frame/core';
-import { UniversalViewer, UniversalViewerContent, type ViewerFile } from '@frame/features';
+import { UniversalViewer, UniversalViewerContent, type ViewerFile } from '@frame/core/modules/viewer';
 import { viewerSamplePdf } from './viewerSamples';
 const inputId = useId();
 const open = ref(false);

@@ -1,7 +1,10 @@
 import type { Frame, WorkspacePaneContent } from '@frame/core';
 
 /** Docs navigation can target either a plain pane or an application-owned document tab. */
-export function showWorkspaceContent(frame: Frame, content: WorkspacePaneContent) {
+export function showWorkspaceContent(
+  frame: Frame,
+  content: WorkspacePaneContent
+) {
   const workspace = frame.workspace;
   const paneId = workspace.activePane.value;
   if (workspace.paneMode(paneId) === 'plain') {

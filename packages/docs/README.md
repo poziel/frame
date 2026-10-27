@@ -1,14 +1,22 @@
 # Frame documentation app
 
-The interactive component catalog and desktop example. Depends on @frame/core and @frame/features; its views and sample content do not ship with either library.
+The interactive component catalog and desktop example. Depends on @frame/core and @frame/core/modules/*; its views and sample content do not ship with either library.
 
 Run `bun run dev` or `bun run build` here, or use the root scripts. src/App.vue owns demo registrations and status content. Catalog sources are in this package under src/examples.
 
+Use the primary view bar and sidebar to browse the docs. **Layouts** lists dedicated playground pages for navigation, sidebars, view bars, panels, menus/toolbar, status, workspace, and docks. Each page renders a separate Frame inside the workspace, with interactive controls and cleanup on leaving. The docs shell has no navigation items, secondary views, or panel demos registered by default. Direct links use `#/layouts/<page-id>`; `#/docks` remains an alias for the docks playground.
+
+Primary Sidebar, Secondary Sidebar, and Panel each include their associated View Bar controls on one page. Old `primary-view-bar`, `secondary-view-bar`, and `panel-view-bar` routes open these combined pages. Documentation display names use Title Case with spaces; Vue components use PascalCase and TypeScript module filenames use camelCase.
+
+Playground forms use Frame controls. Nested layout and chat shells use Frame Monokai Dark through their own Frame instance, including their portalled menus. Frame Monokai Dark and Light are both available in Settings → Appearance → Theme. `src/layouts/playground.css` styles only the preview boundary and label, keeping preview chrome separate from Core styling and the outer documentation shell.
+
+Catalog views share the docs-only `src/components/CatalogView.vue` and `CatalogSection.vue`: a fixed search header with an optional group selector, a scrolling results body, and a fixed result-count footer. Guides, Layouts, Components, API, and Modules use this structure. The primary view order is Guides, Layouts, Components, API, Theming, then Modules; Theming contains the accent palette preview.
+
 This app owns its HTML entry, Vue bootstrap, Vite config, TypeScript config, and frontend dependencies. Builds go to packages/docs/dist. The root commands delegate here; the package's Tauri wrapper loads this output.
 
-**Components → Features → AI chat** demonstrates the chat room with a local streaming endpoint at `/api/chat-demo`. The dev and preview servers send simulated thinking, a random sentence, a second message, and a completion event. No AI service is used. Static hosting and packaged Tauri builds need a host-provided responder or backend.
+**Components → Modules → AI chat** demonstrates the chat room with a local streaming endpoint at `/api/chat-demo`. The dev and preview servers send simulated thinking, a random sentence, a second message, and a completion event. No AI service is used. Static hosting and packaged Tauri builds need a host-provided responder or backend.
 
-**AI chat playground** in the navigation bar (or the `Demo: Open AI chat playground` command) opens a manual agent console in the workspace and its chat in the secondary sidebar. Direct route: `#/playground/ai-chat`. Send a prompt in the sidebar, then emit commentary, thoughts, answers, activity/output, approval requests, questions with choices/custom answers, and image/file artifacts from the workspace. Answer requests in the chat and inspect returned results in the event log. Text sends do not end a turn; use End turn, Stop turn or Simulate failure. This playground needs no server endpoint, AI service, credentials or native backend and works in the static docs build.
+**AI chat playground**, available through the `Demo: Open AI chat playground` command, opens a manual agent console and chat inside its own Frame playground. Direct route: `#/playground/ai-chat`. Its secondary sidebar exists only on that page. Send a prompt in the sidebar, then emit commentary, thoughts, answers, activity/output, approval requests, questions with choices/custom answers, and image/file artifacts from the workspace. Answer requests in the chat and inspect returned results in the event log. Text sends do not end a turn; use End turn, Stop turn or Simulate failure. This playground needs no server endpoint, AI service, credentials or native backend and works in the static docs build.
 
 The shared session survives hiding the sidebar and navigating away; reopening reuses it. Reset session clears the transcript/log and releases its object URLs; reloading the app also clears it. The application owns and disposes the session. Files stay in memory (up to 20 files, 20 MB each), and the event log retains the latest 200 entries. Component catalog examples remain separate from this session.
 

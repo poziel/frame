@@ -1,4 +1,4 @@
-# FrameTextInput
+# FrameTextField
 
 A styled native input for one line of text. Use it for names, search terms, passwords, email addresses, and other native input types. Use [FrameTextArea](text-area.md) for multiple lines.
 
@@ -7,7 +7,7 @@ A styled native input for one line of text. Use it for names, search terms, pass
 ### Anatomy
 
 ```text
-FrameTextInput
+FrameTextField
 └─ Reka Primitive (asChild; no extra DOM wrapper)
    └─ input.frame-text-input
 ```
@@ -19,7 +19,7 @@ The input owns value, native events, constraints, and focus. There is no separat
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
-import { FrameLabel, FrameTextInput } from '@frame/core';
+import { FrameLabel, FrameTextField } from '@frame/core';
 import '@frame/core/style.css';
 
 const projectName = ref('');
@@ -28,7 +28,7 @@ const projectName = ref('');
 <template>
   <div>
     <FrameLabel for="project-name">Project name</FrameLabel>
-    <FrameTextInput
+    <FrameTextField
       id="project-name"
       v-model="projectName"
       name="projectName"
@@ -43,7 +43,7 @@ const projectName = ref('');
 The component passes normal attributes and native event listeners to its input. For example, use `required`, `minlength`, `maxlength`, `autocomplete`, `readonly`, `aria-describedby`, or `@blur` as needed:
 
 ```vue
-<FrameTextInput
+<FrameTextField
   id="project-name"
   v-model="projectName"
   required
@@ -63,7 +63,7 @@ For `type="number"`, nonempty input emits the native input's `valueAsNumber`; cl
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
-import { FrameLabel, FrameTextInput } from '@frame/core';
+import { FrameLabel, FrameTextField } from '@frame/core';
 import '@frame/core/style.css';
 
 const quantity = ref<string | number>('');
@@ -71,7 +71,7 @@ const quantity = ref<string | number>('');
 
 <template>
   <FrameLabel for="quantity">Quantity</FrameLabel>
-  <FrameTextInput id="quantity" v-model="quantity" type="number" :min="0" :step="1" />
+  <FrameTextField id="quantity" v-model="quantity" type="number" :min="0" :step="1" />
 </template>
 ```
 
@@ -146,7 +146,7 @@ No additional public Frame slots.
 
 ### Sources and version
 
-[FrameTextInput.vue](../../../packages/core/src/components/FrameTextInput.vue) renders a native input through Reka Primitive. Styling lives in [style.css](../../../packages/core/src/style.css).
+[FrameTextField.vue](../../../packages/core/src/components/forms/FrameTextField.vue) renders a native input through Reka Primitive. Styling lives in [style.css](../../../packages/core/src/style.css).
 
 #### Reka comparison and state hooks
 

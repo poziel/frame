@@ -1,0 +1,142 @@
+/* Text-entry surfaces share defaults; selects expose a keyboard-only focus ring. */
+.frame-text-input {
+ --_frame-input-border:var(--frame-text-input-border,var(--frame-input-border,1px solid var(--frame-control-border)));
+ --_frame-input-border-radius:var(--frame-text-input-border-radius,var(--frame-input-radius));
+ --_frame-input-hover-border:var(--frame-text-input-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
+ --_frame-input-hover-outline:var(--frame-text-input-hover-outline,var(--frame-input-hover-outline,none));
+ --_frame-input-focus-border:var(--frame-text-input-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
+ --_frame-input-focus-outline:var(--frame-text-input-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
+ --_frame-input-outline-offset:var(--frame-text-input-outline-offset,var(--frame-input-outline-offset,0px));
+}
+.frame-text-area {
+ --_frame-input-border:var(--frame-text-area-border,var(--frame-input-border,1px solid var(--frame-control-border)));
+ --_frame-input-border-radius:var(--frame-text-area-border-radius,var(--frame-input-radius));
+ --_frame-input-hover-border:var(--frame-text-area-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
+ --_frame-input-hover-outline:var(--frame-text-area-hover-outline,var(--frame-input-hover-outline,none));
+ --_frame-input-focus-border:var(--frame-text-area-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
+ --_frame-input-focus-outline:var(--frame-text-area-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
+ --_frame-input-outline-offset:var(--frame-text-area-outline-offset,var(--frame-input-outline-offset,0px));
+}
+.frame-number-field {
+ --_frame-input-border:var(--frame-number-field-border,var(--frame-input-border,1px solid var(--frame-control-border)));
+ --_frame-input-border-radius:var(--frame-number-field-border-radius,var(--frame-input-radius));
+ --_frame-input-hover-border:var(--frame-number-field-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
+ --_frame-input-hover-outline:var(--frame-number-field-hover-outline,var(--frame-input-hover-outline,none));
+ --_frame-input-focus-border:var(--frame-number-field-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
+ --_frame-input-focus-outline:var(--frame-number-field-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
+ --_frame-input-outline-offset:var(--frame-number-field-outline-offset,var(--frame-input-outline-offset,0px));
+}
+.frame-date-field {
+ --_frame-input-border:var(--frame-date-field-border,var(--frame-input-border,1px solid var(--frame-control-border)));
+ --_frame-input-border-radius:var(--frame-date-field-border-radius,var(--frame-input-radius));
+ --_frame-input-hover-border:var(--frame-date-field-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
+ --_frame-input-hover-outline:var(--frame-date-field-hover-outline,var(--frame-input-hover-outline,none));
+ --_frame-input-focus-border:var(--frame-date-field-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
+ --_frame-input-focus-outline:var(--frame-date-field-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
+ --_frame-input-outline-offset:var(--frame-date-field-outline-offset,var(--frame-input-outline-offset,0px));
+}
+.frame-advanced-input {
+ --_frame-input-border:var(--frame-advanced-input-border,var(--frame-input-border,1px solid var(--frame-control-border)));
+ --_frame-input-border-radius:var(--frame-advanced-input-border-radius,var(--frame-input-radius));
+ --_frame-input-hover-border:var(--frame-advanced-input-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
+ --_frame-input-hover-outline:var(--frame-advanced-input-hover-outline,var(--frame-input-hover-outline,none));
+ --_frame-input-focus-border:var(--frame-advanced-input-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
+ --_frame-input-focus-outline:var(--frame-advanced-input-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
+ --_frame-input-outline-offset:var(--frame-advanced-input-outline-offset,var(--frame-input-outline-offset,0px));
+}
+.frame-form-input {
+ --_frame-input-border:var(--frame-form-input-border,var(--frame-input-border,1px solid var(--frame-control-border)));
+ --_frame-input-border-radius:var(--frame-form-input-border-radius,var(--frame-input-radius));
+ --_frame-input-hover-border:var(--frame-form-input-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
+ --_frame-input-hover-outline:var(--frame-form-input-hover-outline,var(--frame-input-hover-outline,none));
+ --_frame-input-focus-border:var(--frame-form-input-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
+ --_frame-input-focus-outline:var(--frame-form-input-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
+ --_frame-input-outline-offset:var(--frame-form-input-outline-offset,var(--frame-input-outline-offset,0px));
+}
+.frame-combobox-anchor {
+ --_frame-input-border:var(--frame-combobox-border,var(--frame-input-border,1px solid var(--frame-control-border)));
+ --_frame-input-border-radius:var(--frame-combobox-border-radius,var(--frame-input-radius));
+ --_frame-input-hover-border:var(--frame-combobox-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
+ --_frame-input-hover-outline:var(--frame-combobox-hover-outline,var(--frame-input-hover-outline,none));
+ --_frame-input-focus-border:var(--frame-combobox-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
+ --_frame-input-focus-outline:var(--frame-combobox-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
+ --_frame-input-outline-offset:var(--frame-combobox-outline-offset,var(--frame-input-outline-offset,0px));
+}
+.frame-tags-input {
+ --_frame-input-border:var(--frame-tags-input-border,var(--frame-input-border,1px solid var(--frame-control-border)));
+ --_frame-input-border-radius:var(--frame-tags-input-border-radius,var(--frame-input-radius));
+ --_frame-input-hover-border:var(--frame-tags-input-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
+ --_frame-input-hover-outline:var(--frame-tags-input-hover-outline,var(--frame-input-hover-outline,none));
+ --_frame-input-focus-border:var(--frame-tags-input-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
+ --_frame-input-focus-outline:var(--frame-tags-input-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
+ --_frame-input-outline-offset:var(--frame-tags-input-outline-offset,var(--frame-input-outline-offset,0px));
+}
+.frame-input-group {
+ --_frame-input-border:var(--frame-input-group-border,var(--frame-input-border,1px solid var(--frame-control-border)));
+ --_frame-input-border-radius:var(--frame-input-group-border-radius,var(--frame-input-radius));
+ --_frame-input-hover-border:var(--frame-input-group-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
+ --_frame-input-hover-outline:var(--frame-input-group-hover-outline,var(--frame-input-hover-outline,none));
+ --_frame-input-focus-border:var(--frame-input-group-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
+ --_frame-input-focus-outline:var(--frame-input-group-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
+ --_frame-input-outline-offset:var(--frame-input-group-outline-offset,var(--frame-input-outline-offset,0px));
+}
+.frame-editable-input {
+ --_frame-input-border:var(--frame-editable-input-border,var(--frame-input-border,1px solid var(--frame-control-border)));
+ --_frame-input-border-radius:var(--frame-editable-input-border-radius,var(--frame-input-radius));
+ --_frame-input-hover-border:var(--frame-editable-input-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
+ --_frame-input-hover-outline:var(--frame-editable-input-hover-outline,var(--frame-input-hover-outline,none));
+ --_frame-input-focus-border:var(--frame-editable-input-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
+ --_frame-input-focus-outline:var(--frame-editable-input-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
+ --_frame-input-outline-offset:var(--frame-editable-input-outline-offset,var(--frame-input-outline-offset,0px));
+}
+.frame-autocomplete-input {
+ --_frame-input-border:var(--frame-autocomplete-input-border,var(--frame-input-border,1px solid var(--frame-control-border)));
+ --_frame-input-border-radius:var(--frame-autocomplete-input-border-radius,var(--frame-input-radius));
+ --_frame-input-hover-border:var(--frame-autocomplete-input-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
+ --_frame-input-hover-outline:var(--frame-autocomplete-input-hover-outline,var(--frame-input-hover-outline,none));
+ --_frame-input-focus-border:var(--frame-autocomplete-input-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
+ --_frame-input-focus-outline:var(--frame-autocomplete-input-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
+ --_frame-input-outline-offset:var(--frame-autocomplete-input-outline-offset,var(--frame-input-outline-offset,0px));
+}
+.frame-color-field-input {
+ --_frame-input-border:var(--frame-color-field-input-border,var(--frame-input-border,1px solid var(--frame-control-border)));
+ --_frame-input-border-radius:var(--frame-color-field-input-border-radius,var(--frame-input-radius));
+ --_frame-input-hover-border:var(--frame-color-field-input-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
+ --_frame-input-hover-outline:var(--frame-color-field-input-hover-outline,var(--frame-input-hover-outline,none));
+ --_frame-input-focus-border:var(--frame-color-field-input-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
+ --_frame-input-focus-outline:var(--frame-color-field-input-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
+ --_frame-input-outline-offset:var(--frame-color-field-input-outline-offset,var(--frame-input-outline-offset,0px));
+}
+.frame-pin-entry {
+ --_frame-input-border:var(--frame-pin-entry-border,var(--frame-input-border,1px solid var(--frame-control-border)));
+ --_frame-input-border-radius:var(--frame-pin-entry-border-radius,var(--frame-input-radius));
+ --_frame-input-hover-border:var(--frame-pin-entry-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
+ --_frame-input-hover-outline:var(--frame-pin-entry-hover-outline,var(--frame-input-hover-outline,none));
+ --_frame-input-focus-border:var(--frame-pin-entry-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
+ --_frame-input-focus-outline:var(--frame-pin-entry-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
+ --_frame-input-outline-offset:var(--frame-pin-entry-outline-offset,var(--frame-input-outline-offset,0px));
+}
+.frame-select {
+ --_frame-input-border:var(--frame-select-border,var(--frame-input-border,1px solid var(--frame-control-border)));
+ --_frame-input-border-radius:var(--frame-select-border-radius,var(--frame-input-radius));
+ --_frame-input-hover-border:var(--frame-select-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
+ --_frame-input-hover-outline:var(--frame-select-hover-outline,var(--frame-input-hover-outline,none));
+ --_frame-input-focus-border:var(--frame-select-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
+ --_frame-input-focus-outline:var(--frame-select-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
+ --_frame-input-outline-offset:var(--frame-select-outline-offset,var(--frame-input-outline-offset,0px));
+}
+:is(.frame-text-input,.frame-text-area,.frame-number-field,.frame-date-field,.frame-advanced-input,.frame-form-input,.frame-combobox-anchor,.frame-tags-input,.frame-input-group,.frame-editable-input,.frame-autocomplete-input,.frame-color-field-input,.frame-pin-entry,.frame-select):not([data-invalid]):not([aria-invalid=true]) {border:var(--_frame-input-border);border-radius:var(--_frame-input-border-radius);outline:none;outline-offset:var(--_frame-input-outline-offset);}
+:is(.frame-text-input,.frame-text-area,.frame-number-field,.frame-date-field,.frame-advanced-input,.frame-form-input,.frame-combobox-anchor,.frame-tags-input,.frame-input-group,.frame-editable-input,.frame-autocomplete-input,.frame-color-field-input,.frame-pin-entry,.frame-select):not([data-invalid]):not([aria-invalid=true]):hover:not(:disabled):not([data-disabled]):not(:focus-within) {border:var(--_frame-input-hover-border);outline:var(--_frame-input-hover-outline);}
+:is(.frame-text-input,.frame-text-area,.frame-number-field,.frame-date-field,.frame-advanced-input,.frame-form-input,.frame-combobox-anchor,.frame-tags-input,.frame-editable-input,.frame-autocomplete-input,.frame-color-field-input,.frame-pin-entry):focus-within:not(:disabled):not([data-disabled]):not([data-invalid]):not([aria-invalid=true]),.frame-select:focus-visible:not(:disabled) {border:var(--_frame-input-focus-border);outline:var(--_frame-input-focus-outline);}
+
+/* Composite text entries draw one outer surface, including on keyboard focus. */
+.frame-number-field > :is(.frame-form-input,.frame-text-input),
+.frame-combobox-anchor > .frame-combobox-input,
+.frame-tags-input .frame-tags-entry,
+.frame-input-group > .frame-input-group-control > :is(.frame-text-input,.frame-text-area,.frame-number-field,.frame-date-field,.frame-combobox-anchor,.frame-select) {border:0 !important;border-radius:0;outline:none !important;background:transparent;}
+.frame-date-field > .frame-date-segment:focus-visible {outline:none;}
+.frame-input-group .frame-control-button:focus-visible {outline:none;}
+
+/* A grouped select follows the select's keyboard-only focus policy. */
+.frame-input-group:focus-within:not(:has(.frame-select:focus)):not([data-disabled]):not([data-invalid]):not([aria-invalid=true]),
+.frame-input-group:has(.frame-select:focus-visible):not([data-disabled]):not([data-invalid]):not([aria-invalid=true]) {border:var(--_frame-input-focus-border);outline:var(--_frame-input-focus-outline);}

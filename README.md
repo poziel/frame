@@ -23,10 +23,10 @@ Consume Frame as a dependency in your own project. Your application stays in its
 - **A configurable workbench.** Arrange side panels, bottom tabs, split workspace panes, and banners. Resize regions and move views between them.
 - **Commands and navigation.** Register application actions with keyboard shortcuts and expose them through menus and Quick actions.
 - **Reusable Vue controls.** Compose buttons, inputs, selects, sliders, tooltips, context menus, and movable, resizable modals.
-- **Settings and notifications.** Supply your own settings sections and bottom-left notifications with expiry and action buttons. Add optional notification history through [`@frame/features`](packages/features).
+- **Settings and notifications.** Supply your own settings sections and bottom-left notifications with expiry and action buttons. Add optional notification history through [`@frame/core/modules/*`](packages/core/src/modules).
 - **Explicit host integration.** Run in a browser, or supply an optional Tauri or Electron adapter for native window controls and file operations.
 
-Frame takes visual cues from VS Code’s workbench layout, panels, and controls. It is an independent project, not a fork of VS Code or a Microsoft product. Core focuses on the shell and shared controls. Optional editor, terminal, chat, and viewer components are provided by `@frame/features`.
+Frame takes visual cues from VS Code’s workbench layout, panels, and controls. It is an independent project, not a fork of VS Code or a Microsoft product. Core focuses on the shell and shared controls. Optional editor, terminal, chat, and viewer components are provided by `@frame/core/modules/*`.
 
 Optional [Tailwind integration](packages/tailwind/README.md) supplies Tailwind and its Vite plugin for application developers. [Theme variables](docs/styling/theme-variables.md) are shared between ordinary CSS and Tailwind utilities.
 
@@ -43,7 +43,7 @@ bun run dev
 
 The example application includes a component catalog and sample views; these contributions are separate from the core package.
 
-Open Quick actions with **Ctrl+P** or **Ctrl+Shift+P**. Use **Components**, **Features**, and **API** to browse documentation and interactive examples. **Ctrl+B** toggles the side panel; **Ctrl+J** toggles the bottom panel. Command works in place of Ctrl on macOS.
+Open Quick actions with **Ctrl+P** or **Ctrl+Shift+P**. Use **Components**, **Modules**, and **API** to browse documentation and interactive examples. **Ctrl+B** toggles the side panel; **Ctrl+J** toggles the bottom panel. Command works in place of Ctrl on macOS.
 
 ## Use Frame in your application
 
@@ -83,7 +83,7 @@ onBeforeUnmount(() => frame.dispose());
 </template>
 ```
 
-Register your Vue components as views, add commands, and enable settings or notifications when needed. Your host application owns its data, persistence, backend, and native host configuration. See [Reusing Frame](docs/shell/commands.md) for registration examples and [Package boundaries](docs/reference/packages.md) for the Core, Features, and documentation application split.
+Register your Vue components as views, add commands, and enable settings or notifications when needed. Your host application owns its data, persistence, backend, and native host configuration. See [Reusing Frame](docs/shell/commands.md) for registration examples and [Package boundaries](docs/reference/packages.md) for the Core modules and documentation application responsibilities.
 
 ## Development
 

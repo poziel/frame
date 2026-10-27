@@ -1,4 +1,4 @@
-import type { TerminalBackend, TerminalEvent } from '@frame/features';
+import type { TerminalBackend, TerminalEvent } from '@frame/core/modules/terminal';
 /** Browser documentation demonstration. This does not run operating-system commands. */
 export function createDemoTerminalBackend(): TerminalBackend {
   let next = 0;

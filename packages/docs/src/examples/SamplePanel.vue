@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useFrame } from "../../../core/src/frame/createFrame";
+import {useFrame} from '../../../core/src/framework/useFrame';
 const frame = useFrame();
 withDefaults(defineProps<{ detail?: boolean }>(), { detail: false });
 </script>

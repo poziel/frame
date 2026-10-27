@@ -4,7 +4,7 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
  const url=`${process.env.FRAME_TEST_URL||'http://localhost:1448'}/@fs/${path.join(__dirname,'fixtures/navigation-bar/index.html').replaceAll('\\','/')}`;
  const load=async()=>{await page.goto(url);await page.locator('[data-nav-id="Alpha"]').waitFor();};
  const settle=()=>page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
- async function check(name,run){try{await load();await run();console.log('PASS '+name);}catch(error){failures.push(name+': '+error.message);console.log('FAIL '+name);}}
+ async function check(name, run){try{await load();await run();console.log('PASS '+name);}catch(error){failures.push(name+': '+error.message);console.log('FAIL '+name);}}
  await check('API hide and unregister preserve focus',async()=>{
   await page.locator('[data-nav-id="Alpha"]').focus();await page.evaluate(()=>window.__navFrame.navigationBar.setItemVisible('Alpha',false));await settle();
   assert.notEqual(await page.evaluate(()=>document.activeElement.tagName),'BODY');

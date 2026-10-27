@@ -1,11 +1,5 @@
 import { shallowReactive } from "vue";
-import {
-  createAIChat,
-  type ChatInteractionHandle,
-  type ChatMessage,
-  type ChatRequest,
-  type ChatResponseWriter,
-} from "@frame/features";
+import { createAIChat, type ChatInteractionHandle, type ChatMessage, type ChatRequest, type ChatResponseWriter } from '@frame/core/modules/chat';
 import {
   chatDemoScenarios,
   runChatDemo,

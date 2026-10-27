@@ -4,7 +4,10 @@ import { dateGuides } from './dateGuides';
 import { colorGuides } from './colorGuides';
 import type { ComponentContract, FeatureExample } from './types';
 export const componentGuides = { ...formGuides, ...dateGuides, ...colorGuides };
-export function formFeatures(id:string, contract:ComponentContract):FeatureExample[]|undefined {
+export function formFeatures(
+  id:string,
+  contract:ComponentContract
+):FeatureExample[]|undefined {
  const guide=componentGuides[id];
  return guide?.examples.map(example=>{
   for(const name of Object.keys(example.values)) {

@@ -6,7 +6,8 @@ import {createDemoState,serializeUsage} from '../packages/docs/src/examples/docu
 test('form guides cite Reka, explain anatomy, and demonstrate supported Frame behavior',()=>{
  for(const [id]of formFamilies){
   const doc=componentDocumentation[id]!;
-  expect(doc.guide?.source).toBe('https://reka-ui.com/docs/components/'+(id==='checkbox-group'?'checkbox':id));
+  if(id==='input-group')expect(doc.guide?.source).toBe('https://reka-ui.com/docs/utilities/primitive');
+  else expect(doc.guide?.source).toBe('https://reka-ui.com/docs/components/'+(id==='scrub-field'?'number-field':id==='checkbox-group'?'checkbox':['color-hsv-rectangle','color-hsv-wheel','color-vhs-circle'].includes(id)?'color-area':id));
   expect(doc.guide!.description.length).toBeGreaterThan(20);
   expect(doc.guide!.capabilities.length).toBeGreaterThan(0);
   expect(doc.guide!.anatomy.length).toBeGreaterThan(0);

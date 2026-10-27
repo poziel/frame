@@ -124,7 +124,7 @@ No additional public Frame slots.
 
 ### Sources and version
 
-[FrameTextArea.vue](../../../packages/core/src/components/FrameTextArea.vue) renders a native textarea through Reka Primitive. Styling lives in [style.css](../../../packages/core/src/style.css).
+[FrameTextArea.vue](../../../packages/core/src/components/forms/FrameTextArea.vue) renders a native textarea through Reka Primitive. Styling lives in [style.css](../../../packages/core/src/style.css).
 
 #### Reka comparison and state hooks
 

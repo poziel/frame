@@ -1,5 +1,5 @@
 import { test, expect } from 'bun:test';
-import { createFrame } from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 
 test('command availability and context enabled state are independent execution gates', async () => {
   const f = createFrame(); let saved = 0, document = false;
@@ -21,16 +21,16 @@ test('command availability and context enabled state are independent execution g
 
 test('categories default to global, are isolated, and validate prefixes', () => {
   const f = createFrame(), other = createFrame();
-  const remove = f.commands.categories.register({ prefix: '!', label: 'Artwork' });
+  const remove = f.commands.prefixes.register({ prefix: '!', label: 'Artwork' });
   f.commands.register({ id: 'art', label: 'Artwork', quickInput: '!', run() {} });
   f.commands.register({ id: 'global', label: 'Global', run() {} });
   f.commands.register({ id: 'hidden', label: 'Hidden', quickInput: false, run() {} });
   f.openQuickInput(); expect(f.quickInputItems.value.map(x => x.id)).toEqual(['global']);
   f.openQuickInput('!'); expect(f.quickInputItems.value.map(x => x.id)).toEqual(['art']);
-  expect(() => f.commands.categories.register({ prefix: '>', label: 'Override' })).toThrow();
-  expect(() => f.commands.categories.register({ prefix: '!', label: 'Duplicate' })).toThrow();
-  expect(() => f.commands.categories.register({ prefix: 'ab', label: 'Invalid' })).toThrow();
-  expect(other.commands.categories.get('!')).toBeUndefined();
+  expect(() => f.commands.prefixes.register({ prefix: '>', label: 'Override' })).toThrow();
+  expect(() => f.commands.prefixes.register({ prefix: '!', label: 'Duplicate' })).toThrow();
+  expect(() => f.commands.prefixes.register({ prefix: 'ab', label: 'Invalid' })).toThrow();
+  expect(other.commands.prefixes.get('!')).toBeUndefined();
   remove(); expect(f.quickInputItems.value.some(x => x.id === 'art')).toBe(false);
   f.dispose(); other.dispose();
 });

@@ -70,44 +70,44 @@ Defaults below are Reka reference defaults unless a Frame override is stated. De
 
 #### Props
 
-| Prop | Reka type | Reka required/default | Availability | Frame behavior |
-| --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | "div" | Declared | Element/component used to render this part. |
-| `asChild` | `boolean` | - | Declared | Typed upstream composition option; fixed generated children are not a public custom-composition slot. |
-| `defaultOpen` | `boolean` | - | Declared | Initial popup visibility when open is uncontrolled. |
-| `defaultValue` | `string` | - | Declared | Initial uncontrolled value upstream; does not override a supplied controlled model. |
-| `dir` | `"ltr" \| "rtl"` | - | Declared | Reading/navigation direction; inherits Reka configuration or LTR when unset. |
-| `disabled` | `boolean` | - | Declared | Disable interaction for this part and its participating descendants. |
-| `highlightOnHover` | `boolean` | true | Declared | Let pointer hover move the active highlight. |
-| `ignoreFilter` | `boolean` | - | Declared | Skip Reka’s own candidate filter; does not bypass Frame filtering. |
-| `loop` | `boolean` | - | Declared | Wrap keyboard navigation at collection endpoints. |
-| `modelValue` | `string` | - | Declared | Controlled value; updates require the host to retain the emitted value. |
-| `name` | `string` | - | Declared | Submitted/registered field identity. |
-| `open` | `boolean` | - | Declared | Controlled popup visibility. |
-| `openOnClick` | `boolean` | false | Declared | Open suggestions when the input is clicked. |
-| `openOnFocus` | `boolean` | false | Declared | Open suggestions when the input gains focus. |
-| `required` | `boolean` | - | Declared | Participate in the owning form’s required-value constraint. |
-| `resetSearchTermOnBlur` | `boolean` | false | Declared | Restore the input search display when focus leaves. |
+| Prop                    | Reka type            | Reka required/default | Availability | Frame behavior                                                                                        |
+| ----------------------- | -------------------- | --------------------- | ------------ | ----------------------------------------------------------------------------------------------------- |
+| `as`                    | `AsTag \| Component` | "div"                 | Declared     | Element/component used to render this part.                                                           |
+| `asChild`               | `boolean`            | -                     | Declared     | Typed upstream composition option; fixed generated children are not a public custom-composition slot. |
+| `defaultOpen`           | `boolean`            | -                     | Declared     | Initial popup visibility when open is uncontrolled.                                                   |
+| `defaultValue`          | `string`             | -                     | Declared     | Initial uncontrolled value upstream; does not override a supplied controlled model.                   |
+| `dir`                   | `"ltr" \| "rtl"`     | -                     | Declared     | Reading/navigation direction; inherits Reka configuration or LTR when unset.                          |
+| `disabled`              | `boolean`            | -                     | Declared     | Disable interaction for this part and its participating descendants.                                  |
+| `highlightOnHover`      | `boolean`            | true                  | Declared     | Let pointer hover move the active highlight.                                                          |
+| `ignoreFilter`          | `boolean`            | -                     | Declared     | Skip Reka’s own candidate filter; does not bypass Frame filtering.                                    |
+| `loop`                  | `boolean`            | -                     | Declared     | Wrap keyboard navigation at collection endpoints.                                                     |
+| `modelValue`            | `string`             | -                     | Declared     | Controlled value; updates require the host to retain the emitted value.                               |
+| `name`                  | `string`             | -                     | Declared     | Submitted/registered field identity.                                                                  |
+| `open`                  | `boolean`            | -                     | Declared     | Controlled popup visibility.                                                                          |
+| `openOnClick`           | `boolean`            | false                 | Declared     | Open suggestions when the input is clicked.                                                           |
+| `openOnFocus`           | `boolean`            | false                 | Declared     | Open suggestions when the input gains focus.                                                          |
+| `required`              | `boolean`            | -                     | Declared     | Participate in the owning form’s required-value constraint.                                           |
+| `resetSearchTermOnBlur` | `boolean`            | false                 | Declared     | Restore the input search display when focus leaves.                                                   |
 
 #### Emits
 
-| Event | Payload | Availability | Behavior |
-| --- | --- | --- | --- |
-| `highlight` | `[payload: { ref: HTMLElement; value: string } \| undefined]` | Declared | Active highlighted item changed; includes its element and value, or undefined when cleared. Not cancellable. |
-| `update:modelValue` | `[value: string]` | Declared | Value changed; retain it in host state. Not cancellable. |
-| `update:open` | `[value: boolean]` | Declared | Popup visibility changed. Not cancellable. |
+| Event               | Payload                                                       | Availability | Behavior                                                                                                     |
+| ------------------- | ------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------ |
+| `highlight`         | `[payload: { ref: HTMLElement; value: string } \| undefined]` | Declared     | Active highlighted item changed; includes its element and value, or undefined when cleared. Not cancellable. |
+| `update:modelValue` | `[value: string]`                                             | Declared     | Value changed; retain it in host state. Not cancellable.                                                     |
+| `update:open`       | `[value: boolean]`                                            | Declared     | Popup visibility changed. Not cancellable.                                                                   |
 
 #### Slots
 
-| Default-slot field | Reka type | Frame availability |
-| --- | --- | --- |
-| `open` | `boolean` | Internal; not passed to the Frame caller slot. |
-| `modelValue` | `string` | Internal; not passed to the Frame caller slot. |
+| Default-slot field | Reka type | Frame availability                             |
+| ------------------ | --------- | ---------------------------------------------- |
+| `open`             | `boolean` | Internal; not passed to the Frame caller slot. |
+| `modelValue`       | `string`  | Internal; not passed to the Frame caller slot. |
 
 #### Data attributes
 
-| Attribute | Values/presence | Meaning |
-| --- | --- | --- |
+| Attribute       | Values/presence         | Meaning                      |
+| --------------- | ----------------------- | ---------------------------- |
 | `data-disabled` | `Present when disabled` | Inherited ListboxRoot state. |
 
 #### Exposed methods
@@ -118,11 +118,11 @@ Frame does not defineExpose or forward the internal Reka instance. Do not depend
 
 #### Props
 
-| Prop | Reka type | Reka required/default | Availability | Frame behavior |
-| --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | "div" | Internal | Element/component used to render this part. Not independently configurable through Frame. |
-| `asChild` | `boolean` | - | Internal | true; wraps the anchor div. Not independently configurable through Frame. |
-| `reference` | `ReferenceElement` | - | Internal | Anchor element or virtual reference for positioning. Not independently configurable through Frame. |
+| Prop        | Reka type            | Reka required/default | Availability | Frame behavior                                                                                     |
+| ----------- | -------------------- | --------------------- | ------------ | -------------------------------------------------------------------------------------------------- |
+| `as`        | `AsTag \| Component` | "div"                 | Internal     | Element/component used to render this part. Not independently configurable through Frame.          |
+| `asChild`   | `boolean`            | -                     | Internal     | true; wraps the anchor div. Not independently configurable through Frame.                          |
+| `reference` | `ReferenceElement`   | -                     | Internal     | Anchor element or virtual reference for positioning. Not independently configurable through Frame. |
 
 #### Emits
 
@@ -140,19 +140,19 @@ No component state data attributes are defined on this part. Inherited native/AR
 
 #### Props
 
-| Prop | Reka type | Reka required/default | Availability | Frame behavior |
-| --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | "input" | Internal | Element/component used to render this part. Not independently configurable through Frame. |
-| `asChild` | `boolean` | - | Internal | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
-| `autoFocus` | `boolean` | - | Internal | Focus the input after mount. Not independently configurable through Frame. |
-| `disabled` | `boolean` | - | Internal | Disable interaction for this part and its participating descendants. Not independently configurable through Frame. |
-| `modelValue` | `string` | - | Internal | Reka coordinates text with Root; no independent Frame input model. Not independently configurable through Frame. |
+| Prop         | Reka type            | Reka required/default | Availability | Frame behavior                                                                                                       |
+| ------------ | -------------------- | --------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `as`         | `AsTag \| Component` | "input"               | Internal     | Element/component used to render this part. Not independently configurable through Frame.                            |
+| `asChild`    | `boolean`            | -                     | Internal     | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
+| `autoFocus`  | `boolean`            | -                     | Internal     | Focus the input after mount. Not independently configurable through Frame.                                           |
+| `disabled`   | `boolean`            | -                     | Internal     | Disable interaction for this part and its participating descendants. Not independently configurable through Frame.   |
+| `modelValue` | `string`             | -                     | Internal     | Reka coordinates text with Root; no independent Frame input model. Not independently configurable through Frame.     |
 
 #### Emits
 
-| Event | Payload | Availability | Behavior |
-| --- | --- | --- | --- |
-| `update:modelValue` | `[string]` | Internal | Value changed; retain it in host state. Not cancellable. Not forwarded as a Frame event; caller cannot cancel this internal emission. |
+| Event               | Payload    | Availability | Behavior                                                                                                                              |
+| ------------------- | ---------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `update:modelValue` | `[string]` | Internal     | Value changed; retain it in host state. Not cancellable. Not forwarded as a Frame event; caller cannot cancel this internal emission. |
 
 #### Slots
 
@@ -160,20 +160,20 @@ Underlying default content has no documented scoped fields. Frame generates this
 
 #### Data attributes
 
-| Attribute | Values/presence | Meaning |
-| --- | --- | --- |
+| Attribute       | Values/presence         | Meaning                    |
+| --------------- | ----------------------- | -------------------------- |
 | `data-disabled` | `Present when disabled` | ListboxFilter input state. |
 
 ### Portal
 
 #### Props
 
-| Prop | Reka type | Reka required/default | Availability | Frame behavior |
-| --- | --- | --- | --- | --- |
-| `defer` | `boolean` | - | Internal | Resolve the teleport target after the current render. Not independently configurable through Frame. |
-| `disabled` | `boolean` | - | Internal | Disable interaction for this part and its participating descendants. Not independently configurable through Frame. |
-| `forceMount` | `boolean` | - | Internal | Retain a presence-controlled part for animation. Not independently configurable through Frame. |
-| `to` | `string \| HTMLElement` | - | Internal | Frame overlay target, or standalone body destination. Not independently configurable through Frame. |
+| Prop         | Reka type               | Reka required/default | Availability | Frame behavior                                                                                                     |
+| ------------ | ----------------------- | --------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `defer`      | `boolean`               | -                     | Internal     | Resolve the teleport target after the current render. Not independently configurable through Frame.                |
+| `disabled`   | `boolean`               | -                     | Internal     | Disable interaction for this part and its participating descendants. Not independently configurable through Frame. |
+| `forceMount` | `boolean`               | -                     | Internal     | Retain a presence-controlled part for animation. Not independently configurable through Frame.                     |
+| `to`         | `string \| HTMLElement` | -                     | Internal     | Frame overlay target, or standalone body destination. Not independently configurable through Frame.                |
 
 #### Emits
 
@@ -191,44 +191,44 @@ No component state data attributes are defined on this part. Inherited native/AR
 
 #### Props
 
-| Prop | Reka type | Reka required/default | Availability | Frame behavior |
-| --- | --- | --- | --- | --- |
-| `align` | `"start" \| "center" \| "end"` | - | Internal | Preferred anchor alignment; collision handling can adjust it. Not independently configurable through Frame. |
-| `alignFlip` | `boolean` | - | Internal | Allow alternate alignment when resolving collisions. Not independently configurable through Frame. |
-| `alignOffset` | `number` | - | Internal | Pixel offset along the alignment axis. Not independently configurable through Frame. |
-| `arrowPadding` | `number` | - | Internal | Minimum arrow inset from the content edges. Not independently configurable through Frame. |
-| `as` | `AsTag \| Component` | "div" | Internal | Element/component used to render this part. Not independently configurable through Frame. |
-| `asChild` | `boolean` | - | Internal | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
-| `avoidCollisions` | `boolean` | - | Internal | Adjust placement to stay inside collision bounds. Not independently configurable through Frame. |
-| `bodyLock` | `boolean` | - | Internal | Lock document-body scrolling while content is open. Not independently configurable through Frame. |
-| `collisionBoundary` | `Element \| (Element \| null)[] \| null` | - | Internal | Derived from the injected overlay target. Not independently configurable through Frame. |
-| `collisionPadding` | `number \| Partial<Record<"top" \| "right" \| "bottom" \| "left", number>>` | - | Internal | 8px. Not independently configurable through Frame. |
-| `dir` | `"ltr" \| "rtl"` | - | Internal | Reading/navigation direction; inherits Reka configuration or LTR when unset. Not independently configurable through Frame. |
-| `disableOutsidePointerEvents` | `boolean` | - | Internal | Block interaction outside the open dismissable layer. Not independently configurable through Frame. |
-| `disableUpdateOnLayoutShift` | `boolean` | - | Internal | Skip positioning updates triggered by layout movement. Not independently configurable through Frame. |
-| `forceMount` | `boolean` | - | Internal | Retain a presence-controlled part for animation. Not independently configurable through Frame. |
-| `hideShiftedArrow` | `boolean` | - | Internal | Hide an arrow displaced from its centered position. Not independently configurable through Frame. |
-| `hideWhenDetached` | `boolean` | - | Internal | Hide content when its reference is occluded. Not independently configurable through Frame. |
-| `hideWhenEmpty` | `boolean` | - | Internal | Hide popup content when the filtered result collection is empty. Not independently configurable through Frame. |
-| `memoDependencies` | `unknown[]` | - | Internal | Additional values invalidating content memoization. Not independently configurable through Frame. |
-| `position` | `"inline" \| "popper"` | - | Internal | popper. Not independently configurable through Frame. |
-| `positionStrategy` | `"fixed" \| "absolute"` | - | Internal | CSS positioning strategy for floating content. Not independently configurable through Frame. |
-| `prioritizePosition` | `boolean` | - | Internal | Keep the popup within bounds even when that overlaps its reference. Not independently configurable through Frame. |
-| `reference` | `ReferenceElement` | - | Internal | Anchor element or virtual reference for positioning. Not independently configurable through Frame. |
-| `side` | `"top" \| "right" \| "bottom" \| "left"` | - | Internal | Preferred side relative to the reference. Not independently configurable through Frame. |
-| `sideFlip` | `boolean` | - | Internal | Permit placement on the opposite side after collision. Not independently configurable through Frame. |
-| `sideOffset` | `number` | - | Internal | 4px. Not independently configurable through Frame. |
-| `sticky` | `"partial" \| "always"` | - | Internal | How strongly the popup stays inside the alignment boundary. Not independently configurable through Frame. |
-| `updatePositionStrategy` | `"always" \| "optimized"` | - | Internal | Frequency of floating-position recalculation. Not independently configurable through Frame. |
+| Prop                          | Reka type                                                                   | Reka required/default | Availability | Frame behavior                                                                                                             |
+| ----------------------------- | --------------------------------------------------------------------------- | --------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| `align`                       | `"start" \| "center" \| "end"`                                              | -                     | Internal     | Preferred anchor alignment; collision handling can adjust it. Not independently configurable through Frame.                |
+| `alignFlip`                   | `boolean`                                                                   | -                     | Internal     | Allow alternate alignment when resolving collisions. Not independently configurable through Frame.                         |
+| `alignOffset`                 | `number`                                                                    | -                     | Internal     | Pixel offset along the alignment axis. Not independently configurable through Frame.                                       |
+| `arrowPadding`                | `number`                                                                    | -                     | Internal     | Minimum arrow inset from the content edges. Not independently configurable through Frame.                                  |
+| `as`                          | `AsTag \| Component`                                                        | "div"                 | Internal     | Element/component used to render this part. Not independently configurable through Frame.                                  |
+| `asChild`                     | `boolean`                                                                   | -                     | Internal     | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame.       |
+| `avoidCollisions`             | `boolean`                                                                   | -                     | Internal     | Adjust placement to stay inside collision bounds. Not independently configurable through Frame.                            |
+| `bodyLock`                    | `boolean`                                                                   | -                     | Internal     | Lock document-body scrolling while content is open. Not independently configurable through Frame.                          |
+| `collisionBoundary`           | `Element \| (Element \| null)[] \| null`                                    | -                     | Internal     | Derived from the injected overlay target. Not independently configurable through Frame.                                    |
+| `collisionPadding`            | `number \| Partial<Record<"top" \| "right" \| "bottom" \| "left", number>>` | -                     | Internal     | 8px. Not independently configurable through Frame.                                                                         |
+| `dir`                         | `"ltr" \| "rtl"`                                                            | -                     | Internal     | Reading/navigation direction; inherits Reka configuration or LTR when unset. Not independently configurable through Frame. |
+| `disableOutsidePointerEvents` | `boolean`                                                                   | -                     | Internal     | Block interaction outside the open dismissable layer. Not independently configurable through Frame.                        |
+| `disableUpdateOnLayoutShift`  | `boolean`                                                                   | -                     | Internal     | Skip positioning updates triggered by layout movement. Not independently configurable through Frame.                       |
+| `forceMount`                  | `boolean`                                                                   | -                     | Internal     | Retain a presence-controlled part for animation. Not independently configurable through Frame.                             |
+| `hideShiftedArrow`            | `boolean`                                                                   | -                     | Internal     | Hide an arrow displaced from its centered position. Not independently configurable through Frame.                          |
+| `hideWhenDetached`            | `boolean`                                                                   | -                     | Internal     | Hide content when its reference is occluded. Not independently configurable through Frame.                                 |
+| `hideWhenEmpty`               | `boolean`                                                                   | -                     | Internal     | Hide popup content when the filtered result collection is empty. Not independently configurable through Frame.             |
+| `memoDependencies`            | `unknown[]`                                                                 | -                     | Internal     | Additional values invalidating content memoization. Not independently configurable through Frame.                          |
+| `position`                    | `"inline" \| "popper"`                                                      | -                     | Internal     | popper. Not independently configurable through Frame.                                                                      |
+| `positionStrategy`            | `"fixed" \| "absolute"`                                                     | -                     | Internal     | CSS positioning strategy for floating content. Not independently configurable through Frame.                               |
+| `prioritizePosition`          | `boolean`                                                                   | -                     | Internal     | Keep the popup within bounds even when that overlaps its reference. Not independently configurable through Frame.          |
+| `reference`                   | `ReferenceElement`                                                          | -                     | Internal     | Anchor element or virtual reference for positioning. Not independently configurable through Frame.                         |
+| `side`                        | `"top" \| "right" \| "bottom" \| "left"`                                    | -                     | Internal     | Preferred side relative to the reference. Not independently configurable through Frame.                                    |
+| `sideFlip`                    | `boolean`                                                                   | -                     | Internal     | Permit placement on the opposite side after collision. Not independently configurable through Frame.                       |
+| `sideOffset`                  | `number`                                                                    | -                     | Internal     | 4px. Not independently configurable through Frame.                                                                         |
+| `sticky`                      | `"partial" \| "always"`                                                     | -                     | Internal     | How strongly the popup stays inside the alignment boundary. Not independently configurable through Frame.                  |
+| `updatePositionStrategy`      | `"always" \| "optimized"`                                                   | -                     | Internal     | Frequency of floating-position recalculation. Not independently configurable through Frame.                                |
 
 #### Emits
 
-| Event | Payload | Availability | Behavior |
-| --- | --- | --- | --- |
-| `escapeKeyDown` | `[event: KeyboardEvent]` | Internal | Escape key in the dismissable layer; upstream supports preventDefault. Not forwarded as a Frame event; caller cannot cancel this internal emission. |
-| `focusOutside` | `[event: FocusOutsideEvent]` | Internal | Focus moved outside the layer; upstream supports preventDefault. Not forwarded as a Frame event; caller cannot cancel this internal emission. |
-| `interactOutside` | `[event: PointerDownOutsideEvent \| FocusOutsideEvent]` | Internal | Outside focus/pointer interaction; upstream supports preventDefault. Not forwarded as a Frame event; caller cannot cancel this internal emission. |
-| `pointerDownOutside` | `[event: PointerDownOutsideEvent]` | Internal | Pointer pressed outside the layer; upstream supports preventDefault. Not forwarded as a Frame event; caller cannot cancel this internal emission. |
+| Event                | Payload                                                 | Availability | Behavior                                                                                                                                            |
+| -------------------- | ------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `escapeKeyDown`      | `[event: KeyboardEvent]`                                | Internal     | Escape key in the dismissable layer; upstream supports preventDefault. Not forwarded as a Frame event; caller cannot cancel this internal emission. |
+| `focusOutside`       | `[event: FocusOutsideEvent]`                            | Internal     | Focus moved outside the layer; upstream supports preventDefault. Not forwarded as a Frame event; caller cannot cancel this internal emission.       |
+| `interactOutside`    | `[event: PointerDownOutsideEvent \| FocusOutsideEvent]` | Internal     | Outside focus/pointer interaction; upstream supports preventDefault. Not forwarded as a Frame event; caller cannot cancel this internal emission.   |
+| `pointerDownOutside` | `[event: PointerDownOutsideEvent]`                      | Internal     | Pointer pressed outside the layer; upstream supports preventDefault. Not forwarded as a Frame event; caller cannot cancel this internal emission.   |
 
 #### Slots
 
@@ -236,53 +236,53 @@ Underlying default content has no documented scoped fields. Frame generates this
 
 #### Data attributes
 
-| Attribute | Values/presence | Meaning |
-| --- | --- | --- |
-| `data-state` | `open \| closed` | Popup presence. |
-| `data-empty` | `Present when empty` | No filtered items. |
-| `data-side` | `top \| right \| bottom \| left` | Resolved popper placement. |
-| `data-align` | `start \| center \| end` | Resolved popper alignment. |
+| Attribute    | Values/presence                  | Meaning                    |
+| ------------ | -------------------------------- | -------------------------- |
+| `data-state` | `open \| closed`                 | Popup presence.            |
+| `data-empty` | `Present when empty`             | No filtered items.         |
+| `data-side`  | `top \| right \| bottom \| left` | Resolved popper placement. |
+| `data-align` | `start \| center \| end`         | Resolved popper alignment. |
 
 ### Item
 
 #### Props
 
-| Prop | Reka type | Reka required/default | Availability | Frame behavior |
-| --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | "div" | Internal | Element/component used to render this part. Not independently configurable through Frame. |
-| `asChild` | `boolean` | - | Internal | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
-| `disabled` | `boolean` | - | Internal | Disable interaction for this part and its participating descendants. Not independently configurable through Frame. |
-| `textValue` | `string` | - | Internal | Plain text used for matching/typeahead and naming. Not independently configurable through Frame. |
-| `value` | `T` | Required upstream | Internal | Stable item identity used by selection. Not independently configurable through Frame. |
+| Prop        | Reka type            | Reka required/default | Availability | Frame behavior                                                                                                       |
+| ----------- | -------------------- | --------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `as`        | `AsTag \| Component` | "div"                 | Internal     | Element/component used to render this part. Not independently configurable through Frame.                            |
+| `asChild`   | `boolean`            | -                     | Internal     | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
+| `disabled`  | `boolean`            | -                     | Internal     | Disable interaction for this part and its participating descendants. Not independently configurable through Frame.   |
+| `textValue` | `string`             | -                     | Internal     | Plain text used for matching/typeahead and naming. Not independently configurable through Frame.                     |
+| `value`     | `T`                  | Required upstream     | Internal     | Stable item identity used by selection. Not independently configurable through Frame.                                |
 
 #### Emits
 
-| Event | Payload | Availability | Behavior |
-| --- | --- | --- | --- |
-| `select` | `[event: SelectEvent<T>]` | Internal | Item activation; upstream preventDefault cancels selection. Not forwarded as a Frame event; caller cannot cancel this internal emission. |
+| Event    | Payload                   | Availability | Behavior                                                                                                                                 |
+| -------- | ------------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `select` | `[event: SelectEvent<T>]` | Internal     | Item activation; upstream preventDefault cancels selection. Not forwarded as a Frame event; caller cannot cancel this internal emission. |
 
 #### Slots
 
-| Default-slot field | Reka type | Frame availability |
-| --- | --- | --- |
-| `selected` | `boolean` | Internal; not passed to the Frame caller slot. |
+| Default-slot field | Reka type | Frame availability                             |
+| ------------------ | --------- | ---------------------------------------------- |
+| `selected`         | `boolean` | Internal; not passed to the Frame caller slot. |
 
 #### Data attributes
 
-| Attribute | Values/presence | Meaning |
-| --- | --- | --- |
-| `data-state` | `checked \| unchecked` | Selected value, distinct from highlight. |
-| `data-highlighted` | `Present when highlighted` | Active navigation item. |
-| `data-disabled` | `Present when disabled` | Option interaction state. |
+| Attribute          | Values/presence            | Meaning                                  |
+| ------------------ | -------------------------- | ---------------------------------------- |
+| `data-state`       | `checked \| unchecked`     | Selected value, distinct from highlight. |
+| `data-highlighted` | `Present when highlighted` | Active navigation item.                  |
+| `data-disabled`    | `Present when disabled`    | Option interaction state.                |
 
 ### Empty
 
 #### Props
 
-| Prop | Reka type | Reka required/default | Availability | Frame behavior |
-| --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | "div" | Internal | Element/component used to render this part. Not independently configurable through Frame. |
-| `asChild` | `boolean` | - | Internal | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
+| Prop      | Reka type            | Reka required/default | Availability | Frame behavior                                                                                                       |
+| --------- | -------------------- | --------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `as`      | `AsTag \| Component` | "div"                 | Internal     | Element/component used to render this part. Not independently configurable through Frame.                            |
+| `asChild` | `boolean`            | -                     | Internal     | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
 
 #### Emits
 
@@ -304,11 +304,11 @@ No component state data attributes are defined on this part. Inherited native/AR
 
 #### Props
 
-| Prop | Type | Required/default | Description |
-| --- | --- | --- | --- |
-| `options` | `readonly string[]` | Required | Suggestions; Frame filters them by the controlled model text. |
-| `label` | `string` | Required | Accessible name on Input; no visible label is rendered. |
-| `placeholder` | `string` | Unset | Hint routed to Input. |
+| Prop          | Type                | Required/default | Description                                                   |
+| ------------- | ------------------- | ---------------- | ------------------------------------------------------------- |
+| `options`     | `readonly string[]` | Required         | Suggestions; Frame filters them by the controlled model text. |
+| `label`       | `string`            | Required         | Accessible name on Input; no visible label is rendered.       |
+| `placeholder` | `string`            | Unset            | Hint routed to Input.                                         |
 
 #### Emits
 
@@ -320,43 +320,43 @@ No public content slots; all internal children are generated.
 
 ### Sources and version
 
-Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/autocomplete), its [Markdown reference](https://reka-ui.com/docs/components/autocomplete.md), and [Frame implementation](../../../packages/core/src/components/FrameAutocomplete.vue). Styling comes from [advanced.css](../../../packages/core/src/forms/advanced.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens.ts).
+Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/autocomplete), its [Markdown reference](https://reka-ui.com/docs/components/autocomplete.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameAutocomplete.vue). Styling comes from [advanced.css](../../../packages/core/src/components/forms/shared/advanced.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
 
 ## Styling
 
 ### Parts and selectors
 
-| Selector | Part | Placement |
-| --- | --- | --- |
-| `.frame-autocomplete` | Root | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
-| `.frame-advanced-input` | Input | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
-| `.frame-advanced-popup` | portalled Content | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
-| `.frame-advanced-option` | Item | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
-| `.frame-field-description` | Empty | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
+| Selector                   | Part              | Placement                                                                        |
+| -------------------------- | ----------------- | -------------------------------------------------------------------------------- |
+| `.frame-autocomplete`      | Root              | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
+| `.frame-advanced-input`    | Input             | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
+| `.frame-advanced-popup`    | portalled Content | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
+| `.frame-advanced-option`   | Item              | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
+| `.frame-field-description` | Empty             | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
 
 Input minimum height is 28px and width is min(100%, 340px). Popup padding, row padding, collision inset, and height cap are currently fixed.
 
 ### Variables
 
-| Token key | Variable | Value kind | Default/fallback | Part/effect | Scope/limits | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| `--frame-accent` | `--frame-accent` | color | Catalog: `#0078d4`. No local fallback; resolves from the cascade. | Input outline | Shared with other controls using the same variable. State selectors: :focus-visible. | Sets Input outline. |
-| CSS only | `--frame-advanced-input-radius` | length | CSS fallback: `var(--frame-input-radius)` | Input border-radius | CSS only; absent from JSON token allowlist. | Sets Input border-radius. |
-| `--frame-control-background` | `--frame-control-background` | color | Catalog: `#1d1d1d`. No local fallback; resolves from the cascade. | Input background | Shared with other controls using the same variable. | Sets Input background. |
-| `--frame-control-border` | `--frame-control-border` | color | Catalog: `var(--frame-border-color)`. No local fallback; resolves from the cascade. | Input border | Shared with other controls using the same variable. | Sets Input border. |
-| `--frame-control-padding-x` | `--frame-control-padding-x` | length | Catalog: `calc(var(--frame-spacing-unit) * 2.5)`. No local fallback; resolves from the cascade. | Input padding | Shared with other controls using the same variable. | Sets Input padding. |
-| `--frame-control-padding-y` | `--frame-control-padding-y` | length | Catalog: `calc(var(--frame-spacing-unit) * 1.25)`. No local fallback; resolves from the cascade. | Input padding | Shared with other controls using the same variable. | Sets Input padding. |
-| `--frame-control-radius` | `--frame-control-radius` | length | Catalog: `var(--frame-radius-medium)`. No local fallback; resolves from the cascade. | portalled Content border-radius; Item border-radius | Shared with other controls using the same variable. | Sets portalled Content border-radius; Item border-radius. |
-| `--frame-control-text` | `--frame-control-text` | color | Catalog: `#d4d4d4`. No local fallback; resolves from the cascade. | Input color | Shared with other controls using the same variable. | Sets Input color. |
-| `--frame-font-body` | `--frame-font-body` | family | Catalog: `"Segoe UI", sans-serif`. No local fallback; resolves from the cascade. | portalled Content font-family | Shared with other controls using the same variable. | Sets portalled Content font-family. |
-| `--frame-font-size-body` | `--frame-font-size-body` | length | Catalog: `12px`. No local fallback; resolves from the cascade. | portalled Content font-size | Shared with other controls using the same variable. | Sets portalled Content font-size. |
-| `--frame-input-radius` | `--frame-input-radius` | length | Catalog: `var(--frame-menu-border-radius)`. No local fallback; resolves from the cascade. | Input border-radius | Shared with other controls using the same variable. | Sets Input border-radius. |
-| `--frame-menu-background` | `--frame-menu-background` | color | Catalog: `var(--frame-overlay-background)`. No local fallback; resolves from the cascade. | portalled Content background | Shared with other controls using the same variable. | Sets portalled Content background. |
-| `--frame-menu-border` | `--frame-menu-border` | color | Catalog: `var(--frame-border-color)`. No local fallback; resolves from the cascade. | portalled Content border | Shared with other controls using the same variable. | Sets portalled Content border. |
-| `--frame-menu-hover` | `--frame-menu-hover` | color | Catalog: `#303336`. No local fallback; resolves from the cascade. | Item background | Shared with other controls using the same variable. State selectors: [data-highlighted]. | Sets Item background. |
-| `--frame-muted` | `--frame-muted` | color | Catalog: `#8e9496`. No local fallback; resolves from the cascade. | Empty color | Shared with other controls using the same variable. | Sets Empty color. |
-| `--frame-overlay-backdrop-filter` | `--frame-overlay-backdrop-filter` | filter | Catalog: `blur(10px) saturate(110%)`. No local fallback; resolves from the cascade. | portalled Content backdrop-filter; portalled Content -webkit-backdrop-filter | Shared with other controls using the same variable. | Sets portalled Content backdrop-filter; portalled Content -webkit-backdrop-filter. |
-| `--frame-overlay-shadow` | `--frame-overlay-shadow` | shadow | Catalog: `0 14px 50px #0006`. No local fallback; resolves from the cascade. | portalled Content box-shadow | Shared with other controls using the same variable. | Sets portalled Content box-shadow. |
-| `--frame-text` | `--frame-text` | color | Catalog: `#cccccc`. No local fallback; resolves from the cascade. | portalled Content color | Shared with other controls using the same variable. | Sets portalled Content color. |
+| Token key                         | Variable                          | Value kind | Default/fallback                                                                                 | Part/effect                                                                  | Scope/limits                                                                             | Description                                                                        |
+| --------------------------------- | --------------------------------- | ---------- | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `--frame-accent`                  | `--frame-accent`                  | color      | Catalog: `#0078d4`. No local fallback; resolves from the cascade.                                | Input outline                                                                | Shared with other controls using the same variable. State selectors: :focus-visible.     | Sets Input outline.                                                                |
+| CSS only                          | `--frame-advanced-input-radius`   | length     | CSS fallback: `var(--frame-input-radius)`                                                        | Input border-radius                                                          | CSS only; absent from JSON token allowlist.                                              | Sets Input border-radius.                                                          |
+| `--frame-control-background`      | `--frame-control-background`      | color      | Catalog: `#1d1d1d`. No local fallback; resolves from the cascade.                                | Input background                                                             | Shared with other controls using the same variable.                                      | Sets Input background.                                                             |
+| `--frame-control-border`          | `--frame-control-border`          | color      | Catalog: `var(--frame-border-color)`. No local fallback; resolves from the cascade.              | Input border                                                                 | Shared with other controls using the same variable.                                      | Sets Input border.                                                                 |
+| `--frame-control-padding-x`       | `--frame-control-padding-x`       | length     | Catalog: `calc(var(--frame-spacing-unit) * 2.5)`. No local fallback; resolves from the cascade.  | Input padding                                                                | Shared with other controls using the same variable.                                      | Sets Input padding.                                                                |
+| `--frame-control-padding-y`       | `--frame-control-padding-y`       | length     | Catalog: `calc(var(--frame-spacing-unit) * 1.25)`. No local fallback; resolves from the cascade. | Input padding                                                                | Shared with other controls using the same variable.                                      | Sets Input padding.                                                                |
+| `--frame-control-radius`          | `--frame-control-radius`          | length     | Catalog: `var(--frame-radius-medium)`. No local fallback; resolves from the cascade.             | portalled Content border-radius; Item border-radius                          | Shared with other controls using the same variable.                                      | Sets portalled Content border-radius; Item border-radius.                          |
+| `--frame-control-text`            | `--frame-control-text`            | color      | Catalog: `#d4d4d4`. No local fallback; resolves from the cascade.                                | Input color                                                                  | Shared with other controls using the same variable.                                      | Sets Input color.                                                                  |
+| `--frame-font-body`               | `--frame-font-body`               | family     | Catalog: `"Segoe UI", sans-serif`. No local fallback; resolves from the cascade.                 | portalled Content font-family                                                | Shared with other controls using the same variable.                                      | Sets portalled Content font-family.                                                |
+| `--frame-font-size-body`          | `--frame-font-size-body`          | length     | Catalog: `12px`. No local fallback; resolves from the cascade.                                   | portalled Content font-size                                                  | Shared with other controls using the same variable.                                      | Sets portalled Content font-size.                                                  |
+| `--frame-input-radius`            | `--frame-input-radius`            | length     | Catalog: `var(--frame-menu-border-radius)`. No local fallback; resolves from the cascade.        | Input border-radius                                                          | Shared with other controls using the same variable.                                      | Sets Input border-radius.                                                          |
+| `--frame-menu-background`         | `--frame-menu-background`         | color      | Catalog: `var(--frame-overlay-background)`. No local fallback; resolves from the cascade.        | portalled Content background                                                 | Shared with other controls using the same variable.                                      | Sets portalled Content background.                                                 |
+| `--frame-menu-border`             | `--frame-menu-border`             | color      | Catalog: `var(--frame-border-color)`. No local fallback; resolves from the cascade.              | portalled Content border                                                     | Shared with other controls using the same variable.                                      | Sets portalled Content border.                                                     |
+| `--frame-menu-hover`              | `--frame-menu-hover`              | color      | Catalog: `#303336`. No local fallback; resolves from the cascade.                                | Item background                                                              | Shared with other controls using the same variable. State selectors: [data-highlighted]. | Sets Item background.                                                              |
+| `--frame-muted`                   | `--frame-muted`                   | color      | Catalog: `#8e9496`. No local fallback; resolves from the cascade.                                | Empty color                                                                  | Shared with other controls using the same variable.                                      | Sets Empty color.                                                                  |
+| `--frame-overlay-backdrop-filter` | `--frame-overlay-backdrop-filter` | filter     | Catalog: `blur(10px) saturate(110%)`. No local fallback; resolves from the cascade.              | portalled Content backdrop-filter; portalled Content -webkit-backdrop-filter | Shared with other controls using the same variable.                                      | Sets portalled Content backdrop-filter; portalled Content -webkit-backdrop-filter. |
+| `--frame-overlay-shadow`          | `--frame-overlay-shadow`          | shadow     | Catalog: `0 14px 50px #0006`. No local fallback; resolves from the cascade.                      | portalled Content box-shadow                                                 | Shared with other controls using the same variable.                                      | Sets portalled Content box-shadow.                                                 |
+| `--frame-text`                    | `--frame-text`                    | color      | Catalog: `#cccccc`. No local fallback; resolves from the cascade.                                | portalled Content color                                                      | Shared with other controls using the same variable.                                      | Sets portalled Content color.                                                      |
 
 See [theme variables](../../styling/theme-variables.md) for theme authoring.

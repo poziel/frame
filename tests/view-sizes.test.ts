@@ -1,5 +1,5 @@
 import { test, expect } from "bun:test";
-import { fitViewSizes } from "../packages/core/src/frame/viewSizes";
+import { fitViewSizes } from "../packages/core/src/framework/views/viewSizes";
 test("open subviews fill the region and share room without hiding any content", () => {
   expect(fitViewSizes([180], 600)).toEqual([600]);
   expect(fitViewSizes([180, 180, 180], 600)).toEqual([200, 200, 200]);

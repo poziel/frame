@@ -1,11 +1,11 @@
 import { createApp, h, nextTick } from 'vue';
-import { createFrame, FrameShell, FrameTextInput, FramePopover, FrameButton, parseTheme, parseThemeFile, type FrameThemeFormat } from '@frame/core';
+import { createFrame, FrameShell, FrameTextField, FramePopover, FrameButton, parseTheme, parseThemeFile, type FrameThemeFormat } from '@frame/core';
 
 const frame = createFrame();
 const second = createFrame();
 createApp({ render: () => h('main', [
-  h(FrameShell, { frame, titleText: 'First', showSearch: false, style: { height: '300px' } }, { default: () => h('section', { id: 'first' }, [h(FrameTextInput, { placeholder: 'First input' }), h(FramePopover, null, { trigger: () => h(FrameButton, { label: 'Open popup' }), default: () => h(FrameTextInput, { placeholder: 'Popup input' }) })]) }),
-  h(FrameShell, { frame: second, titleText: 'Second', showSearch: false, style: { height: '300px' } }, { default: () => h('section', { id: 'second' }, [h(FrameTextInput, { placeholder: 'Second input' })]) }),
+  h(FrameShell, { frame, titleText: 'First', showSearch: false, style: { height: '300px' } }, { default: () => h('section', { id: 'first' }, [h(FrameTextField, { placeholder: 'First input' }), h(FramePopover, null, { trigger: () => h(FrameButton, { label: 'Open popup' }), default: () => h(FrameTextField, { placeholder: 'Popup input' }) })]) }),
+  h(FrameShell, { frame: second, titleText: 'Second', showSearch: false, style: { height: '300px' } }, { default: () => h('section', { id: 'second' }, [h(FrameTextField, { placeholder: 'Second input' })]) }),
 ]) }).mount('#app');
 const definitions: Record<FrameThemeFormat, string> = {
   json: '{"frame":{"text":{"input":{"padding":"24px"}}}}',

@@ -12,12 +12,24 @@ export interface ComponentGuide {
   source: string;
   examples: GuideExample[];
 }
-const example = (id:string,title:string,description:string,values:Record<string,unknown>,slots?:Record<string,string>):GuideExample => ({id,title,description,values,...(slots?{slots}:{})});
+const example = (
+  id:string,
+  title:string,
+  description:string,
+  values:Record<string,unknown>,
+  slots?:Record<string,string>
+):GuideExample => ({id,title,description,values,...(slots?{slots}:{})});
 const anatomy = (...parts:[string,string][]) => parts.map(([part,description])=>({part,description}));
-const choice = (value:string,label:string,extra:Record<string,unknown>={})=>({value,label,...extra});
+const choice = (value:string, label:string, extra:Record<string,unknown>={})=>({value,label,...extra});
 const fruits = [choice('apple','Apple'),choice('banana','Banana'),choice('blueberry','Blueberry'),choice('grapes','Grapes')];
 const textOptions = ['Apple','Apricot','Banana','Blueberry','Grapes'];
-const guide = (id:string,description:string,parts:ComponentGuide['anatomy'],capabilities:string[],examples:GuideExample[]):ComponentGuide => ({description,anatomy:parts,capabilities,examples,source:`https://reka-ui.com/docs/components/${id}`});
+const guide = (
+  id:string,
+  description:string,
+  parts:ComponentGuide['anatomy'],
+  capabilities:string[],
+  examples:GuideExample[]
+):ComponentGuide => ({description,anatomy:parts,capabilities,examples,source:`https://reka-ui.com/docs/components/${id}`});
 
 // Describe the composition shipped by Frame, rather than promising every upstream primitive.
 export const formGuides:Record<string,ComponentGuide> = {
@@ -57,6 +69,7 @@ export const formGuides:Record<string,ComponentGuide> = {
     anatomy(['EditableRoot','Coordinates the value and editing state.'],['EditableArea','Groups both representations of the same text.'],['Preview + Input','Switches between readable text and the editor.']),
     ['Edit a single line in place.','Focus is managed when entering or leaving editing.','Show a placeholder when the value is empty.','Frame supplies the preview/input composition; separate edit, submit, and cancel triggers are not exposed.'],[
       example('inline','Edit in place','Activate the text, change it, and leave the field to finish. Press Escape during editing to cancel.',{modelValue:'Reka UI',label:'Project title'}),
+      example('enter-only','Save only with Enter','Double-click to edit. Enter saves; clicking away or pressing Escape discards the draft.',{modelValue:'Explicit commit',label:'Enter-only title',activationMode:'dblclick',submitMode:'enter'}),
       example('empty','Start from an empty value','The preview shows a placeholder until a title is entered. Placeholder text is not stored in the model.',{modelValue:'',placeholder:'Click to add a title',label:'Untitled project'}),
     ]),
   field: guide('field',
@@ -107,11 +120,28 @@ export const formGuides:Record<string,ComponentGuide> = {
       example('multiple','Select multiple items','Enable multiple to bind an array and select several entries in the same list.',{modelValue:['apple','grapes'],multiple:true,options:fruits,label:'Fruit selection'}),
       example('disabled-option','Skip an unavailable item','Banana remains visible but is skipped by selection; Apple and Grapes remain available.',{modelValue:'apple',options:[choice('apple','Apple'),choice('banana','Banana',{disabled:true}),choice('grapes','Grapes')],label:'Available fruit'}),
     ]),
+  'input-group': {
+    source:'https://reka-ui.com/docs/utilities/primitive',
+    description:'Compose a labeled input with decorations or actions while retaining one shared input surface.',
+    anatomy:[{part:'FrameFieldGroup',description:'Owns the shared border and focus ring.'},{part:'prefix / suffix',description:'Decorations before or after the input.'}],
+    capabilities:['Use currency and unit labels inside the border.','Reuse text, number, date, or select controls.','Override the group surface through component theme variables.'],
+    examples:[{id:'currency',title:'Currency input',description:'A dollar prefix and USD suffix surround the actual Frame text input.',values:{},slots:{prefix:'$',suffix:'USD'}},{id:'unit',title:'Unit suffix',description:'Keep a unit next to the input value inside the same surface.',values:{},slots:{suffix:'kg'}}],
+  },
+  'scrub-field': {
+    source:'https://reka-ui.com/docs/components/number-field',
+    description:'A compact numeric field with drag scrubbing and click-to-edit text entry, built from Reka number-field primitives and Frame text/icon controls.',
+    anatomy:[{part:'NumberFieldRoot',description:'Owns bounds and stepper state.'},{part:'FrameTextField',description:'Direct text entry on click.'},{part:'Scrub display',description:'Label, value, and bounded progress fill.'}],
+    capabilities:['Drag or scroll to adjust numeric tool settings.','Click or press Enter to type; Escape cancels.','Use bounds, fractional steps, and disabled state.'],
+    examples:[{id:'size',title:'Tool size',description:'Drag to set size, or click to enter an exact value.',values:{modelValue:12,label:'Size',suffix:' px',min:1,max:256,step:1}},{id:'opacity',title:'Opacity',description:'Wheel and arrow buttons change the percentage in single steps.',values:{modelValue:80,label:'Opacity',suffix:'%',min:0,max:100,step:1}}],
+  },
   'number-field': guide('number-field',
     'A numeric input with decrement and increment buttons. Bounds and steps apply consistently to the editable value and stepper interactions.',
     anatomy(['NumberFieldRoot','Coordinates numeric value, bounds, and step.'],['NumberFieldInput','Allows direct numeric entry.'],['Decrement + Increment','Adjusts the value by one step.']),
     ['Type numbers or adjust them with buttons and keyboard.','Constrain the allowed numeric interval.','Use fractional or coarse step sizes.'],[
       example('bounds','Bound the value','Choose a value between 1 and 10. The controls stop at the supplied limits.',{modelValue:5,min:1,max:10,label:'Quantity'}),
+      example('compact','Compact attached controls','Keep icon buttons attached to one compact input border.',{modelValue:5,min:0,max:10,label:'Compact quantity',size:'compact',controls:'buttons'}),
+      example('plain','Without steppers','Numeric entry and keyboard adjustment without visible buttons.',{modelValue:5,min:0,max:10,label:'Plain quantity',controls:'none'}),
+      example('stacked','Stacked arrow controls','Native number arrows, matching the settings number input without an extra button background.',{modelValue:5,min:0,max:10,label:'Stacked quantity',controls:'stacked',size:'compact'}),
       example('fractional','Fractional steps','Increase or decrease by 0.25 for a measurement requiring fractional precision.',{modelValue:1.5,min:0,max:4,step:0.25,label:'Measurement'}),
       example('coarse','Coarse increments','A step of 25 moves quickly through the allowed range.',{modelValue:100,min:50,max:200,step:25,label:'Zoom percent'}),
     ]),

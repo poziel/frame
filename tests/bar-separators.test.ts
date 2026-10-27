@@ -1,5 +1,5 @@
 import {expect,test} from 'bun:test';
-import {createFrame} from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 
 test('collapse is independent of display and only affects vertical icons and text',()=>{
  const f=createFrame({navigationBar:{position:'left',display:'both'}}),b=f.navigationBar;

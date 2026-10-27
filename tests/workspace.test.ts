@@ -1,14 +1,14 @@
 import { describe, expect, test } from "bun:test";
-import { createFrame } from "../packages/core/src/frame/createFrame";
-import { createWorkspace } from "../packages/core/src/frame/workspace";
-import type { WorkspaceNode } from "../packages/core/src/types";
+import {createFrame} from '../packages/core/src/framework/frame';
+import { Workspace } from "../packages/core/src/framework/workspace/workspace";
+import type {WorkspaceNode} from '../packages/core/src/framework/workspace/workspaceTypes';
 
 function leaves(node: WorkspaceNode): string[] { return node.type === "pane" ? [node.id] : [...leaves(node.first), ...leaves(node.second)]; }
 
 describe("workspace panes", () => {
   test("splits in all four directions, retaining the original content identity", () => {
     for (const direction of ["left", "right", "up", "down"] as const) {
-      const workspace = createWorkspace();
+      const workspace = new Workspace();
       const original = workspace.panes.value[0];
       const added = workspace.split(direction);
       const root = workspace.root.value;
@@ -21,7 +21,7 @@ describe("workspace panes", () => {
     }
   });
   test("nested splits resize and collapse without losing surviving pane content", () => {
-    const workspace = createWorkspace();
+    const workspace = new Workspace();
     const second = workspace.split("right");
     const component = { render: () => null };
     workspace.setPane(second, { label: "Preview", component, props: { selected: 5 } });

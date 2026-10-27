@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useFrame } from "../../../core/src/frame/createFrame";
+import {useFrame} from '../../../core/src/framework/useFrame';
 withDefaults(defineProps<{ view?: "workspace" | "activity" | "preferences" | "session" }>(), { view: "workspace" });
 const frame = useFrame();
 </script>

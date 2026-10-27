@@ -1,5 +1,5 @@
 import {expect,test} from 'bun:test';
-import {createFrame} from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 
 test('toolbar configuration and changes are isolated on the Frame instance',()=>{
  const first=createFrame({toolbar:{primary:true,commandCenter:false}}),second=createFrame();

@@ -8,13 +8,21 @@ frame.layout.secondarySidebarVisible = false;
 frame.layout.panelVisible = false;
 frame.registerSidePanel({ id: "drag-sample", label: "Drag sample", component: { render: () => "Sample view" } });
 const options = Array.from({ length: 50 }, (_, i) => ({ value: String(i), label: `Choice ${i + 1}`, description: `Details for choice ${i + 1}` }));
-const menuItems = [{ id: "nested", label: "Nested choices", children: Array.from({ length: 50 }, (_, i) => ({ id: `nested-${i}`, label: `Nested ${i + 1}` })) }, ...Array.from({ length: 50 }, (_, i) => ({ id: `item-${i}`, label: `Action ${i + 1}` }))];
+const menuItems = [{ id: "nested", label: "Nested choices", children: Array.from({ length: 50 }, (
+  _,
+  i
+) => ({ id: `nested-${i}`, label: `Nested ${i + 1}` })) }, ...Array.from({ length: 50 }, (
+  _,
+  i
+) => ({ id: `item-${i}`, label: `Action ${i + 1}` }))];
 const ModalContent = defineComponent({
   setup() {
     const choice = ref("0");
     return () => h("div", { style: "display:flex;flex-direction:column;justify-content:space-between;height:100%;padding:12px;box-sizing:border-box" }, [
       h(FrameTooltip, { text: "Modal header tooltip", placement: "top" }, () => h(FrameButton, {}, () => "Modal tooltip")),
-      h(FrameSelect, { modelValue: choice.value, options, label: "Modal choice", "onUpdate:modelValue": (value: string) => { choice.value = value; } }),
+      h(FrameSelect, { modelValue: choice.value, options, label: "Modal choice", "onUpdate:modelValue": (
+        value: string
+      ) => { choice.value = value; } }),
     ]);
   },
 });
@@ -30,12 +38,16 @@ const Content = defineComponent({
         h(FrameButton, { onClick: () => frame.openModal({ id: "overlay-test", title: "Boundary modal", component: ModalContent, width: 900, height: 700, maximized: true }) }, () => "Open modal"),
         h(FrameButton, { onClick: () => { for (let i = 0; i < 10; i++) frame.notify({ title: `Notice ${i + 1}`, details: "Notification detail".repeat(8), duration: 0 }); } }, () => "Notify"),
         h(FrameTooltip, { text: "Top edge tooltip", placement: "top" }, () => h(FrameButton, {}, () => "Top tooltip")),
-        h(FrameSelect, { modelValue: choice.value, options, label: "Top choice", "onUpdate:modelValue": (value: string) => { choice.value = value; } }),
+        h(FrameSelect, { modelValue: choice.value, options, label: "Top choice", "onUpdate:modelValue": (
+          value: string
+        ) => { choice.value = value; } }),
       ]),
       h("div", { style: "position:absolute;bottom:0;left:0;right:0;display:flex;gap:4px" }, [
         h(FrameButton, { ref: trigger, onClick: () => { menu.value = !menu.value; } }, () => "Tall menu"),
         h(FrameTooltip, { text: "Bottom edge tooltip", placement: "bottom" }, () => h(FrameButton, {}, () => "Bottom tooltip")),
-        h(FrameSelect, { modelValue: choice.value, options, label: "Bottom choice", "onUpdate:modelValue": (value: string) => { choice.value = value; } }),
+        h(FrameSelect, { modelValue: choice.value, options, label: "Bottom choice", "onUpdate:modelValue": (
+          value: string
+        ) => { choice.value = value; } }),
       ]),
       menu.value && trigger.value?.element ? h(FrameMenu, { anchor: trigger.value.element, items: menuItems, label: "Tall menu", onClose: () => { menu.value = false; } }) : null,
       h(ContextMenu, { items: menuItems, label: "Boundary context" }, () => h("div", { id: "context-target", style: "position:absolute;top:50%;left:0;width:100%;height:30px" }, "Context target")),

@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import { createFrame } from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 
 test('Manage placement defaults to bottom and stays isolated from other instances and activity placement', () => {
   const first = createFrame(), second = createFrame({ manageButtonPosition: 'top' });

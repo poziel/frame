@@ -5,20 +5,41 @@
   "private": true,
   "type": "module",
   "main": "./dist/frame.js",
-  "types": "./dist/types/frame/index.d.ts",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/types/frame/index.d.ts",
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/frame.js"
     },
     "./style.css": "./dist/frame.css",
-    "./tokens.css": "./src/themes/default.css"
+    "./tokens.css": "./src/themes/generated/default.css",
+    "./modules/chat": {
+      "types": "./dist/types/modules/chat/index.d.ts",
+      "import": "./dist/modules/chat.js"
+    },
+    "./modules/editor": {
+      "types": "./dist/types/modules/editor/index.d.ts",
+      "import": "./dist/modules/editor.js"
+    },
+    "./modules/notifications": {
+      "types": "./dist/types/modules/notifications/index.d.ts",
+      "import": "./dist/modules/notifications.js"
+    },
+    "./modules/terminal": {
+      "types": "./dist/types/modules/terminal/index.d.ts",
+      "import": "./dist/modules/terminal.js"
+    },
+    "./modules/viewer": {
+      "types": "./dist/types/modules/viewer/index.d.ts",
+      "import": "./dist/modules/viewer.js"
+    }
   },
   "files": [
     "dist",
     "licenses",
     "README.md",
-    "src/themes/default.css"
+    "src/themes/generated/default.css",
+    "src/modules/README.md"
   ],
   "sideEffects": [
     "**/*.css"
@@ -34,7 +55,15 @@
     "confbox": "^0.3.1",
     "ldrs": "^1.1.9",
     "reka-ui": "^2.11.0",
-    "shiki": "^4.5.0"
+    "shiki": "^4.5.0",
+    "@shikijs/monaco": "^4.5.0",
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/addon-search": "^0.16.0",
+    "@xterm/addon-web-links": "^0.12.0",
+    "@xterm/xterm": "^6.0.0",
+    "markdown-it": "^15.0.3",
+    "monaco-editor": "^0.57.0",
+    "pdfjs-dist": "^6.4.299"
   },
   "scripts": {
     "tokens:generate": "bun scripts/generate-component-tokens.ts && bun scripts/generate-theme-css.ts",
@@ -47,6 +76,7 @@
     "vite": "^8.0.16",
     "vue-tsc": "^3.3.5",
     "@iconify-json/codicon": "^1.2.75",
-    "vue": "^3.5.13"
+    "vue": "^3.5.13",
+    "@types/markdown-it": "^14.2.0"
   }
 }

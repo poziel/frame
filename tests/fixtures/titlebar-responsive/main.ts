@@ -1,5 +1,5 @@
 import {createApp,h} from 'vue';
-import {createFrame,FrameShell} from '../../../packages/core/src/frame/index';
+import {createFrame,FrameShell} from '../../../packages/core/src/index';
 const frame=createFrame({workspace:{allowPaneCreation:false,welcome:{commands:['example.open','example.new']}},primaryViewBar:{position:'top',size:'compact',display:'icons',allowSizeChange:false,allowDisplayChange:false},toolbar:{customize:true,primary:true,bottom:false,secondary:false,layoutControls:true,commandCenter:false}});
 frame.commands.register({id:'example.open',feature:'example',label:'Open document',shortcut:'Ctrl+O',run:()=>{(window as any).welcomeOpened=true;}});
 frame.commands.register({id:'example.new',feature:'example',label:'New document',run:()=>{}});

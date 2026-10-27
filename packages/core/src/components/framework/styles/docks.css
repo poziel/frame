@@ -1,0 +1,56 @@
+.frame-dock-region { display:grid; grid-template-columns:auto minmax(0,1fr) auto; grid-template-rows:auto minmax(0,1fr) auto; min-width:0; min-height:0; position:relative; --dock-gap:var(--frame-spacing-small,4px); }
+.frame-dock-main { grid-area:2/2; display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:auto minmax(0,1fr) auto;min-width:0;min-height:0;position:relative; }
+.frame-dock-content { grid-area:2/2;display:flex;flex-direction:column;min-width:0;min-height:0;position:relative; }
+.frame-dock-main.has-inside-docks { padding:var(--dock-gap); }
+.frame-dock-main.dock-content-hidden { visibility:hidden; }
+.frame-dock-main.dock-content-hidden > .frame-dock-content { display:none !important; }
+.frame-dock-lane { display:flex; min-width:0; min-height:0; pointer-events:none; box-sizing:border-box; }
+.frame-dock-lane.dock-edge-top,.frame-dock-lane.dock-edge-bottom { flex-direction:column; gap:var(--dock-gap); }
+.frame-dock-lane.dock-edge-left,.frame-dock-lane.dock-edge-right { flex-direction:row; gap:var(--dock-gap); }
+.frame-dock-outside.dock-edge-top,.frame-dock-inside.dock-edge-top { grid-area:1/1/2/4; padding-bottom:var(--dock-gap); }
+.frame-dock-outside.dock-edge-bottom,.frame-dock-inside.dock-edge-bottom { grid-area:3/1/4/4; padding-top:var(--dock-gap); }
+.frame-dock-outside.dock-edge-left { grid-area:2/1; padding-right:var(--dock-gap); }
+.frame-dock-outside.dock-edge-right { grid-area:2/3; padding-left:var(--dock-gap); }
+.frame-dock-inside.dock-edge-left { grid-area:2/1; padding-right:var(--dock-gap); }
+.frame-dock-inside.dock-edge-right { grid-area:2/3; padding-left:var(--dock-gap); }
+.frame-dock-slot { min-width:0;min-height:0;pointer-events:auto;flex-shrink:0; }
+.frame-dock { width:100%;height:100%;box-sizing:border-box;overflow:auto;background:var(--frame-surface);color:var(--frame-text);border:1px solid var(--frame-line);border-radius:var(--frame-panel-radius,var(--frame-radius-medium,6px));padding:var(--frame-spacing-normal,10px); }
+.frame-dock[data-padding=small] { padding:var(--frame-spacing-small,4px); }
+.frame-dock[data-padding=none] { padding:0; }
+.compact .frame-dock-region { --dock-gap:0px; }
+.compact .frame-dock { border-radius:0; }
+.frame-dock-content > .canvas-centering { flex:1;min-height:0; }
+.frame-dock-content > .shell-sidebar { flex:1;min-height:0;width:100%; }
+.frame-dock-content > .bottom-panel { flex:1;height:100%;max-height:100%;min-height:0; }
+.side-panel > .frame-dock-region { flex:1;min-height:0; }
+.frame-dock-content > .side-content { flex:1;min-height:0; }
+.frame-dock-content > .navigation-bar { flex:1; }
+.frame-dock-content > .status-bar { width:100%;height:100%; }
+.primary-dock-region,.secondary-dock-region { min-width:0;min-height:0;pointer-events:none; }
+.frame-dock-anchor-content { flex:1;min-width:0;min-height:0;align-self:stretch; }
+.view-bar-horizontal > .frame-dock-anchor-content > .frame-dock-main > .frame-dock-content,
+.panel-view-bar > .frame-dock-anchor-content > .frame-dock-main > .frame-dock-content { flex-direction:row; }
+.side-panel,.view-bar,.panel-view-bar { position:relative; }
+.canvas-container.frame-dock-region { display:grid;isolation:isolate; }
+.canvas-container.has-outside-docks { border:0;background:transparent;overflow:visible; }
+.canvas-container.has-outside-docks > .frame-dock-main { border:1px solid var(--frame-line);border-radius:var(--frame-panel-radius,var(--frame-radius-large));background:var(--frame-canvas);overflow:hidden; }
+.compact .canvas-container.has-outside-docks > .frame-dock-main { border-radius:0; }
+.bottom-region.frame-dock-region { display:grid; }
+.workbench-layout > .navigation-bar-container.frame-dock-region { display:grid; }
+.frame-dock-content > .shell-sidebar { position:relative; }
+.frame-dock-content > .shell-sidebar.sidebar-horizontal.view-bar-bottom { flex-direction:column-reverse; }
+.frame-dock-content > .shell-sidebar.sidebar-horizontal { flex-direction:column; }
+.frame-dock-region.bottom-region > .frame-dock-main > .frame-dock-content > .panel-resize { position:absolute; }
+.narrow > :is(.primary-dock-region,.secondary-dock-region) { z-index:3; }
+@media(max-width:760px) { .frame-dock-content > .navigation-container.shell-sidebar.expanded { position:relative;top:auto;bottom:auto;left:auto;right:auto;box-shadow:none; } }
+
+/* Overlay lanes occupy no grid space. Only each content-sized slot receives input. */
+.frame-dock-overlays { position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden; }
+.frame-dock-overlay { position:absolute;align-items:center;max-width:100%;max-height:100%;gap:var(--dock-gap); }
+.frame-dock-overlay.dock-edge-top { top:var(--dock-gap);left:var(--dock-gap);right:var(--dock-gap); }
+.frame-dock-overlay.dock-edge-bottom { bottom:var(--dock-gap);left:var(--dock-gap);right:var(--dock-gap); }
+.frame-dock-overlay.dock-edge-left { left:var(--dock-gap);top:var(--dock-gap);bottom:var(--dock-gap); }
+.frame-dock-overlay.dock-edge-right { right:var(--dock-gap);top:var(--dock-gap);bottom:var(--dock-gap); }
+.frame-dock-overlay > .frame-dock-slot { width:max-content;height:max-content;max-width:100%;max-height:100%;overflow:auto; }
+.frame-dock[data-appearance=basic],.frame-dock[data-appearance=none] { padding:0; }
+.frame-dock[data-appearance=none] { background:transparent;border:0;border-radius:0;box-shadow:none; }

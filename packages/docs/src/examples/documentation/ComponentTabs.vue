@@ -1,17 +1,13 @@
 <script setup lang="ts">
-import { useId } from 'vue';
+import { FrameTabs } from '@frame/core';
 import type { DocumentationTab } from './types';
-const props=defineProps<{modelValue:DocumentationTab}>();
+defineProps<{modelValue:DocumentationTab}>();
 const emit=defineEmits<{'update:modelValue':[tab:DocumentationTab]}>();
-const id=useId();
-const tabs:{id:DocumentationTab;label:string}[]=[{id:'features',label:'Features'},{id:'api',label:'API'},{id:'theming',label:'Theming'},{id:'demo',label:'Interactive demo'}];
-function key(event:KeyboardEvent){
- if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
- event.preventDefault();const current=tabs.findIndex(tab=>tab.id===props.modelValue);
- const direction=getComputedStyle(event.currentTarget as HTMLElement).direction==='rtl'?-1:1;
- const next=event.key==='Home'?0:event.key==='End'?tabs.length-1:(current+(event.key==='ArrowRight'?1:-1)*direction+tabs.length)%tabs.length;
- emit('update:modelValue',tabs[next]!.id);
- (event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>('[role=tab]')[next]?.focus();
-}
+const tabs:{value:DocumentationTab;label:string}[]=[{value:'features',label:'Features'},{value:'api',label:'API'},{value:'theming',label:'Theming'},{value:'demo',label:'Interactive demo'}];
+function select(value:string|number) { const tab=tabs.find(tab=>tab.value===value);if(tab)emit('update:modelValue',tab.value); }
 </script>
-<template><div class="documentation-tabs" role="tablist" aria-label="Component documentation" @keydown="key"><button v-for="tab in tabs" :key="tab.id" type="button" role="tab" :id="`${id}-${tab.id}`" :aria-controls="`${id}-${tab.id}-panel`" :tabindex="modelValue===tab.id?0:-1" :aria-selected="modelValue===tab.id" @click="emit('update:modelValue',tab.id)">{{ tab.label }}</button></div><template v-for="tab in tabs" :key="tab.id"><section :hidden="modelValue!==tab.id" :id="`${id}-${tab.id}-panel`" role="tabpanel" :aria-labelledby="`${id}-${tab.id}`" tabindex="0" class="documentation-panel"><slot v-if="modelValue===tab.id" :name="tab.id"/></section></template></template>
+<template>
+  <FrameTabs class="documentation-tabs" :model-value="modelValue" :items="tabs" label="Component documentation" @update:model-value="select">
+    <template #content="{item}"><div class="documentation-panel"><slot v-if="modelValue===item.value" :name="item.value" /></div></template>
+  </FrameTabs>
+</template>

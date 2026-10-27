@@ -1,14 +1,5 @@
-.component-catalog { display: flex; flex-direction: column; flex: 1; min-width: 0; min-height: 0; gap: 12px; padding-bottom: 12px; overflow: auto; box-sizing: border-box; font-size: 12px; --frame-text-input-width: 100%; }
-.component-catalog h3 { font-size: 10px; text-transform: uppercase; letter-spacing: .6px; color: var(--frame-muted); font-weight: 500; margin: 8px 0; }
-.component-catalog section { display: flex; flex-direction: column; flex: 0 0 auto; }
-.catalog-toolbar { position: sticky; top: 0; z-index: 1; display: flex; flex-direction: column; flex: 0 0 auto; gap: 8px; padding: 4px 0 8px; background: var(--frame-surface); }
-.catalog-toolbar > .frame-text-input, .catalog-toolbar > .frame-select, .api-catalog-search > .frame-text-input { width: 100%; max-width: none; min-width: 0; box-sizing: border-box; flex-shrink: 0; }
-.component-catalog button:not(.frame-select) { width: 100%; padding: 7px 8px; text-align: left; border-radius: 3px; }
-.component-catalog section > button:hover { background: var(--frame-list-hover-background); }
-.component-catalog section > button[aria-current=page] { background: var(--frame-list-selection-background); color: var(--frame-list-selection-foreground); outline: 1px solid var(--frame-list-selection-border); outline-offset: -1px; }
-.component-catalog section > button:focus-visible { outline: 1px solid var(--frame-accent); outline-offset: -1px; }
-
 .component-preview-controls { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; min-width: 0; }
+.component-preview-controls:has(> .docs-ai-feature-demo) { width:100%; }
 .component-preview-controls > .setting-field { width: 100%; margin-bottom: 8px; }
 .showcase-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .showcase-split { height: 220px; width: 100%; border: 1px solid var(--frame-line); }
@@ -40,22 +31,16 @@
 .online-icons-toolbar { padding: 6px 12px; display: flex; justify-content: space-between; }
 .online-icons iframe { width: 100%; flex: 1; min-height: 0; border: 0; background: var(--frame-canvas); }
 
-.api-catalog { padding: 0 10px 16px; }
-.api-catalog-search { position: sticky; top: 0; z-index: 1; padding: 4px 0 8px; background: var(--frame-surface); }
-.api-catalog button { display: flex; flex-direction: column; gap: 3px; overflow-wrap: anywhere; }
-.api-catalog button small { color: var(--frame-muted); font-size: 10px; }
 
 /* Catalogs own their scrolling; view hosts must pass down a bounded flex height. */
-.side-content:has(> .view-content > .component-catalog),
-.side-content:has(> .view-host > .view-content > .component-catalog),
-.view-host:has(> .view-content > .component-catalog),
-.view-content:has(> .component-catalog) { display: flex; flex-direction: column; flex: 1; min-width: 0; min-height: 0; overflow: hidden; }
-.api-catalog-search { flex-shrink: 0; }
+.side-content:has(> .view-content > .docs-catalog),
+.side-content:has(> .view-host > .view-content > .docs-catalog),
+.view-host:has(> .view-content > .docs-catalog),
+.view-content:has(> .docs-catalog) { display: flex; flex-direction: column; flex: 1; min-width: 0; min-height: 0; overflow: hidden; }
 
 .documentation-page { max-width: 1180px; }
-.documentation-tabs { display: flex; gap: 20px; border-bottom: 1px solid var(--frame-line); margin: 24px 0; overflow-x: auto; }
-.documentation-tabs button { padding: 12px 0; border-bottom: 2px solid transparent; white-space: nowrap; }
-.documentation-tabs [aria-selected=true] { border-bottom-color: var(--frame-accent); color: var(--frame-text); }
+.documentation-tabs { --frame-tabs-content-padding:0; }
+.documentation-tabs > .frame-tabs-list { margin:24px 0; }
 .documentation-panel { outline-offset: 4px; min-width: 0; }
 .documentation-panel h2 { font-size: 20px; font-weight: 500; margin: 28px 0 12px; }
 .documentation-panel h3 { font-size: 15px; font-weight: 500; margin: 22px 0 12px; }

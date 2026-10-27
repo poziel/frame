@@ -4,14 +4,9 @@ import {
   FrameButton,
   FrameSelect,
   FrameTextArea,
-  FrameTextInput,
+  FrameTextField,
 } from "@frame/core";
-import type {
-  ChatQuestion,
-  ChatThinkingPart,
-  ChatActivityPart,
-  ChatActivityGroupPart,
-} from "@frame/features";
+import type { ChatQuestion, ChatThinkingPart, ChatActivityPart, ChatActivityGroupPart } from '@frame/core/modules/chat';
 import type { ChatPlayground } from "./chatPlayground";
 import ChatQuestionEditor from "./ChatQuestionEditor.vue";
 import { chatDemoScenarios } from "./chatDemoScenarios";
@@ -437,7 +432,7 @@ function attach(event: Event) {
           </p>
           <label
             ><span>New group name</span
-            ><FrameTextInput
+            ><FrameTextField
               v-model="groupName"
               aria-label="New group name"
               :maxlength="500"
@@ -455,7 +450,7 @@ function attach(event: Event) {
           /></label>
           <label
             ><span>Activity label</span
-            ><FrameTextInput
+            ><FrameTextField
               v-model="activityLabel"
               aria-label="Activity label"
               :maxlength="500" /></label
@@ -475,7 +470,7 @@ function attach(event: Event) {
               :maxlength="64000" /></label
           ><label
             ><span>Output language</span
-            ><FrameTextInput
+            ><FrameTextField
               v-model="outputLanguage"
               aria-label="Output language"
               placeholder="text, html, json, bash…" /></label
@@ -534,7 +529,7 @@ function attach(event: Event) {
           </p>
           <label
             ><span>Proposed action</span
-            ><FrameTextInput
+            ><FrameTextField
               v-model="approvalText"
               aria-label="Proposed action"
               :maxlength="4000" /></label
@@ -558,7 +553,7 @@ function attach(event: Event) {
         <fieldset :disabled="!manual">
           <label
             ><span>Request title</span
-            ><FrameTextInput
+            ><FrameTextField
               v-model="questionTitle"
               aria-label="Request title"
               :maxlength="500" /></label
@@ -610,7 +605,7 @@ function attach(event: Event) {
           </div>
           <label
             ><span>Failure message</span
-            ><FrameTextInput
+            ><FrameTextField
               v-model="failure"
               aria-label="Failure message"
               :maxlength="4000" /></label

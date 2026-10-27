@@ -12,7 +12,26 @@ frame.theme.set(vscodeLight2026);
 frame.theme.reset(); // Restore document CSS inheritance.
 ```
 
-Available presets are `vscodeLight2026`, `vscodeHighContrastBlack`, and `vscodeHighContrastWhite`. All three also have JSON subpath exports: `@frame/themes/vscode-light-2026.json`, `@frame/themes/vscode-high-contrast-black.json`, and `@frame/themes/vscode-high-contrast-white.json`.
+Available presets are `frameMonokaiDark`, `frameMonokaiLight`, `frameDusk`, `vscodeLight2026`, `vscodeHighContrastBlack`, and `vscodeHighContrastWhite`. Each has a JSON subpath export.
+
+## Frame Monokai Dark And Light
+
+The coordinated pair follows Frame's approved Monokai Pro-inspired design: warm charcoal and cream text in Dark, soft ivory and warm gray chrome in Light, with golden primary actions. Light mode uses darker semantic accents to preserve readability. These are original Frame adaptations, not official Monokai Pro themes.
+
+```ts
+import { frameMonokaiDark, frameMonokaiLight } from '@frame/themes';
+
+const frame = createFrame({ theme: frameMonokaiDark });
+frame.theme.set(frameMonokaiLight);
+```
+
+JSON exports: `@frame/themes/frame-monokai-dark.json` and `@frame/themes/frame-monokai-light.json`. Both explicitly cover public color tokens for the shell, controls, selections, menus, notifications and portals. Syntax highlighting, Monaco themes and terminal ANSI palettes remain separate integrations. The docs theme picker offers both, and nested playgrounds start with Dark.
+
+The [design references](provenance/frame-monokai.json) record [Monokai Pro](https://monokai.pro/vscode) and [VS Code's color roles](https://code.visualstudio.com/api/references/theme-color). No extension theme files or icon assets are bundled.
+
+## Frame Dusk
+
+Frame's original alternate dark palette uses blue-gray chrome, a dark slate workspace, soft off-white text, and a lavender accent. Import `frameDusk` and pass it as `createFrame({ theme: frameDusk })`. It overrides shared surfaces and interaction colors while retaining Core's dark defaults for other tokens; it does not change the global default theme.
 
 The same definition is available at `@frame/themes/vscode-light-2026.json` for bundlers or user-import testing:
 
@@ -49,3 +68,16 @@ Production-browser checks measure selected text, primary buttons, and quick-inpu
 ## Build locally
 
 All packages remain private. From the repository root, run `bun run build:library`, then `bun run build:themes`. Install `@frame/themes` as a workspace dependency or local package alongside compatible Core. The build externalizes Core and ships the JSON definition, declarations, provenance and license notice. Core and Tailwind do not depend on this package.
+
+## Source conventions and ownership
+
+`src/index.ts` exports documented, validated immutable presets; `src/presets/`
+contains their portable JSON definitions. `provenance/` and `licenses/` retain
+source and licensing records. Public preset names and JSON subpaths are stable.
+
+This package owns data, not live state or subscriptions, so it deliberately
+uses no artificial class wrapper. Core's theme classes own parsing, selection,
+application, and cleanup; consumers select presets through their own Frame.
+The shared TypeScript/TSDoc and formatting standards apply to handwritten code
+and build configuration. Palette values, provenance, and JSON definitions are
+preserved during architecture-only changes.

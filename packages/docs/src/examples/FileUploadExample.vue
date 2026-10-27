@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { FrameButton, FrameCheckbox, FrameFileUpload, FrameFileDropZone, FrameTextInput, FrameSelect, type FileRejection } from '@frame/core';
+import { FrameButton, FrameCheckbox, FrameFileUpload, FrameFileDropZone, FrameTextField, FrameSelect, type FileRejection } from '@frame/core';
 const props = defineProps<{ id: string; variant?: string }>();
 const files = ref<File[]>([]), received = ref<string[]>([]), events = ref<string[]>([]);
 const disabled = ref(false), multiple = ref(true), showFiles = ref(true);
@@ -21,9 +21,9 @@ function rejected(value: FileRejection[]) { events.value = [...value.map(item =>
       <FrameCheckbox v-model="disabled" label="Disabled" />
       <FrameCheckbox v-model="multiple" label="Allow multiple files" />
       <FrameCheckbox v-if="id === 'file-upload'" v-model="showFiles" label="Show selected files" />
-      <label>Accepted file types<FrameTextInput v-model="accept" placeholder="Any file, or image/*,.txt" /></label>
-      <label>Maximum bytes per file<FrameTextInput v-model="maxSize" type="number" min="0" /></label>
-      <label>Maximum files per selection<FrameTextInput v-model="maxFiles" type="number" min="0" /></label>
+      <label>Accepted file types<FrameTextField v-model="accept" placeholder="Any file, or image/*,.txt" /></label>
+      <label>Maximum bytes per file<FrameTextField v-model="maxSize" type="number" min="0" /></label>
+      <label>Maximum files per selection<FrameTextField v-model="maxFiles" type="number" min="0" /></label>
       <label v-if="id === 'file-drop-zone'">Appearance<FrameSelect v-model="appearance" :options="[{value:'zone',label:'Visible zone'},{value:'overlay',label:'Invisible until dragging'}]" label="Appearance" /></label>
     </div>
     <p>Files stay in this browser. Try selecting the same file twice or exceeding a limit.</p>

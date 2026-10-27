@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useFrame } from '@frame/core';
-import { guidePages } from './pages';
+import { guidePages, isGuidePageId } from './pages';
 import { openGuide } from './navigation';
+import CatalogView from '../components/CatalogView.vue';
+import { useCatalogSelection } from '../components/catalog';
 const frame=useFrame();
-const current=computed(()=>frame.workspace.panes.value.find(pane=>pane.id===frame.workspace.activePane.value)?.props?.pageId);
+const sortedPages=[...guidePages].sort((a, b)=>a.title.localeCompare(b.title,'en',{sensitivity:'base',numeric:true}));
+const query=ref<string|number>('');
+const groups=computed(()=>[{title:'Introduction',items:sortedPages.filter(page=>page.title.toLocaleLowerCase().includes(String(query.value).trim().toLocaleLowerCase())).map(page=>({id:page.id,title:page.title}))}]);
+const current=useCatalogSelection('pageId');
+function open(id:string){if(isGuidePageId(id))openGuide(frame,id);}
 </script>
-<template><nav class="component-catalog frame-guide-catalog" aria-label="Frame guides"><section><h3>Introduction</h3><button v-for="page in guidePages" :key="page.id" :aria-current="current===page.id?'page':undefined" @click="openGuide(frame,page.id)">{{ page.title }}</button></section></nav></template>
+<template><CatalogView v-model:query="query" label="Frame guides" search-label="Filter guides" placeholder="Find a guide…" :groups="groups" :current="current" empty-text="No matching guides." @select="open" /></template>

@@ -51,19 +51,11 @@ Core supplies the shell and controls. Themes supplies optional presets. Tailwind
 
 The application supplies Vue `^3.5.13`. The Tailwind integration requires Vite `^8.0.0` and supplies Tailwind and its Vite plugin as dependencies.
 
-If you also need optional Features, build and register it from the Frame repository root:
-
-```powershell
-bun run build:features
-cd packages/features
-bun link
-```
-
-Then run `bun link --save @frame/features` from your application root. Features requires compatible Core; importing it registers no views or starts any services.
+Optional modules are included in Core. Import them from `@frame/core/modules/editor`, `/terminal`, `/viewer`, `/chat`, or `/notifications`. Module imports include their styles automatically; no extra package or engine installation is needed. Importing a module registers no views and starts no services.
 
 ### Rebuild while developing
 
-After editing Core, run `bun run build:library` from the Frame repository root. After editing Themes or Features, run `bun run build:themes` or `bun run build:features`; build Core first when its contracts change. Tailwind's package has no build step. Links continue pointing to the same directories, so rebuilding does not require packing or relinking. Restart the application's development server if it retains an older dependency build.
+After editing Core, run `bun run build:library` from the Frame repository root. After editing modules, rebuild Core with the same command. After editing Themes, run `bun run build:themes`; build Core first when its contracts change. Tailwind's package has no build step. Links continue pointing to the same directories, so rebuilding does not require packing or relinking. Restart the application's development server if it retains an older dependency build.
 
 For an archive-based installation, run `npm pack ./packages/core` and the equivalent command for each other package you need from the Frame repository root after building them. Install the resulting `.tgz` files in the application using `bun add` (and `--dev` for Tailwind). Archives are snapshots: rebuild, repack, and update the application dependency when upgrading.
 
@@ -293,9 +285,9 @@ A mounted shell can retain session state, but restoring it after an application 
 
 Call `frame.dispose()` when the owning shell is destroyed. Dispose host-owned subscriptions, adapters, and optional feature controllers according to their contracts as well. Frame disposal does not imply ownership of every service referenced by an application view.
 
-## Optional Features and desktop integration
+## Optional modules and desktop integration
 
-When using optional components, import their exports from `@frame/features` and load `@frame/features/style.css`. Construct and mount only the features your application needs. Each feature documents its adapters, presentation, and cleanup in the [Features guide](../../packages/features/README.md).
+When using optional modules, import from their `@frame/core/modules/*` entry points. Styles are included automatically. Construct and mount only the modules your application needs. Each module documents its adapters, presentation, and cleanup in the [Modules guide](../../packages/core/src/modules/README.md).
 
 The proposed chained `frame.use(...)` installer and `frame.views.primarySidebar` namespaces are architectural targets, not current APIs. Use the registration methods in this guide for current integrations.
 
@@ -308,6 +300,6 @@ The shell runs in a browser without Rust. Native window controls require an expl
 - [Menus and toolbar](../shell/menus-and-toolbar.md): application menus and title-bar actions.
 - [Documentation index](../README.md): choose the next topic.
 - [Theme variables](../styling/theme-variables.md): style application content with Frame's tokens.
-- [Package boundaries](../reference/packages.md): Core, Features, Tailwind, and Docs responsibilities.
+- [Package boundaries](../reference/packages.md): Core, modules, Tailwind, and Docs responsibilities.
 
 For AI assistants: start with this guide, [configuration](../configuration/frame-options.md), and the [shell contribution map](../shell/README.md), then read the relevant guide and the installed package's TypeScript declarations. Use public exports from the installed version.

@@ -1,5 +1,5 @@
 import {expect,test} from 'bun:test';
-import {createFrame} from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 import {showWorkspaceContent} from '../packages/docs/src/examples/workspaceContent';
 
 test('Docs navigation works in plain, populated-tab, and empty-tab panes',()=>{

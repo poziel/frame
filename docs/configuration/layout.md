@@ -35,14 +35,14 @@ frame.layout.density = 'compact';
 
 `primarySide` is `left` or `right`. The view bar moves with the primary sidebar; the secondary sidebar always occupies the opposite side. Title-bar sidebar icons mirror their physical positions.
 
-`panelAlignment` determines which *physical* sidebar the bottom panel extends beneath:
+`panelAlignment` determines which _physical_ sidebar the bottom panel extends beneath:
 
 | Alignment | Under left sidebar | Under right sidebar |
-| --- | --- | --- |
-| `left` | Yes | No |
-| `right` | No | Yes |
-| `center` | No | No |
-| `justify` | Yes | Yes |
+| --------- | ------------------ | ------------------- |
+| `left`    | Yes                | No                  |
+| `right`   | No                 | Yes                 |
+| `center`  | No                 | No                  |
+| `justify` | Yes                | Yes                 |
 
 The outer view bar remains full height. The panel does not cover it. These physical meanings stay the same after swapping the primary sidebar to the right.
 
@@ -85,7 +85,6 @@ Each registration generates a searchable `frame.secondary.<id>` command. Removin
 
 The layout commands are also registered in Quick actions, including visibility toggles, placement, density, centering, Zen, fullscreen, and resetting the layout. For app-side control use `frame.setZenMode(boolean)`, `frame.resetLayout()`, and the existing panel methods. `resetLayout()` resets preferences only; the shell's `frame.layout.reset` command also exits fullscreen.
 
-
 Default density uses 34px title and status bars; compact keeps a 24px status bar. Centered layout starts at 90% of the available workspace width and remains symmetrically resizable. Grip dots appear only on the primary, secondary, and bottom outer sashes in default density.
 
 See [Workspace panes and Banner](../shell/workspace.md) for splitting, pane content, and the banner's independent `bannerAlignment`, `bannerHeight`, and `bannerVisible` settings. A banner is always custom content, never a drop destination for view menus.
@@ -107,3 +106,15 @@ Custom application overlays belong in the shell's `overlays` slot. Its `bounds` 
 ```
 
 Standalone Frame controls without a shell retain viewport-based placement. Use `FrameSelect` for application dropdowns; native browser/operating-system dropdowns do not use the shell's positioning system.
+
+## Layout objects
+
+`frame.layout` is a reactive `Layout` instance. Existing preference fields and
+Frame reset/Zen operations retain their behavior. The instance also exposes
+`geometry(width, height, measurements?)` and
+`maximizedBounds(width, height, measurements?)` for calculations that preserve
+preferred dimensions. `frame.docks` is a `DockRegistry` instance with the same
+registration, visibility, placement, and measurement APIs.
+
+See the [layout implementation guide](../../packages/core/src/framework/layout/README.md)
+for controller ownership, separator delegation, and drag cleanup.

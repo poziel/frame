@@ -2,7 +2,7 @@
 import { markRaw } from "vue";
 import { PanelSections } from "@frame/core";
 import DemoList from "./DemoList.vue";
-import { useFrame } from "../../../core/src/frame/createFrame";
+import {useFrame} from '../../../core/src/framework/useFrame';
 const frame = useFrame();
 const sections = [{ id: 'collections', title: 'Collections', component: markRaw(DemoList), padded: false, actions: [{ id: 'new', label: '+', run: () => frame.record('New collection requested') }] }, { id: 'people', title: 'People', component: markRaw(DemoList), props: { kind: 'people' } }];
 </script><template><PanelSections :sections="sections"/></template>

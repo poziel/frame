@@ -2,6 +2,7 @@
 import { computed, ref, watch, onMounted, nextTick } from 'vue';
 import { FrameButton, FrameCodeBlock, useFrame } from '@frame/core';
 import { guidePages, type GuidePageId } from './pages';
+import { setupExample, viewExample } from './examples';
 import { openGuide, guidesViewId } from './navigation';
 const props=defineProps<{pageId:GuidePageId}>();
 const frame=useFrame();
@@ -11,36 +12,6 @@ onMounted(scrollToStart);watch(()=>props.pageId,scrollToStart);
 const page=computed(()=>guidePages.find(item=>item.id===props.pageId)!);
 function navigate(id:GuidePageId){openGuide(frame,id);frame.openSidePanel(guidesViewId);}
 function components(){history.replaceState(null,'',location.pathname+location.search);frame.openSidePanel('demo.components');}
-const setupExample=`<script setup lang="ts">
-import { onBeforeUnmount } from 'vue';
-import { createFrame, FrameShell } from '@frame/core';
-import '@frame/core/style.css';
-import ProjectView from './ProjectView.vue';
-
-const frame = createFrame({ navigation: true });
-frame.setWorkspacePane(frame.workspace.activePane.value, {
-  label: 'My project',
-  component: ProjectView,
-});
-
-onBeforeUnmount(() => frame.dispose());
-<`+`/script>
-
-<template>
-  <FrameShell :frame="frame" title-text="My application" />
-</template>`;
-const viewExample=`import { useFrame } from '@frame/core';
-import SearchView from './SearchView.vue';
-
-const frame = useFrame();
-const unregister = frame.registerView({
-  id: 'project.search',
-  label: 'Search',
-  component: SearchView,
-}, 'primary');
-
-frame.openSidePanel('project.search');
-// Call unregister() when this contribution is no longer needed.`;
 </script>
 <template>
  <article ref="article" class="frame-guide-page">
@@ -71,7 +42,7 @@ frame.openSidePanel('project.search');
   <template v-else>
    <section><h2>One root instance, one rendered shell</h2><p>createFrame creates the public coordinator and its per-instance state. FrameShell receives that instance and renders the workbench. Descendant views access it through useFrame, so UI actions and application code can use the same commands and services.</p></section>
    <section><h2>Content and placement are separate</h2><p>A view definition supplies a Vue component and its metadata. Registration tells Frame where that contribution belongs. Workspace APIs manage panes and their content; view APIs manage sidebar and panel contributions. Your view can focus on its own interface.</p></section>
-   <section><h2>Packages follow responsibility</h2><dl><div><dt>@frame/core</dt><dd>The root instance, shell, shared APIs, and reusable visual components.</dd></div><div><dt>@frame/features</dt><dd>Optional controllers and views, including chat, terminal, notifications history, and code editing. Import the features your application needs and manage their explicit lifecycle.</dd></div><div><dt>@frame/tailwind</dt><dd>Optional build integration for application utilities. Generated utilities reference Frame theme variables; Tailwind is configured at build time.</dd></div></dl></section>
+   <section><h2>Packages follow responsibility</h2><dl><div><dt>@frame/core</dt><dd>The root instance, shell, shared APIs, and reusable visual components.</dd></div><div><dt>@frame/core/modules/*</dt><dd>Module entry points in the same Core package: chat, terminal, viewer, editor, and notification history. Import the modules your application needs and manage their explicit lifecycle.</dd></div><div><dt>@frame/tailwind</dt><dd>Optional build integration for application utilities. Generated utilities reference Frame theme variables; Tailwind is configured at build time.</dd></div></dl></section>
    <section><h2>One theme across the interface</h2><p>The shell and controls share --frame-* CSS variables for colors, fonts, spacing, radii, and other presentation choices. Application views can use the same variables so content follows the selected theme.</p></section>
    <section><h2>Current APIs and future direction</h2><p>These guides use the implemented registration and workspace APIs. Typed extension installation through frame.use and feature factories on the root instance remain architectural proposals. They are not required to use the current packages.</p></section>
    <div class="frame-guide-actions"><FrameButton variant="secondary" @click="navigate('getting-started')">Create your first view</FrameButton><FrameButton @click="navigate('overview')">Back to introduction</FrameButton></div>

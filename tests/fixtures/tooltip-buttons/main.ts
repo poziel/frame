@@ -16,7 +16,9 @@ const App = defineComponent({setup(){
   h(FrameIconButton,{label:'Rectangle',icon:RectIcon,tooltip:false}),
   h(FrameIconButton,{label:'Labeled rectangle',icon:RectIcon,showLabel:true,tooltip:false}),
   h(FrameIconButton,{label:'No hint',icon:'folder',tooltip:false}),
-  h(FrameTooltip,{text:'Standalone hint',shortcut:'Alt+S',disabled:disabled.value,placement:'right',id:'standalone-wrapper'}, {default:({describedby}:{describedby?:string})=>h('button',{'aria-describedby':describedby},'Standalone')}),
+  h(FrameTooltip,{text:'Standalone hint',shortcut:'Alt+S',disabled:disabled.value,placement:'right',id:'standalone-wrapper'}, {default:(
+    {describedby}:{describedby?:string}
+  )=>h('button',{'aria-describedby':describedby},'Standalone')}),
   h('button',{onClick:()=>disabled.value=!disabled.value},'Toggle hint'),
   h('button',{onClick:()=>button.value?.focus()},'Focus public button'),
   h('button',{onClick:()=>icon.value?.focus()},'Focus public icon'),

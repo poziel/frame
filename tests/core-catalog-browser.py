@@ -1,7 +1,7 @@
 """Legacy Core discovery, four-tab coverage, and native interaction smoke checks."""
 import os
 from playwright.sync_api import sync_playwright,expect
-PAGES=['Buttons','Icon buttons','Text inputs','Checkboxes','Selects','Sliders','Text areas','Color pickers','Settings controls','Icons','Code block','Loader','Loading region','Back and forward','Modals','Settings','Notifications','Quick input','Tooltips','Dropdown menus','Context menus','Resizable panes','Resize handles','Banner','Workspace panes','Views and sections','Activity actions']
+PAGES=['Buttons','Icon buttons','Text inputs','Checkboxes','Selects','Sliders','Text areas','Color pickers','Settings controls','Icons','Code block','Loader','Loading region','Back and forward','Modals','Settings','Notifications','Quick pick','Tooltips','Dropdown menus','Context menus','Resizable panes','Resize handles','Banner','Workspace panes','Views and sections','Activity actions']
 with sync_playwright() as p:
  b=p.chromium.launch();page=b.new_page(viewport={'width':1440,'height':1000});errors=[]
  page.on('pageerror',lambda error:errors.append(str(error)));page.goto(os.environ.get('FRAME_DOCS_URL','http://localhost:1448'))

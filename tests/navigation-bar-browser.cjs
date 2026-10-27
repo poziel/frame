@@ -13,7 +13,7 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
  for(const dock of ['top','bottom','left','right']){
   await page.getByRole('button',{name:`Dock ${dock}`,exact:true}).click();
   await page.waitForFunction(d=>document.querySelector('.workbench-layout').dataset.navPosition===d,dock);
-  const b=await rail.boundingBox(),body=await page.locator('.workbench-body').boundingBox();
+  const b=await rail.boundingBox(),body=await page.locator('.workbench-body').boundingBox(),container=await page.locator('.navigation-bar-container').boundingBox();const axis=dock==='top'||dock==='bottom'?'width':'height';assert(Math.abs(b[axis]-(container[axis]-8))<2,'Navigation must fill its '+dock+' container');
   if(dock==='top')assert(b.y+b.height<=body.y+1);if(dock==='bottom')assert(b.y>=body.y+body.height-1);if(dock==='left')assert(b.x+b.width<=body.x+1);if(dock==='right')assert(b.x>=body.x+body.width-1);
   assert.equal(await page.evaluate(()=>window.__navMounts()),mounts);assert.equal(await page.getByLabel('Retained input').first().inputValue(),'keep this');
  }
@@ -32,8 +32,8 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
  assert.equal(await page.getByLabel('Retained input').count(),4);
  await page.evaluate(()=>{window.__navFrame.panelViewBar.setBarVisible(true);});
  await page.getByRole('button',{name:'Dock top',exact:true}).click();
- const geometry=await rail.evaluate(el=>{const s=getComputedStyle(el),p=getComputedStyle(el.parentElement);return{border:[s.borderTopWidth,s.borderRightWidth,s.borderBottomWidth,s.borderLeftWidth],radius:parseFloat(s.borderTopLeftRadius),padding:p.padding};});assert.deepEqual(geometry.border,['1px','1px','1px','1px']);assert(geometry.radius>0);assert.equal(geometry.padding,'4px');
- await page.evaluate(()=>document.documentElement.style.setProperty('--frame-spacing-small','8px'));assert.equal(await rail.evaluate(el=>getComputedStyle(el.parentElement).paddingLeft),'8px');await page.evaluate(()=>document.documentElement.style.removeProperty('--frame-spacing-small'));
+ const geometry=await rail.evaluate(el=>{const s=getComputedStyle(el),p=getComputedStyle(el.closest('.navigation-bar-container'));return{border:[s.borderTopWidth,s.borderRightWidth,s.borderBottomWidth,s.borderLeftWidth],radius:parseFloat(s.borderTopLeftRadius),padding:p.padding};});assert.deepEqual(geometry.border,['1px','1px','1px','1px']);assert(geometry.radius>0);assert.equal(geometry.padding,'4px');
+ await page.evaluate(()=>document.documentElement.style.setProperty('--frame-spacing-small','8px'));assert.equal(await rail.evaluate(el=>getComputedStyle(el.closest('.navigation-bar-container')).paddingLeft),'8px');await page.evaluate(()=>document.documentElement.style.removeProperty('--frame-spacing-small'));
  const aBox=await button('Alpha').boundingBox(),bBox=await button('Beta').boundingBox();
  await page.mouse.move(aBox.x+aBox.width/2,aBox.y+aBox.height/2);await page.mouse.down();await page.mouse.move(bBox.x+bBox.width-1,bBox.y+bBox.height/2,{steps:8});await page.mouse.up();
  assert.deepEqual((await page.evaluate(()=>window.__navFrame.navigationBar.items.value.map(i=>i.id))).slice(0,2),['Beta','Alpha']);
@@ -46,4 +46,3 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
  await page.getByRole('button',{name:'Toggle navigation',exact:true}).click();await rail.waitFor({state:'hidden'});await page.getByRole('button',{name:'Toggle navigation',exact:true}).click();await button('Beta').waitFor();assert.equal(await button('Beta').getAttribute('aria-pressed'),'true');
  await page.getByRole('button',{name:'Add overflow',exact:true}).click();await button('More Navigation Items').click();await page.getByRole('menu',{name:'More Navigation Items',exact:true}).waitFor();assert.deepEqual(errors,[]);console.log('Navigation types, menus, four docks, content retention, ordering, themes, and overflow passed');
 }finally{await browser.close();}})().catch(e=>{console.error(e);process.exit(1)});
-

@@ -1,6 +1,21 @@
 import {test,expect} from 'bun:test';
-import {createFrame} from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 const view=(id:string)=>({id,label:id,component:{render:()=>null}});
+
+test('custom pane toolbars opt out of the header per view without affecting other instances or registrations',()=>{
+ const frame=createFrame(),other=createFrame();
+ frame.registerBottomTab({...view('matrix'),showHeader:false});
+ frame.registerBottomTab(view('output'));other.registerBottomTab(view('matrix'));
+ frame.openBottomPanel('matrix');
+ expect(frame.bottomTabs.value.find(tab=>tab.id==='matrix')?.showHeader).toBe(false);
+ expect(frame.bottomTabs.value.find(tab=>tab.id==='output')?.showHeader).toBeUndefined();
+ expect(other.bottomTabs.value[0]?.showHeader).toBeUndefined();
+ frame.moveView('matrix','secondary');frame.openView('matrix');
+ expect(frame.secondaryTabs.value.find(tab=>tab.id==='matrix')?.showHeader).toBe(false);
+ frame.closeSecondaryPanel();frame.openView('matrix');
+ expect(frame.layout.secondarySidebarVisible).toBe(true);
+ frame.dispose();other.dispose();
+});
 test('panel position and alignment state is isolated and alignment is suspended, not lost, for side docking',()=>{
  const first=createFrame({panel:{position:'top',alignment:'justify'},panelViewBar:{display:'icons'}}),second=createFrame();
  expect(first.panel.position.value).toBe('top');expect(first.panelViewBar.display.value).toBe('icons');expect(second.panel.position.value).toBe('bottom');

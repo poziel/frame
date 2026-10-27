@@ -6,7 +6,7 @@ const propertyTypes: Record<string, string[]> = {
   terminal: ['TerminalController', 'string', 'string', 'string', 'ViewDefinition', 'TerminalSessionLayout'],
   'code-block': ['string', 'string', 'CodeBlockTheme', 'boolean', 'boolean', 'readonly number[]', 'number', 'boolean', 'boolean', 'string', 'event'],
   navigation: ['boolean', 'boolean', '() => boolean', 'boolean', '() => void'],
-  'ai-chat': ['AIChatController', '"left" | "right"', 'readonly FrameMenuItem[] / event', '(messages: ChatMessage[], source: ChatMessage) => void', 'boolean / event', 'slot'],
+  'ai-conversation': ['AIChatController', '"left" | "right"', 'readonly FrameMenuItem[] / event', '(messages: ChatMessage[], source: ChatMessage) => void', 'boolean / event', 'slot'],
   loader: ['FrameLoaderVariant', 'number', 'string', 'number | undefined', 'number | undefined', 'string', 'boolean', 'number', 'number'],
   loading: ['boolean', 'FrameLoaderVariant', 'string', 'number / string / number / number / number / number', 'slot', 'slot', 'string', 'FrameLoadingTextPosition', 'boolean', 'boolean', 'slot', 'slot'],
   buttons: ['"ghost" | "secondary" | "primary"', 'string', 'boolean', '(event: MouseEvent) => void'],
@@ -32,27 +32,56 @@ const propertyReferences: Record<string, Record<number, string>> = {
   "notification-panel": { 0: "NotificationHistory" }, notifications: { 3: "NotificationAction" }, modals: { 0: 'ModalDefinition', 1: 'PanelAction' }, settings: { 0: 'SettingsSection', 1: 'SettingValue' }, 'quick-input': { 0: 'QuickPickItem' }, workspace: { 0: 'WorkspaceSplitDirection', 1: 'WorkspacePaneContent' }, views: { 0: 'PanelDefinition' }, select: { 0: 'SelectItem' }, menus: { 0: 'FrameMenuItem' }, 'context-menu': { 0: 'FrameMenuItem' }, 'setting-controls': { 0: 'SettingDefinition' },
 };
 export interface ComponentExample { id: string; title: string; group: string; description: string; usage: string; code: string; properties: { name: string; description: string; type: string; reference?: string }[] }
-function example(id: string, title: string, group: string, description: string, usage: string, code: string, properties: [string, string][] = []): ComponentExample { return { id, title, group, description, usage, code, properties: properties.map(([name, description], index) => ({ name, description, type: propertyTypes[id]?.[index] ?? "void", reference: propertyReferences[id]?.[index] })) }; }
+function example(
+  id: string,
+  title: string,
+  group: string,
+  description: string,
+  usage: string,
+  code: string,
+  properties: [string, string][] = []
+): ComponentExample { return { id, title, group, description, usage, code, properties: properties.map((
+  [name, description],
+  index
+) => ({ name, description, type: propertyTypes[id]?.[index] ?? "void", reference: propertyReferences[id]?.[index] })) }; }
 export const componentExamples: ComponentExample[] = [...generalExamples, ...formExamples, ...fileUploadExamples,
-  example('universal-viewer', 'Universal file viewer', 'Features', 'Preview local images, SVG, PDF, video, code, and plain text inline or fullscreen.', 'Choose a local file or a built-in sample, then open it fullscreen. Escape closes the dialog and restores focus. SVG offers an XML source toggle. Files stay in your browser. Office documents are unsupported; media decoding depends on the browser. PDF pages are visual previews without text selection or search.', `import { ref } from 'vue';
-import { UniversalViewer, UniversalViewerContent, type ViewerFile } from '@frame/features';
-import '@frame/features/style.css';
+  example('ai-prompt', 'Prompt', 'Modules', 'A standalone message composer with attachments, Send, Stop, and host voice hooks.', 'Bind text and attachments, then handle submit and stop. Enter sends; Shift+Enter inserts a line. The composer has no conversation store or backend.', `import { ref } from 'vue';
+import { AIPrompt } from '@frame/core/modules/chat';
+const draft = ref('');
+// <AIPrompt v-model="draft" @submit="send" />`),
+  example('ai-chat', 'Assistant', 'Modules', 'The complete chat experience: conversation, history, and their shared prompt composer.', 'AIChat binds AIConversation and AIHistory together. Narrow containers switch through the history button; wide containers show history beside the conversation. The full demo opens in this application’s secondary sidebar.', `import { AIChat, createAIChat, createAIChatHistory } from '@frame/core/modules/chat';
+const history = createAIChatHistory({
+  applicationId: 'my-app', createChat: () => createAIChat({ respond }),
+});
+// <AIChat :history="history" />
+// history.dispose() when the application owner is done.`),
+  example('ai-history', 'History', 'Modules', 'Optional in-memory conversations with an application scope and responsive chat navigation.', 'AIHistory shows conversations and a shared AIPrompt at the bottom. Sending creates a conversation. Right-click a row or press Shift+F10 for rename, pin, archive, restore, and delete. The application owns persistence, responder integration, and any imported conversations.', `import { AIHistory, createAIChat, createAIChatHistory } from '@frame/core/modules/chat';
+const history = createAIChatHistory({
+  applicationId: 'pixloom', scope: 'application',
+  createChat: () => createAIChat({ respond }),
+});
+// <AIHistory :history="history" />
+// history.setScope('all'); // Show all host-created conversations in this store.
+// Dispose history when its owner is done; it owns its created chats.`),
+  example('universal-viewer', 'Universal file viewer', 'Modules', 'Preview local images, SVG, PDF, video, code, and plain text inline or fullscreen.', 'Choose a local file or a built-in sample, then open it fullscreen. Escape closes the dialog and restores focus. SVG offers an XML source toggle. Files stay in your browser. Office documents are unsupported; media decoding depends on the browser. PDF pages are visual previews without text selection or search.', `import { ref } from 'vue';
+import { UniversalViewer, UniversalViewerContent, type ViewerFile } from '@frame/core/modules/viewer';
+
 
 const open = ref(false);
 const file = ref<ViewerFile>(); // Set to { source: selectedFile } from a file input.
 // <UniversalViewerContent v-if="file" :file="file" style="height: 400px" />
 // <UniversalViewer v-model:open="open" :file="file" />`),
-  example('code-editor', 'Code editor', 'Features', 'A standalone Monaco editor with the same Shiki grammars and themes as Code Block.', 'Place the editor in any container with a defined height. Direct props override matching options. Monaco loads on first mount; each surface owns its model and undo history. A controller can attach to one surface at a time. Monaco themes apply globally across mounted editors. Formatting and semantic assistance depend on available language providers.', `import { CodeEditor, createCodeEditor } from '@frame/features';
+  example('code-editor', 'Code editor', 'Modules', 'A standalone Monaco editor with the same Shiki grammars and themes as Code Block.', 'Place the editor in any container with a defined height. Direct props override matching options. Monaco loads on first mount; each surface owns its model and undo history. A controller can attach to one surface at a time. Monaco themes apply globally across mounted editors. Formatting and semantic assistance depend on available language providers.', `import { CodeEditor, createCodeEditor } from '@frame/core/modules/editor';
 import { CodeBlockTheme } from '@frame/core';
-import '@frame/features/style.css';
+
 
 const editor = createCodeEditor();
 // <CodeEditor v-model="code" :editor="editor" language="typescript"
 //   :theme="CodeBlockTheme.DarkPlus" :read-only="false"
 //   :options="{ fontSize: 14, wordWrap: 'on', tabSize: 2 }"
 //   style="height: 400px" />`, [['v-model', 'Optional source text; starts empty and updates on edits'], ['editor', 'Optional controller for focus, undo/redo, find, formatting and native Monaco access'], ['language', 'Shiki language name or alias; unknown names use plain text'], ['theme', 'Shared CodeBlockTheme enum; defaults to DarkPlus'], ['readOnly', 'Optional direct override of options.readOnly'], ['options', 'Typed Monaco editor and model options; updated reactively'], ['label', 'Accessible name; overrides options.ariaLabel'], ['autofocus', 'Focus once the editor is ready; defaults to false'], ['events', 'ready, update:modelValue, change, selection, focus, blur and error']]),
-  example('terminal', 'Terminal', 'Features', 'Terminal sessions with an explicitly supplied backend, side-by-side panes, search, and a session sidebar.', 'The browser example uses a simulated command backend; it does not execute system commands. Supply a backend to run local or remote shells. Closing or moving a Frame view keeps its shells alive; the trash action terminates a session. Sidebar connector lines identify split groups. Right-click a session to rename it or change its color; hover reveals its close button.', `import { createTerminal, createTerminalView, Terminal } from '@frame/features';
-import '@frame/features/style.css';
+  example('terminal', 'Terminal', 'Modules', 'Terminal sessions with an explicitly supplied backend, side-by-side panes, search, and a session sidebar.', 'The browser example uses a simulated command backend; it does not execute system commands. Supply a backend to run local or remote shells. Closing or moving a Frame view keeps its shells alive; the trash action terminates a session. Sidebar connector lines identify split groups. Right-click a session to rename it or change its color; hover reveals its close button.', `import { createTerminal, createTerminalView, Terminal } from '@frame/core/modules/terminal';
+
 
 const terminal = createTerminal({ backend }); // Supply your application-owned TerminalBackend.
 frame.registerView(createTerminalView({
@@ -61,7 +90,7 @@ frame.registerView(createTerminalView({
 
 // Or place the simple component in any container with a defined height:
 // <Terminal :terminal="terminal" profile="pwsh" />
-// Keep terminal in the application owner. Dispose it on app teardown.`, [['terminal', 'Application-owned controller shared by simple terminals and terminal views'], ['profile', 'Detected profile ID or display name; defaults to the preferred installed shell'], ['sessionId', 'Attach to an existing session without launching another shell'], ['cwd', 'Optional initial working directory'], ['createTerminalView', 'Creates a view definition using Frame header actions and Quick input'], ['sessionLayout', 'sidebar (default) or tabs, on TerminalView or createTerminalView; selectors hide with one session. Drag dividers to resize panes and sidebar. The terminal fills its parent height.']]),
+// Keep terminal in the application owner. Dispose it on app teardown.`, [['terminal', 'Application-owned controller shared by simple terminals and terminal views'], ['profile', 'Detected profile ID or display name; defaults to the preferred installed shell'], ['sessionId', 'Attach to an existing session without launching another shell'], ['cwd', 'Optional initial working directory'], ['createTerminalView', 'Creates a view definition using Frame header actions and Quick pick'], ['sessionLayout', 'sidebar (default) or tabs, on TerminalView or createTerminalView; selectors hide with one session. Drag dividers to resize panes and sidebar. The terminal fills its parent height.']]),
   example("code-block", "Code block", "Display", "Read-only syntax highlighting powered by Shiki with 65 selectable themes.", "Languages and themes load on demand. Highlighted lines use displayed numbers, including the startLine offset. Unknown languages fall back to plain text. Copy preserves the original source. This component displays code; the host owns the source text.", `import { FrameCodeBlock, CodeBlockTheme } from '@frame/core';
 
 <FrameCodeBlock :code="source" language="typescript"
@@ -73,8 +102,8 @@ frame.navigation.back();
 frame.navigation.forward();
 frame.layout.navigationVisible = false;
 frame.navigation.clear();`, [["navigation", "createFrame option; false by default"], ["layout.navigationVisible", "Show or hide both arrows without discarding history"], ["navigation.back / forward", "Navigate one destination; returns false at a boundary or when disabled"], ["navigation.canGoBack / canGoForward", "Reactive availability flags"], ["navigation.clear", "Discard the current history"]]),
-  example("ai-chat", "AI chat", "Features", "A chat room with ordered thoughts, answers, commentary, activities, approvals, questions and artifacts.", "Use the AI chat playground in the navigation bar to manually send events, request approvals, ask single/multiple-choice questions with custom answers, attach images/files and control turn completion. This component example uses the separate local mock server. Enter sends; Shift+Enter inserts a line. Rewind previews an edit without discarding replies until you send; Escape, X, or the same rewind button cancels. Forge emits an independent snapshot. Files stay local; voice input is a host integration hook.", `import { AIChat, createAIChat } from '@frame/features';
-import '@frame/features/style.css';
+  example("ai-conversation", "Conversation", "Modules", "One conversation with ordered thoughts, answers, commentary, activities, approvals, questions and artifacts.", "Use the Interactive demo tab to play local scenarios or manually send events, request approvals, ask single/multiple-choice questions with custom answers, attach images/files and control turn completion. No AI backend is required. Enter sends; Shift+Enter inserts a line. Rewind previews an edit without discarding replies until you send; Escape, X, or the same rewind button cancels. Forge emits an independent snapshot. Files stay local; voice input is a host integration hook.", `import { AIConversation, createAIChat } from '@frame/core/modules/chat';
+
 
 const chat = createAIChat({
   async respond(request, response) {
@@ -87,7 +116,7 @@ const chat = createAIChat({
   }
 });
 // Dispose the controller when its owner unmounts.
-// <AIChat :chat="chat" @forge="openConversation" />`, [["chat", "Controller from createAIChat; owns draft, messages, attachments and generation state"], ["userAlignment / assistantAlignment", "Independently select left or right alignment"], ["attachmentActions / attachmentAction", "Additional host-specific menu actions; files and folders are built in"], ["forge", "Emits an independent snapshot through the selected assistant response"], ["speechEnabled / speech", "Enable and handle voice input in the host"], ["message-actions / composer-actions / empty", "Slots for host actions and empty content"]]),
+// <AIConversation :chat="chat" @forge="openConversation" />`, [["chat", "Controller from createAIChat; owns draft, messages, attachments and generation state"], ["userAlignment / assistantAlignment", "Independently select left or right alignment"], ["attachmentActions / attachmentAction", "Additional host-specific menu actions; files and folders are built in"], ["forge", "Emits an independent snapshot through the selected assistant response"], ["speechEnabled / speech", "Enable and handle voice input in the host"], ["message-actions / composer-actions / empty", "Slots for host actions and empty content"]]),
   example("loader", "Loader", "Display", "All 44 LDRS loading animations, available independently wherever you need an indicator.", "Browse all 44 styles below, select one, and copy its usage. The default is a 32px ring in the theme accent color. Reduced-motion preferences pause the animation. Use decorative when a surrounding component supplies the status.", `import { FrameLoader } from '@frame/core';
 
 // In your template:
@@ -129,12 +158,12 @@ const save = () => console.log('Saved');
   <FrameButton variant="primary" icon="check" @click="save">Save</FrameButton>
 </template>`, [["variant", "ghost (default), secondary, or primary"], ["icon", "Optional Iconify/Codicon name"], ["disabled", "Prevents interaction"], ["click", "Emits the native MouseEvent"]]),
   example("icon-buttons", "Icon buttons", "Actions", "Centered icon actions with a shared hit area, hover state, and tooltip.", "Use an accessible label for every icon-only action. Change the button size and icon ratio independently; disable tooltips or hover backgrounds when appropriate.", `<FrameIconButton label="Refresh" icon="refresh" :size="28" :icon-ratio="0.6" tooltip-placement="top" @click="refresh" />`, [["size / iconRatio", "Button size in pixels and icon-to-button ratio"], ["tooltip", "true, false, or custom tooltip text"], ["hoverHighlight", "Enable or disable the hover background"]]),
-  example("text-input", "Text inputs", "Form controls", "Text, number, password, email, and search inputs with consistent focus styling.", "Bind the value with v-model and associate a visible label using for/id. Numeric inputs emit numbers; an empty numeric input emits an empty string so a host can validate it.", `<script setup lang="ts">
+  example("text-input", "TextField", "Form controls", "Text, number, password, email, and search inputs with consistent focus styling.", "Bind the value with v-model and associate a visible label using for/id. Numeric inputs emit numbers; an empty numeric input emits an empty string so a host can validate it.", `<script setup lang="ts">
 import { ref } from 'vue';
-import { FrameTextInput } from '@frame/core';
+import { FrameTextField } from '@frame/core';
 const name = ref('Workspace');
 </script>
-<template><label for="name">Name</label><FrameTextInput id="name" v-model="name" /></template>`, [["v-model", "The current string or number"], ["type", "text, number, password, search, email"], ["disabled / placeholder", "Standard input behavior"]]),
+<template><label for="name">Name</label><FrameTextField id="name" v-model="name" /></template>`, [["v-model", "The current string or number"], ["type", "text, number, password, search, email"], ["disabled / placeholder", "Standard input behavior"]]),
   example("checkbox", "Checkboxes", "Form controls", "A neutral checkbox with a clickable label and visible keyboard focus.", "Click the label or press Space while focused to toggle the value. Disabled checkboxes keep their state and cannot be changed.", `<script setup lang="ts">
 import { ref } from 'vue';
 import { FrameCheckbox } from '@frame/core';
@@ -170,16 +199,16 @@ const options = [new SelectOption({ value: 'manual', label: 'Manual', descriptio
   example("modals", "Modals", "Overlays", "Movable, resizable dialogs within the workbench.", "Open a registered Vue component with frame.openModal. The modal traps focus, closes on Escape, and supports maximize/restore. Set createFrame({ modal: { contentPadding: 16, width: 480, height: 280 } }) for application defaults. Override contentPadding with 0 for edge-to-edge content; set draggable, resizable, or maximizable to false independently. Supply footer and footerProps for application-owned bottom actions. Background content becomes inert while a modal is active.", `frame.openModal({ id: 'properties', title: 'Properties', component: MyProperties, width: 640, height: 420, contentPadding: 16, maximizable: false, footer: PropertyActions });`, [["openModal / closeModal", "Open, activate, and close modal instances"], ["actions / icon", "Optional header contributions"]]),
   example("settings", "Settings", "Overlays", "A ready-to-use settings modal with nested categories and standard controls.", "Register application-owned sections. Frame handles navigation and presentation; onChange and optional getValue connect the controls to your preference store.", `frame.registerSettingsSection({ id: 'general', title: 'General', settings: [{ id: 'autosave', label: 'Autosave', type: 'checkbox', default: true }] });
 frame.openSettings();`, [["registerSettingsSection", "Returns a disposer"], ["settings.set / reset", "Validated edits and default restoration"]]),
-  example("notifications", "Notifications", "Overlays", "Transient application notifications in the bottom-left corner.", "Notifications disappear after five seconds by default. Hover or keyboard focus pauses the timer. Set duration to 0 for a persistent notification. An optional action runs once and closes the notification on success. Notification history is available separately from @frame/features.", `frame.notify({ title: 'Project saved', severity: 'success', details: 'All changes are saved.', duration: 5000, action: { label: 'Open settings', run: () => frame.openSettings() } });`, [["severity", "info, success, warning, error"], ["details / source / priority", "Optional message, source label, and metadata"], ["duration", "Milliseconds before automatic dismissal; defaults to 5000. Zero stays until dismissed."], ["action", "Optional labeled callback; action failures produce an error notification."]]),
-  example("notification-panel", "Notification history", "Overlays", "An optional ready-made notification panel from @frame/features.", "Create a history store before emitting notifications, mount NotificationPanel in the shell overlays slot and NotificationIndicator in status-actions. The history keeps up to 200 entries by default, independently of core expiry and dismissal. Its clear button changes history only.", `import { createNotificationHistory, NotificationPanel, NotificationIndicator } from '@frame/features';
-import '@frame/features/style.css';
+  example("notifications", "Notifications", "Overlays", "Transient application notifications in the bottom-left corner.", "Notifications disappear after five seconds by default. Hover or keyboard focus pauses the timer. Set duration to 0 for a persistent notification. An optional action runs once and closes the notification on success. Notification history is available separately from @frame/core/modules/notifications.", `frame.notify({ title: 'Project saved', severity: 'success', details: 'All changes are saved.', duration: 5000, action: { label: 'Open settings', run: () => frame.openSettings() } });`, [["severity", "info, success, warning, error"], ["details / source / priority", "Optional message, source label, and metadata"], ["duration", "Milliseconds before automatic dismissal; defaults to 5000. Zero stays until dismissed."], ["action", "Optional labeled callback; action failures produce an error notification."]]),
+  example("notification-panel", "Notification history", "Overlays", "An optional ready-made notification panel from @frame/core/modules/notifications.", "Create a history store before emitting notifications, mount NotificationPanel in the shell overlays slot and NotificationIndicator in status-actions. The history keeps up to 200 entries by default, independently of core expiry and dismissal. Its clear button changes history only.", `import { createNotificationHistory, NotificationPanel, NotificationIndicator } from '@frame/core/modules/notifications';
+
 const history = createNotificationHistory(frame);
 // <FrameShell :frame="frame">
 //   <template #overlays><NotificationPanel :frame="frame" :history="history" :bottom="38" /></template>
 //   <template #status-actions><NotificationIndicator :history="history" /></template>
 // </FrameShell>
 // Call history.dispose() when the host is unmounted.`, [["history", "Opt-in store created by createNotificationHistory(frame, { limit: 200 })."], ["frame", "The shell instance whose notifications are collected."], ["bottom", "Panel offset in pixels above the bottom of the shell."]]),
-  example("quick-input", "Quick input", "Overlays", "A searched list for choosing a command or application item.", "Mount FrameQuickInput when the picker is open. It always provides a search field, handles keyboard selection, and emits the accepted item ID. Close it on close or accept. Frame's showQuickPick API uses this same component.", `import { FrameQuickInput } from '@frame/core';`, [["items", "Unique IDs, labels, optional detail, shortcut and disabled state"], ["title", "Accessible picker name"], ["placeholder", "Search hint; defaults to Type to search…"], ["position", "Optional top or center override; otherwise follows the provided Frame layout"]]),
+  example("quick-input", "Quick pick", "Overlays", "A searched list for choosing a command or application item.", "Mount FrameQuickPick when the picker is open. It always provides a search field, handles keyboard selection, and emits the accepted item ID. Close it on close or accept. Frame's showQuickPick API uses this same component.", `import { FrameQuickPick } from '@frame/core';`, [["items", "Unique IDs, labels, optional detail, shortcut and disabled state"], ["title", "Accessible picker name"], ["placeholder", "Search hint; defaults to Type to search…"], ["position", "Optional top or center override; otherwise follows the provided Frame layout"]]),
   example("quick-panel", "Quick panel", "Overlays", "A titled quick overlay for application-owned content and header actions.", "Mount FrameQuickPanel while open and handle close in the host. Supply application content through the default slot and optional actions through header-actions. It does not provide a search field or a selection model.", `import { FrameQuickPanel } from '@frame/core';`, [["title", "Visible panel heading"], ["position", "Optional top or center override; otherwise follows the provided Frame layout"], ["default", "Application-owned content"], ["header-actions", "Optional actions beside the title"]]),
   example("banner", "Banner", "Layout", "Custom content above the workspace with independent alignment.", "Register a Vue component and open the Banner. Left, right, center, and justify alignment determine which regions it spans. Banner content stays app-owned.", `frame.registerBanner({ id: 'review', label: 'Review', component: ReviewBanner });
 frame.openBanner();`, [["layout.bannerAlignment", "left, right, center, justify"], ["openBanner / closeBanner", "Visibility controls"]]),
@@ -188,4 +217,4 @@ frame.setWorkspacePane(frame.workspace.activePane.value, { label: 'Preview', com
 frame.resetWorkspace();`, [["splitWorkspace", "left, right, up, down"], ["setWorkspacePane", "Replace a pane's content without changing its geometry"]]),
   example("views", "Views and sections", "Layout", "App-owned views that move between sidebars, panels, and nested collections.", "A view can hold custom content or child views. Collections share height between expanded sections and preserve preferred sizes. Drag policies control which views may move.", `frame.registerView({ id: 'collection', label: 'Collection', children: [{ id: 'outline', label: 'Outline', component: Outline }] }, 'primary');`, [["component / children", "Blank view or nested collection"], ["padded / movable / draggable", "Control layout and interaction"]]),
   example("navigation-items", "Navigation items", "Navigation", "Actions, links, menus and separators in the navigation bar.", "Navigation items are independent of sidebar and panel views. Register them explicitly; the host owns actions and destinations. The navigation bar can dock on any edge.", `frame.registerNavigationItem({ id: 'home', type: 'link', label: 'Home', href: '#/home' });`, [["type", "action, link, dropdown, or separator"], ["href", "Link destination"], ["run", "Action callback"]]),
-];
+].map(item => ({ ...item, title: item.title.replace(/([a-z\d])([A-Z])/g, '$1 $2').replace(/\b\w/g, letter => letter.toUpperCase()) }));

@@ -4,13 +4,15 @@ Frame components are imported from `@frame/core`. Load `@frame/core/style.css` o
 
 Start with the smallest control that fits your data:
 
+For keyboard combinations, use [FrameKeycap](keycap.md).
+
 For glyphs and compact actions, see [icon controls](icon-controls.md), including rotation, flips, and icon-only hover emphasis.
 
 | Component | Use it for |
 | --- | --- |
 | [FrameFileUpload / FrameFileDropZone](forms/file-upload.md) | Choosing files, visible drop targets, and invisible workspace drop overlays |
 | [FrameLabel](forms/label.md) | A visible label associated with a control |
-| [FrameTextInput](forms/text-input.md) | One line of text, passwords, email, or a native numeric input |
+| [FrameTextField](forms/text-input.md) | One line of text, passwords, email, or a native numeric input |
 | [FrameTextArea](forms/text-area.md) | Multiple lines of plain text |
 | [FrameCheckbox](forms/checkbox.md) | An independent boolean choice, such as accepting terms |
 | [FrameSwitch](forms/switch.md) | A boolean setting presented as an on/off switch |
@@ -18,8 +20,8 @@ For glyphs and compact actions, see [icon controls](icon-controls.md), including
 | [FrameNumberField](forms/number-field.md) | Numeric quantities with parsing and step buttons |
 | [FrameRadioGroup](forms/radio-group.md) | One visible choice from a string-valued list |
 | [FrameCheckboxGroup](forms/checkbox-group.md) | Multiple string choices with group keyboard navigation |
-| [FramePinInput](forms/pin-input.md) | A short code entered across individual cells |
-| [FrameTagsInput](forms/tags-input.md) | Adding and removing committed string tags |
+| [FramePinField](forms/pin-input.md) | A short code entered across individual cells |
+| [FrameTagField](forms/tags-input.md) | Adding and removing committed string tags |
 | [FrameAutocomplete](forms/autocomplete.md) | Free text with suggestions |
 | [FrameCombobox](forms/combobox.md) | Searching a fixed list for one string choice |
 | [FrameEditable](forms/editable.md) | Inline text editing with commit and cancellation |

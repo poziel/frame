@@ -1,0 +1,142 @@
+{
+  "actions": {
+    "title": "Actions",
+    "components": [
+      "FrameButton",
+      "FrameIconButton",
+      "FrameToggle",
+      "FrameToggleGroup",
+      "FrameToolbar"
+    ]
+  },
+  "forms": {
+    "title": "Form Controls",
+    "components": [
+      "FrameAutocomplete",
+      "FrameCheckbox",
+      "FrameCheckboxGroup",
+      "FrameCombobox",
+      "FrameEditable",
+      "FrameField",
+      "FrameFieldGroup",
+      "FrameFileDropZone",
+      "FrameFileUpload",
+      "FrameForm",
+      "FrameLabel",
+      "FrameListbox",
+      "FrameNumberField",
+      "FrameScrubField",
+      "FramePinField",
+      "FrameRadioGroup",
+      "FrameRating",
+      "FrameSelect",
+      "FrameSlider",
+      "FrameSwitch",
+      "FrameTagField",
+      "FrameTagGroup",
+      "FrameTextArea",
+      "FrameTextField"
+    ]
+  },
+  "forms/dates-and-times": {
+    "title": "Dates and Times",
+    "components": [
+      "FrameCalendar",
+      "FrameDateField",
+      "FrameDatePicker",
+      "FrameDateRangeField",
+      "FrameDateRangePicker",
+      "FrameMonthPicker",
+      "FrameMonthRangePicker",
+      "FrameRangeCalendar",
+      "FrameTimeField",
+      "FrameTimeRangeField",
+      "FrameYearPicker",
+      "FrameYearRangePicker"
+    ]
+  },
+  "forms/colors": {
+    "title": "Colors",
+    "components": [
+      "FrameColorArea",
+      "FrameColorField",
+      "FrameColorPicker",
+      "FrameColorSlider",
+      "FrameColorSwatch",
+      "FrameColorSwatchPicker",
+      "FrameHsvArea",
+      "FrameHsvRectangle",
+      "FrameHsvWheel",
+      "FrameVhsCircle"
+    ]
+  },
+  "navigation": {
+    "title": "Navigation",
+    "components": [
+      "FrameContextMenu",
+      "FrameDropdownMenu",
+      "FrameMenubar",
+      "FrameNavigationMenu",
+      "FramePagination",
+      "FrameStepper",
+      "FrameTabs",
+      "ContextMenu",
+      "AnchoredMenu",
+      "MenuList",
+      "MenuItemContent",
+      "MenubarEntry"
+    ],
+    "helpers": [
+      "generalMenu.ts"
+    ]
+  },
+  "layout": {
+    "title": "Layout",
+    "components": [
+      "FrameReorderList",
+      "FrameAccordion",
+      "FrameAspectRatio",
+      "FrameCollapsible",
+      "FrameScrollArea",
+      "FrameSeparator",
+      "FrameSplitter",
+      "OverlayScrollbars",
+      "ResizablePane",
+      "ResizeHandle"
+    ]
+  },
+  "data-display": {
+    "title": "Data Display",
+    "components": [
+      "FrameAvatar",
+      "FrameCodeBlock",
+      "FrameIcon",
+      "FrameTree",
+      "FrameKeycap"
+    ]
+  },
+  "feedback": {
+    "title": "Feedback",
+    "components": [
+      "FrameLoader",
+      "FrameLoading",
+      "FrameNotifications",
+      "FrameProgress",
+      "FrameToast"
+    ]
+  },
+  "overlays": {
+    "title": "Overlays",
+    "components": [
+      "FrameAlertDialog",
+      "FrameDialog",
+      "FrameDragPreview",
+      "FrameDrawer",
+      "FrameHoverCard",
+      "FramePopover",
+      "FrameTooltip",
+      "FrameControlTooltip",
+      "TooltipAnchor"
+    ]
+  }
+}

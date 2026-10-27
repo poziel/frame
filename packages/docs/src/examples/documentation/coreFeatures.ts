@@ -71,7 +71,10 @@ const cases:Record<string,Case[]>={
   {id:'stored-color',title:'Review a saved project color',description:'The trigger displays the stored color before the user opens the editor to change it.',values:{modelValue:'#16a34a'}},
  ],
 };
-export function coreFeatures(id:string,contract:ComponentContract):FeatureExample[]|undefined {
+export function coreFeatures(
+  id:string,
+  contract:ComponentContract
+):FeatureExample[]|undefined {
  const features:FeatureExample[]|undefined=cases[id]?.map(item=>{const slots=item.slots??{};return {...item,slots,variant:item.id,code:serializeUsage(contract,item.values,slots)};});
  if(features&&['loader','code-block','loading','text-input','text-area','checkbox','slider','color-picker'].includes(id)){
   const original=componentExamples.find(example=>example.id===id)!;

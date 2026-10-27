@@ -1,5 +1,5 @@
 import {test,expect} from 'bun:test';
-import {createFrame} from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 const make=(trackChanges=false)=>{const frame=createFrame({workspace:{tabs:{allowClose:true,lastTab:'allow-empty',trackChanges}}});const w=frame.workspace;w.setPaneMode(w.initialPaneId,'tabs');w.registerTab(w.initialPaneId,{id:'a',title:'A',dirty:true});return frame;};
 test('tab dirty states are opt-in and clean tabs close without confirmation',async()=>{
  const plain=make();expect((await plain.workspace.closeTabs(['a'])).ok).toBe(true);expect(plain.workspace.closeConfirmation.value).toBeUndefined();plain.dispose();

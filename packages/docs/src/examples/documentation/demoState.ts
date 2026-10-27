@@ -1,3 +1,10 @@
+function moduleFor(name: string) {
+ if (/^(CodeEditor|createCodeEditor|installSettingsEditor)/.test(name)) return 'editor';
+ if (/^(Terminal|createTerminal)/.test(name)) return 'terminal';
+ if (/^(UniversalViewer|Viewer|detectViewer|viewerFile)/.test(name)) return 'viewer';
+ if (/^(Notification|HistoryNotification|createNotification)/.test(name)) return 'notifications';
+ return 'chat';
+}
 import {generalDemoValues} from './generalFixtures';
 import { reactive } from 'vue';
 import { isValidColor } from 'reka-ui';
@@ -16,8 +23,8 @@ export function exampleValue(p:ApiProperty, componentName?:string):unknown {
  if(p.name==='channel')return 'hue';
  if(p.name==='xChannel')return 'saturation';
  if(p.name==='yChannel')return 'brightness';
- if(p.name==='modelValue'&&componentName?.startsWith('FrameColor'))return '#0078d4';
- if(p.name==='modelValue'&&['FramePinInput','FrameTagsInput','FrameCheckboxGroup'].includes(componentName??''))return [];
+ if(p.name==='modelValue'&&(componentName?.startsWith('FrameColor')||/Frame(Hsv|Vhs)/.test(componentName??'')))return '#0078d4';
+ if(p.name==='modelValue'&&['FramePinField','FrameTagField','FrameCheckboxGroup'].includes(componentName??''))return [];
  if(p.control==='fixture') return '@'+fixtureFor(p);
  if(p.name==='options'&&p.type.includes('CodeEditor'))return {};
  if(p.name==='options')return [{value:'manual',label:'Manual'},{type:'separator',id:'remote'},{value:'automatic',label:'Automatic',description:'Save while working.'}];
@@ -48,7 +55,7 @@ export function exampleValue(p:ApiProperty, componentName?:string):unknown {
  if(p.control==='json')return p.type.includes('[]')?[]:{};
  return p.name==='type'?'button':p.name==='color'?'#0078d4':p.name==='language'?'typescript':p.name==='axis'?'x':p.name==='label'?'Example control':p.name==='title'?'Example dialog':p.name==='text'?'Helpful information':p.name==='placeholder'?'Enter a value…':'Example';
 }
-function validate(property:ApiProperty,value:unknown) {
+function validate(property:ApiProperty, value:unknown) {
  if(value===null&&/\bnull\b/.test(property.type))return true;
  if(property.type.includes('FrameTreeItem')&&['items','modelValue','defaultValue'].includes(property.name)){
   const item=(entry:unknown):boolean=>!!entry&&typeof entry==='object'&&'id'in entry&&typeof entry.id==='string'&&'label'in entry&&typeof entry.label==='string'&&(!('children'in entry)||Array.isArray(entry.children)&&entry.children.every(item));
@@ -71,12 +78,16 @@ function validate(property:ApiProperty,value:unknown) {
  if(property.name==='setting')return !!value&&typeof value==='object'&&['id','label','type','default'].every(key=>key in value);
  return value!==null&&typeof value==='object';
 }
-export function createDemoState(contract:ComponentContract, initial:Record<string,unknown>={}, options:{includeModel?:boolean}={}) {
+export function createDemoState(
+  contract:ComponentContract,
+  initial:Record<string,unknown>={},
+  options:{includeModel?:boolean}={}
+) {
  const required=Object.fromEntries(contract.props.filter(p=>p.default.kind==='required').map(p=>[p.name,exampleValue(p,contract.name)]));
  const formsModel=options.includeModel!==false&&contract.name.startsWith('Frame')&&contract.props.some(p=>p.name==='modelValue')&&(/Calendar|Date|Time|Month|Year|Color|Rating|Autocomplete|Editable|NumberField|PinInput|RadioGroup|CheckboxGroup|Switch|TagsInput|Toggle|Listbox|Combobox/.test(contract.name))?{modelValue:exampleValue(contract.props.find(p=>p.name==='modelValue')!,contract.name)}:{};
  const baseline={...required,...formsModel,...generalDemoValues(contract.name),...(contract.name==='frame.registerView'?{component:'@component',region:'secondary'}:{}),...initial};
  const values=reactive<Record<string,unknown>>({...baseline});const errors=reactive<Record<string,string>>({});let disposed=false;
- function set(name:string,input:unknown){
+ function set(name:string, input:unknown){
   if(disposed)return false;
   const property=contract.props.find(p=>p.name===name);if(!property)return false;
   if(input===undefined&&property.default.kind!=='required'){delete values[name];delete errors[name];return true;}
@@ -92,8 +103,12 @@ export function createDemoState(contract:ComponentContract, initial:Record<strin
  function reset(){for(const key of Object.keys(values))delete values[key];Object.assign(values,structuredClone(baseline));for(const key of Object.keys(errors))delete errors[key];}
  return {contract,values,props:values,errors,set,reset,dispose(){disposed=true;}};
 }
-export function serializeUsage(contract:ComponentContract, values:Record<string,unknown>, slots:Record<string,string>) {
- const extras=contract.source.includes('/features/');const imports=new Set([contract.name]);const lines:string[]=[];
+export function serializeUsage(
+  contract:ComponentContract,
+  values:Record<string,unknown>,
+  slots:Record<string,string>
+) {
+ const extras=contract.source.includes('/modules/');const imports=new Set([contract.name]);const lines:string[]=[];
  const attrs=Object.entries(values).map(([name,value])=>{
   const prop=contract.props.find(p=>p.name===name);if(!prop||value===undefined)return '';
   const attribute=name.replace(/[A-Z]/g,c=>'-'+c.toLowerCase());
@@ -139,18 +154,20 @@ export function serializeUsage(contract:ComponentContract, values:Record<string,
  let markup=`<${tag} ${fixtures.includes('anchor')?'v-if="anchor" ':''}${attrs.join(' ')}${content?`>\n${content}\n</${tag}>`:' />'}`;
  if(contract.name==='FrameScrollArea'){markup=`<FrameScrollArea ${attrs.join(' ')}><pre style="margin: 0; font: inherit; white-space: pre;" v-text="${escape(JSON.stringify(slots.default??''))}" /></FrameScrollArea>`;}
  if(contract.name==='FrameToast'){imports.add('FrameButton');lines.push('const toastOpen = ref(false);');markup=`<FrameButton @click="toastOpen = true">Show notification</FrameButton>\n<FrameToast ${attrs.filter(attr=>!/^:(?:open|default-open)=/.test(attr)).join(' ')} v-model:open="toastOpen" />`;}
- if(contract.name==='FrameField'){lines.push("const fieldValue = ref('Project name');");markup=`<FrameField ${attrs.join(' ')}><FrameTextInput v-model="fieldValue" /></FrameField>`;imports.add('FrameTextInput');}
- if(contract.name==='FrameForm'){imports.add('FrameField');imports.add('FrameTextInput');imports.add('FrameButton');lines.push("const fieldValue = ref('Project name');",'const submitted = ref("");','function submit(values: Record<string, unknown>, event: SubmitEvent) { event.preventDefault(); submitted.value = JSON.stringify(values); }');markup=`<FrameForm ${attrs.join(' ')} @form-submit="submit"><FrameField name="projectName" label="Project name" required><FrameTextInput v-model="fieldValue" /></FrameField><FrameButton type="submit"><span v-text="${escape(JSON.stringify(slots.default||'Submit form'))}" /></FrameButton><p role="status">{{ submitted }}</p></FrameForm>`;}
- if(contract.name==='FrameLabel'){imports.add('FrameTextInput');lines.push("const fieldValue = ref('Project name');");const id=JSON.stringify(values.for??'project-name').replace(/"/g,'&quot;');markup=`<FrameLabel ${attrs.filter(attr=>!attr.startsWith(':for=')).join(' ')} :for="${id}">${content||'Project name'}</FrameLabel><FrameTextInput :id="${id}" v-model="fieldValue" />`;}
- if(contract.name==='FrameQuickInput'||contract.name==='FrameQuickPanel'){
+ if(contract.name==='FrameField'){lines.push("const fieldValue = ref('Project name');");markup=`<FrameField ${attrs.join(' ')}><FrameTextField v-model="fieldValue" /></FrameField>`;imports.add('FrameTextField');}
+ if(contract.name==='FrameForm'){imports.add('FrameField');imports.add('FrameTextField');imports.add('FrameButton');lines.push("const fieldValue = ref('Project name');",'const submitted = ref("");','function submit(values: Record<string, unknown>, event: SubmitEvent) { event.preventDefault(); submitted.value = JSON.stringify(values); }');markup=`<FrameForm ${attrs.join(' ')} @form-submit="submit"><FrameField name="projectName" label="Project name" required><FrameTextField v-model="fieldValue" /></FrameField><FrameButton type="submit"><span v-text="${escape(JSON.stringify(slots.default||'Submit form'))}" /></FrameButton><p role="status">{{ submitted }}</p></FrameForm>`;}
+ if(contract.name==='FrameLabel'){imports.add('FrameTextField');lines.push("const fieldValue = ref('Project name');");const id=JSON.stringify(values.for??'project-name').replace(/"/g,'&quot;');markup=`<FrameLabel ${attrs.filter(attr=>!attr.startsWith(':for=')).join(' ')} :for="${id}">${content||'Project name'}</FrameLabel><FrameTextField :id="${id}" v-model="fieldValue" />`;}
+ if(contract.name==='FrameQuickPick'||contract.name==='FrameQuickPanel'){
   imports.add('FrameButton');lines.push('const quickOpen = ref(false);');
-  const label=contract.name==='FrameQuickInput'?'Choose an item':'Open panel';
+  const label=contract.name==='FrameQuickPick'?'Choose an item':'Open panel';
   let body=content;
-  if(contract.name==='FrameQuickInput'){
+  if(contract.name==='FrameQuickPick'){
    lines.push('const selected = ref("");','function acceptQuick(id: string) { selected.value = id; quickOpen.value = false; }');
    body=slots.item?`<template #item="{ item }"><div><span v-text="${escape(JSON.stringify(slots.item))}" /><strong>{{ item.label }}</strong><small>{{ item.detail }}</small></div></template>`:'';
-  }else if(slots['header-actions'])body=Object.entries(slots).filter(([,value])=>value).map(([name,text])=>name==='header-actions'?`<template #header-actions><FrameButton @click="quickOpen = false"><span v-text="${escape(JSON.stringify(text))}" /></FrameButton></template>`:`<template #${name}><span v-text="${escape(JSON.stringify(text))}" /></template>`).join('\n');
-  markup=`<FrameButton @click="quickOpen = true">${label}</FrameButton>\n<${tag} v-if="quickOpen" ${attrs.join(' ')} @close="quickOpen = false"${contract.name==='FrameQuickInput'?' @accept="acceptQuick"':''}>${body}</${tag}>${contract.name==='FrameQuickInput'?'\n<p role="status">{{ selected }}</p>':''}`;
+  }else if(slots['header-actions'])body=Object.entries(slots).filter((
+    [,value]
+  )=>value).map(([name,text])=>name==='header-actions'?`<template #header-actions><FrameButton @click="quickOpen = false"><span v-text="${escape(JSON.stringify(text))}" /></FrameButton></template>`:`<template #${name}><span v-text="${escape(JSON.stringify(text))}" /></template>`).join('\n');
+  markup=`<FrameButton @click="quickOpen = true">${label}</FrameButton>\n<${tag} v-if="quickOpen" ${attrs.join(' ')} @close="quickOpen = false"${contract.name==='FrameQuickPick'?' @accept="acceptQuick"':''}>${body}</${tag}>${contract.name==='FrameQuickPick'?'\n<p role="status">{{ selected }}</p>':''}`;
  }
  if(fixtures.includes('anchor'))markup='<button ref="anchor" type="button">Menu trigger</button>\n'+markup;
  if(needsShell)markup=contract.name==='FrameNotifications'?`<FrameShell :frame="frame"><template #overlays>\n${markup}\n</template></FrameShell>`:`<FrameShell :frame="frame">\n${markup}\n</FrameShell>`;
@@ -158,7 +175,9 @@ export function serializeUsage(contract:ComponentContract, values:Record<string,
  if(cleanup.length)lines.push('onBeforeUnmount(() => { '+[...new Set(cleanup)].reverse().map(f=>f==='terminal'?'void terminal.dispose();':`${f}.dispose();`).join(' ')+' });');
  if(service){
   imports.delete(contract.name);imports.add('FrameShell');
-  const valuesCode=Object.entries(values).filter(([name,value])=>value!==undefined&&!(contract.name==='frame.registerView'&&name==='region')).map(([name,value])=>JSON.stringify(name)+': '+(contract.props.find(prop=>prop.name===name)?.control==='fixture'?(fixtureFor(contract.props.find(prop=>prop.name===name)!)==='component'?'PreviewContent':fixtureFor(contract.props.find(prop=>prop.name===name)!)):JSON.stringify(value))).join(', ');
+  const valuesCode=Object.entries(values).filter(([name,value])=>value!==undefined&&!(contract.name==='frame.registerView'&&name==='region')).map((
+    [name,value]
+  )=>JSON.stringify(name)+': '+(contract.props.find(prop=>prop.name===name)?.control==='fixture'?(fixtureFor(contract.props.find(prop=>prop.name===name)!)==='component'?'PreviewContent':fixtureFor(contract.props.find(prop=>prop.name===name)!)):JSON.stringify(value))).join(', ');
   let call=contract.name==='frame.registerView'?`serviceCleanup = frame.registerView({ ${valuesCode} }, ${JSON.stringify(values.region??'secondary')}); frame.openView(${JSON.stringify(values.id)});`:contract.name==='frame.setWorkspacePane'?`frame.setWorkspacePane(frame.workspace.activePane.value, { ${valuesCode} });`:contract.name==='frame.showQuickPick'?`void frame.showQuickPick([{ id: 'one', label: 'First' }, { id: 'two', label: 'Second' }], { ${valuesCode} });`:`${contract.name}({ ${valuesCode} });`;
   if(['frame.registerBanner','frame.registerSettingsSection','frame.registerNavigationItem'].includes(contract.name)){call='serviceCleanup = '+call;if(contract.name==='frame.registerBanner')call+=' frame.openBanner();';if(contract.name==='frame.registerSettingsSection')call+=' frame.openSettings();';}
   lines.push('let serviceCleanup: (() => void) | undefined;');
@@ -168,6 +187,6 @@ export function serializeUsage(contract:ComponentContract, values:Record<string,
  }
  const componentImports=[...imports].filter(name=>!(extras&&name==='FrameShell'));
  if(extras&&needsShell)coreImports.push('FrameShell');
- return `<script setup lang="ts">\nimport { h, ref, shallowRef, onBeforeUnmount } from 'vue';\nimport { ${componentImports.join(', ')} } from '${extras?'@frame/features':'@frame/core'}';\n${coreImports.length?`import { ${[...new Set(coreImports)].join(', ')} } from '@frame/core';\n`:''}${extraImports.length?`import { ${extraImports.join(', ')} } from '@frame/features';\n`:''}${[...new Set(lines)].join('\n')}\n<`+`/script>\n<template>\n${markup}\n</template>`;
+ return `<script setup lang="ts">\nimport { h, ref, shallowRef, onBeforeUnmount } from 'vue';\nimport { ${componentImports.join(', ')} } from '${extras?'@frame/core/modules/'+moduleFor(contract.name):'@frame/core'}';\n${coreImports.length?`import { ${[...new Set(coreImports)].join(', ')} } from '@frame/core';\n`:''}${extraImports.map(name => `import { ${name} } from '@frame/core/modules/${moduleFor(name)}';\n`).join('')}${[...new Set(lines)].join('\n')}\n<`+`/script>\n<template>\n${markup}\n</template>`;
 
 }

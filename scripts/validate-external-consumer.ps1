@@ -20,7 +20,7 @@ try {
     $packOutput = npm pack ./packages/core --pack-destination $artifactPath --json | Out-String
     Assert-Exit "Core archive creation"
     $archive = @($packOutput | ConvertFrom-Json)[0]
-    if (@($archive.files | Where-Object { ($_.path -match '(^src/|^node_modules/|^apps/)') -and $_.path -ne 'src/themes/default.css' }).Count) {
+    if (@($archive.files | Where-Object { ($_.path -match '(^src/|^node_modules/|^apps/)') -and $_.path -ne 'src/themes/generated/default.css' }).Count) {
         throw "Source, dependency, or application files leaked into the archive."
     }
     New-Item -ItemType Directory $consumerPath | Out-Null

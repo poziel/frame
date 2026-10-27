@@ -1,5 +1,5 @@
 import {test,expect} from 'bun:test';
-import {createFrame} from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 const content={render:()=>null};
 
 test('secondary view-bar configuration and runtime presentation are isolated and resettable',()=>{

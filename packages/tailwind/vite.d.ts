@@ -1,1 +1,1 @@
-export { default } from "@tailwindcss/vite";
+export {default} from '@tailwindcss/vite';

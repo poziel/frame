@@ -1,6 +1,6 @@
 import { expect, test } from 'bun:test';
-import { createFrame } from '../packages/core/src/frame/createFrame';
-import { assertExternalUrl, createBrowserHost, type HostWindowState, type HostWindow } from '../packages/core/src/frame/host';
+import {createFrame} from '../packages/core/src/framework/frame';
+import { assertExternalUrl, createBrowserHost, type HostWindowState, type HostWindow } from '../packages/core/src/framework/configuration/host';
 import { createElectronHost } from '../packages/electron/src/index';
 
 const tick = () => new Promise(resolve => setTimeout(resolve, 0));

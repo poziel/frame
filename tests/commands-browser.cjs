@@ -11,7 +11,7 @@ const path = require('node:path');
     await page.getByLabel('first content', { exact: true }).waitFor();
     await page.evaluate(() => {
       const f = fixture.first;
-      f.commands.categories.register({ prefix: '!', label: 'Artwork actions', placeholder: 'Find artwork actions…' });
+      f.commands.prefixes.register({ prefix: '!', label: 'Artwork actions', placeholder: 'Find artwork actions…' });
       f.commands.register({ id: 'app.art', label: 'Inspect artwork', quickInput: '!', feature: 'artwork', run() { fixture.calls.value = 'art'; } });
       f.commands.disable('app.find');
     });

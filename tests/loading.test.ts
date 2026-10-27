@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
 import { createRequire } from "node:module";
-import { frameLoaderVariants } from "../packages/core/src/frame/loading";
+import { frameLoaderVariants } from "../packages/core/src/components/feedback/loading";
 
 test("the loader catalog exposes every installed LDRS web component", async () => {
   const require = createRequire(new URL("../packages/core/package.json", import.meta.url));

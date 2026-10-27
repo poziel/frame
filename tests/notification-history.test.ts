@@ -1,6 +1,6 @@
 import { test, expect } from 'bun:test';
-import { createFrame } from '../packages/core/src/frame/createFrame';
-import { createNotificationHistory } from '../packages/features/src/notificationHistory';
+import {createFrame} from '../packages/core/src/framework/frame';
+import { createNotificationHistory } from '../packages/core/src/modules/notifications/controllers/notificationHistory';
 
 test('optional history retains expired notifications and clears independently of core', async () => {
   const frame = createFrame(); const other = createFrame();

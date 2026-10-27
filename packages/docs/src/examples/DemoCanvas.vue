@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { ContextMenu } from "@frame/core";
-import { useFrame } from "../../../core/src/frame/createFrame";
+import {useFrame} from '../../../core/src/framework/useFrame';
 import logo from "../../../../assets/frame.svg";
 const frame = useFrame(); const done = ref(false);
 const menu = [{ id: 'inspect', label: 'Open inspector' }, { id: 'activity', label: 'Show activity' }];

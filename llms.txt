@@ -4,7 +4,7 @@
 
 Read Getting started, Frame configuration, and the guide for the area being changed. Links are relative to this repository root. This index points to existing Markdown documentation; it does not replace the installed package's TypeScript declarations.
 
-Use public imports from `@frame/core` and `@frame/features`. Create one stable `createFrame()` instance per shell and render it with `FrameShell`. Use instance APIs for shell behavior; ordinary controls work without a Frame instance. The host owns domain state, backend adapters, credentials, and persistence. Registration, opening, hiding, and disposal are distinct operations.
+Use public imports from `@frame/core` and `@frame/core/modules/notifications`. Create one stable `createFrame()` instance per shell and render it with `FrameShell`. Use instance APIs for shell behavior; ordinary controls work without a Frame instance. The host owns domain state, backend adapters, credentials, and persistence. Registration, opening, hiding, and disposal are distinct operations.
 
 The packages are currently private and installed locally. The proposed `.use(feature)` installer and `frame.views.primarySidebar` namespaces are not implemented. Optional Features currently use explicit factories and components. Reka UI provides underlying primitives, but its full API is not automatically exposed by Frame wrappers. Component documentation is being expanded; verify anatomy, forwarded attributes, and unsupported capabilities against the implementation when needed.
 
@@ -25,7 +25,10 @@ The packages are currently private and installed locally. The proposed `.use(fea
 - [Menus and toolbar](docs/shell/menus-and-toolbar.md): Contribute command menus and title-bar actions.
 - [Status bar](docs/shell/status-bar.md): Register footer contributions and update centered status messages.
 - [Commands](docs/shell/commands.md): Register actions, shortcuts, quick picks, and navigation history.
+- [Keyboard shortcuts](docs/shell/keybindings.md): Edit bindings, inspect conflicts, and configure context activation and host persistence.
+- [Settings](docs/shell/settings.md): Section registration, settings tabs, JSON overrides, host file storage, row actions, and optional JSON editing.
 - [Workspace](docs/shell/workspace.md): Supply screen content, split panes, create document tabs, and configure lifecycle policies.
+- [Docks](docs/shell/docks.md): Attach independent Vue content inside or outside shell edges and control placement, visibility, sizing, and lifecycle.
 - [Shell services](docs/shell/services.md): Present banners, modals, settings, notifications, and custom overlays.
 - [Layout](docs/configuration/layout.md): Control visibility, placement, dimensions, density, Zen, and overlay boundaries.
 
@@ -33,7 +36,7 @@ The packages are currently private and installed locally. The proposed `.use(fea
 
 - [Component index](docs/components/README.md): Available Markdown references and documentation scope.
 - [FrameLabel](docs/components/forms/label.md): Associate visible text with a control.
-- [FrameTextInput](docs/components/forms/text-input.md): Single-line input, native attributes, numeric values, and focus access.
+- [FrameTextField](docs/components/forms/text-input.md): Single-line input, native attributes, numeric values, and focus access.
 - [FrameTextArea](docs/components/forms/text-area.md): Multiline plain text, native attributes, resizing, and focus access.
 - [FrameCheckbox](docs/components/forms/checkbox.md): Boolean checkbox, inline labels, native form attributes, and wrapper limitations.
 - [FrameSwitch](docs/components/forms/switch.md): Boolean on/off setting, inline labels, native form attributes, and styling.
@@ -41,8 +44,8 @@ The packages are currently private and installed locally. The proposed `.use(fea
 - [FrameNumberField](docs/components/forms/number-field.md): Numeric editing, stepping, formatting, bounds, empty values, and native form behavior.
 - [FrameRadioGroup](docs/components/forms/radio-group.md): Single string selection, generated options, roving focus, and internal indicator APIs.
 - [FrameCheckboxGroup](docs/components/forms/checkbox-group.md): String-array selection, selection limits, group semantics, and native form serialization.
-- [FramePinInput](docs/components/forms/pin-input.md): Code cells, string-array models, masking, OTP hints, completion, and keyboard behavior.
-- [FrameTagsInput](docs/components/forms/tags-input.md): Committed string tags, delimiters, forwarded events, keyboard removal, and part APIs.
+- [FramePinField](docs/components/forms/pin-input.md): Code cells, string-array models, masking, OTP hints, completion, and keyboard behavior.
+- [FrameTagField](docs/components/forms/tags-input.md): Committed string tags, delimiters, forwarded events, keyboard removal, and part APIs.
 - [FrameAutocomplete](docs/components/forms/autocomplete.md): Free text, suggestion filtering, popup lifecycle, and inherited Reka APIs.
 - [FrameCombobox](docs/components/forms/combobox.md): Searchable single string selection, input attribute routing, and native form helpers.
 - [FrameEditable](docs/components/forms/editable.md): Inline editing, draft commit/cancellation, and internal preview/input parts.
@@ -59,7 +62,7 @@ The packages are currently private and installed locally. The proposed `.use(fea
 
 - [Theme tokens](docs/styling/theme-variables.md): Shared and component tokens, CSS variables, validation and precedence.
 - [Theme files](docs/styling/theme-files.md): JSON, JSONC, JSON5, YAML, TOML and INI imports; nested/dotted token paths.
-- [Features](packages/features/README.md): Explicit setup for notification history, viewer, editor, chat, and native terminal integrations.
+- [Features](packages/core/src/modules/README.md): Explicit setup for notification history, viewer, editor, chat, and native terminal integrations.
 - [Tailwind](packages/tailwind/README.md): Optional build integration; not a runtime Frame capability.
 
 ## Optional
@@ -71,3 +74,7 @@ The packages are currently private and installed locally. The proposed `.use(fea
 ## File selection
 
 - [File upload and drop zone](docs/components/forms/file-upload.md): Standalone picker, validation, and visible or invisible file drop targets.
+
+## Contributor conventions
+
+- [Coding standards](docs/contributing/coding-standards/README.md): Read before editing; follow the language guides and project overrides for TSDoc, classes, spacing, parameters, Vue, HTML, CSS, and formatting commands.

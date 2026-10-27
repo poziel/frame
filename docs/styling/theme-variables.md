@@ -1,6 +1,6 @@
 # Frame theme tokens
 
-Frame owns the `--frame-*` namespace. Every Frame CSS variable is also a **token**, available in JSON, JSONC, JSON5, YAML, TOML and INI theme files. These are tokens, regardless of their serialization format. Applications can use `--app-*` (or a product prefix) for additional variables. Shared default values live in `packages/core/src/themes/default.css`, exported as `@frame/core/tokens.css` and included in Core's normal stylesheet. Component defaults remain in their contextual CSS fallbacks. Tailwind is optional; the same variables work in ordinary CSS.
+Frame owns the `--frame-*` namespace. Every Frame CSS variable is also a **token**, available in JSON, JSONC, JSON5, YAML, TOML and INI theme files. These are tokens, regardless of their serialization format. Applications can use `--app-*` (or a product prefix) for additional variables. Shared default values live in `packages/core/src/themes/generated/default.css`, exported as `@frame/core/tokens.css` and included in Core's normal stylesheet. Component defaults remain in their contextual CSS fallbacks. Tailwind is optional; the same variables work in ordinary CSS.
 
 See [theme file formats](theme-files.md) for equivalent examples in all six formats, nested/dotted paths, and browser file imports.
 
@@ -70,16 +70,16 @@ Core exports `FrameTheme`, `FrameThemeDefinition`, `FrameTokenTree`, `FrameToken
 
 Accepted syntax is deliberately smaller than arbitrary CSS:
 
-| Category | Accepted values |
-| --- | --- |
-| Colors | Hex with 3/4/6/8 digits; common named colors; `transparent`, `currentColor`; literal `rgb`/`rgba`, `hsl`/`hsla`, `oklch`/`oklab`; `color-mix(in srgb, color [weight%], color [weight%])` |
-| Lengths | Nonnegative CSS lengths or percentages, `0`, and nested `calc(length * nonnegative-number)` / `calc(length / positive-number)`; negative lengths are permitted for tracking and shadow offsets/spread; shadow/blur/tracking reject percentages |
-| Fonts | Comma-separated unquoted family names or quoted names, including system families; assets are host-owned |
-| Typography | Weight numbers 1–1000; positive line-height numbers or nonnegative lengths |
-| Shadows | `none`, or comma-separated shadows: optional leading `inset`, 2–4 lengths, then a supported color |
-| Motion | Nonnegative `ms`/`s`; standard easing keywords, `cubic-bezier` and `steps` |
-| Filters | `none` or space-separated `blur(length)` / `saturate(percentage)` / `brightness(percentage)` |
-| Component values (`css`) | Declaration values including shorthands, transforms and grid tracks; balanced parentheses/quotes and resource-free syntax are checked. Property-specific validity is determined by the browser. |
+| Category                 | Accepted values                                                                                                                                                                                                                                |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Colors                   | Hex with 3/4/6/8 digits; common named colors; `transparent`, `currentColor`; literal `rgb`/`rgba`, `hsl`/`hsla`, `oklch`/`oklab`; `color-mix(in srgb, color [weight%], color [weight%])`                                                       |
+| Lengths                  | Nonnegative CSS lengths or percentages, `0`, and nested `calc(length * nonnegative-number)` / `calc(length / positive-number)`; negative lengths are permitted for tracking and shadow offsets/spread; shadow/blur/tracking reject percentages |
+| Fonts                    | Comma-separated unquoted family names or quoted names, including system families; assets are host-owned                                                                                                                                        |
+| Typography               | Weight numbers 1–1000; positive line-height numbers or nonnegative lengths                                                                                                                                                                     |
+| Shadows                  | `none`, or comma-separated shadows: optional leading `inset`, 2–4 lengths, then a supported color                                                                                                                                              |
+| Motion                   | Nonnegative `ms`/`s`; standard easing keywords, `cubic-bezier` and `steps`                                                                                                                                                                     |
+| Filters                  | `none` or space-separated `blur(length)` / `saturate(percentage)` / `brightness(percentage)`                                                                                                                                                   |
+| Component values (`css`) | Declaration values including shorthands, transforms and grid tracks; balanced parentheses/quotes and resource-free syntax are checked. Property-specific validity is determined by the browser.                                                |
 
 Known-token `var(--frame-token)` references are accepted within those grammars; fallback arguments are not. References to contextual tokens require an explicit value for that token. Validation checks the effective default-plus-override graph. Declarations, selectors, imports, URLs, arbitrary variables, comments and control characters are rejected. Shared typed tokens also reject CSS-wide keywords; component values can explicitly use `inherit` or `initial`. Accepted length units are px, rem, em, ch, ex, lh, rlh, vw/vh/vi/vb/vmin/vmax, dvw/dvh/svw/svh/lvw/lvh, cm/mm/in/pt/pc, and percent where permitted. Use hex or functional colors when a particular named color is unsupported. CSS stylesheet themes use the normal CSS import/cascade mechanism rather than the token-file parser.
 
@@ -93,45 +93,45 @@ Tailwind's full entry uses these scales by default. `p-4` is four spacing units;
 
 ## Public tokens
 
-| Variable | Default | Purpose / Tailwind utility example |
-| --- | --- | --- |
-| `--frame-bg` | `#181818` | Application background; `bg-frame-bg` |
-| `--frame-canvas` | `#101112` | Workspace background; `bg-frame-canvas` |
-| `--frame-surface` | `#181818` | Raised surface; `bg-frame-surface` |
-| `--frame-line` | `#2b2b2b` | Border; `border-frame-line` |
-| `--frame-text` | `#cccccc` | Foreground; `text-frame-text` |
-| `--frame-muted` | `#8e9496` | Secondary foreground; `text-frame-muted` |
-| `--frame-accent` | `#0078d4` | Accent and focus; `bg-frame-accent` |
-| `--frame-overlay-surface` | `#1f1f1f` | Shared overlay base color |
-| `--frame-overlay-background` | `color-mix(in srgb, var(--frame-overlay-surface) 83%, transparent)` | Shared translucent surface for menus, selects, dialogs, quick panels, tooltips, and notifications |
-| `--frame-overlay-backdrop-filter` | `blur(10px) saturate(110%)` | Frosted backdrop behind floating surfaces |
-| `--frame-menu-background` | `var(--frame-overlay-background)` | `bg-frame-menu-background` |
-| `--frame-menu-border` | `#303030` | `border-frame-menu-border` |
-| `--frame-menu-hover` | `#303336` | `bg-frame-menu-hover` |
-| `--frame-menu-disabled` | `#656565` | `text-frame-menu-disabled` |
-| `--frame-menu-shortcut` | `#929292` | `text-frame-menu-shortcut` |
-| `--frame-quick-background` | `var(--frame-overlay-background)` | `bg-frame-quick-background` |
-| `--frame-quick-selection` | `var(--frame-accent)` | Quick-action hover/selection, including Customize Layout; `bg-frame-quick-selection` |
-| `--frame-control-background` | `#1d1d1d` | Input background; `bg-frame-control-background` |
-| `--frame-control-border` | `#3c4246` | Input border; `border-frame-control-border` |
-| `--frame-control-text` | `#d4d4d4` | Input foreground; `text-frame-control-text` |
-| `--frame-accent-foreground` | `#ffffff` | Text on accent controls |
-| `--frame-danger` | `#f48771` | Form validation errors |
-| `--frame-font-body` | `"Segoe UI", sans-serif` | Body family; `font-frame-body` |
-| `--frame-font-mono` | `Consolas, monospace` | Code family; `font-frame-mono` |
-| `--frame-font-size-body` | `12px` | Base size; `text-frame-body` |
-| `--frame-content-padding` | `12px` | Content spacing; `p-frame-content` |
-| `--frame-control-padding-x` | `10px` | Control horizontal padding; `px-frame-control-x` |
-| `--frame-control-padding-y` | `5px` | Control vertical padding; `py-frame-control-y` |
-| `--frame-gap` | `6px` | Content gap; `gap-frame-gap` |
-| `--frame-radius-small` | `2px` | Small elements and inset menu rows |
-| `--frame-radius-medium` | `4px` | Inputs, selects, buttons and other controls |
-| `--frame-radius-large` | `7px` | Panels, dialogs and menu containers |
-| `--frame-control-radius` | `var(--frame-radius-medium)` | Control corners; `rounded-frame-control` |
-| `--frame-panel-radius` | `var(--frame-radius-large)` | Panel corners; `rounded-frame-panel` |
-| `--frame-overlay-shadow` | `0 14px 50px #0006` | Overlay elevation; `shadow-frame-overlay` |
-| `--frame-duration` | `150ms` | Motion duration; `duration-[var(--frame-duration)]` |
-| `--frame-ease` | `ease-out` | Timing function; `ease-frame` |
+| Variable                          | Default                                                             | Purpose / Tailwind utility example                                                                |
+| --------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `--frame-bg`                      | `#181818`                                                           | Application background; `bg-frame-bg`                                                             |
+| `--frame-canvas`                  | `#101112`                                                           | Workspace background; `bg-frame-canvas`                                                           |
+| `--frame-surface`                 | `#181818`                                                           | Raised surface; `bg-frame-surface`                                                                |
+| `--frame-line`                    | `#2b2b2b`                                                           | Border; `border-frame-line`                                                                       |
+| `--frame-text`                    | `#cccccc`                                                           | Foreground; `text-frame-text`                                                                     |
+| `--frame-muted`                   | `#8e9496`                                                           | Secondary foreground; `text-frame-muted`                                                          |
+| `--frame-accent`                  | `#0078d4`                                                           | Accent and focus; `bg-frame-accent`                                                               |
+| `--frame-overlay-surface`         | `#1f1f1f`                                                           | Shared overlay base color                                                                         |
+| `--frame-overlay-background`      | `color-mix(in srgb, var(--frame-overlay-surface) 83%, transparent)` | Shared translucent surface for menus, selects, dialogs, quick panels, tooltips, and notifications |
+| `--frame-overlay-backdrop-filter` | `blur(10px) saturate(110%)`                                         | Frosted backdrop behind floating surfaces                                                         |
+| `--frame-menu-background`         | `var(--frame-overlay-background)`                                   | `bg-frame-menu-background`                                                                        |
+| `--frame-menu-border`             | `#303030`                                                           | `border-frame-menu-border`                                                                        |
+| `--frame-menu-hover`              | `#303336`                                                           | `bg-frame-menu-hover`                                                                             |
+| `--frame-menu-disabled`           | `#656565`                                                           | `text-frame-menu-disabled`                                                                        |
+| `--frame-menu-shortcut`           | `#929292`                                                           | `text-frame-menu-shortcut`                                                                        |
+| `--frame-quick-background`        | `var(--frame-overlay-background)`                                   | `bg-frame-quick-background`                                                                       |
+| `--frame-quick-selection`         | `var(--frame-accent)`                                               | Quick-action hover/selection, including Customize Layout; `bg-frame-quick-selection`              |
+| `--frame-control-background`      | `#1d1d1d`                                                           | Input background; `bg-frame-control-background`                                                   |
+| `--frame-control-border`          | `#3c4246`                                                           | Input border; `border-frame-control-border`                                                       |
+| `--frame-control-text`            | `#d4d4d4`                                                           | Input foreground; `text-frame-control-text`                                                       |
+| `--frame-accent-foreground`       | `#ffffff`                                                           | Text on accent controls                                                                           |
+| `--frame-danger`                  | `#f48771`                                                           | Form validation errors                                                                            |
+| `--frame-font-body`               | `"Segoe UI", sans-serif`                                            | Body family; `font-frame-body`                                                                    |
+| `--frame-font-mono`               | `Consolas, monospace`                                               | Code family; `font-frame-mono`                                                                    |
+| `--frame-font-size-body`          | `12px`                                                              | Base size; `text-frame-body`                                                                      |
+| `--frame-content-padding`         | `12px`                                                              | Content spacing; `p-frame-content`                                                                |
+| `--frame-control-padding-x`       | `10px`                                                              | Control horizontal padding; `px-frame-control-x`                                                  |
+| `--frame-control-padding-y`       | `5px`                                                               | Control vertical padding; `py-frame-control-y`                                                    |
+| `--frame-gap`                     | `6px`                                                               | Content gap; `gap-frame-gap`                                                                      |
+| `--frame-radius-small`            | `2px`                                                               | Small elements and inset menu rows                                                                |
+| `--frame-radius-medium`           | `4px`                                                               | Inputs, selects, buttons and other controls                                                       |
+| `--frame-radius-large`            | `7px`                                                               | Panels, dialogs and menu containers                                                               |
+| `--frame-control-radius`          | `var(--frame-radius-medium)`                                        | Control corners; `rounded-frame-control`                                                          |
+| `--frame-panel-radius`            | `var(--frame-radius-large)`                                         | Panel corners; `rounded-frame-panel`                                                              |
+| `--frame-overlay-shadow`          | `0 14px 50px #0006`                                                 | Overlay elevation; `shadow-frame-overlay`                                                         |
+| `--frame-duration`                | `150ms`                                                             | Motion duration; `duration-[var(--frame-duration)]`                                               |
+| `--frame-ease`                    | `ease-out`                                                          | Timing function; `ease-frame`                                                                     |
 
 Color tokens work with Tailwind's corresponding color utilities, including backgrounds, borders, text, and outlines. Spacing mappings also support margins, gaps, and sizing. Numeric utilities such as `p-4` use `--frame-spacing-unit`; overriding only content padding does not change that scale.
 
@@ -222,19 +222,19 @@ Side-docked nav bars cap their cross-axis width with `--frame-navigation-max-wid
 
 Workspace tab styles use the same canvas, text, muted, line, accent, and focus colors as the shell. Override these optional tokens without changing component contracts:
 
-| Token | Default |
-| --- | --- |
-| `--frame-workspace-tab-strip` | Canvas mixed with 16% text color |
-| `--frame-workspace-tab-active` | `--frame-canvas` |
-| `--frame-workspace-tab-text` | `--frame-muted` |
-| `--frame-workspace-tab-active-text` | `--frame-text` |
-| `--frame-workspace-tab-border` | `--frame-line` |
-| `--frame-workspace-tab-height` | `34px` |
-| `--frame-workspace-tab-max-width` | `240px` |
-| `--frame-workspace-tab-font-size` | `12px` |
-| `--frame-workspace-tab-gap` | `6px` |
-| `--frame-workspace-tab-padding` | `0 10px` |
-| `--frame-workspace-tab-action-size` | `24px` |
+| Token                                | Default                             |
+| ------------------------------------ | ----------------------------------- |
+| `--frame-workspace-tab-strip`        | Canvas mixed with 16% text color    |
+| `--frame-workspace-tab-active`       | `--frame-canvas`                    |
+| `--frame-workspace-tab-text`         | `--frame-muted`                     |
+| `--frame-workspace-tab-active-text`  | `--frame-text`                      |
+| `--frame-workspace-tab-border`       | `--frame-line`                      |
+| `--frame-workspace-tab-height`       | `34px`                              |
+| `--frame-workspace-tab-max-width`    | `240px`                             |
+| `--frame-workspace-tab-font-size`    | `12px`                              |
+| `--frame-workspace-tab-gap`          | `6px`                               |
+| `--frame-workspace-tab-padding`      | `0 10px`                            |
+| `--frame-workspace-tab-action-size`  | `24px`                              |
 | `--frame-workspace-tab-action-hover` | Text mixed at 12% over transparency |
 
 The active tab matches its pane content by default; the strip is lighter. Overflowing tabs move into the More Tabs dropdown while trailing actions remain available. `--frame-workspace-tab-radius` and `--frame-workspace-pane-radius` default to the panel radius; `--frame-workspace-tab-drop-color` defaults to the accent color. The selected tab has no bottom separator.
@@ -247,3 +247,17 @@ Registration validates and copies the definition, rejects duplicate IDs, and ret
 It does not change the selected theme. An initial `createFrame({ theme })` theme is also available.
 Removing a choice leaves the current selection intact; `frame.theme.reset()` restores inherited styling.
 Disposal clears available choices and releases attached targets. Each Frame has its own registry.
+
+## Shared input surfaces
+
+Text inputs, text areas, selects, number fields, date fields, and advanced/form inputs share `--frame-input-border` (default `1px solid var(--frame-control-border)`), `--frame-input-radius`, `--frame-input-hover-border`, `--frame-input-hover-outline`, `--frame-input-focus-border`, `--frame-input-focus-outline`, and `--frame-input-outline-offset`. Text-entry surfaces retain the normal border on hover, use no hover outline, and show one accent border/outline around the focused input surface. Composite number/date, combobox, tags, and grouped controls focus the whole surface. Select triggers show an outline only with keyboard focus (`:focus-visible`). Sliders outline only their keyboard-focused thumbs; checkboxes, switches, and choice controls retain their own interaction styles rather than text-input surfaces.
+
+Each component can override the same properties with its own prefix: `--frame-text-input-*`, `--frame-text-area-*`, `--frame-select-*`, `--frame-number-field-*`, `--frame-date-field-*`, `--frame-advanced-input-*`, or `--frame-form-input-*`. Radius uses the `border-radius` suffix, for example `--frame-number-field-border-radius`; all other suffixes match the shared names. This allows a single component to opt out without changing the other inputs.
+
+Composed text entries (Editable, autocomplete, combobox, PIN, tags, numeric and color fields) use `FrameTextField` via Reka's `as-child` composition. Their original parsers, commit semantics and keyboard behavior remain owned by Reka. Date/time fields remain segmented inputs, and textareas remain multiline native controls with the shared surface contract. Specialized input aliases include `--frame-editable-input-*`, `--frame-autocomplete-input-*`, `--frame-combobox-*`, `--frame-color-field-input-*`, `--frame-pin-entry-*`, `--frame-tags-input-*`, and `--frame-input-group-*`.
+
+`FrameFieldGroup` exposes `prefix`, default, and `suffix` slots. For example, place `$` in `prefix`, a labeled `FrameTextField` in the default slot, and `USD` in `suffix`. The group owns a single border/focus ring. Also pass disabled to the child control when disabling a group. The number field's `controls="stacked"` variant uses a native `type="number"` Frame text input, matching Settings, with no custom arrow-button backgrounds or addon padding.
+
+## Tabs
+
+Frame tabs use plain labels over a shared baseline, with an accent underline for the selected tab. Selected and hovered tabs have no fill by default. Keyboard focus uses a separate accent outline. Customize `--frame-tabs-gap`, `--frame-tabs-trigger-padding`, `--frame-tabs-list-border`, `--frame-tabs-indicator-width`, `--frame-tabs-indicator-color`, `--frame-tabs-trigger-background`, `--frame-tabs-trigger-hover-background`, `--frame-tabs-trigger-selected-background`, `--frame-tabs-trigger-color`, `--frame-tabs-trigger-selected-color`, `--frame-tabs-trigger-border-radius`, `--frame-tabs-trigger-focus-outline`, and `--frame-tabs-content-padding` for a specific tab set. Vertical tab sets place the indicator on their trailing edge. Documentation navigation and application tabs use the same component.

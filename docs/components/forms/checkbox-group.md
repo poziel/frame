@@ -249,7 +249,7 @@ No Frame-defined methods or internal Reka refs are exposed.
 
 ### Sources and version
 
-[FrameCheckboxGroup.vue](../../../packages/core/src/components/FrameCheckboxGroup.vue) and [controls.css](../../../packages/core/src/forms/controls.css) define the wrapper. Compared with [Reka Checkbox](https://reka-ui.com/docs/components/checkbox.md), especially Group Root, and installed Reka `2.11.0`.
+[FrameCheckboxGroup.vue](../../../packages/core/src/components/forms/FrameCheckboxGroup.vue) and [controls.css](../../../packages/core/src/components/forms/shared/controls.css) define the wrapper. Compared with [Reka Checkbox](https://reka-ui.com/docs/components/checkbox.md), especially Group Root, and installed Reka `2.11.0`.
 
 ## Styling
 

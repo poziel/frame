@@ -1,6 +1,6 @@
 import {expect,test} from 'bun:test';
-import {createFrame} from '../packages/core/src/frame/createFrame';
-import type {ViewBarPosition,ViewBarSize} from '../packages/core/src/frame/primaryViewBar';
+import {createFrame} from '../packages/core/src/framework/frame';
+import type {ViewBarPosition,ViewBarSize} from '../packages/core/src/framework/views/primaryViewBar';
 const Blank={render:()=>null};
 test('activity placement, sizing and shell density remain independent per Frame',()=>{
  const first=createFrame({primaryViewBar:{position:'top',size:'compact'}}),second=createFrame();

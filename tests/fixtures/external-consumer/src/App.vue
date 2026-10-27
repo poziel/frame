@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineComponent, h, onBeforeUnmount, ref } from 'vue';
-import { createFrame, FrameShell, FrameButton, FrameTextInput, FrameIcon, useFrame } from '@frame/core';
+import { createFrame, FrameShell, FrameButton, FrameTextField, FrameIcon, useFrame } from '@frame/core';
 import '@frame/core/style.css';
 
 const frame = createFrame({ settings: true, notifications: true });
@@ -28,7 +28,7 @@ onBeforeUnmount(() => frame.dispose());
   <FrameShell :frame="frame" title-text="External consumer">
     <main class="consumer-workspace">
       <h1>Independent host application</h1>
-      <label>Project name <FrameTextInput v-model="name" aria-label="Project name" /></label>
+      <label>Project name <FrameTextField v-model="name" aria-label="Project name" /></label>
       <p data-testid="consumer-name">{{ name }}</p>
       <p data-testid="consumer-count">Counter: {{ count }}</p>
       <FrameButton label="Increment" variant="primary" @click="frame.executeCommand('consumer.increment')" />

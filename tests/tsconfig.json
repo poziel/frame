@@ -1,10 +1,34 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["agent-consumer.ts", "commands-consumer.ts", "library-consumer.ts", "workspace-consumer.ts", "navigation-items-consumer.ts", "viewer-consumer.ts", "general-consumer.ts", "notification-consumer.ts", "secondary-bar-consumer.ts", "panel-consumer.ts", "status-consumer.ts"],
+  "include": [
+    "agent-consumer.ts",
+    "chat-consumer.ts",
+    "editor-consumer.ts",
+    "host-packages-consumer.ts",
+    "commands-consumer.ts",
+    "frame-class-consumer.ts",
+    "settings-consumer.ts",
+    "layout-consumer.ts",
+    "configuration-consumer.ts",
+    "library-consumer.ts",
+    "workspace-consumer.ts",
+    "navigation-items-consumer.ts",
+    "viewer-consumer.ts",
+    "general-consumer.ts",
+    "notification-consumer.ts",
+    "secondary-bar-consumer.ts",
+    "panel-consumer.ts",
+    "status-consumer.ts"
+  ],
   "compilerOptions": {
     "paths": {
-      "@frame/core": ["../packages/core/dist/types/frame/index.d.ts"],
-      "@frame/features": ["../packages/features/dist/types/index.d.ts"]
+      "@frame/electron": ["../packages/electron/dist/index.d.ts"],
+      "@frame/electron/*": ["../packages/electron/dist/*.d.ts"],
+      "@frame/tauri": ["../packages/tauri/dist/index.d.ts"],
+      "@frame/core": ["../packages/core/dist/types/index.d.ts"],
+      "@frame/core/modules/*": [
+        "../packages/core/dist/types/modules/*/index.d.ts"
+      ]
     }
   }
 }

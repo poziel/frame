@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import { createTerminal, type TerminalBackend, type TerminalEvent } from '../packages/features/src/terminal';
+import { createTerminal, type TerminalBackend, type TerminalEvent } from '../packages/core/src/modules/terminal/controllers/terminal';
 
 function fixture() {
   const events = new Map<string, (event: TerminalEvent) => void>();

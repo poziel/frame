@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
-import { defaultLayout, layoutGeometry, maximizedRegionBounds } from "../packages/core/src/frame/layout";
-import { createFrame } from "../packages/core/src/frame/createFrame";
+import { defaultLayout, layoutGeometry, maximizedRegionBounds } from "../packages/core/src/framework/layout/layout";
+import {createFrame} from '../packages/core/src/framework/frame';
 
 test("maximized panel coverage follows alignment and preserves the activity rail on either side", () => {
   for (const primarySide of ["left", "right"] as const) for (const panelAlignment of ["left", "right", "center", "justify"] as const) {

@@ -78,3 +78,17 @@ python tests/tailwind-browser.py
 ```
 
 Build Core first. The browser check requires Python Playwright and Chromium. It exercises both production-built CSS entry points, standard scales, user imports, two Frame instances and real Reka portals, remount, cleanup, standalone controls, global CSS compatibility, and native controls without Preflight.
+
+## Implementation structure
+
+`vite.js` keeps the default `frameTailwind(options)` factory. Each call creates
+an independent `FrameTailwindSources` in `src/frameTailwindSources.js` and the
+upstream Tailwind compiler plugins. The class owns its resolved stylesheet
+identity and consuming Vite root; its hooks stay bound when invoked separately.
+Only the canonical Frame utility stylesheet receives the escaped `@source`
+directive. Unrelated files and missing resources remain untouched.
+
+The package archive includes the class implementation and requires no build
+step. Runtime stylesheet entries, generated utility behavior, and the public
+Vite declaration remain compatible. This is build tooling, not a Frame runtime
+capability. CSS token mappings and visual scales are unchanged.

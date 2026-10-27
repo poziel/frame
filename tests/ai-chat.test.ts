@@ -1,7 +1,7 @@
 import { expect, test } from "bun:test";
-import { createAIChat, type ChatResponseWriter } from "../packages/features/src/aiChat";
-import { groupChatParts, splitChatTurn } from "../packages/features/src/chatParts";
-import * as chatPresentation from "../packages/features/src/chatParts";
+import { createAIChat, type ChatResponseWriter } from "../packages/core/src/modules/chat/controllers/aiChat";
+import { groupChatParts, splitChatTurn } from "../packages/core/src/modules/chat/services/content/chatParts";
+import * as chatPresentation from "../packages/core/src/modules/chat/services/content/chatParts";
 import { watch } from "vue";
 
 test("presentation merges adjacent parts without changing source IDs or crossing type boundaries", () => {

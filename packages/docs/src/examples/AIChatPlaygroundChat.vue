@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { AIChat } from "@frame/features";
+import { AIChat } from '@frame/core/modules/chat';
 import { FrameButton, FrameCheckbox } from "@frame/core";
 import type { ChatPlayground } from "./chatPlayground";
 defineProps<{ session: ChatPlayground; openPlayground: () => void }>();

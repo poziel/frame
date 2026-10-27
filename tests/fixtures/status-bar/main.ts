@@ -1,6 +1,6 @@
 import { createApp, h, ref } from 'vue';
 import { createFrame, FrameShell } from '@frame/core';
-import { createNotificationHistory, NotificationPanel } from '@frame/features';
+import { createNotificationHistory, NotificationPanel } from '@frame/core/modules/notifications';
 import '../../../packages/core/src/style.css';
 
 const frame = createFrame();

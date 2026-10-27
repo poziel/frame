@@ -1,6 +1,7 @@
 import { expect, test } from "bun:test";
-import { createFrame } from "../packages/core/src/frame/createFrame";
+import {createFrame} from '../packages/core/src/framework/frame';
 import { componentExamples } from "../packages/docs/src/examples/componentCatalog";
+import { componentDocumentation } from '../packages/docs/src/examples/documentation/registry';
 test('navigation actions are isolated and do not select a view',async()=>{
  const first=createFrame(),second=createFrame();let calls=0;
  first.registerView({id:'view',label:'View',component:{render:()=>null}},'primary');first.openView('view');
@@ -20,5 +21,5 @@ test("Home resets split workspace content while keeping sidebar views", () => {
 });
 test("each catalog entry has a unique page, usage notes, a code example, and API guidance", () => {
   expect(new Set(componentExamples.map(item => item.id)).size).toBe(componentExamples.length);
-  for (const example of componentExamples) { expect(example.title.length).toBeGreaterThan(0); expect(example.usage.length).toBeGreaterThan(0); expect(example.code.length).toBeGreaterThan(0); expect(example.properties.length).toBeGreaterThan(0); }
+  for (const example of componentExamples) { expect(example.title.length).toBeGreaterThan(0); expect(example.usage.length).toBeGreaterThan(0); expect(example.code.length).toBeGreaterThan(0); expect(componentDocumentation[example.id]?.components.some(component => component.props.length + component.methods.length + component.emits.length + component.slots.length > 0)).toBe(true); }
 });

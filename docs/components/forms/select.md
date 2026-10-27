@@ -445,7 +445,7 @@ No Frame-defined methods or internal Reka refs are exposed.
 
 ### Sources and version
 
-[FrameSelect.vue](../../../packages/core/src/components/FrameSelect.vue) composes Reka Select primitives. [Choice encoding](../../../packages/core/src/forms/controls.ts) preserves empty-string values. Styling lives in [controls.css](../../../packages/core/src/forms/controls.css) and [style.css](../../../packages/core/src/style.css).
+[FrameSelect.vue](../../../packages/core/src/components/forms/FrameSelect.vue) composes Reka Select primitives. [Choice encoding](../../../packages/core/src/components/forms/shared/controls.ts) preserves empty-string values. Styling lives in [controls.css](../../../packages/core/src/components/forms/shared/controls.css) and [style.css](../../../packages/core/src/style.css).
 
 Compared with the [Reka Select reference](https://reka-ui.com/docs/components/select.md) and installed Reka `2.11.0` source. See the [coverage review](../../reference/reka-coverage.md).
 

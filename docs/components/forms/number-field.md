@@ -1,6 +1,6 @@
 # FrameNumberField
 
-A numeric value with decrement/increment buttons and a formatted editable input. Use it for quantities and bounded numeric settings. Unlike [FrameTextInput](text-input.md) with `type="number"`, this control composes Reka's parsing, formatting, and step interactions.
+A numeric value with decrement/increment buttons and a formatted editable input. Use it for quantities and bounded numeric settings. Unlike [FrameTextField](text-input.md) with `type="number"`, this control composes Reka's parsing, formatting, and step interactions.
 
 ## Features
 
@@ -41,7 +41,7 @@ Root consumes `id` and associates it with the inner input. `label` supplies that
 
 ### Editing, empty values, and keyboard behavior
 
-Typed text is kept as an editing buffer. Enter or blur commits parsing; stepping updates the numeric model directly. Clearing and committing an empty input can emit `NaN`, so use `Number.isFinite(quantity)` before calculations or submission. This is not a nullable-number model and does not emit `''` like FrameTextInput.
+Typed text is kept as an editing buffer. Enter or blur commits parsing; stepping updates the numeric model directly. Clearing and committing an empty input can emit `NaN`, so use `Number.isFinite(quantity)` before calculations or submission. This is not a nullable-number model and does not emit `''` like FrameTextField.
 
 By default Reka clamps/snaps committed values using the configured bounds and step. Arrow Up/Down step once; Page Up/Down step ten times; Home/End use configured min/max. Enter commits text. Buttons support pointer stepping, including held-button interactions. Focused wheel changes are enabled unless disabled through Root configuration. IME composition is excluded from step/commit keyboard handling.
 
@@ -232,7 +232,7 @@ No Frame-defined methods or internal Reka refs are exposed.
 
 ### Sources and version
 
-[FrameNumberField.vue](../../../packages/core/src/components/FrameNumberField.vue) and [controls.css](../../../packages/core/src/forms/controls.css) define Frame behavior. Compared with the official [Reka Number Field reference](https://reka-ui.com/docs/components/number-field.md) and installed Reka `2.11.0`.
+[FrameNumberField.vue](../../../packages/core/src/components/forms/FrameNumberField.vue) and [controls.css](../../../packages/core/src/components/forms/shared/controls.css) define Frame behavior. Compared with the official [Reka Number Field reference](https://reka-ui.com/docs/components/number-field.md) and installed Reka `2.11.0`.
 
 ## Styling
 

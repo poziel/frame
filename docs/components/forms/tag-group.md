@@ -49,8 +49,7 @@ Roving focus uses arrows, Home/End and typeahead; looping defaults to true. Ente
 
 ### Field integration
 
-TagGroup can participate in Reka Field context for selected values and disabled state. Its root has no name/required native form props or hidden serialization helper of its own. The text list is host-owned; include whatever submitted data your application needs explicitly. It is a different control from [FrameTagsInput](tags-input.md), which commits text into an array.
-
+TagGroup can participate in Reka Field context for selected values and disabled state. Its root has no name/required native form props or hidden serialization helper of its own. The text list is host-owned; include whatever submitted data your application needs explicitly. It is a different control from [FrameTagField](tags-input.md), which commits text into an array.
 
 ## APIs
 
@@ -60,39 +59,39 @@ Defaults below are Reka reference defaults unless a Frame override is stated. De
 
 #### Props
 
-| Prop | Reka type | Reka required/default | Availability | Frame behavior |
-| --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | "div" | Declared | Element/component used to render this part. |
-| `asChild` | `boolean` | - | Declared | Typed upstream composition option; fixed generated children are not a public custom-composition slot. |
-| `by` | `string \| ((a: T, b: T) => boolean)` | - | Declared | Field name or comparator for matching values. |
-| `defaultValue` | `T \| T[]` | - | Declared | Initial uncontrolled value upstream; does not override a supplied controlled model. |
-| `dir` | `"ltr" \| "rtl"` | - | Declared | Reading/navigation direction; inherits Reka configuration or LTR when unset. |
-| `disabled` | `boolean` | - | Declared | Disable interaction for this part and its participating descendants. |
-| `disallowEmptySelection` | `boolean` | - | Declared | Reject deselection of the final selected tag. |
-| `escapeKeyBehavior` | `"none" \| "clearSelection"` | "clearSelection" | Declared | Clear selection on Escape or leave it unchanged. |
-| `loop` | `boolean` | true | Declared | Wrap keyboard navigation at collection endpoints. |
-| `modelValue` | `T \| T[]` | - | Declared | Controlled value; updates require the host to retain the emitted value. |
-| `selectionMode` | `"single" \| "multiple" \| "none"` | "none" | Declared | Allow no selection, one selected tag, or several selected tags. |
+| Prop                     | Reka type                             | Reka required/default | Availability | Frame behavior                                                                                        |
+| ------------------------ | ------------------------------------- | --------------------- | ------------ | ----------------------------------------------------------------------------------------------------- |
+| `as`                     | `AsTag \| Component`                  | "div"                 | Declared     | Element/component used to render this part.                                                           |
+| `asChild`                | `boolean`                             | -                     | Declared     | Typed upstream composition option; fixed generated children are not a public custom-composition slot. |
+| `by`                     | `string \| ((a: T, b: T) => boolean)` | -                     | Declared     | Field name or comparator for matching values.                                                         |
+| `defaultValue`           | `T \| T[]`                            | -                     | Declared     | Initial uncontrolled value upstream; does not override a supplied controlled model.                   |
+| `dir`                    | `"ltr" \| "rtl"`                      | -                     | Declared     | Reading/navigation direction; inherits Reka configuration or LTR when unset.                          |
+| `disabled`               | `boolean`                             | -                     | Declared     | Disable interaction for this part and its participating descendants.                                  |
+| `disallowEmptySelection` | `boolean`                             | -                     | Declared     | Reject deselection of the final selected tag.                                                         |
+| `escapeKeyBehavior`      | `"none" \| "clearSelection"`          | "clearSelection"      | Declared     | Clear selection on Escape or leave it unchanged.                                                      |
+| `loop`                   | `boolean`                             | true                  | Declared     | Wrap keyboard navigation at collection endpoints.                                                     |
+| `modelValue`             | `T \| T[]`                            | -                     | Declared     | Controlled value; updates require the host to retain the emitted value.                               |
+| `selectionMode`          | `"single" \| "multiple" \| "none"`    | "none"                | Declared     | Allow no selection, one selected tag, or several selected tags.                                       |
 
 #### Emits
 
-| Event | Payload | Availability | Behavior |
-| --- | --- | --- | --- |
-| `remove` | `[values: T[]]` | Declared | Requested tag values to remove; host must update items. Not a DOM cancellation event. |
-| `update:modelValue` | `[value: AcceptableValue \| AcceptableValue[] \| undefined]` | Declared | Value changed; retain it in host state. Not cancellable. |
+| Event               | Payload                                                      | Availability | Behavior                                                                              |
+| ------------------- | ------------------------------------------------------------ | ------------ | ------------------------------------------------------------------------------------- |
+| `remove`            | `[values: T[]]`                                              | Declared     | Requested tag values to remove; host must update items. Not a DOM cancellation event. |
+| `update:modelValue` | `[value: AcceptableValue \| AcceptableValue[] \| undefined]` | Declared     | Value changed; retain it in host state. Not cancellable.                              |
 
 #### Slots
 
-| Default-slot field | Reka type | Frame availability |
-| --- | --- | --- |
-| `modelValue` | `T \| T[] \| undefined` | Internal; not passed to the Frame caller slot. |
+| Default-slot field | Reka type               | Frame availability                             |
+| ------------------ | ----------------------- | ---------------------------------------------- |
+| `modelValue`       | `T \| T[] \| undefined` | Internal; not passed to the Frame caller slot. |
 
 #### Data attributes
 
-| Attribute | Values/presence | Meaning |
-| --- | --- | --- |
+| Attribute       | Values/presence         | Meaning               |
+| --------------- | ----------------------- | --------------------- |
 | `data-disabled` | `Present when disabled` | Group disabled state. |
-| `data-empty` | `Present when empty` | No registered tags. |
+| `data-empty`    | `Present when empty`    | No registered tags.   |
 
 #### Exposed methods
 
@@ -102,13 +101,13 @@ Frame does not defineExpose or forward the internal Reka instance. Do not depend
 
 #### Props
 
-| Prop | Reka type | Reka required/default | Availability | Frame behavior |
-| --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | "div" | Internal | Element/component used to render this part. Not independently configurable through Frame. |
-| `asChild` | `boolean` | - | Internal | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
-| `disabled` | `boolean` | - | Internal | items[n].disabled plus inherited root disabled. Not independently configurable through Frame. |
-| `textValue` | `string` | - | Internal | Plain text used for matching/typeahead and naming. Not independently configurable through Frame. |
-| `value` | `T` | Required upstream | Internal | items[n].value. Not independently configurable through Frame. |
+| Prop        | Reka type            | Reka required/default | Availability | Frame behavior                                                                                                       |
+| ----------- | -------------------- | --------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `as`        | `AsTag \| Component` | "div"                 | Internal     | Element/component used to render this part. Not independently configurable through Frame.                            |
+| `asChild`   | `boolean`            | -                     | Internal     | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
+| `disabled`  | `boolean`            | -                     | Internal     | items[n].disabled plus inherited root disabled. Not independently configurable through Frame.                        |
+| `textValue` | `string`             | -                     | Internal     | Plain text used for matching/typeahead and naming. Not independently configurable through Frame.                     |
+| `value`     | `T`                  | Required upstream     | Internal     | items[n].value. Not independently configurable through Frame.                                                        |
 
 #### Emits
 
@@ -116,26 +115,26 @@ No component emits on this part. Native bubbling listeners are not additional co
 
 #### Slots
 
-| Default-slot field | Reka type | Frame availability |
-| --- | --- | --- |
-| `selected` | `boolean` | Internal; not passed to the Frame caller slot. |
-| `disabled` | `boolean` | Internal; not passed to the Frame caller slot. |
+| Default-slot field | Reka type | Frame availability                             |
+| ------------------ | --------- | ---------------------------------------------- |
+| `selected`         | `boolean` | Internal; not passed to the Frame caller slot. |
+| `disabled`         | `boolean` | Internal; not passed to the Frame caller slot. |
 
 #### Data attributes
 
-| Attribute | Values/presence | Meaning |
-| --- | --- | --- |
-| `data-state` | `checked \| unchecked; absent in none mode` | Selection state. |
-| `data-disabled` | `Present when disabled` | Root or item disabled state. |
+| Attribute       | Values/presence                             | Meaning                      |
+| --------------- | ------------------------------------------- | ---------------------------- |
+| `data-state`    | `checked \| unchecked; absent in none mode` | Selection state.             |
+| `data-disabled` | `Present when disabled`                     | Root or item disabled state. |
 
 ### ItemText
 
 #### Props
 
-| Prop | Reka type | Reka required/default | Availability | Frame behavior |
-| --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | "span" | Internal | Element/component used to render this part. Not independently configurable through Frame. |
-| `asChild` | `boolean` | - | Internal | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
+| Prop      | Reka type            | Reka required/default | Availability | Frame behavior                                                                                                       |
+| --------- | -------------------- | --------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `as`      | `AsTag \| Component` | "span"                | Internal     | Element/component used to render this part. Not independently configurable through Frame.                            |
+| `asChild` | `boolean`            | -                     | Internal     | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
 
 #### Emits
 
@@ -153,11 +152,11 @@ No component state data attributes are defined on this part. Inherited native/AR
 
 #### Props
 
-| Prop | Reka type | Reka required/default | Availability | Frame behavior |
-| --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | "button" | Internal | Element/component used to render this part. Not independently configurable through Frame. |
-| `asChild` | `boolean` | - | Internal | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
-| `disabled` | `boolean` | - | Internal | Disable interaction for this part and its participating descendants. Not independently configurable through Frame. |
+| Prop       | Reka type            | Reka required/default | Availability | Frame behavior                                                                                                       |
+| ---------- | -------------------- | --------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `as`       | `AsTag \| Component` | "button"              | Internal     | Element/component used to render this part. Not independently configurable through Frame.                            |
+| `asChild`  | `boolean`            | -                     | Internal     | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
+| `disabled` | `boolean`            | -                     | Internal     | Disable interaction for this part and its participating descendants. Not independently configurable through Frame.   |
 
 #### Emits
 
@@ -169,17 +168,17 @@ Underlying default content has no documented scoped fields. Frame generates this
 
 #### Data attributes
 
-| Attribute | Values/presence | Meaning |
-| --- | --- | --- |
+| Attribute       | Values/presence         | Meaning                 |
+| --------------- | ----------------------- | ----------------------- |
 | `data-disabled` | `Present when disabled` | Delete action disabled. |
 
 ### Frame additions
 
 #### Props
 
-| Prop | Type | Required/default | Description |
-| --- | --- | --- | --- |
-| `items` | `readonly { value: string; label: string; disabled?: boolean }[]` | Required | Host-owned rendered tags. Distinct from the selected model. |
+| Prop    | Type                                                              | Required/default | Description                                                 |
+| ------- | ----------------------------------------------------------------- | ---------------- | ----------------------------------------------------------- |
+| `items` | `readonly { value: string; label: string; disabled?: boolean }[]` | Required         | Host-owned rendered tags. Distinct from the selected model. |
 
 #### Emits
 
@@ -191,30 +190,30 @@ No public content slots; all internal children are generated.
 
 ### Sources and version
 
-Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/tag-group), its [Markdown reference](https://reka-ui.com/docs/components/tag-group.md), and [Frame implementation](../../../packages/core/src/components/FrameTagGroup.vue). Styling comes from [advanced.css](../../../packages/core/src/forms/advanced.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens.ts).
+Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/tag-group), its [Markdown reference](https://reka-ui.com/docs/components/tag-group.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameTagGroup.vue). Styling comes from [advanced.css](../../../packages/core/src/components/forms/shared/advanced.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
 
 ## Styling
 
 ### Parts and selectors
 
-| Selector | Part | Placement |
-| --- | --- | --- |
-| `.frame-tag-group` | Root | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
-| `.frame-tag` | Item | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
+| Selector            | Part       | Placement                                                                        |
+| ------------------- | ---------- | -------------------------------------------------------------------------------- |
+| `.frame-tag-group`  | Root       | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
+| `.frame-tag`        | Item       | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
 | `.frame-tag-delete` | ItemDelete | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
 
 Tags wrap. Item padding (3px 7px) and delete-button padding (0 2px) are fixed. Root disabled styling fades the whole collection.
 
 ### Variables
 
-| Token key | Variable | Value kind | Default/fallback | Part/effect | Scope/limits | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| `--frame-accent` | `--frame-accent` | color | Catalog: `#0078d4`. No local fallback; resolves from the cascade. | Item border-color; Item/ItemDelete outline | Shared with other controls using the same variable. State selectors: [data-state=checked], :focus-visible. | Sets Item border-color; Item/ItemDelete outline. |
-| `--frame-control-radius` | `--frame-control-radius` | length | Catalog: `var(--frame-radius-medium)`. No local fallback; resolves from the cascade. | Item border-radius | Shared with other controls using the same variable. | Sets Item border-radius. |
-| `--frame-gap` | `--frame-gap` | length | Catalog: `calc(var(--frame-spacing-unit) * 1.5)`. No local fallback; resolves from the cascade. | Root gap; Item gap | Shared with other controls using the same variable. | Sets Root gap; Item gap. |
-| `--frame-line` | `--frame-line` | color | Catalog: `#2b2b2b`. No local fallback; resolves from the cascade. | Item border | Shared with other controls using the same variable. | Sets Item border. |
-| `--frame-muted` | `--frame-muted` | color | Catalog: `#8e9496`. No local fallback; resolves from the cascade. | ItemDelete color | Shared with other controls using the same variable. | Sets ItemDelete color. |
-| `--frame-surface` | `--frame-surface` | color | Catalog: `#181818`. No local fallback; resolves from the cascade. | Item background | Shared with other controls using the same variable. | Sets Item background. |
-| `--frame-text` | `--frame-text` | color | Catalog: `#cccccc`. No local fallback; resolves from the cascade. | Item color | Shared with other controls using the same variable. | Sets Item color. |
+| Token key                | Variable                 | Value kind | Default/fallback                                                                                | Part/effect                                | Scope/limits                                                                                               | Description                                      |
+| ------------------------ | ------------------------ | ---------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| `--frame-accent`         | `--frame-accent`         | color      | Catalog: `#0078d4`. No local fallback; resolves from the cascade.                               | Item border-color; Item/ItemDelete outline | Shared with other controls using the same variable. State selectors: [data-state=checked], :focus-visible. | Sets Item border-color; Item/ItemDelete outline. |
+| `--frame-control-radius` | `--frame-control-radius` | length     | Catalog: `var(--frame-radius-medium)`. No local fallback; resolves from the cascade.            | Item border-radius                         | Shared with other controls using the same variable.                                                        | Sets Item border-radius.                         |
+| `--frame-gap`            | `--frame-gap`            | length     | Catalog: `calc(var(--frame-spacing-unit) * 1.5)`. No local fallback; resolves from the cascade. | Root gap; Item gap                         | Shared with other controls using the same variable.                                                        | Sets Root gap; Item gap.                         |
+| `--frame-line`           | `--frame-line`           | color      | Catalog: `#2b2b2b`. No local fallback; resolves from the cascade.                               | Item border                                | Shared with other controls using the same variable.                                                        | Sets Item border.                                |
+| `--frame-muted`          | `--frame-muted`          | color      | Catalog: `#8e9496`. No local fallback; resolves from the cascade.                               | ItemDelete color                           | Shared with other controls using the same variable.                                                        | Sets ItemDelete color.                           |
+| `--frame-surface`        | `--frame-surface`        | color      | Catalog: `#181818`. No local fallback; resolves from the cascade.                               | Item background                            | Shared with other controls using the same variable.                                                        | Sets Item background.                            |
+| `--frame-text`           | `--frame-text`           | color      | Catalog: `#cccccc`. No local fallback; resolves from the cascade.                               | Item color                                 | Shared with other controls using the same variable.                                                        | Sets Item color.                                 |
 
 See [theme variables](../../styling/theme-variables.md) for theme authoring.

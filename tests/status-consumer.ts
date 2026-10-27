@@ -1,5 +1,5 @@
 import { createFrame, type StatusItemDefinition, type StatusSide, type StatusMessageOptions, type StatusController } from '@frame/core';
-import { createNotificationHistory } from '@frame/features';
+import { createNotificationHistory } from '@frame/core/modules/notifications';
 const frame = createFrame({ status: { message: 'Ready', hidden: ['version'], hiddenBadges: [], visible: true } });
 const status: StatusController = frame.status;
 const side: StatusSide = 'left';

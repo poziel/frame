@@ -207,7 +207,7 @@ No Frame-defined methods or internal Reka refs are exposed.
 
 ### Sources and version
 
-[FrameRadioGroup.vue](../../../packages/core/src/components/FrameRadioGroup.vue) and [controls.css](../../../packages/core/src/forms/controls.css) define the wrapper. Compared with the official [Reka Radio Group reference](https://reka-ui.com/docs/components/radio-group.md) and installed Reka `2.11.0`.
+[FrameRadioGroup.vue](../../../packages/core/src/components/forms/FrameRadioGroup.vue) and [controls.css](../../../packages/core/src/components/forms/shared/controls.css) define the wrapper. Compared with the official [Reka Radio Group reference](https://reka-ui.com/docs/components/radio-group.md) and installed Reka `2.11.0`.
 
 ## Styling
 

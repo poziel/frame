@@ -19,7 +19,7 @@ This component has one part. It creates no input, indicator, validation message,
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
-import { FrameLabel, FrameTextInput } from '@frame/core';
+import { FrameLabel, FrameTextField } from '@frame/core';
 import '@frame/core/style.css';
 
 const projectName = ref('');
@@ -28,7 +28,7 @@ const projectName = ref('');
 <template>
   <div>
     <FrameLabel for="project-name">Project name</FrameLabel>
-    <FrameTextInput id="project-name" v-model="projectName" />
+    <FrameTextField id="project-name" v-model="projectName" />
   </div>
 </template>
 ```
@@ -41,7 +41,7 @@ A label can contain your own text or markup. Marking it with an asterisk does no
 
 ```vue
 <FrameLabel for="project-name">Project name (required)</FrameLabel>
-<FrameTextInput
+<FrameTextField
   id="project-name"
   v-model="projectName"
   required
@@ -114,7 +114,7 @@ No Frame-defined methods or internal Reka refs are exposed.
 
 ### Sources and version
 
-[FrameLabel.vue](../../../packages/core/src/components/FrameLabel.vue) wraps Reka Label. Only `for` is declared as a Frame prop.
+[FrameLabel.vue](../../../packages/core/src/components/forms/FrameLabel.vue) wraps Reka Label. Only `for` is declared as a Frame prop.
 
 Compared with the [Reka Label reference](https://reka-ui.com/docs/components/label.md) and installed Reka `2.11.0` source. See the [coverage review](../../reference/reka-coverage.md).
 

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { fitMenu, selectableMenuItems } from "../packages/core/src/frame/menu";
+import { fitMenu, selectableMenuItems } from "../packages/core/src/components/navigation/menu";
 
 describe("menu navigation and positioning", () => {
   test("separators and disabled rows cannot receive keyboard selection", () => {

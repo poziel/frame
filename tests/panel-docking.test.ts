@@ -1,5 +1,5 @@
 import {test,expect} from 'bun:test';
-import {defaultLayout,layoutGeometry,maximizedRegionBounds,panelCoverage} from '../packages/core/src/frame/layout';
+import {defaultLayout,layoutGeometry,maximizedRegionBounds,panelCoverage} from '../packages/core/src/framework/layout/layout';
 test('all panel positions keep preferred dimensions separate and horizontal coverage mirrors top/bottom',()=>{
  for(const primarySide of ['left','right'] as const)for(const panelPosition of ['top','bottom','left','right'] as const)for(const panelAlignment of ['left','right','center','justify'] as const){
   const layout={...defaultLayout(),primarySide,panelPosition,panelAlignment,panelVisible:true,primarySidebarVisible:true,secondarySidebarVisible:true};

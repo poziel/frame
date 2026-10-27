@@ -1,0 +1,8 @@
+/* Documentation preview chrome only. Frame themes own the nested shell and portals. */
+.docs-frame-preview-label{display:flex;align-items:center;gap:8px;margin:16px 0 8px;color:var(--frame-muted);font-size:11px;font-weight:600;letter-spacing:.04em}
+.docs-frame-preview-label::before{content:'';width:8px;height:8px;border-radius:50%;background:#ffd866}
+.docs-frame-preview{height:520px;min-height:360px;position:relative;isolation:isolate;overflow:hidden;border:2px solid #6e6047;border-radius:var(--frame-radius-medium);box-shadow:0 4px 18px #0002}
+.docs-frame-preview > .workbench{height:100%;min-height:0}
+.docs-frame-preview.docks{height:760px}
+.docs-chat-playground{height:100%;min-height:0;border:2px solid #6e6047;box-sizing:border-box}
+.docs-chat-playground > .workbench{height:100%}

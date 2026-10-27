@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import { defaultLayout, layoutGeometry, maximizedRegionBounds } from '../packages/core/src/frame/layout';
+import { defaultLayout, layoutGeometry, maximizedRegionBounds } from '../packages/core/src/framework/layout/layout';
 test('intrinsic activity sizes drive both sidebar tracks and horizontal reservations',()=>{
  const layout=defaultLayout();layout.primarySidebarVisible=true;layout.secondarySidebarVisible=true;layout.secondaryViewBarPosition='default';
  const measurements={primary:{width:54,height:48},secondary:{width:46,height:42}};

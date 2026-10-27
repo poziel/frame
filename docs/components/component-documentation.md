@@ -128,7 +128,7 @@ For each entry provide:
 | Scope/limits     | States affected, shared effects on other controls, or geometry constraints                         |
 | Description      | Which part, state, and visual property it affects; include component-specific limits when relevant |
 
-Check JSON support against `packages/core/src/themes/tokens.ts` and validation in `packages/core/src/themes/theme.ts`. A CSS custom property appearing in a stylesheet is not automatically an allowed JSON token.
+Check JSON support against `packages/core/src/themes/tokens/tokenCatalog.ts` and validation in `packages/core/src/themes/theme.ts`. A CSS custom property appearing in a stylesheet is not automatically an allowed JSON token.
 
 Do not invent tokens for hard-coded dimensions or present runtime `--reka-*` geometry outputs as writable Frame JSON settings. Briefly identify component-specific constraints where needed. A short link to the consumer theme guide is sufficient for readers who need theme authoring instructions. The opposite is true as well.
 

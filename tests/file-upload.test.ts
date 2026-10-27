@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { validateFiles } from '../packages/core/src/forms/files';
+import { validateFiles } from '../packages/core/src/components/forms/shared/files';
 const file = (name: string, type = '', size = 3) => new File(['x'.repeat(size)], name, { type });
 describe('file selection validation', () => {
   test('accepts case-insensitive extensions, exact MIME and wildcard MIME', () => {

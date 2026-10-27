@@ -29,6 +29,9 @@ Required fields: `id`, `title`, and `component`. Optional fields: `props`, `icon
 
 ## Settings
 
+See [application settings](settings.md) for JSON persistence, the optional editor,
+workspace tab presentation, modified rows, and per-setting actions.
+
 ```ts
 const removePreferences = frame.registerSettingsSection({
   id: 'myapp.preferences', title: 'Application',
@@ -44,6 +47,22 @@ Enable Settings with `settings: true` (the default). A section requires `id` and
 
 Optional setting fields are `description`, `placeholder`, `min`, `max`, `step`, `options` (select items), `disabled`, `getValue`, and `onChange`. Values are strings, numbers, or booleans. `getValue` reads host-owned state and `onChange` updates it; persistence remains a host decision. Return the registration cleanup when removing an application's settings contribution.
 
+Register additional subsections independently with
+`frame.settings.register(section, parentSectionId)` or
+`frame.registerSettingsSection(section, parentSectionId)`. The parent must already
+exist. Removing a parent removes all of its contributed descendants and values;
+cleanup callbacks remain safe to call afterward.
+
+Sections can combine generated `settings` with a custom Vue `component` and
+optional `props`. The component can use `useFrame()` for settings services.
+Embedded `<FrameSettings>` also offers a default slot with `{ section, settings }`
+to replace the selected section's custom content while retaining generated fields.
+Frame owns section registration and presentation; hosts own business rules and
+durable persistence.
+
+See [keyboard shortcuts](keybindings.md) for the command-backed shortcut editor,
+context activation, conflict inspection, and user overrides.
+
 ## Notifications
 
 ```ts
@@ -56,7 +75,7 @@ frame.notify({
 
 `title` is required. Optional fields are `id`, `severity`, `details`, `source`, `priority`, `duration`, and `action: { label, run }`. Severity is `'info'`, `'success'`, `'warning'`, or `'error'`. Notifications expire after five seconds by default; zero duration keeps one until explicitly dismissed. `notifications: false` disables their Shell presentation, not the underlying service.
 
-Notification history is optional and belongs to [Features](../../packages/features/README.md). Core does not install a history panel or bell automatically.
+Notification history is optional and belongs to [Features](../../packages/core/src/modules/README.md). Core does not install a history panel or bell automatically.
 
 ## Custom overlays
 

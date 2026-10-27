@@ -1,5 +1,5 @@
 import {createApp,defineComponent,h,ref} from 'vue';
-import PanelActions from '../../../packages/core/src/components/PanelActions.vue';
+import PanelActions from '../../../packages/core/src/components/framework/PanelActions.vue';
 import '../../../packages/core/src/style.css';
 const Icon=defineComponent({render:()=>h('svg',{viewBox:'0 0 16 16','aria-hidden':true},[h('path',{d:'M2 2h12v12H2z',fill:'currentColor'})])});
 const budget=ref(360),runs=ref(0),unavailable=ref(0);

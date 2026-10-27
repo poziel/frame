@@ -2,7 +2,10 @@ import { createApp, defineComponent, h } from 'vue';
 import { createFrame, FrameShell } from '@frame/core';
 import '../../../packages/core/src/style.css';
 const frame = createFrame();
-const content = defineComponent({ setup: () => () => h('div', [h('input', { 'aria-label': 'Retained draft' }), ...Array.from({ length: 80 }, (_, i) => h('p', `Row ${i}`))]) });
+const content = defineComponent({ setup: () => () => h('div', [h('input', { 'aria-label': 'Retained draft' }), ...Array.from({ length: 80 }, (
+  _,
+  i
+) => h('p', `Row ${i}`))]) });
 frame.registerView({ id: 'leaf', label: 'Leaf', component: content }, 'primary');
 frame.registerView({ id: 'groups', label: 'Groups', children: [{ id: 'one', label: 'One', component: content }, { id: 'nested', label: 'Nested', children: [{ id: 'two', label: 'Two', component: content }] }] }, 'primary');
 frame.openSidePanel('leaf');

@@ -1,5 +1,5 @@
 import {test,expect} from 'bun:test';
-import {createFrame} from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 test('fixed view slots preserve their components, props and independent padding across regions',()=>{
  const frame=createFrame(), top={render:()=>null}, bottom={render:()=>null}, middle={render:()=>null};
  const remove=frame.registerSidePanel({id:'slots',label:'Slots',component:middle,padded:false,top:{component:top,props:{label:'Search'},padded:false},bottom:{component:bottom}});

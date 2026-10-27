@@ -3,7 +3,7 @@ const path = require('node:path');
 (async () => {
   const browser = await chromium.launch({headless:true, ...(process.env.FRAME_BROWSER ? {executablePath:process.env.FRAME_BROWSER} : {})});
   const page = await browser.newPage();
-  const near = (a,b) => { if(Math.abs(a-b)>1) throw new Error(`${a} != ${b}`); };
+  const near = (a, b) => { if(Math.abs(a-b)>1) throw new Error(`${a} != ${b}`); };
   try {
     await page.goto((process.env.FRAME_TEST_URL || 'http://localhost:1448') + '/@fs/' + path.resolve('tests/fixtures/shell-toolbar/index.html').replaceAll('\\','/'));
     await page.locator('.titlebar-center').waitFor();

@@ -1,0 +1,61 @@
+import { expect, test } from 'bun:test';
+import { defineComponent } from 'vue';
+import {createFrame} from '../packages/core/src/framework/frame';
+const component=defineComponent({render:()=>null});
+test('docks retain registration through hidden and disabled anchors and move independently',()=>{
+ const frame=createFrame(),other=createFrame();
+ const remove=frame.docks.register({id:'tools',label:'Tools',component,anchor:'secondarySidebar',edge:'right',placement:'outside'});
+ expect(frame.docks.items.value.length).toBe(1);expect(other.docks.items.value.length).toBe(0);
+ expect(frame.docks.resolve('tools')?.visible).toBe(true);
+ frame.secondarySidebar.disable();expect(frame.docks.resolve('tools')?.visible).toBe(false);
+ frame.secondarySidebar.enable();expect(frame.docks.resolve('tools')?.visible).toBe(true);
+ frame.docks.hide('tools');expect(frame.docks.get('tools')?.visible).toBe(false);
+ frame.docks.update('tools',{anchor:'workspace',edge:'bottom',placement:'inside',padding:'small'});
+ frame.docks.show('tools');expect(frame.docks.get('tools')?.anchor).toBe('workspace');
+ remove();expect(frame.docks.items.value.length).toBe(0);frame.dispose();other.dispose();
+});
+test('outside sidebar docks resolve around the paired view bar and invalid updates are atomic',()=>{
+ const frame=createFrame();
+ frame.docks.register({id:'a',label:'A',component,anchor:'primarySidebar',edge:'left',placement:'outside'});
+ expect(frame.docks.resolve('a')?.region).toBe('primary');
+ expect(()=>frame.docks.update('a',{width:-10})).toThrow();
+ expect(frame.docks.get('a')?.width).toBeUndefined();
+ expect(()=>frame.docks.register({id:'a',label:'Duplicate',component,anchor:'workspace',edge:'top',placement:'inside'})).toThrow();
+ frame.dispose();expect(frame.docks.items.value).toHaveLength(0);
+ expect(()=>frame.docks.register({id:'late',label:'Late',component,anchor:'workspace',edge:'top',placement:'inside'})).toThrow();
+});
+test('inside view-bar docks fall back to collapsed parents when their actual bar is hidden',()=>{
+ const frame=createFrame({primaryViewBar:{position:'top'}});
+ frame.docks.register({id:'bar',label:'Bar dock',component,anchor:'primaryViewBar',edge:'bottom',placement:'inside'});
+ expect(frame.docks.resolve('bar')?.region).toBe('primary');
+ expect(frame.docks.resolve('bar')?.placement).toBe('outside');
+ frame.docks.update('bar',{anchor:'panelViewBar'});
+ expect(frame.docks.resolve('bar')?.region).toBe('bottom');
+ frame.panel.enable();frame.layout.panelVisible=true;
+ expect(frame.docks.resolve('bar')?.placement).toBe('inside');
+ frame.panel.disable();expect(frame.docks.resolve('bar')?.visible).toBe(false);
+ frame.dispose();
+});
+
+test('overlay docks remain inside visible anchors and appearances update atomically',()=>{
+ const frame=createFrame();
+ frame.docks.register({id:'overlay',label:'Floating tools',component,anchor:'workspace',edge:'bottom',placement:'overlay',appearance:'none'});
+ expect(frame.docks.get('overlay')?.appearance).toBe('none');
+ expect(frame.docks.resolve('overlay')?.placement).toBe('overlay');
+ expect(frame.docks.at('workspace','inside')).toHaveLength(0);
+ expect(frame.docks.at('workspace','outside')).toHaveLength(0);
+ expect(frame.docks.at('workspace','overlay')).toHaveLength(1);
+ expect(frame.docks.space('workspace')).toEqual({top:0,right:0,bottom:0,left:0});
+ expect(()=>frame.docks.update('overlay',{appearance:'invalid' as never})).toThrow();
+ expect(frame.docks.get('overlay')?.appearance).toBe('none');
+ frame.docks.update('overlay',{anchor:'panel'});
+ expect(frame.docks.resolve('overlay')?.visible).toBe(false);
+ expect(frame.docks.resolve('overlay')?.placement).toBe('overlay');
+ frame.panel.enable();frame.layout.panelVisible=true;
+ expect(frame.docks.resolve('overlay')?.visible).toBe(true);
+ frame.docks.update('overlay',{appearance:'basic',placement:'inside'});
+ expect(frame.docks.get('overlay')?.appearance).toBe('basic');
+ frame.docks.register({id:'default',label:'Default',component,anchor:'workspace',edge:'top',placement:'outside'});
+ expect(frame.docks.get('default')?.appearance).toBe('padded');
+ frame.dispose();
+});

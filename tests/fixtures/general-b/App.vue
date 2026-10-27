@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import {ref} from 'vue';
-import FrameTabs from '../../../packages/core/src/components/FrameTabs.vue';
-import FrameStepper from '../../../packages/core/src/components/FrameStepper.vue';
-import FrameToolbar from '../../../packages/core/src/components/FrameToolbar.vue';
-import FrameTree from '../../../packages/core/src/components/FrameTree.vue';
-import FrameSplitter from '../../../packages/core/src/components/FrameSplitter.vue';
-import FrameNavigationMenu from '../../../packages/core/src/components/FrameNavigationMenu.vue';
-import FrameMenubar from '../../../packages/core/src/components/FrameMenubar.vue';
-import '../../../packages/core/src/themes/default.css';
+import FrameTabs from '../../../packages/core/src/components/navigation/FrameTabs.vue';
+import FrameStepper from '../../../packages/core/src/components/navigation/FrameStepper.vue';
+import FrameToolbar from '../../../packages/core/src/components/actions/FrameToolbar.vue';
+import FrameTree from '../../../packages/core/src/components/data-display/FrameTree.vue';
+import FrameSplitter from '../../../packages/core/src/components/layout/FrameSplitter.vue';
+import FrameNavigationMenu from '../../../packages/core/src/components/navigation/FrameNavigationMenu.vue';
+import FrameMenubar from '../../../packages/core/src/components/navigation/FrameMenubar.vue';
+import '../../../packages/core/src/themes/generated/default.css';
 const tab=ref('one'),step=ref(1),action=ref(''),selected=ref(),expanded=ref<string[]>([]),layout=ref<number[]>([]),menu=ref('');
 const tree=ref([{id:'source',label:'Source',children:[{id:'index',label:'index.ts'},{id:'app',label:'app.ts'}]},{id:'readme',label:'README.md'}]);
 </script>

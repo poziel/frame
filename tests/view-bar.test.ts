@@ -1,5 +1,5 @@
 import {test,expect} from 'bun:test';
-import {createFrame} from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 const component={template:'<div>retained</div>'};
 const view=(id:string)=>id;
 test('activity visibility retains views, falls back, and command opening reveals hidden items',()=>{

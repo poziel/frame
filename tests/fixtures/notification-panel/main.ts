@@ -1,8 +1,8 @@
 import {createApp,h} from 'vue';
 import {createFrame,FrameShell} from '@frame/core';
-import {createNotificationHistory,NotificationPanel,NotificationIndicator} from '@frame/features';
+import { createNotificationHistory, NotificationPanel, NotificationIndicator } from '@frame/core/modules/notifications';
 import '../../../packages/core/src/style.css';
-import '../../../packages/features/src/style.css';
+
 const frame=createFrame();const history=createNotificationHistory(frame);
 createApp({setup:()=>()=>h('div',[
  h('button',{id:'notify',onClick:()=>frame.notify({title:'Build complete',source:'Build service',details:'Your project is ready.',duration:0})},'Notify'),

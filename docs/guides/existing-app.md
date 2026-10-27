@@ -12,7 +12,7 @@ A mounted shell retains session state. Restoration after restart is a separate h
 
 ## Packages and styles
 
-Import `@frame/core` and `@frame/core/style.css`; add `@frame/features/style.css` when using Features. Keep Vue compatible with the peer dependency and avoid bundling two runtimes. Vite's `resolve.dedupe: ['vue']` can help during linked development.
+Import `@frame/core` and `@frame/core/style.css`; add `@frame/core/style.css` when using Features. Keep Vue compatible with the peer dependency and avoid bundling two runtimes. Vite's `resolve.dedupe: ['vue']` can help during linked development.
 
 Archives provide deliberate upgrades. A `file:` dependency on a built package directory is also possible, but copy/link refresh behavior depends on the package manager. Rebuild after source changes. Never alias a host application to the Docs app.
 
@@ -22,7 +22,7 @@ Give the shell a containing layout with height. Check broad global CSS affecting
 
 Browser applications use browser defaults. Native applications explicitly supply a Tauri, Electron, or custom host adapter. Your application retains native commands, permissions, and window configuration. See [host integration](hosts.md).
 
-The [independent consumer fixture](../../tests/fixtures/external-consumer/README.md) shows a separate browser application. Terminal integration needs additional plugin/capability setup described in [Features](../../packages/features/README.md).
+The [independent consumer fixture](../../tests/fixtures/external-consumer/README.md) shows a separate browser application. Terminal integration needs additional plugin/capability setup described in [Features](../../packages/core/src/modules/README.md).
 
 Core has no Tauri dependency. Native adapters may need additional TypeScript library declarations; see their setup guides.
 

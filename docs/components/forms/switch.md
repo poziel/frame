@@ -190,7 +190,7 @@ No Frame-defined methods or internal Reka refs are exposed.
 
 ### Sources and version
 
-[FrameSwitch.vue](../../../packages/core/src/components/FrameSwitch.vue) composes Reka SwitchRoot, SwitchThumb, and Label. Styling lives in [controls.css](../../../packages/core/src/forms/controls.css).
+[FrameSwitch.vue](../../../packages/core/src/components/forms/FrameSwitch.vue) composes Reka SwitchRoot, SwitchThumb, and Label. Styling lives in [controls.css](../../../packages/core/src/components/forms/shared/controls.css).
 
 Compared with the [Reka Switch reference](https://reka-ui.com/docs/components/switch.md) and installed Reka `2.11.0` source. See the [coverage review](../../reference/reka-coverage.md).
 

@@ -31,7 +31,7 @@ export const colorGuides:Record<string,ComponentGuide>={
   examples:[
    {id:'hue-track',title:'Hue spectrum',description:'Move along the hue track while preserving the other channels.',values:{modelValue:'#0078d4',channel:'hue',colorSpace:'hsb'}},
    {id:'alpha-track',title:'Transparency control',description:'Adjust alpha in small increments without changing the underlying color.',values:{modelValue:'rgba(0, 120, 212, 0.6)',channel:'alpha',step:0.05}},
-   {id:'vertical-track',title:'Vertical lightness track',description:'Use a vertical HSL lightness control beside a color plane.',values:{modelValue:'#16a34a',colorSpace:'hsl',channel:'lightness',orientation:'vertical'}},
+   {id:'vertical-track',title:'Vertical lightness track',description:'Use a vertical HSL lightness control; its gradient follows the vertical axis.',values:{modelValue:'#16a34a',colorSpace:'hsl',channel:'lightness',orientation:'vertical'}},
   ],
  },
  'color-swatch':{
@@ -54,4 +54,16 @@ export const colorGuides:Record<string,ComponentGuide>={
    {id:'vertical-palette',title:'Vertical keyboard navigation',description:'Arrange the same palette vertically for a narrow tool area. Use the arrow keys to move between colors.',values:{modelValue:'#16a34a',colors:palette,orientation:'vertical'}},
   ],
  },
+};
+
+for (const [id,title,description] of [
+ ['color-hsv-rectangle','HSV Rectangle','Saturation and value on a square with a vertical hue slider.'],
+ ['color-hsv-wheel','HSV Wheel','A circular hue ring around a saturation/value square.'],
+ ['color-vhs-circle','VHS Circle','Hue and saturation on a disc with a vertical value slider.'],
+] as const) colorGuides[id] = {
+ description, source:'https://reka-ui.com/docs/components/color-area',
+ capabilities:['Pointer and keyboard editing.','Shared color model and preserved alpha.','Scales the area and slider together.'],
+ anatomy:[{part:title,description}],
+ examples:[{id:'compact',title:'Compact picker',description:'A 240px example that fits beside other controls.',values:{modelValue:'#0078d4',size:240}},
+ {id:'larger',title:'Larger picker',description:'A 360px picker scales its slider and thumb with its area.',values:{modelValue:'#0078d4',size:360}}],
 };

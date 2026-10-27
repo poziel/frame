@@ -1,4 +1,4 @@
-import type { ChatResponseWriter } from "@frame/features";
+import type { ChatResponseWriter } from '@frame/core/modules/chat';
 
 export const chatDemoScenarios = [
   {

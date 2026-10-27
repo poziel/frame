@@ -3,7 +3,11 @@ import {createFrame,FrameShell,FrameButton,FrameSelect,FrameQuickPanel} from '@f
 import '../../../packages/core/src/style.css';
 const frame=createFrame();frame.layout.primarySidebarVisible=false;frame.layout.secondarySidebarVisible=false;frame.layout.panelVisible=false;
 const accepted=ref('none'),panel=ref(false);
-const First=defineComponent({setup(){const value=ref('retained'),choice=ref('a');return()=>h('div',[h('input',{'aria-label':'Retained input',value:value.value,onInput:(e:Event)=>value.value=(e.target as HTMLInputElement).value}),h(FrameSelect,{label:'Modal choice',modelValue:choice.value,options:[{value:'a',label:'Alpha'},{value:'b',label:'Beta'}],'onUpdate:modelValue':(v:string)=>choice.value=v}),h(FrameButton,{onClick:()=>frame.openModal({id:'second',title:'Second modal',component:Second})},()=> 'Open second')]);}});
+const First=defineComponent({setup(){const value=ref('retained'),choice=ref('a');return()=>h('div',[h('input',{'aria-label':'Retained input',value:value.value,onInput:(
+  e:Event
+)=>value.value=(e.target as HTMLInputElement).value}),h(FrameSelect,{label:'Modal choice',modelValue:choice.value,options:[{value:'a',label:'Alpha'},{value:'b',label:'Beta'}],'onUpdate:modelValue':(
+  v:string
+)=>choice.value=v}),h(FrameButton,{onClick:()=>frame.openModal({id:'second',title:'Second modal',component:Second})},()=> 'Open second')]);}});
 const Second=defineComponent({setup(){return()=>h(FrameButton,{onClick:()=>frame.openModal({id:'first',title:'First modal',component:First})},()=> 'Raise first');}});
 const Main=defineComponent({setup(){return()=>h('div',[h(FrameButton,{onClick:()=>frame.openModal({id:'first',title:'First modal',component:First,width:500,height:300})},()=> 'Open modal'),h(FrameButton,{onClick:async()=>{const result=await frame.showQuickPick([{id:'disabled',label:'Unavailable',disabled:true},{id:'one',label:'One',detail:'First searchable detail'},{id:'two',label:'Two'},{id:'three',label:'Three'}],{title:'Choose command',placeholder:'Search commands'});accepted.value=result?.id??'cancelled';}},()=> 'Open picker'),h('output',{id:'accepted'},accepted.value),h(FrameButton,{onClick:()=>panel.value=true},()=> 'Open custom panel')]);}});
 frame.setWorkspacePane(frame.workspace.initialPaneId,{label:'Interaction fixture',component:Main});

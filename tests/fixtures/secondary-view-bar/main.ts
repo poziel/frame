@@ -4,7 +4,9 @@ import '../../../packages/core/src/style.css';
 const frame=createFrame({secondaryViewBar:{display:'both'}});frame.layout.secondaryWidth=560;
 const icon=defineComponent({setup:()=>()=>h(FrameIcon,{name:'comment-discussion',size:16})});
 const runs=ref(0);
-const content=defineComponent({setup(){const value=ref('Draft message');return()=>h('input',{id:'draft',value:value.value,'aria-label':'Draft message',onInput:(event:Event)=>value.value=(event.target as HTMLInputElement).value});}});
+const content=defineComponent({setup(){const value=ref('Draft message');return()=>h('input',{id:'draft',value:value.value,'aria-label':'Draft message',onInput:(
+  event:Event
+)=>value.value=(event.target as HTMLInputElement).value});}});
 for(const [id,label]of [['chat','Chat'],['codex','Codex'],['claude','Claude Code']])frame.registerSecondaryTab({id,label,icon,component:content,badge:id==='chat'?3:undefined,actions:id==='chat'?[{id:'new',label:'New Chat',icon,run(){runs.value++;}},{id:'settings',label:'Chat Settings',icon,run(){runs.value+=10;}},{id:'disabled',label:'Unavailable action',icon,disabled:true,run(){runs.value+=100;}}]:[]});
 frame.openSecondaryPanel('chat');
 createApp({setup:()=>()=>h('div',[

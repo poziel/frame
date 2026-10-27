@@ -3,7 +3,9 @@ import {createFrame,FrameShell} from '@frame/core';
 import '../../../packages/core/src/style.css';
 const frame=createFrame();let notesMounts=0;
 frame.layout.secondarySidebarVisible=false;frame.layout.panelVisible=false;
-const Notes=defineComponent({setup(){const value=ref('Initial notes'),instance=++notesMounts;return()=>h('div',[h('label',{for:'notes-entry'},'Notes entry'),h('input',{id:'notes-entry',value:value.value,onInput:(e:Event)=>value.value=(e.target as HTMLInputElement).value}),h('output',{id:'notes-mount'},String(instance))]);}});
+const Notes=defineComponent({setup(){const value=ref('Initial notes'),instance=++notesMounts;return()=>h('div',[h('label',{for:'notes-entry'},'Notes entry'),h('input',{id:'notes-entry',value:value.value,onInput:(
+  e:Event
+)=>value.value=(e.target as HTMLInputElement).value}),h('output',{id:'notes-mount'},String(instance))]);}});
 const Empty=defineComponent({setup:()=>()=>h('p','Registered view content')});
 frame.registerView({id:'notes',label:'Notes',component:Notes},'primary');
 frame.registerView({id:'locked',label:'Locked',component:Empty,movable:false},'primary');

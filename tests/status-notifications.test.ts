@@ -1,6 +1,6 @@
 import { expect, test } from 'bun:test';
-import { createFrame } from '../packages/core/src/frame/createFrame';
-import { createNotificationHistory } from '../packages/features/src/notificationHistory';
+import {createFrame} from '../packages/core/src/framework/frame';
+import { createNotificationHistory } from '../packages/core/src/modules/notifications/controllers/notificationHistory';
 
 test('opt-in notification status item shares placement and badges without disposing history when hidden', () => {
   const frame = createFrame();

@@ -1,9 +1,12 @@
 import { expect, test } from 'bun:test';
-import { createNavigationItems, type NavigationItem } from '../packages/core/src/frame/navigationItems';
+import { NavigationItems, type NavigationItem } from '../packages/core/src/framework/views/navigationItems';
 
 function setup() {
   const calls: string[] = [], errors: unknown[] = [];
-  const registry = createNavigationItems({ navigate: href => { calls.push(href); }, reportError: (_label, error) => { errors.push(error); } });
+  const registry = new NavigationItems({ navigate: href => { calls.push(href); }, reportError: (
+    _label,
+    error
+  ) => { errors.push(error); } });
   return { registry, calls, errors };
 }
 test('navigation types activate only explicit enabled actions and links', async () => {

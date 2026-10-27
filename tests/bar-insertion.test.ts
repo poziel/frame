@@ -1,5 +1,5 @@
 import {expect,test} from 'bun:test';
-import {nearestBarGap} from '../packages/core/src/frame/barInsertion';
+import {nearestBarGap} from '../packages/core/src/framework/layout/barInsertion';
 
 test('both adjacent item edges resolve to one centered gap, horizontally and vertically',()=>{
  const gaps=[{before:'a',center:0},{before:'b',center:42},{before:undefined,center:84}];

@@ -3,7 +3,7 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
 const page=await browser.newPage({viewport:{width:1500,height:900}});page.setDefaultTimeout(7000);const errors=[];page.on('pageerror',e=>errors.push(String(e)));const base=process.env.FRAME_TEST_URL||'http://localhost:1448';
 const fixture=name=>`${base}/@fs/${path.join(__dirname,'fixtures',name,'index.html').replaceAll('\\','/')}`;
 const settle=()=>page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
-const near=(a,b)=>assert(Math.abs(a-b)<2,`${a} != ${b}`);
+const near=(a, b)=>assert(Math.abs(a-b)<2,`${a} != ${b}`);
 await page.goto(fixture('panel-controls'));await page.locator('.bottom-region').waitFor();const panel=page.locator('.bottom-region'),workspace=page.locator('.workspace-region');
 await panel.getByRole('textbox',{name:'Panel draft',exact:true}).fill('Retained through docking');
 for(const side of ['left','right'])for(const position of ['top','bottom','left','right'])for(const alignment of ['center','left','right','justify']){

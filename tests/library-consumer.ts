@@ -1,4 +1,4 @@
-import { createNotificationHistory, NotificationPanel, NotificationIndicator } from "@frame/features";
+import { createNotificationHistory, NotificationPanel, NotificationIndicator } from '@frame/core/modules/notifications';
 import { vscodeLight2026, vscodeHighContrastBlack, vscodeHighContrastWhite } from '@frame/themes';
 import { defineTheme, parseTheme, themeTokens, FrameThemeError, type FrameTheme, type FrameThemeTokenName, type FrameThemeTokens, type FrameThemeController } from '@frame/core';
 const themeToken: FrameThemeTokenName = '--frame-spacing-unit';
@@ -24,17 +24,17 @@ import type { ToolbarPlacement, ToolbarItemId } from '@frame/core';
 const sidebarPlacement: ToolbarPlacement = { area: 'statusBar', side: 'left', order: -100 };
 const sidebarControl: ToolbarItemId = 'primary';
 void [sidebarPlacement, sidebarControl];
-import { Terminal, TerminalView, createTerminal, createTerminalView, type TerminalController, type TerminalProfile, type TerminalSessionLayout } from '@frame/features';
-import { AIChat, createAIChat, type ChatResponseWriter, type ChatMessage, type ChatQuestion, type ChatQuestionAnswer, type ChatApprovalResult, type ChatQuestionsResult } from "@frame/features";
+import { Terminal, TerminalView, createTerminal, createTerminalView, type TerminalController, type TerminalProfile, type TerminalSessionLayout } from '@frame/core/modules/terminal';
+import { AIChat, createAIChat, type ChatResponseWriter, type ChatMessage, type ChatQuestion, type ChatQuestionAnswer, type ChatApprovalResult, type ChatQuestionsResult } from '@frame/core/modules/chat';
 import { h } from "vue";
-import { CodeEditor, createCodeEditor, type CodeEditorOptions, type CodeEditorProps } from '@frame/features';
+import { CodeEditor, createCodeEditor, type CodeEditorOptions, type CodeEditorProps } from '@frame/core/modules/editor';
 const editorOptions: CodeEditorOptions = { fontSize: 15, wordWrap: 'on', tabSize: 2, minimap: { enabled: false } };
 const editorProps: CodeEditorProps = { modelValue: '', editor: createCodeEditor(), language: 'typescript', readOnly: false, options: editorOptions };
 void h(CodeEditor, editorProps);
 import { FrameCodeBlock, CodeBlockTheme, type FrameCodeBlockProps } from "@frame/core";
 const viewerProps: FrameCodeBlockProps = { code: "const value = 1;", language: "typescript", theme: CodeBlockTheme.DarkPlus, lineNumbers: true, highlightedLines: [40], startLine: 40 };
 void h(FrameCodeBlock, viewerProps);
-import { createFrame, FrameShell, FrameIcon, addCollection, FrameMenu, FrameModal, FrameSettings, SettingControl, FrameNotifications, FrameIconButton, ResizablePane, FrameButton, FrameTextInput, FrameCheckbox, FrameSelect, ComponentShowcase, FrameSlider, FrameColorPicker, FrameTextArea, SelectOption, SelectSeparator, type SelectItem, type FrameMenuItem } from "@frame/core";
+import { createFrame, FrameShell, FrameIcon, addCollection, FrameMenu, FrameModal, FrameSettings, SettingControl, FrameNotifications, FrameIconButton, ResizablePane, FrameButton, FrameTextField, FrameCheckbox, FrameSelect, ComponentShowcase, FrameSlider, FrameColorPicker, FrameTextArea, SelectOption, SelectSeparator, type SelectItem, type FrameMenuItem } from "@frame/core";
 
 // Compile against the built package exports, rather than reaching into src/.
 import { FrameLoader, FrameLoading, frameLoaderVariants, type FrameLoaderVariant, type FrameLoadingProps, type FrameLoadingTextPosition } from "@frame/core";
@@ -45,7 +45,9 @@ void [h(FrameLoader, { variant: loaderVariant, size: 24 }), h(FrameLoading, load
 export function consumerFixture() {
   const chat = createAIChat({ respond(_request, writer: ChatResponseWriter) { writer.message("Hello"); writer.complete(); } });
   const conversation: ChatMessage[] = chat.fork("response");
-  void [h(AIChat, { chat, userAlignment: "right", assistantAlignment: "left", onForge: (messages: ChatMessage[]) => { void messages; } }), conversation];
+  void [h(AIChat, { chat, userAlignment: "right", assistantAlignment: "left", onForge: (
+    messages: ChatMessage[]
+  ) => { void messages; } }), conversation];
   chat.dispose();
   const richChat = createAIChat({ async respond(request, writer) {
     writer.commentary('Checking the request');
@@ -88,7 +90,7 @@ export function consumerFixture() {
   void [FrameSettings, SettingControl, FrameNotifications];
   const button = h(FrameIconButton, { label: "Open", icon: "folder-opened", hoverHighlight: false, iconRatio: .6, tooltipPlacement: "right", onClick: () => {} });
   const split = h(ResizablePane, { axis: "x", modelValue: 210, min: 140, minSecond: 180 }, { first: () => "Navigation", second: () => "Content" });
-  void [button, split, FrameButton, FrameTextInput, FrameCheckbox, ComponentShowcase];
+  void [button, split, FrameButton, FrameTextField, FrameCheckbox, ComponentShowcase];
   const grouped: SelectItem[] = [new SelectOption({ value: "one", label: "One" }), new SelectSeparator("group"), new SelectOption({ value: "two", label: "Two" })];
   void [FrameSlider, FrameColorPicker, FrameTextArea, grouped];
   const select = h(FrameSelect, { modelValue: "one", label: "Choice", options: [{ value: "one", label: "One" }] }); void select;
@@ -114,11 +116,11 @@ export function consumerFixture() {
 
 
 // Public form compositions and calendar models must survive declaration emission.
-import { FrameAutocomplete, FrameCheckboxGroup, FrameCombobox, FrameEditable, FrameField, FrameForm, FrameLabel, FrameListbox, FrameNumberField, FramePinInput, FrameRadioGroup, FrameRating, FrameSwitch, FrameTagGroup, FrameTagsInput, FrameToggle, FrameToggleGroup, FrameCalendar, FrameRangeCalendar, FrameDateField, FrameDatePicker, FrameDateRangeField, FrameDateRangePicker, FrameTimeField, FrameTimeRangeField, FrameMonthPicker, FrameMonthRangePicker, FrameYearPicker, FrameYearRangePicker, FrameColorArea, FrameColorField, FrameColorSlider, FrameColorSwatch, FrameColorSwatchPicker, CalendarDate, Time, type DateRange, type TimeRange } from '@frame/core';
+import { FrameAutocomplete, FrameCheckboxGroup, FrameCombobox, FrameEditable, FrameField, FrameForm, FrameLabel, FrameListbox, FrameNumberField, FramePinField, FrameRadioGroup, FrameRating, FrameSwitch, FrameTagGroup, FrameTagField, FrameToggle, FrameToggleGroup, FrameCalendar, FrameRangeCalendar, FrameDateField, FrameDatePicker, FrameDateRangeField, FrameDateRangePicker, FrameTimeField, FrameTimeRangeField, FrameMonthPicker, FrameMonthRangePicker, FrameYearPicker, FrameYearRangePicker, FrameColorArea, FrameColorField, FrameColorSlider, FrameColorSwatch, FrameColorSwatchPicker, CalendarDate, Time, type DateRange, type TimeRange } from '@frame/core';
 const exampleDay = new CalendarDate(2026, 10, 21);
 const exampleRange: DateRange = { start: exampleDay, end: exampleDay.add({ days: 3 }) };
 const exampleTimeRange: TimeRange = { start: new Time(9), end: new Time(17) };
-void [FrameAutocomplete, FrameCheckboxGroup, FrameCombobox, FrameEditable, FrameField, FrameForm, FrameLabel, FrameListbox, FrameNumberField, FramePinInput, FrameRadioGroup, FrameRating, FrameSwitch, FrameTagGroup, FrameTagsInput, FrameToggle, FrameToggleGroup, FrameCalendar, FrameRangeCalendar, FrameDateField, FrameDatePicker, FrameDateRangeField, FrameDateRangePicker, FrameTimeField, FrameTimeRangeField, FrameMonthPicker, FrameMonthRangePicker, FrameYearPicker, FrameYearRangePicker, FrameColorArea, FrameColorField, FrameColorSlider, FrameColorSwatch, FrameColorSwatchPicker, exampleRange, exampleTimeRange];
+void [FrameAutocomplete, FrameCheckboxGroup, FrameCombobox, FrameEditable, FrameField, FrameForm, FrameLabel, FrameListbox, FrameNumberField, FramePinField, FrameRadioGroup, FrameRating, FrameSwitch, FrameTagGroup, FrameTagField, FrameToggle, FrameToggleGroup, FrameCalendar, FrameRangeCalendar, FrameDateField, FrameDatePicker, FrameDateRangeField, FrameDateRangePicker, FrameTimeField, FrameTimeRangeField, FrameMonthPicker, FrameMonthRangePicker, FrameYearPicker, FrameYearRangePicker, FrameColorArea, FrameColorField, FrameColorSlider, FrameColorSwatch, FrameColorSwatchPicker, exampleRange, exampleTimeRange];
 
 import type { ToolbarControl, ToolbarOptions,  PrimaryViewBarOptions, ViewBarPosition, ViewBarSize } from '@frame/core';
 const viewId = 'consumer.details';
@@ -162,13 +164,33 @@ matchingSidebars.closeSecondaryPanel();
 matchingSidebars.primaryViewBar.setDisplay('labels');
 matchingSidebars.dispose();
 
-// Quick input is always searched; custom content uses the separate quick panel.
-import { FrameQuickInput, FrameQuickPanel } from '@frame/core';
-void h(FrameQuickInput,{items:[{id:'open',label:'Open workspace'}],title:'Choose command',position:'center',onAccept:(id:string)=>{void id;},onClose:()=>{}},{item:({item}:{item:{label:string}})=>item.label});
+// Quick pick is always searched; custom content uses the separate quick panel.
+import { FrameQuickPick, FrameQuickPanel } from '@frame/core';
+void h(FrameQuickPick,{items:[{id:'open',label:'Open workspace'}],title:'Choose command',position:'center',onAccept:(
+  id:string
+)=>{void id;},onClose:()=>{}},{item:({item}:{item:{label:string}})=>item.label});
 void h(FrameQuickPanel,{title:'Workspace summary',position:'top',onClose:()=>{}},{default:()=>h('p','Workspace content'),'header-actions':()=>h(FrameButton,{label:'Done'})});
 
-// Quick input and extension command contributions use the public package declarations.
+// Quick pick and extension command contributions use the public package declarations.
 const quickInputFrame = createFrame();
+// AI conversation state remains independent of its optional Frame presentation.
+import { AIView, AIChatHistory, AIConversation, AIHistory, AIPrompt, createAIChatHistory, createAIChatView } from '@frame/core/modules/chat';
+const conversationHistory = createAIChatHistory({ applicationId: 'consumer', createChat: () => createAIChat({ respond(
+  _request,
+  writer
+) { writer.message('Ready'); } }) });
+const removeAIView = quickInputFrame.secondarySidebar.register(createAIChatView({ id: 'consumer.ai', history: conversationHistory }));
+void h(AIView, { history: conversationHistory });
+void h(AIChatHistory, { history: conversationHistory });
+void h(AIHistory, { history: conversationHistory, contextActions: () => [{id:'export',label:'Export'}] });
+void h(AIPrompt, { modelValue: 'Hello', busy: false, onSubmit: (
+  value: {text:string;attachments:import('@frame/core/modules/chat').ChatAttachment[]}
+) => { void value.text; } });
+void h(AIConversation, { chat: createAIChat({ respond() {} }) });
+conversationHistory.rename('example', 'New name');
+conversationHistory.pin('example'); conversationHistory.archive('example');
+conversationHistory.setScope('all');
+removeAIView(); conversationHistory.dispose();
 quickInputFrame.registerCommand({ id: 'extension.preferences', label: 'Extension preferences', icon: 'settings-gear', scope: 'frame', shortcut: 'Ctrl+Shift+Y', quickInput: true, run() {} });
 quickInputFrame.openQuickInput('application');
 quickInputFrame.setQuickInputMode('frame');

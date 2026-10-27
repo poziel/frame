@@ -1,7 +1,7 @@
 import { test, expect } from 'bun:test';
-import { createFrame } from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 import { defineTheme } from '../packages/core/src/themes/theme';
-import { matchesShortcut } from '../packages/core/src/frame/shortcuts';
+import { matchesShortcut } from '../packages/core/src/framework/shortcuts/shortcuts';
 
 test('application and Frame contributions switch live without changing request identity', async () => {
  const frame = createFrame(), other = createFrame(); let calls = 0;
@@ -27,8 +27,9 @@ test('explicit quick picks retain caller data and do not interpret operators', a
 test('theme contributions and workspace activation commands follow their resource lifecycle', async () => {
  const frame=createFrame(); const theme=defineTheme({version:1,id:'test-theme',name:'Test theme',appearance:'dark',tokens:{}});
  const remove=frame.theme.register(theme); frame.openCommands();
- expect(frame.quickInputItems.value.some(x=>x.id==='frame.theme.select.test-theme')).toBe(true);
- frame.acceptQuickInput('frame.theme.select.test-theme'); expect(frame.theme.current.value!.id).toBe(theme.id);
+ expect(frame.quickInputItems.value.some(x=>x.id==='frame.theme.select.test-theme')).toBe(false);
+ frame.acceptQuickInput('frame.theme.change');
+ frame.acceptQuickInput('frame.theme.select.test-theme'); await Promise.resolve(); await Promise.resolve(); expect(frame.theme.current.value!.id).toBe(theme.id);
  remove(); expect(frame.commands.value.some(x=>x.id==='frame.theme.select.test-theme')).toBe(false);
  frame.workspace.setPaneMode(frame.workspace.initialPaneId,'tabs');
  const unregister=frame.workspace.registerTab(frame.workspace.initialPaneId,{id:'document',title:'Document'});

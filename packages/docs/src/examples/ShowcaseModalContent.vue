@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import FrameTextInput from "../../../core/src/components/FrameTextInput.vue";
-import FrameButton from "../../../core/src/components/FrameButton.vue";
-import { useFrame } from "../../../core/src/frame/createFrame";
+import FrameTextField from "../../../core/src/components/forms/FrameTextField.vue";
+import FrameButton from "../../../core/src/components/actions/FrameButton.vue";
+import {useFrame} from '../../../core/src/framework/useFrame';
 const frame = useFrame(); const value = ref<string | number>("");
 </script>
-<template><div class="showcase-modal-content"><h2>A modal with your own content</h2><p>Drag the header, resize an edge, maximize, or press Escape. Background content stays inactive until you close this dialog.</p><label for="modal-example-note">Try a note</label><FrameTextInput id="modal-example-note" v-model="value" placeholder="This state belongs to the modal…"/><FrameButton variant="primary" @click="frame.closeModal()">Done</FrameButton></div></template>
+<template><div class="showcase-modal-content"><h2>A modal with your own content</h2><p>Drag the header, resize an edge, maximize, or press Escape. Background content stays inactive until you close this dialog.</p><label for="modal-example-note">Try a note</label><FrameTextField id="modal-example-note" v-model="value" placeholder="This state belongs to the modal…"/><FrameButton variant="primary" @click="frame.closeModal()">Done</FrameButton></div></template>

@@ -6,13 +6,19 @@ const legacy=['buttons','icon-buttons','text-input','checkbox','select','slider'
 test('all original Core pages remain discoverable beside the Reka forms',()=>{
  const groups=catalogGroups();expect(groups[0]!.title).toBe('Actions');
  const entries=groups.flatMap(group=>group.items);
- expect(entries.length).toBe(componentExamples.filter(item=>item.group!=='Features').length);
+ expect(entries.length).toBe(componentExamples.filter(item=>item.group!=='Modules').length);
  for(const id of legacy){expect(entries.some(item=>item.id===id)).toBe(true);expect(componentDocumentation[id]!.features.length).toBeGreaterThan(1);}
- const forms=groups.find(group=>group.title==='Form controls')!.items.map(item=>item.id);
- expect(forms.slice(0,6)).toEqual(['text-input','text-area','checkbox','select','slider','setting-controls']);expect(forms).toContain('autocomplete');
+ const forms=groups.find(group=>group.title==='Form Controls')!.items.map(item=>item.id);
+ expect(forms).toContain('autocomplete');
+ for(const group of [...groups,...catalogGroups(true)]){
+  const titles=group.items.map(item=>item.title);
+  expect(titles).toEqual([...titles].sort((a, b)=>a.localeCompare(b,'en',{sensitivity:'base',numeric:true})));
+ }
  expect(catalogGroups(false,'FrameTextArea').flatMap(group=>group.items).map(item=>item.id)).toEqual(['text-area']);
- expect(catalogGroups(false,'','Display').flatMap(group=>group.items).map(item=>item.id)).toContain('icons');
- expect(catalogGroups(true).flatMap(group=>group.items).every(item=>item.group==='Features')).toBe(true);
+ expect(catalogGroups(false,'','Data Display').flatMap(group=>group.items).map(item=>item.id)).toContain('icons');
+ expect(catalogGroups(false,'','Navigation').flatMap(group=>group.items).map(item=>item.id)).toEqual(expect.arrayContaining(['general-pagination','general-tabs','general-navigation-menu','menus','context-menu']));
+ expect(catalogGroups(false,'','General').flatMap(group=>group.items).map(item=>item.id)).toEqual(expect.arrayContaining(['quick-input','quick-panel','settings','modals','workspace','navigation-items']));
+ expect(catalogGroups(true).flatMap(group=>group.items).every(item=>item.group==='Modules')).toBe(true);
 });
 test('original Select scenarios remain alongside task-oriented native controls',()=>{
  const examples=componentDocumentation.select!.features;

@@ -1,6 +1,6 @@
 import {expect,test} from 'bun:test';
-import {createFrame} from '../packages/core/src/frame/createFrame';
-import {defaultLayout,layoutGeometry,maximizedRegionBounds} from '../packages/core/src/frame/layout';
+import {createFrame} from '../packages/core/src/framework/frame';
+import {defaultLayout,layoutGeometry,maximizedRegionBounds} from '../packages/core/src/framework/layout/layout';
 const component={render:()=>null};
 
 test('both sidebars toggle active selections only for vertical bars',()=>{

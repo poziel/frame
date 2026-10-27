@@ -1,7 +1,10 @@
 import { CalendarDate, parseDate, parseDateTime, parseTime, parseZonedDateTime } from '@frame/core';
 import type { ApiProperty } from './types';
 export const isDateComponent = (name: string) => /^Frame(?:Calendar|RangeCalendar|Date|Time|Month|Year)/.test(name);
-export function dateModelKind(name: string, property: string): 'date' | 'time' | undefined {
+export function dateModelKind(
+  name: string,
+  property: string
+): 'date' | 'time' | undefined {
  return isDateComponent(name) && ['modelValue','defaultValue','placeholder','defaultPlaceholder','minValue','maxValue'].includes(property) ? name.includes('Time') ? 'time' : 'date' : undefined;
 }
 function parse(value: unknown, time: boolean): unknown {
@@ -11,7 +14,11 @@ function parse(value: unknown, time: boolean): unknown {
  if(typeof value!=='string')throw Error('Use an ISO date/time string, an array of strings, or a { start, end } range.');
  return time ? parseTime(value) : value.includes('[') ? parseZonedDateTime(value) : value.includes('T') ? parseDateTime(value) : parseDate(value);
 }
-export function hydrateDemoValue(component:string, property:string, value:unknown) { const kind=dateModelKind(component,property);return kind?parse(value,kind==='time'):value; }
+export function hydrateDemoValue(
+  component:string,
+  property:string,
+  value:unknown
+) { const kind=dateModelKind(component,property);return kind?parse(value,kind==='time'):value; }
 export function serializeDemoValue(value:unknown):unknown {
  if(Array.isArray(value))return value.map(serializeDemoValue);
  if(value&&typeof value==='object') {

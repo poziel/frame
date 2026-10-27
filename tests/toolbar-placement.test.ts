@@ -1,6 +1,6 @@
 import { expect, test } from 'bun:test';
-import { createFrame } from '../packages/core/src/frame/createFrame';
-import { createNotificationHistory } from '../packages/features/src/notificationHistory';
+import {createFrame} from '../packages/core/src/framework/frame';
+import { createNotificationHistory } from '../packages/core/src/modules/notifications/controllers/notificationHistory';
 
 test('built-in sidebar control moves without replacing its icon, state or command', async () => {
   const frame = createFrame({ toolbar: { primary: true, placements: { primary: { area: 'statusBar', side: 'left', order: -100 } } } });

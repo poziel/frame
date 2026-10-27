@@ -8,7 +8,9 @@
     "rootDir": "./src"
   },
   "include": [
-    "src/frame/index.ts",
-    "src/vite-env.d.ts"
+    "src/index.ts",
+    "src/vite-env.d.ts",
+    "src/modules/**/*.ts",
+    "src/modules/**/*.vue"
   ]
 }

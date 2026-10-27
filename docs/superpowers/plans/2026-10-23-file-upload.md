@@ -11,7 +11,7 @@
 Preserve concurrent edits. No new dependencies. Test extension/MIME/size/count boundaries, repeated selection, nested drag transitions, non-file drags, disabled targets, and mounted content retention. Native runtime drop interception requires host configuration.
 
 ## Tasks
-- [x] Add failing shared validation tests in tests/file-upload.test.ts; implement packages/core/src/forms/files.ts with FileUploadOptions, FileRejection and validateFiles.
+- [x] Add failing shared validation tests in tests/file-upload.test.ts; implement packages/core/src/components/forms/shared/files.ts with FileUploadOptions, FileRejection and validateFiles.
 - [x] Add browser fixture and checks for picker/zone; implement FrameFileUpload.vue, FrameFileDropZone.vue and shared useFilePicker.ts. Verify API calls and UI independently.
 - [x] Export controls/types in frame/index.ts, add styling and consumer documentation/examples. Build Core, check consumers, run focused unit/browser checks and inspect targeted diff.
 

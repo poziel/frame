@@ -1,4 +1,4 @@
-# FrameTagsInput
+# FrameTagField
 
 Edit a collection of string tags. The model contains committed tags; the text currently being typed stays inside the input until it is accepted. Frame does not provide suggestions or a separate public draft model.
 
@@ -7,7 +7,7 @@ Edit a collection of string tags. The model contains committed tags; the text cu
 ### Anatomy
 
 ```text
-FrameTagsInput
+FrameTagField
 └─ TagsInputRoot (.frame-tags-input)
    ├─ TagsInputItem (.frame-tags-input-item), once per model string
    │  ├─ TagsInputItemText
@@ -23,7 +23,7 @@ Frame fixes tag text/delete composition and does not include Reka TagsInputClear
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
-import { FrameLabel, FrameTagsInput } from '@frame/core';
+import { FrameLabel, FrameTagField } from '@frame/core';
 import '@frame/core/style.css';
 
 const tags = ref<string[]>(['planning']);
@@ -31,7 +31,7 @@ const tags = ref<string[]>(['planning']);
 
 <template>
   <FrameLabel for="project-tags">Project tags</FrameLabel>
-  <FrameTagsInput
+  <FrameTagField
     id="project-tags" v-model="tags" label="Project tags"
     placeholder="Type a tag and press Enter"
   />
@@ -61,7 +61,7 @@ Short follow-up examples reuse the Basic usage setup unless they include their o
 These examples reuse Basic usage state. The APIs tab explains which attributes are forwarded to Reka rather than declared as Frame props.
 
 ```vue
-<FrameTagsInput
+<FrameTagField
   v-model="tags" label="Project tags" name="tags"
   :add-on-paste="true" :max="5"
   placeholder="Up to five tags"
@@ -275,7 +275,7 @@ No Frame-defined methods or internal Reka refs are exposed.
 
 ### Sources and version
 
-[FrameTagsInput.vue](../../../packages/core/src/components/FrameTagsInput.vue) and [controls.css](../../../packages/core/src/forms/controls.css) define Frame behavior. Compared with the official [Reka Tags Input reference](https://reka-ui.com/docs/components/tags-input.md) and installed Reka `2.11.0`.
+[FrameTagField.vue](../../../packages/core/src/components/forms/FrameTagField.vue) and [controls.css](../../../packages/core/src/components/forms/shared/controls.css) define Frame behavior. Compared with the official [Reka Tags Input reference](https://reka-ui.com/docs/components/tags-input.md) and installed Reka `2.11.0`.
 
 ## Styling
 

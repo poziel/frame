@@ -10,6 +10,8 @@ Frame is a Vue/TypeScript framework. Core, Features and browser Docs require no 
 
 Browser fullscreen covers the document, including portalled menus. Minimize, maximize and native window close are unavailable.
 
+The title bar renders only window controls supported by the host. Browser shells show no Minimize, Maximize, or Close buttons; a partial native adapter shows only the actions it implements. This uses `frame.host.window.supports(action)`, without browser sniffing or native-runtime imports.
+
 ## Tauri
 
 Build Core, then `bun run build:hosts`, and install local archives for Core and `@frame/tauri` into the consuming application.
@@ -96,3 +98,18 @@ Use one stable Frame instance per shell. Multiple frames may use different host 
 - Normal `@frame/core` and stylesheet imports stay unchanged.
 - Terminal creation requires `createTerminal({ backend })`; the terminal UI requires its controller. There is no automatic native backend. Pass `openUrl: frame.host.external?.openUrl` for host-aware terminal links.
 - Rust PTY code and native examples are extracted to the separate Frame Native companion. `packages/docs` is browser-only.
+
+## Controller implementation
+
+`frame.host` is a `HostController`. Its `window` is a `HostWindowController`,
+which owns capability checks, state observation, and document fullscreen
+listeners. Both expose the same readonly state projection. Disposal releases
+Frame-owned subscriptions without disposing the supplied host services.
+
+Browser defaults use a `BrowserHost` composed from lazy file-selection and URL
+services. `createBrowserHost()` remains available and preserves the structural
+`FrameHost` contract for applications composing their own adapters. Constructing
+browser services performs no DOM access or user-visible operation.
+
+See the [configuration implementation guide](../../packages/core/src/framework/configuration/README.md)
+for class responsibilities, module ownership, and the Vue window-control adapter.

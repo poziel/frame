@@ -66,40 +66,40 @@ Defaults below are Reka reference defaults unless a Frame override is stated. De
 
 #### Props
 
-| Prop | Reka type | Reka required/default | Availability | Frame behavior |
-| --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | "div" | Declared | Element/component used to render this part. |
-| `asChild` | `boolean` | - | Declared | Typed upstream composition option; fixed generated children are not a public custom-composition slot. |
-| `clearable` | `boolean` | - | Declared | Clicking the selected rating can reset it to zero. |
-| `defaultValue` | `number` | - | Declared | Initial uncontrolled value upstream; does not override a supplied controlled model. |
-| `dir` | `"ltr" \| "rtl"` | - | Declared | Reading/navigation direction; inherits Reka configuration or LTR when unset. |
-| `disabled` | `boolean` | - | Declared | Disable interaction for this part and its participating descendants. |
-| `hoverable` | `boolean` | - | Declared | Preview the score under the pointer. |
-| `length` | `number` | 5 | Declared | Number of generated rating items. |
-| `loop` | `boolean` | - | Declared | Wrap keyboard navigation at collection endpoints. |
-| `modelValue` | `number` | - | Declared | Controlled value; updates require the host to retain the emitted value. |
-| `name` | `string` | - | Declared | Submitted/registered field identity. |
-| `orientation` | `"vertical" \| "horizontal"` | "horizontal" | Declared | Keyboard navigation axis; Frame styling can impose a separate visual layout. |
-| `required` | `boolean` | - | Declared | Participate in the owning form’s required-value constraint. |
-| `step` | `1 \| 0.5 \| 0.25 \| 0.1` | 1 | Declared | Numeric increment or fractional rating precision. |
+| Prop           | Reka type                    | Reka required/default | Availability | Frame behavior                                                                                        |
+| -------------- | ---------------------------- | --------------------- | ------------ | ----------------------------------------------------------------------------------------------------- |
+| `as`           | `AsTag \| Component`         | "div"                 | Declared     | Element/component used to render this part.                                                           |
+| `asChild`      | `boolean`                    | -                     | Declared     | Typed upstream composition option; fixed generated children are not a public custom-composition slot. |
+| `clearable`    | `boolean`                    | -                     | Declared     | Clicking the selected rating can reset it to zero.                                                    |
+| `defaultValue` | `number`                     | -                     | Declared     | Initial uncontrolled value upstream; does not override a supplied controlled model.                   |
+| `dir`          | `"ltr" \| "rtl"`             | -                     | Declared     | Reading/navigation direction; inherits Reka configuration or LTR when unset.                          |
+| `disabled`     | `boolean`                    | -                     | Declared     | Disable interaction for this part and its participating descendants.                                  |
+| `hoverable`    | `boolean`                    | -                     | Declared     | Preview the score under the pointer.                                                                  |
+| `length`       | `number`                     | 5                     | Declared     | Number of generated rating items.                                                                     |
+| `loop`         | `boolean`                    | -                     | Declared     | Wrap keyboard navigation at collection endpoints.                                                     |
+| `modelValue`   | `number`                     | -                     | Declared     | Controlled value; updates require the host to retain the emitted value.                               |
+| `name`         | `string`                     | -                     | Declared     | Submitted/registered field identity.                                                                  |
+| `orientation`  | `"vertical" \| "horizontal"` | "horizontal"          | Declared     | Keyboard navigation axis; Frame styling can impose a separate visual layout.                          |
+| `required`     | `boolean`                    | -                     | Declared     | Participate in the owning form’s required-value constraint.                                           |
+| `step`         | `1 \| 0.5 \| 0.25 \| 0.1`    | 1                     | Declared     | Numeric increment or fractional rating precision.                                                     |
 
 #### Emits
 
-| Event | Payload | Availability | Behavior |
-| --- | --- | --- | --- |
-| `update:modelValue` | `[payload: number]` | Declared | Value changed; retain it in host state. Not cancellable. |
+| Event               | Payload             | Availability | Behavior                                                 |
+| ------------------- | ------------------- | ------------ | -------------------------------------------------------- |
+| `update:modelValue` | `[payload: number]` | Declared     | Value changed; retain it in host state. Not cancellable. |
 
 #### Slots
 
-| Default-slot field | Reka type | Frame availability |
-| --- | --- | --- |
-| `modelValue` | `number \| undefined` | Internal; not passed to the Frame caller slot. |
-| `items` | `number[]` | Internal; not passed to the Frame caller slot. |
+| Default-slot field | Reka type             | Frame availability                             |
+| ------------------ | --------------------- | ---------------------------------------------- |
+| `modelValue`       | `number \| undefined` | Internal; not passed to the Frame caller slot. |
+| `items`            | `number[]`            | Internal; not passed to the Frame caller slot. |
 
 #### Data attributes
 
-| Attribute | Values/presence | Meaning |
-| --- | --- | --- |
+| Attribute       | Values/presence         | Meaning                                                                                  |
+| --------------- | ----------------------- | ---------------------------------------------------------------------------------------- |
 | `data-disabled` | `Present when disabled` | Underlying radio-group state; navigation axis is aria-orientation, not a data attribute. |
 
 #### Exposed methods
@@ -110,11 +110,11 @@ Frame does not defineExpose or forward the internal Reka instance. Do not depend
 
 #### Props
 
-| Prop | Reka type | Reka required/default | Availability | Frame behavior |
-| --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | "label" | Internal | Element/component used to render this part. Not independently configurable through Frame. |
-| `asChild` | `boolean` | - | Internal | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
-| `item` | `number` | Required upstream | Internal | Generated from Root’s items. Not independently configurable through Frame. |
+| Prop      | Reka type            | Reka required/default | Availability | Frame behavior                                                                                                       |
+| --------- | -------------------- | --------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `as`      | `AsTag \| Component` | "label"               | Internal     | Element/component used to render this part. Not independently configurable through Frame.                            |
+| `asChild` | `boolean`            | -                     | Internal     | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
+| `item`    | `number`             | Required upstream     | Internal     | Generated from Root’s items. Not independently configurable through Frame.                                           |
 
 #### Emits
 
@@ -122,9 +122,9 @@ No component emits on this part. Native bubbling listeners are not additional co
 
 #### Slots
 
-| Default-slot field | Reka type | Frame availability |
-| --- | --- | --- |
-| `steps` | `number[]` | Internal; not passed to the Frame caller slot. |
+| Default-slot field | Reka type  | Frame availability                             |
+| ------------------ | ---------- | ---------------------------------------------- |
+| `steps`            | `number[]` | Internal; not passed to the Frame caller slot. |
 
 #### Data attributes
 
@@ -134,11 +134,11 @@ No component state data attributes are defined on this part. Inherited native/AR
 
 #### Props
 
-| Prop | Reka type | Reka required/default | Availability | Frame behavior |
-| --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | "div" | Internal | Element/component used to render this part. Not independently configurable through Frame. |
-| `asChild` | `boolean` | - | Internal | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
-| `step` | `number` | Required upstream | Internal | Generated from Item’s steps. Not independently configurable through Frame. |
+| Prop      | Reka type            | Reka required/default | Availability | Frame behavior                                                                                                       |
+| --------- | -------------------- | --------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `as`      | `AsTag \| Component` | "div"                 | Internal     | Element/component used to render this part. Not independently configurable through Frame.                            |
+| `asChild` | `boolean`            | -                     | Internal     | Merge the part behavior into one child instead of rendering a wrapper. Not independently configurable through Frame. |
+| `step`    | `number`             | Required upstream     | Internal     | Generated from Item’s steps. Not independently configurable through Frame.                                           |
 
 #### Emits
 
@@ -150,10 +150,10 @@ Underlying default content has no documented scoped fields. Frame generates this
 
 #### Data attributes
 
-| Attribute | Values/presence | Meaning |
-| --- | --- | --- |
-| `data-state` | `active, otherwise absent` | Filled score or hover preview; aria-checked separately tracks selected radio. |
-| `data-disabled` | `Present when disabled` | Underlying radio disabled state. |
+| Attribute       | Values/presence            | Meaning                                                                       |
+| --------------- | -------------------------- | ----------------------------------------------------------------------------- |
+| `data-state`    | `active, otherwise absent` | Filled score or hover preview; aria-checked separately tracks selected radio. |
+| `data-disabled` | `Present when disabled`    | Underlying radio disabled state.                                              |
 
 ### Frame additions
 
@@ -171,25 +171,25 @@ No additional Frame-only events; see the part tables for declared or forwarded e
 
 ### Sources and version
 
-Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/rating), its [Markdown reference](https://reka-ui.com/docs/components/rating.md), and [Frame implementation](../../../packages/core/src/components/FrameRating.vue). Styling comes from [advanced.css](../../../packages/core/src/forms/advanced.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens.ts).
+Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/rating), its [Markdown reference](https://reka-ui.com/docs/components/rating.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameRating.vue). Styling comes from [advanced.css](../../../packages/core/src/components/forms/shared/advanced.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
 
 ## Styling
 
 ### Parts and selectors
 
-| Selector | Part | Placement |
-| --- | --- | --- |
-| `.frame-rating` | Root | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
-| `.frame-rating-item` | Item | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
+| Selector             | Part          | Placement                                                                        |
+| -------------------- | ------------- | -------------------------------------------------------------------------------- |
+| `.frame-rating`      | Root          | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
+| `.frame-rating-item` | Item          | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
 | `.frame-rating-step` | ItemIndicator | See attribute routing in Anatomy; internal parts have no independent attrs prop. |
 
 Items are fixed at 24 by 28px, with 3px group gaps and 24px indicator glyphs. Reka’s --reka-rating-item-step-* values are runtime geometry outputs, not Frame JSON override keys.
 
 ### Variables
 
-| Token key | Variable | Value kind | Default/fallback | Part/effect | Scope/limits | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| `--frame-accent` | `--frame-accent` | color | Catalog: `#0078d4`. No local fallback; resolves from the cascade. | ItemIndicator color; ItemIndicator outline | Shared with other controls using the same variable. State selectors: [data-state=active], :focus-visible. | Sets ItemIndicator color; ItemIndicator outline. |
-| `--frame-muted` | `--frame-muted` | color | Catalog: `#8e9496`. No local fallback; resolves from the cascade. | ItemIndicator color | Shared with other controls using the same variable. | Sets ItemIndicator color. |
+| Token key        | Variable         | Value kind | Default/fallback                                                  | Part/effect                                | Scope/limits                                                                                              | Description                                      |
+| ---------------- | ---------------- | ---------- | ----------------------------------------------------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| `--frame-accent` | `--frame-accent` | color      | Catalog: `#0078d4`. No local fallback; resolves from the cascade. | ItemIndicator color; ItemIndicator outline | Shared with other controls using the same variable. State selectors: [data-state=active], :focus-visible. | Sets ItemIndicator color; ItemIndicator outline. |
+| `--frame-muted`  | `--frame-muted`  | color      | Catalog: `#8e9496`. No local fallback; resolves from the cascade. | ItemIndicator color                        | Shared with other controls using the same variable.                                                       | Sets ItemIndicator color.                        |
 
 See [theme variables](../../styling/theme-variables.md) for theme authoring.

@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { createViewDrag, insertionBefore } from "../packages/core/src/frame/viewDrag";
+import { ViewDrag, insertionBefore } from "../packages/core/src/framework/views/viewDrag";
 
 test("drop insertion chooses either side of activities, tabs, and accordion views", () => {
   expect(insertionBefore(["a", "b", "c"], "b", false)).toBe("b");
@@ -14,14 +14,18 @@ test("pointer drag exposes preview and insertion state, activates hovered views,
   const bus = new EventTarget();
   const box = { left: 10, right: 42, top: 80, bottom: 114, width: 32, height: 34 };
   const region = { dataset: { viewRegion: "primary", viewAxis: "y" }, getBoundingClientRect: () => ({ left: 0, top: 34, width: 40, height: 766 }), contains: () => true };
-  const item = { dataset: { viewId: "target" }, getBoundingClientRect: () => box, closest: (selector: string) => selector === "[data-view-axis]" ? region : null };
+  const item = { dataset: { viewId: "target" }, getBoundingClientRect: () => box, closest: (
+    selector: string
+  ) => selector === "[data-view-axis]" ? region : null };
   let hit: object = { closest: (selector: string) => selector === "[data-view-region]" || selector === "[data-view-axis]" ? region : selector === "[data-view-id]" ? item : null };
   const shell = { contains: () => true, querySelector: () => ({ getBoundingClientRect: () => ({ left: 0, right: 1200, top: 34, bottom: 800, width: 1200, height: 766 }) }) };
   Object.defineProperty(globalThis, "window", { configurable: true, value: bus });
   Object.defineProperty(globalThis, "document", { configurable: true, value: { elementFromPoint: () => hit } });
-  Object.defineProperty(globalThis, "requestAnimationFrame", { configurable: true, value: (callback: () => void) => { callback(); return 1; } });
+  Object.defineProperty(globalThis, "requestAnimationFrame", { configurable: true, value: (
+    callback: () => void
+  ) => { callback(); return 1; } });
   let activations = 0, reveals = 0, closed = true;
-  const drag = createViewDrag({ view: () => ({ id: "source", label: "Source", component: {} }), siblings: () => ["source", "target", "next"], canMove: () => true, move: () => true, activate: () => { activations++; }, reveal: () => { reveals++; closed = false; }, closed: region => region === "bottom" && closed, primarySide: () => "left", enabled: () => true });
+  const drag = new ViewDrag({ view: () => ({ id: "source", label: "Source", component: {} }), siblings: () => ["source", "target", "next"], canMove: () => true, move: () => true, activate: () => { activations++; }, reveal: () => { reveals++; closed = false; }, closed: region => region === "bottom" && closed, primarySide: () => "left", enabled: () => true });
   const begin = () => drag.begin({ button: 0, pointerId: 1, clientX: 10, clientY: 50, currentTarget: { closest: () => shell } } as unknown as PointerEvent, "source", "primary");
   const pointer = (type: string, x: number, y: number) => { const event = new Event(type, { cancelable: true }); Object.assign(event, { pointerId: 1, clientX: x, clientY: y }); bus.dispatchEvent(event); };
   try {

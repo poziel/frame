@@ -8,6 +8,9 @@
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": { "types": "./dist/types/index.d.ts", "import": "./dist/themes.js" },
+    "./frame-monokai-dark.json": "./src/presets/frame-monokai-dark.json",
+    "./frame-monokai-light.json": "./src/presets/frame-monokai-light.json",
+    "./frame-dusk.json": "./src/presets/frame-dusk.json",
     "./vscode-light-2026.json": "./src/presets/vscode-light-2026.json",
     "./vscode-high-contrast-black.json": "./src/presets/vscode-high-contrast-black.json",
     "./vscode-high-contrast-white.json": "./src/presets/vscode-high-contrast-white.json"

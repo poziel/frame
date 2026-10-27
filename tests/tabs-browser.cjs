@@ -1,0 +1,23 @@
+const {chromium}=require('playwright');const assert=require('node:assert/strict');
+(async()=>{const browser=await chromium.launch({channel:'chrome'});try{
+ const page=await browser.newPage({viewport:{width:1100,height:900}}),errors=[];page.setDefaultTimeout(8000);page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('http://127.0.0.1:1479');
+ const automatic=page.getByRole('tablist',{name:'Automatic',exact:true}),manual=page.getByRole('tablist',{name:'Manual',exact:true});
+ const first=automatic.getByRole('tab',{name:'First',exact:true}),last=automatic.getByRole('tab',{name:'Last',exact:true});
+ const plain=el=>{const s=getComputedStyle(el);return {background:s.backgroundColor,radius:s.borderRadius,indicator:s.borderBottomWidth,color:s.borderBottomColor};};
+ const selected=await first.evaluate(plain);assert.equal(selected.background,'rgba(0, 0, 0, 0)');assert.equal(selected.radius,'0px');assert.equal(selected.indicator,'2px');assert.equal(selected.color,'rgb(255, 93, 87)');
+ await last.hover();assert.equal((await last.evaluate(plain)).background,'rgba(0, 0, 0, 0)');
+ await first.focus();await page.keyboard.press('ArrowRight');assert.equal(await last.getAttribute('aria-selected'),'true','disabled tabs are skipped');
+ await page.keyboard.press('Home');assert.equal(await first.getAttribute('aria-selected'),'true');await page.keyboard.press('End');assert.equal(await last.getAttribute('aria-selected'),'true');
+ const manualFirst=manual.getByRole('tab',{name:'First',exact:true}),manualLast=manual.getByRole('tab',{name:'Last',exact:true});await manualFirst.focus();await page.keyboard.press('ArrowRight');assert.equal(await manualFirst.getAttribute('aria-selected'),'true');await page.keyboard.press('Enter');assert.equal(await manualLast.getAttribute('aria-selected'),'true');
+ const vertical=page.getByRole('tablist',{name:'Vertical',exact:true});await vertical.getByRole('tab',{name:'First',exact:true}).focus();await page.keyboard.press('ArrowDown');assert.equal(await vertical.getByRole('tab',{name:'Last',exact:true}).getAttribute('aria-selected'),'true');
+ assert.equal(await vertical.getByRole('tab',{name:'Last',exact:true}).evaluate(el=>getComputedStyle(el).borderInlineEndWidth),'2px');
+ await page.goto('http://127.0.0.1:1475/');await page.getByRole('button',{name:'Components',exact:true}).click();await page.getByRole('button',{name:'Tabs',exact:true}).click();
+ const docs=page.getByRole('tablist',{name:'Component documentation',exact:true});
+ assert(await docs.evaluate(el=>el.classList.contains('frame-tabs-list')));
+ await docs.getByRole('tab',{name:'Theming',exact:true}).click();assert.equal(await docs.getByRole('tab',{name:'Theming',exact:true}).getAttribute('aria-selected'),'true');
+ assert.equal((await docs.getByRole('tab',{name:'Theming',exact:true}).evaluate(plain)).background,'rgba(0, 0, 0, 0)');
+ await docs.getByRole('tab',{name:'API',exact:true}).focus();await page.keyboard.press('End');assert.equal(await docs.getByRole('tab',{name:'Interactive demo',exact:true}).getAttribute('aria-selected'),'true');
+ await page.screenshot({path:'.tmp/tabs-shared.png'});assert.deepEqual(errors,[]);
+ console.log('PASS: plain shared tabs, transparent selected/hover states, accent indicator, keyboard focus, disabled skipping, manual activation, vertical tabs, and documentation navigation.');
+}finally{await browser.close();}})().catch(error=>{console.error(error);process.exit(1)});

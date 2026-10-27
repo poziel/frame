@@ -10,4 +10,7 @@ for(const frame of frames){
  frame.openSidePanel('same');
 }
 (window as any).viewBarFrames=frames;
-createApp({render:()=>h('div',{style:'display:flex;gap:8px'},frames.map((frame,index)=>h('section',{id:`frame-${index}`,style:'width:700px;height:500px;position:relative'},[h(FrameShell,{frame,titleText:`Instance ${index}`,showSearch:false})])))}).mount('#app');
+createApp({render:()=>h('div',{style:'display:flex;gap:8px'},frames.map((
+  frame,
+  index
+)=>h('section',{id:`frame-${index}`,style:'width:700px;height:500px;position:relative'},[h(FrameShell,{frame,titleText:`Instance ${index}`,showSearch:false})])))}).mount('#app');

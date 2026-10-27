@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { fitOverlay, intersectOverlayBounds } from "../packages/core/src/frame/overlays";
+import { fitOverlay, intersectOverlayBounds } from "../packages/core/src/components/overlays/overlays";
 
 test("oversized overlays shrink inside an offset body without covering either bar", () => {
   expect(fitOverlay({ left: -20, top: 0, width: 900, height: 800 }, { left: 40, top: 34, width: 700, height: 312 })).toEqual({ left: 46, top: 40, width: 688, height: 300 });

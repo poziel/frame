@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { showWorkspaceContent } from './workspaceContent';
-import FrameButton from "../../../core/src/components/FrameButton.vue";
+import FrameButton from "../../../core/src/components/actions/FrameButton.vue";
 import BundledIconCatalog from "./BundledIconCatalog.vue";
 import OnlineIcons from "./OnlineIcons.vue";
-import { useFrame } from "../../../core/src/frame/createFrame";
+import {useFrame} from '../../../core/src/framework/useFrame';
 import ComponentExamplePage from "./ComponentExamplePage.vue";
 defineProps<{ online?: boolean }>();
 const frame = useFrame();

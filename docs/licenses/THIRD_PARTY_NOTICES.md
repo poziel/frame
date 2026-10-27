@@ -24,3 +24,7 @@ LDRS by Griffin Johnston (https://github.com/GriffinJohnston/ldrs) is MIT licens
 ## Reka UI
 
 Reka UI (https://github.com/unovue/reka-ui) supplies Frame's accessible form interaction primitives. Its MIT license and the installed dependency licenses, including the internationalized date/number packages, are collected in reka-ui.txt. Retain that file when distributing Frame. Regenerate with `bun packages/core/scripts/collect-reka-licenses.ts` after dependency updates.
+
+## Core modules
+
+Core modules integrate Monaco Editor (`monaco-editor.txt`, `monaco-third-party.txt`), Shiki Monaco (`shiki-monaco.txt`), and xterm with its fit, search, and web-links addons (`xterm.txt`, `xterm-fit.txt`, `xterm-search.txt`, `xterm-web-links.txt`). Retain these notices when distributing applications using those modules. PDF.js and Markdown-it are Apache-2.0 and MIT licensed respectively; their license texts accompany Core as `pdfjs.txt` and `markdown-it.txt`.

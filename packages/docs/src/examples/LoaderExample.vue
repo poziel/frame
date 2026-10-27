@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { FrameLoader, FrameButton, FrameTextInput, frameLoaderVariants, type FrameLoaderVariant } from "@frame/core";
+import { FrameLoader, FrameButton, FrameTextField, frameLoaderVariants, type FrameLoaderVariant } from "@frame/core";
 
 const selected = ref<FrameLoaderVariant>("ring"), search = ref<string | number>("");
 const copied = ref(false);
@@ -12,7 +12,7 @@ async function copy() { await navigator.clipboard.writeText(`import { FrameLoade
 <template>
   <p>All 44 LDRS styles are available as standalone loaders. Choose a style to see its usage.</p>
   <div class="loader-selection"><FrameLoader :variant="selected" :size="48" :label="selected"/><code>{{ snippet }}</code><FrameButton variant="secondary" @click="copy">{{ copied ? 'Copied' : 'Copy usage' }}</FrameButton></div>
-  <FrameTextInput v-model="search" type="search" aria-label="Filter loader styles" placeholder="Filter 44 loader styles…" />
+  <FrameTextField v-model="search" type="search" aria-label="Filter loader styles" placeholder="Filter 44 loader styles…" />
   <div class="loader-gallery">
     <button v-for="variant in visible" :key="variant" class="loader-card" :aria-pressed="selected === variant" :aria-label="`Use ${variant}`" @click="choose(variant)"><FrameLoader :variant="variant" :size="36" decorative/><code>{{ variant }}</code></button>
   </div>

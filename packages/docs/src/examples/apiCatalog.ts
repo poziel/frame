@@ -5,7 +5,7 @@ const classes = new Set(["SelectItem", "SelectOption", "SelectSeparator"]);
 const values = new Set(["FrameMenuItem", "SettingValue", "WorkspaceSplitDirection", "CodeBlockTheme", "DateValue", "DateRange", "TimeValue", "TimeRange", "ViewBarPosition", "ViewBarSize"]);
 export const apiEntries = Object.keys(typeDocs).sort().map(name => ({
   name, kind: (classes.has(name) ? "Class" : values.has(name) ? "Value type" : "Object contract") as ApiKind,
-  package: (extractedReferences as Record<string,{package:string}>)[name]?.package ?? (name === "NotificationHistory" ? "@frame/features" : "@frame/core"),
+  package: (extractedReferences as Record<string,{package:string}>)[name]?.package ?? (name === "NotificationHistory" ? "@frame/core/modules/notifications" : "@frame/core"),
 }));
 export function filterApiEntries(query: string) {
   const search = query.trim().toLowerCase();

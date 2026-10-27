@@ -3,13 +3,13 @@
   "compilerOptions": {
     "paths": {
       "@frame/core": [
-        "../core/src/frame/index.ts"
-      ],
-      "@frame/features": [
-        "../features/src/index.ts"
+        "../core/src/index.ts"
       ],
       "@frame/themes": [
         "../themes/src/index.ts"
+      ],
+      "@frame/core/modules/*": [
+        "../core/src/modules/*/index.ts"
       ]
     }
   },

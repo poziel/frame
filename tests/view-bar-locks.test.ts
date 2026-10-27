@@ -1,5 +1,5 @@
 import {test,expect} from 'bun:test';
-import {createFrame} from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 test('view-bar size and display locks preserve configured defaults and hide editing commands',async()=>{
  const locked=createFrame({primaryViewBar:{position:'top',size:'compact',display:'icons',allowSizeChange:false,allowDisplayChange:false}}), free=createFrame();
  expect(locked.primaryViewBar.position.value).toBe('top');expect(locked.primaryViewBar.size.value).toBe('compact');expect(locked.primaryViewBar.display.value).toBe('icons');

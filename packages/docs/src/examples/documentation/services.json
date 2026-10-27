@@ -1,7 +1,7 @@
 {
   "notifications": {
     "name": "frame.notify",
-    "source": "packages/core/src/types.ts",
+    "source": "packages/core/src/framework/views/notifications.ts",
     "props": [
       {
         "name": "id",
@@ -9,7 +9,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Id configuration for this component; see its Features examples for usage.",
+        "description": "Stable identity used to address this contribution.",
         "control": "text",
         "references": []
       },
@@ -19,7 +19,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Visible heading.",
+        "description": "Heading displayed by the owning presentation.",
         "control": "text",
         "references": []
       },
@@ -30,12 +30,12 @@
           "kind": "literal",
           "value": "\"info\""
         },
-        "description": "Severity configuration for this component; see its Features examples for usage.",
+        "description": "Semantic severity used to style the notification.",
         "options": [
+          "error",
           "info",
           "success",
-          "warning",
-          "error"
+          "warning"
         ],
         "control": "text",
         "references": [
@@ -48,7 +48,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Details configuration for this component; see its Features examples for usage.",
+        "description": "Optional expanded notification content.",
         "control": "text",
         "references": []
       },
@@ -58,7 +58,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Source configuration for this component; see its Features examples for usage.",
+        "description": "Optional application source identifying the notification origin.",
         "control": "text",
         "references": []
       },
@@ -68,7 +68,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Priority configuration for this component; see its Features examples for usage.",
+        "description": "Optional host priority annotation retained with the notification.",
         "control": "text",
         "references": []
       },
@@ -79,7 +79,7 @@
           "kind": "literal",
           "value": "5000"
         },
-        "description": "Duration configuration for this component; see its Features examples for usage.",
+        "description": "Dismissal delay in milliseconds; zero keeps the notification persistent.",
         "control": "number",
         "references": []
       },
@@ -89,7 +89,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Action configuration for this component; see its Features examples for usage.",
+        "description": "Optional application action offered by the notification.",
         "control": "fixture",
         "references": [
           "NotificationAction"
@@ -111,7 +111,7 @@
   },
   "modals": {
     "name": "frame.openModal",
-    "source": "packages/core/src/types.ts",
+    "source": "packages/core/src/components/framework/modal.ts",
     "props": [
       {
         "name": "id",
@@ -119,7 +119,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Id configuration for this component; see its Features examples for usage.",
+        "description": "Stable identity used to address this contribution.",
         "control": "text",
         "references": []
       },
@@ -129,7 +129,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Visible heading.",
+        "description": "Heading displayed by the owning presentation.",
         "control": "text",
         "references": []
       },
@@ -139,7 +139,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Component configuration for this component; see its Features examples for usage.",
+        "description": "Host-supplied Vue component rendered for this contribution.",
         "control": "fixture",
         "references": [
           "Component"
@@ -151,7 +151,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Props configuration for this component; see its Features examples for usage.",
+        "description": "Properties forwarded to the host-supplied component.",
         "control": "json",
         "references": [
           "Record"
@@ -163,7 +163,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Optional leading icon; provide an accessible label for icon-only actions.",
+        "description": "Optional icon rendered beside the contribution.",
         "control": "fixture",
         "references": [
           "Component"
@@ -175,7 +175,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Application-owned header actions.",
+        "description": "Actions offered by the owning surface.",
         "control": "json",
         "references": [
           "PanelAction"
@@ -187,7 +187,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Width configuration for this component; see its Features examples for usage.",
+        "description": "Requested presentation width in pixels, constrained by the shell bounds.",
         "control": "number",
         "references": []
       },
@@ -197,7 +197,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Height configuration for this component; see its Features examples for usage.",
+        "description": "Requested presentation height in pixels, constrained by the shell bounds.",
         "control": "number",
         "references": []
       },
@@ -207,7 +207,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Maximized configuration for this component; see its Features examples for usage.",
+        "description": "Initial maximized presentation for this modal.",
         "control": "boolean",
         "references": []
       },
@@ -217,7 +217,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Footer configuration for this component; see its Features examples for usage.",
+        "description": "Optional host-owned footer component.",
         "control": "fixture",
         "references": [
           "Component"
@@ -229,11 +229,21 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Footer Props configuration for this component; see its Features examples for usage.",
+        "description": "Properties forwarded to the footer component.",
         "control": "json",
         "references": [
           "Record"
         ]
+      },
+      {
+        "name": "showCloseButton",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Shows the header close button. Defaults to true; Escape still dismisses.",
+        "control": "boolean",
+        "references": []
       },
       {
         "name": "minHeight",
@@ -261,7 +271,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Draggable configuration for this component; see its Features examples for usage.",
+        "description": "Whether pointer dragging is allowed for this contribution.",
         "control": "boolean",
         "references": []
       },
@@ -271,7 +281,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Resizable configuration for this component; see its Features examples for usage.",
+        "description": "Whether the user can resize this modal.",
         "control": "boolean",
         "references": []
       },
@@ -281,7 +291,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Maximizable configuration for this component; see its Features examples for usage.",
+        "description": "Whether the user can toggle maximized modal presentation.",
         "control": "boolean",
         "references": []
       }
@@ -301,7 +311,7 @@
   },
   "settings": {
     "name": "frame.registerSettingsSection",
-    "source": "packages/core/src/types.ts",
+    "source": "packages/core/src/framework/settings/settings.ts",
     "props": [
       {
         "name": "id",
@@ -309,7 +319,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Id configuration for this component; see its Features examples for usage.",
+        "description": "Stable identity used to address this contribution.",
         "control": "text",
         "references": []
       },
@@ -319,7 +329,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Visible heading.",
+        "description": "Heading displayed by the owning presentation.",
         "control": "text",
         "references": []
       },
@@ -329,7 +339,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Description configuration for this component; see its Features examples for usage.",
+        "description": "Explanatory text displayed alongside the entry.",
         "control": "text",
         "references": []
       },
@@ -339,7 +349,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Settings configuration for this component; see its Features examples for usage.",
+        "description": "Field definitions registered within this section.",
         "control": "json",
         "references": [
           "SettingDefinition"
@@ -351,10 +361,34 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Nested application-owned contributions.",
+        "description": "Nested definitions rendered and registered beneath this entry.",
         "control": "json",
         "references": [
           "SettingsSection"
+        ]
+      },
+      {
+        "name": "component",
+        "type": "Component",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Host-supplied Vue component rendered for this contribution.",
+        "control": "fixture",
+        "references": [
+          "Component"
+        ]
+      },
+      {
+        "name": "props",
+        "type": "Record<string, unknown>",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Properties forwarded to the host-supplied component.",
+        "control": "json",
+        "references": [
+          "Record"
         ]
       }
     ],
@@ -373,7 +407,7 @@
   },
   "banner": {
     "name": "frame.registerBanner",
-    "source": "packages/core/src/types.ts",
+    "source": "packages/core/src/framework/workspace/workspaceBanner.ts",
     "props": [
       {
         "name": "id",
@@ -381,7 +415,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Id configuration for this component; see its Features examples for usage.",
+        "description": "Stable identity used to address this contribution.",
         "control": "text",
         "references": []
       },
@@ -391,7 +425,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Visible or accessible label for the control.",
+        "description": "Human-readable name displayed by the owning surface.",
         "control": "text",
         "references": []
       },
@@ -401,7 +435,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Component configuration for this component; see its Features examples for usage.",
+        "description": "Host-supplied Vue component rendered for this contribution.",
         "control": "fixture",
         "references": [
           "Component"
@@ -413,7 +447,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Props configuration for this component; see its Features examples for usage.",
+        "description": "Properties forwarded to the host-supplied component.",
         "control": "json",
         "references": [
           "Record"
@@ -435,7 +469,7 @@
   },
   "workspace": {
     "name": "frame.setWorkspacePane",
-    "source": "packages/core/src/types.ts",
+    "source": "packages/core/src/framework/workspace/workspaceTypes.ts",
     "props": [
       {
         "name": "label",
@@ -443,7 +477,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Visible or accessible label for the control.",
+        "description": "Human-readable name displayed by the owning surface.",
         "control": "text",
         "references": []
       },
@@ -453,7 +487,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Component configuration for this component; see its Features examples for usage.",
+        "description": "Host-supplied Vue component rendered for this contribution.",
         "control": "fixture",
         "references": [
           "Component"
@@ -465,7 +499,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Props configuration for this component; see its Features examples for usage.",
+        "description": "Properties forwarded to the host-supplied component.",
         "control": "json",
         "references": [
           "Record"
@@ -487,7 +521,7 @@
   },
   "views": {
     "name": "frame.registerView",
-    "source": "packages/core/src/types.ts",
+    "source": "packages/core/src/framework/views/shellViewContainer.ts",
     "props": [
       {
         "name": "icon",
@@ -495,7 +529,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Optional leading icon; provide an accessible label for icon-only actions.",
+        "description": "Optional icon rendered beside the contribution.",
         "control": "fixture",
         "references": [
           "Component"
@@ -507,8 +541,28 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Show In Rail configuration for this component; see its Features examples for usage.",
+        "description": "Whether this view contributes an activity-rail selector.",
         "control": "boolean",
+        "references": []
+      },
+      {
+        "name": "showHeader",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Render the bottom/secondary pane header. Defaults to true; false lets content supply its own toolbar.",
+        "control": "boolean",
+        "references": []
+      },
+      {
+        "name": "titleColor",
+        "type": "string",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "CSS color for the view heading and selector label. Supports reactive getters.",
+        "control": "text",
         "references": []
       },
       {
@@ -529,7 +583,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Id configuration for this component; see its Features examples for usage.",
+        "description": "Stable identity used to address this contribution.",
         "control": "text",
         "references": []
       },
@@ -539,7 +593,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Visible or accessible label for the control.",
+        "description": "Human-readable name displayed by the owning surface.",
         "control": "text",
         "references": []
       },
@@ -549,7 +603,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Application-owned header actions.",
+        "description": "Actions offered by the owning surface.",
         "control": "json",
         "references": [
           "PanelAction"
@@ -561,7 +615,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Padded configuration for this component; see its Features examples for usage.",
+        "description": "Whether the surface applies its standard content padding.",
         "control": "boolean",
         "references": []
       },
@@ -571,7 +625,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Top configuration for this component; see its Features examples for usage.",
+        "description": "Optional content retained above the main view content.",
         "control": "json",
         "references": [
           "ViewContentSlot"
@@ -583,7 +637,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Distance in pixels from the presentation boundary bottom.",
+        "description": "Optional content retained below the main view content.",
         "control": "json",
         "references": [
           "ViewContentSlot"
@@ -595,7 +649,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Draggable configuration for this component; see its Features examples for usage.",
+        "description": "Whether pointer dragging is allowed for this contribution.",
         "control": "boolean",
         "references": []
       },
@@ -605,7 +659,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Movable configuration for this component; see its Features examples for usage.",
+        "description": "Whether this contribution can move between eligible containers.",
         "control": "boolean",
         "references": []
       },
@@ -615,7 +669,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Collapsed configuration for this component; see its Features examples for usage.",
+        "description": "Initial collapsed state of this view section.",
         "control": "boolean",
         "references": []
       },
@@ -635,7 +689,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Component configuration for this component; see its Features examples for usage.",
+        "description": "Host-supplied Vue component rendered for this contribution.",
         "control": "fixture",
         "references": [
           "Component"
@@ -647,7 +701,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Nested application-owned contributions.",
+        "description": "Nested definitions rendered and registered beneath this entry.",
         "control": "json",
         "references": [
           "PanelDefinition"
@@ -659,7 +713,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Props configuration for this component; see its Features examples for usage.",
+        "description": "Properties forwarded to the host-supplied component.",
         "control": "json",
         "references": [
           "Record"
@@ -698,7 +752,7 @@
   },
   "navigation-items": {
     "name": "frame.registerNavigationItem",
-    "source": "packages/core/src/frame/navigationItems.ts",
+    "source": "packages/core/src/framework/views/navigationItems.ts",
     "props": [
       {
         "name": "type",
@@ -706,7 +760,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Native input/button behavior.",
+        "description": "Discriminant selecting the supported item behavior.",
         "options": [
           "action"
         ],
@@ -719,7 +773,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Run configuration for this component; see its Features examples for usage.",
+        "description": "Action invoked when this contribution is activated.",
         "control": "fixture",
         "references": [
           "Promise"
@@ -731,7 +785,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Shows the loading presentation while retaining the mounted content.",
+        "description": "Static or reactive indication that this navigation destination is selected.",
         "control": "fixture",
         "references": []
       },
@@ -741,7 +795,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Visible or accessible label for the control.",
+        "description": "Human-readable and accessible name for this contribution.",
         "control": "text",
         "references": []
       },
@@ -751,7 +805,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Optional leading icon; provide an accessible label for icon-only actions.",
+        "description": "Optional icon displayed with the contribution.",
         "control": "fixture",
         "references": [
           "Component"
@@ -763,7 +817,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Badge configuration for this component; see its Features examples for usage.",
+        "description": "Optional badge supplied by the host contribution.",
         "control": "json",
         "references": [
           "ViewBadge"
@@ -775,7 +829,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Prevents user interaction while retaining the current value.",
+        "description": "Whether activation is temporarily blocked while the item remains registered.",
         "control": "boolean",
         "references": []
       },
@@ -785,7 +839,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Id configuration for this component; see its Features examples for usage.",
+        "description": "Stable identifier within the owning registration collection.",
         "control": "text",
         "references": []
       },
@@ -795,7 +849,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Visible configuration for this component; see its Features examples for usage.",
+        "description": "Initial visibility preference; hiding retains the registration.",
         "control": "boolean",
         "references": []
       },
@@ -805,7 +859,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Draggable configuration for this component; see its Features examples for usage.",
+        "description": "Whether the user may reorder or move this contribution.",
         "control": "boolean",
         "references": []
       }
@@ -825,15 +879,55 @@
   },
   "quick-input": {
     "name": "frame.showQuickPick",
-    "source": "packages/core/src/types.ts",
+    "source": "packages/core/src/components/framework/quickPick.ts",
     "props": [
+      {
+        "name": "searchable",
+        "type": "boolean",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Controls text filtering; defaults to true.",
+        "control": "boolean",
+        "references": []
+      },
+      {
+        "name": "initialQuery",
+        "type": "string",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Restores navigation state when returning to a submenu.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "initialSelectedId",
+        "type": "string",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Restores keyboard highlight when returning to a submenu.",
+        "control": "text",
+        "references": []
+      },
+      {
+        "name": "onStateChange",
+        "type": "(state: {query: string; selectedId: string}) => void",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Reports state to the owning navigation controller.",
+        "control": "fixture",
+        "references": []
+      },
       {
         "name": "title",
         "type": "string",
         "default": {
           "kind": "omitted"
         },
-        "description": "Visible heading.",
+        "description": "Heading displayed by the owning presentation.",
         "control": "text",
         "references": []
       },
@@ -843,7 +937,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Hint displayed when the field is empty.",
+        "description": "Hint displayed when the input or search field is empty.",
         "control": "text",
         "references": []
       }
@@ -860,5 +954,453 @@
         "description": "Call this public Frame API with application-owned configuration."
       }
     ]
+  },
+  "ai-chat": {
+    "name": "createAIChat",
+    "source": "packages/core/src/modules/chat/controllers/aiChat.ts",
+    "props": [
+      {
+        "name": "respond",
+        "type": "ChatResponder",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Respond configuration for this component; see its Features examples for usage.",
+        "control": "fixture",
+        "references": [
+          "ChatResponder"
+        ]
+      },
+      {
+        "name": "messages",
+        "type": "ChatMessage[] | undefined",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Messages configuration for this component; see its Features examples for usage.",
+        "control": "fixture",
+        "references": [
+          "ChatMessage"
+        ]
+      }
+    ],
+    "methods": [
+      {
+        "name": "createAIChat",
+        "kind": "method",
+        "parameters": "options: ChatOptions",
+        "returns": "AIChatController",
+        "description": "Creates a class-backed conversation through the existing public factory."
+      },
+      {
+        "name": "clear",
+        "kind": "method",
+        "parameters": "",
+        "returns": "void",
+        "description": "Stops the response and clears local history, draft, attachments, and rewind state."
+      },
+      {
+        "name": "state",
+        "kind": "property",
+        "parameters": "",
+        "returns": "ChatState",
+        "description": "Reactive conversation state shared by its visual presentations."
+      },
+      {
+        "name": "dispose",
+        "kind": "method",
+        "parameters": "",
+        "returns": "void",
+        "description": "Permanently stops this conversation while leaving host services caller-owned."
+      },
+      {
+        "name": "cancelRewind",
+        "kind": "method",
+        "parameters": "",
+        "returns": "void",
+        "description": "Restores the saved draft and attachments without changing message history."
+      },
+      {
+        "name": "rewind",
+        "kind": "method",
+        "parameters": "messageId: string",
+        "returns": "void",
+        "description": "Previews replacement of a user message while retaining the prior unsent draft."
+      },
+      {
+        "name": "stop",
+        "kind": "method",
+        "parameters": "",
+        "returns": "void",
+        "description": "Stops the active response without waiting for the host responder."
+      },
+      {
+        "name": "fork",
+        "kind": "method",
+        "parameters": "messageId: string",
+        "returns": "ChatMessage[]",
+        "description": "Returns an independent conversation prefix ending at a completed assistant message."
+      },
+      {
+        "name": "send",
+        "kind": "method",
+        "parameters": "",
+        "returns": "Promise<boolean>",
+        "description": "Sends the draft once and resolves when its owned response completes or stops."
+      },
+      {
+        "name": "resolveApproval",
+        "kind": "method",
+        "parameters": "id: string, decision: ChatApprovalDecision",
+        "returns": "boolean",
+        "description": "Resolves an approval only in the active generation."
+      },
+      {
+        "name": "answerQuestions",
+        "kind": "method",
+        "parameters": "id: string, answers: ChatQuestionAnswer[]",
+        "returns": "boolean",
+        "description": "Submits validated answers only to the active generation."
+      },
+      {
+        "name": "cancelInteraction",
+        "kind": "method",
+        "parameters": "id: string",
+        "returns": "boolean",
+        "description": "Cancels one interaction only in the active generation."
+      }
+    ],
+    "emits": [],
+    "slots": [],
+    "forwardsAttrs": false
+  },
+  "ai-conversation": {
+    "name": "createAIChat",
+    "source": "packages/core/src/modules/chat/controllers/aiChat.ts",
+    "props": [
+      {
+        "name": "respond",
+        "type": "ChatResponder",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Respond configuration for this component; see its Features examples for usage.",
+        "control": "fixture",
+        "references": [
+          "ChatResponder"
+        ]
+      },
+      {
+        "name": "messages",
+        "type": "ChatMessage[] | undefined",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Messages configuration for this component; see its Features examples for usage.",
+        "control": "fixture",
+        "references": [
+          "ChatMessage"
+        ]
+      }
+    ],
+    "methods": [
+      {
+        "name": "createAIChat",
+        "kind": "method",
+        "parameters": "options: ChatOptions",
+        "returns": "AIChatController",
+        "description": "Creates a class-backed conversation through the existing public factory."
+      },
+      {
+        "name": "clear",
+        "kind": "method",
+        "parameters": "",
+        "returns": "void",
+        "description": "Stops the response and clears local history, draft, attachments, and rewind state."
+      },
+      {
+        "name": "state",
+        "kind": "property",
+        "parameters": "",
+        "returns": "ChatState",
+        "description": "Reactive conversation state shared by its visual presentations."
+      },
+      {
+        "name": "dispose",
+        "kind": "method",
+        "parameters": "",
+        "returns": "void",
+        "description": "Permanently stops this conversation while leaving host services caller-owned."
+      },
+      {
+        "name": "cancelRewind",
+        "kind": "method",
+        "parameters": "",
+        "returns": "void",
+        "description": "Restores the saved draft and attachments without changing message history."
+      },
+      {
+        "name": "rewind",
+        "kind": "method",
+        "parameters": "messageId: string",
+        "returns": "void",
+        "description": "Previews replacement of a user message while retaining the prior unsent draft."
+      },
+      {
+        "name": "stop",
+        "kind": "method",
+        "parameters": "",
+        "returns": "void",
+        "description": "Stops the active response without waiting for the host responder."
+      },
+      {
+        "name": "fork",
+        "kind": "method",
+        "parameters": "messageId: string",
+        "returns": "ChatMessage[]",
+        "description": "Returns an independent conversation prefix ending at a completed assistant message."
+      },
+      {
+        "name": "send",
+        "kind": "method",
+        "parameters": "",
+        "returns": "Promise<boolean>",
+        "description": "Sends the draft once and resolves when its owned response completes or stops."
+      },
+      {
+        "name": "resolveApproval",
+        "kind": "method",
+        "parameters": "id: string, decision: ChatApprovalDecision",
+        "returns": "boolean",
+        "description": "Resolves an approval only in the active generation."
+      },
+      {
+        "name": "answerQuestions",
+        "kind": "method",
+        "parameters": "id: string, answers: ChatQuestionAnswer[]",
+        "returns": "boolean",
+        "description": "Submits validated answers only to the active generation."
+      },
+      {
+        "name": "cancelInteraction",
+        "kind": "method",
+        "parameters": "id: string",
+        "returns": "boolean",
+        "description": "Cancels one interaction only in the active generation."
+      }
+    ],
+    "emits": [],
+    "slots": [],
+    "forwardsAttrs": false
+  },
+  "ai-view": {
+    "name": "createAIChatView",
+    "source": "packages/core/src/modules/chat/integrations/aiChatView.ts",
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Id configuration for this component; see its Features examples for usage.",
+        "control": "fixture",
+        "references": []
+      },
+      {
+        "name": "label",
+        "type": "string | undefined",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Visible or accessible label for the control.",
+        "control": "fixture",
+        "references": []
+      },
+      {
+        "name": "chat",
+        "type": "AIChatController | undefined",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Application-owned chat controller. Requests start only when explicitly sent.",
+        "control": "fixture",
+        "references": [
+          "AIChatController"
+        ]
+      },
+      {
+        "name": "history",
+        "type": "AIChatHistoryController | undefined",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Optional history store from createNotificationHistory, independent of active notifications.",
+        "control": "fixture",
+        "references": [
+          "AIChatHistoryController"
+        ]
+      }
+    ],
+    "methods": [
+      {
+        "name": "createAIChatView",
+        "kind": "method",
+        "parameters": "options: AIChatViewOptions",
+        "returns": "SidePanelDefinition",
+        "description": "Returns a definition only. The host explicitly registers, opens, and removes it. Controllers remain caller-owned."
+      }
+    ],
+    "emits": [],
+    "slots": [],
+    "forwardsAttrs": false
+  },
+  "ai-history": {
+    "name": "createAIChatHistory",
+    "source": "packages/core/src/modules/chat/controllers/aiChatHistory.ts",
+    "props": [
+      {
+        "name": "createChat",
+        "type": "() => AIChatController",
+        "default": {
+          "kind": "required"
+        },
+        "description": "Creates a new owned controller only when create() is explicitly called.",
+        "control": "fixture",
+        "references": [
+          "AIChatController"
+        ]
+      },
+      {
+        "name": "applicationId",
+        "type": "string | undefined",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Application scope identity, independent of the native provider session.",
+        "control": "fixture",
+        "references": []
+      },
+      {
+        "name": "scope",
+        "type": "\"application\" | \"all\" | undefined",
+        "default": {
+          "kind": "omitted"
+        },
+        "description": "Initial application-only or all-in-memory-conversations filter.",
+        "control": "fixture",
+        "references": []
+      }
+    ],
+    "methods": [
+      {
+        "name": "createAIChatHistory",
+        "kind": "method",
+        "parameters": "options: AIChatHistoryOptions",
+        "returns": "AIChatHistoryController",
+        "description": "Creates a class-backed history store through the existing public factory."
+      },
+      {
+        "name": "dispose",
+        "kind": "method",
+        "parameters": "",
+        "returns": "void",
+        "description": "Disposes every owned chat exactly once and empties history."
+      },
+      {
+        "name": "activeId",
+        "kind": "property",
+        "parameters": "",
+        "returns": "ComputedRef<string | undefined>",
+        "description": "Readonly reactive identity of the selected conversation."
+      },
+      {
+        "name": "create",
+        "kind": "method",
+        "parameters": "title: string, applicationId: string | undefined",
+        "returns": "ShallowReactive<{ id: string; title: string; applicationId: string | undefined; createdAt: number; pinned: boolean; archived: boolean; chat: Raw<AIChatController>; }>",
+        "description": "Creates and owns a chat only on explicit request, then selects its conversation."
+      },
+      {
+        "name": "rename",
+        "kind": "method",
+        "parameters": "id: string, title: string",
+        "returns": "boolean",
+        "description": "Updates a conversation title after trimming and validating it."
+      },
+      {
+        "name": "visible",
+        "kind": "property",
+        "parameters": "",
+        "returns": "ComputedRef<AIChatConversation[]>",
+        "description": "Unarchived conversations, with pinned entries ordered first."
+      },
+      {
+        "name": "archived",
+        "kind": "property",
+        "parameters": "",
+        "returns": "ComputedRef<AIChatConversation[]>",
+        "description": "Archived conversations retained in the current scope."
+      },
+      {
+        "name": "active",
+        "kind": "property",
+        "parameters": "",
+        "returns": "ComputedRef<AIChatConversation | undefined>",
+        "description": "Selected conversation in scope, including its retained chat state."
+      },
+      {
+        "name": "conversations",
+        "kind": "property",
+        "parameters": "",
+        "returns": "ComputedRef<AIChatConversation[]>",
+        "description": "Snapshot of metadata entries; each entry retains its chat controller identity."
+      },
+      {
+        "name": "scope",
+        "kind": "property",
+        "parameters": "",
+        "returns": "ComputedRef<\"application\" | \"all\">",
+        "description": "Readonly reactive filter controlled through setScope."
+      },
+      {
+        "name": "select",
+        "kind": "method",
+        "parameters": "id: string",
+        "returns": "boolean",
+        "description": "Selects an existing in-scope conversation without replacing its controller."
+      },
+      {
+        "name": "pin",
+        "kind": "method",
+        "parameters": "id: string, value: boolean",
+        "returns": "boolean",
+        "description": "Changes history ordering without replacing the conversation or chat."
+      },
+      {
+        "name": "archive",
+        "kind": "method",
+        "parameters": "id: string, value: boolean",
+        "returns": "boolean",
+        "description": "Changes archive status and clears selection when archiving the active conversation."
+      },
+      {
+        "name": "remove",
+        "kind": "method",
+        "parameters": "id: string",
+        "returns": "boolean",
+        "description": "Removes one conversation and disposes its owned chat."
+      },
+      {
+        "name": "setScope",
+        "kind": "method",
+        "parameters": "value: \"application\" | \"all\"",
+        "returns": "void",
+        "description": "Changes discovery scope without fetching external provider conversations."
+      }
+    ],
+    "emits": [],
+    "slots": [],
+    "forwardsAttrs": false
   }
 }

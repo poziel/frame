@@ -9,6 +9,7 @@ import { componentExamples } from '../componentCatalog';
 import { variantsFor } from '../exampleVariants';
 import { exampleValue, serializeUsage } from './demoState';
 import type { ComponentContract, ComponentDocumentation, FeatureExample, ThemeClass, ThemeToken } from './types';
+import { aiGuides } from './aiGuides';
 const sources=contracts.pageSources as Record<string,string[]>;
 const surfaces=contracts.contracts as unknown as Record<string,ComponentContract>;
 const styling=themes as Record<string,{classes:ThemeClass[];tokens:ThemeToken[]}>;
@@ -19,6 +20,12 @@ export const componentDocumentation:Record<string,ComponentDocumentation> = Obje
   classes:sources[example.id]!.flatMap(source=>styling[source]?.classes??[]),tokens:sources[example.id]!.flatMap(source=>styling[source]?.tokens??[]),demoId:example.id,
  }];
  if(example.id==='universal-viewer')return [example.id,{id:example.id,components,features:[{id:'basic',title:'Try the file viewer',description:example.usage,variant:'default',code:example.code}],classes:sources[example.id]!.flatMap(source=>styling[source]?.classes??[]),tokens:sources[example.id]!.flatMap(source=>styling[source]?.tokens??[]),demoId:example.id}];
+ if(['ai-prompt','ai-conversation','ai-history','ai-chat','ai-view'].includes(example.id)){
+  const service=(serviceContracts as unknown as Record<string,ComponentContract>)[example.id];
+  const related=example.id==='ai-chat'?['ai-history','ai-view'].map(id=>(serviceContracts as unknown as Record<string,ComponentContract>)[id]!).filter(Boolean):[];
+  const guide=aiGuides[example.id];
+  return [example.id,{id:example.id,components:[...components,...(service?[service]:[]),...related],overview:guide?.overview,features:guide?.features??[],classes:sources[example.id]!.flatMap(source=>styling[source]?.classes??[]),tokens:sources[example.id]!.flatMap(source=>styling[source]?.tokens??[]),demoId:example.id}];
+ }
  const baseline=Object.fromEntries(main.props.filter(p=>p.default.kind==='required'||p.name==='modelValue'||p.name==='label').map(p=>[p.name,exampleValue(p,main.name)]));
  const slots=Object.fromEntries(main.slots.filter(slot=>['default','first','second'].includes(slot.name)).map(slot=>[slot.name,slot.name==='default'?'Example content':slot.name+' pane']));
  const variants=variantsFor(example.id);

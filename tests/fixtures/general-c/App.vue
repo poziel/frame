@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import {ref} from 'vue';
-import FrameDialog from '../../../packages/core/src/components/FrameDialog.vue';
-import FrameAlertDialog from '../../../packages/core/src/components/FrameAlertDialog.vue';
-import FrameDrawer from '../../../packages/core/src/components/FrameDrawer.vue';
-import FramePopover from '../../../packages/core/src/components/FramePopover.vue';
-import FrameHoverCard from '../../../packages/core/src/components/FrameHoverCard.vue';
-import FrameDropdownMenu from '../../../packages/core/src/components/FrameDropdownMenu.vue';
-import FrameContextMenu from '../../../packages/core/src/components/FrameContextMenu.vue';
-import FrameToast from '../../../packages/core/src/components/FrameToast.vue';
+import FrameDialog from '../../../packages/core/src/components/overlays/FrameDialog.vue';
+import FrameAlertDialog from '../../../packages/core/src/components/overlays/FrameAlertDialog.vue';
+import FrameDrawer from '../../../packages/core/src/components/overlays/FrameDrawer.vue';
+import FramePopover from '../../../packages/core/src/components/overlays/FramePopover.vue';
+import FrameHoverCard from '../../../packages/core/src/components/overlays/FrameHoverCard.vue';
+import FrameDropdownMenu from '../../../packages/core/src/components/navigation/FrameDropdownMenu.vue';
+import FrameContextMenu from '../../../packages/core/src/components/navigation/FrameContextMenu.vue';
+import FrameToast from '../../../packages/core/src/components/feedback/FrameToast.vue';
 const selected=ref(''),confirmed=ref(false),toast=ref(false);
 const items=[{id:'edit',label:'Edit'},{id:'disabled',label:'Unavailable',disabled:true},{id:'delete',label:'Delete',separator:true}];
 </script><template><main style="padding:30px;display:flex;gap:12px;flex-wrap:wrap">

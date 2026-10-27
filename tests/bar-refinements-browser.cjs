@@ -8,7 +8,7 @@ const path=require('node:path');
  const widen=await page.addStyleTag({content:'.navigation-bar:not(.bar-horizontal){width:220px}'});
  let previousX;
  for(const direction of ['ltr','rtl']){
- await page.locator('.workbench').evaluate((el,direction)=>el.dir=direction,direction);
+ await page.locator('.workbench').evaluate((el, direction)=>el.dir=direction,direction);
  for(const position of ['left','right'])for(const display of ['icons','text','both'])for(const justification of ['left','center','right']){
   await page.evaluate(({position,display,justification})=>{const b=window.__navFrame.navigationBar;b.setPosition(position);b.setDisplay(display);b.setJustification(justification);},{position,display,justification});
   await page.waitForFunction(j=>document.querySelector('.navigation-bar').dataset.justification===j,justification);
@@ -58,7 +58,7 @@ const path=require('node:path');
  const options=page.locator('.layout-options [data-option]');await options.first().waitFor();
  assert.deepEqual((await options.evaluateAll(els=>els.map(el=>el.dataset.option))).slice(0,11),['menu','navigation-bar','primary-view-bar','primary','secondary-view-bar','secondary','panel-view-bar','panel','banner','status','navigation']);
  const groups=await page.locator('.layout-options small').allTextContents();
- const before=(a,b)=>assert(groups.indexOf(a)>=0&&groups.indexOf(a)<groups.indexOf(b),`${a} before ${b}`);
+ const before=(a, b)=>assert(groups.indexOf(a)>=0&&groups.indexOf(a)<groups.indexOf(b),`${a} before ${b}`);
  before('Navigation Bar Position','Primary View Bar Position');before('Primary View Bar Size','Primary Sidebar Position');before('Primary Sidebar Position','Secondary View Bar Position');before('Secondary View Bar Size','Panel View Bar Display');before('Panel View Bar Size','Panel Position');before('Panel Alignment','Banner Alignment');
  await page.locator('[data-option=nav-justify-center]').click();assert.equal(await page.evaluate(()=>window.__navFrame.navigationBar.justification.value),'center');
  assert.deepEqual(errors,[]);console.log('Side justification, separator dragging, centered gap targets in all bars, and Customize Layout ordering passed');

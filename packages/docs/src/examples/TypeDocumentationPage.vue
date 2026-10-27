@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { showWorkspaceContent } from './workspaceContent';
 import { computed } from "vue";
-import type { WorkspacePaneContent } from "../../../core/src/types";
-import { useFrame } from "../../../core/src/frame/createFrame";
-import FrameButton from "../../../core/src/components/FrameButton.vue";
-import ComponentShowcase from "../../../core/src/components/ComponentShowcase.vue";
+import type {WorkspacePaneContent} from '../../../core/src/framework/workspace/workspaceTypes';
+import {useFrame} from '../../../core/src/framework/useFrame';
+import FrameButton from "../../../core/src/components/actions/FrameButton.vue";
+import ComponentShowcase from "../../../core/src/components/framework/ComponentShowcase.vue";
 import { apiEntries } from "./apiCatalog";
 import { updateReferenceUrl } from "./apiNavigation";
 import TypeLink from "./TypeLink.vue";

@@ -75,7 +75,7 @@ with sync_playwright() as p:
     expect(view.locator('.xterm')).to_have_count(2)
     expect(view.locator('.xterm-rows').last).to_contain_text('output while hidden')
     assert page.evaluate('window.terminalFixture.terminal.sessions.value.length') == 2
-    # Dropdowns use the existing Frame menu and never open Quick input.
+    # Dropdowns use the existing Frame menu and never open Quick pick.
     view.get_by_role('button', name='Terminal options', exact=True).click()
     expect(page.get_by_role('menu', name='Terminal options', exact=True)).to_be_visible()
     expect(page.locator('.palette-backdrop')).to_have_count(0)

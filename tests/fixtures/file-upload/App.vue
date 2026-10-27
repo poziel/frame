@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import FrameFileUpload from '../../../packages/core/src/components/FrameFileUpload.vue';
-import FrameFileDropZone from '../../../packages/core/src/components/FrameFileDropZone.vue';
+import FrameFileUpload from '../../../packages/core/src/components/forms/FrameFileUpload.vue';
+import FrameFileDropZone from '../../../packages/core/src/components/forms/FrameFileDropZone.vue';
 const files = ref<File[]>([]), count = ref(0), disabled = ref(false), accepted = ref('');
 const uploader = ref<InstanceType<typeof FrameFileUpload>>();
 </script>

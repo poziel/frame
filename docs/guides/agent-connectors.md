@@ -1,11 +1,11 @@
 # Connecting an AI chat to local agents
 
-`@frame/features` provides the provider-neutral `AgentConnection` interface, `createJsonLineAgentConnection`, and `createAgentChatSession`. The Rust implementation lives in the companion `frame-native/agents` directory. It supports Codex App Server, Claude through a Python Agent SDK helper, Gemini ACP, GitHub Copilot SDK, and OpenCode HTTP/SSE.
+`@frame/core/modules/chat` provides the provider-neutral `AgentConnection` interface, `createJsonLineAgentConnection`, and `createAgentChatSession`. The Rust implementation lives in the companion `frame-native/agents` directory. It supports Codex App Server, Claude through a Python Agent SDK helper, Gemini ACP, GitHub Copilot SDK, and OpenCode HTTP/SSE.
 
 The host starts and owns the native service. Importing Features starts no process, authentication, or model request. A session is created only when the application explicitly calls the factory; a model turn starts when the user sends a prompt.
 
 ```ts
-import { createAgentChatSession, createJsonLineAgentConnection } from '@frame/features';
+import { createAgentChatSession, createJsonLineAgentConnection } from '@frame/core/modules/chat';
 
 // Host-provided IPC: write sends text to the service's stdin;
 // subscribe delivers decoded UTF-8 stdout chunks and returns an unsubscribe function.

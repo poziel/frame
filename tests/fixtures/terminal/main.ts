@@ -1,8 +1,8 @@
 import { createApp, h, ref } from 'vue';
 import { createFrame, FrameShell, FrameButton } from '@frame/core';
-import { TerminalView, createTerminal, createTerminalView, type TerminalBackend, type TerminalEvent } from '@frame/features';
+import { TerminalView, createTerminal, createTerminalView, type TerminalBackend, type TerminalEvent } from '@frame/core/modules/terminal';
 import '../../../packages/core/src/style.css';
-import '../../../packages/features/src/style.css';
+
 
 let count = 0;
 const receivers = new Map<string, (event: TerminalEvent) => void>();
@@ -26,7 +26,10 @@ const frame = createFrame();
 const headerTerminal = createTerminal({ backend });
 frame.registerView(createTerminalView({ id: 'fixture.terminal', terminal: headerTerminal, frame, autoStart: false }), 'bottom');
 const visible = ref(true);
-(window as any).terminalFixture = { terminal, closed, inputs, sizes, output(id: string, text: string) { receivers.get(id)?.({ type: 'data', data: bytes(text) }); } };
+(window as any).terminalFixture = { terminal, closed, inputs, sizes, output(
+  id: string,
+  text: string
+) { receivers.get(id)?.({ type: 'data', data: bytes(text) }); } };
 createApp({ setup: () => () => h(FrameShell, { frame }, { default: () => h('main', { style: 'height:100%;display:flex;flex-direction:column;min-height:0' }, [
   h(FrameButton, { onClick: () => { visible.value = !visible.value; } }, () => 'Toggle terminal'),
   h(FrameButton, { onClick: () => { frame.layout.panelHeight = 330; frame.openView('fixture.terminal'); } }, () => 'Open header terminal'),

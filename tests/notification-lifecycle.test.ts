@@ -1,8 +1,8 @@
 import { test, expect } from 'bun:test';
-import { createNotifications } from '../packages/core/src/frame/notifications';
+import { Notifications } from '../packages/core/src/framework/views/notifications';
 
 test('notifications expire, persistent notifications remain, and events survive expiry', async () => {
-  const service = createNotifications();
+  const service = new Notifications();
   const received: string[] = [];
   const unsubscribe = service.subscribe(item => received.push(item.title));
   service.notify({ title: 'Brief', duration: 15 });
@@ -16,7 +16,7 @@ test('notifications expire, persistent notifications remain, and events survive 
 });
 
 test('hover and keyboard focus independently pause notification expiry', async () => {
-  const service = createNotifications();
+  const service = new Notifications();
   const handle = service.notify({ title: 'Read this', duration: 20 });
   service.pause(handle.id, 'pointer'); service.pause(handle.id, 'focus');
   await Bun.sleep(35);
@@ -30,7 +30,7 @@ test('hover and keyboard focus independently pause notification expiry', async (
 });
 
 test('notification action executes once and closes only its own instance', async () => {
-  const service = createNotifications();
+  const service = new Notifications();
   let calls = 0;
   const handle = service.notify({ id: 'save', title: 'Save', duration: 0, action: { label: 'Save now', run: async () => { calls++; await Bun.sleep(10); } } });
   const pending = service.runAction(handle.id);
@@ -42,7 +42,7 @@ test('notification action executes once and closes only its own instance', async
   service.dispose();
 });
 test('disposing Frame while an action is pending prevents late notifications', async () => {
-  const service = createNotifications();
+  const service = new Notifications();
   const handle = service.notify({ title: 'Pending', duration: 0, action: { label: 'Run', run: async () => { await Bun.sleep(10); throw new Error('Late failure'); } } });
   const pending = service.runAction(handle.id);
   service.dispose();

@@ -1,4 +1,4 @@
-# FramePinInput
+# FramePinField
 
 A sequence of one-character inputs for a short code. The model is a string array, not a combined string or a number. Joining and validating the code belong to the host.
 
@@ -7,7 +7,7 @@ A sequence of one-character inputs for a short code. The model is a string array
 ### Anatomy
 
 ```text
-FramePinInput
+FramePinField
 └─ PinInputRoot (.frame-pin-input)
    ├─ PinInputInput (.frame-form-input), index 0
    ├─ more inputs up to length - 1
@@ -21,7 +21,7 @@ Frame creates the cells and supplies labels such as “Verification code 1”. R
 ```vue
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { FramePinInput } from '@frame/core';
+import { FramePinField } from '@frame/core';
 import '@frame/core/style.css';
 
 const digits = ref<string[]>([]);
@@ -31,7 +31,7 @@ const code = computed(() => digits.value.join(''));
 <template>
   <div>
     <p>Enter the six-character verification code.</p>
-    <FramePinInput v-model="digits" label="Verification code" :length="6" otp />
+    <FramePinField v-model="digits" label="Verification code" :length="6" otp />
     <p>Entered {{ code.length }} of 6 characters.</p>
   </div>
 </template>
@@ -156,7 +156,7 @@ No Frame-defined methods or internal Reka refs are exposed.
 
 ### Sources and version
 
-[FramePinInput.vue](../../../packages/core/src/components/FramePinInput.vue) and [controls.css](../../../packages/core/src/forms/controls.css) define the wrapper. Compared with the official [Reka PIN Input reference](https://reka-ui.com/docs/components/pin-input.md) and installed Reka `2.11.0`.
+[FramePinField.vue](../../../packages/core/src/components/forms/FramePinField.vue) and [controls.css](../../../packages/core/src/components/forms/shared/controls.css) define the wrapper. Compared with the official [Reka PIN Input reference](https://reka-ui.com/docs/components/pin-input.md) and installed Reka `2.11.0`.
 
 ## Styling
 

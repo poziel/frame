@@ -10,7 +10,7 @@ const frame = createFrame({ host: { ...createBrowserHost(), window: {
 } } });
 const browser = createFrame();
 let files: unknown;
-createApp({ render: () => h(FrameShell, { frame, titleText: 'Host contract fixture' }, { default: () => h('main', [
+createApp({ render: () => h(FrameShell, { frame: location.search === '?browser' ? browser : frame, titleText: 'Host contract fixture' }, { default: () => h('main', [
   h(FrameButton, { label: 'Pick files', onClick: async () => { files = await frame.host.files!.pick({ multiple: true, accept: '.txt' }); } }),
 ]) }) }).mount('#app');
 Object.assign(window, { hostFixture: { frame, browser, files: () => files, stopped: () => stopped } });

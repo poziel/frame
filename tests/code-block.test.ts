@@ -1,8 +1,8 @@
 import { expect, test } from "bun:test";
 import { themeNames } from "../packages/core/node_modules/@shikijs/themes";
-import { CodeBlockTheme, codeBlockThemes } from "../packages/core/src/frame/codeThemes";
-import { codeStartLine, plainCodeLines } from "../packages/core/src/frame/codeBlock";
-import { highlightCode } from "../packages/core/src/frame/codeHighlight";
+import { CodeBlockTheme, codeBlockThemes } from "../packages/core/src/components/data-display/codeThemes";
+import { codeStartLine, plainCodeLines } from "../packages/core/src/components/data-display/codeBlock";
+import { highlightCode } from "../packages/core/src/components/data-display/codeHighlight";
 
 test("the public theme enum exposes every installed Shiki theme", () => {
   expect([...codeBlockThemes].sort()).toEqual([...themeNames].sort());

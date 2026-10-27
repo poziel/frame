@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
-import { fitModal, initialModal, resizeModal } from "../packages/core/src/frame/modal";
-import { createFrame } from "../packages/core/src/frame/createFrame";
+import { fitModal, initialModal, resizeModal } from "../packages/core/src/components/framework/modal";
+import {createFrame} from '../packages/core/src/framework/frame';
 const bounds = { x: 6, y: 40, width: 1188, height: 690 };
 test('custom minimum height applies to initial sizing, resizing, and small bounds', () => {
   const box = initialModal(bounds, 480, 200, 300);

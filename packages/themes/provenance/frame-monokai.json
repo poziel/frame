@@ -1,0 +1,14 @@
+{
+  "presets": ["frame-monokai-dark", "frame-monokai-light"],
+  "authorship": "Original Frame adaptation of user-approved mockups inspired by Monokai Pro. No extension assets or theme files were copied.",
+  "references": [
+    "https://monokai.pro/vscode",
+    "https://monokai.pro/history",
+    "https://code.visualstudio.com/api/references/theme-color"
+  ],
+  "design": {
+    "dark": "Warm charcoal surfaces, cream text and golden primary actions.",
+    "light": "Soft ivory surfaces, warm gray chrome and darkened semantic accents.",
+    "scope": "Frame shell and shared controls; editor syntax, terminal ANSI and application-specific surfaces are separate integrations."
+  }
+}

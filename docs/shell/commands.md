@@ -2,17 +2,21 @@
 
 Register application actions so keyboard shortcuts, menus, buttons, and Quick actions invoke the same behavior. Examples assume a stable `frame` instance and host-owned Vue refs/components.
 
+The [Keyboard Shortcuts editor](keybindings.md) lists these same commands and
+supports user overrides. Optional `source` identifies the contributing feature;
+`when: () => boolean` restricts shortcut activation to a host-defined context.
+
 ```ts
 const removeCommand = frame.commands.register({
   id: 'myapp.show-output', label: 'My app: Show output',
-  detail: 'Open application output', group: 'View', shortcut: 'Ctrl+Alt+O',
+  detail: 'Open application output', shortcut: 'Ctrl+Alt+O',
   enabled: () => canShowOutput.value,
   run: () => frame.openView('myapp.output'),
 });
 await frame.commands.execute('myapp.show-output');
 ```
 
-Required fields are `id`, `label`, and `run`; optional fields include `feature`, `available`, `enabled`, `visible`, `detail`, `group`, `icon`, `shortcut`, and `quickInput`. The default feature is `application`. `run` can return void or a promise. Read reactive dependencies inside predicates to keep presentation current. IDs must be unique; reserve `frame.` for Frame. Registration returns an unregister function.
+Required fields are `id`, `label`, and `run`; optional fields include `feature`, `available`, `enabled`, `visible`, `detail`, `icon`, `shortcut`, and `quickInput`. The default feature is `application`. `run` can return void or a promise. Read reactive dependencies inside predicates to keep presentation current. IDs must be unique; reserve `frame.` for Frame. Registration returns a live command with `enable()`, `disable()`, `setAvailable()`, `setVisible()`, and `unregister()`. During migration, the returned object remains callable as an unregister function. `get(id)` and `list()` return live command objects.
 
 ## Availability, usability, and visibility
 
@@ -32,7 +36,7 @@ Execution checks the owning feature, command availability, and enabled condition
 Commands appear in global application quick input by default (`quickInput` omitted or `true`). Register a category before assigning its prefix:
 
 ```ts
-const removeCategory = frame.commands.categories.register({
+const removeCategory = frame.commands.prefixes.register({
   prefix: '!', label: 'Artwork actions', placeholder: 'Search artwork actions…',
 });
 frame.commands.register({
@@ -48,7 +52,7 @@ Type a registered prefix followed by Space or Tab to enter its category. Backspa
 
 `frame.registerCommand()` and `frame.executeCommand()` remain compatibility aliases; prefer the grouped API. `frame.commands.value` remains a compatibility accessor for `frame.commands.items.value`.
 
-`executeCommand` checks availability and catches action errors, reporting them through status and the bounded session log. Commands default to `scope: 'application'` and appear in application quick input. Set `scope: 'frame'` for shell or extension controls in Frame commands. Set `quickInput: false` to retain API/menu/shortcut access while hiding the command from both pickers. Application commands with `group: 'View'` join the default View menu. A custom menu tree must supply its own items.
+`executeCommand` checks availability and catches action errors, reporting them through status and the bounded session log. Commands default to `scope: 'application'` and appear in application quick input. Set `scope: 'frame'` for shell or extension controls in Frame commands. Set `quickInput: false` to retain API/menu/shortcut access while hiding the command from both pickers. Command groups have been removed. Declare menu entries explicitly using their command IDs.
 
 ## Shortcuts
 
@@ -56,7 +60,7 @@ Use Ctrl, Shift, and/or Alt separated by `+`, plus a key. Ctrl also accepts Comm
 
 Built-in commands register when `createFrame()` runs; the mounted `FrameShell` installs keyboard routing. Application registration can happen before mounting. `frame.openQuickInput()` opens application choices; `frame.openCommands()` (or `frame.openQuickInput('frame')`) opens Frame commands. Typing `>` followed by Space or Tab switches application input to Frame commands. Backspace at the start of the query removes the displayed operator and returns to application choices. Arrow keys navigate, Enter runs the selected enabled choice, and Escape closes.
 
-Shortcuts are captured across the owning shell and its portals, including menus, status bar, sidebars, and quick input. With multiple shells, the most recently focused or clicked shell handles shortcuts; unmounting releases its registration. Focus in unrelated host content is left to the host. Extension shortcuts use the same registration and enabled checks in either picker mode. Ctrl+P and Ctrl+Shift+P are reserved picker shortcuts.
+Shortcuts are captured across the owning shell and its portals, including menus, status bar, sidebars, and quick input. With multiple shells, the most recently focused or clicked shell handles shortcuts; unmounting releases its registration. Focus in unrelated host content is left to the host. Extension shortcuts use the same registration and enabled checks in either picker mode. Ctrl+P and Ctrl+Shift+P are the default picker shortcuts and can be reassigned in the shortcut editor.
 
 ```ts
 const removeExtensionCommand = frame.registerCommand({
@@ -68,7 +72,7 @@ const removeExtensionCommand = frame.registerCommand({
 removeExtensionCommand();
 ```
 
-Frame commands include layout, registered views, workspace tab activation, settings, and window controls. View choices use `View: <name>` and show their registered icon. Duplicate names add `(Primary sidebar)`, `(Secondary sidebar)`, or `(Panel)`; duplicates within one region additionally include the parent path and stable view ID. These labels follow view movement and unregistering without changing command IDs. Literal, case-insensitive search matches in labels and descriptions render bold in the accent color; hovered and keyboard-selected choices keep the bold text in their inherited foreground color. Native minimize, maximize/restore, and close are disabled in a browser; full screen depends on platform support. Theme commands use only themes explicitly registered with `frame.theme.register(theme)` plus the Frame default reset. Core does not load a theme collection automatically.
+Frame commands include layout, registered views, workspace tab activation, settings, and window controls. View choices use `View: <name>` and show their registered icon. Duplicate names add `(Primary sidebar)`, `(Secondary sidebar)`, or `(Panel)`; duplicates within one region additionally include the parent path and stable view ID. These labels follow view movement and unregistering without changing command IDs. Literal, case-insensitive search matches in labels and descriptions render bold in the accent color; hovered and keyboard-selected choices keep the bold text in their inherited foreground color. Native minimize, maximize/restore, and close are disabled in a browser; full screen depends on platform support. The “Change theme…” command opens a nested chooser. Individual theme commands remain executable by ID but are excluded from automatic command lists. Theme commands use only themes explicitly registered with `frame.theme.register(theme)` plus the Frame default reset. Core does not load a theme collection automatically.
 
 ## Custom choices
 
@@ -80,7 +84,7 @@ const choice = await frame.showQuickPick([
 if (choice) console.log(choice.value);
 ```
 
-Items require `id` and `label`, accept `detail`, `icon` (a bundled icon name or Vue component), `shortcut`, and `disabled`, and retain additional typed host data in the result. Options are `title` and `placeholder`. Disabled items cannot be selected. An item shortcut accepts that choice while its picker is open; it takes precedence over a registered command with the same shortcut. Custom quick picks treat `>` as ordinary filter text and do not switch modes. Escape, outside dismissal, replacement by another picker, or disposal resolves to `undefined`.
+Items require `id` and `label`, accept `detail`, `icon` (a bundled icon name or Vue component), `shortcut`, and `disabled`, and retain additional typed host data in the result. Options include `title`, `placeholder`, and `searchable` (default true). Disabled items cannot be selected. An item shortcut accepts that choice while its picker is open; it takes precedence over a registered command with the same shortcut. Custom quick picks treat `>` as ordinary filter text and do not switch modes. Escape, outside dismissal, replacement by another picker, or disposal resolves to `undefined`.
 
 ## Navigation history
 
@@ -124,3 +128,35 @@ rather than being represented as command executions.
 Subscriptions are instance-owned and can target command IDs that register later.
 The returned cleanup is idempotent. Disposal removes subscriptions and prevents
 delivery after pending commands finish; listeners removed during delivery are skipped.
+
+## Command namespaces and permissions
+
+Disabling a dotted ID blocks that command and its descendants, including commands registered later. The parent does not need its own executable command. Dot boundaries are respected: disabling `artwork.edit` does not disable `artwork.editor`. Re-enabling a parent preserves independently disabled children and registered predicates.
+
+`frame.commands.disable('artwork.edit')` and `frame.commands.get('artwork.edit.erase')?.disable()` use the same execution state. Registered dotted IDs also support bracket lookup. Registry method names are reserved IDs. Permission requirements are declared with `requires: ['document.edit']`; `context: () => document` provides the target for evaluation. See [permissions](permissions.md).
+
+## Command Center submenus
+
+`frame.commandCenter.open()` opens application commands. `open(pageId)` opens a registered submenu, and `close()` dismisses the picker. A submenu registers one discoverable command. Its items may mix live commands, arbitrary choices, submenus, headings, and separators.
+
+`commandCenter: false` excludes a command from automatic command lists; explicit submenu references still display it and enforce its live command state. Existing `quickInput` categories remain supported.
+
+```ts
+const black = frame.commands.register({
+  id: 'canvas.background.black', label: 'Black', commandCenter: false,
+  run: () => setBackground('black'),
+});
+const submenu = frame.commandCenter.register({
+  id: 'canvas.background', label: 'Change background…', searchable: false,
+  items: [
+    black,
+    {id: 'divider', type: 'separator', label: 'Other backgrounds'},
+    {id: 'custom', type: 'submenu', label: 'Custom', items: [
+      {id: 'choose', label: 'Choose a color…', run: openColorPicker},
+    ]},
+  ],
+});
+submenu.unregister();
+```
+
+Submenus provide Back and restore the previous search text and highlight. Each submenu can set `searchable`, `title`, and `placeholder`. Structural rows cannot be selected. Ordinary items can provide `description`, `sectionLabel`, `selected`, and accessible `actions` with their own labels and handlers. Selecting a value through `showQuickPick` still returns the original item; local actions and submenu navigation are coordinated by Command Center submenus.

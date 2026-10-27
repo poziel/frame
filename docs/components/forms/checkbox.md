@@ -204,7 +204,7 @@ No Frame-defined methods or internal Reka refs are exposed.
 
 ### Sources and version
 
-[FrameCheckbox.vue](../../../packages/core/src/components/FrameCheckbox.vue) composes Reka CheckboxRoot, CheckboxIndicator, and Label. Styles come from [controls.css](../../../packages/core/src/forms/controls.css) and [style.css](../../../packages/core/src/style.css).
+[FrameCheckbox.vue](../../../packages/core/src/components/forms/FrameCheckbox.vue) composes Reka CheckboxRoot, CheckboxIndicator, and Label. Styles come from [controls.css](../../../packages/core/src/components/forms/shared/controls.css) and [style.css](../../../packages/core/src/style.css).
 
 Compared with the [Reka Checkbox reference](https://reka-ui.com/docs/components/checkbox.md) and installed Reka `2.11.0` source. See the [coverage review](../../reference/reka-coverage.md) for the audit scope and differences.
 

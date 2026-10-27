@@ -1,6 +1,11 @@
 import type { ComponentGuide } from './formGuides';
 
-const example = (id: string, title: string, description: string, values: Record<string, unknown>) => ({ id, title, description, values });
+const example = (
+  id: string,
+  title: string,
+  description: string,
+  values: Record<string, unknown>
+) => ({ id, title, description, values });
 const date = '2026-10-21';
 const range = { start: '2026-10-21', end: '2026-10-26' };
 const source = (id: string) => `https://reka-ui.com/docs/components/${id}`;

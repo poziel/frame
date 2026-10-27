@@ -13,7 +13,7 @@ const frame = createFrame({ settings: false, notifications: false });
 <template><FrameShell :frame="frame" title-text="My application" :show-search="false" /></template>
 ```
 
-Register views, navigation items, settings, notifications, toolbar actions, and commands explicitly. The shell supplies layout controls, keyboard navigation, resize bars, workspace placeholders, and optional Settings UI and transient bottom-left notifications. Notification history, its bell, and its panel are available separately in @frame/features. Register footer text/buttons with `frame.status.register()` and set the centered application status with `frame.status.set()` or `show()`; see the [status bar API](../../docs/shell/status-bar.md).
+Register views, navigation items, settings, notifications, toolbar actions, and commands explicitly. The shell supplies layout controls, keyboard navigation, resize bars, workspace placeholders, and optional Settings UI and transient bottom-left notifications. Notification history, its bell, and its panel are included through `@frame/core/modules/notifications`. Register footer text/buttons with `frame.status.register()` and set the centered application status with `frame.status.set()` or `show()`; see the [status bar API](../../docs/shell/status-bar.md).
 
 Enable Back and Forward beside the search bar with `createFrame({ navigation: true })`. Navigation tracks `setWorkspacePane` (including `workspace.setPane`) and opening registered views. Call `frame.navigation.back()` / `forward()` and read the reactive `canGoBack` / `canGoForward` flags. Opening a new destination after Back discards the forward path. Set `frame.layout.navigationVisible` to hide or show both arrows, also available from the workspace context menu and Customize Layout. Hiding preserves history; setting `frame.features.navigation = false` disables and clears it. `navigation.clear()` starts a fresh history after initial application setup. History is per frame, in memory, and does not undo edits or split geometry. Use `navigation.record(() => { /* related synchronous navigation calls */ })` to group a destination that updates several regions.
 
@@ -40,3 +40,7 @@ Frame accepts JSON, JSONC, JSON5, YAML (`.yaml`/`.yml`), TOML and INI through Co
 Frame includes themed Reka-backed form, color, calendar, and date/time compositions. See [Forms](../../docs/README.md) for coverage, model types, native input behavior, and upstream Alpha status. Controls work independently of a Frame instance; picker popups also integrate with shell overlay boundaries.
 
 Core is a Vue/TypeScript library without Tauri or Electron dependencies. Native integration is explicit through `createFrame({ host })`; see [host integration](../../docs/guides/hosts.md).
+
+## Optional modules
+
+Editor, terminal, file viewer, AI chat, and notification history ship in this package. Import from `@frame/core/modules/editor` (or `terminal`, `viewer`, `chat`, `notifications`). Module styles load automatically. Backend engines install automatically and unused module imports are excluded by consumer builds. See [module contracts](src/modules/README.md).

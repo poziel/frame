@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import { createFrame } from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 test('all view bars expose display and size without changing container state', () => {
  const f=createFrame({primaryViewBar:{display:'both'},panelViewBar:{size:'compact'}});
  f.registerView({id:'terminal',label:'Terminal',component:{render(){return null;}}},'bottom');f.openView('terminal');

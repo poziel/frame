@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import { createFrame } from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 
 test('status items keep registration, side, visibility and badges isolated', () => {
   const first = createFrame({ status: { hidden: ['branch'], hiddenBadges: ['branch'] } });

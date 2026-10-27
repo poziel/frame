@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import { createFrame } from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 
 test('after-command hooks run once after success and await custom asynchronous work', async () => {
   const frame = createFrame(); const calls: string[] = [];

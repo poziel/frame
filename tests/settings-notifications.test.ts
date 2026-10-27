@@ -1,9 +1,11 @@
 import { test, expect } from "bun:test";
-import { createFrame } from "../packages/core/src/frame/createFrame";
-import { regionIcon } from "../packages/core/src/frame/layoutIcons";
+import {createFrame} from '../packages/core/src/framework/frame';
+import { regionIcon } from "../packages/core/src/framework/layout/layoutIcons";
 test("settings register nested categories, validate edits, notify hosts, and unregister atomically", () => {
   const frame = createFrame(); const changes: unknown[] = [];
-  const section = { id: "editor", title: "Editor", children: [{ id: "font", title: "Font", settings: [{ id: "font.size", label: "Size", type: "number" as const, default: 14, min: 8, max: 40, onChange: (value: unknown) => changes.push(value) }] }] };
+  const section = { id: "editor", title: "Editor", children: [{ id: "font", title: "Font", settings: [{ id: "font.size", label: "Size", type: "number" as const, default: 14, min: 8, max: 40, onChange: (
+    value: unknown
+  ) => changes.push(value) }] }] };
   const remove = frame.registerSettingsSection(section);
   expect(frame.settings.allSections.value.map(item => item.id)).toEqual(["editor", "font"]);
   expect(frame.settings.set("font.size", 20)).toBe(true);
@@ -24,7 +26,7 @@ test("settings and notifications are isolated and optional, with configurable ma
   first.openSettings(); expect(first.settingsRequest.value).toBe(0);
   second.openSettings(); expect(second.settingsRequest.value).toBe(1);
   expect(first.features.notifications).toBe(false);
-  first.manageMenuItems.value = []; expect(second.manageMenuItems.value.length).toBe(1);
+  first.manageMenuItems.value = []; expect(second.manageMenuItems.value.map(item => item.id)).toEqual(["settings", "keybindings"]);
 });
 test("notifications preserve severity/details and support individual and bulk dismissal", () => {
   const frame = createFrame(); const other = createFrame();

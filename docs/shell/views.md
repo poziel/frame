@@ -26,13 +26,15 @@ These convenience methods register in the primary, secondary, and bottom regions
 | Field | Purpose |
 | --- | --- |
 | `id` | Required unique view ID; use an application prefix |
-| `label` | Required display name |
+| `label` | Required display name; a getter can read reactive host state |
+| `titleColor` | Optional CSS color for the heading and selector label; supports reactive getters |
 | `component` | Vue content component; optional for a group with children |
 | `props` | Properties passed to the content component |
 | `icon` | Vue icon component, rather than a string icon name |
 | `badge` | String or number for the view selector |
 | `actions` | Header actions: `{ id, label, icon?, run, disabled? }` |
 | `padded` | Whether the view gets built-in content padding |
+| `showHeader` | Bottom/secondary panes: `false` removes the pane header so content can supply one toolbar. Defaults to `true`; close/maximize commands remain available. |
 | `draggable` | Set `false` to prevent dragging |
 | `movable` | Set `false` to prevent moving the view |
 | `collapsed` | Initial collapsed state for a grouped section |
@@ -84,3 +86,16 @@ frame.registerSidePanel({
 ```
 
 Header actions can provide `menu` items and an `onSelect(item)` handler. A checked item uses `checked: true`; update checked state from your application setting to implement a single selection. Menus remain available when an action moves into the header overflow.
+
+View presentation can follow host state without re-registering the view:
+
+```ts
+frame.registerSidePanel({
+  id: 'myapp.left-tool',
+  get label() { return `Left tools · ${selectedTool.value}`; },
+  titleColor: '#28a9f4',
+  component: ToolOptions,
+});
+```
+
+Frame reads `label` and `titleColor` getters reactively. The host owns their reactive dependencies. Presentation changes preserve the component and collapsed, visibility, and placement state. Omit `titleColor` to inherit the theme color.

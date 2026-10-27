@@ -1,5 +1,6 @@
-@import './workspace-tabs.css';
-@import "./themes/default.css";
+@import './components/forms/shared/inputSurfaces.css';
+@import './components/framework/styles/workspace-tabs.css';
+@import "./themes/generated/default.css";
 .frame-overlay-host { position: fixed; z-index: 200; overflow: hidden; pointer-events: none; }
 .frame-overlay-host > :is(.frame-menu, .frame-select-popup, .frame-modal-layer, .palette-backdrop, .frame-notifications, .frame-overlay-scrollbar) { pointer-events: auto; }
 .frame-overlay-host > .frame-menu { z-index: 125; }
@@ -193,7 +194,8 @@
 .status-section { display: flex; align-items: center; gap: var(--frame-status-bar-item-gap, var(--frame-spacing-small, 4px)); min-width: 0; overflow: hidden; }
 .status-left { justify-content: flex-start; }
 .status-right { justify-content: flex-end; }
-.status-message { min-width: 0; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.status-bar > .status-message-tooltip { display:block;min-width:0;width:100%; }
+.status-message { width:100%;min-width: 0; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .status-message-error { color: var(--frame-status-error-color, var(--frame-danger)); }
 .status-message-warning { color: var(--frame-status-warning-color, #cca700); }
 .status-item-host { display: flex; align-items: center; min-width: 0; flex: 0 1 auto; }
@@ -550,9 +552,9 @@ button:hover > .visibility-indicator, button:focus > .visibility-indicator, butt
 .frame-modal-header h2 { font: inherit; margin: var(--frame-modal-header-h2-margin, 0); font-weight: var(--frame-modal-header-h2-font-weight, 500); flex: 1; min-width: var(--frame-modal-header-h2-min-width, 0); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .modal-icon { width: var(--frame-modal-icon-width, 16px); height: var(--frame-modal-icon-height, 16px); }
 .frame-modal-content { min-height: var(--frame-modal-content-min-height, 0); flex: 1; overflow: auto; }
-.frame-modal button { font: inherit; cursor: pointer; border: var(--frame-modal-button-border, 0); background: var(--frame-modal-button-background, transparent); color: inherit; }
+.frame-modal button:not([role="checkbox"]) { font: inherit; cursor: pointer; border: var(--frame-modal-button-border, 0); background: var(--frame-modal-button-background, transparent); color: inherit; }
 .frame-modal button:focus-visible, .frame-modal-header:focus-visible, .frame-modal :is(input,select,textarea):focus-visible { outline: 1px solid var(--frame-accent); outline-offset: var(--frame-modal-button-focus-visible-outline-offset, -1px); }
-.frame-modal button:hover { background: var(--frame-modal-button-hover-background, #ffffff09); }
+.frame-modal button:not([role="checkbox"]):hover { background: var(--frame-modal-button-hover-background, #ffffff09); }
 .modal-resize { position: absolute; touch-action: none; }
 .modal-resize.n, .modal-resize.s { height: var(--frame-modal-resize-n-height, 8px); left: 10px; right: 10px; cursor: ns-resize; }
 .modal-resize.n { top: -4px; } .modal-resize.s { bottom: -4px; }
@@ -595,7 +597,7 @@ button:hover > .visibility-indicator, button:focus > .visibility-indicator, butt
 /* Only leaf bodies scroll; their headers and containing collections stay fixed. */
 .view-host > .view-content { height: 100%; min-height: 0; overflow: auto; box-sizing: border-box; }
 .nested-view-content { overflow: hidden; }
-.side-panel > .section-header { flex-shrink: 0; }
+.side-panel > .section-header,.side-panel .frame-dock-content > .section-header { flex-shrink: 0; }
 .side-content:has(> .view-content > .view-sections),
 .panel-content:has(> .view-content > .view-sections),
 .view-host:has(> .view-content > .view-sections),
@@ -641,7 +643,7 @@ button:hover > .visibility-indicator, button:focus > .visibility-indicator, butt
 
 .frame-modal { color: var(--frame-modal-color, #d4d4d4); }
 .frame-modal :is(button, input, select, textarea) { font: inherit; }
-.frame-modal button { border: var(--frame-modal-button-border, 0); background: var(--frame-modal-button-background-2, none); color: inherit; cursor: pointer; }
+.frame-modal button:not([role="checkbox"]) { border: var(--frame-modal-button-border, 0); background: var(--frame-modal-button-background-2, none); color: inherit; cursor: pointer; }
 .frame-modal button:disabled { cursor: default; }
 .frame-modal :is(button, input, select, textarea):focus-visible { outline: 1px solid var(--frame-accent); outline-offset: var(--frame-modal-is-button-outline-offset, -1px); }
 .frame-modal .settings-content p { margin-top: var(--frame-modal-settings-content-p-margin-top, 0); }
@@ -779,7 +781,8 @@ button.frame-button.frame-icon-button {
  inline-size:var(--frame-icon-button-size,26px);block-size:var(--frame-icon-button-size,26px);aspect-ratio:1;
 }
 .frame-icon-button-icon {
- display:grid;place-items:center;flex:0 0 auto;inline-size:var(--frame-icon-button-icon-size,16px);aspect-ratio:1;
+ /* Center oversized children symmetrically when their padding cannot fit the slot. */
+ display:flex;align-items:center;justify-content:center;flex:0 0 auto;inline-size:var(--frame-icon-button-icon-size,16px);aspect-ratio:1;
 }
 .frame-icon-button-icon > :is(svg,.frame-icon) { display:block;width:100%;height:100%; }
 button.frame-button.frame-icon-button.frame-icon-button-labeled {
@@ -876,3 +879,8 @@ button.frame-button.frame-icon-button.frame-icon-button-icon-only:hover:not(:dis
 }
 
 
+
+/* Descriptive control tooltips must never cover another control's hit area. */
+[data-reka-popper-content-wrapper]:has(> .frame-tooltip[data-noninteractive]),.frame-tooltip[data-noninteractive] { pointer-events:none; }
+
+.frame-modal-header-separator { align-self: stretch; width: var(--frame-modal-header-separator-width, 1px); margin: var(--frame-modal-header-separator-margin, 7px 2px); background: var(--frame-line); flex-shrink: 0; }

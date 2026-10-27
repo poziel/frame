@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref } from 'vue';
-import { FrameButton, FrameTextInput } from '@frame/core';
+import { FrameButton, FrameTextField } from '@frame/core';
 const colors = [
   ['Frame blue', '#0078D4'], ['Iris purple', '#8066CC'], ['Periwinkle', '#7485D6'],
   ['Muted violet', '#996AC7'], ['Amethyst', '#9163CB'], ['Indigo', '#6469C4'],
@@ -39,7 +39,7 @@ function reset() {
 onBeforeUnmount(reset);
 </script>
 <template>
-  <section class="accent-palette" aria-label="Accent palette">
+  <section class="accent-palette" aria-label="Theming">
     <h2>Accent palette</h2>
     <p>Try an accent across Frame's controls, selection, focus outlines, and top-left logo. Your choice stays while you explore this session.</p>
     <div class="accent-palette-current" aria-live="polite"><span :style="{ background: selected }" aria-hidden="true"/><strong>{{ selected }}</strong></div>
@@ -51,7 +51,7 @@ onBeforeUnmount(reset);
     </div>
     <label class="accent-palette-custom">Custom accent<input type="color" :value="selected" @input="apply(($event.target as HTMLInputElement).value)"/></label>
     <FrameButton @click="reset">Reset accent</FrameButton>
-    <div class="accent-palette-sample"><FrameButton variant="primary">Example action</FrameButton><FrameTextInput aria-label="Accent preview input" placeholder="Focus to preview the outline"/></div>
+    <div class="accent-palette-sample"><FrameButton variant="primary">Example action</FrameButton><FrameTextField aria-label="Accent preview input" placeholder="Focus to preview the outline"/></div>
     <p>Button text adapts for contrast ({{ contrast }}:1 against the accent). This is a palette preview; other accent uses still need review.</p>
     <p>Native window and installed app icons keep their packaged artwork. This preview changes the logo inside Frame.</p>
     <pre>:root {

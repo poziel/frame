@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import { createFrame } from '../packages/core/src/frame/createFrame';
+import {createFrame} from '../packages/core/src/framework/frame';
 
 test('navigation justification is explicit, isolated, resettable and defaults left on either side', () => {
  const a=createFrame({navigationBar:{position:'right'}}),b=createFrame({navigationBar:{justification:'center'}});

@@ -10,8 +10,8 @@ with sync_playwright() as p:
     fixture = (Path(__file__).parent / 'fixtures/host/index.html').resolve().as_posix()
     page.goto(f'http://localhost:1420/@fs/{fixture}')
     page.wait_for_load_state('networkidle')
-    expect(page.get_by_role('button', name='Minimize window', exact=True)).to_be_disabled()
-    expect(page.get_by_role('button', name='Close window', exact=True)).to_be_disabled()
+    expect(page.get_by_role('button', name='Minimize window', exact=True)).to_have_count(0)
+    expect(page.get_by_role('button', name='Close window', exact=True)).to_have_count(0)
     page.get_by_role('button', name='Maximize window', exact=True).click()
     expect(page.get_by_role('button', name='Restore window', exact=True)).to_be_enabled()
     page.evaluate("window.hostFixture.frame.host.window.execute('maximize')")
@@ -31,6 +31,11 @@ with sync_playwright() as p:
     assert page.locator('input[type=file]').count() == 0
     page.evaluate('window.hostFixture.frame.dispose()')
     assert page.evaluate('window.hostFixture.stopped()') == 1
+    page.goto(f'http://localhost:1420/@fs/{fixture}?browser')
+    page.wait_for_load_state('networkidle')
+    expect(page.locator('.window-controls')).to_have_count(0)
+    for name in ['Minimize window', 'Maximize window', 'Close window']:
+        expect(page.get_by_role('button', name=name, exact=True)).to_have_count(0)
     assert not errors, errors
     browser.close()
 print('PASS: partial window capabilities, UI/API parity, browser file selection/cancellation, cleanup; no browser errors')

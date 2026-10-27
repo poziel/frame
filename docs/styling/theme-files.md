@@ -105,6 +105,6 @@ Shared tokens retain their typed color/length/font/etc. validation. Component-sp
 
 ## Defaults and maintenance
 
-Shared defaults are generated into `themes/default.css`. Component tokens deliberately retain their defaults at the point of use in CSS (or in runtime layout state), so an omitted component token does not change inheritance or appearance. Selecting a replacement theme removes prior component overrides; reset restores inherited styling and previous host-owned inline values. Theme overrides do not supersede props or layout measurements that are written directly on a descendant element.
+Shared defaults are generated into `themes/generated/default.css`. Component tokens deliberately retain their defaults at the point of use in CSS (or in runtime layout state), so an omitted component token does not change inheritance or appearance. Selecting a replacement theme removes prior component overrides; reset restores inherited styling and previous host-owned inline values. Theme overrides do not supersede props or layout measurements that are written directly on a descendant element.
 
 The build inventories token names from Core and Features sources. Run `bun run --cwd packages/core tokens:generate` after adding a variable; `tokens:check` and the coverage test detect catalog drift. Do not edit generated `componentTokens.ts` directly. Exposing token names for optional Features adds no Features implementation or runtime dependency to Core.
