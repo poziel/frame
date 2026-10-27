@@ -16,6 +16,7 @@
     "docs:contracts": "bun scripts/extract-component-contracts.ts && bun scripts/extract-theme-contracts.ts"
   },
   "devDependencies": {
+    "@vue/compiler-dom": "^3.5.13",
     "@iconify-json/codicon": "^1.2.75",
     "@vitejs/plugin-vue": "^6.0.7",
     "monaco-editor": "^0.57.0",

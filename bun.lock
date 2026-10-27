@@ -63,6 +63,7 @@
         "@frame/tailwind": "workspace:*",
         "@iconify-json/codicon": "^1.2.75",
         "@vitejs/plugin-vue": "^6.0.7",
+        "@vue/compiler-dom": "^3.5.13",
         "monaco-editor": "^0.57.0",
         "typescript": "~6.0.3",
         "vite": "^8.0.16",

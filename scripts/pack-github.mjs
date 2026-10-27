@@ -14,6 +14,14 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const output = resolve(root, 'dist/github-packages');
 const packages = ['core', 'themes', 'tailwind', 'tauri', 'electron'];
 const version = JSON.parse(readFileSync(resolve(root, 'package.json'))).version;
+const prerelease = process.env.PACKAGE_PRERELEASE;
+if (prerelease && !/^dev\.\d+\.\d+$/.test(prerelease)) {
+  throw new Error('PACKAGE_PRERELEASE must have the form dev.RUN.ATTEMPT');
+}
+if (prerelease && process.env.RELEASE_TAG) {
+  throw new Error('Stable releases cannot specify PACKAGE_PRERELEASE');
+}
+const packageVersion = prerelease ? `${version}-${prerelease}` : version;
 if (process.env.RELEASE_TAG && process.env.RELEASE_TAG !== `v${version}`) {
   throw new Error(`Release tag must match package version: v${version}`);
 }
@@ -30,6 +38,7 @@ for (const name of packages) {
     cpSync(resolve(source, file), resolve(stage, file), {recursive: true});
   }
   manifest.name = `@poziel/frame-${name}`;
+  manifest.version = packageVersion;
   manifest.private = false;
   manifest.repository = {
     type: 'git',
@@ -43,9 +52,12 @@ for (const name of packages) {
     for (const [dependency, range] of Object.entries(manifest[field] ?? {})) {
       if (dependency.startsWith('@frame/')) {
         manifest[field][dependency] =
-          `npm:@poziel/frame-${dependency.slice(7)}@${range}`;
+          `npm:@poziel/frame-${dependency.slice(7)}@${prerelease ? packageVersion : range}`;
       }
     }
+  }
+  if (prerelease && manifest.peerDependencies?.['@frame/core']) {
+    manifest.peerDependencies['@frame/core'] = packageVersion;
   }
   delete manifest.scripts;
   delete manifest.devDependencies;

@@ -1,6 +1,10 @@
 name: GitHub Packages
 
 on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
   release:
     types: [published]
@@ -9,7 +13,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: packages-${{ github.ref }}
+  group: packages-${{ github.run_id }}
   cancel-in-progress: false
 
 jobs:
@@ -41,16 +45,18 @@ jobs:
         run: node scripts/pack-github.mjs
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
+          PACKAGE_PRERELEASE: ${{ github.event_name == 'push' && format('dev.{0}.{1}', github.run_number, github.run_attempt) || '' }}
       - uses: actions/upload-artifact@v4
         with:
           name: frame-packages
           path: dist/github-packages/*.tgz
           if-no-files-found: error
       - name: Publish packages
-        if: github.event_name == 'release'
+        if: github.event_name == 'release' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         run: |
           for package in dist/github-packages/*.tgz; do
-            npm publish "$package" --registry=https://npm.pkg.github.com
+            npm publish "$package" --tag "$PACKAGE_TAG" --registry=https://npm.pkg.github.com
           done
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGE_TAG: ${{ github.event_name == 'push' && 'next' || 'latest' }}
