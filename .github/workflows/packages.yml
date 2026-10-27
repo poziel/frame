@@ -77,7 +77,7 @@ jobs:
           path: packages
       - name: Publish packages
         run: |
-          for package in packages/*.tgz; do
+          for package in ./packages/*.tgz; do
             npm publish "$package" --access public --tag "$PACKAGE_TAG" --registry="$PACKAGE_REGISTRY" "--@poziel:registry=$PACKAGE_REGISTRY"
           done
         env:
