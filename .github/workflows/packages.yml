@@ -81,6 +81,6 @@ jobs:
             npm publish "$package" --access public --tag "$PACKAGE_TAG" --registry="$PACKAGE_REGISTRY" "--@poziel:registry=$PACKAGE_REGISTRY"
           done
         env:
-          NODE_AUTH_TOKEN: ${{ matrix.registry == 'https://npm.pkg.github.com' && secrets.GITHUB_TOKEN || secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ matrix.registry == 'https://npm.pkg.github.com' && secrets.GITHUB_TOKEN || '' }}
           PACKAGE_REGISTRY: ${{ matrix.registry }}
           PACKAGE_TAG: ${{ github.event_name == 'push' && 'next' || 'latest' }}

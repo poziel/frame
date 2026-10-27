@@ -12,19 +12,25 @@ Publishing jobs run independently after a shared successful build.
 ## One-time npm setup
 
 The npm account or organization must own the `@poziel` scope.
-For initial publication, create an npm granular access token that can write the
-Frame packages, including creating them, and permits unattended publishing
-with bypass 2FA. Save it as the repository Actions secret **NPM_TOKEN** under
-**Settings → Secrets and variables → Actions**. Never commit or paste the token
-into documentation. GitHub publication continues using `GITHUB_TOKEN`.
+The initial `0.1.0` packages were created through interactive CLI publication.
+For a new package, use `npm login --registry=https://registry.npmjs.org` and
+publish its built archive with public access, completing npm's browser approval.
+Do not create an automation token for this setup.
 
-After the packages exist, prefer npm trusted publishing. In each package's
+After the packages exist, configure npm trusted publishing. In each package's
 settings on npm, configure GitHub Actions with user `poziel`, repository `frame`,
 and workflow filename `packages.yml`. Allow direct `npm publish`, leave the
 environment blank, and complete a publication within npm's setup expiry window.
 The workflow already grants `id-token: write` and uses Node 24 and npm 11.
-Once trusted publication succeeds, remove the `NPM_TOKEN` secret and revoke the
-bootstrap token. npm then authenticates through GitHub OIDC.
+The workflow authenticates to npm through GitHub OIDC and needs no `NPM_TOKEN`
+secret. GitHub publication continues using `GITHUB_TOKEN`.
+
+The same trust relationship can be configured through the CLI, approving npm's
+browser authentication when requested. Repeat for each published package:
+
+```sh
+npm trust github @poziel/frame-core --file packages.yml --repo poziel/frame --allow-publish --registry=https://registry.npmjs.org
+```
 
 ## Automatic builds on main
 
