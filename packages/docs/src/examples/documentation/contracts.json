@@ -16027,7 +16027,7 @@
     "packages/core/src/components/navigation/FrameMenubar.vue": {
       "name": "FrameMenubar",
       "source": "packages/core/src/components/navigation/FrameMenubar.vue",
-      "sourceHash": "439a46b1565ee34d29381bb5ccb8478c8b08ba361d5341f194fa34871d324b02",
+      "sourceHash": "75446bb02171d1b00e50874e4fb4185c2de9ea5e1fad9b8c592ae3e5e9dc0823",
       "props": [
         {
           "name": "modelValue",

@@ -1,16 +1,16 @@
 # Packages and responsibilities
 
-| Package | Provides | Host supplies |
-| --- | --- | --- |
-| `@frame/core` | Shell, views, workspace, commands, controls, settings primitives, transient notifications, validated theme contract and runtime scopes | Product screens, domain stores, backend, persistence, theme import UI and font assets |
-| `@frame/core/modules/*` (same package) | Notification history, chat, viewer, editor, terminal controllers/components and backend interfaces | Explicit setup, adapters, credentials, host-owned cleanup |
-| `@frame/tailwind` | Optional Tailwind/Vite tooling referencing runtime tokens | Build configuration and stylesheet imports |
-| `@frame/themes` | Optional validated presets and JSON: VS Code Light 2026, High Contrast Black and White | Selection UI, persistence, font assets |
-| `@frame/tauri` | Optional TypeScript host adapter | Native Tauri host, plugins and permissions |
-| `@frame/electron` | Renderer adapter, preload bridge and main-process handlers | Electron window and explicit authorization policy |
-| `@frame/docs` | Interactive documentation and examples | Never an application dependency |
+| Package                                | Provides                                                                                                                               | Host supplies                                                                         |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `@frame/core`                          | Shell, views, workspace, commands, controls, settings primitives, transient notifications, validated theme contract and runtime scopes | Product screens, domain stores, backend, persistence, theme import UI and font assets |
+| `@frame/core/modules/*` (same package) | Notification history, chat, viewer, editor, terminal controllers/components and backend interfaces                                     | Explicit setup, adapters, credentials, host-owned cleanup                             |
+| `@frame/tailwind`                      | Optional Tailwind/Vite tooling referencing runtime tokens                                                                              | Build configuration and stylesheet imports                                            |
+| `@frame/themes`                        | Optional validated presets and JSON: VS Code Light 2026, High Contrast Black and White                                                 | Selection UI, persistence, font assets                                                |
+| `@frame/tauri`                         | Optional TypeScript host adapter                                                                                                       | Native Tauri host, plugins and permissions                                            |
+| `@frame/electron`                      | Renderer adapter, preload bridge and main-process handlers                                                                             | Electron window and explicit authorization policy                                     |
+| `@frame/docs`                          | Interactive documentation and examples                                                                                                 | Never an application dependency                                                       |
 
-All packages are currently private. The repository root orchestrates the workspace and is not an install target. Use [local archives](../guides/getting-started.md#install-the-packages) in your own application.
+Workspace manifests are private. The repository root orchestrates the workspace and is not an install target. Use [local archives](../guides/getting-started.md#install-the-packages) or the [GitHub Packages release workflow](../guides/github-packages.md) in your own application. Publishing stages separate `@poziel/frame-*` manifests; consumers use aliases to preserve `@frame/*` imports.
 
 The main Core entry never imports modules. Importing a module registers no views and starts no provider requests or terminal processes. Each module has an isolated JavaScript entry and automatic styles; unused modules stay out of application builds. Heavy engines install automatically with Core; Monaco and PDF support load lazily. Use explicit [factories and components](../../packages/core/src/modules/README.md). The typed `.use(moduleDescriptor)` installer is implemented; the editor module provides `editorModule`, which automatically enables settings JSON editing. Descriptors for other modules remain future work.
 

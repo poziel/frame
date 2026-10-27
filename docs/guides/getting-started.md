@@ -21,6 +21,10 @@ Use public instance APIs to control the shell. Application code should not query
 
 ## Install the packages
 
+For versioned GitHub registry packages, see
+[GitHub Packages installation and releases](github-packages.md). The aliases
+documented there preserve the `@frame/*` imports used throughout these guides.
+
 Frame currently uses private local packages. For development across separate repositories, build the packages and link them directly. No archive or published release is required.
 
 From the Frame repository root:

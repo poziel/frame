@@ -1,0 +1,56 @@
+name: GitHub Packages
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: packages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  packages:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://npm.pkg.github.com
+          scope: '@poziel'
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.3
+      - run: bun install --frozen-lockfile
+      - run: bun run check
+      - run: bun run build:library
+      - run: bun run build:themes
+      - run: bun run build:hosts
+      - run: bun run check:modules
+      - run: bun run check:consumer
+      - run: bun run docs:contracts
+      - run: bun test
+      - name: Pack GitHub manifests
+        run: node scripts/pack-github.mjs
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frame-packages
+          path: dist/github-packages/*.tgz
+          if-no-files-found: error
+      - name: Publish packages
+        if: github.event_name == 'release'
+        run: |
+          for package in dist/github-packages/*.tgz; do
+            npm publish "$package" --registry=https://npm.pkg.github.com
+          done
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

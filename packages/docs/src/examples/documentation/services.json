@@ -965,7 +965,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Respond configuration for this component; see its Features examples for usage.",
+        "description": "Host callback that produces responses when the conversation explicitly\nsends.",
         "control": "fixture",
         "references": [
           "ChatResponder"
@@ -977,7 +977,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Messages configuration for this component; see its Features examples for usage.",
+        "description": "Ordered conversation snapshots supplied by the owner.",
         "control": "fixture",
         "references": [
           "ChatMessage"
@@ -1084,7 +1084,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Respond configuration for this component; see its Features examples for usage.",
+        "description": "Host callback that produces responses when the conversation explicitly\nsends.",
         "control": "fixture",
         "references": [
           "ChatResponder"
@@ -1096,7 +1096,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Messages configuration for this component; see its Features examples for usage.",
+        "description": "Ordered conversation snapshots supplied by the owner.",
         "control": "fixture",
         "references": [
           "ChatMessage"

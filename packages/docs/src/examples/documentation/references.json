@@ -1421,7 +1421,7 @@
   "ChatAttachment": {
     "description": "Public interface declared in packages/core/src/modules/chat/types/chatTypes.ts.",
     "usage": "Import ChatAttachment from @frame/core/modules/chat. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface ChatAttachment {\n\n  id: string;\n\n  name: string;\n\n  kind: 'file' | 'folder' | 'context';\n\n  files?: File[];\n}",
+    "code": "export interface ChatAttachment {\n\n  /**\n   * Stable identity used to address this entry within its owning message or\n   * schema.\n   */\n  id: string;\n\n  /** Display name supplied by the host. */\n  name: string;\n\n  /** Distinguishes file, folder, and application-context references. */\n  kind: 'file' | 'folder' | 'context';\n\n  /**\n   * Optional browser File objects retained by reference; copying clones only\n   * the list.\n   */\n  files?: File[];\n}",
     "properties": [
       {
         "name": "id",
@@ -1449,7 +1449,7 @@
   "ChatMessage": {
     "description": "Public interface declared in packages/core/src/modules/chat/types/chatTypes.ts.",
     "usage": "Import ChatMessage from @frame/core/modules/chat. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface ChatMessage {\n\n  id: string;\n\n  role: 'user' | 'assistant';\n\n  createdAt: number;\n\n  parts: ChatPart[];\n\n  attachments: ChatAttachment[];\n\n  status: 'pending' | 'complete' | 'stopped' | 'error';\n\n  finishedAt?: number;\n\n  error?: string;\n}",
+    "code": "export interface ChatMessage {\n\n  /**\n   * Stable identity used to address this entry within its owning message or\n   * schema.\n   */\n  id: string;\n\n  /** Conversation role identifying the entry as user or assistant content. */\n  role: 'user' | 'assistant';\n\n  /** Creation timestamp in milliseconds since the Unix epoch. */\n  createdAt: number;\n\n  /** Content parts retained in their original event order. */\n  parts: ChatPart[];\n\n  /**\n   * Host-selected attachment references associated with this entry or request.\n   */\n  attachments: ChatAttachment[];\n\n  /** Whether the entry is pending, complete, stopped, or failed. */\n  status: 'pending' | 'complete' | 'stopped' | 'error';\n\n  /**\n   * Completion timestamp in milliseconds since the Unix epoch, when finished.\n   */\n  finishedAt?: number;\n\n  /** Failure explanation retained when the message finishes with an error. */\n  error?: string;\n}",
     "properties": [
       {
         "name": "id",
