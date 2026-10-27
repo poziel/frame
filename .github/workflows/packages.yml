@@ -1,4 +1,4 @@
-name: GitHub Packages
+name: Packages
 
 on:
   push:
@@ -21,14 +21,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          registry-url: https://npm.pkg.github.com
-          scope: '@poziel'
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.4.3
@@ -41,7 +38,7 @@ jobs:
       - run: bun run check:consumer
       - run: bun run docs:contracts
       - run: bun test
-      - name: Pack GitHub manifests
+      - name: Pack publishable manifests
         run: node scripts/pack-github.mjs
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
@@ -51,12 +48,39 @@ jobs:
           name: frame-packages
           path: dist/github-packages/*.tgz
           if-no-files-found: error
+
+  publish:
+    if: github.event_name == 'release' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    needs: packages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    strategy:
+      fail-fast: false
+      matrix:
+        registry:
+          - https://registry.npmjs.org
+          - https://npm.pkg.github.com
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: ${{ matrix.registry }}
+          scope: '@poziel'
+      - name: Install npm with trusted publishing support
+        run: npm install --global npm@11
+      - uses: actions/download-artifact@v4
+        with:
+          name: frame-packages
+          path: packages
       - name: Publish packages
-        if: github.event_name == 'release' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         run: |
-          for package in dist/github-packages/*.tgz; do
-            npm publish "$package" --tag "$PACKAGE_TAG" --registry=https://npm.pkg.github.com
+          for package in packages/*.tgz; do
+            npm publish "$package" --access public --tag "$PACKAGE_TAG" --registry="$PACKAGE_REGISTRY" "--@poziel:registry=$PACKAGE_REGISTRY"
           done
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ matrix.registry == 'https://npm.pkg.github.com' && secrets.GITHUB_TOKEN || secrets.NPM_TOKEN }}
+          PACKAGE_REGISTRY: ${{ matrix.registry }}
           PACKAGE_TAG: ${{ github.event_name == 'push' && 'next' || 'latest' }}

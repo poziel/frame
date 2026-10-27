@@ -45,7 +45,8 @@ for (const name of packages) {
     url: 'git+https://github.com/poziel/frame.git',
     directory: `packages/${name}`,
   };
-  manifest.publishConfig = {registry: 'https://npm.pkg.github.com'};
+  // Registry selection belongs to publishing jobs so this archive serves both.
+  delete manifest.publishConfig;
   // Peers keep their public alias and semver range so the host's aliased Core
   // satisfies them without requesting a second package from the registry.
   for (const field of ['dependencies', 'optionalDependencies']) {
