@@ -34,6 +34,7 @@ For independent sortable rows, see [reorder lists](shell/reorder-list.md).
 
 ## Configuration, styling, and packages
 
+- [Documentation hosting](guides/documentation-pages.md): GitHub Pages deployment and the `frame.poziel.dev` custom domain.
 - [Component documentation](components/README.md): basic form controls, examples, API, behavior, and styling.
 - [Layout](configuration/layout.md): region visibility, placement, sizing, Zen, and overlay boundaries.
 - [Theme tokens](styling/theme-variables.md): shared colors, spacing, fonts, and component tokens.
