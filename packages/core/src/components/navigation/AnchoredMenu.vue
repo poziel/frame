@@ -153,7 +153,7 @@ onBeforeUnmount(() => {
         :is="parts.content"
         ref="content"
         :id="id"
-        class="frame-menu"
+        class="frame-menu frame-overlay-surface frame-overlay-interactive frame-box-scope frame-control-scope frame-shell-text frame-scroll-scope"
         @pointermove="
           ($event.currentTarget as HTMLElement).dataset.menuInput = 'pointer'
         "

@@ -6,6 +6,7 @@ import {
   parseThemeFile,
 } from '../packages/core/src/themes/theme';
 import {themeTokens} from '../packages/core/src/themes/tokens/tokenCatalog';
+import {compileStyleSource} from '../packages/core/scripts/compile-style-source';
 
 const metadata = {
   version: 1 as const,
@@ -178,15 +179,17 @@ test('component image functions cannot load external resources through quoted ca
     ).toThrow('unsupported CSS');
 });
 
-test('every Frame CSS variable in Core and Features has a token', () => {
+test('every authored or emitted Frame CSS variable in Core has a token', () => {
   const missing = new Set<string>();
   for (const root of ['packages/core/src']) {
     for (const file of readdirSync(root, {recursive: true})
       .map(String)
-      .filter((f) => /\.(css|vue|ts)$/.test(f) && !f.startsWith('themes'))) {
-      for (const match of readFileSync(`${root}/${file}`, 'utf8').matchAll(
-        /--frame-[\w-]+/g
-      )) {
+      .filter((f) => /\.(s?css|vue|ts)$/.test(f) && !f.startsWith('themes'))) {
+      const source = readFileSync(`${root}/${file}`, 'utf8');
+      const css = /\.(scss|vue)$/.test(file)
+        ? compileStyleSource(`${root}/${file}`)
+        : '';
+      for (const match of (source + '\n' + css).matchAll(/--frame-[\w-]+/g)) {
         if (!Object.hasOwn(themeTokens, match[0])) missing.add(match[0]);
       }
     }

@@ -1,0 +1,549 @@
+@use './input-surfaces';
+/* Standalone controls share the shell theme without requiring a Frame instance. */
+.frame-form-inline-layout {
+  display: inline-flex;
+  align-items: center;
+  /* Space between children for .frame-form-inline-layout. @token --frame-gap */
+  --_frame-default-gap-3e2a1ab688: 6px;
+  gap: var(--frame-gap, var(--_frame-default-gap-3e2a1ab688));
+}
+.frame-control-surface {
+  font: inherit;
+  /* Foreground for .frame-control-surface. @token --frame-text */
+  --_frame-default-text-11eec91da6: #ccc;
+  color: var(--frame-text, var(--_frame-default-text-11eec91da6));
+  /* Background for .frame-control-surface. @token --frame-surface */
+  --_frame-default-surface-63d5630960: #242424;
+  background: var(--frame-surface, var(--_frame-default-surface-63d5630960));
+  /* Border for .frame-control-surface. @token --frame-line */
+  --_frame-default-line-ff02b7d326: #454545;
+  border: 1px solid var(--frame-line, var(--_frame-default-line-ff02b7d326));
+  /* Corner radius for .frame-control-surface. @token --frame-control-radius */
+  --_frame-default-control-radius-99f2371f33: var(--frame-radius-medium);
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-99f2371f33)
+  );
+  /* Internal spacing for .frame-control-surface. @token --frame-control-padding-y */
+  --_frame-default-control-padding-y-6f187fc61a: 5px;
+  /* Internal spacing for .frame-control-surface. @token --frame-control-padding-x */
+  --_frame-default-control-padding-x-a7f84e125c: 10px;
+  padding: var(
+      --frame-control-padding-y,
+      var(--_frame-default-control-padding-y-6f187fc61a)
+    )
+    var(
+      --frame-control-padding-x,
+      var(--_frame-default-control-padding-x-a7f84e125c)
+    );
+}
+.frame-form-input {
+  /* Corner radius of the legacy form input surface. @token --frame-form-input-radius */
+  --_frame-default-form-input-radius-99: var(--frame-input-radius);
+  /* Shared corner radius for text fields, text areas, selects, and composed input surfaces. @token --frame-input-radius @context */
+  border-radius: var(
+    --frame-form-input-radius,
+    var(--_frame-default-form-input-radius-99)
+  );
+  min-width: 0;
+  box-sizing: border-box;
+  /* Foreground for .frame-form-input. @token --frame-control-text */
+  --_frame-default-control-text-2e67396f40: #d4d4d4;
+  color: var(
+    --frame-control-text,
+    var(--_frame-default-control-text-2e67396f40)
+  );
+  /* Background for .frame-form-input. @token --frame-control-background */
+  --_frame-default-control-background-e1b39ac626: #1d1d1d;
+  background: var(
+    --frame-control-background,
+    var(--_frame-default-control-background-e1b39ac626)
+  );
+  /* Border color for .frame-form-input. @token --frame-control-border */
+  --_frame-default-control-border-b1b8a4c3b3: #3c4246;
+  border-color: var(
+    --frame-control-border,
+    var(--_frame-default-control-border-b1b8a4c3b3)
+  );
+}
+.frame-control-action {
+  cursor: pointer;
+}
+.frame-control-focus:focus-visible {
+  /* Elevation shadow for .frame-control-focus:focus-visible. @token --frame-accent */
+  --_frame-default-accent-1583861c13: #0078d4;
+  outline: 1px solid
+    var(--frame-accent, var(--_frame-default-accent-1583861c13));
+  outline-offset: 2px;
+}
+.frame-control-disabled[data-disabled] {
+  opacity: 0.45;
+  cursor: default;
+}
+.frame-check-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  padding: 0;
+  line-height: 1;
+}
+.frame-check-control[data-state='checked'] {
+  /* Elevation shadow for .frame-check-control[data-state='checked']. @token --frame-accent */
+  --_frame-default-accent-1583861c13: #0078d4;
+  background: var(--frame-accent, var(--_frame-default-accent-1583861c13));
+  /* Elevation shadow for .frame-check-control[data-state='checked']. @token --frame-accent */
+  --_frame-default-accent-1583861c13: #0078d4;
+  border-color: var(--frame-accent, var(--_frame-default-accent-1583861c13));
+  /* Foreground for .frame-check-control[data-state='checked']. @token --frame-accent-foreground */
+  --_frame-default-accent-foreground-55f53c865b: #fff;
+  color: var(
+    --frame-accent-foreground,
+    var(--_frame-default-accent-foreground-55f53c865b)
+  );
+}
+.frame-check-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-check-indicator svg {
+  stroke: currentColor;
+  stroke-width: 0.65;
+  stroke-linejoin: round;
+}
+.frame-choice-group {
+  display: flex;
+  flex-wrap: wrap;
+  /* Space between children for .frame-choice-group. @token --frame-gap */
+  --_frame-default-gap-3e2a1ab688: 6px;
+  gap: var(--frame-gap, var(--_frame-default-gap-3e2a1ab688));
+}
+.frame-choice-group > [role='listbox'],
+.frame-choice-group > [data-reka-listbox-content] {
+  display: flex;
+  flex-direction: column;
+}
+.frame-choice-item {
+  display: flex;
+  align-items: center;
+  /* Space between children for .frame-choice-item. @token --frame-gap */
+  --_frame-default-gap-3e2a1ab688: 6px;
+  gap: var(--frame-gap, var(--_frame-default-gap-3e2a1ab688));
+  text-align: left;
+}
+.frame-choice-item[data-state='on'],
+.frame-choice-item[data-state='checked'],
+.frame-choice-item[data-highlighted],
+.frame-toggle[data-state='on'] {
+  /* Elevation shadow for .frame-choice-item[data-state='on'], .frame-choice-item[data-state='checked'], .frame-choice-item[data-highlighted], .frame-toggle[data-state='on']. @token --frame-accent */
+  --_frame-default-accent-1583861c13: #0078d4;
+  background: var(--frame-accent, var(--_frame-default-accent-1583861c13));
+}
+.frame-choice-item small {
+  /* Foreground for .frame-choice-item small. @token --frame-muted */
+  --_frame-default-muted-74c5fb58d7: #999;
+  color: var(--frame-muted, var(--_frame-default-muted-74c5fb58d7));
+}
+.frame-number-field > .frame-form-input {
+  width: 7em;
+  text-align: center;
+}
+.frame-select-popup.frame-reka-select-popup {
+  position: relative;
+  min-width: var(
+    --reka-select-trigger-width,
+    var(--reka-combobox-trigger-width, 160px)
+  );
+  max-height: var(--reka-select-content-available-height, 320px);
+  pointer-events: auto;
+  font: inherit;
+  /* Foreground for .frame-select-popup.frame-reka-select-popup. @token --frame-text */
+  --_frame-default-text-11eec91da6: #ccc;
+  color: var(--frame-text, var(--_frame-default-text-11eec91da6));
+  /* Shared translucent fill for floating surfaces over the application canvas. @token --frame-overlay-background @context */
+  background: var(--frame-overlay-background);
+  /* Border for .frame-select-popup.frame-reka-select-popup. @token --frame-line */
+  --_frame-default-line-ff02b7d326: #454545;
+  border-color: var(--frame-line, var(--_frame-default-line-ff02b7d326));
+  /* Corner radius for .frame-select-popup.frame-reka-select-popup. @token --frame-control-radius */
+  --_frame-default-control-radius-99f2371f33: var(--frame-radius-medium);
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-99f2371f33)
+  );
+  /* Elevation shadow for .frame-select-popup.frame-reka-select-popup. @token --frame-overlay-shadow */
+  --_frame-default-overlay-shadow-c818b823ef: 0 6px 18px #0005;
+  box-shadow: var(
+    --frame-overlay-shadow,
+    var(--_frame-default-overlay-shadow-c818b823ef)
+  );
+}
+.frame-select-options .frame-reka-select-item {
+  display: flex;
+  align-items: center;
+  /* Space between children for .frame-select-options .frame-reka-select-item. @token --frame-gap */
+  --_frame-default-gap-3e2a1ab688: 6px;
+  gap: var(--frame-gap, var(--_frame-default-gap-3e2a1ab688));
+  padding: 4px 8px;
+  min-height: 24px;
+  outline: none;
+  cursor: pointer;
+}
+.frame-select-options .frame-reka-select-item[data-highlighted] {
+  /* Elevation shadow for .frame-select-options .frame-reka-select-item[data-highlighted]. @token --frame-accent */
+  --_frame-default-accent-1583861c13: #0078d4;
+  background: var(--frame-accent, var(--_frame-default-accent-1583861c13));
+  /* Foreground for .frame-select-options .frame-reka-select-item[data-highlighted]. @token --frame-text */
+  --_frame-default-text-e531feab10: #fff;
+  color: var(--frame-text, var(--_frame-default-text-e531feab10));
+}
+.frame-select-options .frame-reka-select-item[data-disabled] {
+  opacity: 0.4;
+  cursor: default;
+}
+.frame-select-separator {
+  height: 1px;
+  margin: 5px 0;
+  /* Border for .frame-select-separator. @token --frame-line */
+  --_frame-default-line-ff02b7d326: #454545;
+  background: var(--frame-line, var(--_frame-default-line-ff02b7d326));
+}
+/* Keep browser constraint validation while the visible Reka control owns focus. */
+.frame-control-validation {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+}
+
+/* One themed surface for the number input and its optional attached controls. */
+.frame-number-field {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0;
+  box-sizing: border-box;
+  min-width: 0;
+  height: 30px;
+  /* Border for .frame-number-field. @token --frame-control-border */
+  --_frame-default-control-border-f38e153d3a: var(--frame-line);
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border: 1px solid
+    var(--frame-control-border, var(--_frame-default-control-border-f38e153d3a));
+  /* Shared corner radius for text fields, text areas, selects, and composed input surfaces. @token --frame-input-radius @context */
+  border-radius: var(--frame-input-radius);
+  /* Background for .frame-number-field. @token --frame-control-background */
+  --_frame-default-control-background-5152e7530b: var(--frame-surface);
+  /* Neutral raised surface behind grouped content and control compositions. @token --frame-surface @context */
+  background: var(
+    --frame-control-background,
+    var(--_frame-default-control-background-5152e7530b)
+  );
+  /* Foreground for .frame-number-field. @token --frame-control-text */
+  --_frame-default-control-text-3c0bb6871a: var(--frame-text);
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  color: var(
+    --frame-control-text,
+    var(--_frame-default-control-text-3c0bb6871a)
+  );
+}
+.frame-number-field > .frame-form-input {
+  width: 7em;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: right;
+  outline: none;
+  padding: 2px 6px;
+}
+.frame-number-field .frame-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 26px;
+  min-width: 0;
+  width: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+}
+.frame-number-field > .frame-control-button:first-child {
+  /* Border for .frame-number-field > .frame-control-button:first-child. @token --frame-control-border */
+  --_frame-default-control-border-f38e153d3a: var(--frame-line);
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-right: 1px solid
+    var(--frame-control-border, var(--_frame-default-control-border-f38e153d3a));
+  border-radius: inherit;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.frame-number-field > .frame-control-button:last-child {
+  /* Border for .frame-number-field > .frame-control-button:last-child. @token --frame-control-border */
+  --_frame-default-control-border-f38e153d3a: var(--frame-line);
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-left: 1px solid
+    var(--frame-control-border, var(--_frame-default-control-border-f38e153d3a));
+  border-radius: inherit;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.frame-number-field .frame-control-button:hover:not([data-disabled]) {
+  /* Background for .frame-number-field .frame-control-button:hover:not([data-disabled]). @token --frame-menu-hover */
+  --_frame-default-menu-hover-4223ad9c76: var(--frame-line);
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  background: var(
+    --frame-menu-hover,
+    var(--_frame-default-menu-hover-4223ad9c76)
+  );
+}
+.frame-number-field .frame-control-button:focus-visible {
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  outline: 1px solid var(--frame-accent);
+  outline-offset: -2px;
+}
+.frame-number-field[data-size='compact'] {
+  height: 24px;
+}
+.frame-number-field[data-size='compact'] .frame-control-button {
+  flex-basis: 18px;
+  width: 18px;
+}
+.frame-number-field[data-size='compact'] > .frame-form-input {
+  padding: 1px 4px;
+  font-size: inherit;
+}
+.frame-number-steppers {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 22px;
+  /* Border for .frame-number-steppers. @token --frame-control-border */
+  --_frame-default-control-border-f38e153d3a: var(--frame-line);
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-left: 1px solid
+    var(--frame-control-border, var(--_frame-default-control-border-f38e153d3a));
+}
+.frame-number-field .frame-number-steppers > .frame-control-button {
+  flex: 1 1 0;
+  width: 100%;
+  min-height: 0;
+}
+.frame-number-steppers > .frame-control-button + .frame-control-button {
+  /* Border for .frame-number-steppers > .frame-control-button + .frame-control-button. @token --frame-control-border */
+  --_frame-default-control-border-f38e153d3a: var(--frame-line);
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-top: 1px solid
+    var(--frame-control-border, var(--_frame-default-control-border-f38e153d3a));
+}
+.frame-number-field[data-size='compact'] .frame-number-steppers {
+  flex-basis: 16px;
+}
+.frame-number-field[data-disabled] {
+  opacity: 0.45;
+}
+.frame-number-field[data-disabled] .frame-control-button {
+  opacity: 1;
+  cursor: default;
+}
+
+.frame-input-group-control
+  > :is(
+    .frame-text-input,
+    .frame-number-field,
+    .frame-date-field,
+    .frame-combobox-anchor,
+    .frame-select,
+    .frame-text-area
+  ) {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
+
+/* Select and combobox popups share viewport, option and separator presentation. */
+.frame-select-popup {
+  position: fixed;
+  z-index: 125;
+  display: flex;
+  flex-direction: column;
+  /* Foreground for .frame-select-popup. @token --frame-select-popup-color */
+  --_frame-default-select-popup-color-7d705318f3: #d4d4d4;
+  color: var(
+    --frame-select-popup-color,
+    var(--_frame-default-select-popup-color-7d705318f3)
+  );
+  /* Background for .frame-select-popup. @token --frame-select-popup-background */
+  --_frame-default-select-popup-background-ddec47d253: var(
+    --frame-overlay-background
+  );
+  /* Shared translucent fill for floating surfaces over the application canvas. @token --frame-overlay-background @context */
+  background: var(
+    --frame-select-popup-background,
+    var(--_frame-default-select-popup-background-ddec47d253)
+  );
+  /* Border for .frame-select-popup. @token --frame-select-border-color */
+  --_frame-default-select-border-color-e7308eff8a: #454545;
+  /* Border for .frame-select-popup. @token --frame-select-popup-border */
+  --_frame-default-select-popup-border-727537921b: 1px solid
+    var(
+      --frame-select-border-color,
+      var(--_frame-default-select-border-color-e7308eff8a)
+    );
+  border: var(
+    --frame-select-popup-border,
+    var(--_frame-default-select-popup-border-727537921b)
+  );
+  /* Corner radius for .frame-select-popup. @token --frame-select-popup-border-radius */
+  --_frame-default-select-popup-border-radius-eb81c19580: var(
+    --frame-radius-small
+  );
+  /* Small shared corner radius used by inset rows and compact elements. @token --frame-radius-small @context */
+  border-radius: var(
+    --frame-select-popup-border-radius,
+    var(--_frame-default-select-popup-border-radius-eb81c19580)
+  );
+  /* Elevation shadow for .frame-select-popup. @token --frame-select-popup-box-shadow */
+  --_frame-default-select-popup-box-shadow-9890e81475: 0 6px 18px #0005;
+  box-shadow: var(
+    --frame-select-popup-box-shadow,
+    var(--_frame-default-select-popup-box-shadow-9890e81475)
+  );
+  /* Value of font for .frame-select-popup. @token --frame-select-popup-font */
+  --_frame-default-select-popup-font-f709887b0a: 12px system-ui, sans-serif;
+  font: var(
+    --frame-select-popup-font,
+    var(--_frame-default-select-popup-font-f709887b0a)
+  );
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.frame-select-options {
+  overflow: auto;
+  /* Minimum height for .frame-select-options. @token --frame-select-options-min-height */
+  --_frame-default-select-options-min-height-aed87f9571: 0;
+  min-height: var(
+    --frame-select-options-min-height,
+    var(--_frame-default-select-options-min-height-aed87f9571)
+  );
+  scrollbar-width: none;
+}
+.frame-select-options > div {
+  display: flex;
+  /* Space between children for .frame-select-options > div. @token --frame-select-options-div-gap */
+  --_frame-default-select-options-div-gap-62188a9949: 8px;
+  gap: var(
+    --frame-select-options-div-gap,
+    var(--_frame-default-select-options-div-gap-62188a9949)
+  );
+  align-items: center;
+  /* Internal spacing for .frame-select-options > div. @token --frame-select-options-div-padding */
+  --_frame-default-select-options-div-padding-69537e7f82: 4px 8px;
+  padding: var(
+    --frame-select-options-div-padding,
+    var(--_frame-default-select-options-div-padding-69537e7f82)
+  );
+  cursor: pointer;
+  /* Minimum height for .frame-select-options > div. @token --frame-select-options-div-min-height */
+  --_frame-default-select-options-div-min-height-596768f6e5: 24px;
+  min-height: var(
+    --frame-select-options-div-min-height,
+    var(--_frame-default-select-options-div-min-height-596768f6e5)
+  );
+  box-sizing: border-box;
+}
+.frame-select-options .active:not(.disabled) {
+  /* Background for .frame-select-options .active:not(.disabled). @token --frame-select-options-active-not-disabled-background */
+  --_frame-default-select-options-active-not-disabled-background-befd1e15f1: #087caa;
+  background: var(
+    --frame-select-options-active-not-disabled-background,
+    var(
+      --_frame-default-select-options-active-not-disabled-background-befd1e15f1
+    )
+  );
+  /* Foreground for .frame-select-options .active:not(.disabled). @token --frame-select-options-active-not-disabled-color */
+  --_frame-default-select-options-active-not-disabled-color-1d7563a915: white;
+  color: var(
+    --frame-select-options-active-not-disabled-color,
+    var(--_frame-default-select-options-active-not-disabled-color-1d7563a915)
+  );
+}
+.frame-select-options .disabled {
+  /* Opacity for .frame-select-options .disabled. @token --frame-select-options-disabled-opacity */
+  --_frame-default-select-options-disabled-opacity-17b4eb6804: 0.4;
+  opacity: var(
+    --frame-select-options-disabled-opacity,
+    var(--_frame-default-select-options-disabled-opacity-17b4eb6804)
+  );
+  cursor: default;
+}
+.frame-select-options small {
+  /* Foreground for .frame-select-options small. @token --frame-select-options-small-color */
+  --_frame-default-select-options-small-color-7983c82a45: #999;
+  color: var(
+    --frame-select-options-small-color,
+    var(--_frame-default-select-options-small-color-7983c82a45)
+  );
+  /* Text size for .frame-select-options small. @token --frame-select-options-small-font-size */
+  --_frame-default-select-options-small-font-size-ecba6252ee: 11px;
+  font-size: var(
+    --frame-select-options-small-font-size,
+    var(--_frame-default-select-options-small-font-size-ecba6252ee)
+  );
+}
+.frame-select-options .active small {
+  color: inherit;
+}
+
+.frame-select-options > .frame-select-separator {
+  /* Internal spacing for .frame-select-options > .frame-select-separator. @token --frame-select-options-frame-select-separator-padding */
+  --_frame-default-select-options-frame-select-separator-padding-ef02f56ae2: 0;
+  padding: var(
+    --frame-select-options-frame-select-separator-padding,
+    var(
+      --_frame-default-select-options-frame-select-separator-padding-ef02f56ae2
+    )
+  );
+  /* Minimum height for .frame-select-options > .frame-select-separator. @token --frame-select-options-frame-select-separator-min-height */
+  --_frame-default-select-options-frame-select-separator-min-height-0e4a87cca7: 1px;
+  min-height: var(
+    --frame-select-options-frame-select-separator-min-height,
+    var(
+      --_frame-default-select-options-frame-select-separator-min-height-0e4a87cca7
+    )
+  );
+  /* Height for .frame-select-options > .frame-select-separator. @token --frame-select-options-frame-select-separator-height */
+  --_frame-default-select-options-frame-select-separator-height-82a6e3f488: 1px;
+  height: var(
+    --frame-select-options-frame-select-separator-height,
+    var(
+      --_frame-default-select-options-frame-select-separator-height-82a6e3f488
+    )
+  );
+  /* Outer spacing for .frame-select-options > .frame-select-separator. @token --frame-select-options-frame-select-separator-margin */
+  --_frame-default-select-options-frame-select-separator-margin-4e7bc980ca: 5px
+    0;
+  margin: var(
+    --frame-select-options-frame-select-separator-margin,
+    var(
+      --_frame-default-select-options-frame-select-separator-margin-4e7bc980ca
+    )
+  );
+  /* Background for .frame-select-options > .frame-select-separator. @token --frame-line */
+  --_frame-default-line-4baa2b1abd: #3c4246;
+  background: var(--frame-line, var(--_frame-default-line-4baa2b1abd));
+  cursor: default;
+}

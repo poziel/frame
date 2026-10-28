@@ -1,0 +1,156 @@
+.panel-view-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  gap: 3px;
+  overflow: visible;
+}
+.panel-view-bar .frame-dock-content > .panel-tabs:not(.view-bar-measure) {
+  overflow: hidden;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+.panel-view-bar .view-bar-measure {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: -10000px;
+  visibility: hidden;
+  pointer-events: none;
+  width: max-content;
+  max-width: none;
+  overflow: visible;
+}
+.panel-view-bar .view-bar-measure button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.view-bar-compact .panel-tabs button {
+  padding: 2px 5px;
+  /* Text size for .view-bar-compact .panel-tabs button. @token --frame-activity-compact-font-size */
+  --_frame-default-activity-compact-font-size-b7bc7b45e2: 10px;
+  /* Text size for .view-bar-compact .panel-tabs button. @token --frame-view-compact-font-size */
+  --_frame-default-view-compact-font-size-009125f104: var(
+    --frame-activity-compact-font-size,
+    var(--_frame-default-activity-compact-font-size-b7bc7b45e2)
+  );
+  font-size: var(
+    --frame-view-compact-font-size,
+    var(--_frame-default-view-compact-font-size-009125f104)
+  );
+}
+.view-bar-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 15px;
+  padding-inline: 3px;
+  border-radius: 999px;
+  /* Primary font family inherited by shell content and ordinary controls. @token --frame-font-body @context */
+  font: 10px/15px var(--frame-font-body);
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  background: var(--frame-accent);
+  /* Readable text and icon foreground on accent-filled surfaces. @token --frame-accent-foreground @context */
+  color: var(--frame-accent-foreground);
+}
+.panel-view-bar .frame-dock-content > .frame-icon-button,
+.panel-view-bar .frame-dock-content > .tooltip-trigger {
+  flex-shrink: 0;
+}
+
+.secondary-region .panel-header {
+  /* Space between columns for .secondary-region .panel-header. @token --frame-secondary-panel-header-gap */
+  --_frame-default-secondary-panel-header-gap-5826fcb6cd: 4px;
+  column-gap: var(
+    --frame-secondary-panel-header-gap,
+    var(--_frame-default-secondary-panel-header-gap-5826fcb6cd)
+  );
+}
+
+.panel-view-bar {
+  /* Default used by --bar-icon-size on .navigation-bar.bar-horizontal.bar-display-both:not(.bar-compact). Used when --frame-view-labeled-icon-size is unset. @token --frame-activity-labeled-icon-size */
+  --_frame-default-activity-labeled-icon-size-634b5bdd90: 22px;
+  /* Default used by --bar-icon-size on .navigation-bar.bar-horizontal.bar-display-both:not(.bar-compact). @token --frame-view-labeled-icon-size */
+  --_frame-default-view-labeled-icon-size-3e0570a078: var(
+    --frame-activity-labeled-icon-size,
+    var(--_frame-default-activity-labeled-icon-size-634b5bdd90)
+  );
+  --bar-icon-size: var(
+    --frame-view-labeled-icon-size,
+    var(--_frame-default-view-labeled-icon-size-3e0570a078)
+  );
+}
+.panel-view-bar .panel-tabs button {
+  /* Text size for .panel-view-bar .panel-tabs button. @token --frame-activity-font-size */
+  --_frame-default-activity-font-size-80710c2315: 14px;
+  /* Text size for .panel-view-bar .panel-tabs button. @token --frame-view-font-size */
+  --_frame-default-view-font-size-c616380a25: var(
+    --frame-activity-font-size,
+    var(--_frame-default-activity-font-size-80710c2315)
+  );
+  font-size: var(
+    --frame-view-font-size,
+    var(--_frame-default-view-font-size-c616380a25)
+  );
+  /* Space between children for .panel-view-bar .panel-tabs button. @token --frame-spacing-small */
+  --_frame-default-spacing-small-3e5e0f3c4b: 4px;
+  /* Internal spacing for .panel-view-bar .panel-tabs button. @token --frame-activity-item-padding */
+  --_frame-default-activity-item-padding-ca7d067a32: var(
+    --frame-spacing-small,
+    var(--_frame-default-spacing-small-3e5e0f3c4b)
+  );
+  /* Internal spacing for .panel-view-bar .panel-tabs button. @token --frame-view-item-padding */
+  --_frame-default-view-item-padding-cb42a729bb: var(
+    --frame-activity-item-padding,
+    var(--_frame-default-activity-item-padding-ca7d067a32)
+  );
+  padding: var(
+    --frame-view-item-padding,
+    var(--_frame-default-view-item-padding-cb42a729bb)
+  );
+  line-height: 1;
+}
+.panel-view-bar.view-bar-compact {
+  /* Default used by --bar-icon-size on .navigation-bar.bar-compact. Used when --frame-navigation-compact-icon-size and --frame-view-compact-icon-size is unset. @token --frame-activity-compact-icon-size */
+  --_frame-default-activity-compact-icon-size-01412c1a19: 18px;
+  /* Default used by --bar-icon-size on .navigation-bar.bar-compact. Used when --frame-navigation-compact-icon-size is unset. @token --frame-view-compact-icon-size */
+  --_frame-default-view-compact-icon-size-d32465a20d: var(
+    --frame-activity-compact-icon-size,
+    var(--_frame-default-activity-compact-icon-size-01412c1a19)
+  );
+  --bar-icon-size: var(
+    --frame-view-compact-icon-size,
+    var(--_frame-default-view-compact-icon-size-d32465a20d)
+  );
+}
+.panel-view-bar.view-bar-compact .panel-tabs button {
+  /* Text size for .panel-view-bar.view-bar-compact .panel-tabs button. @token --frame-activity-compact-font-size */
+  --_frame-default-activity-compact-font-size-ba00f1c19d: 11px;
+  /* Text size for .panel-view-bar.view-bar-compact .panel-tabs button. @token --frame-view-compact-font-size */
+  --_frame-default-view-compact-font-size-81c044636c: var(
+    --frame-activity-compact-font-size,
+    var(--_frame-default-activity-compact-font-size-ba00f1c19d)
+  );
+  font-size: var(
+    --frame-view-compact-font-size,
+    var(--_frame-default-view-compact-font-size-81c044636c)
+  );
+  /* Space between children for .panel-view-bar.view-bar-compact .panel-tabs button. @token --frame-spacing-small */
+  --_frame-default-spacing-small-3e5e0f3c4b: 4px;
+  /* Internal spacing for .panel-view-bar.view-bar-compact .panel-tabs button. @token --frame-activity-compact-item-padding */
+  --_frame-default-activity-compact-item-padding-1533320777: calc(
+    var(--frame-spacing-small, var(--_frame-default-spacing-small-3e5e0f3c4b)) *
+      0.75
+  );
+  /* Internal spacing for .panel-view-bar.view-bar-compact .panel-tabs button. @token --frame-view-compact-item-padding */
+  --_frame-default-view-compact-item-padding-252015e4c9: var(
+    --frame-activity-compact-item-padding,
+    var(--_frame-default-activity-compact-item-padding-1533320777)
+  );
+  padding: var(
+    --frame-view-compact-item-padding,
+    var(--_frame-default-view-compact-item-padding-252015e4c9)
+  );
+}

@@ -66,7 +66,7 @@ defineSlots<{
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .frame-loading {
   position: relative;
   isolation: isolate;
@@ -128,7 +128,7 @@ defineSlots<{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* Space between children for .frame-loading-indicator. Used when --frame-loading-indicator-gap is unset. @token --frame-gap */
+  /* Space between children for .frame-loading-indicator. @token --frame-gap */
   --_frame-default-gap-3e2a1ab688: 6px;
   /* Space between children for .frame-loading-indicator. @token --frame-loading-indicator-gap */
   --_frame-default-loading-indicator-gap-a6c6d91414: calc(
@@ -171,7 +171,7 @@ defineSlots<{
   /* Foreground for .frame-loading-label. @token --frame-muted */
   --_frame-default-muted-a933579eb4: #8e9496;
   color: var(--frame-muted, var(--_frame-default-muted-a933579eb4));
-  /* Text size for .frame-loading-label. Used when --frame-loading-label-font-size is unset. @token --frame-font-size-body */
+  /* Text size for .frame-loading-label. @token --frame-font-size-body */
   --_frame-default-font-size-body-5e4c71c1b0: 12px;
   /* Text size for .frame-loading-label. @token --frame-loading-label-font-size */
   --_frame-default-loading-label-font-size-a180a03df1: var(

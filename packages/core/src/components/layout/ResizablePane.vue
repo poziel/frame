@@ -96,3 +96,81 @@ defineSlots<{
       ><slot name="second" /></div
   ></div>
 </template>
+
+<style lang="scss">
+.resizable-pane {
+  display: grid;
+  /* Minimum height for .resizable-pane. @token --frame-resizable-pane-min-height */
+  --_frame-default-resizable-pane-min-height-f7fab42ec6: 0;
+  min-height: var(
+    --frame-resizable-pane-min-height,
+    var(--_frame-default-resizable-pane-min-height-f7fab42ec6)
+  ); /* Minimum width for .resizable-pane. @token --frame-resizable-pane-min-width */
+  --_frame-default-resizable-pane-min-width-77f8ce5b78: 0;
+  min-width: var(
+    --frame-resizable-pane-min-width,
+    var(--_frame-default-resizable-pane-min-width-77f8ce5b78)
+  ); /* Width for .resizable-pane. @token --frame-resizable-pane-width */
+  --_frame-default-resizable-pane-width-0a23adcf5c: 100%;
+  width: var(
+    --frame-resizable-pane-width,
+    var(--_frame-default-resizable-pane-width-0a23adcf5c)
+  ); /* Height for .resizable-pane. @token --frame-resizable-pane-height */
+  --_frame-default-resizable-pane-height-c4bafa7375: 100%;
+  height: var(
+    --frame-resizable-pane-height,
+    var(--_frame-default-resizable-pane-height-c4bafa7375)
+  );
+}
+.resizable-pane-first,
+.resizable-pane-second {
+  /* Minimum height for .resizable-pane-first, .resizable-pane-second. @token --frame-resizable-pane-first-min-height */
+  --_frame-default-resizable-pane-first-min-height-0986d14ff7: 0;
+  min-height: var(
+    --frame-resizable-pane-first-min-height,
+    var(--_frame-default-resizable-pane-first-min-height-0986d14ff7)
+  ); /* Minimum width for .resizable-pane-first, .resizable-pane-second. @token --frame-resizable-pane-first-min-width */
+  --_frame-default-resizable-pane-first-min-width-3c3836f821: 0;
+  min-width: var(
+    --frame-resizable-pane-first-min-width,
+    var(--_frame-default-resizable-pane-first-min-width-3c3836f821)
+  );
+  overflow: hidden;
+}
+.resizable-pane.x > .resizable-pane-first {
+  grid-column: 1;
+  grid-row: 1;
+}
+.resizable-pane.x > .resizable-pane-second {
+  grid-column: 3;
+  grid-row: 1;
+}
+.resizable-pane.y > .resizable-pane-first {
+  grid-column: 1;
+  grid-row: 1;
+}
+.resizable-pane.y > .resizable-pane-second {
+  grid-column: 1;
+  grid-row: 3;
+}
+.resizable-pane > .resize-handle {
+  position: relative;
+  z-index: 2;
+}
+.resizable-pane.x > .resize-handle {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+}
+.resizable-pane.y > .resize-handle {
+  grid-row: 2;
+  grid-column: 1;
+  align-self: center;
+  /* Width for .resizable-pane.y > .resize-handle. @token --frame-resizable-pane-y-resize-handle-width */
+  --_frame-default-resizable-pane-y-resize-handle-width-5e06c35255: 100%;
+  width: var(
+    --frame-resizable-pane-y-resize-handle-width,
+    var(--_frame-default-resizable-pane-y-resize-handle-width-5e06c35255)
+  );
+}
+</style>

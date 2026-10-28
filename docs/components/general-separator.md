@@ -77,10 +77,10 @@ Use the shared theme variables in application content. Component-specific declar
 
 <!-- frame:generated styles="general-separator" -->
 
-| CSS variable              | Theme path              | Default expression  | Purpose                                                                          | Context            |
-| ------------------------- | ----------------------- | ------------------- | -------------------------------------------------------------------------------- | ------------------ |
-| `--frame-separator-color` | `frame.separator.color` | `var(--frame-line)` | Color of the horizontal or vertical separator.                                   | `.frame-separator` |
-| `--frame-line`            | `frame.line`            | `#2b2b2b`           | Neutral divider color for content boundaries, tracks, and structural separators. | `.frame-separator` |
+| CSS variable              | Theme path              | Default expression                        | Purpose                                                                          | Context            |
+| ------------------------- | ----------------------- | ----------------------------------------- | -------------------------------------------------------------------------------- | ------------------ |
+| `--frame-separator-color` | `frame.separator.color` | `var(--frame-line)`                       | Color of the horizontal or vertical separator.                                   | `.frame-separator` |
+| `--frame-line`            | `frame.line`            | No declared default; supplied by context. | Neutral divider color for content boundaries, tracks, and structural separators. | `.frame-separator` |
 
 Expressions are preserved as written; their computed values depend on the active theme and component state.
 

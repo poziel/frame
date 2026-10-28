@@ -1,0 +1,50 @@
+.frame-modal :where(button:not(.frame-button):not([role='checkbox'])) {
+  font: inherit;
+  cursor: pointer;
+  /* Border for .frame-modal :where(button:not(.frame-button):not([role='checkbox'])). @token --frame-modal-button-border */
+  --_frame-default-modal-button-border-1ee06a28d6: 0;
+  border: var(
+    --frame-modal-button-border,
+    var(--_frame-default-modal-button-border-1ee06a28d6)
+  );
+  /* Background for .frame-modal :where(button:not(.frame-button):not([role='checkbox'])). @token --frame-modal-button-background */
+  --_frame-default-modal-button-background-e03064750e: transparent;
+  background: var(
+    --frame-modal-button-background,
+    var(--_frame-default-modal-button-background-e03064750e)
+  );
+  color: inherit;
+}
+
+.frame-modal button:focus-visible,
+.frame-modal-header:focus-visible,
+.frame-modal :is(input, select, textarea):focus-visible {
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  outline: 1px solid var(--frame-accent);
+  /* Outline offset for .frame-modal button:focus-visible, .frame-modal-header:focus-visible, .frame-modal :is(input, select, textarea):focus-visible. @token --frame-modal-button-focus-visible-outline-offset */
+  --_frame-default-modal-button-focus-visible-outline-offset-a426773c06: -1px;
+  outline-offset: var(
+    --frame-modal-button-focus-visible-outline-offset,
+    var(--_frame-default-modal-button-focus-visible-outline-offset-a426773c06)
+  );
+}
+
+.frame-modal
+  :where(button:not(.frame-button):not([role='checkbox'])):hover:not(
+    :disabled
+  ) {
+  /* Background for .frame-modal :where(button:not(.frame-button):not([role='checkbox'])):hover:not(:disabled). @token --frame-modal-button-hover-background */
+  --_frame-default-modal-button-hover-background-dd4f2b2c91: #ffffff09;
+  background: var(
+    --frame-modal-button-hover-background,
+    var(--_frame-default-modal-button-hover-background-dd4f2b2c91)
+  );
+}
+
+.frame-menu {
+  z-index: 120;
+}
+
+.frame-tooltip {
+  z-index: 145;
+}

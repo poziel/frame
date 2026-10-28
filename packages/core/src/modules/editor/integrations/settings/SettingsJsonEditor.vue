@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import '../../styles/index.css';
 import {useFrame} from '../../../../index';
 import CodeEditor from '../../components/CodeEditor.vue';
 
@@ -24,13 +23,15 @@ const label =
     />
   </section>
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .frame-settings-json {
   display: flex;
   flex-direction: column;
   height: 100%;
   min-height: 0;
+  /* Color for .frame-settings-json; text. @token --frame-text @context */
   color: var(--frame-text);
+  /* Background for .frame-settings-json; bg. @token --frame-bg @context */
   background: var(--frame-bg);
 }
 .frame-settings-json :deep(.frame-code-editor) {

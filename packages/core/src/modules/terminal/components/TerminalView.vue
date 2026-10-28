@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '../styles/index.css';
+import '../styles/index.scss';
 import {
   computed,
   nextTick,
@@ -383,7 +383,10 @@ defineExpose({
 </script>
 <template>
   <div class="frame-terminal-view">
-    <header v-if="toolbar" class="frame-terminal-toolbar">
+    <header
+      v-if="toolbar"
+      class="frame-terminal-toolbar frame-terminal-controls"
+    >
       <span class="frame-terminal-title"
         ><FrameIcon name="terminal" />{{ active?.name ?? 'Terminal' }}</span
       >
@@ -448,7 +451,7 @@ defineExpose({
     />
     <div
       v-if="showSearch"
-      class="frame-terminal-search"
+      class="frame-terminal-search frame-terminal-controls"
       @keydown.esc.stop="searchClose"
     >
       <FrameTextField
@@ -472,7 +475,7 @@ defineExpose({
       <FrameIconButton label="Next match" icon="arrow-down" @click="search()" />
       <FrameIconButton label="Close search" icon="close" @click="searchClose" />
     </div>
-    <div v-if="renameId" class="frame-terminal-rename">
+    <div v-if="renameId" class="frame-terminal-rename frame-terminal-controls">
       <label :for="`${localId}-rename`">Terminal name</label
       ><FrameTextField
         :id="`${localId}-rename`"
@@ -491,7 +494,7 @@ defineExpose({
     </div>
     <div
       v-if="colorSession"
-      class="frame-terminal-color"
+      class="frame-terminal-color frame-terminal-controls"
       @keydown.esc.stop="finishColor"
     >
       <label :for="`${localId}-color`">Color for {{ colorSession.name }}</label
@@ -692,3 +695,516 @@ defineExpose({
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.frame-terminal-view {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  /* Height for .frame-terminal-view; terminal view height. @token --frame-terminal-view-height */
+  --_frame-default-terminal-view-height-01c74607a7: 100%;
+  height: var(
+    --frame-terminal-view-height,
+    var(--_frame-default-terminal-view-height-01c74607a7)
+  );
+  /* Min height for .frame-terminal-view; terminal view min height. @token --frame-terminal-view-min-height */
+  --_frame-default-terminal-view-min-height-af7f326321: 0;
+  min-height: var(
+    --frame-terminal-view-min-height,
+    var(--_frame-default-terminal-view-min-height-af7f326321)
+  );
+  /* Min width for .frame-terminal-view; terminal view min width. @token --frame-terminal-view-min-width */
+  --_frame-default-terminal-view-min-width-302ca979c8: 0;
+  min-width: var(
+    --frame-terminal-view-min-width,
+    var(--_frame-default-terminal-view-min-width-302ca979c8)
+  );
+  box-sizing: border-box;
+  overflow: hidden;
+  /* Background for .frame-terminal-view; surface. @token --frame-surface */
+  --_frame-default-surface-7fcb70be5e: #181818;
+  background: var(--frame-surface, var(--_frame-default-surface-7fcb70be5e));
+  /* Color for .frame-terminal-view; terminal view color. @token --frame-terminal-view-color */
+  --_frame-default-terminal-view-color-f39072723f: #ccc;
+  color: var(
+    --frame-terminal-view-color,
+    var(--_frame-default-terminal-view-color-f39072723f)
+  );
+  /* Font size for .frame-terminal-view; terminal view font size. @token --frame-terminal-view-font-size */
+  --_frame-default-terminal-view-font-size-900c2ce053: 12px;
+  font-size: var(
+    --frame-terminal-view-font-size,
+    var(--_frame-default-terminal-view-font-size-900c2ce053)
+  );
+}
+
+.frame-terminal-controls {
+  display: flex;
+  align-items: center;
+  /* Gap for .frame-terminal-controls; terminal toolbar gap. @token --frame-terminal-toolbar-gap */
+  --_frame-default-terminal-toolbar-gap-b85fcc0d5e: 4px;
+  gap: var(
+    --frame-terminal-toolbar-gap,
+    var(--_frame-default-terminal-toolbar-gap-b85fcc0d5e)
+  );
+  /* Padding for .frame-terminal-controls; terminal toolbar padding. @token --frame-terminal-toolbar-padding */
+  --_frame-default-terminal-toolbar-padding-e45c6272b6: 3px 6px;
+  padding: var(
+    --frame-terminal-toolbar-padding,
+    var(--_frame-default-terminal-toolbar-padding-e45c6272b6)
+  );
+  flex-shrink: 0;
+}
+
+.frame-terminal-toolbar {
+  /* Border bottom for .frame-terminal-toolbar; line. @token --frame-line */
+  --_frame-default-line-a07f23943d: #2b2b2b;
+  border-bottom: 1px solid
+    var(--frame-line, var(--_frame-default-line-a07f23943d));
+  flex-wrap: wrap;
+}
+
+.frame-terminal-title {
+  display: flex;
+  align-items: center;
+  /* Gap for .frame-terminal-title; terminal title gap. @token --frame-terminal-title-gap */
+  --_frame-default-terminal-title-gap-308fe43a2e: 6px;
+  gap: var(
+    --frame-terminal-title-gap,
+    var(--_frame-default-terminal-title-gap-308fe43a2e)
+  );
+  flex: 1;
+  /* Min width for .frame-terminal-title; terminal title min width. @token --frame-terminal-title-min-width */
+  --_frame-default-terminal-title-min-width-4d0c993cbd: 70px;
+  min-width: var(
+    --frame-terminal-title-min-width,
+    var(--_frame-default-terminal-title-min-width-4d0c993cbd)
+  );
+}
+
+.frame-terminal-toolbar .frame-select {
+  /* Width for .frame-terminal-toolbar .frame-select; terminal toolbar frame select width. @token --frame-terminal-toolbar-frame-select-width */
+  --_frame-default-terminal-toolbar-frame-select-width-fc978d4fb8: 160px;
+  width: var(
+    --frame-terminal-toolbar-frame-select-width,
+    var(--_frame-default-terminal-toolbar-frame-select-width-fc978d4fb8)
+  );
+}
+
+.frame-terminal-search {
+  justify-content: flex-end;
+}
+
+.frame-terminal-search .frame-text-input {
+  /* Width for .frame-terminal-search .frame-text-input; terminal search frame text input width. @token --frame-terminal-search-frame-text-input-width */
+  --_frame-default-terminal-search-frame-text-input-width-7203265244: min(
+    240px,
+    60%
+  );
+  width: var(
+    --frame-terminal-search-frame-text-input-width,
+    var(--_frame-default-terminal-search-frame-text-input-width-7203265244)
+  );
+}
+
+.frame-terminal-rename {
+  flex-wrap: wrap;
+}
+
+.frame-terminal-body {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  flex: 1;
+  /* Min height for .frame-terminal-body; terminal body min height. @token --frame-terminal-body-min-height */
+  --_frame-default-terminal-body-min-height-13a2086d4c: 0;
+  min-height: var(
+    --frame-terminal-body-min-height,
+    var(--_frame-default-terminal-body-min-height-13a2086d4c)
+  );
+  /* Min width for .frame-terminal-body; terminal body min width. @token --frame-terminal-body-min-width */
+  --_frame-default-terminal-body-min-width-0f6aa4b3d7: 0;
+  min-width: var(
+    --frame-terminal-body-min-width,
+    var(--_frame-default-terminal-body-min-width-0f6aa4b3d7)
+  );
+  overflow: hidden;
+}
+
+.frame-terminal-body.with-tabs {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.frame-terminal-panes {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  grid-column: 1;
+  grid-row: 1;
+  /* Min width for .frame-terminal-panes; terminal panes min width. @token --frame-terminal-panes-min-width */
+  --_frame-default-terminal-panes-min-width-fc657dd0a6: 0;
+  min-width: var(
+    --frame-terminal-panes-min-width,
+    var(--_frame-default-terminal-panes-min-width-fc657dd0a6)
+  );
+  /* Min height for .frame-terminal-panes; terminal panes min height. @token --frame-terminal-panes-min-height */
+  --_frame-default-terminal-panes-min-height-4490d9ea17: 0;
+  min-height: var(
+    --frame-terminal-panes-min-height,
+    var(--_frame-default-terminal-panes-min-height-4490d9ea17)
+  );
+  overflow: hidden;
+}
+
+.with-tabs > .frame-terminal-panes {
+  grid-row: 2;
+}
+
+.frame-terminal-pane {
+  grid-row: 1;
+  /* Min width for .frame-terminal-pane; terminal pane min width. @token --frame-terminal-pane-min-width */
+  --_frame-default-terminal-pane-min-width-267f990e72: 0;
+  min-width: var(
+    --frame-terminal-pane-min-width,
+    var(--_frame-default-terminal-pane-min-width-267f990e72)
+  );
+  /* Min height for .frame-terminal-pane; terminal pane min height. @token --frame-terminal-pane-min-height */
+  --_frame-default-terminal-pane-min-height-85acf43783: 0;
+  min-height: var(
+    --frame-terminal-pane-min-height,
+    var(--_frame-default-terminal-pane-min-height-85acf43783)
+  );
+  overflow: hidden;
+  /* Border bottom for .frame-terminal-pane; terminal pane border bottom. @token --frame-terminal-pane-border-bottom */
+  --_frame-default-terminal-pane-border-bottom-630d9bdd86: 1px solid transparent;
+  border-bottom: var(
+    --frame-terminal-pane-border-bottom,
+    var(--_frame-default-terminal-pane-border-bottom-630d9bdd86)
+  );
+}
+
+.frame-terminal-pane:not(:first-child) {
+  /* Border left for .frame-terminal-pane:not(:first-child); line. @token --frame-line */
+  --_frame-default-line-a07f23943d: #2b2b2b;
+  border-left: 1px solid
+    var(--frame-line, var(--_frame-default-line-a07f23943d));
+}
+
+.frame-terminal-panes > .frame-terminal-pane-resize {
+  position: relative;
+  grid-row: 1;
+  justify-self: center;
+}
+
+.frame-terminal-body > .frame-terminal-sidebar-resize {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+}
+
+.frame-terminal-pane.active {
+  /* Border bottom color for .frame-terminal-pane.active; accent. @token --frame-accent */
+  --_frame-default-accent-1583861c13: #0078d4;
+  border-bottom-color: var(
+    --frame-accent,
+    var(--_frame-default-accent-1583861c13)
+  );
+}
+
+.frame-terminal-sidebar {
+  grid-column: 3;
+  grid-row: 1;
+  /* Min width for .frame-terminal-sidebar; terminal sidebar min width. @token --frame-terminal-sidebar-min-width */
+  --_frame-default-terminal-sidebar-min-width-5e4f55e411: 0;
+  min-width: var(
+    --frame-terminal-sidebar-min-width,
+    var(--_frame-default-terminal-sidebar-min-width-5e4f55e411)
+  );
+  /* Min height for .frame-terminal-sidebar; terminal sidebar min height. @token --frame-terminal-sidebar-min-height */
+  --_frame-default-terminal-sidebar-min-height-7f3a84e012: 0;
+  min-height: var(
+    --frame-terminal-sidebar-min-height,
+    var(--_frame-default-terminal-sidebar-min-height-7f3a84e012)
+  );
+  box-sizing: border-box;
+  overflow: auto;
+  /* Border left for .frame-terminal-sidebar; line. @token --frame-line */
+  --_frame-default-line-a07f23943d: #2b2b2b;
+  border-left: 1px solid
+    var(--frame-line, var(--_frame-default-line-a07f23943d));
+  /* Padding for .frame-terminal-sidebar; terminal sidebar padding. @token --frame-terminal-sidebar-padding */
+  --_frame-default-terminal-sidebar-padding-ca8a2a6caf: 4px;
+  padding: var(
+    --frame-terminal-sidebar-padding,
+    var(--_frame-default-terminal-sidebar-padding-ca8a2a6caf)
+  );
+}
+
+.frame-terminal-tabs {
+  display: flex;
+  grid-column: 1;
+  grid-row: 1;
+  /* Min width for .frame-terminal-tabs; terminal tabs min width. @token --frame-terminal-tabs-min-width */
+  --_frame-default-terminal-tabs-min-width-81314d1943: 0;
+  min-width: var(
+    --frame-terminal-tabs-min-width,
+    var(--_frame-default-terminal-tabs-min-width-81314d1943)
+  );
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* Border bottom for .frame-terminal-tabs; line. @token --frame-line */
+  --_frame-default-line-a07f23943d: #2b2b2b;
+  border-bottom: 1px solid
+    var(--frame-line, var(--_frame-default-line-a07f23943d));
+}
+
+.frame-terminal-tabs .frame-terminal-session-group {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.frame-terminal-tabs
+  .frame-terminal-session-group
+  + .frame-terminal-session-group {
+  /* Border left for .frame-terminal-tabs
+  .frame-terminal-session-group
+  + .frame-terminal-session-group; line. @token --frame-line */
+  --_frame-default-line-a07f23943d: #2b2b2b;
+  border-left: 1px solid
+    var(--frame-line, var(--_frame-default-line-a07f23943d));
+}
+
+.frame-terminal-tabs .frame-terminal-session {
+  flex: 0 0 160px;
+  /* Width for .frame-terminal-tabs .frame-terminal-session; terminal tabs frame terminal session width. @token --frame-terminal-tabs-frame-terminal-session-width */
+  --_frame-default-terminal-tabs-frame-terminal-session-width-964bcc2916: 160px;
+  width: var(
+    --frame-terminal-tabs-frame-terminal-session-width,
+    var(--_frame-default-terminal-tabs-frame-terminal-session-width-964bcc2916)
+  );
+  /* Min width for .frame-terminal-tabs .frame-terminal-session; terminal tabs frame terminal session min width. @token --frame-terminal-tabs-frame-terminal-session-min-width */
+  --_frame-default-terminal-tabs-frame-terminal-session-min-width-6840aebbf2: 100px;
+  min-width: var(
+    --frame-terminal-tabs-frame-terminal-session-min-width,
+    var(
+      --_frame-default-terminal-tabs-frame-terminal-session-min-width-6840aebbf2
+    )
+  );
+  /* Max width for .frame-terminal-tabs .frame-terminal-session; terminal tabs frame terminal session max width. @token --frame-terminal-tabs-frame-terminal-session-max-width */
+  --_frame-default-terminal-tabs-frame-terminal-session-max-width-d61abe9bb4: 200px;
+  max-width: var(
+    --frame-terminal-tabs-frame-terminal-session-max-width,
+    var(
+      --_frame-default-terminal-tabs-frame-terminal-session-max-width-d61abe9bb4
+    )
+  );
+  /* Border radius for .frame-terminal-tabs .frame-terminal-session; terminal tabs frame terminal session border radius. @token --frame-terminal-tabs-frame-terminal-session-border-radius */
+  --_frame-default-terminal-tabs-frame-terminal-session-border-radius-fd94c50c88: 0;
+  border-radius: var(
+    --frame-terminal-tabs-frame-terminal-session-border-radius,
+    var(
+      --_frame-default-terminal-tabs-frame-terminal-session-border-radius-fd94c50c88
+    )
+  );
+  /* Border bottom for .frame-terminal-tabs .frame-terminal-session; terminal tabs frame terminal session border bottom. @token --frame-terminal-tabs-frame-terminal-session-border-bottom */
+  --_frame-default-terminal-tabs-frame-terminal-session-border-bottom-841701989a: 1px
+    solid transparent;
+  border-bottom: var(
+    --frame-terminal-tabs-frame-terminal-session-border-bottom,
+    var(
+      --_frame-default-terminal-tabs-frame-terminal-session-border-bottom-841701989a
+    )
+  );
+}
+
+.frame-terminal-tabs .frame-terminal-session.active {
+  /* Border bottom color for .frame-terminal-tabs .frame-terminal-session.active; accent. @token --frame-accent */
+  --_frame-default-accent-1583861c13: #0078d4;
+  border-bottom-color: var(
+    --frame-accent,
+    var(--_frame-default-accent-1583861c13)
+  );
+}
+
+.frame-terminal-session {
+  position: relative;
+  display: flex;
+  align-items: center;
+  /* Min height for .frame-terminal-session; terminal session min height. @token --frame-terminal-session-min-height */
+  --_frame-default-terminal-session-min-height-25c416453e: 28px;
+  min-height: var(
+    --frame-terminal-session-min-height,
+    var(--_frame-default-terminal-session-min-height-25c416453e)
+  );
+  /* Border radius for .frame-terminal-session; terminal session border radius. @token --frame-terminal-session-border-radius */
+  --_frame-default-terminal-session-border-radius-b2d270162c: 3px;
+  border-radius: var(
+    --frame-terminal-session-border-radius,
+    var(--_frame-default-terminal-session-border-radius-b2d270162c)
+  );
+}
+
+.frame-terminal-session.active {
+  /* Background for .frame-terminal-session.active; terminal session active background. @token --frame-terminal-session-active-background */
+  --_frame-default-terminal-session-active-background-7ec5119307: #ffffff0c;
+  background: var(
+    --frame-terminal-session-active-background,
+    var(--_frame-default-terminal-session-active-background-7ec5119307)
+  );
+}
+
+.frame-terminal-session-label {
+  display: flex;
+  flex: 1;
+  /* Min width for .frame-terminal-session-label; terminal session label min width. @token --frame-terminal-session-label-min-width */
+  --_frame-default-terminal-session-label-min-width-c503722ff0: 0;
+  min-width: var(
+    --frame-terminal-session-label-min-width,
+    var(--_frame-default-terminal-session-label-min-width-c503722ff0)
+  );
+}
+
+.frame-terminal-session-select {
+  display: flex;
+  align-items: center;
+  /* Gap for .frame-terminal-session-select; terminal session select gap. @token --frame-terminal-session-select-gap */
+  --_frame-default-terminal-session-select-gap-85d917655d: 5px;
+  gap: var(
+    --frame-terminal-session-select-gap,
+    var(--_frame-default-terminal-session-select-gap-85d917655d)
+  );
+  /* Width for .frame-terminal-session-select; terminal session select width. @token --frame-terminal-session-select-width */
+  --_frame-default-terminal-session-select-width-896cfd8000: 100%;
+  width: var(
+    --frame-terminal-session-select-width,
+    var(--_frame-default-terminal-session-select-width-896cfd8000)
+  );
+  /* Min width for .frame-terminal-session-select; terminal session select min width. @token --frame-terminal-session-select-min-width */
+  --_frame-default-terminal-session-select-min-width-49335f4487: 0;
+  min-width: var(
+    --frame-terminal-session-select-min-width,
+    var(--_frame-default-terminal-session-select-min-width-49335f4487)
+  );
+  /* Min height for .frame-terminal-session-select; terminal session select min height. @token --frame-terminal-session-select-min-height */
+  --_frame-default-terminal-session-select-min-height-185339e11d: 28px;
+  min-height: var(
+    --frame-terminal-session-select-min-height,
+    var(--_frame-default-terminal-session-select-min-height-185339e11d)
+  );
+  /* Padding for .frame-terminal-session-select; terminal session select padding. @token --frame-terminal-session-select-padding */
+  --_frame-default-terminal-session-select-padding-41e3149957: 5px;
+  padding: var(
+    --frame-terminal-session-select-padding,
+    var(--_frame-default-terminal-session-select-padding-41e3149957)
+  );
+  /* Border for .frame-terminal-session-select; terminal session select border. @token --frame-terminal-session-select-border */
+  --_frame-default-terminal-session-select-border-a48b15c2c6: 0;
+  border: var(
+    --frame-terminal-session-select-border,
+    var(--_frame-default-terminal-session-select-border-a48b15c2c6)
+  );
+  color: inherit;
+  /* Background for .frame-terminal-session-select; terminal session select background. @token --frame-terminal-session-select-background */
+  --_frame-default-terminal-session-select-background-b4e6d4482a: none;
+  background: var(
+    --frame-terminal-session-select-background,
+    var(--_frame-default-terminal-session-select-background-b4e6d4482a)
+  );
+  text-align: left;
+  cursor: pointer;
+}
+
+.frame-terminal-session-select span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.frame-terminal-session-select small {
+  /* Color for .frame-terminal-session-select small; muted. @token --frame-muted */
+  --_frame-default-muted-74c5fb58d7: #999;
+  color: var(--frame-muted, var(--_frame-default-muted-74c5fb58d7));
+}
+
+.frame-terminal-session-close {
+  display: none;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+}
+
+.frame-terminal-session:hover .frame-terminal-session-close,
+.frame-terminal-session:focus-within .frame-terminal-session-close {
+  display: block;
+}
+
+.frame-terminal-session:hover .frame-terminal-session-select,
+.frame-terminal-session:focus-within .frame-terminal-session-select {
+  /* Padding right for .frame-terminal-session:hover .frame-terminal-session-select,
+.frame-terminal-session:focus-within .frame-terminal-session-select; terminal session hover frame terminal session select padding right. @token --frame-terminal-session-hover-frame-terminal-session-select-padding-right */
+  --_frame-default-terminal-session-hover-frame-terminal-session-select-padding-right-b0d1b52080: 30px;
+  padding-right: var(
+    --frame-terminal-session-hover-frame-terminal-session-select-padding-right,
+    var(
+      --_frame-default-terminal-session-hover-frame-terminal-session-select-padding-right-b0d1b52080
+    )
+  );
+}
+
+.frame-terminal-sidebar .split-group .frame-terminal-session-select {
+  /* Padding left for .frame-terminal-sidebar .split-group .frame-terminal-session-select; terminal sidebar split group frame terminal session select padding left. @token --frame-terminal-sidebar-split-group-frame-terminal-session-select-padding-left */
+  --_frame-default-terminal-sidebar-split-group-frame-terminal-session-select-padding-left-e848f6c588: 22px;
+  padding-left: var(
+    --frame-terminal-sidebar-split-group-frame-terminal-session-select-padding-left,
+    var(
+      --_frame-default-terminal-sidebar-split-group-frame-terminal-session-select-padding-left-e848f6c588
+    )
+  );
+}
+
+.frame-terminal-sidebar .split-group .frame-terminal-session::before {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  /* Border left for .frame-terminal-sidebar .split-group .frame-terminal-session::before; muted. @token --frame-muted */
+  --_frame-default-muted-a933579eb4: #8e9496;
+  border-left: 1px solid
+    var(--frame-muted, var(--_frame-default-muted-a933579eb4));
+}
+
+.frame-terminal-sidebar
+  .split-group
+  .frame-terminal-session:first-child::before {
+  top: 50%;
+}
+
+.frame-terminal-sidebar
+  .split-group
+  .frame-terminal-session:last-child::before {
+  bottom: 50%;
+}
+
+.frame-terminal-sidebar .split-group .frame-terminal-session::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  left: 8px;
+  top: 50%;
+  /* Width for .frame-terminal-sidebar .split-group .frame-terminal-session::after; terminal sidebar split group frame terminal session after width. @token --frame-terminal-sidebar-split-group-frame-terminal-session-after-width */
+  --_frame-default-terminal-sidebar-split-group-frame-terminal-session-after-width-da8a9341a0: 8px;
+  width: var(
+    --frame-terminal-sidebar-split-group-frame-terminal-session-after-width,
+    var(
+      --_frame-default-terminal-sidebar-split-group-frame-terminal-session-after-width-da8a9341a0
+    )
+  );
+  /* Border top for .frame-terminal-sidebar .split-group .frame-terminal-session::after; muted. @token --frame-muted */
+  --_frame-default-muted-a933579eb4: #8e9496;
+  border-top: 1px solid
+    var(--frame-muted, var(--_frame-default-muted-a933579eb4));
+}
+</style>

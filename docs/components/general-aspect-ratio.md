@@ -80,11 +80,11 @@ Use the shared theme variables in application content. Component-specific declar
 
 <!-- frame:generated styles="general-aspect-ratio" -->
 
-| CSS variable                      | Theme path                      | Default expression     | Purpose                                                                              | Context               |
-| --------------------------------- | ------------------------------- | ---------------------- | ------------------------------------------------------------------------------------ | --------------------- |
-| `--frame-aspect-ratio-background` | `frame.aspect.ratio.background` | `var(--frame-surface)` | Surface behind aspect-ratio content.                                                 | `.frame-aspect-ratio` |
-| `--frame-surface`                 | `frame.surface`                 | `#181818`              | Neutral raised surface behind grouped content and control compositions.              | `.frame-aspect-ratio` |
-| `--frame-text`                    | `frame.text`                    | `#cccccc`              | Primary foreground for readable text and icons across shell and application content. | `.frame-aspect-ratio` |
+| CSS variable                      | Theme path                      | Default expression                        | Purpose                                                                              | Context               |
+| --------------------------------- | ------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------ | --------------------- |
+| `--frame-aspect-ratio-background` | `frame.aspect.ratio.background` | `var(--frame-surface)`                    | Surface behind aspect-ratio content.                                                 | `.frame-aspect-ratio` |
+| `--frame-surface`                 | `frame.surface`                 | No declared default; supplied by context. | Neutral raised surface behind grouped content and control compositions.              | `.frame-aspect-ratio` |
+| `--frame-text`                    | `frame.text`                    | No declared default; supplied by context. | Primary foreground for readable text and icons across shell and application content. | `.frame-aspect-ratio` |
 
 Expressions are preserved as written; their computed values depend on the active theme and component state.
 

@@ -1,0 +1,11 @@
+.frame-file-input {
+  display: none;
+}
+.frame-file-errors {
+  /* Error and destructive-action color used for validation messages and invalid field borders. @token --frame-danger @context */
+  color: var(--frame-danger);
+  overflow-wrap: anywhere;
+}
+.frame-file-errors:empty {
+  display: none;
+}

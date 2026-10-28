@@ -108,12 +108,12 @@ Use the shared theme variables in application content. Component-specific declar
 
 <!-- frame:generated styles="file-upload" -->
 
-| CSS variable     | Theme path     | Default expression | Purpose                                                                                    | Context               |
-| ---------------- | -------------- | ------------------ | ------------------------------------------------------------------------------------------ | --------------------- |
-| `--frame-text`   | `frame.text`   | `#cccccc`          | Primary foreground for readable text and icons across shell and application content.       | `.frame-file-upload`  |
-| `--frame-gap`    | `frame.gap`    | `6px`              | Vertical space around the uploaded-file list.                                              | `.frame-file-list`    |
-| `--frame-gap`    | `frame.gap`    | `6px`              | Space between file presentation elements.                                                  | `.frame-file-list li` |
-| `--frame-danger` | `frame.danger` | `#f48771`          | Error and destructive-action color used for validation messages and invalid field borders. | `.frame-file-errors`  |
+| CSS variable     | Theme path     | Default expression                        | Purpose                                                                                    | Context               |
+| ---------------- | -------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------- |
+| `--frame-danger` | `frame.danger` | No declared default; supplied by context. | Error and destructive-action color used for validation messages and invalid field borders. | `.frame-file-errors`  |
+| `--frame-text`   | `frame.text`   | No declared default; supplied by context. | Primary foreground for readable text and icons across shell and application content.       | `.frame-file-upload`  |
+| `--frame-gap`    | `frame.gap`    | `6px`                                     | Space between children for .frame-file-list.                                               | `.frame-file-list`    |
+| `--frame-gap`    | `frame.gap`    | `6px`                                     | Space between children for .frame-file-list li.                                            | `.frame-file-list li` |
 
 Expressions are preserved as written; their computed values depend on the active theme and component state.
 

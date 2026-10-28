@@ -1,0 +1,115 @@
+@use './input-surface-tools';
+
+/* Component overrides share a runtime text-surface contract. */
+.frame-text-input {
+  @include input-surface-tools.text-surface-variables('text-input');
+}
+
+.frame-text-area {
+  @include input-surface-tools.text-surface-variables('text-area');
+}
+
+.frame-number-field {
+  @include input-surface-tools.text-surface-variables('number-field');
+}
+
+.frame-date-field {
+  @include input-surface-tools.text-surface-variables('date-field');
+}
+
+.frame-advanced-input {
+  @include input-surface-tools.text-surface-variables('advanced-input');
+}
+
+.frame-form-input {
+  @include input-surface-tools.text-surface-variables('form-input');
+}
+
+.frame-combobox-anchor {
+  @include input-surface-tools.text-surface-variables('combobox');
+}
+
+.frame-tags-input {
+  @include input-surface-tools.text-surface-variables('tags-input');
+}
+
+.frame-input-group {
+  @include input-surface-tools.text-surface-variables('input-group');
+}
+
+.frame-editable-input {
+  @include input-surface-tools.text-surface-variables('editable-input');
+}
+
+.frame-autocomplete-input {
+  @include input-surface-tools.text-surface-variables('autocomplete-input');
+}
+
+.frame-color-field-input {
+  @include input-surface-tools.text-surface-variables('color-field-input');
+}
+
+.frame-pin-entry {
+  @include input-surface-tools.text-surface-variables('pin-entry');
+}
+
+.frame-select {
+  @include input-surface-tools.text-surface-variables('select');
+}
+
+.frame-input-surface:not([data-invalid]):not([aria-invalid='true']) {
+  border: var(--_frame-input-border);
+  border-radius: var(--_frame-input-border-radius);
+  outline: none;
+  outline-offset: var(--_frame-input-outline-offset);
+}
+.frame-input-surface:not([data-invalid]):not([aria-invalid='true']):hover:not(
+    :disabled
+  ):not([data-disabled]):not(:focus-within) {
+  border: var(--_frame-input-hover-border);
+  outline: var(--_frame-input-hover-outline);
+}
+.frame-input-focus-within:focus-within:not(:disabled):not([data-disabled]):not(
+    [data-invalid]
+  ):not([aria-invalid='true']),
+.frame-input-focus-visible:focus-visible:not(:disabled) {
+  border: var(--_frame-input-focus-border);
+  outline: var(--_frame-input-focus-outline);
+}
+
+/* Composite text entries draw one outer surface, including on keyboard focus. */
+.frame-number-field > :is(.frame-form-input, .frame-text-input),
+.frame-combobox-anchor > .frame-combobox-input,
+.frame-tags-input .frame-tags-entry,
+.frame-input-group
+  > .frame-input-group-control
+  > :is(
+    .frame-text-input,
+    .frame-text-area,
+    .frame-number-field,
+    .frame-date-field,
+    .frame-combobox-anchor,
+    .frame-select
+  ) {
+  border: 0 !important;
+  border-radius: 0;
+  outline: none !important;
+  background: transparent;
+}
+.frame-date-field > .frame-date-segment:focus-visible {
+  outline: none;
+}
+.frame-input-group .frame-control-button:focus-visible {
+  outline: none;
+}
+
+/* A grouped select follows the select's keyboard-only focus policy. */
+.frame-input-group:focus-within:not(:has(.frame-select:focus)):not(
+    [data-disabled]
+  ):not([data-invalid]):not([aria-invalid='true']),
+.frame-input-group:has(.frame-select:focus-visible):not([data-disabled]):not(
+    [data-invalid]
+  ):not([aria-invalid='true']) {
+  border: var(--_frame-input-focus-border);
+  outline: var(--_frame-input-focus-outline);
+}

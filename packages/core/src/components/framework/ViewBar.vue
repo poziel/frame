@@ -17,7 +17,7 @@ import {
 import type {Component} from 'vue';
 import FrameDropdownMenu from '../navigation/FrameDropdownMenu.vue';
 import BarItemContent from './BarItemContent.vue';
-import './styles/bar-items.css';
+import './styles/bar-items.scss';
 import FrameIconButton from '../actions/FrameIconButton.vue';
 import {useFrame} from '../../framework/useFrame';
 import type {
@@ -30,7 +30,7 @@ import type {
   SidePanelDefinition,
   ViewRegion,
 } from '../../framework/views/shellViewContainer';
-import './styles/view-bars.css';
+import './styles/view-bars.scss';
 
 interface ViewItemKey {
 
@@ -545,7 +545,7 @@ defineSlots<{
 <template>
   <nav
     ref="rail"
-    class="view-bar"
+    class="view-bar frame-shell-label"
     :class="{
       'view-bar-horizontal': horizontal,
       'view-bar-compact': compact,

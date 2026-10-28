@@ -12,7 +12,7 @@ import {
   type HoverCardContentProps,
 } from 'reka-ui';
 import {useOverlayBoundary} from './overlays';
-import '../shared/general-c.css';
+import './styles/surfaces.scss';
 
 defineOptions({inheritAttrs: false});
 
@@ -63,7 +63,7 @@ defineSlots<{
     ><HoverCardPortal :to="target"
       ><HoverCardContent
         v-bind="{...contentProps, ...$attrs}"
-        class="frame-general-popup frame-advanced-popup"
+        class="frame-general-popup frame-advanced-popup frame-general-surface frame-overlay-surface"
         :collision-boundary="collisionBoundary"
         :collision-padding="8"
         :side-offset="6"

@@ -1,0 +1,132 @@
+.canvas-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  /* Minimum height for .canvas-container. @token --frame-canvas-container-min-height */
+  --_frame-default-canvas-container-min-height-5aa2a95a1f: 0;
+  min-height: var(
+    --frame-canvas-container-min-height,
+    var(--_frame-default-canvas-container-min-height-5aa2a95a1f)
+  );
+  /* Minimum width for .canvas-container. @token --frame-canvas-container-min-width */
+  --_frame-default-canvas-container-min-width-853bdf2bc5: 0;
+  min-width: var(
+    --frame-canvas-container-min-width,
+    var(--_frame-default-canvas-container-min-width-853bdf2bc5)
+  );
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border: 1px solid var(--frame-line);
+  /* Corner radius for .canvas-container. @token --frame-canvas-container-border-radius */
+  --_frame-default-canvas-container-border-radius-df4a4eabed: var(
+    --frame-radius-large
+  );
+  /* Large shared corner radius used by panel and menu containers. @token --frame-radius-large @context */
+  border-radius: var(
+    --frame-canvas-container-border-radius,
+    var(--_frame-default-canvas-container-border-radius-df4a4eabed)
+  );
+  /* Content canvas background used by workspace panes and recessed content. @token --frame-canvas @context */
+  background: var(--frame-canvas);
+  overflow: hidden;
+}
+
+.count {
+  /* Left outer spacing for .count. @token --frame-count-margin-left */
+  --_frame-default-count-margin-left-8c2e7d0c9f: 7px;
+  margin-left: var(
+    --frame-count-margin-left,
+    var(--_frame-default-count-margin-left-8c2e7d0c9f)
+  );
+  /* Text size for .count. @token --frame-count-font-size */
+  --_frame-default-count-font-size-569ece8779: 10px;
+  font-size: var(
+    --frame-count-font-size,
+    var(--_frame-default-count-font-size-569ece8779)
+  );
+  /* Secondary foreground for descriptions, hints, and visually subordinate content. @token --frame-muted @context */
+  color: var(--frame-muted);
+}
+
+.panel-log {
+  overflow: auto;
+  /* Internal spacing for .panel-log. @token --frame-panel-log-padding */
+  --_frame-default-panel-log-padding-ec26e1c310: 5px 12px 12px;
+  padding: var(
+    --frame-panel-log-padding,
+    var(--_frame-default-panel-log-padding-ec26e1c310)
+  );
+  /* Monospace font family for code, terminal text, and fixed-width content. @token --frame-font-mono @context */
+  font-family: var(--frame-font-mono);
+  /* Text size for .panel-log. @token --frame-panel-log-font-size */
+  --_frame-default-panel-log-font-size-80cde2683d: 11px;
+  font-size: var(
+    --frame-panel-log-font-size,
+    var(--_frame-default-panel-log-font-size-80cde2683d)
+  );
+}
+
+.panel-log > div {
+  display: flex;
+  align-items: center;
+  /* Space between children for .panel-log > div. @token --frame-panel-log-div-gap */
+  --_frame-default-panel-log-div-gap-28678b4ada: 12px;
+  gap: var(
+    --frame-panel-log-div-gap,
+    var(--_frame-default-panel-log-div-gap-28678b4ada)
+  );
+  /* Text line height for .panel-log > div. @token --frame-panel-log-div-line-height */
+  --_frame-default-panel-log-div-line-height-a0841ba24d: 24px;
+  line-height: var(
+    --frame-panel-log-div-line-height,
+    var(--_frame-default-panel-log-div-line-height-a0841ba24d)
+  );
+}
+
+.panel-log time {
+  /* Foreground for .panel-log time. @token --frame-panel-log-time-color */
+  --_frame-default-panel-log-time-color-074653663f: #77858a;
+  color: var(
+    --frame-panel-log-time-color,
+    var(--_frame-default-panel-log-time-color-074653663f)
+  );
+}
+
+.panel-log svg {
+  /* Foreground for .panel-log svg. @token --frame-panel-log-svg-color */
+  --_frame-default-panel-log-svg-color-0c25a0ffe9: #82988a;
+  color: var(
+    --frame-panel-log-svg-color,
+    var(--_frame-default-panel-log-svg-color-0c25a0ffe9)
+  );
+}
+
+// Canvas and pane workspaces share the same flex/overflow contract.
+.frame-workspace-surface {
+  display: flex;
+  flex: 1;
+  /* Minimum height for .frame-workspace-surface. @token --frame-WorkspaceCanvas-exposes-a-slot-future-tools-occupy-this-surface-workspace-min-height */
+  --_frame-default-WorkspaceCanvas-exposes-a-slot-future-tools-occupy-this-surface-workspace-min-height-3311acd38b: 0;
+  min-height: var(
+    --frame-WorkspaceCanvas-exposes-a-slot-future-tools-occupy-this-surface-workspace-min-height,
+    var(
+      --_frame-default-WorkspaceCanvas-exposes-a-slot-future-tools-occupy-this-surface-workspace-min-height-3311acd38b
+    )
+  );
+  /* Minimum width for .frame-workspace-surface. @token --frame-WorkspaceCanvas-exposes-a-slot-future-tools-occupy-this-surface-workspace-min-width */
+  --_frame-default-WorkspaceCanvas-exposes-a-slot-future-tools-occupy-this-surface-workspace-min-width-b52d417c56: 0;
+  min-width: var(
+    --frame-WorkspaceCanvas-exposes-a-slot-future-tools-occupy-this-surface-workspace-min-width,
+    var(
+      --_frame-default-WorkspaceCanvas-exposes-a-slot-future-tools-occupy-this-surface-workspace-min-width-b52d417c56
+    )
+  );
+  overflow: auto;
+  /* Outline offset for .frame-workspace-surface. @token --frame-WorkspaceCanvas-exposes-a-slot-future-tools-occupy-this-surface-workspace-outline-offset */
+  --_frame-default-WorkspaceCanvas-exposes-a-slot-future-tools-occupy-this-surface-workspace-outline-offset-f8c0846fce: -3px;
+  outline-offset: var(
+    --frame-WorkspaceCanvas-exposes-a-slot-future-tools-occupy-this-surface-workspace-outline-offset,
+    var(
+      --_frame-default-WorkspaceCanvas-exposes-a-slot-future-tools-occupy-this-surface-workspace-outline-offset-f8c0846fce
+    )
+  );
+}

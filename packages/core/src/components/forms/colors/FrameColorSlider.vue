@@ -11,7 +11,7 @@ import {
   ColorSliderThumb,
 } from 'reka-ui';
 import type {ColorSliderRootProps, ColorSliderRootEmits} from 'reka-ui';
-import '../shared/advanced.css';
+import '../styles/advanced.scss';
 
 const props = defineProps<ColorSliderRootProps>();
 const emit = defineEmits<{
@@ -58,6 +58,36 @@ const trackStyle = computed(() => {
     ><ColorSliderTrack :style="trackStyle" class="frame-color-track"
       ><ColorSliderThumb
         :aria-disabled="disabled || undefined"
-        class="frame-color-thumb" /></ColorSliderTrack
+        class="frame-color-thumb frame-advanced-focus" /></ColorSliderTrack
   ></ColorSliderRoot>
 </template>
+
+<style lang="scss">
+.frame-color-slider {
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 220px;
+  height: 22px;
+  touch-action: none;
+}
+
+.frame-color-slider[data-orientation='vertical'] {
+  width: 22px;
+  height: 160px;
+}
+
+.frame-color-track {
+  display: block;
+  flex: 1;
+  height: 12px;
+  /* Shared corner radius of buttons and ordinary controls; text-entry surfaces may use the input radius instead. @token --frame-control-radius @context */
+  border-radius: var(--frame-control-radius);
+}
+
+.frame-color-slider[data-orientation='vertical'] .frame-color-track {
+  height: 100%;
+  width: 12px;
+  flex: initial;
+}
+</style>

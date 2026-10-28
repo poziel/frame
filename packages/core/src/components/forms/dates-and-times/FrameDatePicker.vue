@@ -24,7 +24,7 @@ import {
   type DatePickerRootEmits,
 } from 'reka-ui';
 import {useOverlayBoundary} from '../../overlays/overlays';
-import '../shared/dates.css';
+import '../styles/dates.scss';
 
 const props = defineProps<
   DatePickerRootProps & {
@@ -56,7 +56,7 @@ defineSlots<{
     <span ref="anchor" class="frame-date-picker">
       <DatePickerAnchor>
         <DatePickerField
-          class="frame-date-field"
+          class="frame-date-field frame-input-surface frame-input-focus-within frame-date-text"
           :aria-label="label"
           v-slot="{segments}"
         >
@@ -77,7 +77,7 @@ defineSlots<{
     </span>
     <DatePickerContent
       :aria-label="label ?? triggerLabel ?? 'Choose date'"
-      class="frame-date-popover"
+      class="frame-date-popover frame-overlay-surface frame-date-text"
       :portal="{to: boundary.target.value}"
       :collision-boundary="collisionBoundary"
       :collision-padding="6"
@@ -89,7 +89,7 @@ defineSlots<{
     >
       <DatePickerCalendar
         :calendar-label="label"
-        class="frame-calendar"
+        class="frame-calendar frame-date-text"
         v-slot="{grid, weekDays}"
       >
         <DatePickerHeader class="frame-date-header">

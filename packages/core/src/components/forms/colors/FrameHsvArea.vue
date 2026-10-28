@@ -149,7 +149,7 @@ function key(event: KeyboardEvent) {
       @change-end="commit"
     >
       <ColorAreaArea :style="style" class="frame-color-plane"
-        ><ColorAreaThumb class="frame-color-thumb"
+        ><ColorAreaThumb class="frame-color-thumb frame-advanced-focus"
       /></ColorAreaArea>
     </ColorAreaRoot>
     <div
@@ -185,7 +185,10 @@ function key(event: KeyboardEvent) {
       "
       @keydown="key"
     >
-      <span class="frame-color-thumb frame-hsv-thumb" :style="thumb" />
+      <span
+        class="frame-color-thumb frame-hsv-thumb frame-advanced-focus"
+        :style="thumb"
+      />
       <ColorAreaRoot
         v-if="variant === 'wheel'"
         :model-value="model"
@@ -203,7 +206,7 @@ function key(event: KeyboardEvent) {
         @change-end="commit"
       >
         <ColorAreaArea :style="style" class="frame-color-plane"
-          ><ColorAreaThumb class="frame-color-thumb"
+          ><ColorAreaThumb class="frame-color-thumb frame-advanced-focus"
         /></ColorAreaArea>
       </ColorAreaRoot>
     </div>
@@ -220,7 +223,7 @@ function key(event: KeyboardEvent) {
     />
   </div>
 </template>
-<style>
+<style lang="scss">
 .frame-hsv-area {
   display: flex;
   align-items: stretch;
@@ -276,6 +279,7 @@ function key(event: KeyboardEvent) {
   position: absolute;
   inset: 12%;
   border-radius: 50%;
+  /* Neutral raised surface behind grouped content and control compositions. @token --frame-surface @context */
   background: var(--frame-surface);
 }
 .frame-hsv-thumb {
@@ -296,6 +300,7 @@ function key(event: KeyboardEvent) {
   .frame-color-slider[data-orientation='vertical']
   .frame-color-track {
   width: 60%;
+  /* Shared corner radius of buttons and ordinary controls; text-entry surfaces may use the input radius instead. @token --frame-control-radius @context */
   border-radius: var(--frame-control-radius);
 }
 .frame-hsv-disc:focus-visible {

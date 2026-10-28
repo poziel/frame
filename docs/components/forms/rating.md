@@ -293,7 +293,7 @@ No additional Frame-only events; see the part tables for declared or forwarded e
 
 #### Sources and version
 
-Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/rating), its [Markdown reference](https://reka-ui.com/docs/components/rating.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameRating.vue). Styling comes from [advanced.css](../../../packages/core/src/components/forms/shared/advanced.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
+Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/rating), its [Markdown reference](https://reka-ui.com/docs/components/rating.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameRating.vue). Styling comes from [advanced.scss](../../../packages/core/src/components/forms/styles/advanced.scss) and [shared styles](../../../packages/core/src/styles/index.scss). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
 
 ## Styling
 
@@ -301,11 +301,11 @@ Use the shared theme variables in application content. Component-specific declar
 
 <!-- frame:generated styles="rating" -->
 
-| CSS variable     | Theme path     | Default expression | Purpose                                                                                  | Context                                                                                                                                             |
-| ---------------- | -------------- | ------------------ | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--frame-muted`  | `frame.muted`  | `#8e9496`          | Secondary foreground for descriptions, hints, and visually subordinate content.          | `.frame-rating-step`                                                                                                                                |
-| `--frame-accent` | `frame.accent` | `#0078d4`          | Shared interaction color for keyboard focus, active actions, and accent-filled controls. | `.frame-rating-step[data-state='active']`                                                                                                           |
-| `--frame-accent` | `frame.accent` | `#0078d4`          | Shared interaction color for keyboard focus, active actions, and accent-filled controls. | `:is(   .frame-advanced-input,   .frame-rating-step,   .frame-tag,   .frame-tag-delete,   .frame-color-thumb,   .frame-swatch-item ):focus-visible` |
+| CSS variable     | Theme path     | Default expression                        | Purpose                                                                                  | Context                                 |
+| ---------------- | -------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------- | --------------------------------------- |
+| `--frame-accent` | `frame.accent` | No declared default; supplied by context. | Shared interaction color for keyboard focus, active actions, and accent-filled controls. | `.frame-advanced-focus:focus-visible`   |
+| `--frame-muted`  | `frame.muted`  | No declared default; supplied by context. | Secondary foreground for descriptions, hints, and visually subordinate content.          | `.frame-rating-step`                    |
+| `--frame-accent` | `frame.accent` | No declared default; supplied by context. | Shared interaction color for keyboard focus, active actions, and accent-filled controls. | `.frame-rating-step[data-state=active]` |
 
 Expressions are preserved as written; their computed values depend on the active theme and component state.
 

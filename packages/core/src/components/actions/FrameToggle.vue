@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {Toggle} from 'reka-ui';
-import '../forms/shared/controls.css';
+import '../forms/styles/controls.scss';
 
 withDefaults(
   defineProps<{
@@ -25,7 +25,7 @@ defineSlots<{
 </script>
 <template>
   <Toggle
-    class="frame-toggle"
+    class="frame-toggle frame-control-surface frame-control-action frame-control-focus frame-control-disabled"
     :model-value="modelValue"
     :disabled="disabled"
     :aria-label="label"

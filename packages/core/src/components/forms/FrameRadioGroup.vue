@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {RadioGroupRoot, RadioGroupItem, RadioGroupIndicator} from 'reka-ui';
-import './shared/controls.css';
+import './styles/controls.scss';
 import type {SelectItem} from './shared/selectItem';
 import {isSelectOption} from './shared/select';
 
@@ -33,7 +33,7 @@ const emit = defineEmits<{
         v-if="isSelectOption(option)"
         :value="option.value"
         :disabled="disabled || option.disabled"
-        class="frame-choice-item"
+        class="frame-choice-item frame-control-surface frame-control-action frame-control-focus frame-control-disabled"
         ><RadioGroupIndicator class="frame-radio-indicator" /><span>{{
           option.label
         }}</span

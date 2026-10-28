@@ -2,7 +2,7 @@
 import FrameTextField from '../FrameTextField.vue';
 import {ColorFieldRoot, useForwardPropsEmits, ColorFieldInput} from 'reka-ui';
 import type {ColorFieldRootProps, ColorFieldRootEmits} from 'reka-ui';
-import '../shared/advanced.css';
+import '../styles/advanced.scss';
 
 defineOptions({inheritAttrs: false});
 const props = defineProps<ColorFieldRootProps>();
@@ -19,6 +19,6 @@ const forwarded = useForwardPropsEmits(props, emit);
     ><ColorFieldInput as-child
       ><FrameTextField
         v-bind="$attrs"
-        class="frame-color-field-input" /></ColorFieldInput
+        class="frame-color-field-input frame-input-surface frame-input-focus-within" /></ColorFieldInput
   ></ColorFieldRoot>
 </template>

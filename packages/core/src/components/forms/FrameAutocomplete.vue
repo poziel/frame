@@ -13,7 +13,7 @@ import {
 } from 'reka-ui';
 import type {AutocompleteRootProps, AutocompleteRootEmits} from 'reka-ui';
 import {useOverlayBoundary} from '../overlays/overlays';
-import './shared/advanced.css';
+import './styles/advanced.scss';
 
 const props = defineProps<
   AutocompleteRootProps & {
@@ -52,7 +52,7 @@ const collisionBoundary = computed(() =>
           ><FrameTextField
             :aria-label="label"
             :placeholder="placeholder"
-            class="frame-autocomplete-input" /></AutocompleteInput></div></AutocompleteAnchor
+            class="frame-autocomplete-input frame-input-surface frame-input-focus-within" /></AutocompleteInput></div></AutocompleteAnchor
     ><AutocompletePortal :to="target"
       ><AutocompleteContent
         position="popper"
@@ -60,7 +60,7 @@ const collisionBoundary = computed(() =>
         :collision-padding="8"
         :style="limits"
         :side-offset="4"
-        class="frame-advanced-popup"
+        class="frame-advanced-popup frame-overlay-surface"
         ><AutocompleteItem
           v-for="option in filtered"
           :key="option"
@@ -74,3 +74,22 @@ const collisionBoundary = computed(() =>
     ></AutocompleteRoot
   >
 </template>
+
+<style lang="scss">
+.frame-autocomplete-input {
+  width: min(100%, 340px);
+}
+
+.frame-advanced-option {
+  padding: 6px 10px;
+  cursor: default;
+  outline: none;
+  /* Shared corner radius of buttons and ordinary controls; text-entry surfaces may use the input radius instead. @token --frame-control-radius @context */
+  border-radius: var(--frame-control-radius);
+}
+
+.frame-advanced-option[data-highlighted] {
+  /* Neutral hover and highlight fill for ordinary menu rows. @token --frame-menu-hover @context */
+  background: var(--frame-menu-hover);
+}
+</style>

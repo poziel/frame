@@ -1,0 +1,342 @@
+/* Both sidebar containers use the same shell; Default follows their outside edge. */
+.layout-grid .shell-sidebar {
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  position: relative;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+.layout-grid .shell-sidebar[data-sidebar-side='left'] {
+  flex-direction: row;
+}
+.layout-grid .shell-sidebar[data-sidebar-side='right'] {
+  flex-direction: row-reverse;
+}
+.layout-grid .shell-sidebar > .side-panel {
+  flex: 1 1 auto;
+  width: 0;
+  min-width: 0;
+  min-height: 0;
+  height: var(--workspace-height, 100%);
+  margin-top: var(--workspace-top, 0px);
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border: 1px solid var(--frame-line);
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: var(--frame-panel-radius);
+  /* Neutral raised surface behind grouped content and control compositions. @token --frame-surface @context */
+  background: var(--frame-surface);
+  pointer-events: auto;
+}
+.layout-grid .shell-sidebar > .view-bar {
+  flex: 0 0 var(--rail-width);
+  width: var(--rail-width);
+  box-sizing: border-box;
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border: 1px solid var(--frame-line);
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: var(--frame-panel-radius);
+  /* Neutral raised surface behind grouped content and control compositions. @token --frame-surface @context */
+  background: var(--frame-surface);
+  pointer-events: auto;
+}
+.layout-grid .shell-sidebar > .secondary-resize {
+  pointer-events: auto;
+}
+.layout-grid
+  .shell-sidebar:not(.sidebar-horizontal).expanded[data-sidebar-side='left']
+  > .view-bar {
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: var(--frame-panel-radius) 0 0 var(--frame-panel-radius);
+  border-right-color: transparent;
+}
+.layout-grid
+  .shell-sidebar:not(.sidebar-horizontal).expanded[data-sidebar-side='left']
+  > .side-panel {
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: 0 var(--frame-panel-radius) var(--frame-panel-radius) 0;
+}
+.layout-grid
+  .shell-sidebar:not(.sidebar-horizontal).expanded[data-sidebar-side='right']
+  > .view-bar {
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: 0 var(--frame-panel-radius) var(--frame-panel-radius) 0;
+  border-left-color: transparent;
+}
+.layout-grid
+  .shell-sidebar:not(.sidebar-horizontal).expanded[data-sidebar-side='right']
+  > .side-panel {
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: var(--frame-panel-radius) 0 0 var(--frame-panel-radius);
+}
+.layout-grid .shell-sidebar.without-rail > .side-panel {
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: var(--frame-panel-radius);
+}
+.layout-grid .shell-sidebar.sidebar-horizontal {
+  flex-direction: column;
+}
+.layout-grid .shell-sidebar.sidebar-horizontal.view-bar-bottom {
+  flex-direction: column-reverse;
+}
+.layout-grid .shell-sidebar.sidebar-horizontal > .view-bar {
+  flex: 0 0 var(--view-bar-height);
+  width: 100%;
+  height: var(--view-bar-height);
+  min-width: 0;
+  overflow: hidden;
+}
+.layout-grid .shell-sidebar.sidebar-horizontal > .side-panel {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 0;
+  margin-top: 0;
+}
+.layout-grid .shell-sidebar.view-bar-top > .view-bar {
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: var(--frame-panel-radius) var(--frame-panel-radius) 0 0;
+  border-bottom-color: transparent;
+}
+.layout-grid .shell-sidebar.view-bar-top > .side-panel {
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: 0 0 var(--frame-panel-radius) var(--frame-panel-radius);
+}
+.layout-grid .shell-sidebar.view-bar-bottom > .view-bar {
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: 0 0 var(--frame-panel-radius) var(--frame-panel-radius);
+  border-top-color: transparent;
+}
+.layout-grid .shell-sidebar.view-bar-bottom > .side-panel {
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: var(--frame-panel-radius) var(--frame-panel-radius) 0 0;
+}
+.shell-sidebar .side-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Override expanded edge contours as well as horizontal placement contours. */
+.workbench.compact
+  .layout-grid
+  .shell-sidebar[data-sidebar-side]
+  > :is(.side-panel, .view-bar) {
+  border-radius: 0;
+}
+.layout-grid .shell-sidebar.sidebar-horizontal > .view-bar {
+  padding: 4px;
+  /* Space between children for .layout-grid .shell-sidebar.sidebar-horizontal > .view-bar. @token --frame-gap */
+  --_frame-default-gap-3e2a1ab688: 6px;
+  gap: var(--frame-gap, var(--_frame-default-gap-3e2a1ab688));
+  min-height: 0;
+}
+.layout-grid .shell-sidebar.sidebar-horizontal > .view-bar.view-bar-compact {
+  padding: 3px;
+}
+.shell-sidebar .view-bar.view-bar-horizontal .rail-button {
+  height: 34px;
+}
+.shell-sidebar .view-bar.view-bar-horizontal.view-bar-compact .rail-button {
+  height: 28px;
+}
+.shell-sidebar
+  .view-bar.view-bar-horizontal:is(
+    .view-bar-display-text,
+    .view-bar-display-both
+  )
+  .rail-button {
+  width: auto;
+  min-width: 34px;
+}
+.shell-sidebar
+  .view-bar.view-bar-horizontal.view-bar-compact:is(
+    .view-bar-display-text,
+    .view-bar-display-both
+  )
+  .rail-button {
+  width: auto;
+  min-width: 28px;
+}
+
+/* Intrinsic cross-axis size is measured back into the shell geometry. */
+.layout-grid .shell-sidebar > .view-bar {
+  flex: 0 0 auto;
+  width: max-content;
+  /* Space between children for .layout-grid .shell-sidebar > .view-bar. @token --frame-spacing-small */
+  --_frame-default-spacing-small-3e5e0f3c4b: 4px;
+  /* Internal spacing for .layout-grid .shell-sidebar > .view-bar. @token --frame-activity-rail-padding */
+  --_frame-default-activity-rail-padding-8a21507c2e: var(
+    --frame-spacing-small,
+    var(--_frame-default-spacing-small-3e5e0f3c4b)
+  );
+  /* Internal spacing for .layout-grid .shell-sidebar > .view-bar. @token --frame-view-rail-padding */
+  --_frame-default-view-rail-padding-67130ec058: var(
+    --frame-activity-rail-padding,
+    var(--_frame-default-activity-rail-padding-8a21507c2e)
+  );
+  padding: var(
+    --frame-view-rail-padding,
+    var(--_frame-default-view-rail-padding-67130ec058)
+  );
+  /* Space between children for .layout-grid .shell-sidebar > .view-bar. @token --frame-spacing-small */
+  --_frame-default-spacing-small-3e5e0f3c4b: 4px;
+  /* Space between children for .layout-grid .shell-sidebar > .view-bar. @token --frame-activity-rail-gap */
+  --_frame-default-activity-rail-gap-a2ac3d47e4: var(
+    --frame-spacing-small,
+    var(--_frame-default-spacing-small-3e5e0f3c4b)
+  );
+  /* Space between children for .layout-grid .shell-sidebar > .view-bar. @token --frame-view-rail-gap */
+  --_frame-default-view-rail-gap-df48e8ce41: var(
+    --frame-activity-rail-gap,
+    var(--_frame-default-activity-rail-gap-a2ac3d47e4)
+  );
+  gap: var(
+    --frame-view-rail-gap,
+    var(--_frame-default-view-rail-gap-df48e8ce41)
+  );
+}
+.layout-grid .shell-sidebar.sidebar-horizontal > .view-bar,
+.layout-grid .shell-sidebar.sidebar-horizontal > .view-bar.view-bar-compact {
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  /* Space between children for .layout-grid .shell-sidebar.sidebar-horizontal > .view-bar, .layout-grid .shell-sidebar.sidebar-horizontal > .view-bar.view-bar-compact. @token --frame-spacing-small */
+  --_frame-default-spacing-small-3e5e0f3c4b: 4px;
+  /* Internal spacing for .layout-grid .shell-sidebar.sidebar-horizontal > .view-bar, .layout-grid .shell-sidebar.sidebar-horizontal > .view-bar.view-bar-compact. @token --frame-activity-rail-padding */
+  --_frame-default-activity-rail-padding-8a21507c2e: var(
+    --frame-spacing-small,
+    var(--_frame-default-spacing-small-3e5e0f3c4b)
+  );
+  /* Internal spacing for .layout-grid .shell-sidebar.sidebar-horizontal > .view-bar, .layout-grid .shell-sidebar.sidebar-horizontal > .view-bar.view-bar-compact. @token --frame-view-rail-padding */
+  --_frame-default-view-rail-padding-67130ec058: var(
+    --frame-activity-rail-padding,
+    var(--_frame-default-activity-rail-padding-8a21507c2e)
+  );
+  padding: var(
+    --frame-view-rail-padding,
+    var(--_frame-default-view-rail-padding-67130ec058)
+  );
+}
+.shell-sidebar .view-bar.view-bar-horizontal .rail-button,
+.shell-sidebar .view-bar.view-bar-horizontal.view-bar-compact .rail-button,
+.shell-sidebar
+  .view-bar.view-bar-horizontal:is(
+    .view-bar-display-text,
+    .view-bar-display-both
+  )
+  .rail-button,
+.shell-sidebar
+  .view-bar.view-bar-horizontal.view-bar-compact:is(
+    .view-bar-display-text,
+    .view-bar-display-both
+  )
+  .rail-button {
+  width: auto;
+  height: auto;
+  min-width: 0;
+}
+
+.layout-grid .shell-sidebar > .view-bar.view-bar-compact,
+.layout-grid .shell-sidebar.sidebar-horizontal > .view-bar.view-bar-compact {
+  /* Space between children for .layout-grid .shell-sidebar > .view-bar.view-bar-compact, .layout-grid .shell-sidebar.sidebar-horizontal > .view-bar.view-bar-compact. @token --frame-spacing-small */
+  --_frame-default-spacing-small-3e5e0f3c4b: 4px;
+  /* Internal spacing for .layout-grid .shell-sidebar > .view-bar.view-bar-compact, .layout-grid .shell-sidebar.sidebar-horizontal > .view-bar.view-bar-compact. @token --frame-activity-rail-padding */
+  --_frame-default-activity-rail-padding-8a21507c2e: var(
+    --frame-spacing-small,
+    var(--_frame-default-spacing-small-3e5e0f3c4b)
+  );
+  /* Internal spacing for .layout-grid .shell-sidebar > .view-bar.view-bar-compact, .layout-grid .shell-sidebar.sidebar-horizontal > .view-bar.view-bar-compact. @token --frame-view-rail-padding */
+  --_frame-default-view-rail-padding-67130ec058: var(
+    --frame-activity-rail-padding,
+    var(--_frame-default-activity-rail-padding-8a21507c2e)
+  );
+  /* Internal spacing for .layout-grid .shell-sidebar > .view-bar.view-bar-compact, .layout-grid .shell-sidebar.sidebar-horizontal > .view-bar.view-bar-compact. @token --frame-activity-compact-rail-padding */
+  --_frame-default-activity-compact-rail-padding-59e88b3485: var(
+    --frame-view-rail-padding,
+    var(--_frame-default-view-rail-padding-67130ec058)
+  );
+  /* Internal spacing for .layout-grid .shell-sidebar > .view-bar.view-bar-compact, .layout-grid .shell-sidebar.sidebar-horizontal > .view-bar.view-bar-compact. @token --frame-view-compact-rail-padding */
+  --_frame-default-view-compact-rail-padding-df8560573b: var(
+    --frame-activity-compact-rail-padding,
+    var(--_frame-default-activity-compact-rail-padding-59e88b3485)
+  );
+  padding: var(
+    --frame-view-compact-rail-padding,
+    var(--_frame-default-view-compact-rail-padding-df8560573b)
+  );
+}
+/* Retain density-specific padding with the horizontal selector specificity. */
+.shell-sidebar .view-bar.view-bar-horizontal.view-bar-compact .rail-button {
+  /* Space between children for .shell-sidebar .view-bar.view-bar-horizontal.view-bar-compact .rail-button. @token --frame-spacing-small */
+  --_frame-default-spacing-small-3e5e0f3c4b: 4px;
+  /* Internal spacing for .shell-sidebar .view-bar.view-bar-horizontal.view-bar-compact .rail-button. @token --frame-activity-compact-item-padding */
+  --_frame-default-activity-compact-item-padding-1533320777: calc(
+    var(--frame-spacing-small, var(--_frame-default-spacing-small-3e5e0f3c4b)) *
+      0.75
+  );
+  /* Internal spacing for .shell-sidebar .view-bar.view-bar-horizontal.view-bar-compact .rail-button. @token --frame-view-compact-item-padding */
+  --_frame-default-view-compact-item-padding-252015e4c9: var(
+    --frame-activity-compact-item-padding,
+    var(--_frame-default-activity-compact-item-padding-1533320777)
+  );
+  padding: var(
+    --frame-view-compact-item-padding,
+    var(--_frame-default-view-compact-item-padding-252015e4c9)
+  );
+}
+
+/* Density rules from the base stylesheet must not restore legacy fixed targets. */
+.shell-sidebar .view-bar.view-bar-display-icons .rail-button,
+.shell-sidebar .view-bar.view-bar-display-icons.view-bar-compact .rail-button {
+  width: auto;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: 1;
+}
+
+.shell-sidebar
+  .view-bar.view-bar-horizontal.view-bar-display-icons
+  .rail-button {
+  /* Space between children for .shell-sidebar .view-bar.view-bar-horizontal.view-bar-display-icons .rail-button. @token --frame-spacing-small */
+  --_frame-default-spacing-small-3e5e0f3c4b: 4px;
+  /* Internal spacing for .shell-sidebar .view-bar.view-bar-horizontal.view-bar-display-icons .rail-button. @token --frame-activity-item-padding */
+  --_frame-default-activity-item-padding-ca7d067a32: var(
+    --frame-spacing-small,
+    var(--_frame-default-spacing-small-3e5e0f3c4b)
+  );
+  /* Internal spacing for .shell-sidebar .view-bar.view-bar-horizontal.view-bar-display-icons .rail-button. @token --frame-view-item-padding */
+  --_frame-default-view-item-padding-cb42a729bb: var(
+    --frame-activity-item-padding,
+    var(--_frame-default-activity-item-padding-ca7d067a32)
+  );
+  padding: var(
+    --frame-view-item-padding,
+    var(--_frame-default-view-item-padding-cb42a729bb)
+  );
+}
+.shell-sidebar
+  .view-bar.view-bar-horizontal.view-bar-display-icons.view-bar-compact
+  .rail-button {
+  /* Space between children for .shell-sidebar .view-bar.view-bar-horizontal.view-bar-display-icons.view-bar-compact .rail-button. @token --frame-spacing-small */
+  --_frame-default-spacing-small-3e5e0f3c4b: 4px;
+  /* Internal spacing for .shell-sidebar .view-bar.view-bar-horizontal.view-bar-display-icons.view-bar-compact .rail-button. @token --frame-activity-compact-item-padding */
+  --_frame-default-activity-compact-item-padding-1533320777: calc(
+    var(--frame-spacing-small, var(--_frame-default-spacing-small-3e5e0f3c4b)) *
+      0.75
+  );
+  /* Internal spacing for .shell-sidebar .view-bar.view-bar-horizontal.view-bar-display-icons.view-bar-compact .rail-button. @token --frame-view-compact-item-padding */
+  --_frame-default-view-compact-item-padding-252015e4c9: var(
+    --frame-activity-compact-item-padding,
+    var(--_frame-default-activity-compact-item-padding-1533320777)
+  );
+  padding: var(
+    --frame-view-compact-item-padding,
+    var(--_frame-default-view-compact-item-padding-252015e4c9)
+  );
+}

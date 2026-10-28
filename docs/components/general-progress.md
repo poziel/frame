@@ -84,16 +84,16 @@ Use the shared theme variables in application content. Component-specific declar
 
 <!-- frame:generated styles="general-progress" -->
 
-| CSS variable              | Theme path              | Default expression           | Purpose                                                                                                      | Context                     |
-| ------------------------- | ----------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------ | --------------------------- |
-| `--frame-progress-height` | `frame.progress.height` | `6px`                        | Thickness of the progress track.                                                                             | `.frame-progress`           |
-| `--frame-progress-track`  | `frame.progress.track`  | `var(--frame-line)`          | Surface of the unfilled progress track.                                                                      | `.frame-progress`           |
-| `--frame-control-radius`  | `frame.control.radius`  | `var(--frame-radius-medium)` | Shared corner radius of buttons and ordinary controls; text-entry surfaces may use the input radius instead. | `.frame-progress`           |
-| `--frame-line`            | `frame.line`            | `#2b2b2b`                    | Neutral divider color for content boundaries, tracks, and structural separators.                             | `.frame-progress`           |
-| `--frame-progress-color`  | `frame.progress.color`  | `var(--frame-accent)`        | Fill of the progress indicator.                                                                              | `.frame-progress-indicator` |
-| `--frame-accent`          | `frame.accent`          | `#0078d4`                    | Shared interaction color for keyboard focus, active actions, and accent-filled controls.                     | `.frame-progress-indicator` |
-| `--frame-duration`        | `frame.duration`        | `150ms`                      | Shared duration for control and shell presentation transitions.                                              | `.frame-progress-indicator` |
-| `--frame-ease`            | `frame.ease`            | `ease-out`                   | Shared timing curve for control and shell presentation transitions.                                          | `.frame-progress-indicator` |
+| CSS variable              | Theme path              | Default expression                        | Purpose                                                                                                      | Context                     |
+| ------------------------- | ----------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------ | --------------------------- |
+| `--frame-progress-height` | `frame.progress.height` | `6px`                                     | Thickness of the progress track.                                                                             | `.frame-progress`           |
+| `--frame-progress-track`  | `frame.progress.track`  | `var(--frame-line)`                       | Surface of the unfilled progress track.                                                                      | `.frame-progress`           |
+| `--frame-control-radius`  | `frame.control.radius`  | No declared default; supplied by context. | Shared corner radius of buttons and ordinary controls; text-entry surfaces may use the input radius instead. | `.frame-progress`           |
+| `--frame-line`            | `frame.line`            | No declared default; supplied by context. | Neutral divider color for content boundaries, tracks, and structural separators.                             | `.frame-progress`           |
+| `--frame-progress-color`  | `frame.progress.color`  | `var(--frame-accent)`                     | Fill of the progress indicator.                                                                              | `.frame-progress-indicator` |
+| `--frame-accent`          | `frame.accent`          | No declared default; supplied by context. | Shared interaction color for keyboard focus, active actions, and accent-filled controls.                     | `.frame-progress-indicator` |
+| `--frame-duration`        | `frame.duration`        | No declared default; supplied by context. | Shared duration for control and shell presentation transitions.                                              | `.frame-progress-indicator` |
+| `--frame-ease`            | `frame.ease`            | No declared default; supplied by context. | Shared timing curve for control and shell presentation transitions.                                          | `.frame-progress-indicator` |
 
 Expressions are preserved as written; their computed values depend on the active theme and component state.
 

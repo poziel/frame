@@ -1,4 +1,4 @@
-import './styles/index.css';
+import './styles/index.scss';
 
 export {default as UniversalViewer} from './components/UniversalViewer.vue';
 export {default as UniversalViewerContent} from './components/UniversalViewerContent.vue';

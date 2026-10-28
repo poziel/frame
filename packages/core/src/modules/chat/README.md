@@ -14,7 +14,7 @@ stylesheet.
 - `integrations/`: the explicit Frame view definition helper.
 - `types/`: data-only chat and agent contracts with documented members and
   discriminated event variants.
-- `styles/index.css`: shared chat presentation.
+- `styles/index.scss`: shared chat presentation.
 
 The application owns providers, adapters, persistence, and explicit creation.
 Creating a view definition does not register a sidebar or dispose caller-owned

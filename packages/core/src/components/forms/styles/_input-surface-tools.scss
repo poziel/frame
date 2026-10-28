@@ -1,0 +1,82 @@
+// Bind a text surface to its component overrides and shared runtime defaults.
+@mixin text-surface-variables($prefix) {
+  /* Fallback for: Resting border of the text input. @token --frame-input-border */
+  --_frame-default-input-border-252130f242: 1px solid
+    var(--frame-control-border);
+  /* Resting border of the #{$prefix} text surface. @token --frame-#{$prefix}-border */
+  --_frame-default-#{$prefix}-border-80478923bf: var(
+    --frame-input-border,
+    var(--_frame-default-input-border-252130f242)
+  );
+  /* Resting border color of form controls, independently overridable from menu borders. @token --frame-control-border @context */
+  --_frame-input-border: var(
+    --frame-#{$prefix}-border,
+    var(--_frame-default-#{$prefix}-border-80478923bf)
+  );
+  /* Corner radius of the #{$prefix} text surface. @token --frame-#{$prefix}-border-radius */
+  --_frame-default-#{$prefix}-border-radius-f1cfd0b791: var(
+    --frame-input-radius
+  );
+  /* Shared corner radius for text fields, text areas, selects, and composed input surfaces. @token --frame-input-radius @context */
+  --_frame-input-border-radius: var(
+    --frame-#{$prefix}-border-radius,
+    var(--_frame-default-#{$prefix}-border-radius-f1cfd0b791)
+  );
+  /* Fallback for: Border while the pointer hovers over the text input. @token --frame-input-hover-border */
+  --_frame-default-input-hover-border-2d187c47a6: 1px solid
+    var(--frame-control-border);
+  /* Border while the pointer hovers of the #{$prefix} text surface. @token --frame-#{$prefix}-hover-border */
+  --_frame-default-#{$prefix}-hover-border-7d6e2f8498: var(
+    --frame-input-hover-border,
+    var(--_frame-default-input-hover-border-2d187c47a6)
+  );
+  --_frame-input-hover-border: var(
+    --frame-#{$prefix}-hover-border,
+    var(--_frame-default-#{$prefix}-hover-border-7d6e2f8498)
+  );
+  /* Fallback for: Outline while the pointer hovers over the text input. @token --frame-input-hover-outline */
+  --_frame-default-input-hover-outline-8f2a45ae80: none;
+  /* Outline while the pointer hovers of the #{$prefix} text surface. @token --frame-#{$prefix}-hover-outline */
+  --_frame-default-#{$prefix}-hover-outline-0625b47616: var(
+    --frame-input-hover-outline,
+    var(--_frame-default-input-hover-outline-8f2a45ae80)
+  );
+  --_frame-input-hover-outline: var(
+    --frame-#{$prefix}-hover-outline,
+    var(--_frame-default-#{$prefix}-hover-outline-0625b47616)
+  );
+  /* Fallback for: Border while focus is within the text input. @token --frame-input-focus-border */
+  --_frame-default-input-focus-border-0435f9b5a7: 1px solid var(--frame-accent);
+  /* Border while focus is within the input of the #{$prefix} text surface. @token --frame-#{$prefix}-focus-border */
+  --_frame-default-#{$prefix}-focus-border-4d5238f968: var(
+    --frame-input-focus-border,
+    var(--_frame-default-input-focus-border-0435f9b5a7)
+  );
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  --_frame-input-focus-border: var(
+    --frame-#{$prefix}-focus-border,
+    var(--_frame-default-#{$prefix}-focus-border-4d5238f968)
+  );
+  /* Fallback for: Focus outline of the text input. @token --frame-input-focus-outline */
+  --_frame-default-input-focus-outline-83b1eb84d6: 1px solid var(--frame-accent);
+  /* Outline while focus is within the input of the #{$prefix} text surface. @token --frame-#{$prefix}-focus-outline */
+  --_frame-default-#{$prefix}-focus-outline-cebf99a78d: var(
+    --frame-input-focus-outline,
+    var(--_frame-default-input-focus-outline-83b1eb84d6)
+  );
+  --_frame-input-focus-outline: var(
+    --frame-#{$prefix}-focus-outline,
+    var(--_frame-default-#{$prefix}-focus-outline-cebf99a78d)
+  );
+  /* Fallback for: Offset between the outline and the text input. @token --frame-input-outline-offset */
+  --_frame-default-input-outline-offset-23b248891d: 0px;
+  /* Offset between the outline and input of the #{$prefix} text surface. @token --frame-#{$prefix}-outline-offset */
+  --_frame-default-#{$prefix}-outline-offset-f2cb4c36a1: var(
+    --frame-input-outline-offset,
+    var(--_frame-default-input-outline-offset-23b248891d)
+  );
+  --_frame-input-outline-offset: var(
+    --frame-#{$prefix}-outline-offset,
+    var(--_frame-default-#{$prefix}-outline-offset-f2cb4c36a1)
+  );
+}

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {SliderRoot, SliderTrack, SliderRange, SliderThumb} from 'reka-ui';
-import './shared/controls.css';
+import './styles/controls.scss';
 
 defineOptions({inheritAttrs: false});
 withDefaults(
@@ -33,7 +33,7 @@ const emit = defineEmits<{
   <SliderRoot
     name=""
     :required="required"
-    class="frame-slider frame-slider-root"
+    class="frame-slider frame-slider-root frame-control-disabled"
     :model-value="[modelValue]"
     :min="min"
     :max="max"
@@ -42,7 +42,9 @@ const emit = defineEmits<{
     @update:model-value="emit('update:modelValue', $event?.[0] ?? modelValue)"
     ><SliderTrack class="frame-slider-track"
       ><SliderRange class="frame-slider-range" /></SliderTrack
-    ><SliderThumb v-bind="$attrs" class="frame-slider-thumb" /></SliderRoot
+    ><SliderThumb
+      v-bind="$attrs"
+      class="frame-slider-thumb frame-control-focus" /></SliderRoot
   ><input
     v-if="name"
     type="hidden"
@@ -52,3 +54,54 @@ const emit = defineEmits<{
     :disabled="disabled"
   />
 </template>
+
+<style lang="scss">
+.frame-slider-root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 20px;
+  touch-action: none;
+  user-select: none;
+}
+
+.frame-slider-track {
+  position: relative;
+  flex: 1;
+  height: 4px;
+  /* Border for .frame-slider-track. @token --frame-line */
+  --_frame-default-line-ff02b7d326: #454545;
+  background: var(--frame-line, var(--_frame-default-line-ff02b7d326));
+  border-radius: 999px;
+}
+
+.frame-slider-range {
+  position: absolute;
+  height: 100%;
+  /* Elevation shadow for .frame-slider-range. @token --frame-accent */
+  --_frame-default-accent-1583861c13: #0078d4;
+  background: var(--frame-accent, var(--_frame-default-accent-1583861c13));
+}
+
+.frame-slider-thumb {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  /* Foreground for .frame-slider-thumb. @token --frame-text */
+  --_frame-default-text-11eec91da6: #ccc;
+  background: var(--frame-text, var(--_frame-default-text-11eec91da6));
+}
+</style>
+
+<style lang="scss">
+.frame-slider {
+  /* Width for .frame-slider. @token --frame-slider-width */
+  --_frame-default-slider-width-b27ae231e5: min(100%, 340px);
+  width: var(
+    --frame-slider-width,
+    var(--_frame-default-slider-width-b27ae231e5)
+  ); /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  accent-color: var(--frame-accent);
+}
+</style>

@@ -7,7 +7,7 @@ import type {
   FileUploadOptions,
 } from './shared/files';
 import {useFilePicker} from './shared/useFilePicker';
-import './shared/files.css';
+import './styles/files.scss';
 
 const props = withDefaults(
   defineProps<
@@ -138,3 +138,31 @@ defineSlots<{
     >
   </div>
 </template>
+
+<style lang="scss">
+.frame-file-upload {
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  color: var(--frame-text);
+  font: inherit;
+}
+
+.frame-file-list {
+  list-style: none;
+  padding: 0;
+  /* Space between children for .frame-file-list. @token --frame-gap */
+  --_frame-default-gap-3e2a1ab688: 6px;
+  margin: var(--frame-gap, var(--_frame-default-gap-3e2a1ab688)) 0;
+}
+
+.frame-file-list li {
+  display: flex;
+  align-items: center;
+  /* Space between children for .frame-file-list li. @token --frame-gap */
+  --_frame-default-gap-3e2a1ab688: 6px;
+  gap: var(--frame-gap, var(--_frame-default-gap-3e2a1ab688));
+}
+
+.frame-file-list li > span {
+  overflow-wrap: anywhere;
+}
+</style>

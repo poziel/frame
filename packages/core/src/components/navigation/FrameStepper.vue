@@ -13,7 +13,7 @@ import {
 import type {StepperRootProps, StepperRootEmits} from 'reka-ui';
 import type {FrameStepItem} from './stepperTypes';
 import FrameIcon from '../data-display/FrameIcon.vue';
-import '../shared/general-b.css';
+import './styles/navigation.scss';
 
 const props = defineProps<
   StepperRootProps & {
@@ -50,7 +50,7 @@ defineSlots<{
 <template>
   <StepperRoot
     v-bind="forwarded"
-    class="frame-stepper"
+    class="frame-stepper frame-navigation-text"
     :aria-label="label"
     v-slot="state"
     ><slot v-bind="state"
@@ -62,7 +62,7 @@ defineSlots<{
         :completed="item.completed"
         class="frame-stepper-item"
         v-slot="{state: stepState}"
-        ><StepperTrigger class="frame-stepper-trigger"
+        ><StepperTrigger class="frame-stepper-trigger frame-navigation-focus"
           ><StepperIndicator class="frame-stepper-indicator"
             ><FrameIcon
               v-if="stepState === 'completed'"
@@ -83,3 +83,85 @@ defineSlots<{
           class="frame-stepper-separator" /></StepperItem></slot
   ></StepperRoot>
 </template>
+
+<style lang="scss">
+.frame-stepper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.frame-stepper-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.frame-stepper-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  text-align: start;
+  font: inherit;
+  /* Corner radius for .frame-stepper-trigger. @token --frame-control-radius */
+  --_frame-default-control-radius-99f2371f33: var(--frame-radius-medium);
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-99f2371f33)
+  );
+}
+
+.frame-stepper-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  /* Background for .frame-stepper-indicator. @token --frame-control-border */
+  --_frame-default-control-border-70a9ec99ca: #555;
+  border: 1px solid
+    var(--frame-control-border, var(--_frame-default-control-border-70a9ec99ca));
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.frame-stepper-item[data-state='active'] .frame-stepper-indicator,
+.frame-stepper-item[data-state='completed'] .frame-stepper-indicator {
+  /* Foreground for .frame-stepper-item[data-state='active'] .frame-stepper-indicator, .frame-stepper-item[data-state='completed'] .frame-stepper-indicator. @token --frame-accent */
+  --_frame-default-accent-10eb2a821a: #007acc;
+  border-color: var(--frame-accent, var(--_frame-default-accent-10eb2a821a));
+  /* Foreground for .frame-stepper-item[data-state='active'] .frame-stepper-indicator, .frame-stepper-item[data-state='completed'] .frame-stepper-indicator. @token --frame-accent */
+  --_frame-default-accent-10eb2a821a: #007acc;
+  color: var(--frame-accent, var(--_frame-default-accent-10eb2a821a));
+}
+
+.frame-stepper-title {
+  display: block;
+  font-weight: 600;
+}
+
+.frame-stepper-description {
+  display: block;
+  font-size: 0.9em;
+  /* Foreground for .frame-stepper-description. @token --frame-muted */
+  --_frame-default-muted-1e7907e7d2: #888;
+  color: var(--frame-muted, var(--_frame-default-muted-1e7907e7d2));
+}
+
+.frame-stepper-separator {
+  flex: 1;
+  height: 1px;
+  /* Background for .frame-stepper-separator. @token --frame-control-border */
+  --_frame-default-control-border-70a9ec99ca: #555;
+  background: var(
+    --frame-control-border,
+    var(--_frame-default-control-border-70a9ec99ca)
+  );
+}
+</style>

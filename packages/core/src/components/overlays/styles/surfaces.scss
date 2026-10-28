@@ -1,0 +1,222 @@
+.frame-general-anchor {
+  display: inline-flex;
+}
+.frame-general-button {
+  font: inherit;
+  /* Foreground for .frame-general-button. @token --frame-control-text */
+  --_frame-default-control-text-91e0a0e828: var(--frame-foreground);
+  /* foreground used by color in .frame-general-button. @token --frame-foreground @context */
+  color: var(
+    --frame-control-text,
+    var(--_frame-default-control-text-91e0a0e828)
+  );
+  /* Background for .frame-general-button. @token --frame-control-background */
+  --_frame-default-control-background-77221642fb: var(--frame-background);
+  /* background used by background in .frame-general-button. @token --frame-background @context */
+  background: var(
+    --frame-control-background,
+    var(--_frame-default-control-background-77221642fb)
+  );
+  /* Border for .frame-general-button. @token --frame-control-border */
+  --_frame-default-control-border-4449350f74: var(--frame-border);
+  /* border used by border in .frame-general-button. @token --frame-border @context */
+  border: 1px solid
+    var(--frame-control-border, var(--_frame-default-control-border-4449350f74));
+  /* Corner radius for .frame-general-button. @token --frame-radius */
+  --_frame-default-radius-99a192d218: var(--frame-radius-medium);
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(--frame-radius, var(--_frame-default-radius-99a192d218));
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.frame-general-button:focus-visible {
+  /* Outline for .frame-general-button:focus-visible. @token --frame-focus-border */
+  --_frame-default-focus-border-c62bef2652: var(--frame-accent);
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  outline: 2px solid
+    var(--frame-focus-border, var(--_frame-default-focus-border-c62bef2652));
+  outline-offset: 2px;
+}
+.frame-general-backdrop {
+  position: fixed;
+  /* Background for .frame-general-backdrop. @token --frame-dialog-backdrop */
+  --_frame-default-dialog-backdrop-cb3a3c1849: #0006;
+  background: var(
+    --frame-dialog-backdrop,
+    var(--_frame-default-dialog-backdrop-cb3a3c1849)
+  );
+  z-index: 1100;
+}
+.frame-general-layer {
+  position: fixed;
+  z-index: 1101;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  padding: 16px;
+  box-sizing: border-box;
+}
+.frame-general-surface {
+  pointer-events: auto;
+  /* Background for .frame-general-surface. @token --frame-general-background */
+  --_frame-default-general-background-9c8ab68e02: var(
+    --frame-overlay-background
+  );
+  /* Shared translucent fill for floating surfaces over the application canvas. @token --frame-overlay-background @context */
+  background: var(
+    --frame-general-background,
+    var(--_frame-default-general-background-9c8ab68e02)
+  );
+  /* Foreground for .frame-general-surface. @token --frame-foreground */
+  --_frame-default-foreground-6fda637b2d: #eee;
+  /* Foreground for .frame-general-surface. @token --frame-control-text */
+  --_frame-default-control-text-b4b7b146a4: var(
+    --frame-foreground,
+    var(--_frame-default-foreground-6fda637b2d)
+  );
+  /* Foreground for .frame-general-surface. @token --frame-general-foreground */
+  --_frame-default-general-foreground-405c264981: var(
+    --frame-control-text,
+    var(--_frame-default-control-text-b4b7b146a4)
+  );
+  color: var(
+    --frame-general-foreground,
+    var(--_frame-default-general-foreground-405c264981)
+  );
+  /* Border for .frame-general-surface. @token --frame-border */
+  --_frame-default-border-d253414c44: #555;
+  /* Border for .frame-general-surface. @token --frame-control-border */
+  --_frame-default-control-border-6f8a3d1eb3: var(
+    --frame-border,
+    var(--_frame-default-border-d253414c44)
+  );
+  /* Border for .frame-general-surface. @token --frame-general-border */
+  --_frame-default-general-border-0c7236cc08: var(
+    --frame-control-border,
+    var(--_frame-default-control-border-6f8a3d1eb3)
+  );
+  border: 1px solid
+    var(--frame-general-border, var(--_frame-default-general-border-0c7236cc08));
+  /* Corner radius for .frame-general-surface. @token --frame-radius */
+  --_frame-default-radius-99a192d218: var(--frame-radius-medium);
+  /* Corner radius for .frame-general-surface. @token --frame-general-radius */
+  --_frame-default-general-radius-5340eb41c6: var(
+    --frame-radius,
+    var(--_frame-default-radius-99a192d218)
+  );
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(
+    --frame-general-radius,
+    var(--_frame-default-general-radius-5340eb41c6)
+  );
+  /* Elevation shadow for .frame-general-surface. @token --frame-general-shadow */
+  --_frame-default-general-shadow-63b8c2d6df: 0 8px 24px #0004;
+  box-shadow: var(
+    --frame-general-shadow,
+    var(--_frame-default-general-shadow-63b8c2d6df)
+  );
+  font: inherit;
+  box-sizing: border-box;
+}
+.frame-general-dialog {
+  width: min(460px, 100%);
+  max-height: 100%;
+  overflow: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.frame-general-title {
+  font-size: inherit;
+  font-weight: 600;
+  margin: 0;
+}
+.frame-general-description {
+  font-size: inherit;
+  /* Foreground for .frame-general-description. @token --frame-description-foreground */
+  --_frame-default-description-foreground-1e2c54bf46: var(--frame-foreground);
+  /* foreground used by color in .frame-general-description. @token --frame-foreground @context */
+  color: var(
+    --frame-description-foreground,
+    var(--_frame-default-description-foreground-1e2c54bf46)
+  );
+  margin: 0;
+  line-height: 1.5;
+}
+.frame-general-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+.frame-general-popup {
+  padding: 12px;
+  overflow: auto;
+  z-index: 1102;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.frame-general-arrow {
+  /* SVG fill for .frame-general-arrow. @token --frame-control-background */
+  --_frame-default-control-background-06fec62e0d: #202020;
+  /* SVG fill for .frame-general-arrow. @token --frame-general-background */
+  --_frame-default-general-background-bb868be5ed: var(
+    --frame-control-background,
+    var(--_frame-default-control-background-06fec62e0d)
+  );
+  fill: var(
+    --frame-general-background,
+    var(--_frame-default-general-background-bb868be5ed)
+  );
+}
+.frame-general-menu {
+  padding: 4px;
+  min-width: 180px;
+  overflow: auto;
+  z-index: 1102;
+}
+.frame-general-menu-item {
+  padding: 6px 8px;
+  /* Corner radius for .frame-general-menu-item. @token --frame-radius */
+  --_frame-default-radius-99a192d218: var(--frame-radius-medium);
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(--frame-radius, var(--_frame-default-radius-99a192d218));
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  outline: none;
+  cursor: default;
+}
+.frame-general-menu-item[data-highlighted] {
+  /* Background for .frame-general-menu-item[data-highlighted]. @token --frame-accent */
+  --_frame-default-accent-bf882e355d: #365c85;
+  /* Background for .frame-general-menu-item[data-highlighted]. @token --frame-list-active-selection-background */
+  --_frame-default-list-active-selection-background-b231bd9af9: var(
+    --frame-accent,
+    var(--_frame-default-accent-bf882e355d)
+  );
+  background: var(
+    --frame-list-active-selection-background,
+    var(--_frame-default-list-active-selection-background-b231bd9af9)
+  );
+}
+.frame-general-menu-item[data-disabled] {
+  opacity: 0.45;
+}
+.frame-general-separator {
+  height: 1px;
+  /* Border for .frame-general-separator. @token --frame-border */
+  --_frame-default-border-d253414c44: #555;
+  /* Border for .frame-general-separator. @token --frame-control-border */
+  --_frame-default-control-border-6f8a3d1eb3: var(
+    --frame-border,
+    var(--_frame-default-border-d253414c44)
+  );
+  background: var(
+    --frame-control-border,
+    var(--_frame-default-control-border-6f8a3d1eb3)
+  );
+  margin: 4px;
+}

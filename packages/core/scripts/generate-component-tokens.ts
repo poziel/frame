@@ -1,14 +1,22 @@
 import {readFileSync, readdirSync, writeFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {compileStyleSource} from './compile-style-source';
 
 // Build-time inventory only. Module token names are shared; module implementations remain separate entry points.
 const names = new Set<string>();
 for (const root of [new URL('../src/', import.meta.url)]) {
   for (const file of readdirSync(root, {recursive: true}).map(String).sort()) {
-    if (!/\.(css|vue|ts)$/.test(file) || file.startsWith('themes')) continue;
-    for (const match of readFileSync(
-      new URL(file.replaceAll('\\', '/'), root),
-      'utf8'
-    ).matchAll(/--frame-[\w-]+/g))
+    if (!/\.(s?css|vue|ts)$/.test(file) || file.startsWith('themes')) continue;
+    const path = new URL(file.replaceAll('\\', '/'), root);
+    const source = readFileSync(path, 'utf8');
+    // Compile interpolated mixin token names, while retaining TS/runtime uses.
+    // The composition entry includes generated theme defaults, not component tokens.
+    const css =
+      /\.(scss|vue)$/.test(file) &&
+      file.replaceAll('\\', '/') !== 'styles/index.scss'
+        ? compileStyleSource(fileURLToPath(path))
+        : '';
+    for (const match of (source + '\n' + css).matchAll(/--frame-[\w-]+/g))
       names.add(match[0]);
   }
 }

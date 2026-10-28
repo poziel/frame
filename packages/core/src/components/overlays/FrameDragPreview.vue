@@ -47,14 +47,14 @@ defineSlots<{
       ><slot /></div
   ></Teleport>
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .frame-drag-preview {
   position: fixed;
   z-index: 10000;
   pointer-events: none;
   overflow: hidden;
   padding: 8px 10px;
-  /* Border for .frame-drag-preview. Used when --frame-drag-preview-border is unset. @token --frame-reorder-preview-border */
+  /* Border for .frame-drag-preview. @token --frame-reorder-preview-border */
   --_frame-default-reorder-preview-border-b2e73e2d1f: var(--frame-border-color);
   /* Border for .frame-drag-preview. @token --frame-drag-preview-border */
   --_frame-default-drag-preview-border-114f65c8a1: var(
@@ -69,9 +69,9 @@ defineSlots<{
   /* Corner radius for .frame-drag-preview. @token --frame-radius */
   --_frame-default-radius-cde2a7669d: 4px;
   border-radius: var(--frame-radius, var(--_frame-default-radius-cde2a7669d));
-  /* Background for .frame-drag-preview. Used when --frame-drag-preview-background and --frame-reorder-preview-background is unset. @token --frame-bg */
+  /* Background for .frame-drag-preview. @token --frame-bg */
   --_frame-default-bg-29eeb8bfdf: #181818;
-  /* Background for .frame-drag-preview. Used when --frame-drag-preview-background is unset. @token --frame-reorder-preview-background */
+  /* Background for .frame-drag-preview. @token --frame-reorder-preview-background */
   --_frame-default-reorder-preview-background-85985ba0bd: var(
     --frame-bg,
     var(--_frame-default-bg-29eeb8bfdf)
@@ -85,8 +85,10 @@ defineSlots<{
     --frame-drag-preview-background,
     var(--_frame-default-drag-preview-background-69d3ae2d55)
   );
-  color: var(--frame-text);
-  /* Elevation shadow for .frame-drag-preview. Used when --frame-drag-preview-shadow is unset. @token --frame-reorder-preview-shadow */
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  color: var(
+    --frame-text
+  ); /* Elevation shadow for .frame-drag-preview. @token --frame-reorder-preview-shadow */
   --_frame-default-reorder-preview-shadow-e836a93c9b: 0 4px 12px #0005;
   /* Elevation shadow for .frame-drag-preview. @token --frame-drag-preview-shadow */
   --_frame-default-drag-preview-shadow-0085e8d364: var(

@@ -25,3 +25,11 @@ defineSlots<{
   </FrameTooltip>
   <slot v-else :describedby="undefined" />
 </template>
+
+<style lang="scss">
+/* Descriptive control tooltips must never cover another control's hit area. */
+[data-reka-popper-content-wrapper]:has(> .frame-tooltip[data-noninteractive]),
+.frame-tooltip[data-noninteractive] {
+  pointer-events: none;
+}
+</style>

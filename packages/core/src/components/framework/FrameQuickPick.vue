@@ -277,10 +277,10 @@ defineSlots<{
   </QuickOverlay>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .picker-heading {
-  /* Inherited host separator-color alias for group headings in the quick picker. @token --frame-border @context */
-  /* Inherited host secondary-text alias for group headings in the quick picker. @token --frame-text-muted @context */
+  /* border used by border in .picker-heading. @token --frame-border @context */
+  /* text muted used by padding in .picker-heading. @token --frame-text-muted @context */
   padding: 6px 12px;
   border-top: 1px solid var(--frame-border);
   color: var(--frame-text-muted);
@@ -296,6 +296,7 @@ defineSlots<{
   gap: var(--frame-spacing-unit, var(--_frame-default-spacing-unit-fb33760b58));
 }
 .quick-input-operator {
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
   color: var(--frame-text);
   /* Background for .quick-input-operator. @token --frame-input-bg */
   --_frame-default-input-bg-b13a1ddb7f: var(--frame-overlay-background);
@@ -307,10 +308,214 @@ defineSlots<{
     var(--_frame-default-radius-small-a00d8c947a)
   );
   padding: 2px 8px;
+  /* Monospace font family for code, terminal text, and fixed-width content. @token --frame-font-mono @context */
   font-family: var(--frame-font-mono);
 }
 .palette-input :deep(input) {
   min-width: 0;
   flex: 1;
+}
+</style>
+
+<style lang="scss">
+.palette-input {
+  flex-shrink: 0;
+  /* Bottom internal spacing for .palette-input. @token --frame-palette-input-padding-bottom */
+  --_frame-default-palette-input-padding-bottom-bbd520cfb4: 5px;
+  padding-bottom: var(
+    --frame-palette-input-padding-bottom,
+    var(--_frame-default-palette-input-padding-bottom-bbd520cfb4)
+  );
+}
+
+.palette-results {
+  overflow: auto;
+  /* Minimum height for .palette-results. @token --frame-palette-results-min-height */
+  --_frame-default-palette-results-min-height-08300150f8: 0;
+  min-height: var(
+    --frame-palette-results-min-height,
+    var(--_frame-default-palette-results-min-height-08300150f8)
+  );
+}
+
+.command-result {
+  display: flex;
+  align-items: center;
+  /* Space between children for .command-result. @token --frame-command-result-gap */
+  --_frame-default-command-result-gap-120997ed78: 10px;
+  gap: var(
+    --frame-command-result-gap,
+    var(--_frame-default-command-result-gap-120997ed78)
+  );
+  /* Minimum height for .command-result. @token --frame-command-result-min-height */
+  --_frame-default-command-result-min-height-b94eac5173: 23px;
+  min-height: var(
+    --frame-command-result-min-height,
+    var(--_frame-default-command-result-min-height-b94eac5173)
+  );
+  /* Internal spacing for .command-result. @token --frame-command-result-padding */
+  --_frame-default-command-result-padding-b0caa94d91: 2px 7px;
+  padding: var(
+    --frame-command-result-padding,
+    var(--_frame-default-command-result-padding-b0caa94d91)
+  );
+  /* Corner radius for .command-result. @token --frame-command-result-border-radius */
+  --_frame-default-command-result-border-radius-29508278b3: var(
+    --frame-radius-medium
+  );
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(
+    --frame-command-result-border-radius,
+    var(--_frame-default-command-result-border-radius-29508278b3)
+  );
+  cursor: pointer;
+  /* Text size for .command-result. @token --frame-command-result-font-size */
+  --_frame-default-command-result-font-size-9a4ee7cad9: 12px;
+  font-size: var(
+    --frame-command-result-font-size,
+    var(--_frame-default-command-result-font-size-9a4ee7cad9)
+  );
+}
+
+.command-result.active {
+  /* Background for .command-result.active. @token --frame-command-result-active-background */
+  --_frame-default-command-result-active-background-845017fde3: #344b57;
+  background: var(
+    --frame-command-result-active-background,
+    var(--_frame-default-command-result-active-background-845017fde3)
+  );
+  /* Foreground for .command-result.active. @token --frame-command-result-active-color */
+  --_frame-default-command-result-active-color-8a1b3705a7: #f0f4f6;
+  color: var(
+    --frame-command-result-active-color,
+    var(--_frame-default-command-result-active-color-8a1b3705a7)
+  );
+}
+
+.command-label {
+  flex-shrink: 0;
+}
+
+.command-result small {
+  flex: 1;
+  /* Minimum width for .command-result small. @token --frame-command-result-small-min-width */
+  --_frame-default-command-result-small-min-width-9417cc934a: 0;
+  min-width: var(
+    --frame-command-result-small-min-width,
+    var(--_frame-default-command-result-small-min-width-9417cc934a)
+  );
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* Text size for .command-result small. @token --frame-command-result-small-font-size */
+  --_frame-default-command-result-small-font-size-6070e35c6d: 10px;
+  font-size: var(
+    --frame-command-result-small-font-size,
+    var(--_frame-default-command-result-small-font-size-6070e35c6d)
+  );
+  /* Foreground for .command-result small. @token --frame-command-result-small-color */
+  --_frame-default-command-result-small-color-955ccfffdd: #8f9ba1;
+  color: var(
+    --frame-command-result-small-color,
+    var(--_frame-default-command-result-small-color-955ccfffdd)
+  );
+}
+
+.command-result.active small {
+  color: inherit;
+}
+
+.command-result kbd {
+  margin-left: auto;
+  flex-shrink: 0;
+  /* Text size for .command-result kbd. @token --frame-command-result-kbd-font-size */
+  --_frame-default-command-result-kbd-font-size-f16f478185: 9px;
+  font-size: var(
+    --frame-command-result-kbd-font-size,
+    var(--_frame-default-command-result-kbd-font-size-f16f478185)
+  );
+  /* Text line height for .command-result kbd. @token --frame-command-result-kbd-line-height */
+  --_frame-default-command-result-kbd-line-height-364fdfeb23: 14px;
+  line-height: var(
+    --frame-command-result-kbd-line-height,
+    var(--_frame-default-command-result-kbd-line-height-364fdfeb23)
+  );
+  /* Background for .command-result kbd. @token --frame-command-result-kbd-background */
+  --_frame-default-command-result-kbd-background-aa34306749: #ffffff08;
+  background: var(
+    --frame-command-result-kbd-background,
+    var(--_frame-default-command-result-kbd-background-aa34306749)
+  );
+  /* Border color for .command-result kbd. @token --frame-command-result-kbd-border-color */
+  --_frame-default-command-result-kbd-border-color-93c1506541: #ffffff10;
+  border-color: var(
+    --frame-command-result-kbd-border-color,
+    var(--_frame-default-command-result-kbd-border-color-93c1506541)
+  );
+}
+
+.command-result.disabled {
+  /* Foreground for .command-result.disabled. @token --frame-command-result-disabled-color */
+  --_frame-default-command-result-disabled-color-624b752ba4: #68747a;
+  color: var(
+    --frame-command-result-disabled-color,
+    var(--_frame-default-command-result-disabled-color-624b752ba4)
+  );
+  cursor: default;
+}
+
+.no-results {
+  /* Foreground for .no-results. @token --frame-no-results-color */
+  --_frame-default-no-results-color-bccd5734a7: #99a6ad;
+  color: var(
+    --frame-no-results-color,
+    var(--_frame-default-no-results-color-bccd5734a7)
+  );
+  /* Text size for .no-results. @token --frame-no-results-font-size */
+  --_frame-default-no-results-font-size-da93e2e2a9: 12px;
+  font-size: var(
+    --frame-no-results-font-size,
+    var(--_frame-default-no-results-font-size-da93e2e2a9)
+  );
+  /* Internal spacing for .no-results. @token --frame-no-results-padding */
+  --_frame-default-no-results-padding-258adc9f77: 10px 7px;
+  padding: var(
+    --frame-no-results-padding,
+    var(--_frame-default-no-results-padding-258adc9f77)
+  );
+}
+
+@media (max-width: 540px) {
+  .command-result {
+    /* Text size for .command-result. @token --frame-command-result-font-size-2 */
+    --_frame-default-command-result-font-size-2-09450167b1: 11px;
+    font-size: var(
+      --frame-command-result-font-size-2,
+      var(--_frame-default-command-result-font-size-2-09450167b1)
+    );
+  }
+  .command-result small {
+    display: none;
+  }
+  .command-label {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+.quick-input-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+}
+
+.quick-input-icon > * {
+  width: 16px;
+  height: 16px;
 }
 </style>

@@ -59,7 +59,7 @@ const searchInput = ref<HTMLInputElement>();
     >
   </div>
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .settings-presentation {
   display: flex;
   flex-direction: column;
@@ -93,7 +93,9 @@ const searchInput = ref<HTMLInputElement>();
     --frame-control-background,
     var(--_frame-default-control-background-3a95faa91f)
   );
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
   color: var(--frame-text);
+  /* Shared resting border color inherited by menus and form controls. @token --frame-border-color @context */
   border: 1px solid var(--frame-border-color);
   /* Corner radius for .preferences-search. @token --frame-radius-medium */
   --_frame-default-radius-medium-48b47b16d5: 4px;
@@ -104,6 +106,7 @@ const searchInput = ref<HTMLInputElement>();
   font: inherit;
 }
 .preferences-search:focus-visible {
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
   outline: 1px solid var(--frame-accent);
   outline-offset: -1px;
 }

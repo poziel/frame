@@ -61,3 +61,37 @@ defineSlots<{
     ><template v-if="$slots.tooltip" #tooltip><slot name="tooltip" /></template
   ></FrameControlTooltip>
 </template>
+
+<style lang="scss">
+.frame-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
+  /* Text line height for .frame-icon. @token --frame-icon-line-height */
+  --_frame-default-icon-line-height-88a7de6930: 1;
+  line-height: var(
+    --frame-icon-line-height,
+    var(--_frame-default-icon-line-height-88a7de6930)
+  );
+}
+.frame-icon > svg {
+  display: block;
+  /* Width for .frame-icon > svg. @token --frame-icon-svg-width */
+  --_frame-default-icon-svg-width-c14d71c586: 100%;
+  width: var(
+    --frame-icon-svg-width,
+    var(--_frame-default-icon-svg-width-c14d71c586)
+  ); /* Height for .frame-icon > svg. @token --frame-icon-svg-height */
+  --_frame-default-icon-svg-height-82bef0fd8d: 100%;
+  height: var(
+    --frame-icon-svg-height,
+    var(--_frame-default-icon-svg-height-82bef0fd8d)
+  );
+}
+</style>

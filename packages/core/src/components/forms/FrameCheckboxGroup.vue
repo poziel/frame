@@ -8,7 +8,7 @@ import {
 import FrameIcon from '../data-display/FrameIcon.vue';
 import type {SelectItem} from './shared/selectItem';
 import {isSelectOption} from './shared/select';
-import './shared/controls.css';
+import './styles/controls.scss';
 
 defineProps<{
   /** Controlled array of checked option values. */
@@ -35,9 +35,11 @@ const emit = defineEmits<{
     ><template
       v-for="(option, index) in options"
       :key="isSelectOption(option) ? option.value : (option.id ?? index)"
-      ><Label v-if="isSelectOption(option)" class="frame-form-inline"
+      ><Label
+        v-if="isSelectOption(option)"
+        class="frame-form-inline frame-form-inline-layout"
         ><CheckboxRoot
-          class="frame-check-control"
+          class="frame-check-control frame-control-surface frame-control-action frame-control-focus frame-control-disabled"
           :value="option.value"
           :disabled="disabled || option.disabled"
           ><CheckboxIndicator class="frame-check-indicator"

@@ -368,7 +368,7 @@ No additional Frame-only events; see the part tables for declared or forwarded e
 
 #### Sources and version
 
-Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/field), its [Markdown reference](https://reka-ui.com/docs/components/field.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameField.vue). Styling comes from [advanced.css](../../../packages/core/src/components/forms/shared/advanced.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
+Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/field), its [Markdown reference](https://reka-ui.com/docs/components/field.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameField.vue). Styling comes from [advanced.scss](../../../packages/core/src/components/forms/styles/advanced.scss) and [shared styles](../../../packages/core/src/styles/index.scss). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
 
 ## Styling
 
@@ -376,13 +376,13 @@ Use the shared theme variables in application content. Component-specific declar
 
 <!-- frame:generated styles="field" -->
 
-| CSS variable     | Theme path     | Default expression                      | Purpose                                                                              | Context                                                           |
-| ---------------- | -------------- | --------------------------------------- | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
-| `--frame-gap`    | `frame.gap`    | `calc(var(--frame-spacing-unit) * 1.5)` | Standard space between related content items and control children.                   | `.frame-field`                                                    |
-| `--frame-text`   | `frame.text`   | `#cccccc`                               | Primary foreground for readable text and icons across shell and application content. | `.frame-field-label`                                              |
-| `--frame-muted`  | `frame.muted`  | `#8e9496`                               | Secondary foreground for descriptions, hints, and visually subordinate content.      | `.frame-field-description`                                        |
-| `--frame-danger` | `frame.danger` | `#f48771`                               | Foreground of field validation messages.                                             | `.frame-field-error`                                              |
-| `--frame-danger` | `frame.danger` | `#f48771`                               | Border color of a field marked invalid.                                              | `.frame-field [data-invalid], .frame-field [aria-invalid='true']` |
+| CSS variable     | Theme path     | Default expression                        | Purpose                                                                              | Context                                                         |
+| ---------------- | -------------- | ----------------------------------------- | ------------------------------------------------------------------------------------ | --------------------------------------------------------------- |
+| `--frame-muted`  | `frame.muted`  | No declared default; supplied by context. | Secondary foreground for descriptions, hints, and visually subordinate content.      | `.frame-field-description`                                      |
+| `--frame-gap`    | `frame.gap`    | No declared default; supplied by context. | Standard space between related content items and control children.                   | `.frame-field`                                                  |
+| `--frame-text`   | `frame.text`   | No declared default; supplied by context. | Primary foreground for readable text and icons across shell and application content. | `.frame-field-label`                                            |
+| `--frame-danger` | `frame.danger` | `#f48771`                                 | Foreground of field validation messages.                                             | `.frame-field-error`                                            |
+| `--frame-danger` | `frame.danger` | `#f48771`                                 | Foreground of field validation messages.                                             | `.frame-field [data-invalid], .frame-field [aria-invalid=true]` |
 
 Expressions are preserved as written; their computed values depend on the active theme and component state.
 

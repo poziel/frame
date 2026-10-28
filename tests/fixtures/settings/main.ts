@@ -2,7 +2,7 @@ import {createApp, h, markRaw} from 'vue';
 import CustomField from './CustomField.vue';
 import {Frame, FrameShell} from '@frame/core';
 import {editorModule} from '@frame/core/modules/editor';
-import '../../../packages/core/src/style.css';
+import '../../../packages/core/src/styles/index.scss';
 
 let json = '{}';
 const copied: string[] = [];

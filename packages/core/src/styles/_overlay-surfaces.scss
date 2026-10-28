@@ -1,0 +1,27 @@
+@use './mixins/surfaces';
+/* Shared frosted surface for floating content; backdrop dimming remains separate. */
+.frame-overlay-surface {
+  @include surfaces.overlay-backdrop;
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    /* overlay surface used by   frame overlay background in :root. @token --frame-overlay-surface @context */
+    --frame-overlay-background: var(--frame-overlay-surface);
+    --frame-overlay-backdrop-filter: none;
+  }
+  [data-frame-theme-scope] {
+    /* overlay surface used by   frame overlay background in [data-frame-theme-scope]. @token --frame-overlay-surface @context */
+    --frame-overlay-background: var(--frame-overlay-surface) !important;
+    --frame-overlay-backdrop-filter: none !important;
+  }
+}
+@supports not (backdrop-filter: blur(1px)) {
+  :root {
+    /* overlay surface used by   frame overlay background in :root. @token --frame-overlay-surface @context */
+    --frame-overlay-background: var(--frame-overlay-surface);
+  }
+  [data-frame-theme-scope] {
+    /* overlay surface used by   frame overlay background in [data-frame-theme-scope]. @token --frame-overlay-surface @context */
+    --frame-overlay-background: var(--frame-overlay-surface) !important;
+  }
+}

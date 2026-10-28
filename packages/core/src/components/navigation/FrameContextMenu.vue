@@ -25,7 +25,7 @@ import OverlayScrollbars from '../layout/OverlayScrollbars.vue';
 import AnchoredMenu from './AnchoredMenu.vue';
 import {useId} from 'vue';
 import {useOverlayBoundary} from '../overlays/overlays';
-import '../shared/general-c.css';
+import '../overlays/styles/surfaces.scss';
 
 const commandFrame = inject(frameKey, undefined);
 defineOptions({inheritAttrs: false});
@@ -169,7 +169,7 @@ defineSlots<{
       ><ContextMenuContent
         v-bind="{...contentEvents, ...contentProps, ...$attrs}"
         ref="content"
-        class="frame-menu"
+        class="frame-menu frame-overlay-surface frame-overlay-interactive frame-box-scope frame-control-scope frame-shell-text frame-scroll-scope"
         @pointermove="
           ($event.currentTarget as HTMLElement).dataset.menuInput = 'pointer'
         "

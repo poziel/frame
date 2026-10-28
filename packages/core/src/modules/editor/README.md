@@ -14,7 +14,7 @@ no Monaco engine and create no model or editor widget.
 | `components/CodeEditor.vue`                           | Vue props, watchers, events, mount/unmount, and loading/error presentation                |
 | `integrations/`                                       | Typed module installation and settings JSON editor integration                            |
 | `integrations/settings/settingsEditorRegistration.ts` | Paired JSON editor registrations, partial-install rollback, and idempotent cleanup        |
-| `styles/index.css`                                    | Editor presentation styles                                                                |
+| `components/CodeEditor.vue`                           | Editor presentation styles                                                                |
 
 ## Ownership and callbacks
 

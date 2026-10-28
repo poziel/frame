@@ -126,7 +126,7 @@ function surfaceRef(id: string, element: unknown) {
           :is="parts.SubContent"
           @escape-key-down="emit('dismiss')"
           :ref="(element: unknown) => surfaceRef(item.id, element)"
-          class="frame-menu"
+          class="frame-menu frame-overlay-surface frame-overlay-interactive frame-box-scope frame-control-scope frame-shell-text frame-scroll-scope"
           @pointermove="
             ($event.currentTarget as HTMLElement).dataset.menuInput = 'pointer'
           "

@@ -1,0 +1,8 @@
+.workspace-pane-content > .pane-placeholder,
+.workspace-tab-content > .pane-placeholder,
+.workspace-tab-content-host > .pane-placeholder {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}

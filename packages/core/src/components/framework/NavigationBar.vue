@@ -31,7 +31,7 @@ import FrameContextMenu from '../navigation/FrameContextMenu.vue';
 import FrameIcon from '../data-display/FrameIcon.vue';
 import BarItemContent from './BarItemContent.vue';
 import NavigationItemMenu from './NavigationItemMenu.vue';
-import './styles/bar-items.css';
+import './styles/bar-items.scss';
 
 const frame = useFrame(),
   bar = frame.navigationBar;
@@ -520,7 +520,7 @@ onBeforeUnmount(() => {
                   " /></button></DropdownMenuTrigger
             ><DropdownMenuPortal :to="target"
               ><DropdownMenuContent
-                class="frame-menu navigation-menu"
+                class="frame-menu navigation-menu frame-overlay-surface frame-overlay-interactive frame-box-scope frame-control-scope frame-shell-text frame-scroll-scope"
                 :side="side"
                 :side-offset="6"
                 :collision-padding="8"
@@ -595,7 +595,7 @@ onBeforeUnmount(() => {
           ></DropdownMenuTrigger
         ><DropdownMenuPortal :to="target"
           ><DropdownMenuContent
-            class="frame-menu navigation-menu"
+            class="frame-menu navigation-menu frame-overlay-surface frame-overlay-interactive frame-box-scope frame-control-scope frame-shell-text frame-scroll-scope"
             :side="side"
             :side-offset="6"
             :collision-padding="8"

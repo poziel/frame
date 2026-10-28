@@ -204,7 +204,7 @@ No additional Frame-only events; see the part tables for declared or forwarded e
 
 #### Sources and version
 
-Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/form), its [Markdown reference](https://reka-ui.com/docs/components/form.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameForm.vue). Styling comes from [advanced.css](../../../packages/core/src/components/forms/shared/advanced.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
+Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/form), its [Markdown reference](https://reka-ui.com/docs/components/form.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameForm.vue). Styling comes from [advanced.scss](../../../packages/core/src/components/forms/styles/advanced.scss) and [shared styles](../../../packages/core/src/styles/index.scss). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
 
 ## Styling
 
@@ -212,9 +212,9 @@ Use the shared theme variables in application content. Component-specific declar
 
 <!-- frame:generated styles="form" -->
 
-| CSS variable              | Theme path              | Default expression                    | Purpose                                                                         | Context       |
-| ------------------------- | ----------------------- | ------------------------------------- | ------------------------------------------------------------------------------- | ------------- |
-| `--frame-content-padding` | `frame.content.padding` | `calc(var(--frame-spacing-unit) * 3)` | Standard inset around content in panels, disclosures, and application surfaces. | `.frame-form` |
+| CSS variable              | Theme path              | Default expression                        | Purpose                                                                         | Context       |
+| ------------------------- | ----------------------- | ----------------------------------------- | ------------------------------------------------------------------------------- | ------------- |
+| `--frame-content-padding` | `frame.content.padding` | No declared default; supplied by context. | Standard inset around content in panels, disclosures, and application surfaces. | `.frame-form` |
 
 Expressions are preserved as written; their computed values depend on the active theme and component state.
 

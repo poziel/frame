@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ToggleGroupRoot, ToggleGroupItem} from 'reka-ui';
-import '../forms/shared/controls.css';
+import '../forms/styles/controls.scss';
 import type {SelectItem} from '../forms/shared/selectItem';
 import {isSelectOption} from '../forms/shared/select';
 
@@ -36,7 +36,7 @@ const emit = defineEmits<{
         v-if="isSelectOption(option)"
         :value="option.value"
         :disabled="disabled || option.disabled"
-        class="frame-choice-item"
+        class="frame-choice-item frame-control-surface frame-control-action frame-control-focus frame-control-disabled"
         ><span>{{ option.label }}</span
         ><small v-if="option.detail">{{
           option.detail

@@ -87,10 +87,10 @@ Use the shared theme variables in application content. Component-specific declar
 
 <!-- frame:generated styles="color-swatch" -->
 
-| CSS variable             | Theme path             | Default expression           | Purpose                                                                                                      | Context               |
-| ------------------------ | ---------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------ | --------------------- |
-| `--frame-line`           | `frame.line`           | `#2b2b2b`                    | Neutral divider color for content boundaries, tracks, and structural separators.                             | `.frame-color-swatch` |
-| `--frame-control-radius` | `frame.control.radius` | `var(--frame-radius-medium)` | Shared corner radius of buttons and ordinary controls; text-entry surfaces may use the input radius instead. | `.frame-color-swatch` |
+| CSS variable             | Theme path             | Default expression                        | Purpose                                                                                                      | Context               |
+| ------------------------ | ---------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------ | --------------------- |
+| `--frame-line`           | `frame.line`           | No declared default; supplied by context. | Neutral divider color for content boundaries, tracks, and structural separators.                             | `.frame-color-swatch` |
+| `--frame-control-radius` | `frame.control.radius` | No declared default; supplied by context. | Shared corner radius of buttons and ordinary controls; text-entry surfaces may use the input radius instead. | `.frame-color-swatch` |
 
 Expressions are preserved as written; their computed values depend on the active theme and component state.
 

@@ -1,0 +1,231 @@
+.view-sections {
+  /* Minimum height for .view-sections. @token --frame-activity-sections-min-height */
+  --_frame-default-activity-sections-min-height-0cd14f886b: 80px;
+  /* Minimum height for .view-sections. @token --frame-view-sections-min-height */
+  --_frame-default-view-sections-min-height-6dbf51ca11: var(
+    --frame-activity-sections-min-height,
+    var(--_frame-default-activity-sections-min-height-0cd14f886b)
+  );
+  min-height: var(
+    --frame-view-sections-min-height,
+    var(--_frame-default-view-sections-min-height-6dbf51ca11)
+  );
+}
+
+.nested-view-content > .view-host {
+  /* Minimum height for .nested-view-content > .view-host. @token --frame-nested-view-content-view-host-min-height */
+  --_frame-default-nested-view-content-view-host-min-height-7c4b3c1ee2: 100%;
+  min-height: var(
+    --frame-nested-view-content-view-host-min-height,
+    var(--_frame-default-nested-view-content-view-host-min-height-7c4b3c1ee2)
+  );
+}
+
+.menu-drop-placeholder {
+  /* Secondary foreground for descriptions, hints, and visually subordinate content. @token --frame-muted @context */
+  color: var(--frame-muted);
+  /* Internal spacing for .menu-drop-placeholder. @token --frame-menu-drop-placeholder-padding */
+  --_frame-default-menu-drop-placeholder-padding-ed38007424: 12px;
+  padding: var(
+    --frame-menu-drop-placeholder-padding,
+    var(--_frame-default-menu-drop-placeholder-padding-ed38007424)
+  );
+  /* Text size for .menu-drop-placeholder. @token --frame-menu-drop-placeholder-font-size */
+  --_frame-default-menu-drop-placeholder-font-size-049222547c: 11px;
+  font-size: var(
+    --frame-menu-drop-placeholder-font-size,
+    var(--_frame-default-menu-drop-placeholder-font-size-049222547c)
+  );
+}
+
+/* Rail and sidebar draw their own contours, including beside spanning regions. */
+.layout-grid > .primary-region {
+  /* Border for .layout-grid > .primary-region. @token --frame-Rail-and-sidebar-draw-their-own-contours-border */
+  --_frame-default-Rail-and-sidebar-draw-their-own-contours-border-14295aa3e5: 0;
+  border: var(
+    --frame-Rail-and-sidebar-draw-their-own-contours-border,
+    var(
+      --_frame-default-Rail-and-sidebar-draw-their-own-contours-border-14295aa3e5
+    )
+  );
+  /* Corner radius for .layout-grid > .primary-region. @token --frame-Rail-and-sidebar-draw-their-own-contours-border-radius */
+  --_frame-default-Rail-and-sidebar-draw-their-own-contours-border-radius-c9cac92a25: 0;
+  border-radius: var(
+    --frame-Rail-and-sidebar-draw-their-own-contours-border-radius,
+    var(
+      --_frame-default-Rail-and-sidebar-draw-their-own-contours-border-radius-c9cac92a25
+    )
+  );
+  /* Background for .layout-grid > .primary-region. @token --frame-Rail-and-sidebar-draw-their-own-contours-background */
+  --_frame-default-Rail-and-sidebar-draw-their-own-contours-background-2b61da3cc2: transparent;
+  background: var(
+    --frame-Rail-and-sidebar-draw-their-own-contours-background,
+    var(
+      --_frame-default-Rail-and-sidebar-draw-their-own-contours-background-2b61da3cc2
+    )
+  );
+  overflow: visible;
+}
+
+.primary-region.edge-regions,
+.primary-right .primary-region.edge-regions {
+  clip-path: none;
+}
+
+.layout-grid .primary-region > .view-bar {
+  box-sizing: border-box;
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border: 1px solid var(--frame-line);
+  /* Corner radius for .layout-grid .primary-region > .view-bar. @token --frame-layout-grid-primary-region-view-bar-border-radius */
+  --_frame-default-layout-grid-primary-region-view-bar-border-radius-9dd22b4e4f: var(
+    --frame-radius-large
+  );
+  /* Large shared corner radius used by panel and menu containers. @token --frame-radius-large @context */
+  border-radius: var(
+    --frame-layout-grid-primary-region-view-bar-border-radius,
+    var(
+      --_frame-default-layout-grid-primary-region-view-bar-border-radius-9dd22b4e4f
+    )
+  );
+  /* Neutral raised surface behind grouped content and control compositions. @token --frame-surface @context */
+  background: var(--frame-surface);
+}
+
+.layout-grid .primary-region > .side-panel {
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border: 1px solid var(--frame-line);
+  /* Corner radius for .layout-grid .primary-region > .side-panel. @token --frame-layout-grid-primary-region-side-panel-border-radius */
+  --_frame-default-layout-grid-primary-region-side-panel-border-radius-da1ab09ff0: var(
+    --frame-radius-large
+  );
+  /* Large shared corner radius used by panel and menu containers. @token --frame-radius-large @context */
+  border-radius: var(
+    --frame-layout-grid-primary-region-side-panel-border-radius,
+    var(
+      --_frame-default-layout-grid-primary-region-side-panel-border-radius-da1ab09ff0
+    )
+  );
+  /* Neutral raised surface behind grouped content and control compositions. @token --frame-surface @context */
+  background: var(--frame-surface);
+}
+
+.primary-region.expanded:not(.edge-regions) > .view-bar {
+  /* Right border for .primary-region.expanded:not(.edge-regions) > .view-bar. @token --frame-primary-region-expanded-not-edge-regions-view-bar-border-right */
+  --_frame-default-primary-region-expanded-not-edge-regions-view-bar-border-right-82ef91823f: 1px
+    solid transparent;
+  border-right: var(
+    --frame-primary-region-expanded-not-edge-regions-view-bar-border-right,
+    var(
+      --_frame-default-primary-region-expanded-not-edge-regions-view-bar-border-right-82ef91823f
+    )
+  );
+  /* Corner radius for .primary-region.expanded:not(.edge-regions) > .view-bar. @token --frame-primary-region-expanded-not-edge-regions-view-bar-border-radius */
+  --_frame-default-primary-region-expanded-not-edge-regions-view-bar-border-radius-0ac1e53c9f: var(
+      --frame-radius-large
+    )
+    0 0 var(--frame-radius-large);
+  /* Large shared corner radius used by panel and menu containers. @token --frame-radius-large @context */
+  border-radius: var(
+    --frame-primary-region-expanded-not-edge-regions-view-bar-border-radius,
+    var(
+      --_frame-default-primary-region-expanded-not-edge-regions-view-bar-border-radius-0ac1e53c9f
+    )
+  );
+}
+
+.primary-region.expanded:not(.edge-regions) > .side-panel {
+  /* Corner radius for .primary-region.expanded:not(.edge-regions) > .side-panel. @token --frame-primary-region-expanded-not-edge-regions-side-panel-border-radius */
+  --_frame-default-primary-region-expanded-not-edge-regions-side-panel-border-radius-3eba80ba0a: 0
+    var(--frame-radius-large) var(--frame-radius-large) 0;
+  /* Large shared corner radius used by panel and menu containers. @token --frame-radius-large @context */
+  border-radius: var(
+    --frame-primary-region-expanded-not-edge-regions-side-panel-border-radius,
+    var(
+      --_frame-default-primary-region-expanded-not-edge-regions-side-panel-border-radius-3eba80ba0a
+    )
+  );
+}
+
+.primary-right .primary-region.expanded:not(.edge-regions) > .view-bar {
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-right: 1px solid var(--frame-line);
+  /* Left border for .primary-right .primary-region.expanded:not(.edge-regions) > .view-bar. @token --frame-primary-right-primary-region-expanded-not-edge-regions-view-bar-border-left */
+  --_frame-default-primary-right-primary-region-expanded-not-edge-regions-view-bar-border-left-a27d33263f: 1px
+    solid transparent;
+  border-left: var(
+    --frame-primary-right-primary-region-expanded-not-edge-regions-view-bar-border-left,
+    var(
+      --_frame-default-primary-right-primary-region-expanded-not-edge-regions-view-bar-border-left-a27d33263f
+    )
+  );
+  /* Corner radius for .primary-right .primary-region.expanded:not(.edge-regions) > .view-bar. @token --frame-primary-right-primary-region-expanded-not-edge-regions-view-bar-border-radius */
+  --_frame-default-primary-right-primary-region-expanded-not-edge-regions-view-bar-border-radius-572b436399: 0
+    var(--frame-radius-large) var(--frame-radius-large) 0;
+  /* Large shared corner radius used by panel and menu containers. @token --frame-radius-large @context */
+  border-radius: var(
+    --frame-primary-right-primary-region-expanded-not-edge-regions-view-bar-border-radius,
+    var(
+      --_frame-default-primary-right-primary-region-expanded-not-edge-regions-view-bar-border-radius-572b436399
+    )
+  );
+}
+
+.primary-right .primary-region.expanded:not(.edge-regions) > .side-panel {
+  /* Corner radius for .primary-right .primary-region.expanded:not(.edge-regions) > .side-panel. @token --frame-primary-right-primary-region-expanded-not-edge-regions-side-panel-border-radius */
+  --_frame-default-primary-right-primary-region-expanded-not-edge-regions-side-panel-border-radius-c3abadc2ca: var(
+      --frame-radius-large
+    )
+    0 0 var(--frame-radius-large);
+  /* Large shared corner radius used by panel and menu containers. @token --frame-radius-large @context */
+  border-radius: var(
+    --frame-primary-right-primary-region-expanded-not-edge-regions-side-panel-border-radius,
+    var(
+      --_frame-default-primary-right-primary-region-expanded-not-edge-regions-side-panel-border-radius-c3abadc2ca
+    )
+  );
+}
+
+.compact .layout-grid .primary-region > .view-bar,
+.compact .layout-grid .primary-region > .side-panel {
+  /* Corner radius for .compact .layout-grid .primary-region > .view-bar, .compact .layout-grid .primary-region > .side-panel. @token --frame-compact-layout-grid-primary-region-view-bar-border-radius */
+  --_frame-default-compact-layout-grid-primary-region-view-bar-border-radius-5fbd061c92: 0;
+  border-radius: var(
+    --frame-compact-layout-grid-primary-region-view-bar-border-radius,
+    var(
+      --_frame-default-compact-layout-grid-primary-region-view-bar-border-radius-5fbd061c92
+    )
+  );
+}
+
+.empty-view-region {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  /* Minimum height for .empty-view-region. @token --frame-empty-view-region-min-height */
+  --_frame-default-empty-view-region-min-height-1d4d51d296: 80px;
+  min-height: var(
+    --frame-empty-view-region-min-height,
+    var(--_frame-default-empty-view-region-min-height-1d4d51d296)
+  );
+  /* Internal spacing for .empty-view-region. @token --frame-empty-view-region-padding */
+  --_frame-default-empty-view-region-padding-42cd055701: 20px;
+  padding: var(
+    --frame-empty-view-region-padding,
+    var(--_frame-default-empty-view-region-padding-42cd055701)
+  );
+  /* Secondary foreground for descriptions, hints, and visually subordinate content. @token --frame-muted @context */
+  color: var(--frame-muted);
+  text-align: center;
+  /* Text size for .empty-view-region. @token --frame-empty-view-region-font-size */
+  --_frame-default-empty-view-region-font-size-b71ccea89f: 12px;
+  font-size: var(
+    --frame-empty-view-region-font-size,
+    var(--_frame-default-empty-view-region-font-size-b71ccea89f)
+  );
+}
+
+.dragging-views,
+.dragging-views * {
+  cursor: grabbing !important;
+}

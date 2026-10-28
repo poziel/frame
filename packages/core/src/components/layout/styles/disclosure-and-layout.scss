@@ -1,0 +1,59 @@
+.frame-layout-text {
+  /* Primary font family inherited by shell content and ordinary controls. @token --frame-font-body @context */
+  font-family: var(--frame-font-body);
+  /* Base text size inherited by shell content and ordinary controls. @token --frame-font-size-body @context */
+  font-size: var(--frame-font-size-body);
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  color: var(--frame-text);
+}
+.frame-disclosure-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Standard space between related content items and control children. @token --frame-gap @context */
+  gap: var(--frame-gap);
+  width: 100%;
+  border: 0;
+  /* Resting surface shared by accordion and collapsible triggers. @token --frame-disclosure-background */
+  --_frame-default-disclosure-background: var(--frame-surface);
+  /* Neutral raised surface behind grouped content and control compositions. @token --frame-surface @context */
+  background: var(
+    --frame-disclosure-background,
+    var(--_frame-default-disclosure-background)
+  );
+  color: inherit;
+  font: inherit;
+  /* Standard inset around content in panels, disclosures, and application surfaces. @token --frame-content-padding @context */
+  padding: var(--frame-content-padding);
+  text-align: start;
+  cursor: pointer;
+}
+.frame-disclosure-trigger:hover {
+  /* Pointer hover surface shared by disclosure triggers. @token --frame-disclosure-hover */
+  --_frame-default-disclosure-hover: var(--frame-menu-hover);
+  /* Neutral hover and highlight fill for ordinary menu rows. @token --frame-menu-hover @context */
+  background: var(
+    --frame-disclosure-hover,
+    var(--_frame-default-disclosure-hover)
+  );
+}
+.frame-layout-focus:focus-visible {
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  outline: 2px solid var(--frame-accent);
+  outline-offset: -2px;
+}
+.frame-layout-disabled:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.frame-disclosure-content {
+  /* Standard inset around content in panels, disclosures, and application surfaces. @token --frame-content-padding @context */
+  padding: var(--frame-content-padding);
+  /* Surface behind expanded disclosure content. @token --frame-disclosure-content-background */
+  --_frame-default-disclosure-content-background: var(--frame-canvas);
+  /* Content canvas background used by workspace panes and recessed content. @token --frame-canvas @context */
+  background: var(
+    --frame-disclosure-content-background,
+    var(--_frame-default-disclosure-content-background)
+  );
+}

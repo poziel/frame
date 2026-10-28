@@ -14,7 +14,7 @@ import {
   type ToastRootEmits,
 } from 'reka-ui';
 import {useOverlayBoundary, overlayLayerStyle} from '../overlays/overlays';
-import '../shared/general-c.css';
+import '../overlays/styles/surfaces.scss';
 
 defineOptions({inheritAttrs: false});
 
@@ -80,7 +80,7 @@ defineSlots<{
       ><div class="frame-general-toast-layer" :style="layer"
         ><ToastRoot
           v-bind="{...rootBindings, ...$attrs}"
-          class="frame-general-toast"
+          class="frame-general-toast frame-general-surface frame-overlay-surface"
           ><ToastTitle class="frame-general-title">{{ title }}</ToastTitle
           ><ToastDescription
             v-if="description"
@@ -104,3 +104,33 @@ defineSlots<{
           " /></div></ToastPortal
   ></ToastProvider>
 </template>
+
+<style lang="scss">
+.frame-general-toast-layer {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1105;
+}
+.frame-general-toast-viewport {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: min(360px, calc(100% - 24px));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: auto;
+}
+.frame-general-toast {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.frame-general-toast[data-state='closed'] {
+  display: none;
+}
+</style>

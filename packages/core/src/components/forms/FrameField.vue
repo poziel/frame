@@ -11,7 +11,7 @@ import FrameControlTooltip from '../overlays/FrameControlTooltip.vue';
 import {computed} from 'vue';
 import {useControlTooltip, type ControlTooltipProps} from './shared/tooltip';
 import type {FieldRootProps} from 'reka-ui';
-import './shared/advanced.css';
+import './styles/advanced.scss';
 
 const props = withDefaults(
   defineProps<
@@ -67,3 +67,37 @@ defineSlots<{
     ><template v-if="$slots.tooltip" #tooltip><slot name="tooltip" /></template
   ></FrameControlTooltip>
 </template>
+
+<style lang="scss">
+.frame-field :is(input, textarea, select) {
+  font: inherit;
+}
+
+.frame-field {
+  display: flex;
+  flex-direction: column;
+  /* Standard space between related content items and control children. @token --frame-gap @context */
+  gap: var(--frame-gap);
+  min-width: 0;
+}
+
+.frame-field-label {
+  font-weight: 500;
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  color: var(--frame-text);
+}
+
+.frame-field-error {
+  font-size: 11px;
+  /* Foreground of field validation messages. @token --frame-danger */
+  --_frame-default-danger-125: #f48771;
+  color: var(--frame-danger, var(--_frame-default-danger-125));
+}
+
+.frame-field [data-invalid],
+.frame-field [aria-invalid='true'] {
+  /* Foreground of field validation messages. @token --frame-danger */
+  --_frame-default-danger-125: #f48771;
+  border-color: var(--frame-danger, var(--_frame-default-danger-125));
+}
+</style>

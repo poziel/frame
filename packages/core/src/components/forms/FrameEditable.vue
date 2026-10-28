@@ -7,7 +7,7 @@ import {
   EditableInput,
   EditablePreview,
 } from 'reka-ui';
-import './shared/controls.css';
+import './styles/controls.scss';
 import FrameControlTooltip from '../overlays/FrameControlTooltip.vue';
 import {useControlTooltip, type ControlTooltipProps} from './shared/tooltip';
 
@@ -100,13 +100,13 @@ defineSlots<{
       >
         <EditableArea>
           <EditablePreview
-            class="frame-form-input"
+            class="frame-form-input frame-control-surface frame-control-focus frame-input-surface frame-input-focus-within"
             :aria-label="label"
             :aria-describedby="describedBy(describedby)"
           />
           <EditableInput as-child
             ><FrameTextField
-              class="frame-editable-input"
+              class="frame-editable-input frame-input-surface frame-input-focus-within"
               :aria-label="label"
               :aria-describedby="describedBy(describedby)"
               @keydown="key"

@@ -6,7 +6,7 @@ import {
   ColorAreaThumb,
 } from 'reka-ui';
 import type {ColorAreaRootProps, ColorAreaRootEmits} from 'reka-ui';
-import '../shared/advanced.css';
+import '../styles/advanced.scss';
 import FrameHsvArea from './FrameHsvArea.vue';
 
 const props = defineProps<
@@ -46,6 +46,6 @@ const forwarded = useForwardPropsEmits(props, emit);
     ><ColorAreaArea :style="style" class="frame-color-plane"
       ><ColorAreaThumb
         :aria-disabled="disabled || undefined"
-        class="frame-color-thumb" /></ColorAreaArea
+        class="frame-color-thumb frame-advanced-focus" /></ColorAreaArea
   ></ColorAreaRoot>
 </template>

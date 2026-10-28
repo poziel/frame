@@ -15,7 +15,7 @@ import {
   type MonthRangePickerRootProps,
   type MonthRangePickerRootEmits,
 } from 'reka-ui';
-import '../shared/dates.css';
+import '../styles/dates.scss';
 
 const props = defineProps<
   MonthRangePickerRootProps & {
@@ -39,7 +39,7 @@ defineSlots<{
   <MonthRangePickerRoot
     v-bind="forwarded"
     :calendar-label="props.calendarLabel ?? props.label"
-    class="frame-calendar"
+    class="frame-calendar frame-date-text"
     v-slot="{grid}"
   >
     <MonthRangePickerHeader class="frame-date-header">

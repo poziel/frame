@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '../styles/index.css';
+import '../styles/index.scss';
 import {computed, nextTick, ref, useId} from 'vue';
 import {
   FrameButton,
@@ -217,3 +217,126 @@ defineSlots<{
     </FrameDialog>
   </section>
 </template>
+
+<style lang="scss">
+.frame-chat-history {
+  /* Padding for .frame-chat-history; ai history padding. @token --frame-ai-history-padding */
+  --_frame-default-ai-history-padding-5e5582b299: 12px;
+  padding: var(
+    --frame-ai-history-padding,
+    var(--_frame-default-ai-history-padding-5e5582b299)
+  );
+  /* Font size for .frame-chat-history; font size. @token --frame-font-size */
+  --_frame-default-font-size-7873e21aaa: 13px;
+  font-size: var(--frame-font-size, var(--_frame-default-font-size-7873e21aaa));
+}
+
+.frame-chat-history ul {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+
+.frame-chat-history li {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.frame-chat-history li > .frame-button {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  justify-content: flex-start;
+}
+
+.frame-chat-history-empty {
+  /* Color for .frame-chat-history-empty; muted. @token --frame-muted @context */
+  color: var(--frame-muted);
+  line-height: 1.6;
+}
+
+.frame-ai-history {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+}
+
+.frame-ai-history > .frame-chat-history {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+}
+
+.frame-ai-history-prompt {
+  flex: none;
+  min-width: 0;
+  /* Padding for .frame-ai-history-prompt; ai history prompt padding. @token --frame-ai-history-prompt-padding */
+  --_frame-default-ai-history-prompt-padding-0b4f45061a: 12px;
+  padding: var(
+    --frame-ai-history-prompt-padding,
+    var(--_frame-default-ai-history-prompt-padding-0b4f45061a)
+  );
+}
+
+.frame-ai-history-footer {
+  flex: none;
+  /* Padding for .frame-ai-history-footer; ai history footer padding. @token --frame-ai-history-footer-padding */
+  --_frame-default-ai-history-footer-padding-75840b621c: 0 12px;
+  padding: var(
+    --frame-ai-history-footer-padding,
+    var(--_frame-default-ai-history-footer-padding-75840b621c)
+  );
+}
+
+.frame-ai-history-footer .frame-ai-history-archive {
+  /* Color for .frame-ai-history-footer .frame-ai-history-archive; muted. @token --frame-muted @context */
+  color: var(--frame-muted);
+  /* Font size for .frame-ai-history-footer .frame-ai-history-archive; ai history archive font size. @token --frame-ai-history-archive-font-size */
+  --_frame-default-ai-history-archive-font-size-0e574c2cde: 11px;
+  font-size: var(
+    --frame-ai-history-archive-font-size,
+    var(--_frame-default-ai-history-archive-font-size-0e574c2cde)
+  );
+}
+
+.frame-chat-history li > .frame-general-anchor {
+  display: block;
+  min-width: 0;
+  width: 100%;
+}
+
+.frame-chat-history .frame-chat-history-row {
+  display: flex;
+  align-items: center;
+  /* Gap for .frame-chat-history .frame-chat-history-row; ai history row gap. @token --frame-ai-history-row-gap */
+  --_frame-default-ai-history-row-gap-bb84d03d10: 6px;
+  gap: var(
+    --frame-ai-history-row-gap,
+    var(--_frame-default-ai-history-row-gap-bb84d03d10)
+  );
+  width: 100%;
+  min-width: 0;
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.frame-chat-history-row > span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.frame-chat-history-row[aria-current='page'] {
+  /* Background for .frame-chat-history-row[aria-current='page']; list selection background. @token --frame-list-selection-background */
+  --_frame-default-list-selection-background-057ac04bb5: #ffffff12;
+  background: var(
+    --frame-list-selection-background,
+    var(--_frame-default-list-selection-background-057ac04bb5)
+  );
+}
+</style>

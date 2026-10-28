@@ -1,0 +1,36 @@
+.palette-input .frame-text-input {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+/* Reka positions the wrapper; the menu itself remains in that coordinate system. */
+.frame-menu[data-reka-menu-content] {
+  position: relative;
+  pointer-events: auto;
+}
+.frame-menu .menu-row > button.frame-button[data-highlighted]:not(:disabled) {
+  /* Neutral hover and highlight fill for ordinary menu rows. @token --frame-menu-hover @context */
+  background: var(--frame-menu-hover);
+}
+.frame-menu
+  .menu-row
+  > button.frame-button[data-highlighted]
+  > .visibility-indicator {
+  opacity: 1;
+}
+
+/* Menu rows retain their columns instead of the ordinary button's centered flex layout. */
+.frame-menu .menu-row > button.frame-button {
+  display: grid;
+  justify-content: normal;
+}
+.frame-menu[data-item-alignment='left'] .menu-label {
+  text-align: left;
+}
+.frame-menu[data-item-alignment='center'] .menu-label {
+  text-align: center;
+}
+.frame-menu[data-item-alignment='right'] .menu-label {
+  text-align: right;
+}

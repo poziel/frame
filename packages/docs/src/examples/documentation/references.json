@@ -463,7 +463,7 @@
     "package": "@frame/core"
   },
   "SelectItem": {
-    "description": "Runtime base for select options and separators.\n\nThe constructor supports shared instanceof checks. Its companion type is a\nstructural union, so existing plain-object options and separators remain\naccepted and consumers can narrow them using the separator discriminator.\nValue-bearing option or non-selectable separator, including plain objects.",
+    "description": "Runtime base for select options and separators.\r\n\r\nThe constructor supports shared instanceof checks. Its companion type is a\r\nstructural union, so existing plain-object options and separators remain\r\naccepted and consumers can narrow them using the separator discriminator.\nValue-bearing option or non-selectable separator, including plain objects.",
     "usage": "Import SelectItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
     "code": "export type SelectItem = SelectOption | SelectSeparator;",
     "properties": [],
@@ -1076,7 +1076,7 @@
   "CodeBlockTheme": {
     "description": "",
     "usage": "Import CodeBlockTheme from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export enum CodeBlockTheme {\n  Andromeeda = \"andromeeda\",\n  AuroraX = \"aurora-x\",\n  AyuDark = \"ayu-dark\",\n  AyuLight = \"ayu-light\",\n  AyuMirage = \"ayu-mirage\",\n  CatppuccinFrappe = \"catppuccin-frappe\",\n  CatppuccinLatte = \"catppuccin-latte\",\n  CatppuccinMacchiato = \"catppuccin-macchiato\",\n  CatppuccinMocha = \"catppuccin-mocha\",\n  DarkPlus = \"dark-plus\",\n  Dracula = \"dracula\",\n  DraculaSoft = \"dracula-soft\",\n  EverforestDark = \"everforest-dark\",\n  EverforestLight = \"everforest-light\",\n  GithubDark = \"github-dark\",\n  GithubDarkDefault = \"github-dark-default\",\n  GithubDarkDimmed = \"github-dark-dimmed\",\n  GithubDarkHighContrast = \"github-dark-high-contrast\",\n  GithubLight = \"github-light\",\n  GithubLightDefault = \"github-light-default\",\n  GithubLightHighContrast = \"github-light-high-contrast\",\n  GruvboxDarkHard = \"gruvbox-dark-hard\",\n  GruvboxDarkMedium = \"gruvbox-dark-medium\",\n  GruvboxDarkSoft = \"gruvbox-dark-soft\",\n  GruvboxLightHard = \"gruvbox-light-hard\",\n  GruvboxLightMedium = \"gruvbox-light-medium\",\n  GruvboxLightSoft = \"gruvbox-light-soft\",\n  Horizon = \"horizon\",\n  HorizonBright = \"horizon-bright\",\n  Houston = \"houston\",\n  KanagawaDragon = \"kanagawa-dragon\",\n  KanagawaLotus = \"kanagawa-lotus\",\n  KanagawaWave = \"kanagawa-wave\",\n  Laserwave = \"laserwave\",\n  LightPlus = \"light-plus\",\n  MaterialTheme = \"material-theme\",\n  MaterialThemeDarker = \"material-theme-darker\",\n  MaterialThemeLighter = \"material-theme-lighter\",\n  MaterialThemeOcean = \"material-theme-ocean\",\n  MaterialThemePalenight = \"material-theme-palenight\",\n  MinDark = \"min-dark\",\n  MinLight = \"min-light\",\n  Monokai = \"monokai\",\n  NightOwl = \"night-owl\",\n  NightOwlLight = \"night-owl-light\",\n  Nord = \"nord\",\n  OneDarkPro = \"one-dark-pro\",\n  OneLight = \"one-light\",\n  Plastic = \"plastic\",\n  Poimandres = \"poimandres\",\n  Red = \"red\",\n  RosePine = \"rose-pine\",\n  RosePineDawn = \"rose-pine-dawn\",\n  RosePineMoon = \"rose-pine-moon\",\n  SlackDark = \"slack-dark\",\n  SlackOchin = \"slack-ochin\",\n  SnazzyLight = \"snazzy-light\",\n  SolarizedDark = \"solarized-dark\",\n  SolarizedLight = \"solarized-light\",\n  Synthwave84 = \"synthwave-84\",\n  TokyoNight = \"tokyo-night\",\n  Vesper = \"vesper\",\n  VitesseBlack = \"vitesse-black\",\n  VitesseDark = \"vitesse-dark\",\n  VitesseLight = \"vitesse-light\",\n}",
+    "code": "export enum CodeBlockTheme {\r\n  Andromeeda = \"andromeeda\",\r\n  AuroraX = \"aurora-x\",\r\n  AyuDark = \"ayu-dark\",\r\n  AyuLight = \"ayu-light\",\r\n  AyuMirage = \"ayu-mirage\",\r\n  CatppuccinFrappe = \"catppuccin-frappe\",\r\n  CatppuccinLatte = \"catppuccin-latte\",\r\n  CatppuccinMacchiato = \"catppuccin-macchiato\",\r\n  CatppuccinMocha = \"catppuccin-mocha\",\r\n  DarkPlus = \"dark-plus\",\r\n  Dracula = \"dracula\",\r\n  DraculaSoft = \"dracula-soft\",\r\n  EverforestDark = \"everforest-dark\",\r\n  EverforestLight = \"everforest-light\",\r\n  GithubDark = \"github-dark\",\r\n  GithubDarkDefault = \"github-dark-default\",\r\n  GithubDarkDimmed = \"github-dark-dimmed\",\r\n  GithubDarkHighContrast = \"github-dark-high-contrast\",\r\n  GithubLight = \"github-light\",\r\n  GithubLightDefault = \"github-light-default\",\r\n  GithubLightHighContrast = \"github-light-high-contrast\",\r\n  GruvboxDarkHard = \"gruvbox-dark-hard\",\r\n  GruvboxDarkMedium = \"gruvbox-dark-medium\",\r\n  GruvboxDarkSoft = \"gruvbox-dark-soft\",\r\n  GruvboxLightHard = \"gruvbox-light-hard\",\r\n  GruvboxLightMedium = \"gruvbox-light-medium\",\r\n  GruvboxLightSoft = \"gruvbox-light-soft\",\r\n  Horizon = \"horizon\",\r\n  HorizonBright = \"horizon-bright\",\r\n  Houston = \"houston\",\r\n  KanagawaDragon = \"kanagawa-dragon\",\r\n  KanagawaLotus = \"kanagawa-lotus\",\r\n  KanagawaWave = \"kanagawa-wave\",\r\n  Laserwave = \"laserwave\",\r\n  LightPlus = \"light-plus\",\r\n  MaterialTheme = \"material-theme\",\r\n  MaterialThemeDarker = \"material-theme-darker\",\r\n  MaterialThemeLighter = \"material-theme-lighter\",\r\n  MaterialThemeOcean = \"material-theme-ocean\",\r\n  MaterialThemePalenight = \"material-theme-palenight\",\r\n  MinDark = \"min-dark\",\r\n  MinLight = \"min-light\",\r\n  Monokai = \"monokai\",\r\n  NightOwl = \"night-owl\",\r\n  NightOwlLight = \"night-owl-light\",\r\n  Nord = \"nord\",\r\n  OneDarkPro = \"one-dark-pro\",\r\n  OneLight = \"one-light\",\r\n  Plastic = \"plastic\",\r\n  Poimandres = \"poimandres\",\r\n  Red = \"red\",\r\n  RosePine = \"rose-pine\",\r\n  RosePineDawn = \"rose-pine-dawn\",\r\n  RosePineMoon = \"rose-pine-moon\",\r\n  SlackDark = \"slack-dark\",\r\n  SlackOchin = \"slack-ochin\",\r\n  SnazzyLight = \"snazzy-light\",\r\n  SolarizedDark = \"solarized-dark\",\r\n  SolarizedLight = \"solarized-light\",\r\n  Synthwave84 = \"synthwave-84\",\r\n  TokyoNight = \"tokyo-night\",\r\n  Vesper = \"vesper\",\r\n  VitesseBlack = \"vitesse-black\",\r\n  VitesseDark = \"vitesse-dark\",\r\n  VitesseLight = \"vitesse-light\",\r\n}",
     "properties": [],
     "package": "@frame/core"
   },
@@ -1175,9 +1175,9 @@
     "package": "@frame/core"
   },
   "FrameToolbarItem": {
-    "description": "One button, link, or separator rendered by FrameToolbar.\nActivating a non-separator emits this item through the component's action\nevent. Application command registration remains separate from this contract.",
+    "description": "One button, link, or separator rendered by FrameToolbar.\r\nActivating a non-separator emits this item through the component's action\r\nevent. Application command registration remains separate from this contract.",
     "usage": "Import FrameToolbarItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface FrameToolbarItem {\n\n  /** Stable rendering identity within the toolbar. */\n  id: string;\n\n  /** Visible text for a button or link; unused when rendering a separator. */\n  label: string;\n\n  /** Optional icon displayed before a non-separator label. */\n  icon?: string;\n\n  /** Prevents activation and renders a button instead of an active link. */\n  disabled?: boolean;\n\n  /** Link destination used when the item is enabled and not a separator. */\n  href?: string;\n\n  /** Renders a structural separator instead of a button or link. */\n  separator?: boolean;\n}",
+    "code": "export interface FrameToolbarItem {\r\n\r\n  /** Stable rendering identity within the toolbar. */\r\n  id: string;\r\n\r\n  /** Visible text for a button or link; unused when rendering a separator. */\r\n  label: string;\r\n\r\n  /** Optional icon displayed before a non-separator label. */\r\n  icon?: string;\r\n\r\n  /** Prevents activation and renders a button instead of an active link. */\r\n  disabled?: boolean;\r\n\r\n  /** Link destination used when the item is enabled and not a separator. */\r\n  href?: string;\r\n\r\n  /** Renders a structural separator instead of a button or link. */\r\n  separator?: boolean;\r\n}",
     "properties": [
       {
         "name": "id",
@@ -1215,7 +1215,7 @@
   "FrameTreeItem": {
     "description": "Recursive tree data accepted by FrameTree and its custom item slot.",
     "usage": "Import FrameTreeItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface FrameTreeItem {\n\n  /** Default rendering and selection key, unless getKey overrides it. */\n  id: string;\n\n  /** Visible label in the default tree row. */\n  label: string;\n\n  /** Optional row icon, independent of the expansion indicator. */\n  icon?: string;\n\n  /** Disables interaction with this item through the underlying tree primitive. */\n  disabled?: boolean;\n\n  /** Descendants consumed by the tree's item-flattening behavior. */\n  children?: FrameTreeItem[];\n}",
+    "code": "export interface FrameTreeItem {\r\n\r\n  /** Default rendering and selection key, unless getKey overrides it. */\r\n  id: string;\r\n\r\n  /** Visible label in the default tree row. */\r\n  label: string;\r\n\r\n  /** Optional row icon, independent of the expansion indicator. */\r\n  icon?: string;\r\n\r\n  /** Disables interaction with this item through the underlying tree primitive. */\r\n  disabled?: boolean;\r\n\r\n  /** Descendants consumed by the tree's item-flattening behavior. */\r\n  children?: FrameTreeItem[];\r\n}",
     "properties": [
       {
         "name": "id",
@@ -1299,7 +1299,7 @@
   "ViewerFile": {
     "description": "Host-owned source with optional metadata overrides.",
     "usage": "Import ViewerFile from @frame/core/modules/viewer. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface ViewerFile {\r\n\r\n  /** Portable bytes or a browser-fetchable URL; authentication stays host-owned. */\r\n  source: ViewerSource;\r\n\r\n  /** Explicit display name; otherwise resolved from File or URL. */\r\n  name?: string;\r\n\r\n  /** Explicit MIME type preferred over the supplied Blob or response metadata. */\r\n  mimeType?: string;\r\n\r\n  /** Optional syntax language override for code detection. */\r\n  language?: string;\r\n}",
+    "code": "export interface ViewerFile {\n\n  /** Portable bytes or a browser-fetchable URL; authentication stays host-owned. */\n  source: ViewerSource;\n\n  /** Explicit display name; otherwise resolved from File or URL. */\n  name?: string;\n\n  /** Explicit MIME type preferred over the supplied Blob or response metadata. */\n  mimeType?: string;\n\n  /** Optional syntax language override for code detection. */\n  language?: string;\n}",
     "properties": [
       {
         "name": "source",
@@ -1327,25 +1327,25 @@
   "NotificationHistory": {
     "description": "Structural history API retained for existing panels and host implementations.",
     "usage": "Import NotificationHistory from @frame/core/modules/notifications. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export type NotificationHistory = Pick<\r\n  NotificationHistoryController,\r\n  keyof NotificationHistoryController\r\n>;",
+    "code": "export type NotificationHistory = Pick<\n  NotificationHistoryController,\n  keyof NotificationHistoryController\n>;",
     "properties": [],
     "package": "@frame/core/modules/notifications"
   },
   "CodeEditorOptions": {
     "description": "Value, model, language and theme are managed by the component.",
     "usage": "Import CodeEditorOptions from @frame/core/modules/editor. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export type CodeEditorOptions = Omit<\r\n  Monaco.editor.IStandaloneEditorConstructionOptions,\r\n  'value' | 'model' | 'language' | 'theme'\r\n> &\r\n  Monaco.editor.ITextModelUpdateOptions;",
+    "code": "export type CodeEditorOptions = Omit<\n  Monaco.editor.IStandaloneEditorConstructionOptions,\n  'value' | 'model' | 'language' | 'theme'\n> &\n  Monaco.editor.ITextModelUpdateOptions;",
     "properties": [],
     "package": "@frame/core/modules/editor"
   },
   "CodeEditorController": {
     "description": "Structural host contract for one mounted surface; no Frame is required.",
     "usage": "Import CodeEditorController from @frame/core/modules/editor. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface CodeEditorController {\r\n\r\n  /** Readonly reactive reference to the currently attached Monaco surface. */\r\n  readonly instance: Readonly<\r\n    ShallowRef<Monaco.editor.IStandaloneCodeEditor | undefined>\r\n  >;\r\n\r\n  /** Focuses the mounted surface, returning false before attachment. */\r\n  focus(): boolean;\r\n\r\n  /** Runs Monaco undo on the mounted surface. */\r\n  undo(): boolean;\r\n\r\n  /** Runs Monaco redo on the mounted surface. */\r\n  redo(): boolean;\r\n\r\n  /** Opens the mounted editor’s find widget. */\r\n  find(): boolean;\r\n\r\n  /** Replaces the complete model within undo boundaries, including read-only models. */\r\n  replaceCode(code: string): boolean;\r\n\r\n  /** Runs a supported Monaco action; returns false when unavailable. */\r\n  runAction(id: string): Promise<boolean>;\r\n\r\n  /** Runs the registered document formatter when supported. */\r\n  format(): Promise<boolean>;\r\n\r\n  /** Recomputes the mounted editor layout. */\r\n  layout(): void;\r\n\r\n  /** Used by CodeEditor to claim one mounted surface. Returns an idempotent release. */\r\n  attach(instance: Monaco.editor.IStandaloneCodeEditor): () => void;\r\n}",
+    "code": "export interface CodeEditorController {\n\n  /** Readonly reactive reference to the currently attached Monaco surface. */\n  readonly instance: Readonly<\n    ShallowRef<Monaco.editor.IStandaloneCodeEditor | undefined>\n  >;\n\n  /** Focuses the mounted surface, returning false before attachment. */\n  focus(): boolean;\n\n  /** Runs Monaco undo on the mounted surface. */\n  undo(): boolean;\n\n  /** Runs Monaco redo on the mounted surface. */\n  redo(): boolean;\n\n  /** Opens the mounted editor’s find widget. */\n  find(): boolean;\n\n  /** Replaces the complete model within undo boundaries, including read-only models. */\n  replaceCode(code: string): boolean;\n\n  /** Runs a supported Monaco action; returns false when unavailable. */\n  runAction(id: string): Promise<boolean>;\n\n  /** Runs the registered document formatter when supported. */\n  format(): Promise<boolean>;\n\n  /** Recomputes the mounted editor layout. */\n  layout(): void;\n\n  /** Used by CodeEditor to claim one mounted surface. Returns an idempotent release. */\n  attach(instance: Monaco.editor.IStandaloneCodeEditor): () => void;\n}",
     "properties": [
       {
         "name": "instance",
-        "type": "Readonly<\r\n    ShallowRef<Monaco.editor.IStandaloneCodeEditor | undefined>\r\n  >",
+        "type": "Readonly<\n    ShallowRef<Monaco.editor.IStandaloneCodeEditor | undefined>\n  >",
         "description": "Readonly reactive reference to the currently attached Monaco surface."
       }
     ],
@@ -1361,19 +1361,19 @@
   "TerminalController": {
     "description": "Structural public API supporting class-backed or host-provided controllers.",
     "usage": "Import TerminalController from @frame/core/modules/terminal. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export type TerminalController = Pick<\r\n  TerminalSessionController,\r\n  keyof TerminalSessionController\r\n>;",
+    "code": "export type TerminalController = Pick<\n  TerminalSessionController,\n  keyof TerminalSessionController\n>;",
     "properties": [],
     "package": "@frame/core/modules/terminal"
   },
   "ChatAttachment": {
     "description": "Host-selected file, folder, or context reference attached to a chat message.",
     "usage": "Import ChatAttachment from @frame/core/modules/chat. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface ChatAttachment {\r\n\r\n  /**\r\n   * Stable identity used to address this entry within its owning message or\r\n   * schema.\r\n   */\r\n  id: string;\r\n\r\n  /** Display name supplied by the host. */\r\n  name: string;\r\n\r\n  /** Distinguishes file, folder, and application-context references. */\r\n  kind: 'file' | 'folder' | 'context';\r\n\r\n  /**\r\n   * Optional browser File objects retained by reference; copying clones only\r\n   * the list.\r\n   */\r\n  files?: File[];\r\n}",
+    "code": "export interface ChatAttachment {\n\n  /**\n   * Stable identity used to address this entry within its owning message or\n   * schema.\n   */\n  id: string;\n\n  /** Display name supplied by the host. */\n  name: string;\n\n  /** Distinguishes file, folder, and application-context references. */\n  kind: 'file' | 'folder' | 'context';\n\n  /**\n   * Optional browser File objects retained by reference; copying clones only\n   * the list.\n   */\n  files?: File[];\n}",
     "properties": [
       {
         "name": "id",
         "type": "string",
-        "description": "Stable identity used to address this entry within its owning message or\r\nschema."
+        "description": "Stable identity used to address this entry within its owning message or\nschema."
       },
       {
         "name": "name",
@@ -1388,20 +1388,20 @@
       {
         "name": "files",
         "type": "File[]",
-        "description": "Optional browser File objects retained by reference; copying clones only\r\nthe list."
+        "description": "Optional browser File objects retained by reference; copying clones only\nthe list."
       }
     ],
     "package": "@frame/core/modules/chat"
   },
   "ChatMessage": {
-    "description": "One ordered conversation entry, including content, attachments, and\r\ncompletion.",
+    "description": "One ordered conversation entry, including content, attachments, and\ncompletion.",
     "usage": "Import ChatMessage from @frame/core/modules/chat. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface ChatMessage {\r\n\r\n  /**\r\n   * Stable identity used to address this entry within its owning message or\r\n   * schema.\r\n   */\r\n  id: string;\r\n\r\n  /** Conversation role identifying the entry as user or assistant content. */\r\n  role: 'user' | 'assistant';\r\n\r\n  /** Creation timestamp in milliseconds since the Unix epoch. */\r\n  createdAt: number;\r\n\r\n  /** Content parts retained in their original event order. */\r\n  parts: ChatPart[];\r\n\r\n  /**\r\n   * Host-selected attachment references associated with this entry or request.\r\n   */\r\n  attachments: ChatAttachment[];\r\n\r\n  /** Whether the entry is pending, complete, stopped, or failed. */\r\n  status: 'pending' | 'complete' | 'stopped' | 'error';\r\n\r\n  /**\r\n   * Completion timestamp in milliseconds since the Unix epoch, when finished.\r\n   */\r\n  finishedAt?: number;\r\n\r\n  /** Failure explanation retained when the message finishes with an error. */\r\n  error?: string;\r\n}",
+    "code": "export interface ChatMessage {\n\n  /**\n   * Stable identity used to address this entry within its owning message or\n   * schema.\n   */\n  id: string;\n\n  /** Conversation role identifying the entry as user or assistant content. */\n  role: 'user' | 'assistant';\n\n  /** Creation timestamp in milliseconds since the Unix epoch. */\n  createdAt: number;\n\n  /** Content parts retained in their original event order. */\n  parts: ChatPart[];\n\n  /**\n   * Host-selected attachment references associated with this entry or request.\n   */\n  attachments: ChatAttachment[];\n\n  /** Whether the entry is pending, complete, stopped, or failed. */\n  status: 'pending' | 'complete' | 'stopped' | 'error';\n\n  /**\n   * Completion timestamp in milliseconds since the Unix epoch, when finished.\n   */\n  finishedAt?: number;\n\n  /** Failure explanation retained when the message finishes with an error. */\n  error?: string;\n}",
     "properties": [
       {
         "name": "id",
         "type": "string",
-        "description": "Stable identity used to address this entry within its owning message or\r\nschema."
+        "description": "Stable identity used to address this entry within its owning message or\nschema."
       },
       {
         "name": "role",
@@ -1442,9 +1442,9 @@
     "package": "@frame/core/modules/chat"
   },
   "ChatResponder": {
-    "description": "Host responder invoked for one turn; responses are published through its\r\nwriter.",
+    "description": "Host responder invoked for one turn; responses are published through its\nwriter.",
     "usage": "Import ChatResponder from @frame/core/modules/chat. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export type ChatResponder = (\r\n  request: ChatRequest,\r\n  response: ChatResponseWriter\r\n) => void | Promise<void>;",
+    "code": "export type ChatResponder = (\n  request: ChatRequest,\n  response: ChatResponseWriter\n) => void | Promise<void>;",
     "properties": [],
     "package": "@frame/core/modules/chat"
   },
@@ -1458,7 +1458,7 @@
   "AIChatConversation": {
     "description": "In-memory conversation metadata retaining one history-owned chat controller.",
     "usage": "Import AIChatConversation from @frame/core/modules/chat. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface AIChatConversation {\r\n\r\n  /** Unique identity within this history store. */\r\n  id: string;\r\n\r\n  /** User-visible name preserved while the conversation is retained. */\r\n  title: string;\r\n\r\n  /** Application scope identity, independent of the native provider session. */\r\n  applicationId?: string;\r\n\r\n  /** Creation time in epoch milliseconds. */\r\n  createdAt: number;\r\n\r\n  /** Whether the conversation sorts before unpinned entries. */\r\n  pinned: boolean;\r\n\r\n  /** Whether the conversation is retained outside the normal visible list. */\r\n  archived: boolean;\r\n\r\n  /** Owned chat controller disposed when the conversation is removed. */\r\n  chat: AIChatController;\r\n}",
+    "code": "export interface AIChatConversation {\n\n  /** Unique identity within this history store. */\n  id: string;\n\n  /** User-visible name preserved while the conversation is retained. */\n  title: string;\n\n  /** Application scope identity, independent of the native provider session. */\n  applicationId?: string;\n\n  /** Creation time in epoch milliseconds. */\n  createdAt: number;\n\n  /** Whether the conversation sorts before unpinned entries. */\n  pinned: boolean;\n\n  /** Whether the conversation is retained outside the normal visible list. */\n  archived: boolean;\n\n  /** Owned chat controller disposed when the conversation is removed. */\n  chat: AIChatController;\n}",
     "properties": [
       {
         "name": "id",
@@ -1501,7 +1501,7 @@
   "AIChatHistoryController": {
     "description": "Structural history API used by existing components and host factories.",
     "usage": "Import AIChatHistoryController from @frame/core/modules/chat. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export type AIChatHistoryController = Pick<\r\n  ChatHistoryController,\r\n  keyof ChatHistoryController\r\n>;",
+    "code": "export type AIChatHistoryController = Pick<\n  ChatHistoryController,\n  keyof ChatHistoryController\n>;",
     "properties": [],
     "package": "@frame/core/modules/chat"
   }

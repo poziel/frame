@@ -1,0 +1,52 @@
+.frame-viewer-control-row {
+  display: flex;
+  align-items: center;
+  /* Gap for .frame-viewer-control-row; gap. @token --frame-gap */
+  --_frame-default-gap-3e2a1ab688: 6px;
+  gap: var(--frame-gap, var(--_frame-default-gap-3e2a1ab688));
+  flex-wrap: wrap;
+}
+
+.frame-viewer-button {
+  /* Color for .frame-viewer-button; text. @token --frame-text @context */
+  color: var(--frame-text);
+  /* Background for .frame-viewer-button; surface. @token --frame-surface */
+  --_frame-default-surface-7fcb70be5e: #181818;
+  background: var(--frame-surface, var(--_frame-default-surface-7fcb70be5e));
+  /* Border for .frame-viewer-button; line. @token --frame-line */
+  --_frame-default-line-b8a143df52: #333;
+  border: 1px solid var(--frame-line, var(--_frame-default-line-b8a143df52));
+  /* Border radius for .frame-viewer-button; control radius. @token --frame-control-radius */
+  --_frame-default-control-radius-a17c4333cc: 3px;
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-a17c4333cc)
+  );
+  /*   _frame default control padding x a7f84e125c for .frame-viewer-button; control padding y. @token --frame-control-padding-y */
+  --_frame-default-control-padding-y-6f187fc61a: 5px;
+  /* Padding for .frame-viewer-button; control padding x. @token --frame-control-padding-x */
+  --_frame-default-control-padding-x-a7f84e125c: 10px;
+  padding: var(
+      --frame-control-padding-y,
+      var(--_frame-default-control-padding-y-6f187fc61a)
+    )
+    var(
+      --frame-control-padding-x,
+      var(--_frame-default-control-padding-x-a7f84e125c)
+    );
+  font: inherit;
+  cursor: pointer;
+}
+
+.frame-viewer-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.frame-viewer-button:focus-visible,
+.frame-viewer-content :focus-visible {
+  /* Outline for .frame-viewer-button:focus-visible,
+.frame-viewer-content :focus-visible; accent. @token --frame-accent @context */
+  outline: 2px solid var(--frame-accent);
+  outline-offset: 2px;
+}

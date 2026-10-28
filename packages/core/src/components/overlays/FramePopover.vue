@@ -15,7 +15,7 @@ import {
   type PopoverContentEmits,
 } from 'reka-ui';
 import {useOverlayBoundary} from './overlays';
-import '../shared/general-c.css';
+import './styles/surfaces.scss';
 
 defineOptions({inheritAttrs: false});
 
@@ -68,7 +68,7 @@ defineSlots<{
     ><PopoverPortal :to="target"
       ><PopoverContent
         v-bind="{...contentEvents, ...contentProps, ...$attrs}"
-        class="frame-general-popup frame-advanced-popup"
+        class="frame-general-popup frame-advanced-popup frame-general-surface frame-overlay-surface"
         :collision-boundary="collisionBoundary"
         :collision-padding="8"
         :side-offset="6"

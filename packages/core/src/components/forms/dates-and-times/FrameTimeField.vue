@@ -7,7 +7,7 @@ import {
   type TimeFieldRootProps,
   type TimeFieldRootEmits,
 } from 'reka-ui';
-import '../shared/dates.css';
+import '../styles/dates.scss';
 
 const props = defineProps<
   TimeFieldRootProps & {
@@ -26,7 +26,7 @@ const forwarded = useForwardPropsEmits(rootProps, emit);
   <TimeFieldRoot
     v-bind="forwarded"
     :aria-label="label"
-    class="frame-date-field"
+    class="frame-date-field frame-input-surface frame-input-focus-within frame-date-text"
     v-slot="{segments}"
   >
     <TimeFieldInput

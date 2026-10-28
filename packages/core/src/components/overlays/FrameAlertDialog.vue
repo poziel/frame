@@ -18,7 +18,7 @@ import {
   type AlertDialogContentEmits,
 } from 'reka-ui';
 import {useOverlayBoundary, overlayLayerStyle} from './overlays';
-import '../shared/general-c.css';
+import './styles/surfaces.scss';
 
 defineOptions({inheritAttrs: false});
 
@@ -97,7 +97,7 @@ defineSlots<{
       <div class="frame-general-layer" :style="layer">
         <AlertDialogContent
           v-bind="{...contentEvents, ...contentProps, ...$attrs}"
-          class="frame-general-dialog frame-advanced-popup"
+          class="frame-general-dialog frame-advanced-popup frame-general-surface frame-overlay-surface"
         >
           <AlertDialogTitle class="frame-general-title">{{
             title

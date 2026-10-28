@@ -1,0 +1,450 @@
+.main-column {
+  flex: 1;
+  /* Minimum width for .main-column. @token --frame-main-column-min-width */
+  --_frame-default-main-column-min-width-8259e95808: 0;
+  min-width: var(
+    --frame-main-column-min-width,
+    var(--_frame-default-main-column-min-width-8259e95808)
+  );
+  /* Minimum height for .main-column. @token --frame-main-column-min-height */
+  --_frame-default-main-column-min-height-7a65c483f4: 0;
+  min-height: var(
+    --frame-main-column-min-height,
+    var(--_frame-default-main-column-min-height-7a65c483f4)
+  );
+  display: flex;
+  flex-direction: column;
+  /* Space between children for .main-column. @token --frame-main-column-gap */
+  --_frame-default-main-column-gap-2ba599974b: 6px;
+  gap: var(
+    --frame-main-column-gap,
+    var(--_frame-default-main-column-gap-2ba599974b)
+  );
+}
+
+.tooltip-trigger {
+  display: inline-flex;
+  align-items: center;
+  /* Minimum width for .tooltip-trigger. @token --frame-tooltip-trigger-min-width */
+  --_frame-default-tooltip-trigger-min-width-9dcea8b02e: 0;
+  min-width: var(
+    --frame-tooltip-trigger-min-width,
+    var(--_frame-default-tooltip-trigger-min-width-9dcea8b02e)
+  );
+}
+
+.frame-tooltip {
+  position: fixed;
+  z-index: 30;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  /* Space between children for .frame-tooltip. @token --frame-tooltip-gap */
+  --_frame-default-tooltip-gap-d5b30d44b7: 12px;
+  gap: var(--frame-tooltip-gap, var(--_frame-default-tooltip-gap-d5b30d44b7));
+  /* Maximum width for .frame-tooltip. @token --frame-tooltip-max-width */
+  --_frame-default-tooltip-max-width-b392b76082: calc(100vw - 12px);
+  max-width: var(
+    --frame-tooltip-max-width,
+    var(--_frame-default-tooltip-max-width-b392b76082)
+  );
+  /* Internal spacing for .frame-tooltip. @token --frame-tooltip-padding */
+  --_frame-default-tooltip-padding-070b1e0616: 5px 8px;
+  padding: var(
+    --frame-tooltip-padding,
+    var(--_frame-default-tooltip-padding-070b1e0616)
+  );
+  /* Border for .frame-tooltip. @token --frame-tooltip-border */
+  --_frame-default-tooltip-border-bddc2afd41: 1px solid var(--frame-line);
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border: var(
+    --frame-tooltip-border,
+    var(--_frame-default-tooltip-border-bddc2afd41)
+  );
+  /* Corner radius for .frame-tooltip. @token --frame-tooltip-border-radius */
+  --_frame-default-tooltip-border-radius-8f11e2f14d: var(
+    --frame-control-radius
+  );
+  /* Shared corner radius of buttons and ordinary controls; text-entry surfaces may use the input radius instead. @token --frame-control-radius @context */
+  border-radius: var(
+    --frame-tooltip-border-radius,
+    var(--_frame-default-tooltip-border-radius-8f11e2f14d)
+  );
+  /* Background for .frame-tooltip. @token --frame-tooltip-background */
+  --_frame-default-tooltip-background-1949ec6d1f: var(
+    --frame-overlay-background
+  );
+  /* Shared translucent fill for floating surfaces over the application canvas. @token --frame-overlay-background @context */
+  background: var(
+    --frame-tooltip-background,
+    var(--_frame-default-tooltip-background-1949ec6d1f)
+  );
+  /* Foreground for .frame-tooltip. @token --frame-tooltip-color */
+  --_frame-default-tooltip-color-2bef39905c: var(--frame-control-text);
+  /* Foreground for text and icons on resting control surfaces. @token --frame-control-text @context */
+  color: var(
+    --frame-tooltip-color,
+    var(--_frame-default-tooltip-color-2bef39905c)
+  );
+  /* Elevation shadow for .frame-tooltip. @token --frame-tooltip-box-shadow */
+  --_frame-default-tooltip-box-shadow-3ccf3c3aa2: 0 3px 12px #0005;
+  box-shadow: var(
+    --frame-tooltip-box-shadow,
+    var(--_frame-default-tooltip-box-shadow-3ccf3c3aa2)
+  );
+  /* Text size for .frame-tooltip. @token --frame-tooltip-font-size */
+  --_frame-default-tooltip-font-size-8ff18b8ad9: 11px;
+  font-size: var(
+    --frame-tooltip-font-size,
+    var(--_frame-default-tooltip-font-size-8ff18b8ad9)
+  );
+  /* Text line height for .frame-tooltip. @token --frame-tooltip-line-height */
+  --_frame-default-tooltip-line-height-4a2572f6b9: 18px;
+  line-height: var(
+    --frame-tooltip-line-height,
+    var(--_frame-default-tooltip-line-height-4a2572f6b9)
+  );
+}
+
+.frame-tooltip kbd {
+  /* Text size for .frame-tooltip kbd. @token --frame-tooltip-kbd-font-size */
+  --_frame-default-tooltip-kbd-font-size-4a337daa5f: 10px;
+  font-size: var(
+    --frame-tooltip-kbd-font-size,
+    var(--_frame-default-tooltip-kbd-font-size-4a337daa5f)
+  );
+  /* Foreground for .frame-tooltip kbd. @token --frame-tooltip-kbd-color */
+  --_frame-default-tooltip-kbd-color-d513f53c6d: #a2adb2;
+  color: var(
+    --frame-tooltip-kbd-color,
+    var(--_frame-default-tooltip-kbd-color-d513f53c6d)
+  );
+  /* Border for .frame-tooltip kbd. @token --frame-tooltip-kbd-border */
+  --_frame-default-tooltip-kbd-border-a4f6f34b22: 0;
+  border: var(
+    --frame-tooltip-kbd-border,
+    var(--_frame-default-tooltip-kbd-border-a4f6f34b22)
+  );
+  /* Background for .frame-tooltip kbd. @token --frame-tooltip-kbd-background */
+  --_frame-default-tooltip-kbd-background-aa168306d2: none;
+  background: var(
+    --frame-tooltip-kbd-background,
+    var(--_frame-default-tooltip-kbd-background-aa168306d2)
+  );
+  /* Internal spacing for .frame-tooltip kbd. @token --frame-tooltip-kbd-padding */
+  --_frame-default-tooltip-kbd-padding-b431dd61b4: 0;
+  padding: var(
+    --frame-tooltip-kbd-padding,
+    var(--_frame-default-tooltip-kbd-padding-b431dd61b4)
+  );
+}
+
+.view-bar {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* Space between children for .view-bar. @token --frame-activity-rail-gap */
+  --_frame-default-activity-rail-gap-504cdeac3d: 4px;
+  /* Space between children for .view-bar. @token --frame-view-rail-gap */
+  --_frame-default-view-rail-gap-656b7199ba: var(
+    --frame-activity-rail-gap,
+    var(--_frame-default-activity-rail-gap-504cdeac3d)
+  );
+  gap: var(
+    --frame-view-rail-gap,
+    var(--_frame-default-view-rail-gap-656b7199ba)
+  );
+  /* Top internal spacing for .view-bar. @token --frame-activity-rail-padding-top */
+  --_frame-default-activity-rail-padding-top-a2ae939da7: 5px;
+  /* Top internal spacing for .view-bar. @token --frame-view-rail-padding-top */
+  --_frame-default-view-rail-padding-top-eff9227ccb: var(
+    --frame-activity-rail-padding-top,
+    var(--_frame-default-activity-rail-padding-top-a2ae939da7)
+  );
+  padding-top: var(
+    --frame-view-rail-padding-top,
+    var(--_frame-default-view-rail-padding-top-eff9227ccb)
+  );
+}
+
+.rail-button {
+  position: relative;
+  /* Width for .rail-button. @token --frame-rail-button-width */
+  --_frame-default-rail-button-width-bdaba2b014: 32px;
+  width: var(
+    --frame-rail-button-width,
+    var(--_frame-default-rail-button-width-bdaba2b014)
+  );
+  /* Height for .rail-button. @token --frame-rail-button-height */
+  --_frame-default-rail-button-height-c8c13f8f6d: 34px;
+  height: var(
+    --frame-rail-button-height,
+    var(--_frame-default-rail-button-height-c8c13f8f6d)
+  );
+  display: grid;
+  place-items: center;
+  /* Corner radius for .rail-button. @token --frame-rail-button-border-radius */
+  --_frame-default-rail-button-border-radius-c9e9c476e6: var(
+    --frame-radius-medium
+  );
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(
+    --frame-rail-button-border-radius,
+    var(--_frame-default-rail-button-border-radius-c9e9c476e6)
+  );
+  /* Foreground for .rail-button. @token --frame-rail-button-color */
+  --_frame-default-rail-button-color-b85c0412ae: #949ea4;
+  color: var(
+    --frame-rail-button-color,
+    var(--_frame-default-rail-button-color-b85c0412ae)
+  );
+  /* Text size for .rail-button. @token --frame-rail-button-font-size */
+  --_frame-default-rail-button-font-size-add0cba84e: 13px;
+  font-size: var(
+    --frame-rail-button-font-size,
+    var(--_frame-default-rail-button-font-size-add0cba84e)
+  );
+}
+
+.rail-button:hover {
+  /* Background for .rail-button:hover. @token --frame-rail-button-hover-background */
+  --_frame-default-rail-button-hover-background-4cb124519f: #ffffff09;
+  background: var(
+    --frame-rail-button-hover-background,
+    var(--_frame-default-rail-button-hover-background-4cb124519f)
+  );
+}
+
+.rail-button.selected {
+  /* Foreground for .rail-button.selected. @token --frame-rail-button-selected-color */
+  --_frame-default-rail-button-selected-color-bab384785f: #ffffff;
+  color: var(
+    --frame-rail-button-selected-color,
+    var(--_frame-default-rail-button-selected-color-bab384785f)
+  );
+  /* Background for .rail-button.selected. @token --frame-rail-button-selected-background */
+  --_frame-default-rail-button-selected-background-c481b4b269: #333333;
+  background: var(
+    --frame-rail-button-selected-background,
+    var(--_frame-default-rail-button-selected-background-c481b4b269)
+  );
+}
+
+.panel-log {
+  /* Top internal spacing for .panel-log. @token --frame-panel-log-padding-top */
+  --_frame-default-panel-log-padding-top-8cf255e663: 10px;
+  padding-top: var(
+    --frame-panel-log-padding-top,
+    var(--_frame-default-panel-log-padding-top-8cf255e663)
+  );
+}
+
+.panel-log > div {
+  align-items: baseline;
+  white-space: pre-wrap;
+}
+
+.panel-log time {
+  flex-shrink: 0;
+}
+
+.side-log {
+  /* Internal spacing for .side-log. @token --frame-side-log-padding */
+  --_frame-default-side-log-padding-88eeac1366: 0;
+  padding: var(
+    --frame-side-log-padding,
+    var(--_frame-default-side-log-padding-88eeac1366)
+  );
+  font-family: inherit;
+  /* Text size for .side-log. @token --frame-side-log-font-size */
+  --_frame-default-side-log-font-size-1ea07c43b5: 11px;
+  font-size: var(
+    --frame-side-log-font-size,
+    var(--_frame-default-side-log-font-size-1ea07c43b5)
+  );
+}
+
+.side-log > div {
+  display: block;
+  /* Bottom border for .side-log > div. @token --frame-side-log-div-border-bottom */
+  --_frame-default-side-log-div-border-bottom-d93d4e6aa1: 1px solid #ffffff05;
+  border-bottom: var(
+    --frame-side-log-div-border-bottom,
+    var(--_frame-default-side-log-div-border-bottom-d93d4e6aa1)
+  );
+  /* Internal spacing for .side-log > div. @token --frame-side-log-div-padding */
+  --_frame-default-side-log-div-padding-c69edda759: 8px 0;
+  padding: var(
+    --frame-side-log-div-padding,
+    var(--_frame-default-side-log-div-padding-c69edda759)
+  );
+}
+
+.side-log time {
+  display: block;
+  /* Text size for .side-log time. @token --frame-side-log-time-font-size */
+  --_frame-default-side-log-time-font-size-4da42754dc: 10px;
+  font-size: var(
+    --frame-side-log-time-font-size,
+    var(--_frame-default-side-log-time-font-size-4da42754dc)
+  );
+  /* Text line height for .side-log time. @token --frame-side-log-time-line-height */
+  --_frame-default-side-log-time-line-height-8834758f98: 1.5;
+  line-height: var(
+    --frame-side-log-time-line-height,
+    var(--_frame-default-side-log-time-line-height-8834758f98)
+  );
+}
+
+.bottom-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 260px;
+  /* Minimum height for .bottom-panel. @token --frame-bottom-panel-min-height */
+  --_frame-default-bottom-panel-min-height-3c83c22ea8: 100px;
+  min-height: var(
+    --frame-bottom-panel-min-height,
+    var(--_frame-default-bottom-panel-min-height-3c83c22ea8)
+  );
+  /* Maximum height for .bottom-panel. @token --frame-bottom-panel-max-height */
+  --_frame-default-bottom-panel-max-height-15a4144f5a: 55%;
+  max-height: var(
+    --frame-bottom-panel-max-height,
+    var(--_frame-default-bottom-panel-max-height-15a4144f5a)
+  );
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border: 1px solid var(--frame-line);
+  /* Corner radius for .bottom-panel. @token --frame-bottom-panel-border-radius */
+  --_frame-default-bottom-panel-border-radius-f69961a707: var(
+    --frame-radius-large
+  );
+  /* Large shared corner radius used by panel and menu containers. @token --frame-radius-large @context */
+  border-radius: var(
+    --frame-bottom-panel-border-radius,
+    var(--_frame-default-bottom-panel-border-radius-f69961a707)
+  );
+  overflow: hidden;
+  /* Neutral raised surface behind grouped content and control compositions. @token --frame-surface @context */
+  background: var(--frame-surface);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  /* Space between children for .panel-header. @token --frame-panel-header-gap */
+  --_frame-default-panel-header-gap-5504a1fcf3: 8px;
+  gap: var(
+    --frame-panel-header-gap,
+    var(--_frame-default-panel-header-gap-5504a1fcf3)
+  );
+  /* Minimum height for .panel-header. @token --frame-panel-header-min-height */
+  --_frame-default-panel-header-min-height-39c7dbfb8b: 34px;
+  min-height: var(
+    --frame-panel-header-min-height,
+    var(--_frame-default-panel-header-min-height-39c7dbfb8b)
+  );
+  /* Internal spacing for .panel-header. @token --frame-panel-header-padding */
+  --_frame-default-panel-header-padding-e3257ad3ff: 0 7px;
+  padding: var(
+    --frame-panel-header-padding,
+    var(--_frame-default-panel-header-padding-e3257ad3ff)
+  );
+}
+
+.panel-tabs {
+  display: flex;
+  align-items: center;
+  /* Default used by --bar-drop-spacing on .panel-tabs.bar-drop-list. @token --frame-panel-tabs-gap */
+  --_frame-default-panel-tabs-gap-6d3dd32513: 3px;
+  gap: var(
+    --frame-panel-tabs-gap,
+    var(--_frame-default-panel-tabs-gap-6d3dd32513)
+  );
+  flex: 1;
+  overflow-x: auto;
+}
+
+.panel-tabs button {
+  flex-shrink: 0;
+  /* Internal spacing for .panel-tabs button. @token --frame-panel-tabs-button-padding */
+  --_frame-default-panel-tabs-button-padding-9b204f81a9: 4px 8px;
+  padding: var(
+    --frame-panel-tabs-button-padding,
+    var(--_frame-default-panel-tabs-button-padding-9b204f81a9)
+  );
+  /* Text size for .panel-tabs button. @token --frame-panel-tabs-button-font-size */
+  --_frame-default-panel-tabs-button-font-size-bbec94720b: 11px;
+  font-size: var(
+    --frame-panel-tabs-button-font-size,
+    var(--_frame-default-panel-tabs-button-font-size-bbec94720b)
+  );
+  /* Text line height for .panel-tabs button. @token --frame-panel-tabs-button-line-height */
+  --_frame-default-panel-tabs-button-line-height-64cf3ef206: 17px;
+  line-height: var(
+    --frame-panel-tabs-button-line-height,
+    var(--_frame-default-panel-tabs-button-line-height-64cf3ef206)
+  );
+  /* Foreground for .panel-tabs button. @token --frame-panel-tabs-button-color */
+  --_frame-default-panel-tabs-button-color-0b5147bb7a: #959fa5;
+  color: var(
+    --frame-panel-tabs-button-color,
+    var(--_frame-default-panel-tabs-button-color-0b5147bb7a)
+  );
+  /* Corner radius for .panel-tabs button. @token --frame-panel-tabs-button-border-radius */
+  --_frame-default-panel-tabs-button-border-radius-847ccb31e4: var(
+    --frame-radius-medium
+  );
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(
+    --frame-panel-tabs-button-border-radius,
+    var(--_frame-default-panel-tabs-button-border-radius-847ccb31e4)
+  );
+  white-space: nowrap;
+}
+
+.panel-tabs button:hover {
+  /* Foreground for .panel-tabs button:hover. @token --frame-panel-tabs-button-hover-color */
+  --_frame-default-panel-tabs-button-hover-color-65343399b8: #d7dcde;
+  color: var(
+    --frame-panel-tabs-button-hover-color,
+    var(--_frame-default-panel-tabs-button-hover-color-65343399b8)
+  );
+  /* Background for .panel-tabs button:hover. @token --frame-panel-tabs-button-hover-background */
+  --_frame-default-panel-tabs-button-hover-background-488b8dd752: #ffffff06;
+  background: var(
+    --frame-panel-tabs-button-hover-background,
+    var(--_frame-default-panel-tabs-button-hover-background-488b8dd752)
+  );
+}
+
+.panel-tabs button[aria-selected='true'] {
+  /* Foreground for .panel-tabs button[aria-selected='true']. @token --frame-panel-tabs-button-color-2 */
+  --_frame-default-panel-tabs-button-color-2-80f8fde2e7: #e0e3e4;
+  color: var(
+    --frame-panel-tabs-button-color-2,
+    var(--_frame-default-panel-tabs-button-color-2-80f8fde2e7)
+  );
+  /* Background for .panel-tabs button[aria-selected='true']. @token --frame-panel-tabs-button-background */
+  --_frame-default-panel-tabs-button-background-b44862421b: #313638;
+  background: var(
+    --frame-panel-tabs-button-background,
+    var(--_frame-default-panel-tabs-button-background-b44862421b)
+  );
+}
+
+.panel-content {
+  flex: 1;
+  /* Minimum height for .panel-content. @token --frame-panel-content-min-height */
+  --_frame-default-panel-content-min-height-aa8cb395e7: 0;
+  min-height: var(
+    --frame-panel-content-min-height,
+    var(--_frame-default-panel-content-min-height-aa8cb395e7)
+  );
+  overflow: auto;
+  /* Outline offset for .panel-content. @token --frame-panel-content-outline-offset */
+  --_frame-default-panel-content-outline-offset-37f00d6bb6: -2px;
+  outline-offset: var(
+    --frame-panel-content-outline-offset,
+    var(--_frame-default-panel-content-outline-offset-37f00d6bb6)
+  );
+}

@@ -1,0 +1,153 @@
+.frame-overlay-host {
+  position: fixed;
+  z-index: 200;
+  overflow: hidden;
+  pointer-events: none;
+}
+.frame-overlay-host > .frame-overlay-interactive {
+  pointer-events: auto;
+}
+.frame-overlay-host > .frame-menu {
+  z-index: 125;
+}
+.frame-overlay-host > .frame-tooltip {
+  z-index: 145;
+}
+.frame-overlay-host > .palette-backdrop {
+  z-index: 140;
+}
+.frame-overlay-host > .frame-notifications {
+  position: fixed;
+}
+.frame-custom-overlays {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.frame-custom-overlays > * {
+  pointer-events: auto;
+}
+:where(.frame-box-scope),
+:where(.frame-box-scope) * {
+  box-sizing: border-box;
+}
+
+:where(.frame-control-scope) :is(button, input) {
+  font: inherit;
+}
+:where(.frame-control-scope) button {
+  /* Border for :where(.workbench, .frame-menu, .palette-backdrop) button. @token --frame-where-workbench-border */
+  --_frame-default-where-workbench-border-52810b8580: 0;
+  border: var(
+    --frame-where-workbench-border,
+    var(--_frame-default-where-workbench-border-52810b8580)
+  );
+  /* Background for :where(.workbench, .frame-menu, .palette-backdrop) button. @token --frame-where-workbench-background */
+  --_frame-default-where-workbench-background-a5e1459747: none;
+  background: var(
+    --frame-where-workbench-background,
+    var(--_frame-default-where-workbench-background-a5e1459747)
+  );
+  color: inherit;
+  cursor: pointer;
+}
+:where(.frame-control-scope) button:disabled {
+  cursor: default;
+}
+:where(.frame-control-scope) :is(button, a, input):focus-visible {
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  outline: 1px solid var(--frame-accent);
+  /* Outline offset for :where(.workbench, .frame-menu, .palette-backdrop) :is(button, a, input):focus-visible. @token --frame-where-workbench-outline-offset */
+  --_frame-default-where-workbench-outline-offset-d01574a709: -2px;
+  outline-offset: var(
+    --frame-where-workbench-outline-offset,
+    var(--_frame-default-where-workbench-outline-offset-d01574a709)
+  );
+}
+:where(.frame-control-scope) button:hover:not(:disabled) {
+  /* Foreground for :where(.workbench, .frame-menu, .palette-backdrop) button:hover:not(:disabled). @token --frame-where-workbench-color */
+  --_frame-default-where-workbench-color-ff3b10dd7a: #eee;
+  color: var(
+    --frame-where-workbench-color,
+    var(--_frame-default-where-workbench-color-ff3b10dd7a)
+  );
+}
+:where(.frame-control-scope) :is(h1, h2, p) {
+  /* Outer spacing for :where(.workbench, .frame-menu, .palette-backdrop) :is(h1, h2, p). @token --frame-where-workbench-margin */
+  --_frame-default-where-workbench-margin-ba40949ea1: 0;
+  margin: var(
+    --frame-where-workbench-margin,
+    var(--_frame-default-where-workbench-margin-ba40949ea1)
+  );
+}
+:where(.frame-control-scope) strong {
+  /* Text weight for :where(.workbench, .frame-menu, .palette-backdrop) strong. @token --frame-where-workbench-font-weight */
+  --_frame-default-where-workbench-font-weight-2fc541e527: 500;
+  font-weight: var(
+    --frame-where-workbench-font-weight,
+    var(--_frame-default-where-workbench-font-weight-2fc541e527)
+  );
+}
+:where(.frame-control-scope) svg {
+  flex-shrink: 0;
+}
+:where(.frame-box-scope) kbd {
+  font-family: inherit;
+  /* Text size for :where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd. @token --frame-where-workbench-font-size */
+  --_frame-default-where-workbench-font-size-b9cbb61372: 10px;
+  font-size: var(
+    --frame-where-workbench-font-size,
+    var(--_frame-default-where-workbench-font-size-b9cbb61372)
+  );
+  /* Text line height for :where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd. @token --frame-where-workbench-line-height */
+  --_frame-default-where-workbench-line-height-495af1a51e: 15px;
+  line-height: var(
+    --frame-where-workbench-line-height,
+    var(--_frame-default-where-workbench-line-height-495af1a51e)
+  );
+  /* Foreground for :where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd. @token --frame-where-workbench-color-2 */
+  --_frame-default-where-workbench-color-2-76dfec49c3: #b8bdc0;
+  color: var(
+    --frame-where-workbench-color-2,
+    var(--_frame-default-where-workbench-color-2-76dfec49c3)
+  );
+  /* Border for :where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd. Used when --frame-where-workbench-border-2 is unset. @token --frame-shortcut-border-color */
+  --_frame-default-shortcut-border-color-19a3697d56: #35393b;
+  /* Border for :where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd. @token --frame-where-workbench-border-2 */
+  --_frame-default-where-workbench-border-2-11dd9b8ff3: 1px solid
+    var(
+      --frame-shortcut-border-color,
+      var(--_frame-default-shortcut-border-color-19a3697d56)
+    );
+  border: var(
+    --frame-where-workbench-border-2,
+    var(--_frame-default-where-workbench-border-2-11dd9b8ff3)
+  );
+  /* Corner radius for :where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd. @token --frame-where-workbench-border-radius */
+  --_frame-default-where-workbench-border-radius-3dabf15330: var(
+    --frame-radius-medium
+  );
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(
+    --frame-where-workbench-border-radius,
+    var(--_frame-default-where-workbench-border-radius-3dabf15330)
+  );
+  /* Background for :where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd. @token --frame-where-workbench-background-2 */
+  --_frame-default-where-workbench-background-2-fffa947785: #242729;
+  background: var(
+    --frame-where-workbench-background-2,
+    var(--_frame-default-where-workbench-background-2-fffa947785)
+  );
+  /* Internal spacing for :where(.workbench, .frame-menu, .palette-backdrop, .frame-tooltip) kbd. @token --frame-where-workbench-padding */
+  --_frame-default-where-workbench-padding-fd7d64e772: 0 4px;
+  padding: var(
+    --frame-where-workbench-padding,
+    var(--_frame-default-where-workbench-padding-fd7d64e772)
+  );
+  white-space: nowrap;
+}
+/* Shell labels are controls; application view content remains selectable. */
+.frame-shell-label {
+  -webkit-user-select: none;
+  user-select: none;
+}

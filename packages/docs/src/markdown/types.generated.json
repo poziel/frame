@@ -496,7 +496,7 @@
     "properties": [
       {
         "name": "instance",
-        "type": "Readonly<\r\n    ShallowRef<Monaco.editor.IStandaloneCodeEditor | undefined>\r\n  >",
+        "type": "Readonly<\n    ShallowRef<Monaco.editor.IStandaloneCodeEditor | undefined>\n  >",
         "description": "Readonly reactive reference to the currently attached Monaco surface."
       }
     ]

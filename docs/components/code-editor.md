@@ -91,18 +91,18 @@ Use the shared theme variables in application content. Component-specific declar
 
 <!-- frame:generated styles="code-editor" -->
 
-| CSS variable                         | Theme path                         | Default expression | Purpose                                         | Context                     |
-| ------------------------------------ | ---------------------------------- | ------------------ | ----------------------------------------------- | --------------------------- |
-| `--frame-code-editor-width`          | `frame.code.editor.width`          | `100%`             | Width for .frame-code-editor.                   | `.frame-code-editor`        |
-| `--frame-code-editor-height`         | `frame.code.editor.height`         | `100%`             | Height for .frame-code-editor.                  | `.frame-code-editor`        |
-| `--frame-code-editor-min-width`      | `frame.code.editor.min.width`      | `0`                | Minimum width for .frame-code-editor.           | `.frame-code-editor`        |
-| `--frame-code-editor-min-height`     | `frame.code.editor.min.height`     | `0`                | Minimum height for .frame-code-editor.          | `.frame-code-editor`        |
-| `--frame-code-editor-host-width`     | `frame.code.editor.host.width`     | `100%`             | Width for .frame-code-editor-host.              | `.frame-code-editor-host`   |
-| `--frame-code-editor-host-height`    | `frame.code.editor.host.height`    | `100%`             | Height for .frame-code-editor-host.             | `.frame-code-editor-host`   |
-| `--frame-code-editor-status-margin`  | `frame.code.editor.status.margin`  | `0`                | Outer spacing for .frame-code-editor-status.    | `.frame-code-editor-status` |
-| `--frame-code-editor-status-padding` | `frame.code.editor.status.padding` | `12px`             | Internal spacing for .frame-code-editor-status. | `.frame-code-editor-status` |
-| `--frame-bg`                         | `frame.bg`                         | `#1e1e1e`          | Background for .frame-code-editor-status.       | `.frame-code-editor-status` |
-| `--frame-fg`                         | `frame.fg`                         | `#d4d4d4`          | Foreground for .frame-code-editor-status.       | `.frame-code-editor-status` |
+| CSS variable                         | Theme path                         | Default expression | Purpose                                                            | Context                     |
+| ------------------------------------ | ---------------------------------- | ------------------ | ------------------------------------------------------------------ | --------------------------- |
+| `--frame-code-editor-width`          | `frame.code.editor.width`          | `100%`             | Width for .frame-code-editor; code editor width.                   | `.frame-code-editor`        |
+| `--frame-code-editor-height`         | `frame.code.editor.height`         | `100%`             | Height for .frame-code-editor; code editor height.                 | `.frame-code-editor`        |
+| `--frame-code-editor-min-width`      | `frame.code.editor.min.width`      | `0`                | Min width for .frame-code-editor; code editor min width.           | `.frame-code-editor`        |
+| `--frame-code-editor-min-height`     | `frame.code.editor.min.height`     | `0`                | Min height for .frame-code-editor; code editor min height.         | `.frame-code-editor`        |
+| `--frame-code-editor-host-width`     | `frame.code.editor.host.width`     | `100%`             | Width for .frame-code-editor-host; code editor host width.         | `.frame-code-editor-host`   |
+| `--frame-code-editor-host-height`    | `frame.code.editor.host.height`    | `100%`             | Height for .frame-code-editor-host; code editor host height.       | `.frame-code-editor-host`   |
+| `--frame-code-editor-status-margin`  | `frame.code.editor.status.margin`  | `0`                | Margin for .frame-code-editor-status; code editor status margin.   | `.frame-code-editor-status` |
+| `--frame-code-editor-status-padding` | `frame.code.editor.status.padding` | `12px`             | Padding for .frame-code-editor-status; code editor status padding. | `.frame-code-editor-status` |
+| `--frame-bg`                         | `frame.bg`                         | `#1e1e1e`          | Background for .frame-code-editor-status; bg.                      | `.frame-code-editor-status` |
+| `--frame-fg`                         | `frame.fg`                         | `#d4d4d4`          | Color for .frame-code-editor-status; fg.                           | `.frame-code-editor-status` |
 
 Expressions are preserved as written; their computed values depend on the active theme and component state.
 

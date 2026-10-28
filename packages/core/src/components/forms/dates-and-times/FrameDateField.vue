@@ -7,7 +7,7 @@ import {
   type DateFieldRootProps,
   type DateFieldRootEmits,
 } from 'reka-ui';
-import '../shared/dates.css';
+import '../styles/dates.scss';
 
 const props = defineProps<
   DateFieldRootProps & {
@@ -26,7 +26,7 @@ const forwarded = useForwardPropsEmits(rootProps, emit);
   <DateFieldRoot
     v-bind="forwarded"
     :aria-label="label"
-    class="frame-date-field"
+    class="frame-date-field frame-input-surface frame-input-focus-within frame-date-text"
     v-slot="{segments}"
   >
     <DateFieldInput

@@ -17,7 +17,7 @@ import {
   type RangeCalendarRootProps,
   type RangeCalendarRootEmits,
 } from 'reka-ui';
-import '../shared/dates.css';
+import '../styles/dates.scss';
 
 const props = defineProps<
   RangeCalendarRootProps & {
@@ -41,7 +41,7 @@ defineSlots<{
   <RangeCalendarRoot
     v-bind="forwarded"
     :calendar-label="props.calendarLabel ?? props.label"
-    class="frame-calendar"
+    class="frame-calendar frame-date-text"
     v-slot="{grid, weekDays}"
   >
     <RangeCalendarHeader class="frame-date-header">

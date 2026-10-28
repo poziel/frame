@@ -70,7 +70,7 @@ const visibleTabs = computed(() =>
     >
       <header
         v-if="tabs.find((tab) => tab.id === activeId)?.showHeader !== false"
-        class="panel-header"
+        class="panel-header frame-shell-label"
         @contextmenu="headerContext"
       >
         <PanelViewBar

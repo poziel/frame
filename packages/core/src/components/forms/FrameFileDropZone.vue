@@ -7,7 +7,7 @@ import type {
   FileUploadOptions,
 } from './shared/files';
 import {useFilePicker} from './shared/useFilePicker';
-import './shared/files.css';
+import './styles/files.scss';
 
 const props = withDefaults(
   defineProps<
@@ -168,3 +168,55 @@ defineSlots<{
     >
   </div>
 </template>
+
+<style lang="scss">
+.frame-file-drop-zone {
+  position: relative;
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  color: var(--frame-text);
+  font: inherit;
+}
+
+.frame-file-presentation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Space between children for .frame-file-presentation. @token --frame-gap */
+  --_frame-default-gap-3e2a1ab688: 6px;
+  gap: var(
+    --frame-gap,
+    var(--_frame-default-gap-3e2a1ab688)
+  ); /* Inset inside the file drop-zone presentation. @token --frame-content-padding */
+  --_frame-default-content-padding-130: 12px;
+  padding: var(
+    --frame-content-padding,
+    var(--_frame-default-content-padding-130)
+  ); /* Resting border color of form controls, independently overridable from menu borders. @token --frame-control-border @context */
+  border: 1px dashed var(--frame-control-border); /* Corner radius of the file drop-zone presentation and drag overlay. @token --frame-control-radius */
+  --_frame-default-control-radius-131: 4px;
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-131)
+  );
+}
+
+.frame-file-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  border: 2px dashed var(--frame-accent); /* Corner radius of the file drop-zone presentation and drag overlay. @token --frame-control-radius */
+  --_frame-default-control-radius-131: 4px;
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-131)
+  ); /* Shared translucent fill for floating surfaces over the application canvas. @token --frame-overlay-background @context */
+  background: var(
+    --frame-overlay-background
+  ); /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  color: var(--frame-text);
+}
+</style>

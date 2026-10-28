@@ -80,7 +80,7 @@ function linkKey(event: KeyboardEvent, item: NavigationLinkItem) {
         /><span aria-hidden="true">›</span></DropdownMenuSubTrigger
       ><DropdownMenuPortal :to="target"
         ><DropdownMenuSubContent
-          class="frame-menu navigation-menu"
+          class="frame-menu navigation-menu frame-overlay-surface frame-overlay-interactive frame-box-scope frame-control-scope frame-shell-text frame-scroll-scope"
           :aria-label="item.label"
           :side-offset="4"
           :collision-padding="8"

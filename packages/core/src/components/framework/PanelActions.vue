@@ -14,7 +14,6 @@ import {
 import {frameKey} from '../../framework/useFrame';
 import FrameIconButton from '../actions/FrameIconButton.vue';
 import FrameDropdownMenu from '../navigation/FrameDropdownMenu.vue';
-import './styles/panel-action-overflow.css';
 
 const props = defineProps<{
   /** Header action definitions; available actions overflow when the header cannot fit them. */
@@ -285,3 +284,85 @@ defineSlots<{
     />
   </div>
 </template>
+
+<style lang="scss">
+.panel-actions.panel-actions-responsive {
+  min-width: 0;
+  flex: 0 1 auto;
+}
+.panel-actions-extra {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: inherit;
+  align-items: center;
+}
+.panel-actions-extra:empty {
+  display: none;
+}
+.panel-actions-measure {
+  display: flex;
+  position: fixed;
+  inset-inline-start: -10000px;
+  top: 0;
+  width: max-content;
+  visibility: hidden;
+  pointer-events: none;
+  gap: inherit;
+}
+.panel-actions-measure > span {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.panel-actions
+  .frame-icon-button:has(> span:not(.frame-icon):not(.frame-icon-button-icon)) {
+  width: auto !important;
+  /* Internal spacing for .panel-actions .frame-icon-button:has(> span:not(.frame-icon):not(.frame-icon-button-icon)). @token --frame-panel-actions-frame-icon-button-has-span-not-frame-icon-padding */
+  --_frame-default-panel-actions-frame-icon-button-has-span-not-frame-icon-padding-4b85c731e5: 0
+    5px;
+  padding: var(
+    --frame-panel-actions-frame-icon-button-has-span-not-frame-icon-padding,
+    var(
+      --_frame-default-panel-actions-frame-icon-button-has-span-not-frame-icon-padding-4b85c731e5
+    )
+  );
+}
+
+.panel-actions {
+  display: flex;
+  align-items: center;
+  /* Space between children for .panel-actions. @token --frame-panel-actions-gap */
+  --_frame-default-panel-actions-gap-0514b9c230: 3px;
+  gap: var(
+    --frame-panel-actions-gap,
+    var(--_frame-default-panel-actions-gap-0514b9c230)
+  );
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.panel-actions button {
+  /* Text size for .panel-actions button. @token --frame-panel-actions-button-font-size */
+  --_frame-default-panel-actions-button-font-size-532cf5d20a: 11px;
+  font-size: var(
+    --frame-panel-actions-button-font-size,
+    var(--_frame-default-panel-actions-button-font-size-532cf5d20a)
+  );
+  white-space: nowrap;
+}
+
+.panel-actions .icon-button {
+  width: auto;
+  /* Minimum width for .panel-actions .icon-button. @token --frame-panel-actions-icon-button-min-width */
+  --_frame-default-panel-actions-icon-button-min-width-4e71d66b3d: 24px;
+  min-width: var(
+    --frame-panel-actions-icon-button-min-width,
+    var(--_frame-default-panel-actions-icon-button-min-width-4e71d66b3d)
+  ); /* Internal spacing for .panel-actions .icon-button. @token --frame-panel-actions-icon-button-padding */
+  --_frame-default-panel-actions-icon-button-padding-b4614ed760: 0 5px;
+  padding: var(
+    --frame-panel-actions-icon-button-padding,
+    var(--_frame-default-panel-actions-icon-button-padding-b4614ed760)
+  );
+}
+</style>

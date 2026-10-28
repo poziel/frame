@@ -4,6 +4,8 @@
 
 Before editing code or documentation, read [coding standards](docs/contributing/coding-standards/README.md), then the guides for each language being changed. They document the Google baselines and Frame's overrides for classes, TSDoc, spacing, parameter layout, Vue, HTML, and CSS. The project guides take precedence over formatter defaults.
 
+Core's maintained styles use SCSS. Read the [SCSS conventions](docs/contributing/coding-standards/css.md) and [style architecture](docs/styling/style-architecture.md) before changing styles or their composition. Public built-package stylesheet imports remain CSS.
+
 Use `bun run format` and `bun run check` for the shared workflow. Formatting checks and writes use the same complete pipeline. One-class-per-file, meaningful documentation, and architectural boundaries still require review. See [formatting and checks](docs/contributing/coding-standards/formatting.md) for scope, CI usage, and deliberate whole-workspace migrations.
 
 ## Product model

@@ -17,3 +17,15 @@ onBeforeUnmount(() => props.respond(false));
     ><p>Your changes will be lost if you close without saving.</p></div
   >
 </template>
+
+<style lang="scss">
+.workspace-unsaved-dialog {
+  padding: 16px;
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  color: var(--frame-text);
+}
+
+.workspace-unsaved-dialog p {
+  margin: 0 0 12px;
+}
+</style>

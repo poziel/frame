@@ -1,0 +1,70 @@
+.frame-menubar {
+  display: flex;
+  align-items: center;
+  /* Minimum width for .frame-menubar. @token --frame-menubar-min-width */
+  --_frame-default-menubar-min-width-2b906f699d: 0;
+  min-width: var(
+    --frame-menubar-min-width,
+    var(--_frame-default-menubar-min-width-2b906f699d)
+  );
+}
+
+.menubar-groups {
+  display: flex;
+  align-items: center;
+}
+
+.frame-menubar button {
+  /* Foreground for .frame-menubar button. @token --frame-menubar-button-color */
+  --_frame-default-menubar-button-color-c81cbfefc3: #a9a9a9;
+  color: var(
+    --frame-menubar-button-color,
+    var(--_frame-default-menubar-button-color-c81cbfefc3)
+  );
+  /* Height for .frame-menubar button. @token --frame-menubar-button-height */
+  --_frame-default-menubar-button-height-8e3b1bd1ed: 25px;
+  height: var(
+    --frame-menubar-button-height,
+    var(--_frame-default-menubar-button-height-8e3b1bd1ed)
+  );
+  /* Internal spacing for .frame-menubar button. @token --frame-menubar-button-padding */
+  --_frame-default-menubar-button-padding-37576c29aa: 0 8px;
+  padding: var(
+    --frame-menubar-button-padding,
+    var(--_frame-default-menubar-button-padding-37576c29aa)
+  );
+  /* Corner radius for .frame-menubar button. @token --frame-menubar-button-border-radius */
+  --_frame-default-menubar-button-border-radius-63f770a45d: var(
+    --frame-radius-medium
+  );
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(
+    --frame-menubar-button-border-radius,
+    var(--_frame-default-menubar-button-border-radius-63f770a45d)
+  );
+  /* Text size for .frame-menubar button. @token --frame-menubar-button-font-size */
+  --_frame-default-menubar-button-font-size-273719f3cb: 12px;
+  font-size: var(
+    --frame-menubar-button-font-size,
+    var(--_frame-default-menubar-button-font-size-273719f3cb)
+  );
+  white-space: nowrap;
+}
+
+.frame-menubar button:hover,
+.frame-menubar button.active {
+  /* Background for .frame-menubar button:hover, .frame-menubar button.active. @token --frame-menubar-button-hover-background */
+  --_frame-default-menubar-button-hover-background-7aa78982b9: #ffffff0b;
+  background: var(
+    --frame-menubar-button-hover-background,
+    var(--_frame-default-menubar-button-hover-background-7aa78982b9)
+  );
+}
+
+.menubar-overflow {
+  display: none;
+}
+
+.menubar-overflow.needed {
+  display: block;
+}

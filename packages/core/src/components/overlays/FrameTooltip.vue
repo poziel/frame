@@ -122,7 +122,7 @@ defineSlots<{
       </span>
       <TooltipPortal :to="target"
         ><TooltipContent
-          class="frame-tooltip"
+          class="frame-tooltip frame-overlay-surface frame-box-scope frame-shell-text"
           :data-noninteractive="disableHoverableContent || undefined"
           :aria-label="shortcut ? text + ' ' + shortcut : text"
           :side="placement"

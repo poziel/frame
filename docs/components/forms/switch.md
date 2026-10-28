@@ -263,7 +263,7 @@ No Frame-defined methods or internal Reka refs are exposed.
 
 #### Sources and version
 
-[FrameSwitch.vue](../../../packages/core/src/components/forms/FrameSwitch.vue) composes Reka SwitchRoot, SwitchThumb, and Label. Styling lives in [controls.css](../../../packages/core/src/components/forms/shared/controls.css).
+[FrameSwitch.vue](../../../packages/core/src/components/forms/FrameSwitch.vue) composes Reka SwitchRoot, SwitchThumb, and Label. Styling lives in [controls.scss](../../../packages/core/src/components/forms/styles/controls.scss).
 
 Compared with the [Reka Switch reference](https://reka-ui.com/docs/components/switch.md) and installed Reka `2.11.0` source. See the [coverage review](../../reference/reka-coverage.md).
 
@@ -273,16 +273,16 @@ Use the shared theme variables in application content. Component-specific declar
 
 <!-- frame:generated styles="switch" -->
 
-| CSS variable       | Theme path       | Default expression | Purpose                                                                                                                                                                 | Context                                                                                                                                                                    |
-| ------------------ | ---------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--frame-gap`      | `frame.gap`      | `6px`              | Space between children for .frame-form-inline, .frame-number-field, .frame-pin-input, .frame-tags-input, .frame-combobox-anchor.                                        | `.frame-form-inline, .frame-number-field, .frame-pin-input, .frame-tags-input, .frame-combobox-anchor`                                                                     |
-| `--frame-accent`   | `frame.accent`   | `#0078d4`          | Outline for :is( .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control, .frame-switch, .frame-slider-thumb ):focus-visible. | `:is(   .frame-form-input,   .frame-control-button,   .frame-toggle,   .frame-choice-item,   .frame-check-control,   .frame-switch,   .frame-slider-thumb ):focus-visible` |
-| `--frame-line`     | `frame.line`     | `#454545`          | Border color of the switch track.                                                                                                                                       | `.frame-switch`                                                                                                                                                            |
-| `--frame-surface`  | `frame.surface`  | `#242424`          | Unchecked switch track surface.                                                                                                                                         | `.frame-switch`                                                                                                                                                            |
-| `--frame-accent`   | `frame.accent`   | `#0078d4`          | Checked switch track surface.                                                                                                                                           | `.frame-switch[data-state='checked']`                                                                                                                                      |
-| `--frame-text`     | `frame.text`     | `#ccc`             | Switch thumb foreground.                                                                                                                                                | `.frame-switch-thumb`                                                                                                                                                      |
-| `--frame-duration` | `frame.duration` | `150ms`            | Duration of the switch thumb movement.                                                                                                                                  | `.frame-switch-thumb`                                                                                                                                                      |
-| `--frame-ease`     | `frame.ease`     | `ease-out`         | Timing curve of the switch thumb movement.                                                                                                                              | `.frame-switch-thumb`                                                                                                                                                      |
+| CSS variable       | Theme path       | Default expression | Purpose                                                   | Context                              |
+| ------------------ | ---------------- | ------------------ | --------------------------------------------------------- | ------------------------------------ |
+| `--frame-gap`      | `frame.gap`      | `6px`              | Space between children for .frame-form-inline-layout.     | `.frame-form-inline-layout`          |
+| `--frame-accent`   | `frame.accent`   | `#0078d4`          | Elevation shadow for .frame-control-focus:focus-visible.  | `.frame-control-focus:focus-visible` |
+| `--frame-line`     | `frame.line`     | `#454545`          | Border for .frame-switch.                                 | `.frame-switch`                      |
+| `--frame-surface`  | `frame.surface`  | `#242424`          | Background for .frame-switch.                             | `.frame-switch`                      |
+| `--frame-accent`   | `frame.accent`   | `#0078d4`          | Elevation shadow for .frame-switch[data-state='checked']. | `.frame-switch[data-state=checked]`  |
+| `--frame-text`     | `frame.text`     | `#ccc`             | Foreground for .frame-switch-thumb.                       | `.frame-switch-thumb`                |
+| `--frame-duration` | `frame.duration` | `150ms`            | Duration of the switch thumb movement.                    | `.frame-switch-thumb`                |
+| `--frame-ease`     | `frame.ease`     | `ease-out`         | Timing curve of the switch thumb movement.                | `.frame-switch-thumb`                |
 
 Expressions are preserved as written; their computed values depend on the active theme and component state.
 

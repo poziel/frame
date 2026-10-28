@@ -1,0 +1,150 @@
+.frame-chat-text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  /* Max width for .frame-chat-text; chat text max width. @token --frame-chat-text-max-width */
+  --_frame-default-chat-text-max-width-baa2aaa7e2: 100%;
+  max-width: var(
+    --frame-chat-text-max-width,
+    var(--_frame-default-chat-text-max-width-baa2aaa7e2)
+  );
+  /* Margin bottom for .frame-chat-text; chat text margin bottom. @token --frame-chat-text-margin-bottom */
+  --_frame-default-chat-text-margin-bottom-171cec0dcf: 8px;
+  margin-bottom: var(
+    --frame-chat-text-margin-bottom,
+    var(--_frame-default-chat-text-margin-bottom-171cec0dcf)
+  );
+}
+
+.frame-chat-error {
+  /* Color for .frame-chat-error; chat error color. @token --frame-chat-error-color */
+  --_frame-default-chat-error-color-e8ebb94924: #f48771;
+  color: var(
+    --frame-chat-error-color,
+    var(--_frame-default-chat-error-color-e8ebb94924)
+  );
+}
+
+// Transcript children span multiple components. Keep this reset before event
+// surfaces and commentary so their own margins retain the original precedence.
+.frame-chat-work-events > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.frame-chat-event-surface {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 12px;
+  /* Padding for .frame-chat-event-surface; chat event padding. @token --frame-chat-event-padding */
+  --_frame-default-chat-event-padding-8cc064c1ac: 12px;
+  padding: var(
+    --frame-chat-event-padding,
+    var(--_frame-default-chat-event-padding-8cc064c1ac)
+  );
+  /* Border for .frame-chat-event-surface; border. @token --frame-border */
+  --_frame-default-border-4d797429ec: #ffffff24;
+  border: 1px solid var(--frame-border, var(--_frame-default-border-4d797429ec));
+  /* Border radius for .frame-chat-event-surface; chat event radius. @token --frame-chat-event-radius */
+  --_frame-default-chat-event-radius-945db357a8: 6px;
+  border-radius: var(
+    --frame-chat-event-radius,
+    var(--_frame-default-chat-event-radius-945db357a8)
+  );
+  /* Background for .frame-chat-event-surface; surface. @token --frame-surface */
+  --_frame-default-surface-7fcb70be5e: #181818;
+  background: var(--frame-surface, var(--_frame-default-surface-7fcb70be5e));
+  overflow-wrap: anywhere;
+}
+
+.frame-chat-event-meta {
+  /* Color for .frame-chat-event-meta; muted. @token --frame-muted */
+  --_frame-default-muted-74c5fb58d7: #999;
+  color: var(--frame-muted, var(--_frame-default-muted-74c5fb58d7));
+  /* Font size for .frame-chat-event-meta; chat event meta size. @token --frame-chat-event-meta-size */
+  --_frame-default-chat-event-meta-size-b2777c8a5f: 11px;
+  font-size: var(
+    --frame-chat-event-meta-size,
+    var(--_frame-default-chat-event-meta-size-b2777c8a5f)
+  );
+}
+
+.frame-chat-event-text {
+  margin: 8px 0;
+  white-space: pre-wrap;
+}
+
+.frame-chat-event-detail {
+  margin: 6px 0;
+}
+
+.frame-chat-attachments {
+  display: flex;
+  flex-wrap: wrap;
+  /* Gap for .frame-chat-attachments; chat attachments gap. @token --frame-chat-attachments-gap */
+  --_frame-default-chat-attachments-gap-de29b665a1: 5px;
+  gap: var(
+    --frame-chat-attachments-gap,
+    var(--_frame-default-chat-attachments-gap-de29b665a1)
+  );
+  /* Margin bottom for .frame-chat-attachments; chat attachments margin bottom. @token --frame-chat-attachments-margin-bottom */
+  --_frame-default-chat-attachments-margin-bottom-9b8cdf95d0: 6px;
+  margin-bottom: var(
+    --frame-chat-attachments-margin-bottom,
+    var(--_frame-default-chat-attachments-margin-bottom-9b8cdf95d0)
+  );
+  /* Max width for .frame-chat-attachments; chat attachments max width. @token --frame-chat-attachments-max-width */
+  --_frame-default-chat-attachments-max-width-93a9c86bac: 100%;
+  max-width: var(
+    --frame-chat-attachments-max-width,
+    var(--_frame-default-chat-attachments-max-width-93a9c86bac)
+  );
+}
+
+.frame-chat-chip {
+  display: inline-flex;
+  align-items: center;
+  /* Gap for .frame-chat-chip; chat chip gap. @token --frame-chat-chip-gap */
+  --_frame-default-chat-chip-gap-8ac8dc0369: 5px;
+  gap: var(
+    --frame-chat-chip-gap,
+    var(--_frame-default-chat-chip-gap-8ac8dc0369)
+  );
+  /* Border radius for .frame-chat-chip; chat chip border radius. @token --frame-chat-chip-border-radius */
+  --_frame-default-chat-chip-border-radius-8e155040aa: 4px;
+  border-radius: var(
+    --frame-chat-chip-border-radius,
+    var(--_frame-default-chat-chip-border-radius-8e155040aa)
+  );
+  /* Background for .frame-chat-chip; chat chip background. @token --frame-chat-chip-background */
+  --_frame-default-chat-chip-background-ede7723a94: #ffffff0b;
+  background: var(
+    --frame-chat-chip-background,
+    var(--_frame-default-chat-chip-background-ede7723a94)
+  );
+  /* Border for .frame-chat-chip; chat chip border. @token --frame-chat-chip-border */
+  --_frame-default-chat-chip-border-c4f50b2e85: 1px solid #ffffff16;
+  border: var(
+    --frame-chat-chip-border,
+    var(--_frame-default-chat-chip-border-c4f50b2e85)
+  );
+  /* Padding for .frame-chat-chip; chat chip padding. @token --frame-chat-chip-padding */
+  --_frame-default-chat-chip-padding-6d2fb33808: 2px 6px;
+  padding: var(
+    --frame-chat-chip-padding,
+    var(--_frame-default-chat-chip-padding-6d2fb33808)
+  );
+  /* Font size for .frame-chat-chip; chat chip font size. @token --frame-chat-chip-font-size */
+  --_frame-default-chat-chip-font-size-97ad6a3d96: 11px;
+  font-size: var(
+    --frame-chat-chip-font-size,
+    var(--_frame-default-chat-chip-font-size-97ad6a3d96)
+  );
+  overflow-wrap: anywhere;
+  /* Max width for .frame-chat-chip; chat chip max width. @token --frame-chat-chip-max-width */
+  --_frame-default-chat-chip-max-width-102ac26390: 100%;
+  max-width: var(
+    --frame-chat-chip-max-width,
+    var(--_frame-default-chat-chip-max-width-102ac26390)
+  );
+}

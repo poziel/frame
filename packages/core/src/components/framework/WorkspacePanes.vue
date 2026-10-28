@@ -128,7 +128,7 @@ defineSlots<{
   <main
     ref="workspaceRoot"
     id="workspace"
-    class="workspace workspace-panes"
+    class="workspace workspace-panes frame-workspace-surface"
     tabindex="-1"
     aria-label="Workspace"
   >
@@ -240,3 +240,16 @@ defineSlots<{
     />
   </main>
 </template>
+
+<style lang="scss">
+.workspace-panes.frame-workspace-surface {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  --workspace-pane-gap: 1px;
+}
+
+.compact .workspace-panes {
+  --workspace-pane-gap: 1px;
+}
+</style>

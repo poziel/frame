@@ -9,7 +9,7 @@ import {
 import FrameTextField from './FrameTextField.vue';
 import FrameIcon from '../data-display/FrameIcon.vue';
 import {scrubValue, scrubPosition} from './shared/scrub';
-import './shared/controls.css';
+import './styles/controls.scss';
 
 const props = withDefaults(
   defineProps<{
@@ -191,7 +191,7 @@ async function finish(cancelled = false, focus = true) {
 </script>
 <template>
   <NumberFieldRoot
-    class="frame-number-field frame-scrub-field"
+    class="frame-number-field frame-scrub-field frame-form-inline-layout frame-input-surface frame-input-focus-within"
     :model-value="modelValue"
     :min="min"
     :max="max"
@@ -213,7 +213,7 @@ async function finish(cancelled = false, focus = true) {
       v-if="editing"
       ref="entry"
       :id="id"
-      class="frame-form-input frame-scrub-input"
+      class="frame-form-input frame-scrub-input frame-control-surface frame-control-focus frame-input-surface frame-input-focus-within"
       inputmode="decimal"
       :model-value="draft"
       :aria-label="label + ' value'"
@@ -253,10 +253,99 @@ async function finish(cancelled = false, focus = true) {
       >
     </button>
     <span class="frame-scrub-steppers"
-      ><NumberFieldIncrement class="frame-control-button" aria-label="Increase"
+      ><NumberFieldIncrement
+        class="frame-control-button frame-control-surface frame-control-action frame-control-focus frame-control-disabled"
+        aria-label="Increase"
         ><FrameIcon name="chevron-up" :size="12" /></NumberFieldIncrement
-      ><NumberFieldDecrement class="frame-control-button" aria-label="Decrease"
+      ><NumberFieldDecrement
+        class="frame-control-button frame-control-surface frame-control-action frame-control-focus frame-control-disabled"
+        aria-label="Decrease"
         ><FrameIcon name="chevron-down" :size="12" /></NumberFieldDecrement
     ></span>
   </NumberFieldRoot>
 </template>
+
+<style lang="scss">
+.frame-scrub-field {
+  /* Preferred width of the drag-adjustable numeric field. @token --frame-scrub-field-width */
+  --_frame-default-scrub-field-width-119: 100%;
+  width: var(
+    --frame-scrub-field-width,
+    var(--_frame-default-scrub-field-width-119)
+  ); /* Height of the drag-adjustable numeric field. @token --frame-scrub-field-height */
+  --_frame-default-scrub-field-height-120: 28px;
+  height: var(
+    --frame-scrub-field-height,
+    var(--_frame-default-scrub-field-height-120)
+  );
+  overflow: hidden;
+}
+
+.frame-scrub-field > .frame-scrub-display {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  padding: 2px 6px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: ew-resize;
+  touch-action: none;
+  user-select: none;
+  border-radius: 0;
+}
+
+.frame-scrub-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  /* Surface of the numeric value fill behind scrub field text. @token --frame-scrub-field-fill */
+  --_frame-default-scrub-field-fill-121: var(--frame-line);
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  background: var(
+    --frame-scrub-field-fill,
+    var(--_frame-default-scrub-field-fill-121)
+  );
+  pointer-events: none;
+}
+
+.frame-scrub-text {
+  position: relative;
+  pointer-events: none;
+}
+
+.frame-scrub-field .frame-scrub-display:focus-visible {
+  outline: 0;
+}
+
+.frame-scrub-steppers {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 18px;
+  /* Resting border color of form controls, independently overridable from menu borders. @token --frame-control-border @context */
+  border-inline-start: 1px solid var(--frame-control-border);
+}
+
+.frame-scrub-field .frame-scrub-steppers > .frame-control-button {
+  flex: 1 1 0;
+  width: 100%;
+  min-height: 0;
+}
+
+.frame-scrub-field > .frame-scrub-input {
+  text-align: center;
+  width: 0;
+  flex: 1;
+  min-width: 0;
+  max-width: none;
+}
+
+.frame-scrub-field[data-disabled] .frame-scrub-display {
+  cursor: default;
+}
+
+.frame-scrub-backing {
+  display: none !important;
+}
+</style>

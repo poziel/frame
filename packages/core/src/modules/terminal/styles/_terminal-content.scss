@@ -1,0 +1,81 @@
+.view-content:has(> :is(.frame-terminal-view, .frame-terminal)) {
+  display: flex;
+  flex-direction: column;
+  /* Height for .view-content:has(> :is(.frame-terminal-view, .frame-terminal)); view content has is frame terminal view height. @token --frame-view-content-has-is-frame-terminal-view-height */
+  --_frame-default-view-content-has-is-frame-terminal-view-height-7e5270ef07: 100%;
+  height: var(
+    --frame-view-content-has-is-frame-terminal-view-height,
+    var(
+      --_frame-default-view-content-has-is-frame-terminal-view-height-7e5270ef07
+    )
+  );
+  /* Min height for .view-content:has(> :is(.frame-terminal-view, .frame-terminal)); view content has is frame terminal view min height. @token --frame-view-content-has-is-frame-terminal-view-min-height */
+  --_frame-default-view-content-has-is-frame-terminal-view-min-height-d21bed66c9: 0;
+  min-height: var(
+    --frame-view-content-has-is-frame-terminal-view-min-height,
+    var(
+      --_frame-default-view-content-has-is-frame-terminal-view-min-height-d21bed66c9
+    )
+  );
+  overflow: hidden;
+}
+
+.frame-terminal-error {
+  display: flex;
+  align-items: center;
+  /* Gap for .frame-terminal-error; terminal error gap. @token --frame-terminal-error-gap */
+  --_frame-default-terminal-error-gap-e5b11a39e9: 6px;
+  gap: var(
+    --frame-terminal-error-gap,
+    var(--_frame-default-terminal-error-gap-e5b11a39e9)
+  );
+  /* Padding for .frame-terminal-error; terminal error padding. @token --frame-terminal-error-padding */
+  --_frame-default-terminal-error-padding-d0335fb1d4: 4px 8px;
+  padding: var(
+    --frame-terminal-error-padding,
+    var(--_frame-default-terminal-error-padding-d0335fb1d4)
+  );
+  /* Color for .frame-terminal-error; terminal error color. @token --frame-terminal-error-color */
+  --_frame-default-terminal-error-color-447763206e: #f48771;
+  color: var(
+    --frame-terminal-error-color,
+    var(--_frame-default-terminal-error-color-447763206e)
+  );
+  overflow-wrap: anywhere;
+}
+
+.frame-terminal-error > span {
+  flex: 1;
+}
+
+.frame-terminal-empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Gap for .frame-terminal-empty; terminal empty gap. @token --frame-terminal-empty-gap */
+  --_frame-default-terminal-empty-gap-4c323aafe0: 8px;
+  gap: var(
+    --frame-terminal-empty-gap,
+    var(--_frame-default-terminal-empty-gap-4c323aafe0)
+  );
+  /* Width for .frame-terminal-empty; terminal empty width. @token --frame-terminal-empty-width */
+  --_frame-default-terminal-empty-width-6934025d53: 100%;
+  width: var(
+    --frame-terminal-empty-width,
+    var(--_frame-default-terminal-empty-width-6934025d53)
+  );
+  /* Color for .frame-terminal-empty; muted. @token --frame-muted */
+  --_frame-default-muted-74c5fb58d7: #999;
+  color: var(--frame-muted, var(--_frame-default-muted-74c5fb58d7));
+}
+
+.frame-terminal-empty > p {
+  margin: 0;
+}
+
+.frame-terminal-empty .frame-terminal-error {
+  max-width: 48ch;
+  text-align: center;
+  flex: none;
+}

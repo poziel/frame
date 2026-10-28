@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '../styles/index.css';
+import '../styles/index.scss';
 import {computed, nextTick, ref, watch} from 'vue';
 import {FrameIconButton, type FrameMenuItem} from '../../../index';
 import AIConversation from './AIConversation.vue';
@@ -162,3 +162,133 @@ defineSlots<{
     </div>
   </section>
 </template>
+
+<style lang="scss">
+.frame-ai-view {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  container-type: inline-size;
+  /* Color for .frame-ai-view; text. @token --frame-text @context */
+  color: var(--frame-text);
+}
+
+.frame-ai-view-content {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.frame-ai-view-layout {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.frame-ai-view-content > .frame-ai-chat {
+  flex: 1;
+  min-height: 0;
+}
+
+.frame-ai-view-history {
+  display: none;
+  min-width: 0;
+  overflow: auto;
+}
+
+.frame-ai-view:where(.show-history) .frame-ai-view-layout {
+  flex-direction: column;
+}
+
+.frame-ai-view:where(.show-history) .frame-ai-view-history {
+  display: block;
+  flex: 1;
+}
+
+.frame-ai-view:where(.show-history) .frame-ai-view-content {
+  flex: 0 0 auto;
+}
+
+.frame-ai-view-new {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+}
+
+.frame-ai-view .frame-ai-view-back {
+  position: absolute;
+  /* Top for .frame-ai-view .frame-ai-view-back; ai history back top. @token --frame-ai-history-back-top */
+  --_frame-default-ai-history-back-top-34fa25c7db: 6px;
+  top: var(
+    --frame-ai-history-back-top,
+    var(--_frame-default-ai-history-back-top-34fa25c7db)
+  );
+  /* Left for .frame-ai-view .frame-ai-view-back; ai history back left. @token --frame-ai-history-back-left */
+  --_frame-default-ai-history-back-left-76d74611f2: 8px;
+  left: var(
+    --frame-ai-history-back-left,
+    var(--_frame-default-ai-history-back-left-76d74611f2)
+  );
+  z-index: 2;
+  margin: 0;
+  /* Color for .frame-ai-view .frame-ai-view-back; muted. @token --frame-muted @context */
+  color: var(--frame-muted);
+}
+
+.frame-ai-view.has-history .frame-ai-conversation .frame-chat-transcript {
+  /* Padding top for .frame-ai-view.has-history .frame-ai-conversation .frame-chat-transcript; ai history back clearance. @token --frame-ai-history-back-clearance */
+  --_frame-default-ai-history-back-clearance-7299091111: 24px;
+  padding-top: var(
+    --frame-ai-history-back-clearance,
+    var(--_frame-default-ai-history-back-clearance-7299091111)
+  );
+}
+
+.frame-ai-view .history-hidden-conversation {
+  display: none;
+}
+
+.frame-ai-view.show-history:not(.has-conversation) .frame-ai-view-content {
+  display: none;
+}
+
+@container (min-width: 720px) {
+  .frame-ai-view .frame-ai-view-layout {
+    flex-direction: row;
+  }
+  .frame-ai-view .frame-ai-view-history {
+    display: block;
+    /* Flex for .frame-ai-view .frame-ai-view-history; ai history width. @token --frame-ai-history-width */
+    --_frame-default-ai-history-width-74d7da03bf: 280px;
+    flex: 0 0
+      var(
+        --frame-ai-history-width,
+        var(--_frame-default-ai-history-width-74d7da03bf)
+      );
+    /* Border right for .frame-ai-view .frame-ai-view-history; line. @token --frame-line @context */
+    border-right: 1px solid var(--frame-line);
+  }
+  .frame-ai-view .frame-ai-view-content {
+    flex: 1;
+  }
+  .frame-ai-view .frame-ai-view-back {
+    display: none;
+  }
+  .frame-ai-view.has-history .frame-ai-conversation .frame-chat-transcript {
+    padding-top: 0;
+  }
+  .frame-ai-view .history-hidden-conversation {
+    display: flex;
+  }
+  .frame-ai-view:not(.has-conversation) .frame-ai-view-history {
+    flex: 1;
+    border-right: 0;
+  }
+}
+</style>

@@ -1,10 +1,10 @@
 import {expect, test} from 'bun:test';
-import {readFileSync, readdirSync} from 'node:fs';
 import {resolve} from 'node:path';
-import {parse as parseSfc} from '@vue/compiler-sfc';
 import postcss from 'postcss';
 import valueParser from 'postcss-value-parser';
 import {extractCssContracts} from './css-contracts';
+import {productionCssSources} from './production-css-sources';
+import {compileStyleSource} from '../../../core/scripts/compile-style-source';
 
 const root = resolve(import.meta.dir, '../../../..');
 const keywords = new Set([
@@ -17,21 +17,7 @@ const keywords = new Set([
 
 test('CSS-wide fallback keywords never become private default declarations', () => {
   const violations: string[] = [];
-  for (const relative of readdirSync(resolve(root, 'packages/core/src'), {
-    recursive: true,
-  }).map(String)) {
-    const file = relative.replaceAll('\\', '/');
-    if (!/\.(css|vue)$/.test(file) || file.includes('themes/generated/'))
-      continue;
-    const content = readFileSync(
-      resolve(root, 'packages/core/src', file),
-      'utf8'
-    );
-    const css = file.endsWith('.vue')
-      ? parseSfc(content)
-          .descriptor.styles.map((style) => style.content)
-          .join('\n')
-      : content;
+  for (const [file, css] of productionCssSources(root)) {
     postcss.parse(css).walkDecls((declaration) => {
       if (!declaration.prop.startsWith('--_frame-default-')) return;
       if (keywords.has(declaration.value.trim().toLowerCase()))
@@ -60,11 +46,9 @@ test('CSS-wide fallback keywords never become private default declarations', () 
 });
 
 test('icon label font size inherits the actual font-size property', () => {
-  const css = readFileSync(
-    resolve(root, 'packages/core/src/style.css'),
-    'utf8'
-  );
-  const contract = extractCssContracts(css, 'style.css', [
+  const source = 'packages/core/src/components/actions/FrameIconButton.vue';
+  const css = compileStyleSource(resolve(root, source));
+  const contract = extractCssContracts(css, source, [
     'frame-icon-button-label',
   ]).tokens.find(({name}) => name === '--frame-icon-button-label-font-size');
   expect(contract?.value).toBe('inherit');

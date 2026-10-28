@@ -16,7 +16,7 @@ import {
 import type {SelectItem} from './shared/selectItem';
 import {isSelectOption} from './shared/select';
 import {useOverlayBoundary} from '../overlays/overlays';
-import './shared/controls.css';
+import './styles/controls.scss';
 import {encodeChoiceValue, decodeChoiceValue} from './shared/controls';
 
 defineOptions({inheritAttrs: false});
@@ -73,7 +73,9 @@ const displayValue = (value: unknown) => {
     @update:model-value="
       emit('update:modelValue', decodeChoiceValue(String($event ?? 'frame:')))
     "
-    ><ComboboxAnchor ref="anchor" class="frame-combobox-anchor"
+    ><ComboboxAnchor
+      ref="anchor"
+      class="frame-combobox-anchor frame-form-inline-layout frame-input-surface frame-input-focus-within"
       ><ComboboxInput
         ref="input"
         :display-value="displayValue"
@@ -84,13 +86,15 @@ const displayValue = (value: unknown) => {
           class="frame-combobox-input"
           :aria-label="label"
           :placeholder="placeholder" /></ComboboxInput
-      ><ComboboxTrigger class="frame-control-button" aria-label="Show options"
+      ><ComboboxTrigger
+        class="frame-control-button frame-control-surface frame-control-action frame-control-focus frame-control-disabled"
+        aria-label="Show options"
         >⌄</ComboboxTrigger
       ></ComboboxAnchor
     ><ComboboxPortal :to="target"
       ><ComboboxContent
         position="popper"
-        class="frame-select-popup frame-reka-select-popup"
+        class="frame-select-popup frame-reka-select-popup frame-overlay-surface frame-overlay-interactive"
         :collision-boundary="boundary"
         :collision-padding="8"
         :style="{

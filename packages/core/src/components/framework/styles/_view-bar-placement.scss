@@ -1,0 +1,197 @@
+.panel-action-separator {
+  flex: none;
+  /* Width for .panel-action-separator. @token --frame-panel-action-separator-width */
+  --_frame-default-panel-action-separator-width-c85850fae3: 1px;
+  width: var(
+    --frame-panel-action-separator-width,
+    var(--_frame-default-panel-action-separator-width-c85850fae3)
+  );
+  /* Height for .panel-action-separator. @token --frame-panel-action-separator-height */
+  --_frame-default-panel-action-separator-height-b82330950f: 16px;
+  height: var(
+    --frame-panel-action-separator-height,
+    var(--_frame-default-panel-action-separator-height-b82330950f)
+  );
+  /* Outer spacing for .panel-action-separator. @token --frame-panel-action-separator-margin */
+  --_frame-default-panel-action-separator-margin-168f5b64e2: 0 6px;
+  margin: var(
+    --frame-panel-action-separator-margin,
+    var(--_frame-default-panel-action-separator-margin-168f5b64e2)
+  );
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  background: var(--frame-line);
+}
+.layout-grid > .region-maximized {
+  /* Neutral raised surface behind grouped content and control compositions. @token --frame-surface @context */
+  background: var(--frame-surface);
+}
+
+.rail-badge {
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-end: 1px;
+  min-width: 15px;
+  height: 15px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 3px;
+  border-radius: 999px;
+  /* Primary font family inherited by shell content and ordinary controls. @token --frame-font-body @context */
+  font: 10px/1 var(--frame-font-body);
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  background: var(--frame-accent);
+  /* Readable text and icon foreground on accent-filled surfaces. @token --frame-accent-foreground @context */
+  color: var(--frame-accent-foreground);
+  pointer-events: none;
+}
+
+/* Activity placement and size are independent preferences, including in compact shell layouts. */
+.view-bar .tooltip-trigger {
+  flex-shrink: 0;
+}
+.view-bar.view-bar-compact .rail-button {
+  /* Width for .view-bar.view-bar-compact .rail-button. @token --frame-activity-compact-button-width */
+  --_frame-default-activity-compact-button-width-7328f59d24: 26px;
+  /* Width for .view-bar.view-bar-compact .rail-button. @token --frame-view-compact-button-width */
+  --_frame-default-view-compact-button-width-2755248f45: var(
+    --frame-activity-compact-button-width,
+    var(--_frame-default-activity-compact-button-width-7328f59d24)
+  );
+  width: var(
+    --frame-view-compact-button-width,
+    var(--_frame-default-view-compact-button-width-2755248f45)
+  );
+  /* Height for .view-bar.view-bar-compact .rail-button. @token --frame-activity-compact-button-height */
+  --_frame-default-activity-compact-button-height-7b9c407f96: 28px;
+  /* Height for .view-bar.view-bar-compact .rail-button. @token --frame-view-compact-button-height */
+  --_frame-default-view-compact-button-height-c226a9ddee: var(
+    --frame-activity-compact-button-height,
+    var(--_frame-default-activity-compact-button-height-7b9c407f96)
+  );
+  height: var(
+    --frame-view-compact-button-height,
+    var(--_frame-default-view-compact-button-height-c226a9ddee)
+  );
+  font-size: 11px;
+}
+.view-bar .rail-button > :is(svg, .frame-icon) {
+  /* Default used by --bar-icon-size on .navigation-bar. Used when --frame-navigation-icon-size and --frame-view-icon-size is unset. @token --frame-activity-icon-size */
+  --_frame-default-activity-icon-size-54b90823cf: 28px;
+  /* Default used by --bar-icon-size on .navigation-bar. Used when --frame-navigation-icon-size is unset. @token --frame-view-icon-size */
+  --_frame-default-view-icon-size-28c9248ee9: var(
+    --frame-activity-icon-size,
+    var(--_frame-default-activity-icon-size-54b90823cf)
+  );
+  width: var(
+    --frame-view-icon-size,
+    var(--_frame-default-view-icon-size-28c9248ee9)
+  ) !important;
+  /* Default used by --bar-icon-size on .navigation-bar. Used when --frame-navigation-icon-size and --frame-view-icon-size is unset. @token --frame-activity-icon-size */
+  --_frame-default-activity-icon-size-54b90823cf: 28px;
+  /* Default used by --bar-icon-size on .navigation-bar. Used when --frame-navigation-icon-size is unset. @token --frame-view-icon-size */
+  --_frame-default-view-icon-size-28c9248ee9: var(
+    --frame-activity-icon-size,
+    var(--_frame-default-activity-icon-size-54b90823cf)
+  );
+  height: var(
+    --frame-view-icon-size,
+    var(--_frame-default-view-icon-size-28c9248ee9)
+  ) !important;
+}
+.view-bar.view-bar-compact .rail-button > :is(svg, .frame-icon) {
+  /* Default used by --bar-icon-size on .navigation-bar.bar-compact. Used when --frame-navigation-compact-icon-size and --frame-view-compact-icon-size is unset. @token --frame-activity-compact-icon-size */
+  --_frame-default-activity-compact-icon-size-01412c1a19: 18px;
+  /* Default used by --bar-icon-size on .navigation-bar.bar-compact. Used when --frame-navigation-compact-icon-size is unset. @token --frame-view-compact-icon-size */
+  --_frame-default-view-compact-icon-size-d32465a20d: var(
+    --frame-activity-compact-icon-size,
+    var(--_frame-default-activity-compact-icon-size-01412c1a19)
+  );
+  width: var(
+    --frame-view-compact-icon-size,
+    var(--_frame-default-view-compact-icon-size-d32465a20d)
+  ) !important;
+  /* Default used by --bar-icon-size on .navigation-bar.bar-compact. Used when --frame-navigation-compact-icon-size and --frame-view-compact-icon-size is unset. @token --frame-activity-compact-icon-size */
+  --_frame-default-activity-compact-icon-size-01412c1a19: 18px;
+  /* Default used by --bar-icon-size on .navigation-bar.bar-compact. Used when --frame-navigation-compact-icon-size is unset. @token --frame-view-compact-icon-size */
+  --_frame-default-view-compact-icon-size-d32465a20d: var(
+    --frame-activity-compact-icon-size,
+    var(--_frame-default-activity-compact-icon-size-01412c1a19)
+  );
+  height: var(
+    --frame-view-compact-icon-size,
+    var(--_frame-default-view-compact-icon-size-d32465a20d)
+  ) !important;
+}
+.layout-grid > .primary-region:is(.view-bar-top, .view-bar-bottom) {
+  flex-direction: column;
+}
+.layout-grid > .primary-region.view-bar-bottom {
+  flex-direction: column-reverse;
+}
+.layout-grid .primary-region:is(.view-bar-top, .view-bar-bottom) > .view-bar {
+  flex-direction: row;
+  flex: 0 0 var(--view-bar-height);
+  width: 100%;
+  height: var(--view-bar-height);
+  min-width: 0;
+  min-height: 0;
+  padding: 4px;
+  /* Space between children for .layout-grid .primary-region:is(.view-bar-top, .view-bar-bottom) > .view-bar. @token --frame-gap */
+  --_frame-default-gap-3e2a1ab688: 6px;
+  gap: var(--frame-gap, var(--_frame-default-gap-3e2a1ab688));
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border: 1px solid var(--frame-line);
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: var(--frame-panel-radius);
+}
+.layout-grid .primary-region:is(.view-bar-top, .view-bar-bottom) > .side-panel {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: calc(var(--workspace-height) - var(--view-bar-height));
+  margin-top: 0;
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: var(--frame-panel-radius);
+}
+.layout-grid.primary-right > .primary-region.view-bar-top > .view-bar,
+.layout-grid > .primary-region.view-bar-top > .view-bar {
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-left: 1px solid var(--frame-line);
+  border-right: 1px solid var(--frame-line);
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: var(--frame-panel-radius) var(--frame-panel-radius) 0 0;
+  border-bottom-color: transparent;
+}
+.layout-grid.primary-right > .primary-region.view-bar-bottom > .view-bar,
+.layout-grid > .primary-region.view-bar-bottom > .view-bar {
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-left: 1px solid var(--frame-line);
+  border-right: 1px solid var(--frame-line);
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: 0 0 var(--frame-panel-radius) var(--frame-panel-radius);
+  border-top-color: transparent;
+}
+.layout-grid.primary-right > .primary-region.view-bar-top > .side-panel,
+.layout-grid > .primary-region.view-bar-top > .side-panel {
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: 0 0 var(--frame-panel-radius) var(--frame-panel-radius);
+}
+.layout-grid.primary-right > .primary-region.view-bar-bottom > .side-panel,
+.layout-grid > .primary-region.view-bar-bottom > .side-panel {
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: var(--frame-panel-radius) var(--frame-panel-radius) 0 0;
+}
+.layout-grid > .primary-region.horizontal-collapsed > .view-bar {
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border: 1px solid var(--frame-line);
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  border-radius: var(--frame-panel-radius);
+}
+.layout-grid .primary-region > .view-bar.view-bar-horizontal.view-bar-compact {
+  padding: 3px;
+}

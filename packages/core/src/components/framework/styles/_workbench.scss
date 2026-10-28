@@ -1,0 +1,13 @@
+.workbench {
+  /* Height for .workbench. @token --frame-workbench-height */
+  --_frame-default-workbench-height-3b0213c462: 100dvh;
+  height: var(
+    --frame-workbench-height,
+    var(--_frame-default-workbench-height-3b0213c462)
+  );
+  display: grid;
+  grid-template-rows: 34px minmax(0, 1fr) 24px;
+  overflow: hidden;
+  /* Base shell background behind its registered regions and content. @token --frame-bg @context */
+  background: var(--frame-bg);
+}

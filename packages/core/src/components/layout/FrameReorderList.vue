@@ -327,7 +327,7 @@ defineSlots<{
     <slot name="empty" v-if="!modelValue.length" />
   </div>
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .frame-reorder-list {
   position: relative;
   min-height: 100%;
@@ -349,7 +349,7 @@ defineSlots<{
   left: 0;
   right: 0;
   height: 2px;
-  /* Background for .frame-reorder-indicator. Used when --frame-reorder-indicator is unset. @token --frame-accent */
+  /* Background for .frame-reorder-indicator. @token --frame-accent */
   --_frame-default-accent-e21b5fbd56: #409cff;
   /* Background for .frame-reorder-indicator. @token --frame-reorder-indicator */
   --_frame-default-reorder-indicator-42bb100095: var(

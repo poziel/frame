@@ -10,7 +10,7 @@ import {
 import type {ToolbarRootProps} from 'reka-ui';
 import type {FrameToolbarItem} from './toolbarTypes';
 import FrameIcon from '../data-display/FrameIcon.vue';
-import '../shared/general-b.css';
+import '../navigation/styles/navigation.scss';
 
 const props = defineProps<
   ToolbarRootProps & {
@@ -36,7 +36,10 @@ defineSlots<{
 }>();
 </script>
 <template>
-  <ToolbarRoot v-bind="forwarded" class="frame-toolbar" :aria-label="label"
+  <ToolbarRoot
+    v-bind="forwarded"
+    class="frame-toolbar frame-navigation-text frame-navigation-list-layout"
+    :aria-label="label"
     ><slot
       ><template v-for="item in items" :key="item.id"
         ><ToolbarSeparator
@@ -45,7 +48,7 @@ defineSlots<{
         /><ToolbarLink
           v-else-if="item.href && !item.disabled"
           :href="item.href"
-          class="frame-toolbar-button"
+          class="frame-toolbar-button frame-navigation-control frame-navigation-focus"
           @click="emit('action', item)"
           ><FrameIcon v-if="item.icon" :name="item.icon" />{{
             item.label
@@ -53,7 +56,7 @@ defineSlots<{
         ><ToolbarButton
           v-else
           :disabled="item.disabled"
-          class="frame-toolbar-button"
+          class="frame-toolbar-button frame-navigation-control frame-navigation-focus"
           @click="emit('action', item)"
           ><FrameIcon v-if="item.icon" :name="item.icon" />{{
             item.label
@@ -63,3 +66,21 @@ defineSlots<{
     ></ToolbarRoot
   >
 </template>
+
+<style lang="scss">
+.frame-toolbar-separator {
+  width: 1px;
+  align-self: stretch;
+  /* Background for .frame-toolbar-separator. @token --frame-control-border */
+  --_frame-default-control-border-70a9ec99ca: #555;
+  background: var(
+    --frame-control-border,
+    var(--_frame-default-control-border-70a9ec99ca)
+  );
+  margin: 3px;
+}
+.frame-toolbar[data-orientation='vertical'] > .frame-toolbar-separator {
+  height: 1px;
+  width: auto;
+}
+</style>

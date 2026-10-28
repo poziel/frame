@@ -1,0 +1,157 @@
+// Preserve shared setting controls before shell/modal specializations.
+
+.workbench {
+  position: relative;
+}
+
+.view-bar {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-tree-row {
+  display: flex;
+  /* Minimum height for .settings-tree-row. @token --frame-settings-tree-row-min-height */
+  --_frame-default-settings-tree-row-min-height-feb032f29a: 28px;
+  min-height: var(
+    --frame-settings-tree-row-min-height,
+    var(--_frame-default-settings-tree-row-min-height-feb032f29a)
+  );
+  align-items: center;
+  /* Corner radius for .settings-tree-row. @token --frame-settings-tree-row-border-radius */
+  --_frame-default-settings-tree-row-border-radius-90c6391575: var(
+    --frame-radius-medium
+  );
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(
+    --frame-settings-tree-row-border-radius,
+    var(--_frame-default-settings-tree-row-border-radius-90c6391575)
+  );
+}
+
+.settings-tree-row.selected {
+  /* Background for .settings-tree-row.selected. @token --frame-settings-tree-row-selected-background */
+  --_frame-default-settings-tree-row-selected-background-7583eef649: #ffffff0b;
+  background: var(
+    --frame-settings-tree-row-selected-background,
+    var(--_frame-default-settings-tree-row-selected-background-7583eef649)
+  );
+  /* Foreground for .settings-tree-row.selected. @token --frame-settings-tree-row-selected-color */
+  --_frame-default-settings-tree-row-selected-color-bc52f0ee76: #fff;
+  color: var(
+    --frame-settings-tree-row-selected-color,
+    var(--_frame-default-settings-tree-row-selected-color-bc52f0ee76)
+  );
+  /* Text weight for .settings-tree-row.selected. @token --frame-settings-tree-row-selected-font-weight */
+  --_frame-default-settings-tree-row-selected-font-weight-3ddb90d4ac: 600;
+  font-weight: var(
+    --frame-settings-tree-row-selected-font-weight,
+    var(--_frame-default-settings-tree-row-selected-font-weight-3ddb90d4ac)
+  );
+}
+
+.settings-tree-row > button:last-child {
+  flex: 1;
+  /* Internal spacing for .settings-tree-row > button:last-child. @token --frame-settings-tree-row-button-last-child-padding */
+  --_frame-default-settings-tree-row-button-last-child-padding-e07f39ec62: 5px
+    3px;
+  padding: var(
+    --frame-settings-tree-row-button-last-child-padding,
+    var(--_frame-default-settings-tree-row-button-last-child-padding-e07f39ec62)
+  );
+  text-align: left;
+  /* Minimum width for .settings-tree-row > button:last-child. @token --frame-settings-tree-row-button-last-child-min-width */
+  --_frame-default-settings-tree-row-button-last-child-min-width-f5204562cb: 0;
+  min-width: var(
+    --frame-settings-tree-row-button-last-child-min-width,
+    var(
+      --_frame-default-settings-tree-row-button-last-child-min-width-f5204562cb
+    )
+  );
+}
+
+.settings-disclosure,
+.settings-disclosure-spacer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 20px;
+  /* Width for .settings-disclosure, .settings-disclosure-spacer. @token --frame-settings-disclosure-width */
+  --_frame-default-settings-disclosure-width-df041f2099: 20px;
+  width: var(
+    --frame-settings-disclosure-width,
+    var(--_frame-default-settings-disclosure-width-df041f2099)
+  );
+}
+
+.frame-modal :is(button, input, select, textarea) {
+  font: inherit;
+}
+
+.frame-modal :where(button:not(.frame-button):not([role='checkbox'])) {
+  /* Border for .frame-modal :where(button:not(.frame-button):not([role='checkbox'])). @token --frame-modal-button-border */
+  --_frame-default-modal-button-border-1ee06a28d6: 0;
+  border: var(
+    --frame-modal-button-border,
+    var(--_frame-default-modal-button-border-1ee06a28d6)
+  );
+  /* Background for .frame-modal :where(button:not(.frame-button):not([role='checkbox'])). @token --frame-modal-button-background-2 */
+  --_frame-default-modal-button-background-2-c12bfb5eb6: none;
+  background: var(
+    --frame-modal-button-background-2,
+    var(--_frame-default-modal-button-background-2-c12bfb5eb6)
+  );
+  color: inherit;
+  cursor: pointer;
+}
+
+.frame-modal button:disabled {
+  cursor: default;
+}
+
+.frame-modal :is(button, input, select, textarea):focus-visible {
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  outline: 1px solid var(--frame-accent);
+  /* Outline offset for .frame-modal :is(button, input, select, textarea):focus-visible. @token --frame-modal-is-button-outline-offset */
+  --_frame-default-modal-is-button-outline-offset-8b22db1f1c: -1px;
+  outline-offset: var(
+    --frame-modal-is-button-outline-offset,
+    var(--_frame-default-modal-is-button-outline-offset-8b22db1f1c)
+  );
+}
+
+.frame-modal .settings-content p {
+  /* Top outer spacing for .frame-modal .settings-content p. @token --frame-modal-settings-content-p-margin-top */
+  --_frame-default-modal-settings-content-p-margin-top-ebc3a97fac: 0;
+  margin-top: var(
+    --frame-modal-settings-content-p-margin-top,
+    var(--_frame-default-modal-settings-content-p-margin-top-ebc3a97fac)
+  );
+}
+
+.frame-modal .settings-tree-row:hover {
+  /* Background for .frame-modal .settings-tree-row:hover. @token --frame-modal-settings-tree-row-hover-background */
+  --_frame-default-modal-settings-tree-row-hover-background-f1d8e68cb6: #ffffff08;
+  background: var(
+    --frame-modal-settings-tree-row-hover-background,
+    var(--_frame-default-modal-settings-tree-row-hover-background-f1d8e68cb6)
+  );
+}
+
+.frame-modal
+  .setting-field
+  :is(select, textarea, input:not([type='checkbox'])) {
+  /* Border for .frame-modal .setting-field :is(select, textarea, input:not([type='checkbox'])). @token --frame-modal-setting-field-is-select-border */
+  --_frame-default-modal-setting-field-is-select-border-5922e35c9f: 1px solid
+    #3c4246;
+  border: var(
+    --frame-modal-setting-field-is-select-border,
+    var(--_frame-default-modal-setting-field-is-select-border-5922e35c9f)
+  );
+  /* Background for .frame-modal .setting-field :is(select, textarea, input:not([type='checkbox'])). @token --frame-modal-setting-field-is-select-background */
+  --_frame-default-modal-setting-field-is-select-background-22c8bfae8d: #1b1d1e;
+  background: var(
+    --frame-modal-setting-field-is-select-background,
+    var(--_frame-default-modal-setting-field-is-select-background-22c8bfae8d)
+  );
+}

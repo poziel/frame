@@ -27,7 +27,7 @@ const keys = computed(() => {
     ></span
   >
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .frame-keycap {
   display: inline-flex;
   align-items: center;
@@ -84,6 +84,7 @@ const keys = computed(() => {
   );
 }
 .frame-keycap-join {
+  /* Secondary foreground for descriptions, hints, and visually subordinate content. @token --frame-muted @context */
   color: var(--frame-muted);
 }
 </style>

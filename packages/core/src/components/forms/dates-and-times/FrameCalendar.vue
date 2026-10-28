@@ -16,7 +16,7 @@ import {
   useForwardPropsEmits,
   type CalendarRootProps,
 } from 'reka-ui';
-import '../shared/dates.css';
+import '../styles/dates.scss';
 import type {DateValue} from '../shared/dates';
 
 const props = defineProps<
@@ -54,7 +54,7 @@ defineSlots<{
   <CalendarRoot
     v-bind="forwarded"
     :calendar-label="props.calendarLabel ?? props.label"
-    class="frame-calendar"
+    class="frame-calendar frame-date-text"
     v-slot="{grid, weekDays}"
   >
     <CalendarHeader class="frame-date-header">

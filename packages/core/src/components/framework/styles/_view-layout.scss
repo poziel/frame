@@ -1,0 +1,4 @@
+/* Fixed view regions surround the middle scroll viewport. */
+.view-host > .view-content.view-content-slotted {
+  overflow: hidden;
+}

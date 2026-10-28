@@ -115,7 +115,7 @@ const actions = computed(() =>
     ></div>
   </div>
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .settings-field-row {
   position: relative;
   /* Internal spacing for .settings-field-row. @token --frame-settings-field-padding */
@@ -142,6 +142,7 @@ const actions = computed(() =>
       1px
   );
   border: 1px solid transparent;
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
   border-radius: var(--frame-radius-medium);
   min-width: 0;
   outline: none;
@@ -150,7 +151,7 @@ const actions = computed(() =>
 .settings-field-row:focus-within,
 .settings-field-row.menu-open,
 .settings-field-row.owned-focus {
-  /* Background for .settings-field-row:hover,.settings-field-row:focus-within,.settings-field-row.menu-open,.settings-field-row.owned-focus. @token --frame-settings-field-hover-background */
+  /* Background for .settings-field-row:hover, .settings-field-row:focus-within, .settings-field-row.menu-open, .settings-field-row.owned-focus. @token --frame-settings-field-hover-background */
   --_frame-default-settings-field-hover-background-aca162f780: var(
     --frame-list-hover-background
   );
@@ -162,6 +163,7 @@ const actions = computed(() =>
 .settings-field-row:focus-within,
 .settings-field-row.menu-open,
 .settings-field-row.owned-focus {
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
   border-color: var(--frame-accent);
 }
 .settings-modified-bar {
@@ -270,8 +272,8 @@ const actions = computed(() =>
   overflow-wrap: anywhere;
 }
 .settings-field-row :deep(.frame-check-control) {
-  border: 1px solid var(--frame-control-border);
-  /* Background for .settings-field-row :deep(.frame-check-control). @token --frame-control-background */
+  /* Resting border color of form controls, independently overridable from menu borders. @token --frame-control-border @context */
+  border: 1px solid var(--frame-control-border); /* Background for .settings-field-row :deep(.frame-check-control). @token --frame-control-background */
   --_frame-default-control-background-da7f1b6e0b: var(--frame-surface);
   background: var(
     --frame-control-background,
@@ -279,8 +281,10 @@ const actions = computed(() =>
   );
 }
 .settings-field-row :deep(.frame-check-control[data-state='checked']) {
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
   background: var(--frame-accent);
   border-color: var(--frame-accent);
+  /* Readable text and icon foreground on accent-filled surfaces. @token --frame-accent-foreground @context */
   color: var(--frame-accent-foreground);
 }
 @media (hover: none) {

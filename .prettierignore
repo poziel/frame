@@ -20,3 +20,4 @@ packages/core/src/themes/componentTokens.ts
 packages/core/src/themes/default.css
 packages/docs/src/examples/documentation/*.json
 **/licenses/**
+.ai-workspace/

@@ -1,0 +1,68 @@
+/* Stable body identity while the optional navigation bar docks around it. */
+.workbench-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+}
+.workbench-layout > .workbench-body {
+  grid-area: body;
+}
+.workbench-layout {
+  grid-template-areas: 'body';
+}
+.workbench-layout.has-navigation-bar[data-nav-position='top'] {
+  grid-template-areas: 'nav' 'body';
+  grid-template-rows: auto minmax(0, 1fr);
+}
+.workbench-layout.has-navigation-bar[data-nav-position='bottom'] {
+  grid-template-areas: 'body' 'nav';
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+.workbench-layout.has-navigation-bar[data-nav-position='left'] {
+  grid-template-areas: 'nav body';
+  grid-template-columns: auto minmax(0, 1fr);
+}
+.workbench-layout.has-navigation-bar[data-nav-position='right'] {
+  grid-template-areas: 'body nav';
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.workbench-layout > .navigation-bar-container {
+  grid-area: nav;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  /* Space between children for .workbench-layout > .navigation-bar-container. @token --frame-spacing-small */
+  --_frame-default-spacing-small-3e5e0f3c4b: 4px;
+  padding: var(
+    --frame-spacing-small,
+    var(--_frame-default-spacing-small-3e5e0f3c4b)
+  );
+}
+.workbench-layout > .navigation-bar-container > .navigation-bar {
+  flex: 1;
+}
+.compact .workbench-layout > .navigation-bar-container {
+  padding: 0;
+}
+.compact .navigation-bar {
+  /* Corner radius for .compact .navigation-bar. @token --frame-compact-canvas-container-border-radius */
+  --_frame-default-compact-canvas-container-border-radius-ed10260111: 0;
+  border-radius: var(
+    --frame-compact-canvas-container-border-radius,
+    var(--_frame-default-compact-canvas-container-border-radius-ed10260111)
+  );
+}
+
+/* Side navigation must leave the workspace usable even with a long host label. */
+.workbench-layout:is([data-nav-position='left'], [data-nav-position='right'])
+  > .navigation-bar-container {
+  /* Value of max-inline-size for .workbench-layout:is([data-nav-position='left'], [data-nav-position='right']) > .navigation-bar-container. @token --frame-navigation-max-width */
+  --_frame-default-navigation-max-width-3c4669a967: min(30vw, 320px);
+  max-inline-size: var(
+    --frame-navigation-max-width,
+    var(--_frame-default-navigation-max-width-3c4669a967)
+  );
+}

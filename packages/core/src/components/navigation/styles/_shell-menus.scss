@@ -1,0 +1,338 @@
+:where(.frame-shell-text) {
+  /* Primary font family inherited by shell content and ordinary controls. @token --frame-font-body @context */
+  font-family: var(--frame-font-body);
+  /* Base text size inherited by shell content and ordinary controls. @token --frame-font-size-body @context */
+  font-size: var(--frame-font-size-body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  color-scheme: dark;
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  color: var(--frame-text);
+}
+.titlebar-text {
+  /* Foreground for .titlebar-text. @token --frame-titlebar-text-color */
+  --_frame-default-titlebar-text-color-c859ff0db1: #b7b7b7;
+  color: var(
+    --frame-titlebar-text-color,
+    var(--_frame-default-titlebar-text-color-c859ff0db1)
+  );
+  /* Text size for .titlebar-text. @token --frame-titlebar-text-font-size */
+  --_frame-default-titlebar-text-font-size-ed98a711e3: 12px;
+  font-size: var(
+    --frame-titlebar-text-font-size,
+    var(--_frame-default-titlebar-text-font-size-ed98a711e3)
+  );
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  /* Minimum width for .titlebar-text. @token --frame-titlebar-text-min-width */
+  --_frame-default-titlebar-text-min-width-e13539ec13: 60px;
+  min-width: var(
+    --frame-titlebar-text-min-width,
+    var(--_frame-default-titlebar-text-min-width-e13539ec13)
+  );
+}
+.navigation-container.expanded > .view-bar {
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-right: 1px solid var(--frame-line);
+}
+.frame-menu {
+  position: fixed;
+  z-index: 25;
+  /* Preferred width of the dropdown surface before viewport constraints. @token --frame-menu-width */
+  --_frame-default-menu-width: max-content;
+  width: var(--frame-menu-width, var(--_frame-default-menu-width));
+  /* Minimum width of a dropdown surface. @token --frame-menu-min-width */
+  --_frame-default-menu-min-width: 240px;
+  min-width: var(--frame-menu-min-width, var(--_frame-default-menu-min-width));
+  /* Viewport width constraint for dropdown surfaces. @token --frame-menu-max-width */
+  --_frame-default-menu-max-width: calc(100vw - 12px);
+  max-width: var(--frame-menu-max-width, var(--_frame-default-menu-max-width));
+  /* Viewport height constraint for dropdown surfaces. @token --frame-menu-max-height */
+  --_frame-default-menu-max-height: calc(100dvh - 12px);
+  max-height: var(
+    --frame-menu-max-height,
+    var(--_frame-default-menu-max-height)
+  );
+  overflow: auto;
+  /* Inset around dropdown menu rows. @token --frame-menu-padding */
+  --_frame-default-menu-padding: var(--frame-spacing-small);
+  /* Compact shared spacing step used by menu insets, view rails, and dense content groups. @token --frame-spacing-small @context */
+  padding: var(--frame-menu-padding, var(--_frame-default-menu-padding));
+  /* Border color around floating menus, independently overridable from control borders. @token --frame-menu-border @context */
+  border: 1px solid var(--frame-menu-border);
+  /* Fallback for: Corner radius of the select popup. @token --frame-menu-border-radius */
+  --_frame-default-menu-border-radius-8fac327441: var(--frame-radius-large);
+  /* Large shared corner radius used by panel and menu containers. @token --frame-radius-large @context */
+  border-radius: var(
+    --frame-menu-border-radius,
+    var(--_frame-default-menu-border-radius-8fac327441)
+  );
+  /* Surface behind floating menu containers, following the shared overlay background. @token --frame-menu-background @context */
+  background: var(--frame-menu-background);
+  backdrop-filter: blur(18px) saturate(110%);
+  -webkit-backdrop-filter: blur(18px) saturate(110%);
+  /* Fallback for: Elevation shadow of the select popup. @token --frame-menu-box-shadow */
+  --_frame-default-menu-box-shadow-9bbfe7b8d5: 0 6px 22px #0005;
+  box-shadow: var(
+    --frame-menu-box-shadow,
+    var(--_frame-default-menu-box-shadow-9bbfe7b8d5)
+  );
+}
+.frame-menu .menu-row > button.frame-button {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) auto 13px;
+  align-items: center;
+  /* Space between children for .frame-menu .menu-row > button.frame-button. @token --frame-menu-row-button-gap */
+  --_frame-default-menu-row-button-gap-233c144ea0: 6px;
+  gap: var(
+    --frame-menu-row-button-gap,
+    var(--_frame-default-menu-row-button-gap-233c144ea0)
+  );
+  /* Width for .frame-menu .menu-row > button.frame-button. @token --frame-menu-row-button-width */
+  --_frame-default-menu-row-button-width-c63b153fcd: 100%;
+  width: var(
+    --frame-menu-row-button-width,
+    var(--_frame-default-menu-row-button-width-c63b153fcd)
+  );
+  /* Minimum height for .frame-menu .menu-row > button.frame-button. @token --frame-menu-row-button-min-height */
+  --_frame-default-menu-row-button-min-height-0b5f412be5: 24px;
+  min-height: var(
+    --frame-menu-row-button-min-height,
+    var(--_frame-default-menu-row-button-min-height-0b5f412be5)
+  );
+  /* Internal spacing for .frame-menu .menu-row > button.frame-button. @token --frame-menu-row-button-padding */
+  --_frame-default-menu-row-button-padding-54ded92933: 2px 6px;
+  padding: var(
+    --frame-menu-row-button-padding,
+    var(--_frame-default-menu-row-button-padding-54ded92933)
+  );
+  /* Border for .frame-menu .menu-row > button.frame-button. @token --frame-menu-row-button-border */
+  --_frame-default-menu-row-button-border-3238aaf452: 1px solid transparent;
+  border: var(
+    --frame-menu-row-button-border,
+    var(--_frame-default-menu-row-button-border-3238aaf452)
+  );
+  /* Fallback for: Corner radius of a select option row. @token --frame-menu-row-button-border-radius */
+  --_frame-default-menu-row-button-border-radius-37f3ed5642: var(
+    --frame-radius-medium
+  );
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(
+    --frame-menu-row-button-border-radius,
+    var(--_frame-default-menu-row-button-border-radius-37f3ed5642)
+  );
+  text-align: left;
+  white-space: nowrap;
+  /* Fallback for: Text size in a select option row. @token --frame-menu-row-button-font-size */
+  --_frame-default-menu-row-button-font-size-b48ad4dfcb: 12px;
+  font-size: var(
+    --frame-menu-row-button-font-size,
+    var(--_frame-default-menu-row-button-font-size-b48ad4dfcb)
+  );
+  /* Text line height for .frame-menu .menu-row > button.frame-button. @token --frame-menu-row-button-line-height */
+  --_frame-default-menu-row-button-line-height-253bc7d470: 18px;
+  line-height: var(
+    --frame-menu-row-button-line-height,
+    var(--_frame-default-menu-row-button-line-height-253bc7d470)
+  );
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  color: var(--frame-text);
+}
+.menu-check {
+  display: grid;
+  place-items: center;
+  /* Width for .menu-check. @token --frame-menu-check-width */
+  --_frame-default-menu-check-width-e0757d31e0: 18px;
+  width: var(
+    --frame-menu-check-width,
+    var(--_frame-default-menu-check-width-e0757d31e0)
+  );
+}
+.menu-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.menu-chevron {
+  grid-column: 4;
+  /* Width for .menu-chevron. @token --frame-menu-chevron-width */
+  --_frame-default-menu-chevron-width-d43bf2afb4: 13px;
+  width: var(
+    --frame-menu-chevron-width,
+    var(--_frame-default-menu-chevron-width-d43bf2afb4)
+  );
+  /* Foreground for .menu-chevron. @token --frame-menu-chevron-color */
+  --_frame-default-menu-chevron-color-4afd0b28d8: #a1a1a1;
+  color: var(
+    --frame-menu-chevron-color,
+    var(--_frame-default-menu-chevron-color-4afd0b28d8)
+  );
+}
+.frame-menu .menu-row > button.frame-button.active:not(:disabled) {
+  /* Neutral hover and highlight fill for ordinary menu rows. @token --frame-menu-hover @context */
+  background: var(--frame-menu-hover);
+}
+.frame-menu:not([data-menu-input='pointer'])
+  .menu-row
+  > button.frame-button:focus-visible,
+.frame-menu
+  .menu-row
+  > button.frame-button[aria-expanded='true']:not(:disabled) {
+  /* Neutral hover and highlight fill for ordinary menu rows. @token --frame-menu-hover @context */
+  background: var(--frame-menu-hover);
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  border-color: var(--frame-accent);
+  /* Outline for .frame-menu:not([data-menu-input='pointer']) .menu-row > button.frame-button:focus-visible, .frame-menu .menu-row > button.frame-button[aria-expanded='true']:not(:disabled). @token --frame-menu-row-button-active-not-disabled-outline */
+  --_frame-default-menu-row-button-active-not-disabled-outline-4f305c6bb5: none;
+  outline: var(
+    --frame-menu-row-button-active-not-disabled-outline,
+    var(--_frame-default-menu-row-button-active-not-disabled-outline-4f305c6bb5)
+  );
+}
+.frame-menu .menu-row > button.frame-button:disabled {
+  /* Foreground of unavailable or disabled menu actions. @token --frame-menu-disabled @context */
+  color: var(--frame-menu-disabled);
+}
+.frame-menu .menu-row > button.frame-button:disabled .menu-chevron {
+  color: inherit;
+}
+.menu-row > button > kbd {
+  grid-column: 3;
+  /* Text size for .menu-row > button > kbd. @token --frame-menu-row-button-kbd-font-size */
+  --_frame-default-menu-row-button-kbd-font-size-b29bf3355f: 11px;
+  font-size: var(
+    --frame-menu-row-button-kbd-font-size,
+    var(--_frame-default-menu-row-button-kbd-font-size-b29bf3355f)
+  );
+  /* Muted foreground for keyboard shortcuts displayed beside menu actions. @token --frame-menu-shortcut @context */
+  color: var(--frame-menu-shortcut);
+  /* Background for .menu-row > button > kbd. @token --frame-menu-row-button-kbd-background */
+  --_frame-default-menu-row-button-kbd-background-98c2a3af71: none;
+  background: var(
+    --frame-menu-row-button-kbd-background,
+    var(--_frame-default-menu-row-button-kbd-background-98c2a3af71)
+  );
+  /* Border for .menu-row > button > kbd. @token --frame-menu-row-button-kbd-border */
+  --_frame-default-menu-row-button-kbd-border-035c1e18d8: 0;
+  border: var(
+    --frame-menu-row-button-kbd-border,
+    var(--_frame-default-menu-row-button-kbd-border-035c1e18d8)
+  );
+  /* Internal spacing for .menu-row > button > kbd. @token --frame-menu-row-button-kbd-padding */
+  --_frame-default-menu-row-button-kbd-padding-14ba2efe56: 0 0 0 18px;
+  padding: var(
+    --frame-menu-row-button-kbd-padding,
+    var(--_frame-default-menu-row-button-kbd-padding-14ba2efe56)
+  );
+}
+.menu-separator {
+  /* Border color around floating menus, independently overridable from control borders. @token --frame-menu-border @context */
+  border-top: 1px solid var(--frame-menu-border);
+  /* Outer spacing for .menu-separator. @token --frame-menu-separator-margin */
+  --_frame-default-menu-separator-margin-f92634d2a4: 5px 4px;
+  margin: var(
+    --frame-menu-separator-margin,
+    var(--_frame-default-menu-separator-margin-f92634d2a4)
+  );
+}
+.palette {
+  /* Surface behind quick input and quick action overlays. @token --frame-quick-background @context */
+  background: var(--frame-quick-background);
+  /* Border color around floating menus, independently overridable from control borders. @token --frame-menu-border @context */
+  border-color: var(--frame-menu-border);
+}
+.command-result.active {
+  /* Background highlighting the active quick input or quick action result. @token --frame-quick-selection @context */
+  background: var(--frame-quick-selection);
+}
+.command-result.disabled {
+  /* Foreground of unavailable or disabled menu actions. @token --frame-menu-disabled @context */
+  color: var(--frame-menu-disabled);
+}
+.quick-panel {
+  /* Minimum height for .quick-panel. @token --frame-quick-panel-min-height */
+  --_frame-default-quick-panel-min-height-72933b3623: 130px;
+  min-height: var(
+    --frame-quick-panel-min-height,
+    var(--_frame-default-quick-panel-min-height-72933b3623)
+  );
+}
+.quick-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Internal spacing for .quick-panel-header. @token --frame-quick-panel-header-padding */
+  --_frame-default-quick-panel-header-padding-a44b78ebbf: 0 2px 5px 8px;
+  padding: var(
+    --frame-quick-panel-header-padding,
+    var(--_frame-default-quick-panel-header-padding-a44b78ebbf)
+  );
+  /* Minimum height for .quick-panel-header. @token --frame-quick-panel-header-min-height */
+  --_frame-default-quick-panel-header-min-height-cef44e2eba: 28px;
+  min-height: var(
+    --frame-quick-panel-header-min-height,
+    var(--_frame-default-quick-panel-header-min-height-cef44e2eba)
+  );
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  color: var(--frame-text);
+}
+@media (min-width: 701px) {
+  .titlebar > .command-tooltip,
+  .titlebar > .titlebar-text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    /* Width for .titlebar > .command-tooltip, .titlebar > .titlebar-text. @token --frame-titlebar-command-tooltip-width-2 */
+    --_frame-default-titlebar-command-tooltip-width-2-ec30c26ed2: min(
+      600px,
+      calc(100% - 480px)
+    );
+    width: var(
+      --frame-titlebar-command-tooltip-width-2,
+      var(--_frame-default-titlebar-command-tooltip-width-2-ec30c26ed2)
+    );
+  }
+}
+@media (max-width: 700px) {
+  .titlebar-text {
+    flex: 0 1 260px;
+  }
+}
+@media (max-width: 540px) {
+  .titlebar-text {
+    flex-basis: 140px;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .frame-menu {
+    /* Background for .frame-menu. @token --frame-menu-background */
+    --_frame-default-menu-background-f955d6355e: #1f1f1f;
+    background: var(
+      --frame-menu-background,
+      var(--_frame-default-menu-background-f955d6355e)
+    );
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .frame-menu {
+    /* Background for .frame-menu. @token --frame-menu-background */
+    --_frame-default-menu-background-f955d6355e: #1f1f1f;
+    background: var(
+      --frame-menu-background,
+      var(--_frame-default-menu-background-f955d6355e)
+    );
+  }
+}
+
+.quick-panel-header {
+  justify-content: center;
+  position: relative;
+}
+.quick-panel-header > .icon-button {
+  position: absolute;
+  right: 0;
+}

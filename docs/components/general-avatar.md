@@ -83,17 +83,17 @@ Use the shared theme variables in application content. Component-specific declar
 
 <!-- frame:generated styles="general-avatar" -->
 
-| CSS variable                 | Theme path                 | Default expression                | Purpose                                                                              | Context                                                                                      |
-| ---------------------------- | -------------------------- | --------------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
-| `--frame-font-body`          | `frame.font.body`          | `"Segoe UI", sans-serif`          | Primary font family inherited by shell content and ordinary controls.                | `.frame-accordion, .frame-collapsible, .frame-pagination, .frame-avatar, .frame-scroll-area` |
-| `--frame-font-size-body`     | `frame.font.size.body`     | `12px`                            | Base text size inherited by shell content and ordinary controls.                     | `.frame-accordion, .frame-collapsible, .frame-pagination, .frame-avatar, .frame-scroll-area` |
-| `--frame-text`               | `frame.text`               | `#cccccc`                         | Primary foreground for readable text and icons across shell and application content. | `.frame-accordion, .frame-collapsible, .frame-pagination, .frame-avatar, .frame-scroll-area` |
-| `--frame-avatar-size`        | `frame.avatar.size`        | `36px`                            | Equal width and height of the avatar surface.                                        | `.frame-avatar`                                                                              |
-| `--frame-avatar-radius`      | `frame.avatar.radius`      | `50%`                             | Corner radius of the avatar surface.                                                 | `.frame-avatar`                                                                              |
-| `--frame-avatar-background`  | `frame.avatar.background`  | `var(--frame-control-background)` | Surface behind the avatar image or fallback.                                         | `.frame-avatar`                                                                              |
-| `--frame-control-background` | `frame.control.background` | `#1d1d1d`                         | Resting fill of text-entry controls and other control surfaces.                      | `.frame-avatar`                                                                              |
-| `--frame-avatar-color`       | `frame.avatar.color`       | `var(--frame-text)`               | Foreground of the avatar fallback.                                                   | `.frame-avatar-fallback`                                                                     |
-| `--frame-text`               | `frame.text`               | `#cccccc`                         | Primary foreground for readable text and icons across shell and application content. | `.frame-avatar-fallback`                                                                     |
+| CSS variable                 | Theme path                 | Default expression                        | Purpose                                                                              | Context                  |
+| ---------------------------- | -------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------ |
+| `--frame-font-body`          | `frame.font.body`          | No declared default; supplied by context. | Primary font family inherited by shell content and ordinary controls.                | `.frame-layout-text`     |
+| `--frame-font-size-body`     | `frame.font.size.body`     | No declared default; supplied by context. | Base text size inherited by shell content and ordinary controls.                     | `.frame-layout-text`     |
+| `--frame-text`               | `frame.text`               | No declared default; supplied by context. | Primary foreground for readable text and icons across shell and application content. | `.frame-layout-text`     |
+| `--frame-avatar-size`        | `frame.avatar.size`        | `36px`                                    | Equal width and height of the avatar surface.                                        | `.frame-avatar`          |
+| `--frame-avatar-radius`      | `frame.avatar.radius`      | `50%`                                     | Corner radius of the avatar surface.                                                 | `.frame-avatar`          |
+| `--frame-avatar-background`  | `frame.avatar.background`  | `var(--frame-control-background)`         | Surface behind the avatar image or fallback.                                         | `.frame-avatar`          |
+| `--frame-control-background` | `frame.control.background` | No declared default; supplied by context. | Resting fill of text-entry controls and other control surfaces.                      | `.frame-avatar`          |
+| `--frame-avatar-color`       | `frame.avatar.color`       | `var(--frame-text)`                       | Foreground of the avatar fallback.                                                   | `.frame-avatar-fallback` |
+| `--frame-text`               | `frame.text`               | No declared default; supplied by context. | Primary foreground for readable text and icons across shell and application content. | `.frame-avatar-fallback` |
 
 Expressions are preserved as written; their computed values depend on the active theme and component state.
 

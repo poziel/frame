@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ColorSwatch} from 'reka-ui';
 import type {ColorSwatchProps} from 'reka-ui';
-import '../shared/advanced.css';
+import '../styles/advanced.scss';
 
 defineProps<ColorSwatchProps>();
 

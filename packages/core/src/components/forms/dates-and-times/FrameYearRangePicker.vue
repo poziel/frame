@@ -15,7 +15,7 @@ import {
   type YearRangePickerRootProps,
   type YearRangePickerRootEmits,
 } from 'reka-ui';
-import '../shared/dates.css';
+import '../styles/dates.scss';
 
 const props = defineProps<
   YearRangePickerRootProps & {
@@ -39,7 +39,7 @@ defineSlots<{
   <YearRangePickerRoot
     v-bind="forwarded"
     :calendar-label="props.calendarLabel ?? props.label"
-    class="frame-calendar"
+    class="frame-calendar frame-date-text"
     v-slot="{grid}"
   >
     <YearRangePickerHeader class="frame-date-header">

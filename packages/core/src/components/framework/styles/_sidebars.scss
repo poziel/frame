@@ -1,0 +1,519 @@
+.workbench-body {
+  display: flex;
+  /* Space between children for .workbench-body. @token --frame-workbench-body-gap */
+  --_frame-default-workbench-body-gap-171cb980a5: 6px;
+  gap: var(
+    --frame-workbench-body-gap,
+    var(--_frame-default-workbench-body-gap-171cb980a5)
+  );
+  /* Internal spacing for .workbench-body. @token --frame-workbench-body-padding */
+  --_frame-default-workbench-body-padding-57d0268334: 1px 5px 0;
+  padding: var(
+    --frame-workbench-body-padding,
+    var(--_frame-default-workbench-body-padding-57d0268334)
+  );
+  /* Minimum height for .workbench-body. @token --frame-workbench-body-min-height */
+  --_frame-default-workbench-body-min-height-23f72592c2: 0;
+  min-height: var(
+    --frame-workbench-body-min-height,
+    var(--_frame-default-workbench-body-min-height-23f72592c2)
+  );
+  /* Minimum width for .workbench-body. @token --frame-workbench-body-min-width */
+  --_frame-default-workbench-body-min-width-7f8df9d28d: 0;
+  min-width: var(
+    --frame-workbench-body-min-width,
+    var(--_frame-default-workbench-body-min-width-7f8df9d28d)
+  );
+  position: relative;
+}
+.navigation-container {
+  display: flex;
+  flex: 0 0 auto;
+  /* Minimum height for .navigation-container. @token --frame-navigation-container-min-height */
+  --_frame-default-navigation-container-min-height-9601f7b14f: 0;
+  min-height: var(
+    --frame-navigation-container-min-height,
+    var(--_frame-default-navigation-container-min-height-9601f7b14f)
+  );
+  /* Width for .navigation-container. @token --frame-navigation-container-width */
+  --_frame-default-navigation-container-width-f220804f3d: 40px;
+  width: var(
+    --frame-navigation-container-width,
+    var(--_frame-default-navigation-container-width-f220804f3d)
+  );
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border: 1px solid var(--frame-line);
+  /* Corner radius for .navigation-container. @token --frame-navigation-container-border-radius */
+  --_frame-default-navigation-container-border-radius-709a9fb32e: var(
+    --frame-radius-large
+  );
+  /* Large shared corner radius used by panel and menu containers. @token --frame-radius-large @context */
+  border-radius: var(
+    --frame-navigation-container-border-radius,
+    var(--_frame-default-navigation-container-border-radius-709a9fb32e)
+  );
+  /* Neutral raised surface behind grouped content and control compositions. @token --frame-surface @context */
+  background: var(--frame-surface);
+  overflow: hidden;
+}
+.navigation-container.expanded {
+  /* Width for .navigation-container.expanded. @token --frame-navigation-container-expanded-width */
+  --_frame-default-navigation-container-expanded-width-2a384bfcb7: 276px;
+  width: var(
+    --frame-navigation-container-expanded-width,
+    var(--_frame-default-navigation-container-expanded-width-2a384bfcb7)
+  );
+}
+.view-bar {
+  /* Width for .view-bar. @token --frame-activity-rail-width */
+  --_frame-default-activity-rail-width-526d906168: 38px;
+  /* Width for .view-bar. @token --frame-view-rail-width */
+  --_frame-default-view-rail-width-067154550e: var(
+    --frame-activity-rail-width,
+    var(--_frame-default-activity-rail-width-526d906168)
+  );
+  width: var(
+    --frame-view-rail-width,
+    var(--_frame-default-view-rail-width-067154550e)
+  );
+  flex-shrink: 0;
+}
+.side-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* Minimum width for .side-panel. @token --frame-side-panel-min-width */
+  --_frame-default-side-panel-min-width-36959c1e28: 0;
+  min-width: var(
+    --frame-side-panel-min-width,
+    var(--_frame-default-side-panel-min-width-36959c1e28)
+  );
+  overflow: auto;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Space between children for .section-header. @token --frame-section-header-gap */
+  --_frame-default-section-header-gap-186315d561: var(--frame-spacing-small);
+  /* Compact shared spacing step used by menu insets, view rails, and dense content groups. @token --frame-spacing-small @context */
+  gap: var(
+    --frame-section-header-gap,
+    var(--_frame-default-section-header-gap-186315d561)
+  );
+  /* Internal spacing for .section-header. @token --frame-section-header-padding */
+  --_frame-default-section-header-padding-8e69b64fbc: var(--frame-spacing-small)
+    var(--frame-spacing-normal);
+  /* Normal shared spacing step used for content insets and separation. @token --frame-spacing-normal @context */
+  padding: var(
+    --frame-section-header-padding,
+    var(--_frame-default-section-header-padding-8e69b64fbc)
+  );
+}
+.section-header h2 {
+  /* Text size for .section-header h2. @token --frame-section-header-h2-font-size */
+  --_frame-default-section-header-h2-font-size-f10e51993d: 11px;
+  font-size: var(
+    --frame-section-header-h2-font-size,
+    var(--_frame-default-section-header-h2-font-size-f10e51993d)
+  );
+  /* Text weight for .section-header h2. @token --frame-section-header-h2-font-weight */
+  --_frame-default-section-header-h2-font-weight-c1927f0369: 500;
+  font-weight: var(
+    --frame-section-header-h2-font-weight,
+    var(--_frame-default-section-header-h2-font-weight-c1927f0369)
+  );
+}
+.icon-button {
+  /* Width for .icon-button. @token --frame-icon-button-width */
+  --_frame-default-icon-button-width-4ec478dc8e: 25px;
+  width: var(
+    --frame-icon-button-width,
+    var(--_frame-default-icon-button-width-4ec478dc8e)
+  );
+  /* Height for .icon-button. @token --frame-icon-button-height */
+  --_frame-default-icon-button-height-8889c661e6: 25px;
+  height: var(
+    --frame-icon-button-height,
+    var(--_frame-default-icon-button-height-8889c661e6)
+  );
+  display: inline-grid;
+  place-items: center;
+  /* Corner radius for .icon-button. @token --frame-icon-button-border-radius */
+  --_frame-default-icon-button-border-radius-16b7364890: var(
+    --frame-radius-medium
+  );
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(
+    --frame-icon-button-border-radius,
+    var(--_frame-default-icon-button-border-radius-16b7364890)
+  );
+  /* Secondary foreground for descriptions, hints, and visually subordinate content. @token --frame-muted @context */
+  color: var(--frame-muted);
+}
+.icon-button:hover {
+  /* Background for .icon-button:hover. @token --frame-icon-button-hover-background */
+  --_frame-default-icon-button-hover-background-a4ebd2e075: #ffffff0b;
+  background: var(
+    --frame-icon-button-hover-background,
+    var(--_frame-default-icon-button-hover-background-a4ebd2e075)
+  );
+}
+.side-content {
+  /* Internal spacing for .side-content. @token --frame-side-content-padding */
+  --_frame-default-side-content-padding-c20e08c6f1: var(--frame-spacing-small)
+    var(--frame-spacing-normal);
+  /* Compact shared spacing step used by menu insets, view rails, and dense content groups. @token --frame-spacing-small @context */
+  /* Normal shared spacing step used for content insets and separation. @token --frame-spacing-normal @context */
+  padding: var(
+    --frame-side-content-padding,
+    var(--_frame-default-side-content-padding-c20e08c6f1)
+  );
+}
+.side-group-label {
+  display: flex;
+  justify-content: space-between;
+  /* Text size for .side-group-label. @token --frame-side-group-label-font-size */
+  --_frame-default-side-group-label-font-size-2077abe4dd: 9px;
+  font-size: var(
+    --frame-side-group-label-font-size,
+    var(--_frame-default-side-group-label-font-size-2077abe4dd)
+  );
+  /* Text weight for .side-group-label. @token --frame-side-group-label-font-weight */
+  --_frame-default-side-group-label-font-weight-4eaef99136: 500;
+  font-weight: var(
+    --frame-side-group-label-font-weight,
+    var(--_frame-default-side-group-label-font-weight-4eaef99136)
+  );
+  /* Letter spacing for .side-group-label. @token --frame-side-group-label-letter-spacing */
+  --_frame-default-side-group-label-letter-spacing-5a1f06a5c2: 0.7px;
+  letter-spacing: var(
+    --frame-side-group-label-letter-spacing,
+    var(--_frame-default-side-group-label-letter-spacing-5a1f06a5c2)
+  );
+  /* Foreground for .side-group-label. @token --frame-side-group-label-color */
+  --_frame-default-side-group-label-color-3423f6a829: #9da3a6;
+  color: var(
+    --frame-side-group-label-color,
+    var(--_frame-default-side-group-label-color-3423f6a829)
+  );
+  /* Outer spacing for .side-group-label. @token --frame-side-group-label-margin */
+  --_frame-default-side-group-label-margin-eea551413f: 9px 0 14px;
+  margin: var(
+    --frame-side-group-label-margin,
+    var(--_frame-default-side-group-label-margin-eea551413f)
+  );
+}
+.side-description {
+  /* Text size for .side-description. @token --frame-side-description-font-size */
+  --_frame-default-side-description-font-size-f4cc4cccb4: 11px;
+  font-size: var(
+    --frame-side-description-font-size,
+    var(--_frame-default-side-description-font-size-f4cc4cccb4)
+  );
+  /* Text line height for .side-description. @token --frame-side-description-line-height */
+  --_frame-default-side-description-line-height-e5e06f9bff: 1.7;
+  line-height: var(
+    --frame-side-description-line-height,
+    var(--_frame-default-side-description-line-height-e5e06f9bff)
+  );
+  /* Secondary foreground for descriptions, hints, and visually subordinate content. @token --frame-muted @context */
+  color: var(--frame-muted);
+}
+.side-action {
+  display: flex;
+  /* Space between children for .side-action. @token --frame-side-action-gap */
+  --_frame-default-side-action-gap-f71501d605: 10px;
+  gap: var(
+    --frame-side-action-gap,
+    var(--_frame-default-side-action-gap-f71501d605)
+  );
+  align-items: center;
+  /* Text size for .side-action. @token --frame-side-action-font-size */
+  --_frame-default-side-action-font-size-31a9463178: 11px;
+  font-size: var(
+    --frame-side-action-font-size,
+    var(--_frame-default-side-action-font-size-31a9463178)
+  );
+  /* Foreground for .side-action. @token --frame-side-action-color */
+  --_frame-default-side-action-color-afd9729359: #b4bdc2;
+  color: var(
+    --frame-side-action-color,
+    var(--_frame-default-side-action-color-afd9729359)
+  );
+  /* Top outer spacing for .side-action. @token --frame-side-action-margin-top */
+  --_frame-default-side-action-margin-top-74f58fc02e: 15px;
+  margin-top: var(
+    --frame-side-action-margin-top,
+    var(--_frame-default-side-action-margin-top-74f58fc02e)
+  );
+  /* Internal spacing for .side-action. @token --frame-side-action-padding */
+  --_frame-default-side-action-padding-8e3a6c988a: 0;
+  padding: var(
+    --frame-side-action-padding,
+    var(--_frame-default-side-action-padding-8e3a6c988a)
+  );
+}
+.live-dot {
+  display: inline-block;
+  /* Width for .live-dot. @token --frame-live-dot-width */
+  --_frame-default-live-dot-width-3e6d22b521: 5px;
+  width: var(
+    --frame-live-dot-width,
+    var(--_frame-default-live-dot-width-3e6d22b521)
+  );
+  /* Height for .live-dot. @token --frame-live-dot-height */
+  --_frame-default-live-dot-height-89d9141b70: 5px;
+  height: var(
+    --frame-live-dot-height,
+    var(--_frame-default-live-dot-height-89d9141b70)
+  );
+  flex-shrink: 0;
+  /* Corner radius for .live-dot. @token --frame-live-dot-border-radius */
+  --_frame-default-live-dot-border-radius-ac78e7f46e: 50%;
+  border-radius: var(
+    --frame-live-dot-border-radius,
+    var(--_frame-default-live-dot-border-radius-ac78e7f46e)
+  );
+  /* Background for .live-dot. @token --frame-live-dot-background */
+  --_frame-default-live-dot-background-20a94764b7: #82988a;
+  background: var(
+    --frame-live-dot-background,
+    var(--_frame-default-live-dot-background-20a94764b7)
+  );
+}
+.activity-list {
+  list-style: none;
+  /* Internal spacing for .activity-list. @token --frame-activity-list-padding */
+  --_frame-default-activity-list-padding-3ff2eb6a10: 0;
+  /* Internal spacing for .activity-list. @token --frame-view-list-padding */
+  --_frame-default-view-list-padding-f95d8bca31: var(
+    --frame-activity-list-padding,
+    var(--_frame-default-activity-list-padding-3ff2eb6a10)
+  );
+  padding: var(
+    --frame-view-list-padding,
+    var(--_frame-default-view-list-padding-f95d8bca31)
+  );
+  /* Outer spacing for .activity-list. @token --frame-activity-list-margin */
+  --_frame-default-activity-list-margin-b2d6bb36c3: 0;
+  /* Outer spacing for .activity-list. @token --frame-view-list-margin */
+  --_frame-default-view-list-margin-25781cb25c: var(
+    --frame-activity-list-margin,
+    var(--_frame-default-activity-list-margin-b2d6bb36c3)
+  );
+  margin: var(
+    --frame-view-list-margin,
+    var(--_frame-default-view-list-margin-25781cb25c)
+  );
+}
+.activity-list li {
+  display: flex;
+  /* Space between children for .activity-list li. @token --frame-activity-list-li-gap */
+  --_frame-default-activity-list-li-gap-f7cc61e801: 9px;
+  /* Space between children for .activity-list li. @token --frame-view-list-li-gap */
+  --_frame-default-view-list-li-gap-2784248b57: var(
+    --frame-activity-list-li-gap,
+    var(--_frame-default-activity-list-li-gap-f7cc61e801)
+  );
+  gap: var(
+    --frame-view-list-li-gap,
+    var(--_frame-default-view-list-li-gap-2784248b57)
+  );
+  /* Internal spacing for .activity-list li. @token --frame-activity-list-li-padding */
+  --_frame-default-activity-list-li-padding-37c3b6c3a1: 11px 0;
+  /* Internal spacing for .activity-list li. @token --frame-view-list-li-padding */
+  --_frame-default-view-list-li-padding-588e04f8ba: var(
+    --frame-activity-list-li-padding,
+    var(--_frame-default-activity-list-li-padding-37c3b6c3a1)
+  );
+  padding: var(
+    --frame-view-list-li-padding,
+    var(--_frame-default-view-list-li-padding-588e04f8ba)
+  );
+  /* Text size for .activity-list li. @token --frame-activity-list-li-font-size */
+  --_frame-default-activity-list-li-font-size-5dbb16d93d: 11px;
+  /* Text size for .activity-list li. @token --frame-view-list-li-font-size */
+  --_frame-default-view-list-li-font-size-fdc086b9b5: var(
+    --frame-activity-list-li-font-size,
+    var(--_frame-default-activity-list-li-font-size-5dbb16d93d)
+  );
+  font-size: var(
+    --frame-view-list-li-font-size,
+    var(--_frame-default-view-list-li-font-size-fdc086b9b5)
+  );
+  /* Text line height for .activity-list li. @token --frame-activity-list-li-line-height */
+  --_frame-default-activity-list-li-line-height-5ace45973a: 1.6;
+  /* Text line height for .activity-list li. @token --frame-view-list-li-line-height */
+  --_frame-default-view-list-li-line-height-00acf37cce: var(
+    --frame-activity-list-li-line-height,
+    var(--_frame-default-activity-list-li-line-height-5ace45973a)
+  );
+  line-height: var(
+    --frame-view-list-li-line-height,
+    var(--_frame-default-view-list-li-line-height-00acf37cce)
+  );
+}
+.activity-list .live-dot {
+  /* Top outer spacing for .activity-list .live-dot. @token --frame-activity-list-live-dot-margin-top */
+  --_frame-default-activity-list-live-dot-margin-top-40b082dbdc: 6px;
+  /* Top outer spacing for .activity-list .live-dot. @token --frame-view-list-live-dot-margin-top */
+  --_frame-default-view-list-live-dot-margin-top-fbf2e4712d: var(
+    --frame-activity-list-live-dot-margin-top,
+    var(--_frame-default-activity-list-live-dot-margin-top-40b082dbdc)
+  );
+  margin-top: var(
+    --frame-view-list-live-dot-margin-top,
+    var(--_frame-default-view-list-live-dot-margin-top-fbf2e4712d)
+  );
+}
+.activity-list small {
+  display: block;
+  /* Text size for .activity-list small. @token --frame-activity-list-small-font-size */
+  --_frame-default-activity-list-small-font-size-d2232df9b8: 10px;
+  /* Text size for .activity-list small. @token --frame-view-list-small-font-size */
+  --_frame-default-view-list-small-font-size-b0b52b0060: var(
+    --frame-activity-list-small-font-size,
+    var(--_frame-default-activity-list-small-font-size-d2232df9b8)
+  );
+  font-size: var(
+    --frame-view-list-small-font-size,
+    var(--_frame-default-view-list-small-font-size-b0b52b0060)
+  );
+  /* Secondary foreground for descriptions, hints, and visually subordinate content. @token --frame-muted @context */
+  color: var(--frame-muted);
+  /* Top outer spacing for .activity-list small. @token --frame-activity-list-small-margin-top */
+  --_frame-default-activity-list-small-margin-top-7c420dc80c: 3px;
+  /* Top outer spacing for .activity-list small. @token --frame-view-list-small-margin-top */
+  --_frame-default-view-list-small-margin-top-efb8c5344b: var(
+    --frame-activity-list-small-margin-top,
+    var(--_frame-default-activity-list-small-margin-top-7c420dc80c)
+  );
+  margin-top: var(
+    --frame-view-list-small-margin-top,
+    var(--_frame-default-view-list-small-margin-top-efb8c5344b)
+  );
+}
+.preference {
+  display: flex;
+  align-items: center;
+  /* Space between children for .preference. @token --frame-preference-gap */
+  --_frame-default-preference-gap-4c41ae97ef: 10px;
+  gap: var(
+    --frame-preference-gap,
+    var(--_frame-default-preference-gap-4c41ae97ef)
+  );
+  /* Outer spacing for .preference. @token --frame-preference-margin */
+  --_frame-default-preference-margin-8c75edffbc: 12px 0 20px;
+  margin: var(
+    --frame-preference-margin,
+    var(--_frame-default-preference-margin-8c75edffbc)
+  );
+}
+.preference :where(.workbench, .frame-menu, .palette-backdrop) strong {
+  /* Text size for .preference :where(.workbench, .frame-menu, .palette-backdrop) strong. @token --frame-preference-where-workbench-font-size */
+  --_frame-default-preference-where-workbench-font-size-fa78a39a2d: 11px;
+  font-size: var(
+    --frame-preference-where-workbench-font-size,
+    var(--_frame-default-preference-where-workbench-font-size-fa78a39a2d)
+  );
+}
+.preference p {
+  /* Secondary foreground for descriptions, hints, and visually subordinate content. @token --frame-muted @context */
+  color: var(--frame-muted);
+  /* Text size for .preference p. @token --frame-preference-p-font-size */
+  --_frame-default-preference-p-font-size-7f5e8c91aa: 10px;
+  font-size: var(
+    --frame-preference-p-font-size,
+    var(--_frame-default-preference-p-font-size-7f5e8c91aa)
+  );
+  /* Text line height for .preference p. @token --frame-preference-p-line-height */
+  --_frame-default-preference-p-line-height-5629057cff: 1.6;
+  line-height: var(
+    --frame-preference-p-line-height,
+    var(--_frame-default-preference-p-line-height-5629057cff)
+  );
+  /* Top outer spacing for .preference p. @token --frame-preference-p-margin-top */
+  --_frame-default-preference-p-margin-top-51a0763db2: 5px;
+  margin-top: var(
+    --frame-preference-p-margin-top,
+    var(--_frame-default-preference-p-margin-top-51a0763db2)
+  );
+}
+.switch {
+  margin-left: auto;
+  /* Minimum width for .switch. @token --frame-switch-min-width */
+  --_frame-default-switch-min-width-e19affb571: 28px;
+  min-width: var(
+    --frame-switch-min-width,
+    var(--_frame-default-switch-min-width-e19affb571)
+  );
+  /* Height for .switch. @token --frame-switch-height */
+  --_frame-default-switch-height-1bfd31f815: 16px;
+  height: var(
+    --frame-switch-height,
+    var(--_frame-default-switch-height-1bfd31f815)
+  );
+  /* Corner radius for .switch. @token --frame-switch-border-radius */
+  --_frame-default-switch-border-radius-362b477e2e: 12px;
+  border-radius: var(
+    --frame-switch-border-radius,
+    var(--_frame-default-switch-border-radius-362b477e2e)
+  );
+  /* Internal spacing for .switch. @token --frame-switch-padding */
+  --_frame-default-switch-padding-f9b4943d30: 3px;
+  padding: var(
+    --frame-switch-padding,
+    var(--_frame-default-switch-padding-f9b4943d30)
+  );
+  /* Background for .switch. @token --frame-switch-background */
+  --_frame-default-switch-background-028a86f1ce: #444c50;
+  background: var(
+    --frame-switch-background,
+    var(--_frame-default-switch-background-028a86f1ce)
+  );
+}
+.switch span {
+  display: block;
+  /* Width for .switch span. @token --frame-switch-span-width */
+  --_frame-default-switch-span-width-ee15f89562: 10px;
+  width: var(
+    --frame-switch-span-width,
+    var(--_frame-default-switch-span-width-ee15f89562)
+  );
+  /* Height for .switch span. @token --frame-switch-span-height */
+  --_frame-default-switch-span-height-ceb4ec23d6: 10px;
+  height: var(
+    --frame-switch-span-height,
+    var(--_frame-default-switch-span-height-ceb4ec23d6)
+  );
+  /* Corner radius for .switch span. @token --frame-switch-span-border-radius */
+  --_frame-default-switch-span-border-radius-ed582b4ded: 50%;
+  border-radius: var(
+    --frame-switch-span-border-radius,
+    var(--_frame-default-switch-span-border-radius-ed582b4ded)
+  );
+  /* Background for .switch span. @token --frame-switch-span-background */
+  --_frame-default-switch-span-background-010cfde80d: #bac2c5;
+  background: var(
+    --frame-switch-span-background,
+    var(--_frame-default-switch-span-background-010cfde80d)
+  );
+}
+.switch.on {
+  /* Background for .switch.on. @token --frame-switch-on-background */
+  --_frame-default-switch-on-background-867aaf7560: #7c705e;
+  background: var(
+    --frame-switch-on-background,
+    var(--_frame-default-switch-on-background-867aaf7560)
+  );
+}
+.switch.on span {
+  margin-left: auto;
+  /* Background for .switch.on span. @token --frame-switch-on-span-background */
+  --_frame-default-switch-on-span-background-3a028c0814: #eee5d5;
+  background: var(
+    --frame-switch-on-span-background,
+    var(--_frame-default-switch-on-span-background-3a028c0814)
+  );
+}

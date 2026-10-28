@@ -1,0 +1,21 @@
+/* Shared scroll treatment for all shell and application-owned scroll areas. */
+:where(.frame-scroll-scope),
+:where(.frame-scroll-scope) * {
+  scrollbar-width: none;
+}
+:where(.frame-scroll-scope)::-webkit-scrollbar,
+:where(.frame-scroll-scope) ::-webkit-scrollbar {
+  display: none;
+  /* Width for :where( .workbench, .frame-menu, .palette-backdrop, .frame-modal )::-webkit-scrollbar, :where(.workbench, .frame-menu, .palette-backdrop, .frame-modal) ::-webkit-scrollbar. @token --frame-where-workbench-width */
+  --_frame-default-where-workbench-width-e5f497cd9a: 0;
+  width: var(
+    --frame-where-workbench-width,
+    var(--_frame-default-where-workbench-width-e5f497cd9a)
+  );
+  /* Height for :where( .workbench, .frame-menu, .palette-backdrop, .frame-modal )::-webkit-scrollbar, :where(.workbench, .frame-menu, .palette-backdrop, .frame-modal) ::-webkit-scrollbar. @token --frame-where-workbench-height */
+  --_frame-default-where-workbench-height-2a763e6e7a: 0;
+  height: var(
+    --frame-where-workbench-height,
+    var(--_frame-default-where-workbench-height-2a763e6e7a)
+  );
+}

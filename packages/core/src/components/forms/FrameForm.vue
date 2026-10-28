@@ -2,7 +2,7 @@
 import {computed, getCurrentInstance} from 'vue';
 import {FormRoot, useForwardProps} from 'reka-ui';
 import type {FormRootProps, FormRootEmits} from 'reka-ui';
-import './shared/advanced.css';
+import './styles/advanced.scss';
 
 const props = defineProps<FormRootProps>();
 const emit = defineEmits<FormRootEmits>();
@@ -27,3 +27,11 @@ defineSlots<{
 <template>
   <FormRoot v-bind="forwarded" class="frame-form"><slot /></FormRoot>
 </template>
+
+<style lang="scss">
+.frame-form {
+  display: grid;
+  /* Standard inset around content in panels, disclosures, and application surfaces. @token --frame-content-padding @context */
+  gap: var(--frame-content-padding);
+}
+</style>

@@ -106,7 +106,7 @@ async function copy() {
     <OverlayScrollbars :root="root" />
   </section>
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .frame-code-block {
   display: flex;
   flex-direction: column;
@@ -122,7 +122,7 @@ async function copy() {
   /* Border for .frame-code-block. @token --frame-line */
   --_frame-default-line-b8a143df52: #333;
   border: 1px solid var(--frame-line, var(--_frame-default-line-b8a143df52));
-  /* Corner radius for .frame-code-block. Used when --frame-span-span-span-code-pre-OverlayScrollbars-root-root-section-template-style-scoped-frame-code-block-border-radius is unset. @token --frame-panel-radius */
+  /* Corner radius for .frame-code-block. @token --frame-panel-radius */
   --_frame-default-panel-radius-eda9823db5: 7px;
   /* Corner radius for .frame-code-block. @token --frame-span-span-span-code-pre-OverlayScrollbars-root-root-section-template-style-scoped-frame-code-block-border-radius */
   --_frame-default-span-span-span-code-pre-OverlayScrollbars-root-root-section-template-style-scoped-frame-code-block-border-radius-e605194010: var(
@@ -135,9 +135,9 @@ async function copy() {
       --_frame-default-span-span-span-code-pre-OverlayScrollbars-root-root-section-template-style-scoped-frame-code-block-border-radius-e605194010
     )
   );
-  /* Value of font for .frame-code-block. Used when --frame-span-span-span-code-pre-OverlayScrollbars-root-root-section-template-style-scoped-frame-code-block-font is unset. @token --frame-font-size-body */
+  /* Value of font for .frame-code-block. @token --frame-font-size-body */
   --_frame-default-font-size-body-5e0c1e1e0a: 12px;
-  /* Value of font for .frame-code-block. Used when --frame-span-span-span-code-pre-OverlayScrollbars-root-root-section-template-style-scoped-frame-code-block-font is unset. @token --frame-font-mono */
+  /* Value of font for .frame-code-block. @token --frame-font-mono */
   --_frame-default-font-mono-4ab5cb5fd0: Consolas, monospace;
   /* Value of font for .frame-code-block. @token --frame-span-span-span-code-pre-OverlayScrollbars-root-root-section-template-style-scoped-frame-code-block-font */
   --_frame-default-span-span-span-code-pre-OverlayScrollbars-root-root-section-template-style-scoped-frame-code-block-font-3c907872c4: var(
@@ -174,7 +174,7 @@ async function copy() {
     --frame-code-toolbar-border-bottom,
     var(--_frame-default-code-toolbar-border-bottom-b3690a3a18)
   );
-  /* Value of font for .frame-code-toolbar. Used when --frame-code-toolbar-font is unset. @token --frame-font-body */
+  /* Value of font for .frame-code-toolbar. @token --frame-font-body */
   --_frame-default-font-body-1e270f4103: 'Segoe UI', sans-serif;
   /* Value of font for .frame-code-toolbar. @token --frame-code-toolbar-font */
   --_frame-default-code-toolbar-font-1ba6860a5d: 11px/1.5
@@ -268,8 +268,8 @@ pre.frame-code-source {
   white-space: pre;
 }
 .frame-code-gutter {
-  /* Digit count of the final displayed line number, computed from the starting line and highlighted or plain code lines. @token --frame-code-digits @context */
-  /* Line-number foreground supplied by the active code highlight result, with the component choosing a light or dark fallback. @token --frame-code-gutter @context */
+  /* code digits used by code digits in .frame-code-gutter. @token --frame-code-digits @context */
+  /* code gutter used by flex in .frame-code-gutter. @token --frame-code-gutter @context */
   flex: 0 0 calc((var(--frame-code-digits) + 1) * 1ch);
   /* Right outer spacing for .frame-code-gutter. @token --frame-code-gutter-margin-right */
   --_frame-default-code-gutter-margin-right-30c5e9e08c: 18px;

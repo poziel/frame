@@ -17,7 +17,7 @@ import {
   type DialogContentEmits,
 } from 'reka-ui';
 import {useOverlayBoundary, overlayLayerStyle} from './overlays';
-import '../shared/general-c.css';
+import './styles/surfaces.scss';
 
 defineOptions({inheritAttrs: false});
 
@@ -106,7 +106,7 @@ defineSlots<{
       <div class="frame-general-layer" :style="layer">
         <DialogContent
           v-bind="{...contentEvents, ...contentProps, ...$attrs}"
-          class="frame-general-dialog frame-advanced-popup"
+          class="frame-general-dialog frame-advanced-popup frame-general-surface frame-overlay-surface"
         >
           <DialogTitle
             class="frame-general-title"
@@ -131,7 +131,7 @@ defineSlots<{
     </DialogPortal>
   </DialogRoot>
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .frame-dialog-hidden-title {
   position: absolute;
   width: 1px;

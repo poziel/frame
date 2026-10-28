@@ -116,7 +116,7 @@ function childRef(id: string) {
       class="panel-section"
       :class="{expanded: !closed[child.id]}"
     >
-      <header
+      <header class="frame-shell-label"
         ><button
           class="section-toggle"
           :style="{color: child.titleColor}"
@@ -173,3 +173,20 @@ function childRef(id: string) {
     }}</p>
   </div>
 </template>
+
+<style lang="scss">
+.section-chevron {
+  /* Width for .section-chevron. @token --frame-section-chevron-width */
+  --_frame-default-section-chevron-width-5b110fe219: 16px;
+  width: var(
+    --frame-section-chevron-width,
+    var(--_frame-default-section-chevron-width-5b110fe219)
+  ); /* Height for .section-chevron. @token --frame-section-chevron-height */
+  --_frame-default-section-chevron-height-53ed2892ad: 16px;
+  height: var(
+    --frame-section-chevron-height,
+    var(--_frame-default-section-chevron-height-53ed2892ad)
+  );
+  flex: 0 0 16px;
+}
+</style>

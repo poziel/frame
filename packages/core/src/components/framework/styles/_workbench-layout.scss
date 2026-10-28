@@ -1,0 +1,340 @@
+/* Layout tracks share one coordinate system so the bottom panel can span either sidebar. */
+.layout-grid {
+  display: grid;
+  /* Space between children for .layout-grid. @token --frame-Layout-tracks-share-one-coordinate-system-so-the-bottom-panel-can-span-either-sidebar-layout-grid-gap */
+  --_frame-default-Layout-tracks-share-one-coordinate-system-so-the-bottom-panel-can-span-either-sidebar-layout-grid-gap-7ab5fd13ba: 0;
+  gap: var(
+    --frame-Layout-tracks-share-one-coordinate-system-so-the-bottom-panel-can-span-either-sidebar-layout-grid-gap,
+    var(
+      --_frame-default-Layout-tracks-share-one-coordinate-system-so-the-bottom-panel-can-span-either-sidebar-layout-grid-gap-7ab5fd13ba
+    )
+  );
+  position: relative;
+}
+.layout-grid > .primary-region {
+  width: auto;
+  /* Minimum width for .layout-grid > .primary-region. @token --frame-layout-grid-primary-region-min-width */
+  --_frame-default-layout-grid-primary-region-min-width-a0a2b3914e: 0;
+  min-width: var(
+    --frame-layout-grid-primary-region-min-width,
+    var(--_frame-default-layout-grid-primary-region-min-width-a0a2b3914e)
+  );
+  /* Minimum height for .layout-grid > .primary-region. @token --frame-layout-grid-primary-region-min-height */
+  --_frame-default-layout-grid-primary-region-min-height-0097077a56: 0;
+  min-height: var(
+    --frame-layout-grid-primary-region-min-height,
+    var(--_frame-default-layout-grid-primary-region-min-height-0097077a56)
+  );
+  position: relative;
+  grid-row: 1 / 3;
+}
+.layout-grid > .workspace-region {
+  grid-column: 3;
+  grid-row: 1;
+}
+.layout-grid .primary-region > .view-bar {
+  flex: 0 0 var(--rail-width);
+  width: var(--rail-width);
+}
+.layout-grid .primary-region > .side-panel {
+  height: var(--workspace-height);
+  /* Minimum height for .layout-grid .primary-region > .side-panel. @token --frame-layout-grid-primary-region-side-panel-min-height */
+  --_frame-default-layout-grid-primary-region-side-panel-min-height-a57b42af17: 0;
+  min-height: var(
+    --frame-layout-grid-primary-region-side-panel-min-height,
+    var(
+      --_frame-default-layout-grid-primary-region-side-panel-min-height-a57b42af17
+    )
+  );
+}
+.primary-region.panel-under {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% var(--workspace-height),
+    var(--rail-width) var(--workspace-height),
+    var(--rail-width) 100%,
+    0 100%
+  );
+}
+.primary-right .primary-region {
+  flex-direction: row-reverse;
+}
+.primary-right .primary-region.panel-under {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    calc(100% - var(--rail-width)) 100%,
+    calc(100% - var(--rail-width)) var(--workspace-height),
+    0 var(--workspace-height)
+  );
+}
+.primary-right .primary-region.expanded > .view-bar {
+  /* Right border for .primary-right .primary-region.expanded > .view-bar. @token --frame-primary-right-primary-region-expanded-view-bar-border-right */
+  --_frame-default-primary-right-primary-region-expanded-view-bar-border-right-ec64853cac: 0;
+  border-right: var(
+    --frame-primary-right-primary-region-expanded-view-bar-border-right,
+    var(
+      --_frame-default-primary-right-primary-region-expanded-view-bar-border-right-ec64853cac
+    )
+  );
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-left: 1px solid var(--frame-line);
+}
+.secondary-region,
+.bottom-region {
+  /* Minimum width for .secondary-region, .bottom-region. @token --frame-secondary-region-min-width */
+  --_frame-default-secondary-region-min-width-1be7d9c9cb: 0;
+  min-width: var(
+    --frame-secondary-region-min-width,
+    var(--_frame-default-secondary-region-min-width-1be7d9c9cb)
+  );
+  /* Minimum height for .secondary-region, .bottom-region. @token --frame-secondary-region-min-height */
+  --_frame-default-secondary-region-min-height-aa3dea0956: 0;
+  min-height: var(
+    --frame-secondary-region-min-height,
+    var(--_frame-default-secondary-region-min-height-aa3dea0956)
+  );
+  position: relative;
+  display: flex;
+}
+.secondary-region > .bottom-panel,
+.bottom-region > .bottom-panel {
+  flex: 1;
+  /* Height for .secondary-region > .bottom-panel, .bottom-region > .bottom-panel. @token --frame-secondary-region-bottom-panel-height */
+  --_frame-default-secondary-region-bottom-panel-height-258b6505ea: 100%;
+  height: var(
+    --frame-secondary-region-bottom-panel-height,
+    var(--_frame-default-secondary-region-bottom-panel-height-258b6505ea)
+  );
+  /* Maximum height for .secondary-region > .bottom-panel, .bottom-region > .bottom-panel. @token --frame-secondary-region-bottom-panel-max-height */
+  --_frame-default-secondary-region-bottom-panel-max-height-ccb1652744: 100%;
+  max-height: var(
+    --frame-secondary-region-bottom-panel-max-height,
+    var(--_frame-default-secondary-region-bottom-panel-max-height-ccb1652744)
+  );
+  /* Minimum height for .secondary-region > .bottom-panel, .bottom-region > .bottom-panel. @token --frame-secondary-region-bottom-panel-min-height */
+  --_frame-default-secondary-region-bottom-panel-min-height-3ed975619f: 0;
+  min-height: var(
+    --frame-secondary-region-bottom-panel-min-height,
+    var(--_frame-default-secondary-region-bottom-panel-min-height-3ed975619f)
+  );
+}
+.bottom-region {
+  grid-row: 2;
+  z-index: 2;
+}
+.layout-grid.narrow > .primary-region {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+}
+.layout-grid.narrow.primary-right > .primary-region {
+  left: auto;
+  right: 0;
+}
+.layout-grid.narrow > .secondary-region {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 4;
+}
+.layout-grid.narrow.primary-right > .secondary-region {
+  right: auto;
+  left: 0;
+}
+.canvas-centering {
+  display: flex;
+  flex: 1;
+  /* Minimum width for .canvas-centering. @token --frame-canvas-centering-min-width */
+  --_frame-default-canvas-centering-min-width-472d274bd4: 0;
+  min-width: var(
+    --frame-canvas-centering-min-width,
+    var(--_frame-default-canvas-centering-min-width-472d274bd4)
+  );
+  /* Minimum height for .canvas-centering. @token --frame-canvas-centering-min-height */
+  --_frame-default-canvas-centering-min-height-0ce4bedc53: 0;
+  min-height: var(
+    --frame-canvas-centering-min-height,
+    var(--_frame-default-canvas-centering-min-height-0ce4bedc53)
+  );
+}
+.canvas-centering.centered {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) 4px minmax(0, min(var(--center-width), calc(100% - 8px)))
+    4px minmax(0, 1fr);
+}
+.canvas-centering.centered > .workspace {
+  grid-column: 3;
+  /* Width for .canvas-centering.centered > .workspace. @token --frame-canvas-centering-centered-workspace-width */
+  --_frame-default-canvas-centering-centered-workspace-width-fad619d5a3: 100%;
+  width: var(
+    --frame-canvas-centering-centered-workspace-width,
+    var(--_frame-default-canvas-centering-centered-workspace-width-fad619d5a3)
+  );
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-left: 1px solid var(--frame-line);
+  border-right: 1px solid var(--frame-line);
+}
+.resize-handle {
+  position: absolute;
+  z-index: 6;
+  touch-action: none;
+  /* Outline for .resize-handle. @token --frame-resize-handle-outline */
+  --_frame-default-resize-handle-outline-f4da142033: none;
+  outline: var(
+    --frame-resize-handle-outline,
+    var(--_frame-default-resize-handle-outline-f4da142033)
+  );
+  user-select: none;
+}
+.resize-handle.vertical {
+  /* Width for .resize-handle.vertical. @token --frame-resize-handle-vertical-width */
+  --_frame-default-resize-handle-vertical-width-1e66c3af21: 6px;
+  width: var(
+    --frame-resize-handle-vertical-width,
+    var(--_frame-default-resize-handle-vertical-width-1e66c3af21)
+  );
+  top: 0;
+  bottom: 0;
+  cursor: col-resize;
+}
+.resize-handle.horizontal {
+  /* Height for .resize-handle.horizontal. @token --frame-resize-handle-horizontal-height */
+  --_frame-default-resize-handle-horizontal-height-71aa908dfa: 6px;
+  height: var(
+    --frame-resize-handle-horizontal-height,
+    var(--_frame-default-resize-handle-horizontal-height-71aa908dfa)
+  );
+  left: 0;
+  right: 0;
+  cursor: row-resize;
+}
+.resize-handle::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  /* Corner radius for .resize-handle::after. @token --frame-resize-handle-after-border-radius */
+  --_frame-default-resize-handle-after-border-radius-895629ba08: var(
+    --frame-radius-small
+  );
+  /* Small shared corner radius used by inset rows and compact elements. @token --frame-radius-small @context */
+  border-radius: var(
+    --frame-resize-handle-after-border-radius,
+    var(--_frame-default-resize-handle-after-border-radius-895629ba08)
+  );
+  /* Background for .resize-handle::after. @token --frame-resize-handle-after-background */
+  --_frame-default-resize-handle-after-background-68f8cc4e6f: transparent;
+  background: var(
+    --frame-resize-handle-after-background,
+    var(--_frame-default-resize-handle-after-background-68f8cc4e6f)
+  );
+}
+.resize-handle:hover::after,
+.resize-handle:focus-visible::after,
+.resize-handle.dragging::after {
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  background: var(--frame-accent);
+}
+.primary-resize {
+  right: 0;
+  height: var(--workspace-height);
+  bottom: auto !important;
+}
+.primary-right .primary-resize {
+  right: auto;
+  left: 0;
+}
+.secondary-resize {
+  left: 0;
+}
+.primary-right .secondary-resize {
+  left: auto;
+  right: 0;
+}
+.panel-resize {
+  top: -3px;
+}
+.canvas-centering > .resize-handle {
+  position: relative;
+  /* Width for .canvas-centering > .resize-handle. @token --frame-canvas-centering-resize-handle-width */
+  --_frame-default-canvas-centering-resize-handle-width-6765c9ed78: 4px;
+  width: var(
+    --frame-canvas-centering-resize-handle-width,
+    var(--_frame-default-canvas-centering-resize-handle-width-6765c9ed78)
+  );
+}
+.canvas-centering > .center-left {
+  grid-column: 2;
+  grid-row: 1;
+}
+.canvas-centering > .center-right {
+  grid-column: 4;
+  grid-row: 1;
+}
+.canvas-centering > .resize-handle::after {
+  inset: 0 1px;
+}
+.compact .workbench-body {
+  /* Internal spacing for .compact .workbench-body. @token --frame-compact-workbench-body-padding */
+  --_frame-default-compact-workbench-body-padding-5d7c10461e: 0;
+  padding: var(
+    --frame-compact-workbench-body-padding,
+    var(--_frame-default-compact-workbench-body-padding-5d7c10461e)
+  );
+}
+.compact .canvas-container,
+.compact .primary-region,
+.compact .bottom-panel {
+  /* Corner radius for .compact .canvas-container, .compact .primary-region, .compact .bottom-panel. @token --frame-compact-canvas-container-border-radius */
+  --_frame-default-compact-canvas-container-border-radius-ed10260111: 0;
+  border-radius: var(
+    --frame-compact-canvas-container-border-radius,
+    var(--_frame-default-compact-canvas-container-border-radius-ed10260111)
+  );
+}
+.compact .status-bar {
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-top: 1px solid var(--frame-line);
+}
+.compact .titlebar {
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-bottom: 1px solid var(--frame-line);
+}
+.compact .layout-grid {
+  /* Space between columns for .compact .layout-grid. @token --frame-compact-layout-grid-column-gap */
+  --_frame-default-compact-layout-grid-column-gap-8001c3bcaa: 0;
+  column-gap: var(
+    --frame-compact-layout-grid-column-gap,
+    var(--_frame-default-compact-layout-grid-column-gap-8001c3bcaa)
+  );
+  /* Space between rows for .compact .layout-grid. @token --frame-compact-layout-grid-row-gap */
+  --_frame-default-compact-layout-grid-row-gap-91dfce7b54: 0;
+  row-gap: var(
+    --frame-compact-layout-grid-row-gap,
+    var(--_frame-default-compact-layout-grid-row-gap-91dfce7b54)
+  );
+}
+.compact .canvas-container,
+.compact .primary-region,
+.compact .bottom-panel {
+  /* Top border for .compact .canvas-container, .compact .primary-region, .compact .bottom-panel. @token --frame-compact-canvas-container-border-top */
+  --_frame-default-compact-canvas-container-border-top-51f8a1a4c2: 0;
+  border-top: var(
+    --frame-compact-canvas-container-border-top,
+    var(--_frame-default-compact-canvas-container-border-top-51f8a1a4c2)
+  );
+}
+.compact .view-bar {
+  /* Top internal spacing for .compact .view-bar. @token --frame-compact-view-bar-padding-top */
+  --_frame-default-compact-view-bar-padding-top-2d9d24b0c1: 2px;
+  padding-top: var(
+    --frame-compact-view-bar-padding-top,
+    var(--_frame-default-compact-view-bar-padding-top-2d9d24b0c1)
+  );
+}

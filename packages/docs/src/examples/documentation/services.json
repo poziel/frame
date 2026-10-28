@@ -920,7 +920,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Host callback that produces responses when the conversation explicitly\r\nsends.",
+        "description": "Host callback that produces responses when the conversation explicitly\nsends.",
         "control": "fixture",
         "references": [
           "ChatResponder"
@@ -1039,7 +1039,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Host callback that produces responses when the conversation explicitly\r\nsends.",
+        "description": "Host callback that produces responses when the conversation explicitly\nsends.",
         "control": "fixture",
         "references": [
           "ChatResponder"

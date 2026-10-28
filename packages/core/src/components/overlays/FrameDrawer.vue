@@ -17,7 +17,7 @@ import {
   type DrawerContentEmits,
 } from 'reka-ui';
 import {useOverlayBoundary, overlayLayerStyle} from './overlays';
-import '../shared/general-c.css';
+import './styles/surfaces.scss';
 
 defineOptions({inheritAttrs: false});
 
@@ -119,7 +119,7 @@ defineSlots<{
       >
         <DrawerContent
           v-bind="{...contentEvents, ...contentProps, ...$attrs}"
-          class="frame-general-dialog frame-advanced-popup frame-general-drawer"
+          class="frame-general-dialog frame-advanced-popup frame-general-drawer frame-general-surface frame-overlay-surface"
         >
           <DrawerTitle class="frame-general-title">{{ title }}</DrawerTitle>
           <DrawerDescription
@@ -140,3 +140,36 @@ defineSlots<{
     </DrawerPortal>
   </DrawerRoot>
 </template>
+
+<style lang="scss">
+.frame-general-drawer {
+  align-self: end;
+  width: min(640px, 100%);
+}
+
+.frame-general-drawer-layer[data-direction='up'] {
+  align-items: start;
+}
+
+.frame-general-drawer-layer[data-direction='down'] {
+  align-items: end;
+}
+
+.frame-general-drawer-layer[data-direction='left'] {
+  justify-items: start;
+}
+
+.frame-general-drawer-layer[data-direction='right'] {
+  justify-items: end;
+}
+
+.frame-general-drawer-layer[data-direction='up'] .frame-general-drawer {
+  align-self: start;
+}
+
+.frame-general-drawer-layer[data-direction='left'] .frame-general-drawer,
+.frame-general-drawer-layer[data-direction='right'] .frame-general-drawer {
+  align-self: stretch;
+  max-width: 380px;
+}
+</style>

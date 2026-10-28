@@ -235,7 +235,7 @@ function showConflicts() {
     </FrameDialog>
   </section>
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .frame-keybindings {
   box-sizing: border-box;
   display: flex;
@@ -254,6 +254,7 @@ function showConflicts() {
     --frame-keybindings-padding,
     var(--_frame-default-keybindings-padding-11b0e9a904)
   );
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
   color: var(--frame-text);
   font: inherit;
 }
@@ -268,6 +269,7 @@ function showConflicts() {
     var(--_frame-default-control-background-b9ae3de79a)
   );
   color: inherit;
+  /* Shared resting border color inherited by menus and form controls. @token --frame-border-color @context */
   border: 1px solid var(--frame-border-color);
   /* Corner radius for .shortcut-search. @token --frame-radius-medium */
   --_frame-default-radius-medium-d2eb911727: 4px;
@@ -304,6 +306,7 @@ th {
     --frame-keybindings-header-background,
     var(--_frame-default-keybindings-header-background-b34c4002e8)
   );
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
   color: var(--frame-text);
   font-weight: 600;
 }
@@ -319,6 +322,7 @@ td {
 }
 thead tr,
 tbody tr {
+  /* Shared resting border color inherited by menus and form controls. @token --frame-border-color @context */
   border-bottom: 1px solid var(--frame-border-color);
 }
 tr:nth-child(even) {
@@ -333,6 +337,7 @@ tr:nth-child(even) {
 }
 tbody tr:hover,
 tbody tr:focus-within {
+  /* Background of a selected application list row. @token --frame-list-selection-background @context */
   background: var(--frame-list-selection-background);
 }
 .shortcut-command {
@@ -340,6 +345,7 @@ tbody tr:focus-within {
 }
 small {
   display: block;
+  /* Secondary foreground for descriptions, hints, and visually subordinate content. @token --frame-muted @context */
   color: var(--frame-muted);
   font-size: 0.85em;
 }
@@ -425,6 +431,7 @@ tr:focus-within .shortcut-binding-actions {
   min-height: 20px;
 }
 .shortcut-conflicts {
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
   color: var(--frame-text);
   text-decoration: underline;
   font: inherit;
@@ -437,6 +444,7 @@ tr:focus-within .shortcut-binding-actions {
 }
 input:focus-visible,
 tr:focus-visible {
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
   outline: 1px solid var(--frame-accent);
   outline-offset: -1px;
 }

@@ -273,7 +273,7 @@ onBeforeUnmount(() => {
     ><div
       v-for="bar in bars"
       :key="bars.indexOf(bar)"
-      class="frame-overlay-scrollbar"
+      class="frame-overlay-scrollbar frame-overlay-interactive"
       :class="[bar.axis, {dragging}]"
       aria-hidden="true"
       :style="{
@@ -302,3 +302,77 @@ onBeforeUnmount(() => {
         " /></div
   ></Teleport>
 </template>
+
+<style lang="scss">
+.frame-overlay-scrollbar {
+  position: fixed;
+  z-index: 20;
+  /* Background for .frame-overlay-scrollbar. @token --frame-overlay-scrollbar-background */
+  --_frame-default-overlay-scrollbar-background-76482ac315: transparent;
+  background: var(
+    --frame-overlay-scrollbar-background,
+    var(--_frame-default-overlay-scrollbar-background-76482ac315)
+  );
+  touch-action: none;
+  user-select: none;
+}
+.frame-overlay-thumb {
+  position: absolute;
+  /* Background for .frame-overlay-thumb. @token --frame-overlay-thumb-background */
+  --_frame-default-overlay-thumb-background-f9565e81a0: #626a7077;
+  background: var(
+    --frame-overlay-thumb-background,
+    var(--_frame-default-overlay-thumb-background-f9565e81a0)
+  ); /* Corner radius for .frame-overlay-thumb. @token --frame-overlay-thumb-border-radius */
+  --_frame-default-overlay-thumb-border-radius-ccab8f0e26: var(
+    --frame-radius-medium
+  );
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(
+    --frame-overlay-thumb-border-radius,
+    var(--_frame-default-overlay-thumb-border-radius-ccab8f0e26)
+  );
+}
+.frame-overlay-scrollbar.y .frame-overlay-thumb {
+  left: 2px;
+  /* Width for .frame-overlay-scrollbar.y .frame-overlay-thumb. @token --frame-overlay-scrollbar-y-frame-overlay-thumb-width */
+  --_frame-default-overlay-scrollbar-y-frame-overlay-thumb-width-2a3bde8a7a: 8px;
+  width: var(
+    --frame-overlay-scrollbar-y-frame-overlay-thumb-width,
+    var(
+      --_frame-default-overlay-scrollbar-y-frame-overlay-thumb-width-2a3bde8a7a
+    )
+  );
+}
+.frame-overlay-scrollbar.x .frame-overlay-thumb {
+  top: 2px;
+  /* Height for .frame-overlay-scrollbar.x .frame-overlay-thumb. @token --frame-overlay-scrollbar-x-frame-overlay-thumb-height */
+  --_frame-default-overlay-scrollbar-x-frame-overlay-thumb-height-7c987a1f97: 8px;
+  height: var(
+    --frame-overlay-scrollbar-x-frame-overlay-thumb-height,
+    var(
+      --_frame-default-overlay-scrollbar-x-frame-overlay-thumb-height-7c987a1f97
+    )
+  );
+}
+.frame-overlay-scrollbar:hover .frame-overlay-thumb {
+  /* Background for .frame-overlay-scrollbar:hover .frame-overlay-thumb. @token --frame-overlay-scrollbar-hover-frame-overlay-thumb-background */
+  --_frame-default-overlay-scrollbar-hover-frame-overlay-thumb-background-c28c17d8fe: #79838aaa;
+  background: var(
+    --frame-overlay-scrollbar-hover-frame-overlay-thumb-background,
+    var(
+      --_frame-default-overlay-scrollbar-hover-frame-overlay-thumb-background-c28c17d8fe
+    )
+  );
+}
+.frame-overlay-scrollbar.dragging .frame-overlay-thumb {
+  /* Background for .frame-overlay-scrollbar.dragging .frame-overlay-thumb. @token --frame-overlay-scrollbar-dragging-frame-overlay-thumb-background */
+  --_frame-default-overlay-scrollbar-dragging-frame-overlay-thumb-background-46ec750e96: #8b969dcc;
+  background: var(
+    --frame-overlay-scrollbar-dragging-frame-overlay-thumb-background,
+    var(
+      --_frame-default-overlay-scrollbar-dragging-frame-overlay-thumb-background-46ec750e96
+    )
+  );
+}
+</style>

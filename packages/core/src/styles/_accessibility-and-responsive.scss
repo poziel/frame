@@ -1,0 +1,111 @@
+.sr-only {
+  position: absolute;
+  /* Width for .sr-only. @token --frame-sr-only-width */
+  --_frame-default-sr-only-width-7ba0e646f8: 1px;
+  width: var(
+    --frame-sr-only-width,
+    var(--_frame-default-sr-only-width-7ba0e646f8)
+  );
+  /* Height for .sr-only. @token --frame-sr-only-height */
+  --_frame-default-sr-only-height-47a61593bc: 1px;
+  height: var(
+    --frame-sr-only-height,
+    var(--_frame-default-sr-only-height-47a61593bc)
+  );
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.skip-link {
+  position: fixed;
+  left: 70px;
+  top: -50px;
+  /* Internal spacing for .skip-link. @token --frame-skip-link-padding */
+  --_frame-default-skip-link-padding-f8bb906a62: 10px;
+  padding: var(
+    --frame-skip-link-padding,
+    var(--_frame-default-skip-link-padding-f8bb906a62)
+  );
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  background: var(--frame-accent);
+  /* Foreground for .skip-link. @token --frame-skip-link-color */
+  --_frame-default-skip-link-color-da20738e69: #191b1d;
+  color: var(
+    --frame-skip-link-color,
+    var(--_frame-default-skip-link-color-da20738e69)
+  );
+  z-index: 20;
+}
+.skip-link:focus {
+  top: 5px;
+}
+@media (max-width: 700px) {
+  .navigation-container.expanded {
+    /* Width for .navigation-container.expanded. @token --frame-navigation-container-expanded-width-2 */
+    --_frame-default-navigation-container-expanded-width-2-3a6b4a48ab: 236px;
+    width: var(
+      --frame-navigation-container-expanded-width-2,
+      var(--_frame-default-navigation-container-expanded-width-2-3a6b4a48ab)
+    );
+  }
+  .command-tooltip {
+    flex-basis: 260px;
+  }
+  .titlebar-layout {
+    /* Right internal spacing for .titlebar-layout. @token --frame-titlebar-layout-padding-right-2 */
+    --_frame-default-titlebar-layout-padding-right-2-c5394ab014: 2px;
+    padding-right: var(
+      --frame-titlebar-layout-padding-right-2,
+      var(--_frame-default-titlebar-layout-padding-right-2-c5394ab014)
+    );
+  }
+}
+@media (max-width: 540px) {
+  .navigation-container.expanded {
+    position: absolute;
+    top: 1px;
+    bottom: 0;
+    left: 5px;
+    z-index: 3;
+    /* Elevation shadow for .navigation-container.expanded. @token --frame-navigation-container-expanded-box-shadow */
+    --_frame-default-navigation-container-expanded-box-shadow-d8669b0a1d: 10px 0
+      25px #0006;
+    box-shadow: var(
+      --frame-navigation-container-expanded-box-shadow,
+      var(--_frame-default-navigation-container-expanded-box-shadow-d8669b0a1d)
+    );
+  }
+  .navigation-container.expanded + .main-column {
+    /* Left outer spacing for .navigation-container.expanded + .main-column. @token --frame-navigation-container-expanded-main-column-margin-left */
+    --_frame-default-navigation-container-expanded-main-column-margin-left-a39f38446f: 46px;
+    margin-left: var(
+      --frame-navigation-container-expanded-main-column-margin-left,
+      var(
+        --_frame-default-navigation-container-expanded-main-column-margin-left-a39f38446f
+      )
+    );
+  }
+  .titlebar-drag {
+    /* Minimum width for .titlebar-drag. @token --frame-titlebar-drag-min-width-2 */
+    --_frame-default-titlebar-drag-min-width-2-d54e2063ce: 5px;
+    min-width: var(
+      --frame-titlebar-drag-min-width-2,
+      var(--_frame-default-titlebar-drag-min-width-2-d54e2063ce)
+    );
+  }
+  .command-context {
+    display: none;
+  }
+  .command-tooltip {
+    flex-basis: 140px;
+    /* Minimum width for .command-tooltip. @token --frame-command-tooltip-min-width */
+    --_frame-default-command-tooltip-min-width-62415ee97f: 70px;
+    min-width: var(
+      --frame-command-tooltip-min-width,
+      var(--_frame-default-command-tooltip-min-width-62415ee97f)
+    );
+  }
+  .status-workspace {
+    display: none;
+  }
+}

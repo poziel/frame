@@ -1,0 +1,35 @@
+.layout-grid.primary-right .primary-region.edge-regions > .view-bar {
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border: 1px solid var(--frame-line);
+}
+
+.layout-grid > .primary-region {
+  pointer-events: none;
+}
+.layout-grid .primary-region > .view-bar,
+.layout-grid .primary-region > .side-panel {
+  pointer-events: auto;
+}
+.layout-grid .primary-region.without-rail > .side-panel {
+  /* Corner radius for .layout-grid .primary-region.without-rail > .side-panel. @token --frame-layout-grid-primary-region-without-rail-side-panel-border-radius */
+  --_frame-default-layout-grid-primary-region-without-rail-side-panel-border-radius-d3252b8346: var(
+    --frame-radius-large
+  );
+  /* Large shared corner radius used by panel and menu containers. @token --frame-radius-large @context */
+  border-radius: var(
+    --frame-layout-grid-primary-region-without-rail-side-panel-border-radius,
+    var(
+      --_frame-default-layout-grid-primary-region-without-rail-side-panel-border-radius-d3252b8346
+    )
+  );
+}
+.compact .layout-grid .primary-region.without-rail > .side-panel {
+  /* Corner radius for .compact .layout-grid .primary-region.without-rail > .side-panel. @token --frame-compact-layout-grid-primary-region-without-rail-side-panel-border-radius */
+  --_frame-default-compact-layout-grid-primary-region-without-rail-side-panel-border-radius-1e61ac629a: 0;
+  border-radius: var(
+    --frame-compact-layout-grid-primary-region-without-rail-side-panel-border-radius,
+    var(
+      --_frame-default-compact-layout-grid-primary-region-without-rail-side-panel-border-radius-1e61ac629a
+    )
+  );
+}

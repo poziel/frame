@@ -10,6 +10,14 @@ own contents normally. Prefer scoped styles for component-private rules.
 Global theme infrastructure and intentionally shared stylesheet entry points
 remain global.
 
+Authored Core styles use `<style lang="scss">` or
+`<style scoped lang="scss">`. Adding the language must preserve an existing
+block's scoped/global behavior. Keep private SCSS inside the component by
+default, even when substantial. Load shared Sass tools with `@use` inside the
+style block. Separate sheets serve shared responsibilities. Relocating styles
+requires verifying loading and cascade behavior. See [CSS and SCSS](css.md) for reuse conventions and
+[style architecture](../../styling/style-architecture.md) for current ownership.
+
 Use Composition API refs, computed values, and lifecycle hooks for component-local
 presentation. Stateful framework controllers belong in classes; wrapping an
 entire setup function in a class is not required. Do not move framework state

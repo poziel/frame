@@ -1,0 +1,509 @@
+.workspace-tab-bar {
+  display: flex;
+  min-width: 0;
+  /* Minimum height for .workspace-tab-bar. @token --frame-workspace-tab-height */
+  --_frame-default-workspace-tab-height-1e40aeec45: 34px;
+  min-height: var(
+    --frame-workspace-tab-height,
+    var(--_frame-default-workspace-tab-height-1e40aeec45)
+  );
+  /* Background for .workspace-tab-bar. @token --frame-workspace-tab-strip */
+  --_frame-default-workspace-tab-strip-873f391f24: color-mix(
+    in srgb,
+    var(--frame-canvas) 84%,
+    var(--frame-text) 16%
+  );
+  /* Content canvas background used by workspace panes and recessed content. @token --frame-canvas @context */
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  background: var(
+    --frame-workspace-tab-strip,
+    var(--_frame-default-workspace-tab-strip-873f391f24)
+  );
+  border-bottom: 0;
+}
+
+.workspace-tabs {
+  flex: none;
+  min-width: 0;
+  position: relative;
+}
+
+.workspace-tab-scroll {
+  min-width: 0;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+}
+
+.workspace-tab-list {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  /* Minimum height for .workspace-tab-list. @token --frame-workspace-tab-height */
+  --_frame-default-workspace-tab-height-1e40aeec45: 34px;
+  min-height: var(
+    --frame-workspace-tab-height,
+    var(--_frame-default-workspace-tab-height-1e40aeec45)
+  );
+}
+
+.workspace-tab-item {
+  display: flex;
+  align-items: stretch;
+  flex: none;
+  /* Maximum width for .workspace-tab-item. @token --frame-workspace-tab-max-width */
+  --_frame-default-workspace-tab-max-width-56449fdce6: 240px;
+  max-width: var(
+    --frame-workspace-tab-max-width,
+    var(--_frame-default-workspace-tab-max-width-56449fdce6)
+  );
+  /* Foreground for .workspace-tab-item. @token --frame-workspace-tab-text */
+  --_frame-default-workspace-tab-text-dfc66db94e: var(--frame-muted);
+  /* Secondary foreground for descriptions, hints, and visually subordinate content. @token --frame-muted @context */
+  color: var(
+    --frame-workspace-tab-text,
+    var(--_frame-default-workspace-tab-text-dfc66db94e)
+  );
+  /* Value of border-inline-end for .workspace-tab-item. @token --frame-workspace-tab-border */
+  --_frame-default-workspace-tab-border-548438f37f: var(--frame-line);
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-inline-end: 1px solid
+    var(
+      --frame-workspace-tab-border,
+      var(--_frame-default-workspace-tab-border-548438f37f)
+    );
+}
+
+.workspace-tab-item.selected {
+  /* Background for .workspace-tab-item.selected. @token --frame-workspace-tab-active */
+  --_frame-default-workspace-tab-active-dba763185b: var(--frame-canvas);
+  /* Content canvas background used by workspace panes and recessed content. @token --frame-canvas @context */
+  background: var(
+    --frame-workspace-tab-active,
+    var(--_frame-default-workspace-tab-active-dba763185b)
+  );
+  /* Foreground for .workspace-tab-item.selected. @token --frame-workspace-tab-active-text */
+  --_frame-default-workspace-tab-active-text-3f3ede9e3a: var(--frame-text);
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  color: var(
+    --frame-workspace-tab-active-text,
+    var(--_frame-default-workspace-tab-active-text-3f3ede9e3a)
+  );
+  /* Corner radius for .workspace-tab-item.selected. @token --frame-panel-radius */
+  --_frame-default-panel-radius-47ae5f65f1: 6px;
+  /* Corner radius for .workspace-tab-item.selected. @token --frame-workspace-tab-radius */
+  --_frame-default-workspace-tab-radius-321c0db175: var(
+    --frame-panel-radius,
+    var(--_frame-default-panel-radius-47ae5f65f1)
+  );
+  border-radius: var(
+      --frame-workspace-tab-radius,
+      var(--_frame-default-workspace-tab-radius-321c0db175)
+    )
+    var(
+      --frame-workspace-tab-radius,
+      var(--_frame-default-workspace-tab-radius-321c0db175)
+    )
+    0 0;
+}
+
+.workspace-tab-item:hover {
+  /* Foreground for .workspace-tab-item:hover. @token --frame-workspace-tab-active-text */
+  --_frame-default-workspace-tab-active-text-3f3ede9e3a: var(--frame-text);
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  color: var(
+    --frame-workspace-tab-active-text,
+    var(--_frame-default-workspace-tab-active-text-3f3ede9e3a)
+  );
+}
+
+.workspace-tab-trigger {
+  display: flex;
+  align-items: center;
+  /* Space between children for .workspace-tab-trigger. @token --frame-workspace-tab-gap */
+  --_frame-default-workspace-tab-gap-0416703cfa: 6px;
+  gap: var(
+    --frame-workspace-tab-gap,
+    var(--_frame-default-workspace-tab-gap-0416703cfa)
+  );
+  min-width: 0;
+  /* Internal spacing for .workspace-tab-trigger. @token --frame-workspace-tab-padding */
+  --_frame-default-workspace-tab-padding-dbc41ef621: 0 10px;
+  padding: var(
+    --frame-workspace-tab-padding,
+    var(--_frame-default-workspace-tab-padding-dbc41ef621)
+  );
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  /* Text size for .workspace-tab-trigger. @token --frame-workspace-tab-font-size */
+  --_frame-default-workspace-tab-font-size-2b76b4e191: 12px;
+  font-size: var(
+    --frame-workspace-tab-font-size,
+    var(--_frame-default-workspace-tab-font-size-2b76b4e191)
+  );
+  cursor: pointer;
+}
+
+.workspace-tab-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workspace-tab-icon {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.workspace-tab-action {
+  display: grid;
+  place-items: center;
+  align-self: center;
+  flex: none;
+  /* Width for .workspace-tab-action. @token --frame-workspace-tab-action-size */
+  --_frame-default-workspace-tab-action-size-5c236f1961: 24px;
+  width: var(
+    --frame-workspace-tab-action-size,
+    var(--_frame-default-workspace-tab-action-size-5c236f1961)
+  );
+  /* Width for .workspace-tab-action. @token --frame-workspace-tab-action-size */
+  --_frame-default-workspace-tab-action-size-5c236f1961: 24px;
+  height: var(
+    --frame-workspace-tab-action-size,
+    var(--_frame-default-workspace-tab-action-size-5c236f1961)
+  );
+  margin-inline-end: 4px;
+  border: 0;
+  /* Corner radius for .workspace-tab-action. @token --frame-radius-small */
+  --_frame-default-radius-small-a00d8c947a: 3px;
+  border-radius: var(
+    --frame-radius-small,
+    var(--_frame-default-radius-small-a00d8c947a)
+  );
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.workspace-tab-action:hover {
+  /* Background for .workspace-tab-action:hover. @token --frame-workspace-tab-action-hover */
+  --_frame-default-workspace-tab-action-hover-3a3f54a287: color-mix(
+    in srgb,
+    var(--frame-text) 12%,
+    transparent
+  );
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  background: var(
+    --frame-workspace-tab-action-hover,
+    var(--_frame-default-workspace-tab-action-hover-3a3f54a287)
+  );
+}
+
+.workspace-tab-action:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.workspace-tab-trigger:focus-visible,
+.workspace-tab-action:focus-visible {
+  /* Outline for .workspace-tab-trigger:focus-visible, .workspace-tab-action:focus-visible. @token --frame-focus */
+  --_frame-default-focus-362d088478: var(--frame-accent);
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  outline: 1px solid var(--frame-focus, var(--_frame-default-focus-362d088478));
+  outline-offset: -2px;
+}
+
+.workspace-tab-actions {
+  display: flex;
+  align-items: center;
+  flex: none;
+  margin-inline-start: auto;
+}
+
+.workspace-tab-content-host,
+.workspace-tab-content {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.workspace-tab-content > .pane-placeholder {
+  display: grid;
+  place-items: center;
+  flex: 1;
+  min-height: 0;
+}
+
+.workspace-tab-item .workspace-tab-close {
+  opacity: 0;
+}
+
+.workspace-tab-item.selected .workspace-tab-close,
+.workspace-tab-item:hover .workspace-tab-close,
+.workspace-tab-close:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.workspace-tab-measure {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  display: flex;
+  width: max-content;
+  inset: 0 auto auto 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.workspace-tab-measure .workspace-tab-item {
+  flex: none;
+}
+
+.workspace-tab-overflow {
+  align-self: center;
+  margin-inline: 4px;
+}
+
+.workspace-tab-item {
+  position: relative;
+}
+
+.workspace-tab-item.drop-before::before,
+.workspace-tab-drop-end {
+  content: '';
+  flex: none;
+  width: 2px;
+  /* Background for .workspace-tab-item.drop-before::before, .workspace-tab-drop-end. @token --frame-workspace-tab-drop-color */
+  --_frame-default-workspace-tab-drop-color-056c4306e0: var(--frame-accent);
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  background: var(
+    --frame-workspace-tab-drop-color,
+    var(--_frame-default-workspace-tab-drop-color-056c4306e0)
+  );
+}
+
+.workspace-tab-item.drop-before::before {
+  position: absolute;
+  inset: 2px auto 2px 0;
+  z-index: 2;
+}
+
+.workspace-tab-drop-end {
+  align-self: stretch;
+  margin-block: 2px;
+}
+
+.workspace-panes .workspace-pane {
+  /* Corner radius for .workspace-panes .workspace-pane. @token --frame-panel-radius */
+  --_frame-default-panel-radius-47ae5f65f1: 6px;
+  /* Corner radius for .workspace-panes .workspace-pane. @token --frame-workspace-pane-radius */
+  --_frame-default-workspace-pane-radius-f7dc3945a7: var(
+    --frame-panel-radius,
+    var(--_frame-default-panel-radius-47ae5f65f1)
+  );
+  border-radius: var(
+    --frame-workspace-pane-radius,
+    var(--_frame-default-workspace-pane-radius-f7dc3945a7)
+  );
+}
+
+.workspace-panes .workspace-pane.multiple {
+  /* Corner radius for .workspace-panes .workspace-pane.multiple. @token --frame-panel-radius */
+  --_frame-default-panel-radius-47ae5f65f1: 6px;
+  /* Corner radius for .workspace-panes .workspace-pane.multiple. @token --frame-workspace-pane-radius */
+  --_frame-default-workspace-pane-radius-f7dc3945a7: var(
+    --frame-panel-radius,
+    var(--_frame-default-panel-radius-47ae5f65f1)
+  );
+  border-radius: var(
+    --frame-workspace-pane-radius,
+    var(--_frame-default-workspace-pane-radius-f7dc3945a7)
+  );
+}
+
+.workspace-pane-content {
+  position: relative;
+}
+
+.workspace-drop-target::after {
+  content: 'Move tab here';
+  display: grid;
+  place-items: center;
+  position: absolute;
+  inset: 4px;
+  z-index: 5;
+  pointer-events: none;
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  border: 2px solid var(--frame-accent);
+  /* Corner radius for .workspace-drop-target::after. @token --frame-panel-radius */
+  --_frame-default-panel-radius-47ae5f65f1: 6px;
+  border-radius: var(
+    --frame-panel-radius,
+    var(--_frame-default-panel-radius-47ae5f65f1)
+  );
+  background: color-mix(in srgb, var(--frame-accent) 15%, transparent);
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  color: var(--frame-text);
+  font-size: 12px;
+}
+
+.workspace-tab-item {
+  overflow: hidden;
+}
+
+.workspace-tab-item .workspace-tab-action.frame-icon-button {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.workspace-tab-item.icon-only .workspace-tab-trigger {
+  /* Width for .workspace-tab-item.icon-only .workspace-tab-trigger. @token --frame-workspace-tab-icon-width */
+  --_frame-default-workspace-tab-icon-width-19184e2e82: 36px;
+  width: var(
+    --frame-workspace-tab-icon-width,
+    var(--_frame-default-workspace-tab-icon-width-19184e2e82)
+  );
+  padding: 0;
+  justify-content: center;
+}
+
+.workspace-tab-item.icon-only > .workspace-tab-action,
+.workspace-tab-item.icon-only > .tooltip-trigger {
+  position: absolute;
+  inset-inline-start: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+.workspace-tab-item.icon-only.has-close:is(.selected, :hover, :focus-within)
+  .workspace-tab-trigger
+  > *,
+.workspace-tab-item.icon-only.pinned .workspace-tab-trigger > * {
+  visibility: hidden;
+}
+
+.menu-row:has(.workspace-overflow-close) {
+  display: flex;
+  align-items: center;
+}
+
+.menu-row:has(.workspace-overflow-close) > [role^='menuitem'] {
+  flex: 1;
+  min-width: 0;
+}
+
+.workspace-overflow-close {
+  flex: none;
+  opacity: 0;
+  margin-inline: 4px;
+}
+
+.menu-row:hover .workspace-overflow-close,
+.workspace-overflow-close:focus-visible {
+  opacity: 1;
+}
+
+.workspace-tab-item > .tooltip-trigger {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  flex: none;
+  margin-inline-end: 4px;
+}
+
+.workspace-tab-item.icon-only > .tooltip-trigger {
+  margin: 0;
+}
+
+.menu-row > .tooltip-trigger:has(.workspace-overflow-close) {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+/* One visual row, with sibling buttons so closing never activates the menu item. */
+.frame-menu .menu-row:has(.workspace-overflow-close) {
+  position: relative;
+  /* Fallback for: Corner radius of a select option row. @token --frame-menu-row-button-border-radius */
+  --_frame-default-menu-row-button-border-radius-37f3ed5642: var(
+    --frame-radius-medium
+  );
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(
+    --frame-menu-row-button-border-radius,
+    var(--_frame-default-menu-row-button-border-radius-37f3ed5642)
+  );
+}
+
+.frame-menu
+  .menu-row:has(.workspace-overflow-close):is(
+    :hover,
+    :focus-within,
+    :has([data-highlighted])
+  ) {
+  /* Neutral hover and highlight fill for ordinary menu rows. @token --frame-menu-hover @context */
+  background: var(--frame-menu-hover);
+}
+
+.frame-menu .menu-row:has(.workspace-overflow-close) > button.frame-button {
+  padding-inline-end: 36px;
+  background: transparent;
+}
+
+.frame-menu
+  .menu-row:has(.workspace-overflow-close)
+  > button.frame-button:is([data-highlighted], :hover, :focus-visible) {
+  background: transparent;
+}
+
+.frame-menu .menu-row > .tooltip-trigger:has(.workspace-overflow-close) {
+  position: absolute;
+  inset-inline-end: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.frame-menu .workspace-overflow-close {
+  margin: 0;
+}
+
+.workspace-tab-close-slot {
+  position: relative;
+  display: grid;
+  align-items: center;
+  flex: none;
+}
+
+.workspace-tab-dirty-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  left: 8px;
+  top: calc(50% - 4px);
+  pointer-events: none;
+}
+
+.workspace-tab-item.dirty .workspace-tab-close {
+  opacity: 0;
+}
+
+.workspace-tab-close-slot:hover .workspace-tab-close,
+.workspace-tab-close-slot:focus-within .workspace-tab-close {
+  opacity: 1;
+}
+
+.workspace-tab-close-slot:hover .workspace-tab-dirty-dot,
+.workspace-tab-close-slot:focus-within .workspace-tab-dirty-dot {
+  opacity: 0;
+}

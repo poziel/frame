@@ -38,3 +38,16 @@ defineSlots<{
     <slot />
   </QuickOverlay>
 </template>
+
+<style lang="scss">
+.quick-panel-actions {
+  display: flex;
+  position: absolute;
+  right: 0;
+  align-items: center;
+}
+
+.quick-panel-header {
+  flex-shrink: 0;
+}
+</style>

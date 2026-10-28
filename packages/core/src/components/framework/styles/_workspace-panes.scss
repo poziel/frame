@@ -1,0 +1,131 @@
+.workspace-banner {
+  grid-row: 1;
+  /* Minimum width for .workspace-banner. @token --frame-workspace-banner-min-width */
+  --_frame-default-workspace-banner-min-width-3e419d729b: 0;
+  min-width: var(
+    --frame-workspace-banner-min-width,
+    var(--_frame-default-workspace-banner-min-width-3e419d729b)
+  );
+  /* Minimum height for .workspace-banner. @token --frame-workspace-banner-min-height */
+  --_frame-default-workspace-banner-min-height-a615f78c32: 0;
+  min-height: var(
+    --frame-workspace-banner-min-height,
+    var(--_frame-default-workspace-banner-min-height-a615f78c32)
+  );
+  overflow: auto;
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border: 1px solid var(--frame-line);
+  /* Corner radius for .workspace-banner. @token --frame-workspace-banner-border-radius */
+  --_frame-default-workspace-banner-border-radius-f77a75c6f4: var(
+    --frame-radius-large
+  );
+  /* Large shared corner radius used by panel and menu containers. @token --frame-radius-large @context */
+  border-radius: var(
+    --frame-workspace-banner-border-radius,
+    var(--_frame-default-workspace-banner-border-radius-f77a75c6f4)
+  );
+  /* Neutral raised surface behind grouped content and control compositions. @token --frame-surface @context */
+  background: var(--frame-surface);
+  z-index: 2;
+}
+
+.compact .workspace-banner {
+  /* Corner radius for .compact .workspace-banner. @token --frame-compact-workspace-banner-border-radius */
+  --_frame-default-compact-workspace-banner-border-radius-7048e91963: 0;
+  border-radius: var(
+    --frame-compact-workspace-banner-border-radius,
+    var(--_frame-default-compact-workspace-banner-border-radius-7048e91963)
+  );
+}
+
+.workspace-pane-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Internal spacing for .workspace-pane-header. @token --frame-workspace-pane-header-padding */
+  --_frame-default-workspace-pane-header-padding-9d807286dc: 0 8px 0 12px;
+  padding: var(
+    --frame-workspace-pane-header-padding,
+    var(--_frame-default-workspace-pane-header-padding-9d807286dc)
+  );
+  /* Minimum height for .workspace-pane-header. @token --frame-workspace-pane-header-min-height */
+  --_frame-default-workspace-pane-header-min-height-ad8713434e: 30px;
+  min-height: var(
+    --frame-workspace-pane-header-min-height,
+    var(--_frame-default-workspace-pane-header-min-height-ad8713434e)
+  );
+  /* Secondary foreground for descriptions, hints, and visually subordinate content. @token --frame-muted @context */
+  color: var(--frame-muted);
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-bottom: 1px solid var(--frame-line);
+  /* Text size for .workspace-pane-header. @token --frame-workspace-pane-header-font-size */
+  --_frame-default-workspace-pane-header-font-size-a787338ce3: 11px;
+  font-size: var(
+    --frame-workspace-pane-header-font-size,
+    var(--_frame-default-workspace-pane-header-font-size-a787338ce3)
+  );
+}
+
+.workspace-pane-header > span {
+  /* Minimum width for .workspace-pane-header > span. @token --frame-workspace-pane-header-span-min-width */
+  --_frame-default-workspace-pane-header-span-min-width-2feaa9d657: 0;
+  min-width: var(
+    --frame-workspace-pane-header-span-min-width,
+    var(--_frame-default-workspace-pane-header-span-min-width-2feaa9d657)
+  );
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.workspace-pane-host,
+.workspace-pane-content {
+  flex: 1;
+  /* Minimum width for .workspace-pane-host, .workspace-pane-content. @token --frame-workspace-pane-host-min-width */
+  --_frame-default-workspace-pane-host-min-width-977fb9ddf9: 0;
+  min-width: var(
+    --frame-workspace-pane-host-min-width,
+    var(--_frame-default-workspace-pane-host-min-width-977fb9ddf9)
+  );
+  /* Minimum height for .workspace-pane-host, .workspace-pane-content. @token --frame-workspace-pane-host-min-height */
+  --_frame-default-workspace-pane-host-min-height-cb32bfe256: 0;
+  min-height: var(
+    --frame-workspace-pane-host-min-height,
+    var(--_frame-default-workspace-pane-host-min-height-cb32bfe256)
+  );
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.workspace-pane-content > .workspace {
+  /* Minimum height for .workspace-pane-content > .workspace. @token --frame-workspace-pane-content-workspace-min-height */
+  --_frame-default-workspace-pane-content-workspace-min-height-23fdf9ea0d: 100%;
+  min-height: var(
+    --frame-workspace-pane-content-workspace-min-height,
+    var(--_frame-default-workspace-pane-content-workspace-min-height-23fdf9ea0d)
+  );
+  flex-shrink: 0;
+}
+
+.sample-free-button {
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border: 1px solid var(--frame-line);
+  /* Internal spacing for .sample-free-button. @token --frame-sample-free-button-padding */
+  --_frame-default-sample-free-button-padding-e2fa4e443f: 6px 10px;
+  padding: var(
+    --frame-sample-free-button-padding,
+    var(--_frame-default-sample-free-button-padding-e2fa4e443f)
+  );
+  /* Primary foreground for readable text and icons across shell and application content. @token --frame-text @context */
+  color: var(--frame-text);
+  /* Corner radius for .sample-free-button. @token --frame-sample-free-button-border-radius */
+  --_frame-default-sample-free-button-border-radius-e3b842393a: var(
+    --frame-radius-medium
+  );
+  /* Medium shared corner radius used by ordinary controls. @token --frame-radius-medium @context */
+  border-radius: var(
+    --frame-sample-free-button-border-radius,
+    var(--_frame-default-sample-free-button-border-radius-e3b842393a)
+  );
+}

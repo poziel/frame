@@ -105,18 +105,18 @@ Use the shared theme variables in application content. Component-specific declar
 
 <!-- frame:generated styles="file-drop-zone" -->
 
-| CSS variable                 | Theme path                 | Default expression                                                  | Purpose                                                                                    | Context                    |
-| ---------------------------- | -------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | -------------------------- |
-| `--frame-text`               | `frame.text`               | `#cccccc`                                                           | Primary foreground for readable text and icons across shell and application content.       | `.frame-file-drop-zone`    |
-| `--frame-gap`                | `frame.gap`                | `6px`                                                               | Space between file presentation elements.                                                  | `.frame-file-presentation` |
-| `--frame-content-padding`    | `frame.content.padding`    | `12px`                                                              | Inset inside the file drop-zone presentation.                                              | `.frame-file-presentation` |
-| `--frame-control-radius`     | `frame.control.radius`     | `4px`                                                               | Corner radius of the file drop-zone presentation and drag overlay.                         | `.frame-file-presentation` |
-| `--frame-control-border`     | `frame.control.border`     | `var(--frame-border-color)`                                         | Resting border color of form controls, independently overridable from menu borders.        | `.frame-file-presentation` |
-| `--frame-control-radius`     | `frame.control.radius`     | `4px`                                                               | Corner radius of the file drop-zone presentation and drag overlay.                         | `.frame-file-overlay`      |
-| `--frame-accent`             | `frame.accent`             | `#0078d4`                                                           | Shared interaction color for keyboard focus, active actions, and accent-filled controls.   | `.frame-file-overlay`      |
-| `--frame-overlay-background` | `frame.overlay.background` | `color-mix(in srgb, var(--frame-overlay-surface) 83%, transparent)` | Shared translucent fill for floating surfaces over the application canvas.                 | `.frame-file-overlay`      |
-| `--frame-text`               | `frame.text`               | `#cccccc`                                                           | Primary foreground for readable text and icons across shell and application content.       | `.frame-file-overlay`      |
-| `--frame-danger`             | `frame.danger`             | `#f48771`                                                           | Error and destructive-action color used for validation messages and invalid field borders. | `.frame-file-errors`       |
+| CSS variable                 | Theme path                 | Default expression                        | Purpose                                                                                    | Context                    |
+| ---------------------------- | -------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------ | -------------------------- |
+| `--frame-danger`             | `frame.danger`             | No declared default; supplied by context. | Error and destructive-action color used for validation messages and invalid field borders. | `.frame-file-errors`       |
+| `--frame-text`               | `frame.text`               | No declared default; supplied by context. | Primary foreground for readable text and icons across shell and application content.       | `.frame-file-drop-zone`    |
+| `--frame-gap`                | `frame.gap`                | `6px`                                     | Space between children for .frame-file-presentation.                                       | `.frame-file-presentation` |
+| `--frame-content-padding`    | `frame.content.padding`    | `12px`                                    | Inset inside the file drop-zone presentation.                                              | `.frame-file-presentation` |
+| `--frame-control-radius`     | `frame.control.radius`     | `4px`                                     | Corner radius of the file drop-zone presentation and drag overlay.                         | `.frame-file-presentation` |
+| `--frame-control-border`     | `frame.control.border`     | No declared default; supplied by context. | Resting border color of form controls, independently overridable from menu borders.        | `.frame-file-presentation` |
+| `--frame-control-radius`     | `frame.control.radius`     | `4px`                                     | Corner radius of the file drop-zone presentation and drag overlay.                         | `.frame-file-overlay`      |
+| `--frame-accent`             | `frame.accent`             | No declared default; supplied by context. | Shared interaction color for keyboard focus, active actions, and accent-filled controls.   | `.frame-file-overlay`      |
+| `--frame-overlay-background` | `frame.overlay.background` | No declared default; supplied by context. | Shared translucent fill for floating surfaces over the application canvas.                 | `.frame-file-overlay`      |
+| `--frame-text`               | `frame.text`               | No declared default; supplied by context. | Primary foreground for readable text and icons across shell and application content.       | `.frame-file-overlay`      |
 
 Expressions are preserved as written; their computed values depend on the active theme and component state.
 

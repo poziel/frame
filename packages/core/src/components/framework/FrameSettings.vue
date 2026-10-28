@@ -126,7 +126,7 @@ defineSlots<{
     ></div
   >
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .frame-settings-surface {
   display: flex;
   flex-direction: column;
@@ -162,5 +162,106 @@ defineSlots<{
   );
   white-space: normal;
   overflow-wrap: anywhere;
+}
+</style>
+
+<style lang="scss">
+.frame-settings {
+  display: grid;
+  grid-template-columns: minmax(140px, 210px) minmax(0, 1fr);
+  /* Height for .frame-settings. @token --frame-settings-height */
+  --_frame-default-settings-height-b3d3edc7f1: 100%;
+  height: var(
+    --frame-settings-height,
+    var(--_frame-default-settings-height-b3d3edc7f1)
+  );
+  /* Minimum height for .frame-settings. @token --frame-settings-min-height */
+  --_frame-default-settings-min-height-058d160f74: 0;
+  min-height: var(
+    --frame-settings-min-height,
+    var(--_frame-default-settings-min-height-058d160f74)
+  );
+}
+
+.frame-settings .settings-navigation {
+  overflow: auto;
+  /* Internal spacing for .frame-settings .settings-navigation. @token --frame-settings-settings-navigation-padding */
+  --_frame-default-settings-settings-navigation-padding-5a0c822a8f: 18px 8px;
+  padding: var(
+    --frame-settings-settings-navigation-padding,
+    var(--_frame-default-settings-settings-navigation-padding-5a0c822a8f)
+  );
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-right: 1px solid var(--frame-line);
+}
+
+.frame-settings .settings-content {
+  overflow: auto;
+  /* Internal spacing for .frame-settings .settings-content. @token --frame-settings-settings-content-padding */
+  --_frame-default-settings-settings-content-padding-15e66111f9: 24px 30px;
+  padding: var(
+    --frame-settings-settings-content-padding,
+    var(--_frame-default-settings-settings-content-padding-15e66111f9)
+  );
+  /* Minimum width for .frame-settings .settings-content. @token --frame-settings-settings-content-min-width */
+  --_frame-default-settings-settings-content-min-width-54ddd06392: 0;
+  min-width: var(
+    --frame-settings-settings-content-min-width,
+    var(--_frame-default-settings-settings-content-min-width-54ddd06392)
+  );
+}
+
+.settings-content h2 {
+  /* Text size for .settings-content h2. @token --frame-settings-content-h2-font-size */
+  --_frame-default-settings-content-h2-font-size-d5b7a2a005: 24px;
+  font-size: var(
+    --frame-settings-content-h2-font-size,
+    var(--_frame-default-settings-content-h2-font-size-d5b7a2a005)
+  );
+  /* Text weight for .settings-content h2. @token --frame-settings-content-h2-font-weight */
+  --_frame-default-settings-content-h2-font-weight-3a477e2709: 600;
+  font-weight: var(
+    --frame-settings-content-h2-font-weight,
+    var(--_frame-default-settings-content-h2-font-weight-3a477e2709)
+  );
+  /* Outer spacing for .settings-content h2. @token --frame-settings-content-h2-margin */
+  --_frame-default-settings-content-h2-margin-10c09bb11a: 0 0 24px;
+  margin: var(
+    --frame-settings-content-h2-margin,
+    var(--_frame-default-settings-content-h2-margin-10c09bb11a)
+  );
+}
+
+@media (max-width: 600px) {
+  .frame-settings {
+    grid-template-columns: 135px minmax(0, 1fr);
+  }
+  .frame-settings .settings-content {
+    /* Internal spacing for .frame-settings .settings-content. @token --frame-settings-settings-content-padding-2 */
+    --_frame-default-settings-settings-content-padding-2-2b44e15cd3: 18px 14px;
+    padding: var(
+      --frame-settings-settings-content-padding-2,
+      var(--_frame-default-settings-settings-content-padding-2-2b44e15cd3)
+    );
+  }
+}
+
+.frame-settings .settings-navigation,
+.frame-settings .settings-content {
+  /* Height for .frame-settings .settings-navigation, .frame-settings .settings-content. @token --frame-settings-settings-navigation-height */
+  --_frame-default-settings-settings-navigation-height-683dd344fc: 100%;
+  height: var(
+    --frame-settings-settings-navigation-height,
+    var(--_frame-default-settings-settings-navigation-height-683dd344fc)
+  );
+}
+
+.frame-settings .settings-navigation {
+  /* Internal spacing for .frame-settings .settings-navigation. @token --frame-settings-settings-navigation-padding-2 */
+  --_frame-default-settings-settings-navigation-padding-2-d6f17509e5: 18px 14px;
+  padding: var(
+    --frame-settings-settings-navigation-padding-2,
+    var(--_frame-default-settings-settings-navigation-padding-2-d6f17509e5)
+  );
 }
 </style>

@@ -1,0 +1,358 @@
+/* Sashes live in the gutter, with a generous hit area and quiet grip. */
+.resize-handle.vertical {
+  /* Width for .resize-handle.vertical. @token --frame-Sashes-live-in-the-gutter-width */
+  --_frame-default-Sashes-live-in-the-gutter-width-db85daa942: 12px;
+  width: var(
+    --frame-Sashes-live-in-the-gutter-width,
+    var(--_frame-default-Sashes-live-in-the-gutter-width-db85daa942)
+  );
+}
+
+.resize-handle.horizontal {
+  /* Height for .resize-handle.horizontal. @token --frame-resize-handle-horizontal-height-2 */
+  --_frame-default-resize-handle-horizontal-height-2-2769f96613: 12px;
+  height: var(
+    --frame-resize-handle-horizontal-height-2,
+    var(--_frame-default-resize-handle-horizontal-height-2-2769f96613)
+  );
+}
+
+.resize-handle::after {
+  inset: 4px;
+  /* Transition treatment for .resize-handle::after. @token --frame-resize-handle-after-transition */
+  --_frame-default-resize-handle-after-transition-a2593cd001: background 120ms;
+  transition: var(
+    --frame-resize-handle-after-transition,
+    var(--_frame-default-resize-handle-after-transition-a2593cd001)
+  );
+}
+
+.resize-handle::before {
+  content: none;
+  position: absolute;
+  /* Width for .resize-handle::before. @token --frame-resize-handle-before-width */
+  --_frame-default-resize-handle-before-width-59200c9410: 2px;
+  width: var(
+    --frame-resize-handle-before-width,
+    var(--_frame-default-resize-handle-before-width-59200c9410)
+  );
+  /* Height for .resize-handle::before. @token --frame-resize-handle-before-height */
+  --_frame-default-resize-handle-before-height-7c5d38a60d: 2px;
+  height: var(
+    --frame-resize-handle-before-height,
+    var(--_frame-default-resize-handle-before-height-7c5d38a60d)
+  );
+  /* Corner radius for .resize-handle::before. @token --frame-resize-handle-before-border-radius */
+  --_frame-default-resize-handle-before-border-radius-04e395fd73: 50%;
+  border-radius: var(
+    --frame-resize-handle-before-border-radius,
+    var(--_frame-default-resize-handle-before-border-radius-04e395fd73)
+  );
+  /* Secondary foreground for descriptions, hints, and visually subordinate content. @token --frame-muted @context */
+  background: var(--frame-muted);
+  top: 50%;
+  left: 50%;
+  box-shadow:
+    0 -4px var(--frame-muted),
+    0 4px var(--frame-muted);
+  /* Opacity for .resize-handle::before. @token --frame-resize-handle-before-opacity */
+  --_frame-default-resize-handle-before-opacity-67cb18fad9: 0.55;
+  opacity: var(
+    --frame-resize-handle-before-opacity,
+    var(--_frame-default-resize-handle-before-opacity-67cb18fad9)
+  );
+}
+
+.resize-handle.horizontal::before {
+  /* Secondary foreground for descriptions, hints, and visually subordinate content. @token --frame-muted @context */
+  box-shadow:
+    -4px 0 var(--frame-muted),
+    4px 0 var(--frame-muted);
+}
+
+.primary-gap-resize {
+  position: relative;
+  justify-self: center;
+  align-self: stretch;
+  /* Height for .primary-gap-resize. @token --frame-primary-gap-resize-height */
+  --_frame-default-primary-gap-resize-height-ec7ca21ce2: 100%;
+  height: var(
+    --frame-primary-gap-resize-height,
+    var(--_frame-default-primary-gap-resize-height-ec7ca21ce2)
+  );
+}
+
+.secondary-resize {
+  left: -9px;
+}
+
+.primary-right .secondary-resize {
+  left: auto;
+  right: -9px;
+}
+
+.panel-resize {
+  top: -9px;
+}
+
+.panel-actions svg,
+.tab-icon {
+  /* Width for .panel-actions svg, .tab-icon. @token --frame-panel-actions-svg-width */
+  --_frame-default-panel-actions-svg-width-0e1096eeda: 16px;
+  width: var(
+    --frame-panel-actions-svg-width,
+    var(--_frame-default-panel-actions-svg-width-0e1096eeda)
+  );
+  /* Height for .panel-actions svg, .tab-icon. @token --frame-panel-actions-svg-height */
+  --_frame-default-panel-actions-svg-height-27299c3c47: 16px;
+  height: var(
+    --frame-panel-actions-svg-height,
+    var(--_frame-default-panel-actions-svg-height-27299c3c47)
+  );
+  flex-shrink: 0;
+}
+
+.panel-tabs [role='tab'] {
+  display: inline-flex;
+  align-items: center;
+  /* Space between children for .panel-tabs [role='tab']. @token --frame-panel-tabs-gap-2 */
+  --_frame-default-panel-tabs-gap-2-4a136db3de: 6px;
+  gap: var(
+    --frame-panel-tabs-gap-2,
+    var(--_frame-default-panel-tabs-gap-2-4a136db3de)
+  );
+}
+
+.unpadded {
+  padding: 0 !important;
+}
+
+.context-menu-target {
+  display: contents;
+}
+
+.panel-section {
+  position: relative;
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-bottom: 1px solid var(--frame-line);
+}
+
+.panel-section > header {
+  display: flex;
+  /* Minimum height for .panel-section > header. @token --frame-panel-section-header-min-height */
+  --_frame-default-panel-section-header-min-height-1cc064c1f8: 28px;
+  min-height: var(
+    --frame-panel-section-header-min-height,
+    var(--_frame-default-panel-section-header-min-height-1cc064c1f8)
+  );
+  align-items: center;
+  /* Space between children for .panel-section > header. @token --frame-panel-section-header-gap */
+  --_frame-default-panel-section-header-gap-dd3416f218: 6px;
+  gap: var(
+    --frame-panel-section-header-gap,
+    var(--_frame-default-panel-section-header-gap-dd3416f218)
+  );
+}
+
+.section-toggle {
+  display: flex;
+  align-items: center;
+  /* Space between children for .section-toggle. @token --frame-section-toggle-gap */
+  --_frame-default-section-toggle-gap-214549fa5e: 6px;
+  gap: var(
+    --frame-section-toggle-gap,
+    var(--_frame-default-section-toggle-gap-214549fa5e)
+  );
+  flex: 1;
+  /* Internal spacing for .section-toggle. @token --frame-section-toggle-padding */
+  --_frame-default-section-toggle-padding-0c6276f9fc: 6px 10px;
+  padding: var(
+    --frame-section-toggle-padding,
+    var(--_frame-default-section-toggle-padding-0c6276f9fc)
+  );
+  text-align: left;
+  /* Background for .section-toggle. @token --frame-section-toggle-background */
+  --_frame-default-section-toggle-background-3dc7aa884f: transparent;
+  background: var(
+    --frame-section-toggle-background,
+    var(--_frame-default-section-toggle-background-3dc7aa884f)
+  );
+  /* Border for .section-toggle. @token --frame-section-toggle-border */
+  --_frame-default-section-toggle-border-18cea4fb38: 0;
+  border: var(
+    --frame-section-toggle-border,
+    var(--_frame-default-section-toggle-border-18cea4fb38)
+  );
+  color: inherit;
+  cursor: pointer;
+}
+
+.accordion-content {
+  /* Internal spacing for .accordion-content. @token --frame-accordion-content-padding */
+  --_frame-default-accordion-content-padding-d84d21e101: 12px;
+  padding: var(
+    --frame-accordion-content-padding,
+    var(--_frame-default-accordion-content-padding-d84d21e101)
+  );
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.panel-section > .resize-handle {
+  position: relative;
+  /* Outer spacing for .panel-section > .resize-handle. @token --frame-panel-section-resize-handle-margin */
+  --_frame-default-panel-section-resize-handle-margin-8dd1e175f8: -6px 0;
+  margin: var(
+    --frame-panel-section-resize-handle-margin,
+    var(--_frame-default-panel-section-resize-handle-margin-8dd1e175f8)
+  );
+  z-index: 7;
+}
+
+.view-drop-target {
+  /* Shared interaction color for keyboard focus, active actions, and accent-filled controls. @token --frame-accent @context */
+  outline: 1px solid var(--frame-accent);
+  /* Outline offset for .view-drop-target. @token --frame-activity-drop-target-outline-offset */
+  --_frame-default-activity-drop-target-outline-offset-de3eb2d11e: -2px;
+  /* Outline offset for .view-drop-target. @token --frame-view-drop-target-outline-offset */
+  --_frame-default-view-drop-target-outline-offset-9f5d375ba2: var(
+    --frame-activity-drop-target-outline-offset,
+    var(--_frame-default-activity-drop-target-outline-offset-de3eb2d11e)
+  );
+  outline-offset: var(
+    --frame-view-drop-target-outline-offset,
+    var(--_frame-default-view-drop-target-outline-offset-9f5d375ba2)
+  );
+  /* Background color for .view-drop-target. @token --frame-activity-drop-target-background-color */
+  --_frame-default-activity-drop-target-background-color-71c194401c: #0078d40a;
+  /* Background color for .view-drop-target. @token --frame-view-drop-target-background-color */
+  --_frame-default-view-drop-target-background-color-38c9c0aa4a: var(
+    --frame-activity-drop-target-background-color,
+    var(--_frame-default-activity-drop-target-background-color-71c194401c)
+  );
+  background-color: var(
+    --frame-view-drop-target-background-color,
+    var(--_frame-default-view-drop-target-background-color-38c9c0aa4a)
+  );
+}
+
+[data-view-id] {
+  touch-action: none;
+  user-select: none;
+}
+
+.panel-header > .frame-tooltip {
+  flex-shrink: 0;
+}
+
+.panel-tabs {
+  /* Minimum width for .panel-tabs. @token --frame-panel-tabs-min-width */
+  --_frame-default-panel-tabs-min-width-2eedddfec7: 0;
+  min-width: var(
+    --frame-panel-tabs-min-width,
+    var(--_frame-default-panel-tabs-min-width-2eedddfec7)
+  );
+}
+
+.context-menu-target {
+  display: block;
+}
+
+.panel-header > .tooltip-trigger {
+  flex-shrink: 0;
+}
+
+.panel-content {
+  /* Internal spacing for .panel-content. @token --frame-panel-content-padding */
+  --_frame-default-panel-content-padding-3f92d734b0: 12px;
+  padding: var(
+    --frame-panel-content-padding,
+    var(--_frame-default-panel-content-padding-3f92d734b0)
+  );
+  box-sizing: border-box;
+}
+
+/* Grip markers are reserved for the three outer regions at default density. */
+.resize-handle.has-grip::before {
+  content: '';
+}
+
+.compact .resize-handle::before {
+  content: none;
+}
+
+.panel-section:last-child {
+  /* Bottom border for .panel-section:last-child. @token --frame-panel-section-last-child-border-bottom */
+  --_frame-default-panel-section-last-child-border-bottom-f8408a1ea6: 0;
+  border-bottom: var(
+    --frame-panel-section-last-child-border-bottom,
+    var(--_frame-default-panel-section-last-child-border-bottom-f8408a1ea6)
+  );
+}
+
+.layout-grid > .workspace-region {
+  grid-row: 3;
+}
+
+.layout-grid > .bottom-region {
+  grid-row: 5;
+}
+
+.layout-grid .primary-region > .side-panel {
+  margin-top: var(--workspace-top, 0px);
+}
+
+.primary-region.edge-regions {
+  clip-path: polygon(
+    0 0,
+    var(--rail-width) 0,
+    var(--rail-width) var(--workspace-top),
+    100% var(--workspace-top),
+    100% calc(100% - var(--workspace-bottom)),
+    var(--rail-width) calc(100% - var(--workspace-bottom)),
+    var(--rail-width) 100%,
+    0 100%
+  );
+}
+
+.primary-right .primary-region.edge-regions {
+  clip-path: polygon(
+    100% 0,
+    calc(100% - var(--rail-width)) 0,
+    calc(100% - var(--rail-width)) var(--workspace-top),
+    0 var(--workspace-top),
+    0 calc(100% - var(--workspace-bottom)),
+    calc(100% - var(--rail-width)) calc(100% - var(--workspace-bottom)),
+    calc(100% - var(--rail-width)) 100%,
+    100% 100%
+  );
+}
+
+.canvas-centering.centered {
+  grid-template-columns:
+    minmax(0, 1fr) 0 minmax(0, var(--center-width))
+    0 minmax(0, 1fr);
+}
+
+.canvas-centering > .resize-handle {
+  /* Width for .canvas-centering > .resize-handle. @token --frame-canvas-centering-resize-handle-width-2 */
+  --_frame-default-canvas-centering-resize-handle-width-2-008020bfbb: 12px;
+  width: var(
+    --frame-canvas-centering-resize-handle-width-2,
+    var(--_frame-default-canvas-centering-resize-handle-width-2-008020bfbb)
+  );
+  justify-self: center;
+}
+
+.canvas-centering > .resize-handle::after {
+  inset: 0 5px;
+}
+
+.workbench:not(.compact) .status-bar {
+  /* Text size for .workbench:not(.compact) .status-bar. @token --frame-workbench-not-compact-status-bar-font-size */
+  --_frame-default-workbench-not-compact-status-bar-font-size-9126b4d9e1: 11px;
+  font-size: var(
+    --frame-workbench-not-compact-status-bar-font-size,
+    var(--_frame-default-workbench-not-compact-status-bar-font-size-9126b4d9e1)
+  );
+}

@@ -328,7 +328,7 @@ defineSlots<{
   <DialogRoot :open="active" :modal="false"
     ><Teleport :to="target"
       ><div
-        class="frame-modal-layer"
+        class="frame-modal-layer frame-overlay-interactive"
         :style="layerStyle"
         :inert="!active || undefined"
         @contextmenu.prevent
@@ -345,7 +345,7 @@ defineSlots<{
             ref="dialog"
             :aria-modal="active ? true : undefined"
             tabindex="-1"
-            class="frame-modal"
+            class="frame-modal frame-overlay-surface frame-scroll-scope"
             :class="{maximized, 'no-drag': !draggable}"
             :style="style"
           >
@@ -417,3 +417,316 @@ defineSlots<{
     ><FrameFocusOwner
   /></DialogRoot>
 </template>
+
+<style lang="scss">
+@use '../../styles/mixins/surfaces';
+
+.frame-modal-layer {
+  position: fixed;
+  inset: 0;
+  /* Value of font for .frame-modal-layer. @token --frame-modal-layer-font */
+  --_frame-default-modal-layer-font-5a4faa6201: 12px system-ui;
+  font: var(
+    --frame-modal-layer-font,
+    var(--_frame-default-modal-layer-font-5a4faa6201)
+  );
+  /* Foreground for .frame-modal-layer. @token --frame-modal-layer-color */
+  --_frame-default-modal-layer-color-d589627b52: #d0d2d4;
+  color: var(
+    --frame-modal-layer-color,
+    var(--_frame-default-modal-layer-color-d589627b52)
+  );
+}
+
+.frame-modal-layer,
+.frame-modal-layer * {
+  box-sizing: border-box;
+}
+
+.frame-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  /* Background for .frame-modal-backdrop. @token --frame-modal-backdrop-background */
+  --_frame-default-modal-backdrop-background-be5275b5b5: #0006;
+  background: var(
+    --frame-modal-backdrop-background,
+    var(--_frame-default-modal-backdrop-background-be5275b5b5)
+  );
+}
+
+.frame-modal {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  /* Shared corner radius of panel containers and larger floating surfaces. @token --frame-panel-radius @context */
+  /* Shared translucent fill for floating surfaces over the application canvas. @token --frame-overlay-background @context */
+  @include surfaces.framed-surface(
+    1px solid var(--frame-line),
+    var(--frame-panel-radius),
+    var(--frame-overlay-background)
+  );
+  /* Blur and saturation treatment behind shared translucent floating surfaces. @token --frame-overlay-backdrop-filter @context */
+  backdrop-filter: var(--frame-overlay-backdrop-filter);
+  /* Elevation shadow separating floating overlays from underlying content. @token --frame-overlay-shadow @context */
+  box-shadow: var(--frame-overlay-shadow);
+  /* Outline for .frame-modal. @token --frame-modal-outline */
+  --_frame-default-modal-outline-e6ed6df6b7: none;
+  outline: var(
+    --frame-modal-outline,
+    var(--_frame-default-modal-outline-e6ed6df6b7)
+  );
+}
+
+.frame-modal-header {
+  display: flex;
+  align-items: center;
+  /* Space between children for .frame-modal-header. @token --frame-modal-header-gap */
+  --_frame-default-modal-header-gap-6eb82ae436: 8px;
+  gap: var(
+    --frame-modal-header-gap,
+    var(--_frame-default-modal-header-gap-6eb82ae436)
+  );
+  /* Internal spacing for .frame-modal-header. @token --frame-modal-header-padding */
+  --_frame-default-modal-header-padding-109034d7d7: 0 8px 0 12px;
+  padding: var(
+    --frame-modal-header-padding,
+    var(--_frame-default-modal-header-padding-109034d7d7)
+  );
+  /* Minimum height for .frame-modal-header. @token --frame-modal-header-min-height */
+  --_frame-default-modal-header-min-height-bcf30a0afa: 34px;
+  min-height: var(
+    --frame-modal-header-min-height,
+    var(--_frame-default-modal-header-min-height-bcf30a0afa)
+  );
+  flex-shrink: 0;
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-bottom: 1px solid var(--frame-line);
+  /* Corner radius for .frame-modal-header. @token --frame-modal-header-border-radius */
+  --_frame-default-modal-header-border-radius-7cf8ffdbc3: var(
+      --frame-radius-large
+    )
+    var(--frame-radius-large) 0 0;
+  /* Large shared corner radius used by panel and menu containers. @token --frame-radius-large @context */
+  border-radius: var(
+    --frame-modal-header-border-radius,
+    var(--_frame-default-modal-header-border-radius-7cf8ffdbc3)
+  );
+  /* Neutral raised surface behind grouped content and control compositions. @token --frame-surface @context */
+  background: var(--frame-surface);
+  cursor: move;
+  touch-action: none;
+  user-select: none;
+}
+
+.frame-modal-header h2 {
+  font: inherit;
+  /* Outer spacing for .frame-modal-header h2. @token --frame-modal-header-h2-margin */
+  --_frame-default-modal-header-h2-margin-92b160e847: 0;
+  margin: var(
+    --frame-modal-header-h2-margin,
+    var(--_frame-default-modal-header-h2-margin-92b160e847)
+  );
+  /* Text weight for .frame-modal-header h2. @token --frame-modal-header-h2-font-weight */
+  --_frame-default-modal-header-h2-font-weight-d752cfcdce: 500;
+  font-weight: var(
+    --frame-modal-header-h2-font-weight,
+    var(--_frame-default-modal-header-h2-font-weight-d752cfcdce)
+  );
+  flex: 1;
+  /* Minimum width for .frame-modal-header h2. @token --frame-modal-header-h2-min-width */
+  --_frame-default-modal-header-h2-min-width-9953e1b293: 0;
+  min-width: var(
+    --frame-modal-header-h2-min-width,
+    var(--_frame-default-modal-header-h2-min-width-9953e1b293)
+  );
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modal-icon {
+  /* Width for .modal-icon. @token --frame-modal-icon-width */
+  --_frame-default-modal-icon-width-1be3aabd2a: 16px;
+  width: var(
+    --frame-modal-icon-width,
+    var(--_frame-default-modal-icon-width-1be3aabd2a)
+  );
+  /* Height for .modal-icon. @token --frame-modal-icon-height */
+  --_frame-default-modal-icon-height-37dd9efb0d: 16px;
+  height: var(
+    --frame-modal-icon-height,
+    var(--_frame-default-modal-icon-height-37dd9efb0d)
+  );
+}
+
+.frame-modal-content {
+  /* Minimum height for .frame-modal-content. @token --frame-modal-content-min-height */
+  --_frame-default-modal-content-min-height-42b6bcd057: 0;
+  min-height: var(
+    --frame-modal-content-min-height,
+    var(--_frame-default-modal-content-min-height-42b6bcd057)
+  );
+  flex: 1;
+  overflow: auto;
+}
+
+.modal-resize {
+  position: absolute;
+  touch-action: none;
+}
+
+.modal-resize.n,
+.modal-resize.s {
+  /* Height for .modal-resize.n, .modal-resize.s. @token --frame-modal-resize-n-height */
+  --_frame-default-modal-resize-n-height-f1f40ac622: 8px;
+  height: var(
+    --frame-modal-resize-n-height,
+    var(--_frame-default-modal-resize-n-height-f1f40ac622)
+  );
+  left: 10px;
+  right: 10px;
+  cursor: ns-resize;
+}
+
+.modal-resize.n {
+  top: -4px;
+}
+
+.modal-resize.s {
+  bottom: -4px;
+}
+
+.modal-resize.e,
+.modal-resize.w {
+  /* Width for .modal-resize.e, .modal-resize.w. @token --frame-modal-resize-e-width */
+  --_frame-default-modal-resize-e-width-1195d78c34: 8px;
+  width: var(
+    --frame-modal-resize-e-width,
+    var(--_frame-default-modal-resize-e-width-1195d78c34)
+  );
+  top: 10px;
+  bottom: 10px;
+  cursor: ew-resize;
+}
+
+.modal-resize.e {
+  right: -4px;
+}
+
+.modal-resize.w {
+  left: -4px;
+}
+
+.modal-resize.ne,
+.modal-resize.nw,
+.modal-resize.se,
+.modal-resize.sw {
+  /* Width for .modal-resize.ne, .modal-resize.nw, .modal-resize.se, .modal-resize.sw. @token --frame-modal-resize-ne-width */
+  --_frame-default-modal-resize-ne-width-15e0e4b060: 16px;
+  width: var(
+    --frame-modal-resize-ne-width,
+    var(--_frame-default-modal-resize-ne-width-15e0e4b060)
+  );
+  /* Height for .modal-resize.ne, .modal-resize.nw, .modal-resize.se, .modal-resize.sw. @token --frame-modal-resize-ne-height */
+  --_frame-default-modal-resize-ne-height-f926fa1400: 16px;
+  height: var(
+    --frame-modal-resize-ne-height,
+    var(--_frame-default-modal-resize-ne-height-f926fa1400)
+  );
+}
+
+.modal-resize.ne {
+  top: -5px;
+  right: -5px;
+  cursor: nesw-resize;
+}
+
+.modal-resize.nw {
+  top: -5px;
+  left: -5px;
+  cursor: nwse-resize;
+}
+
+.modal-resize.se {
+  bottom: -5px;
+  right: -5px;
+  cursor: nwse-resize;
+}
+
+.modal-resize.sw {
+  bottom: -5px;
+  left: -5px;
+  cursor: nesw-resize;
+}
+
+.frame-modal {
+  /* Foreground for .frame-modal. @token --frame-modal-color */
+  --_frame-default-modal-color-2e0972ca74: #d4d4d4;
+  color: var(--frame-modal-color, var(--_frame-default-modal-color-2e0972ca74));
+}
+
+.frame-modal-content {
+  /* Internal spacing for .frame-modal-content. @token --frame-modal-content-padding */
+  --_frame-default-modal-content-padding-c751aac5c4: 0;
+  padding: var(
+    --frame-modal-content-padding,
+    var(--_frame-default-modal-content-padding-c751aac5c4)
+  );
+}
+
+.frame-modal.no-drag .frame-modal-header {
+  cursor: default;
+  touch-action: auto;
+}
+
+.frame-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* Space between children for .frame-modal-footer. @token --frame-modal-footer-gap */
+  --_frame-default-modal-footer-gap-d7720fc4a6: 8px;
+  gap: var(
+    --frame-modal-footer-gap,
+    var(--_frame-default-modal-footer-gap-d7720fc4a6)
+  );
+  /* Internal spacing for .frame-modal-footer. @token --frame-modal-footer-padding */
+  --_frame-default-modal-footer-padding-e917be8127: 8px 12px;
+  padding: var(
+    --frame-modal-footer-padding,
+    var(--_frame-default-modal-footer-padding-e917be8127)
+  );
+  /* Minimum height for .frame-modal-footer. @token --frame-modal-header-min-height */
+  --_frame-default-modal-header-min-height-bcf30a0afa: 34px;
+  min-height: var(
+    --frame-modal-header-min-height,
+    var(--_frame-default-modal-header-min-height-bcf30a0afa)
+  );
+  flex-shrink: 0;
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  border-top: 1px solid var(--frame-line);
+  /* Large shared corner radius used by panel and menu containers. @token --frame-radius-large @context */
+  border-radius: 0 0 var(--frame-radius-large) var(--frame-radius-large);
+  /* Neutral raised surface behind grouped content and control compositions. @token --frame-surface @context */
+  background: var(--frame-surface);
+}
+
+.frame-modal-header-separator {
+  align-self: stretch;
+  /* Width for .frame-modal-header-separator. @token --frame-modal-header-separator-width */
+  --_frame-default-modal-header-separator-width-c835aaefed: 1px;
+  width: var(
+    --frame-modal-header-separator-width,
+    var(--_frame-default-modal-header-separator-width-c835aaefed)
+  );
+  /* Outer spacing for .frame-modal-header-separator. @token --frame-modal-header-separator-margin */
+  --_frame-default-modal-header-separator-margin-af197dead3: 7px 2px;
+  margin: var(
+    --frame-modal-header-separator-margin,
+    var(--_frame-default-modal-header-separator-margin-af197dead3)
+  );
+  /* Neutral divider color for content boundaries, tracks, and structural separators. @token --frame-line @context */
+  background: var(--frame-line);
+  flex-shrink: 0;
+}
+</style>

@@ -1,0 +1,221 @@
+.panel-section > header {
+  /* Internal spacing for .panel-section > header. @token --frame-panel-section-header-padding */
+  --_frame-default-panel-section-header-padding-f1be8cd24a: 3px 8px 3px 2px;
+  padding: var(
+    --frame-panel-section-header-padding,
+    var(--_frame-default-panel-section-header-padding-f1be8cd24a)
+  );
+}
+
+.panel-section > header > .panel-actions {
+  visibility: hidden;
+}
+
+.panel-section.expanded:hover > header > .panel-actions,
+.panel-section.expanded:focus-within > header > .panel-actions {
+  visibility: visible;
+}
+
+.workspace-pane-content > .pane-placeholder {
+  display: grid;
+  place-items: center;
+  flex: 1;
+  /* Minimum height for .workspace-pane-content > .pane-placeholder. @token --frame-workspace-pane-content-pane-placeholder-min-height */
+  --_frame-default-workspace-pane-content-pane-placeholder-min-height-6e23252c10: 0;
+  min-height: var(
+    --frame-workspace-pane-content-pane-placeholder-min-height,
+    var(
+      --_frame-default-workspace-pane-content-pane-placeholder-min-height-6e23252c10
+    )
+  );
+  /* Internal spacing for .workspace-pane-content > .pane-placeholder. @token --frame-workspace-pane-content-pane-placeholder-padding */
+  --_frame-default-workspace-pane-content-pane-placeholder-padding-098059f4e8: 0;
+  padding: var(
+    --frame-workspace-pane-content-pane-placeholder-padding,
+    var(
+      --_frame-default-workspace-pane-content-pane-placeholder-padding-098059f4e8
+    )
+  );
+}
+
+/* Collection views consume their host's available height, including when nested. */
+.shell-sidebar > .side-panel {
+  overflow: hidden;
+}
+
+.side-content {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.side-content > .view-host {
+  height: 100%;
+}
+
+.view-host {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.panel-content.view-host {
+  overflow: hidden;
+}
+
+/* Only leaf bodies scroll; their headers and containing collections stay fixed. */
+.view-host > .view-content {
+  height: 100%;
+  min-height: 0;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.nested-view-content {
+  overflow: hidden;
+}
+
+.side-panel > .section-header,
+.side-panel .frame-dock-content > .section-header {
+  flex-shrink: 0;
+}
+
+.side-content:has(> .view-content > .view-sections),
+.panel-content:has(> .view-content > .view-sections),
+.view-host:has(> .view-content > .view-sections),
+.view-content:has(> .view-sections) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  /* Minimum height for .side-content:has(> .view-content > .view-sections), .panel-content:has(> .view-content > .view-sections), .view-host:has(> .view-content > .view-sections), .view-content:has(> .view-sections). @token --frame-side-content-has-view-content-view-sections-min-height */
+  --_frame-default-side-content-has-view-content-view-sections-min-height-c2a32bca3b: 0;
+  min-height: var(
+    --frame-side-content-has-view-content-view-sections-min-height,
+    var(
+      --_frame-default-side-content-has-view-content-view-sections-min-height-c2a32bca3b
+    )
+  );
+  overflow: hidden;
+}
+
+.view-sections {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  /* Minimum height for .view-sections. @token --frame-activity-sections-min-height-2 */
+  --_frame-default-activity-sections-min-height-2-58f8b60f66: 0;
+  /* Minimum height for .view-sections. @token --frame-view-sections-min-height-2 */
+  --_frame-default-view-sections-min-height-2-81c03e81fb: var(
+    --frame-activity-sections-min-height-2,
+    var(--_frame-default-activity-sections-min-height-2-58f8b60f66)
+  );
+  min-height: var(
+    --frame-view-sections-min-height-2,
+    var(--_frame-default-view-sections-min-height-2-81c03e81fb)
+  );
+  overflow: hidden;
+}
+
+.view-sections > .panel-section {
+  flex: 0 0 auto;
+  /* Minimum height for .view-sections > .panel-section. @token --frame-activity-sections-panel-section-min-height */
+  --_frame-default-activity-sections-panel-section-min-height-917fdc2e56: 0;
+  /* Minimum height for .view-sections > .panel-section. @token --frame-view-sections-panel-section-min-height */
+  --_frame-default-view-sections-panel-section-min-height-f028388be9: var(
+    --frame-activity-sections-panel-section-min-height,
+    var(--_frame-default-activity-sections-panel-section-min-height-917fdc2e56)
+  );
+  min-height: var(
+    --frame-view-sections-panel-section-min-height,
+    var(--_frame-default-view-sections-panel-section-min-height-f028388be9)
+  );
+}
+
+.view-sections > .panel-section > header {
+  box-sizing: border-box;
+}
+
+.view-sections > .panel-section > .nested-view-content {
+  /* Minimum height for .view-sections > .panel-section > .nested-view-content. @token --frame-activity-sections-panel-section-nested-view-content-min-height */
+  --_frame-default-activity-sections-panel-section-nested-view-content-min-height-bdb9a3896f: 0;
+  /* Minimum height for .view-sections > .panel-section > .nested-view-content. @token --frame-view-sections-panel-section-nested-view-content-min-height */
+  --_frame-default-view-sections-panel-section-nested-view-content-min-height-7d5f0195c8: var(
+    --frame-activity-sections-panel-section-nested-view-content-min-height,
+    var(
+      --_frame-default-activity-sections-panel-section-nested-view-content-min-height-bdb9a3896f
+    )
+  );
+  min-height: var(
+    --frame-view-sections-panel-section-nested-view-content-min-height,
+    var(
+      --_frame-default-view-sections-panel-section-nested-view-content-min-height-7d5f0195c8
+    )
+  );
+}
+
+.nested-view-content > .view-host {
+  /* Minimum height for .nested-view-content > .view-host. @token --frame-nested-view-content-view-host-min-height-2 */
+  --_frame-default-nested-view-content-view-host-min-height-2-b0a3be291f: 0;
+  min-height: var(
+    --frame-nested-view-content-view-host-min-height-2,
+    var(--_frame-default-nested-view-content-view-host-min-height-2-b0a3be291f)
+  );
+  /* Height for .nested-view-content > .view-host. @token --frame-nested-view-content-view-host-height */
+  --_frame-default-nested-view-content-view-host-height-b7675023fc: 100%;
+  height: var(
+    --frame-nested-view-content-view-host-height,
+    var(--_frame-default-nested-view-content-view-host-height-b7675023fc)
+  );
+}
+
+.view-sections > .panel-section > .resize-handle {
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  /* Width for .view-sections > .panel-section > .resize-handle. @token --frame-activity-sections-panel-section-resize-handle-width */
+  --_frame-default-activity-sections-panel-section-resize-handle-width-7f504f399b: 100%;
+  /* Width for .view-sections > .panel-section > .resize-handle. @token --frame-view-sections-panel-section-resize-handle-width */
+  --_frame-default-view-sections-panel-section-resize-handle-width-dfc754d8c8: var(
+    --frame-activity-sections-panel-section-resize-handle-width,
+    var(
+      --_frame-default-activity-sections-panel-section-resize-handle-width-7f504f399b
+    )
+  );
+  width: var(
+    --frame-view-sections-panel-section-resize-handle-width,
+    var(
+      --_frame-default-view-sections-panel-section-resize-handle-width-dfc754d8c8
+    )
+  );
+  /* Outer spacing for .view-sections > .panel-section > .resize-handle. @token --frame-activity-sections-panel-section-resize-handle-margin */
+  --_frame-default-activity-sections-panel-section-resize-handle-margin-1a76063ebd: 0;
+  /* Outer spacing for .view-sections > .panel-section > .resize-handle. @token --frame-view-sections-panel-section-resize-handle-margin */
+  --_frame-default-view-sections-panel-section-resize-handle-margin-754c05a4b2: var(
+    --frame-activity-sections-panel-section-resize-handle-margin,
+    var(
+      --_frame-default-activity-sections-panel-section-resize-handle-margin-1a76063ebd
+    )
+  );
+  margin: var(
+    --frame-view-sections-panel-section-resize-handle-margin,
+    var(
+      --_frame-default-view-sections-panel-section-resize-handle-margin-754c05a4b2
+    )
+  );
+}
+
+.side-content:has(> .view-host > .view-content > .view-sections) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  /* Minimum height for .side-content:has(> .view-host > .view-content > .view-sections). @token --frame-side-content-has-view-host-view-content-view-sections-min-height */
+  --_frame-default-side-content-has-view-host-view-content-view-sections-min-height-94d0e0e42b: 0;
+  min-height: var(
+    --frame-side-content-has-view-host-view-content-view-sections-min-height,
+    var(
+      --_frame-default-side-content-has-view-host-view-content-view-sections-min-height-94d0e0e42b
+    )
+  );
+  overflow: hidden;
+}

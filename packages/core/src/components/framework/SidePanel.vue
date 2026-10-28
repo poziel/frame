@@ -47,7 +47,10 @@ defineSlots<{
       mode="inside"
       class="frame-dock-anchor-content"
     >
-      <header class="section-header" @contextmenu="$emit('context', $event)">
+      <header
+        class="section-header frame-shell-label"
+        @contextmenu="$emit('context', $event)"
+      >
         <h2 class="side-title" :style="{color: titleColor}">{{ title }}</h2>
         <PanelActions
           :actions="actions"

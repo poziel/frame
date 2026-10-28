@@ -1,5 +1,6 @@
 import {describe, expect, test} from 'bun:test';
-import {readFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {compileStyleSource} from '../../../core/scripts/compile-style-source';
 import {extractCssContracts} from './css-contracts';
 
 describe('CSS declaration contracts', () => {
@@ -115,12 +116,12 @@ test('keeps conditional defaults separate even when their selectors match', () =
 
 test('real tabs retain horizontal and vertical baseline and indicator contracts', () => {
   const source = new URL(
-    '../../../core/src/components/shared/general-b.css',
+    '../../../core/src/components/navigation/FrameTabs.vue',
     import.meta.url
   );
   const result = extractCssContracts(
-    readFileSync(source, 'utf8'),
-    'general-b.css',
+    compileStyleSource(fileURLToPath(source)),
+    'packages/core/src/components/navigation/FrameTabs.vue',
     ['frame-tabs', 'frame-tabs-list', 'frame-tabs-trigger']
   );
   for (const name of [

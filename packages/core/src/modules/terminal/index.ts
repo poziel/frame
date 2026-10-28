@@ -1,4 +1,4 @@
-import './styles/index.css';
+import './styles/index.scss';
 
 export {default as Terminal} from './components/Terminal.vue';
 export {default as TerminalView} from './components/TerminalView.vue';

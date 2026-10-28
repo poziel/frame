@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '../styles/index.css';
+import '../styles/index.scss';
 import {computed, onBeforeUnmount, onMounted, ref, watch} from 'vue';
 import {FrameIcon} from '../../../index';
 import type {TerminalController} from '../controllers/terminal';
@@ -118,3 +118,127 @@ defineExpose({
     >
   </div>
 </template>
+
+<style lang="scss">
+.frame-terminal {
+  display: flex;
+  flex-direction: column;
+  /* Width for .frame-terminal; terminal width. @token --frame-terminal-width */
+  --_frame-default-terminal-width-1fbbf09da4: 100%;
+  width: var(
+    --frame-terminal-width,
+    var(--_frame-default-terminal-width-1fbbf09da4)
+  );
+  /* Height for .frame-terminal; terminal height. @token --frame-terminal-height */
+  --_frame-default-terminal-height-cc7758d1e6: 100%;
+  height: var(
+    --frame-terminal-height,
+    var(--_frame-default-terminal-height-cc7758d1e6)
+  );
+  /* Min height for .frame-terminal; terminal min height. @token --frame-terminal-min-height */
+  --_frame-default-terminal-min-height-543e0fc2b6: 0;
+  min-height: var(
+    --frame-terminal-min-height,
+    var(--_frame-default-terminal-min-height-543e0fc2b6)
+  );
+  /* Min width for .frame-terminal; terminal min width. @token --frame-terminal-min-width */
+  --_frame-default-terminal-min-width-c7c710a47a: 0;
+  min-width: var(
+    --frame-terminal-min-width,
+    var(--_frame-default-terminal-min-width-c7c710a47a)
+  );
+  /* Background for .frame-terminal; terminal background. @token --frame-terminal-background */
+  --_frame-default-terminal-background-8e0854a5be: #181818;
+  background: var(
+    --frame-terminal-background,
+    var(--_frame-default-terminal-background-8e0854a5be)
+  );
+}
+
+.frame-terminal-host {
+  flex: 1;
+  /* Min height for .frame-terminal-host; terminal host min height. @token --frame-terminal-host-min-height */
+  --_frame-default-terminal-host-min-height-461cec4b27: 0;
+  min-height: var(
+    --frame-terminal-host-min-height,
+    var(--_frame-default-terminal-host-min-height-461cec4b27)
+  );
+  /* Min width for .frame-terminal-host; terminal host min width. @token --frame-terminal-host-min-width */
+  --_frame-default-terminal-host-min-width-b27e7a5082: 0;
+  min-width: var(
+    --frame-terminal-host-min-width,
+    var(--_frame-default-terminal-host-min-width-b27e7a5082)
+  );
+  overflow: hidden;
+  /* Padding for .frame-terminal-host; terminal host padding. @token --frame-terminal-host-padding */
+  --_frame-default-terminal-host-padding-3f56b52bc5: 7px 9px;
+  padding: var(
+    --frame-terminal-host-padding,
+    var(--_frame-default-terminal-host-padding-3f56b52bc5)
+  );
+}
+
+.frame-terminal-screen {
+  /* Height for .frame-terminal-screen; terminal screen height. @token --frame-terminal-screen-height */
+  --_frame-default-terminal-screen-height-915a156c3f: 100%;
+  height: var(
+    --frame-terminal-screen-height,
+    var(--_frame-default-terminal-screen-height-915a156c3f)
+  );
+  /* Width for .frame-terminal-screen; terminal screen width. @token --frame-terminal-screen-width */
+  --_frame-default-terminal-screen-width-6d9a1ee661: 100%;
+  width: var(
+    --frame-terminal-screen-width,
+    var(--_frame-default-terminal-screen-width-6d9a1ee661)
+  );
+}
+
+.frame-terminal-status {
+  flex-shrink: 0;
+  /* Margin for .frame-terminal-status; terminal status margin. @token --frame-terminal-status-margin */
+  --_frame-default-terminal-status-margin-793ef65706: 0;
+  margin: var(
+    --frame-terminal-status-margin,
+    var(--_frame-default-terminal-status-margin-793ef65706)
+  );
+  /* Padding for .frame-terminal-status; terminal status padding. @token --frame-terminal-status-padding */
+  --_frame-default-terminal-status-padding-bdd144a95a: 4px 9px;
+  padding: var(
+    --frame-terminal-status-padding,
+    var(--_frame-default-terminal-status-padding-bdd144a95a)
+  );
+  /* Color for .frame-terminal-status; muted. @token --frame-muted */
+  --_frame-default-muted-74c5fb58d7: #999;
+  color: var(--frame-muted, var(--_frame-default-muted-74c5fb58d7));
+  /* Font size for .frame-terminal-status; terminal status font size. @token --frame-terminal-status-font-size */
+  --_frame-default-terminal-status-font-size-93db312565: 12px;
+  font-size: var(
+    --frame-terminal-status-font-size,
+    var(--_frame-default-terminal-status-font-size-93db312565)
+  );
+}
+
+.frame-terminal {
+  position: relative;
+}
+
+.frame-terminal-failure {
+  position: absolute;
+  inset: 0;
+  /* Padding for .frame-terminal-failure; space 4. @token --frame-space-4 */
+  --_frame-default-space-4-f8290663f4: 16px;
+  padding: var(--frame-space-4, var(--_frame-default-space-4-f8290663f4));
+  box-sizing: border-box;
+  /*   _frame default terminal background 87ddb0fe58 for .frame-terminal-failure; bg. @token --frame-bg */
+  --_frame-default-bg-29eeb8bfdf: #181818;
+  /* Background for .frame-terminal-failure; terminal background. @token --frame-terminal-background */
+  --_frame-default-terminal-background-87ddb0fe58: var(
+    --frame-bg,
+    var(--_frame-default-bg-29eeb8bfdf)
+  );
+  background: var(
+    --frame-terminal-background,
+    var(--_frame-default-terminal-background-87ddb0fe58)
+  );
+}
+</style>
