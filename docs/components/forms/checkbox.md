@@ -83,38 +83,38 @@ Frame supplies this part in its anatomy. Availability below refers to configurat
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | Same upstream type; undeclared in Frame | `button` (Reka) | Forwarded / limited | Changes Root composition, not individual children; can break Frame fixed anatomy. |
-| `asChild` | `boolean` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / limited | Changes Root composition, not individual children; can break Frame fixed anatomy. |
-| `defaultValue` | `T \| "indeterminate"` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / ineffective | Frame supplies the controlled model; this does not establish uncontrolled Frame state. |
-| `disabled` | `boolean` | `boolean` | `false` | Declared | Prevent interaction. |
-| `falseValue` | `T` | Same upstream type; undeclared in Frame | `false` (Reka) | Forwarded / unsupported | Custom values cannot preserve the Frame boolean model contract. |
-| `id` | `string` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Element or form-control identity. |
-| `modelValue` | `null \| T \| "indeterminate"` | `boolean` | `false` | Changed | Boolean only; updates use value === true. |
-| `name` | `string` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Native submitted field name. |
-| `required` | `boolean` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Native required-value constraint. |
-| `trueValue` | `T` | Same upstream type; undeclared in Frame | `true` (Reka) | Forwarded / unsupported | Custom values cannot preserve the Frame boolean model contract. |
-| `value` | `AcceptableValue` | Same upstream type; undeclared in Frame | `"on"` (Reka) | Forwarded | Option identity or submitted checked value. |
+| Prop           | Reka type                      | Frame type                              | Required/default            | Availability            | Description                                                                            |
+| -------------- | ------------------------------ | --------------------------------------- | --------------------------- | ----------------------- | -------------------------------------------------------------------------------------- |
+| `as`           | `AsTag \| Component`           | Same upstream type; undeclared in Frame | `button` (Reka)             | Forwarded / limited     | Changes Root composition, not individual children; can break Frame fixed anatomy.      |
+| `asChild`      | `boolean`                      | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / limited     | Changes Root composition, not individual children; can break Frame fixed anatomy.      |
+| `defaultValue` | `T \| "indeterminate"`         | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / ineffective | Frame supplies the controlled model; this does not establish uncontrolled Frame state. |
+| `disabled`     | `boolean`                      | `boolean`                               | `false`                     | Declared                | Prevent interaction.                                                                   |
+| `falseValue`   | `T`                            | Same upstream type; undeclared in Frame | `false` (Reka)              | Forwarded / unsupported | Custom values cannot preserve the Frame boolean model contract.                        |
+| `id`           | `string`                       | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Element or form-control identity.                                                      |
+| `modelValue`   | `null \| T \| "indeterminate"` | `boolean`                               | `false`                     | Changed                 | Boolean only; updates use value === true.                                              |
+| `name`         | `string`                       | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Native submitted field name.                                                           |
+| `required`     | `boolean`                      | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Native required-value constraint.                                                      |
+| `trueValue`    | `T`                            | Same upstream type; undeclared in Frame | `true` (Reka)               | Forwarded / unsupported | Custom values cannot preserve the Frame boolean model contract.                        |
+| `value`        | `AcceptableValue`              | Same upstream type; undeclared in Frame | `"on"` (Reka)               | Forwarded               | Option identity or submitted checked value.                                            |
 
 #### Emits
 
-| Emit | Reka payload | Frame payload | Availability | Behavior |
-| --- | --- | --- | --- | --- |
-| `update:modelValue` | `[value: T \| "indeterminate"]` | boolean | Declared / changed | Controlled-model update using the conversion described on modelValue above. Not a cancellable event. |
+| Emit                | Reka payload                    | Frame payload | Availability       | Behavior                                                                                             |
+| ------------------- | ------------------------------- | ------------- | ------------------ | ---------------------------------------------------------------------------------------------------- |
+| `update:modelValue` | `[value: T \| "indeterminate"]` | boolean       | Declared / changed | Controlled-model update using the conversion described on modelValue above. Not a cancellable event. |
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | `modelValue: T \| "indeterminate"` | Internal; payload not forwarded to callers |
-| default | `state: false \| true \| "indeterminate"` | Internal; payload not forwarded to callers |
+| Upstream slot | Scoped field                              | Frame availability                         |
+| ------------- | ----------------------------------------- | ------------------------------------------ |
+| default       | `modelValue: T \| "indeterminate"`        | Internal; payload not forwarded to callers |
+| default       | `state: false \| true \| "indeterminate"` | Internal; payload not forwarded to callers |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
-| data-state | checked / unchecked | Current checked/on state. |
+| Attribute     | Value/presence        | Meaning                    |
+| ------------- | --------------------- | -------------------------- |
+| data-state    | checked / unchecked   | Current checked/on state.  |
 | data-disabled | Present when disabled | Underlying disabled state. |
 
 #### State notes
@@ -129,11 +129,11 @@ Frame supplies this part in its anatomy. Availability below refers to configurat
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | No independent Frame prop | `"span"` (Reka) | Internal | Rendered element/component. Not independently configurable through Frame. |
-| `asChild` | `boolean` | No independent Frame prop | Unset in upstream reference | Internal | Merge behavior into the supplied child element. Not independently configurable through Frame. |
-| `forceMount` | `boolean` | No independent Frame prop | Unset in upstream reference | Internal | Keep the part mounted for presence/animation control. Not independently configurable through Frame. |
+| Prop         | Reka type            | Frame type                | Required/default            | Availability | Description                                                                                         |
+| ------------ | -------------------- | ------------------------- | --------------------------- | ------------ | --------------------------------------------------------------------------------------------------- |
+| `as`         | `AsTag \| Component` | No independent Frame prop | `"span"` (Reka)             | Internal     | Rendered element/component. Not independently configurable through Frame.                           |
+| `asChild`    | `boolean`            | No independent Frame prop | Unset in upstream reference | Internal     | Merge behavior into the supplied child element. Not independently configurable through Frame.       |
+| `forceMount` | `boolean`            | No independent Frame prop | Unset in upstream reference | Internal     | Keep the part mounted for presence/animation control. Not independently configurable through Frame. |
 
 #### Emits
 
@@ -141,16 +141,16 @@ No component-defined emits on this part. Native listeners are separate from comp
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | No scoped fields listed | Frame supplies the internal composition; no public part slot |
+| Upstream slot | Scoped field            | Frame availability                                           |
+| ------------- | ----------------------- | ------------------------------------------------------------ |
+| default       | No scoped fields listed | Frame supplies the internal composition; no public part slot |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
-| data-state | checked / unchecked during presence | Reflects owner state while mounted, including presence transitions. |
-| data-disabled | Present when disabled | Underlying disabled state. |
+| Attribute     | Value/presence                      | Meaning                                                             |
+| ------------- | ----------------------------------- | ------------------------------------------------------------------- |
+| data-state    | checked / unchecked during presence | Reflects owner state while mounted, including presence transitions. |
+| data-disabled | Present when disabled               | Underlying disabled state.                                          |
 
 ### Label
 
@@ -158,11 +158,11 @@ Frame supplies this part in its anatomy. Availability below refers to configurat
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | No independent Frame prop | `"label"` (Reka) | Internal | Rendered element/component. Not independently configurable through Frame. |
-| `asChild` | `boolean` | No independent Frame prop | Unset in upstream reference | Internal | Merge behavior into the supplied child element. Not independently configurable through Frame. |
-| `for` | `string` | No independent Frame prop | Unset in upstream reference | Internal | Associated control ID. Not independently configurable through Frame. |
+| Prop      | Reka type            | Frame type                | Required/default            | Availability | Description                                                                                   |
+| --------- | -------------------- | ------------------------- | --------------------------- | ------------ | --------------------------------------------------------------------------------------------- |
+| `as`      | `AsTag \| Component` | No independent Frame prop | `"label"` (Reka)            | Internal     | Rendered element/component. Not independently configurable through Frame.                     |
+| `asChild` | `boolean`            | No independent Frame prop | Unset in upstream reference | Internal     | Merge behavior into the supplied child element. Not independently configurable through Frame. |
+| `for`     | `string`             | No independent Frame prop | Unset in upstream reference | Internal     | Associated control ID. Not independently configurable through Frame.                          |
 
 #### Emits
 
@@ -170,29 +170,29 @@ No component-defined emits on this part. Native listeners are separate from comp
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | No scoped fields listed | Frame supplies the internal composition; no public part slot |
+| Upstream slot | Scoped field            | Frame availability                                           |
+| ------------- | ----------------------- | ------------------------------------------------------------ |
+| default       | No scoped fields listed | Frame supplies the internal composition; no public part slot |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
-| — | None supplied by this part | Label/text/separator parts do not add checked/open state markers. |
+| Attribute | Value/presence             | Meaning                                                           |
+| --------- | -------------------------- | ----------------------------------------------------------------- |
+| —         | None supplied by this part | Label/text/separator parts do not add checked/open state markers. |
 
 ### Frame additions
 
 #### Props
 
-| Prop | Type | Required/default | Description |
-| --- | --- | --- | --- |
-| `label` | `string` | `Unset` | Inline label text; replaced by the default slot. |
+| Prop    | Type     | Required/default | Description                                      |
+| ------- | -------- | ---------------- | ------------------------------------------------ |
+| `label` | `string` | `Unset`          | Inline label text; replaced by the default slot. |
 
 #### Slots
 
-| Slot | Payload | Fallback | Placement |
-| --- | --- | --- | --- |
-| default | None | label prop | Beside the interactive Root, inside the outer Label; does not customize Indicator/Thumb. |
+| Slot    | Payload | Fallback   | Placement                                                                                |
+| ------- | ------- | ---------- | ---------------------------------------------------------------------------------------- |
+| default | None    | label prop | Beside the interactive Root, inside the outer Label; does not customize Indicator/Thumb. |
 
 #### Emits
 
@@ -204,7 +204,7 @@ No Frame-defined methods or internal Reka refs are exposed.
 
 ### Sources and version
 
-[FrameCheckbox.vue](../../../packages/core/src/components/forms/FrameCheckbox.vue) composes Reka CheckboxRoot, CheckboxIndicator, and Label. Styles come from [controls.css](../../../packages/core/src/components/forms/shared/controls.css) and [style.css](../../../packages/core/src/style.css).
+[FrameCheckbox.vue](../../../packages/core/src/components/forms/FrameCheckbox.vue) composes Reka CheckboxRoot, CheckboxIndicator, and Label. Styles come from [controls.scss](../../../packages/core/src/components/forms/styles/controls.scss) and [styles/index.scss](../../../packages/core/src/styles/index.scss).
 
 Compared with the [Reka Checkbox reference](https://reka-ui.com/docs/components/checkbox.md) and installed Reka `2.11.0` source. See the [coverage review](../../reference/reka-coverage.md) for the audit scope and differences.
 
@@ -212,18 +212,18 @@ Compared with the [Reka Checkbox reference](https://reka-ui.com/docs/components/
 
 ### Parts and selectors
 
-| Selector | Part | Placement/attribute target |
-| --- | --- | --- |
-| `.frame-checkbox` | Outer label | Outer label; caller class/style goes to the interactive child instead. |
-| `.frame-check-control` | Checkbox button | Caller class/style targets this element. |
+| Selector               | Part            | Placement/attribute target                                             |
+| ---------------------- | --------------- | ---------------------------------------------------------------------- |
+| `.frame-checkbox`      | Outer label     | Outer label; caller class/style goes to the interactive child instead. |
+| `.frame-check-control` | Checkbox button | Caller class/style targets this element.                               |
 
 The visible checkbox is 18 by 18 pixels. Native-input legacy variables do not resize its Reka button.
 
 ### Variables
 
-| Token key | Variable | Value kind | Default/fallback | Part/effect | Scope/limits | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| CSS only | `--frame-checkbox-gap` | length / CSS length expression | CSS fallback: `8px` | Outer label gap | Local to matching component rules. CSS only; not in JSON allowlist. | Checkbox gap. |
-| CSS only | `--frame-checkbox-line-height` | lineHeight | CSS fallback: `18px` | Outer label line-height | Local to matching component rules. CSS only; not in JSON allowlist. | Checkbox line height. |
+| Token key | Variable                       | Value kind                     | Default/fallback     | Part/effect             | Scope/limits                                                        | Description           |
+| --------- | ------------------------------ | ------------------------------ | -------------------- | ----------------------- | ------------------------------------------------------------------- | --------------------- |
+| CSS only  | `--frame-checkbox-gap`         | length / CSS length expression | CSS fallback: `8px`  | Outer label gap         | Local to matching component rules. CSS only; not in JSON allowlist. | Checkbox gap.         |
+| CSS only  | `--frame-checkbox-line-height` | lineHeight                     | CSS fallback: `18px` | Outer label line-height | Local to matching component rules. CSS only; not in JSON allowlist. | Checkbox line height. |
 
 See [theme variables](../../styling/theme-variables.md) for theme authoring.

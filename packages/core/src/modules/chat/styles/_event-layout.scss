@@ -1,0 +1,8 @@
+// Event cards retain their own selector specificity while sharing heading layout.
+@mixin heading-layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 12px;
+}

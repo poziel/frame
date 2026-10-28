@@ -385,7 +385,7 @@
   "NavigationActionItem": {
     "description": "Public interface declared in packages/core/src/framework/views/navigationItems.ts.",
     "usage": "Import NavigationActionItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface NavigationActionItem extends NamedNavigationItem {\n\n  /** Discriminant selecting the supported item behavior. */\n  type: 'action';\n\n  /** Action invoked when this contribution is activated. */\n  run: () => void | Promise<void>;\n\n  /** Static or reactive indication that this navigation destination is selected. */\n  active?: boolean | (() => boolean);\n}",
+    "code": "export interface NavigationActionItem extends NamedNavigationItem {\r\n\r\n  /** Discriminant selecting the supported item behavior. */\r\n  type: 'action';\r\n\r\n  /** Action invoked when this contribution is activated. */\r\n  run: () => void | Promise<void>;\r\n\r\n  /** Static or reactive indication that this navigation destination is selected. */\r\n  active?: boolean | (() => boolean);\r\n}",
     "properties": [
       {
         "name": "type",
@@ -408,21 +408,21 @@
   "NavigationItem": {
     "description": "Public type declared in packages/core/src/framework/views/navigationItems.ts.",
     "usage": "Import NavigationItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export type NavigationItem =\n  | NavigationActionItem\n  | NavigationLinkItem\n  | NavigationDropdownItem\n  | NavigationSeparatorItem;",
+    "code": "export type NavigationItem =\r\n  | NavigationActionItem\r\n  | NavigationLinkItem\r\n  | NavigationDropdownItem\r\n  | NavigationSeparatorItem;",
     "properties": [],
     "package": "@frame/core"
   },
   "FrameMenuItem": {
     "description": "Public type declared in packages/core/src/components/navigation/generalMenu.ts.",
     "usage": "Import FrameMenuItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export type FrameMenuItem =\n  | {\n      /** Stable identity used to address this contribution. */\n      id: string;\n\n      /** Kind of control or structural row represented by this definition. */\n      type: 'separator';\n    }\n  | {\n      /** Stable identity used to address this contribution. */\n      id: string;\n      /** Kind of control or structural row represented by this definition. */\n      type?: 'item';\n      /** Human-readable name displayed by the owning surface. */\n      label: string;\n      /** Registered command whose state and execution are shared with this row. */\n      command?: string;\n      /** Shortcut text displayed with this menu action. */\n      shortcut?: string;\n      /** Whether user interaction with this entry is currently blocked. */\n      disabled?: boolean;\n      /** Current checked or visible state rendered by the menu row. */\n      checked?: boolean;\n      /** Uses a visibility indicator instead of an ordinary check mark. */\n      visibility?: boolean;\n      /** Nested definitions rendered and registered beneath this entry. */\n      children?: readonly FrameMenuItem[];\n    };",
+    "code": "export type FrameMenuItem =\r\n  | {\r\n      /** Stable identity used to address this contribution. */\r\n      id: string;\r\n\r\n      /** Kind of control or structural row represented by this definition. */\r\n      type: 'separator';\r\n    }\r\n  | {\r\n      /** Stable identity used to address this contribution. */\r\n      id: string;\r\n      /** Kind of control or structural row represented by this definition. */\r\n      type?: 'item';\r\n      /** Human-readable name displayed by the owning surface. */\r\n      label: string;\r\n      /** Registered command whose state and execution are shared with this row. */\r\n      command?: string;\r\n      /** Shortcut text displayed with this menu action. */\r\n      shortcut?: string;\r\n      /** Whether user interaction with this entry is currently blocked. */\r\n      disabled?: boolean;\r\n      /** Current checked or visible state rendered by the menu row. */\r\n      checked?: boolean;\r\n      /** Uses a visibility indicator instead of an ordinary check mark. */\r\n      visibility?: boolean;\r\n      /** Nested definitions rendered and registered beneath this entry. */\r\n      children?: readonly FrameMenuItem[];\r\n    };",
     "properties": [],
     "package": "@frame/core"
   },
   "ViewContentSlot": {
     "description": "Public interface declared in packages/core/src/framework/views/shellViewContainer.ts.",
     "usage": "Import ViewContentSlot from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface ViewContentSlot {\n\n  /** Host-supplied Vue component rendered for this contribution. */\n  component: Component;\n\n  /** Properties forwarded to the host-supplied component. */\n  props?: Record<string, unknown>;\n\n  /** Whether the surface applies its standard content padding. */\n  padded?: boolean;\n}",
+    "code": "export interface ViewContentSlot {\r\n\r\n  /** Host-supplied Vue component rendered for this contribution. */\r\n  component: Component;\r\n\r\n  /** Properties forwarded to the host-supplied component. */\r\n  props?: Record<string, unknown>;\r\n\r\n  /** Whether the surface applies its standard content padding. */\r\n  padded?: boolean;\r\n}",
     "properties": [
       {
         "name": "component",
@@ -445,7 +445,7 @@
   "PanelDefinition": {
     "description": "Public interface declared in packages/core/src/framework/views/shellViewContainer.ts.",
     "usage": "Import PanelDefinition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface PanelDefinition {\n\n  /** Render the bottom/secondary pane header. Defaults to true; false lets content supply its own toolbar. */\n  showHeader?: boolean;\n\n  /** CSS color for the view heading and selector label. Supports reactive getters. */\n  titleColor?: string;\n\n  /** Optional view-item badge; presentation is controlled by frame.primaryViewBar or frame.secondaryViewBar. */\n  badge?: ViewBadge;\n\n  /** Stable identity used to address this contribution. */\n  id: string;\n\n  /** Human-readable name displayed by the owning surface. */\n  label: string;\n\n  /** Optional icon rendered beside the contribution. */\n  icon?: Component;\n\n  /** Actions offered by the owning surface. */\n  actions?: readonly PanelAction[];\n\n  /** Whether the surface applies its standard content padding. */\n  padded?: boolean;\n\n  /** Optional content retained above the main view content. */\n  top?: ViewContentSlot;\n\n  /** Optional content retained below the main view content. */\n  bottom?: ViewContentSlot;\n\n  /** Whether pointer dragging is allowed for this contribution. */\n  draggable?: boolean;\n\n  /** Whether this contribution can move between eligible containers. */\n  movable?: boolean;\n\n  /** Initial collapsed state of this view section. */\n  collapsed?: boolean;\n\n  /** Initial presentation visibility; hiding does not unregister or dispose the view. */\n  visible?: boolean;\n\n  /** Host-supplied Vue component rendered for this contribution. */\n  component?: Component;\n\n  /** Nested definitions rendered and registered beneath this entry. */\n  children?: readonly PanelDefinition[];\n\n  /** Properties forwarded to the host-supplied component. */\n  props?: Record<string, unknown>;\n}",
+    "code": "export interface PanelDefinition {\r\n\r\n  /** Render the bottom/secondary pane header. Defaults to true; false lets content supply its own toolbar. */\r\n  showHeader?: boolean;\r\n\r\n  /** CSS color for the view heading and selector label. Supports reactive getters. */\r\n  titleColor?: string;\r\n\r\n  /** Optional view-item badge; presentation is controlled by frame.primaryViewBar or frame.secondaryViewBar. */\r\n  badge?: ViewBadge;\r\n\r\n  /** Stable identity used to address this contribution. */\r\n  id: string;\r\n\r\n  /** Human-readable name displayed by the owning surface. */\r\n  label: string;\r\n\r\n  /** Optional icon rendered beside the contribution. */\r\n  icon?: Component;\r\n\r\n  /** Actions offered by the owning surface. */\r\n  actions?: readonly PanelAction[];\r\n\r\n  /** Whether the surface applies its standard content padding. */\r\n  padded?: boolean;\r\n\r\n  /** Optional content retained above the main view content. */\r\n  top?: ViewContentSlot;\r\n\r\n  /** Optional content retained below the main view content. */\r\n  bottom?: ViewContentSlot;\r\n\r\n  /** Whether pointer dragging is allowed for this contribution. */\r\n  draggable?: boolean;\r\n\r\n  /** Whether this contribution can move between eligible containers. */\r\n  movable?: boolean;\r\n\r\n  /** Initial collapsed state of this view section. */\r\n  collapsed?: boolean;\r\n\r\n  /** Initial presentation visibility; hiding does not unregister or dispose the view. */\r\n  visible?: boolean;\r\n\r\n  /** Host-supplied Vue component rendered for this contribution. */\r\n  component?: Component;\r\n\r\n  /** Nested definitions rendered and registered beneath this entry. */\r\n  children?: readonly PanelDefinition[];\r\n\r\n  /** Properties forwarded to the host-supplied component. */\r\n  props?: Record<string, unknown>;\r\n}",
     "properties": [
       {
         "name": "showHeader",
@@ -538,7 +538,7 @@
   "SidePanelDefinition": {
     "description": "Public interface declared in packages/core/src/framework/views/shellViewContainer.ts.",
     "usage": "Import SidePanelDefinition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface SidePanelDefinition extends PanelDefinition {\n\n  /** Optional icon rendered beside the contribution. */\n  icon?: Component;\n\n  /** Whether this view contributes an activity-rail selector. */\n  showInRail?: boolean;\n}",
+    "code": "export interface SidePanelDefinition extends PanelDefinition {\r\n\r\n  /** Optional icon rendered beside the contribution. */\r\n  icon?: Component;\r\n\r\n  /** Whether this view contributes an activity-rail selector. */\r\n  showInRail?: boolean;\r\n}",
     "properties": [
       {
         "name": "icon",
@@ -563,7 +563,7 @@
   "PanelAction": {
     "description": "Public interface declared in packages/core/src/framework/views/shellViewContainer.ts.",
     "usage": "Import PanelAction from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface PanelAction {\n\n  /** Stable identity used to address this contribution. */\n  id: string;\n\n  /** Human-readable name displayed by the owning surface. */\n  label: string;\n\n  /** Optional icon rendered beside the contribution. */\n  icon?: Component;\n\n  /** Application callback invoked when the action is activated. */\n  run: () => void;\n\n  /** Whether user interaction with this entry is currently blocked. */\n  disabled?: boolean;\n\n  /** Optional nested menu displayed by this action. */\n  menu?: readonly FrameMenuItem[];\n\n  /** Receives a choice from the action's nested menu. */\n  onSelect?: (item: FrameMenuItem) => void;\n}",
+    "code": "export interface PanelAction {\r\n\r\n  /** Stable identity used to address this contribution. */\r\n  id: string;\r\n\r\n  /** Human-readable name displayed by the owning surface. */\r\n  label: string;\r\n\r\n  /** Optional icon rendered beside the contribution. */\r\n  icon?: Component;\r\n\r\n  /** Application callback invoked when the action is activated. */\r\n  run: () => void;\r\n\r\n  /** Whether user interaction with this entry is currently blocked. */\r\n  disabled?: boolean;\r\n\r\n  /** Optional nested menu displayed by this action. */\r\n  menu?: readonly FrameMenuItem[];\r\n\r\n  /** Receives a choice from the action's nested menu. */\r\n  onSelect?: (item: FrameMenuItem) => void;\r\n}",
     "properties": [
       {
         "name": "id",
@@ -606,7 +606,7 @@
   "CommandPrefix": {
     "description": "Public interface declared in packages/core/src/framework/commands/commandPrefixes.ts.",
     "usage": "Import CommandPrefix from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface CommandPrefix {\n\n  /** Unique single-symbol prefix used to enter this command category. */\n  prefix: string;\n\n  /** Human-readable category label. */\n  label: string;\n\n  /** Optional search hint displayed inside this category. */\n  placeholder?: string;\n}",
+    "code": "export interface CommandPrefix {\r\n\r\n  /** Unique single-symbol prefix used to enter this command category. */\r\n  prefix: string;\r\n\r\n  /** Human-readable category label. */\r\n  label: string;\r\n\r\n  /** Optional search hint displayed inside this category. */\r\n  placeholder?: string;\r\n}",
     "properties": [
       {
         "name": "prefix",
@@ -629,7 +629,7 @@
   "QuickPickItem": {
     "description": "Public interface declared in packages/core/src/components/framework/quickPick.ts.",
     "usage": "Import QuickPickItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface QuickPickItem {\n\n  /** Optional live availability for explicit command projections. */\n  available?: () => boolean;\n\n  /** Structural rows are not selectable. */\n  type?: 'item' | 'separator' | 'heading' | 'submenu';\n\n  /** Inline secondary text. */\n  description?: string;\n\n  /** Trailing category annotation. */\n  sectionLabel?: string;\n\n  /** Marks the current choice independently of keyboard highlight. */\n  selected?: boolean;\n\n  /** Nested choices, opened by the Command Center. */\n  items?: readonly QuickPickItem[];\n\n  /** Whether this nested submenu offers text filtering. */\n  searchable?: boolean;\n\n  /** Optional local action for non-command choices. */\n  run?: () => void | Promise<void>;\n\n  /** Independently accessible row actions. */\n  actions?: readonly {\n    /** Stable identity used to address this contribution. */\n    id: string;\n    /** Human-readable name displayed by the owning surface. */\n    label: string;\n    /** Optional icon rendered beside the contribution. */\n    icon?: string;\n    /** Application callback invoked when the action is activated. */\n    run: () => void | Promise<void>;\n  }[];\n\n  /** Stable identity used to address this contribution. */\n  id: string;\n\n  /** Optional icon rendered beside the contribution. */\n  icon?: string | Component;\n\n  /** Human-readable name displayed by the owning surface. */\n  label: string;\n\n  /** Optional secondary text retained with this entry. */\n  detail?: string;\n\n  /** Shortcut text displayed with this choice. */\n  shortcut?: string;\n\n  /** Whether user interaction with this entry is currently blocked. */\n  disabled?: boolean;\n}",
+    "code": "export interface QuickPickItem {\r\n\r\n  /** Optional live availability for explicit command projections. */\r\n  available?: () => boolean;\r\n\r\n  /** Structural rows are not selectable. */\r\n  type?: 'item' | 'separator' | 'heading' | 'submenu';\r\n\r\n  /** Inline secondary text. */\r\n  description?: string;\r\n\r\n  /** Trailing category annotation. */\r\n  sectionLabel?: string;\r\n\r\n  /** Marks the current choice independently of keyboard highlight. */\r\n  selected?: boolean;\r\n\r\n  /** Nested choices, opened by the Command Center. */\r\n  items?: readonly QuickPickItem[];\r\n\r\n  /** Whether this nested submenu offers text filtering. */\r\n  searchable?: boolean;\r\n\r\n  /** Optional local action for non-command choices. */\r\n  run?: () => void | Promise<void>;\r\n\r\n  /** Independently accessible row actions. */\r\n  actions?: readonly {\r\n    /** Stable identity used to address this contribution. */\r\n    id: string;\r\n    /** Human-readable name displayed by the owning surface. */\r\n    label: string;\r\n    /** Optional icon rendered beside the contribution. */\r\n    icon?: string;\r\n    /** Application callback invoked when the action is activated. */\r\n    run: () => void | Promise<void>;\r\n  }[];\r\n\r\n  /** Stable identity used to address this contribution. */\r\n  id: string;\r\n\r\n  /** Optional icon rendered beside the contribution. */\r\n  icon?: string | Component;\r\n\r\n  /** Human-readable name displayed by the owning surface. */\r\n  label: string;\r\n\r\n  /** Optional secondary text retained with this entry. */\r\n  detail?: string;\r\n\r\n  /** Shortcut text displayed with this choice. */\r\n  shortcut?: string;\r\n\r\n  /** Whether user interaction with this entry is currently blocked. */\r\n  disabled?: boolean;\r\n}",
     "properties": [
       {
         "name": "available",
@@ -673,7 +673,7 @@
       },
       {
         "name": "actions",
-        "type": "readonly {\n    /** Stable identity used to address this contribution. */\n    id: string;\n    /** Human-readable name displayed by the owning surface. */\n    label: string;\n    /** Optional icon rendered beside the contribution. */\n    icon?: string;\n    /** Application callback invoked when the action is activated. */\n    run: () => void | Promise<void>;\n  }[]",
+        "type": "readonly {\r\n    /** Stable identity used to address this contribution. */\r\n    id: string;\r\n    /** Human-readable name displayed by the owning surface. */\r\n    label: string;\r\n    /** Optional icon rendered beside the contribution. */\r\n    icon?: string;\r\n    /** Application callback invoked when the action is activated. */\r\n    run: () => void | Promise<void>;\r\n  }[]",
         "description": "Application-owned header actions."
       },
       {
@@ -712,7 +712,7 @@
   "QuickPickOptions": {
     "description": "Public interface declared in packages/core/src/components/framework/quickPick.ts.",
     "usage": "Import QuickPickOptions from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface QuickPickOptions {\n\n  /** Controls text filtering; defaults to true. */\n  searchable?: boolean;\n\n  /** Restores navigation state when returning to a submenu. */\n  initialQuery?: string;\n\n  /** Restores keyboard highlight when returning to a submenu. */\n  initialSelectedId?: string;\n\n  /** Reports state to the owning navigation controller. */\n  onStateChange?: (state: {query: string; selectedId: string}) => void;\n\n  /** Heading displayed by the owning presentation. */\n  title?: string;\n\n  /** Hint displayed when the input or search field is empty. */\n  placeholder?: string;\n}",
+    "code": "export interface QuickPickOptions {\r\n\r\n  /** Controls text filtering; defaults to true. */\r\n  searchable?: boolean;\r\n\r\n  /** Restores navigation state when returning to a submenu. */\r\n  initialQuery?: string;\r\n\r\n  /** Restores keyboard highlight when returning to a submenu. */\r\n  initialSelectedId?: string;\r\n\r\n  /** Reports state to the owning navigation controller. */\r\n  onStateChange?: (state: {query: string; selectedId: string}) => void;\r\n\r\n  /** Heading displayed by the owning presentation. */\r\n  title?: string;\r\n\r\n  /** Hint displayed when the input or search field is empty. */\r\n  placeholder?: string;\r\n}",
     "properties": [
       {
         "name": "searchable",
@@ -750,7 +750,7 @@
   "WorkspacePaneContent": {
     "description": "Public interface declared in packages/core/src/framework/workspace/workspaceTypes.ts.",
     "usage": "Import WorkspacePaneContent from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface WorkspacePaneContent {\n\n  /** Human-readable name displayed by the owning surface. */\n  label: string;\n\n  /** Host-supplied Vue component rendered for this contribution. */\n  component?: Component;\n\n  /** Properties forwarded to the host-supplied component. */\n  props?: Record<string, unknown>;\n}",
+    "code": "export interface WorkspacePaneContent {\r\n\r\n  /** Human-readable name displayed by the owning surface. */\r\n  label: string;\r\n\r\n  /** Host-supplied Vue component rendered for this contribution. */\r\n  component?: Component;\r\n\r\n  /** Properties forwarded to the host-supplied component. */\r\n  props?: Record<string, unknown>;\r\n}",
     "properties": [
       {
         "name": "label",
@@ -773,7 +773,7 @@
   "ModalDefinition": {
     "description": "Public interface declared in packages/core/src/components/framework/modal.ts.",
     "usage": "Import ModalDefinition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface ModalDefinition extends ModalOptions {\n\n  /** Stable identity used to address this contribution. */\n  id: string;\n\n  /** Heading displayed by the owning presentation. */\n  title: string;\n\n  /** Host-supplied Vue component rendered for this contribution. */\n  component: Component;\n\n  /** Properties forwarded to the host-supplied component. */\n  props?: Record<string, unknown>;\n\n  /** Optional icon rendered beside the contribution. */\n  icon?: Component;\n\n  /** Actions offered by the owning surface. */\n  actions?: readonly PanelAction[];\n\n  /** Requested presentation width in pixels, constrained by the shell bounds. */\n  width?: number;\n\n  /** Requested presentation height in pixels, constrained by the shell bounds. */\n  height?: number;\n\n  /** Initial maximized presentation for this modal. */\n  maximized?: boolean;\n\n  /** Optional host-owned footer component. */\n  footer?: Component;\n\n  /** Properties forwarded to the footer component. */\n  footerProps?: Record<string, unknown>;\n}",
+    "code": "export interface ModalDefinition extends ModalOptions {\r\n\r\n  /** Stable identity used to address this contribution. */\r\n  id: string;\r\n\r\n  /** Heading displayed by the owning presentation. */\r\n  title: string;\r\n\r\n  /** Host-supplied Vue component rendered for this contribution. */\r\n  component: Component;\r\n\r\n  /** Properties forwarded to the host-supplied component. */\r\n  props?: Record<string, unknown>;\r\n\r\n  /** Optional icon rendered beside the contribution. */\r\n  icon?: Component;\r\n\r\n  /** Actions offered by the owning surface. */\r\n  actions?: readonly PanelAction[];\r\n\r\n  /** Requested presentation width in pixels, constrained by the shell bounds. */\r\n  width?: number;\r\n\r\n  /** Requested presentation height in pixels, constrained by the shell bounds. */\r\n  height?: number;\r\n\r\n  /** Initial maximized presentation for this modal. */\r\n  maximized?: boolean;\r\n\r\n  /** Optional host-owned footer component. */\r\n  footer?: Component;\r\n\r\n  /** Properties forwarded to the footer component. */\r\n  footerProps?: Record<string, unknown>;\r\n}",
     "properties": [
       {
         "name": "id",
@@ -836,7 +836,7 @@
   "WorkspaceBannerDefinition": {
     "description": "Public interface declared in packages/core/src/framework/workspace/workspaceBanner.ts.",
     "usage": "Import WorkspaceBannerDefinition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface WorkspaceBannerDefinition {\n\n  /** Stable identity used to address this contribution. */\n  id: string;\n\n  /** Human-readable name displayed by the owning surface. */\n  label: string;\n\n  /** Host-supplied Vue component rendered for this contribution. */\n  component: Component;\n\n  /** Properties forwarded to the host-supplied component. */\n  props?: Record<string, unknown>;\n}",
+    "code": "export interface WorkspaceBannerDefinition {\r\n\r\n  /** Stable identity used to address this contribution. */\r\n  id: string;\r\n\r\n  /** Human-readable name displayed by the owning surface. */\r\n  label: string;\r\n\r\n  /** Host-supplied Vue component rendered for this contribution. */\r\n  component: Component;\r\n\r\n  /** Properties forwarded to the host-supplied component. */\r\n  props?: Record<string, unknown>;\r\n}",
     "properties": [
       {
         "name": "id",
@@ -878,7 +878,7 @@
   "SettingDefinition": {
     "description": "Public interface declared in packages/core/src/framework/settings/setting.ts.",
     "usage": "Import SettingDefinition from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface SettingDefinition {\n\n  /** Hide this persisted field from the settings form, while keeping it editable in JSON. */\n  visible?: boolean;\n\n  /** Exclude a contextual form control from the application preferences file. */\n  persist?: boolean;\n\n  /** Stable identity used to address this contribution. */\n  id: string;\n\n  /** Human-readable name displayed by the owning surface. */\n  label: string;\n\n  /** Explanatory text displayed alongside the entry. */\n  description?: string;\n\n  /** Kind of control or structural row represented by this definition. */\n  type:\n    'text' | 'textarea' | 'number' | 'checkbox' | 'select' | 'range' | 'color';\n\n  /** Value restored when this field is reset. */\n  default: SettingValue;\n\n  /** Hint displayed when the input or search field is empty. */\n  placeholder?: string;\n\n  /** Minimum accepted numeric value. */\n  min?: number;\n\n  /** Maximum accepted numeric value. */\n  max?: number;\n\n  /** Increment supplied to the numeric or range control. */\n  step?: number;\n\n  /** Selectable values and structural separator rows offered by the control. */\n  options?: readonly SelectItem[];\n\n  /** Whether user interaction with this entry is currently blocked. */\n  disabled?: boolean;\n\n  /** Reads the effective value from host-owned domain state. */\n  getValue?: () => SettingValue;\n\n  /** Receives validated edits before controller fallback values are updated. */\n  onChange?: (value: SettingValue) => void;\n\n  /** Custom control, including a FieldGroup. Frame retains the label, description and row actions. */\n  component?: Component;\n\n  /** Properties forwarded to the host-supplied component. */\n  props?: Record<string, unknown>;\n}",
+    "code": "export interface SettingDefinition {\r\n\r\n  /** Hide this persisted field from the settings form, while keeping it editable in JSON. */\r\n  visible?: boolean;\r\n\r\n  /** Exclude a contextual form control from the application preferences file. */\r\n  persist?: boolean;\r\n\r\n  /** Stable identity used to address this contribution. */\r\n  id: string;\r\n\r\n  /** Human-readable name displayed by the owning surface. */\r\n  label: string;\r\n\r\n  /** Explanatory text displayed alongside the entry. */\r\n  description?: string;\r\n\r\n  /** Kind of control or structural row represented by this definition. */\r\n  type:\r\n    'text' | 'textarea' | 'number' | 'checkbox' | 'select' | 'range' | 'color';\r\n\r\n  /** Value restored when this field is reset. */\r\n  default: SettingValue;\r\n\r\n  /** Hint displayed when the input or search field is empty. */\r\n  placeholder?: string;\r\n\r\n  /** Minimum accepted numeric value. */\r\n  min?: number;\r\n\r\n  /** Maximum accepted numeric value. */\r\n  max?: number;\r\n\r\n  /** Increment supplied to the numeric or range control. */\r\n  step?: number;\r\n\r\n  /** Selectable values and structural separator rows offered by the control. */\r\n  options?: readonly SelectItem[];\r\n\r\n  /** Whether user interaction with this entry is currently blocked. */\r\n  disabled?: boolean;\r\n\r\n  /** Reads the effective value from host-owned domain state. */\r\n  getValue?: () => SettingValue;\r\n\r\n  /** Receives validated edits before controller fallback values are updated. */\r\n  onChange?: (value: SettingValue) => void;\r\n\r\n  /** Custom control, including a FieldGroup. Frame retains the label, description and row actions. */\r\n  component?: Component;\r\n\r\n  /** Properties forwarded to the host-supplied component. */\r\n  props?: Record<string, unknown>;\r\n}",
     "properties": [
       {
         "name": "visible",
@@ -971,7 +971,7 @@
   "SettingsSection": {
     "description": "Public interface declared in packages/core/src/framework/settings/settings.ts.",
     "usage": "Import SettingsSection from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface SettingsSection {\n\n  /** Stable identity used to address this contribution. */\n  id: string;\n\n  /** Heading displayed by the owning presentation. */\n  title: string;\n\n  /** Explanatory text displayed alongside the entry. */\n  description?: string;\n\n  /** Field definitions registered within this section. */\n  settings?: readonly SettingDefinition[];\n\n  /** Nested definitions rendered and registered beneath this entry. */\n  children?: readonly SettingsSection[];\n\n  /** Host-supplied Vue component rendered for this contribution. */\n  component?: Component;\n\n  /** Properties forwarded to the host-supplied component. */\n  props?: Record<string, unknown>;\n}",
+    "code": "export interface SettingsSection {\r\n\r\n  /** Stable identity used to address this contribution. */\r\n  id: string;\r\n\r\n  /** Heading displayed by the owning presentation. */\r\n  title: string;\r\n\r\n  /** Explanatory text displayed alongside the entry. */\r\n  description?: string;\r\n\r\n  /** Field definitions registered within this section. */\r\n  settings?: readonly SettingDefinition[];\r\n\r\n  /** Nested definitions rendered and registered beneath this entry. */\r\n  children?: readonly SettingsSection[];\r\n\r\n  /** Host-supplied Vue component rendered for this contribution. */\r\n  component?: Component;\r\n\r\n  /** Properties forwarded to the host-supplied component. */\r\n  props?: Record<string, unknown>;\r\n}",
     "properties": [
       {
         "name": "id",
@@ -1021,7 +1021,7 @@
   "NotificationAction": {
     "description": "Public interface declared in packages/core/src/framework/views/notifications.ts.",
     "usage": "Import NotificationAction from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface NotificationAction {\n\n  /** Human-readable name displayed by the owning surface. */\n  label: string;\n\n  /** Application callback invoked when the action is activated. */\n  run: () => void | Promise<void>;\n}",
+    "code": "export interface NotificationAction {\r\n\r\n  /** Human-readable name displayed by the owning surface. */\r\n  label: string;\r\n\r\n  /** Application callback invoked when the action is activated. */\r\n  run: () => void | Promise<void>;\r\n}",
     "properties": [
       {
         "name": "label",
@@ -1039,7 +1039,7 @@
   "NotificationOptions": {
     "description": "Public interface declared in packages/core/src/framework/views/notifications.ts.",
     "usage": "Import NotificationOptions from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface NotificationOptions {\n\n  /** Stable identity used to address this contribution. */\n  id?: string;\n\n  /** Heading displayed by the owning presentation. */\n  title: string;\n\n  /** Semantic severity used to style the notification. */\n  severity?: NotificationSeverity;\n\n  /** Optional expanded notification content. */\n  details?: string;\n\n  /** Optional application source identifying the notification origin. */\n  source?: string;\n\n  /** Optional host priority annotation retained with the notification. */\n  priority?: string;\n\n  /** Dismissal delay in milliseconds; zero keeps the notification persistent. */\n  duration?: number;\n\n  /** Optional application action offered by the notification. */\n  action?: NotificationAction;\n}",
+    "code": "export interface NotificationOptions {\r\n\r\n  /** Stable identity used to address this contribution. */\r\n  id?: string;\r\n\r\n  /** Heading displayed by the owning presentation. */\r\n  title: string;\r\n\r\n  /** Semantic severity used to style the notification. */\r\n  severity?: NotificationSeverity;\r\n\r\n  /** Optional expanded notification content. */\r\n  details?: string;\r\n\r\n  /** Optional application source identifying the notification origin. */\r\n  source?: string;\r\n\r\n  /** Optional host priority annotation retained with the notification. */\r\n  priority?: string;\r\n\r\n  /** Dismissal delay in milliseconds; zero keeps the notification persistent. */\r\n  duration?: number;\r\n\r\n  /** Optional application action offered by the notification. */\r\n  action?: NotificationAction;\r\n}",
     "properties": [
       {
         "name": "id",
@@ -1087,7 +1087,7 @@
   "FrameMenubarItem": {
     "description": "Public interface declared in packages/core/src/components/navigation/menubarTypes.ts.",
     "usage": "Import FrameMenubarItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface FrameMenubarItem {\n\n  /** Stable selection value identifying this top-level menu. */\n  value: string;\n\n  /** Visible top-level trigger label. */\n  label: string;\n\n  /** Prevents user activation of the menu trigger. */\n  disabled?: boolean;\n\n  /** Ordered actions normalized into the menu's displayed entries. */\n  items: FrameMenubarAction[];\n}",
+    "code": "export interface FrameMenubarItem {\r\n\r\n  /** Stable selection value identifying this top-level menu. */\r\n  value: string;\r\n\r\n  /** Visible top-level trigger label. */\r\n  label: string;\r\n\r\n  /** Prevents user activation of the menu trigger. */\r\n  disabled?: boolean;\r\n\r\n  /** Ordered actions normalized into the menu's displayed entries. */\r\n  items: FrameMenubarAction[];\r\n}",
     "properties": [
       {
         "name": "value",
@@ -1136,7 +1136,7 @@
   "FrameAccordionItem": {
     "description": "Public interface declared in packages/core/src/components/layout/FrameAccordion.vue.ts.",
     "usage": "Import FrameAccordionItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface FrameAccordionItem { value: string; title: string; description?: string; disabled?: boolean }",
+    "code": "export interface FrameAccordionItem {\n\n  value: string;\n\n  title: string;\n\n  description?: string;\n\n  disabled?: boolean;\n}",
     "properties": [
       {
         "name": "value",
@@ -1164,7 +1164,7 @@
   "FrameTabItem": {
     "description": "Public interface declared in packages/core/src/components/navigation/tabsTypes.ts.",
     "usage": "Import FrameTabItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface FrameTabItem {\n\n  /** Stable selection value shared by the trigger and corresponding panel. */\n  value: string | number;\n\n  /** Visible text in the default tab trigger. */\n  label: string;\n\n  /** Prevents activation of this trigger while retaining its panel definition. */\n  disabled?: boolean;\n\n  /** Fallback panel text when the content slot is not supplied. */\n  content?: string;\n\n  /** Optional icon displayed before the default trigger label. */\n  icon?: string;\n}",
+    "code": "export interface FrameTabItem {\r\n\r\n  /** Stable selection value shared by the trigger and corresponding panel. */\r\n  value: string | number;\r\n\r\n  /** Visible text in the default tab trigger. */\r\n  label: string;\r\n\r\n  /** Prevents activation of this trigger while retaining its panel definition. */\r\n  disabled?: boolean;\r\n\r\n  /** Fallback panel text when the content slot is not supplied. */\r\n  content?: string;\r\n\r\n  /** Optional icon displayed before the default trigger label. */\r\n  icon?: string;\r\n}",
     "properties": [
       {
         "name": "value",
@@ -1197,7 +1197,7 @@
   "FrameStepItem": {
     "description": "Public interface declared in packages/core/src/components/navigation/stepperTypes.ts.",
     "usage": "Import FrameStepItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface FrameStepItem {\n\n  /** Step value forwarded to Reka and displayed in the default indicator. */\n  step: number;\n\n  /** Visible step title. */\n  label: string;\n\n  /** Optional supporting text displayed below the title. */\n  description?: string;\n\n  /** Prevents user activation of this step. */\n  disabled?: boolean;\n\n  /** Explicit completion state forwarded to the underlying step item. */\n  completed?: boolean;\n}",
+    "code": "export interface FrameStepItem {\r\n\r\n  /** Step value forwarded to Reka and displayed in the default indicator. */\r\n  step: number;\r\n\r\n  /** Visible step title. */\r\n  label: string;\r\n\r\n  /** Optional supporting text displayed below the title. */\r\n  description?: string;\r\n\r\n  /** Prevents user activation of this step. */\r\n  disabled?: boolean;\r\n\r\n  /** Explicit completion state forwarded to the underlying step item. */\r\n  completed?: boolean;\r\n}",
     "properties": [
       {
         "name": "step",
@@ -1230,7 +1230,7 @@
   "FrameToolbarItem": {
     "description": "Public interface declared in packages/core/src/components/actions/toolbarTypes.ts.",
     "usage": "Import FrameToolbarItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface FrameToolbarItem {\n\n  /** Stable rendering identity within the toolbar. */\n  id: string;\n\n  /** Visible text for a button or link; unused when rendering a separator. */\n  label: string;\n\n  /** Optional icon displayed before a non-separator label. */\n  icon?: string;\n\n  /** Prevents activation and renders a button instead of an active link. */\n  disabled?: boolean;\n\n  /** Link destination used when the item is enabled and not a separator. */\n  href?: string;\n\n  /** Renders a structural separator instead of a button or link. */\n  separator?: boolean;\n}",
+    "code": "export interface FrameToolbarItem {\r\n\r\n  /** Stable rendering identity within the toolbar. */\r\n  id: string;\r\n\r\n  /** Visible text for a button or link; unused when rendering a separator. */\r\n  label: string;\r\n\r\n  /** Optional icon displayed before a non-separator label. */\r\n  icon?: string;\r\n\r\n  /** Prevents activation and renders a button instead of an active link. */\r\n  disabled?: boolean;\r\n\r\n  /** Link destination used when the item is enabled and not a separator. */\r\n  href?: string;\r\n\r\n  /** Renders a structural separator instead of a button or link. */\r\n  separator?: boolean;\r\n}",
     "properties": [
       {
         "name": "id",
@@ -1268,7 +1268,7 @@
   "FrameTreeItem": {
     "description": "Public interface declared in packages/core/src/components/data-display/treeTypes.ts.",
     "usage": "Import FrameTreeItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface FrameTreeItem {\n\n  /** Default rendering and selection key, unless getKey overrides it. */\n  id: string;\n\n  /** Visible label in the default tree row. */\n  label: string;\n\n  /** Optional row icon, independent of the expansion indicator. */\n  icon?: string;\n\n  /** Disables interaction with this item through the underlying tree primitive. */\n  disabled?: boolean;\n\n  /** Descendants consumed by the tree's item-flattening behavior. */\n  children?: FrameTreeItem[];\n}",
+    "code": "export interface FrameTreeItem {\r\n\r\n  /** Default rendering and selection key, unless getKey overrides it. */\r\n  id: string;\r\n\r\n  /** Visible label in the default tree row. */\r\n  label: string;\r\n\r\n  /** Optional row icon, independent of the expansion indicator. */\r\n  icon?: string;\r\n\r\n  /** Disables interaction with this item through the underlying tree primitive. */\r\n  disabled?: boolean;\r\n\r\n  /** Descendants consumed by the tree's item-flattening behavior. */\r\n  children?: FrameTreeItem[];\r\n}",
     "properties": [
       {
         "name": "id",
@@ -1301,7 +1301,7 @@
   "FrameSplitPanel": {
     "description": "Public interface declared in packages/core/src/components/layout/splitterTypes.ts.",
     "usage": "Import FrameSplitPanel from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface FrameSplitPanel extends SplitterPanelProps {\n\n  /** Resize-handle name and fallback panel text when content is omitted. */\n  label?: string;\n\n  /** Fallback text displayed when the panel slot is not supplied. */\n  content?: string;\n}",
+    "code": "export interface FrameSplitPanel extends SplitterPanelProps {\r\n\r\n  /** Resize-handle name and fallback panel text when content is omitted. */\r\n  label?: string;\r\n\r\n  /** Fallback text displayed when the panel slot is not supplied. */\r\n  content?: string;\r\n}",
     "properties": [
       {
         "name": "label",
@@ -1319,7 +1319,7 @@
   "FrameNavigationItem": {
     "description": "Public interface declared in packages/core/src/components/navigation/navigationMenuTypes.ts.",
     "usage": "Import FrameNavigationItem from @frame/core. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface FrameNavigationItem {\n\n  /** Stable item value forwarded to the navigation menu primitive. */\n  value: string;\n\n  /** Visible link text or submenu trigger label. */\n  label: string;\n\n  /** Link destination used when this entry has no submenu children. */\n  href?: string;\n\n  /** Blocks navigation or submenu activation without removing the entry. */\n  disabled?: boolean;\n\n  /** Links shown in the default submenu, or supplied to its custom content slot. */\n  children?: FrameNavigationItem[];\n}",
+    "code": "export interface FrameNavigationItem {\r\n\r\n  /** Stable item value forwarded to the navigation menu primitive. */\r\n  value: string;\r\n\r\n  /** Visible link text or submenu trigger label. */\r\n  label: string;\r\n\r\n  /** Link destination used when this entry has no submenu children. */\r\n  href?: string;\r\n\r\n  /** Blocks navigation or submenu activation without removing the entry. */\r\n  disabled?: boolean;\r\n\r\n  /** Links shown in the default submenu, or supplied to its custom content slot. */\r\n  children?: FrameNavigationItem[];\r\n}",
     "properties": [
       {
         "name": "value",
@@ -1352,7 +1352,7 @@
   "ViewerFile": {
     "description": "Public interface declared in packages/core/src/modules/viewer/types/viewerTypes.ts.",
     "usage": "Import ViewerFile from @frame/core/modules/viewer. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface ViewerFile {\n\n  /** Portable bytes or a browser-fetchable URL; authentication stays host-owned. */\n  source: ViewerSource;\n\n  /** Explicit display name; otherwise resolved from File or URL. */\n  name?: string;\n\n  /** Explicit MIME type preferred over the supplied Blob or response metadata. */\n  mimeType?: string;\n\n  /** Optional syntax language override for code detection. */\n  language?: string;\n}",
+    "code": "export interface ViewerFile {\r\n\r\n  /** Portable bytes or a browser-fetchable URL; authentication stays host-owned. */\r\n  source: ViewerSource;\r\n\r\n  /** Explicit display name; otherwise resolved from File or URL. */\r\n  name?: string;\r\n\r\n  /** Explicit MIME type preferred over the supplied Blob or response metadata. */\r\n  mimeType?: string;\r\n\r\n  /** Optional syntax language override for code detection. */\r\n  language?: string;\r\n}",
     "properties": [
       {
         "name": "source",
@@ -1414,14 +1414,14 @@
   "TerminalController": {
     "description": "Public type declared in packages/core/src/modules/terminal/controllers/terminal.ts.",
     "usage": "Import TerminalController from @frame/core/modules/terminal. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export type TerminalController = Pick<\n  TerminalSessionController,\n  keyof TerminalSessionController\n>;",
+    "code": "export type TerminalController = Pick<\r\n  TerminalSessionController,\r\n  keyof TerminalSessionController\r\n>;",
     "properties": [],
     "package": "@frame/core/modules/terminal"
   },
   "ChatAttachment": {
     "description": "Public interface declared in packages/core/src/modules/chat/types/chatTypes.ts.",
     "usage": "Import ChatAttachment from @frame/core/modules/chat. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface ChatAttachment {\n\n  /**\n   * Stable identity used to address this entry within its owning message or\n   * schema.\n   */\n  id: string;\n\n  /** Display name supplied by the host. */\n  name: string;\n\n  /** Distinguishes file, folder, and application-context references. */\n  kind: 'file' | 'folder' | 'context';\n\n  /**\n   * Optional browser File objects retained by reference; copying clones only\n   * the list.\n   */\n  files?: File[];\n}",
+    "code": "export interface ChatAttachment {\r\n\r\n  /**\r\n   * Stable identity used to address this entry within its owning message or\r\n   * schema.\r\n   */\r\n  id: string;\r\n\r\n  /** Display name supplied by the host. */\r\n  name: string;\r\n\r\n  /** Distinguishes file, folder, and application-context references. */\r\n  kind: 'file' | 'folder' | 'context';\r\n\r\n  /**\r\n   * Optional browser File objects retained by reference; copying clones only\r\n   * the list.\r\n   */\r\n  files?: File[];\r\n}",
     "properties": [
       {
         "name": "id",
@@ -1449,7 +1449,7 @@
   "ChatMessage": {
     "description": "Public interface declared in packages/core/src/modules/chat/types/chatTypes.ts.",
     "usage": "Import ChatMessage from @frame/core/modules/chat. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface ChatMessage {\n\n  /**\n   * Stable identity used to address this entry within its owning message or\n   * schema.\n   */\n  id: string;\n\n  /** Conversation role identifying the entry as user or assistant content. */\n  role: 'user' | 'assistant';\n\n  /** Creation timestamp in milliseconds since the Unix epoch. */\n  createdAt: number;\n\n  /** Content parts retained in their original event order. */\n  parts: ChatPart[];\n\n  /**\n   * Host-selected attachment references associated with this entry or request.\n   */\n  attachments: ChatAttachment[];\n\n  /** Whether the entry is pending, complete, stopped, or failed. */\n  status: 'pending' | 'complete' | 'stopped' | 'error';\n\n  /**\n   * Completion timestamp in milliseconds since the Unix epoch, when finished.\n   */\n  finishedAt?: number;\n\n  /** Failure explanation retained when the message finishes with an error. */\n  error?: string;\n}",
+    "code": "export interface ChatMessage {\r\n\r\n  /**\r\n   * Stable identity used to address this entry within its owning message or\r\n   * schema.\r\n   */\r\n  id: string;\r\n\r\n  /** Conversation role identifying the entry as user or assistant content. */\r\n  role: 'user' | 'assistant';\r\n\r\n  /** Creation timestamp in milliseconds since the Unix epoch. */\r\n  createdAt: number;\r\n\r\n  /** Content parts retained in their original event order. */\r\n  parts: ChatPart[];\r\n\r\n  /**\r\n   * Host-selected attachment references associated with this entry or request.\r\n   */\r\n  attachments: ChatAttachment[];\r\n\r\n  /** Whether the entry is pending, complete, stopped, or failed. */\r\n  status: 'pending' | 'complete' | 'stopped' | 'error';\r\n\r\n  /**\r\n   * Completion timestamp in milliseconds since the Unix epoch, when finished.\r\n   */\r\n  finishedAt?: number;\r\n\r\n  /** Failure explanation retained when the message finishes with an error. */\r\n  error?: string;\r\n}",
     "properties": [
       {
         "name": "id",
@@ -1497,7 +1497,7 @@
   "ChatResponder": {
     "description": "Public type declared in packages/core/src/modules/chat/types/chatTypes.ts.",
     "usage": "Import ChatResponder from @frame/core/modules/chat. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export type ChatResponder = (\n  request: ChatRequest,\n  response: ChatResponseWriter\n) => void | Promise<void>;",
+    "code": "export type ChatResponder = (\r\n  request: ChatRequest,\r\n  response: ChatResponseWriter\r\n) => void | Promise<void>;",
     "properties": [],
     "package": "@frame/core/modules/chat"
   },
@@ -1511,7 +1511,7 @@
   "AIChatConversation": {
     "description": "Public interface declared in packages/core/src/modules/chat/controllers/aiChatHistory.ts.",
     "usage": "Import AIChatConversation from @frame/core/modules/chat. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export interface AIChatConversation {\n\n  /** Unique identity within this history store. */\n  id: string;\n\n  /** User-visible name preserved while the conversation is retained. */\n  title: string;\n\n  /** Application scope identity, independent of the native provider session. */\n  applicationId?: string;\n\n  /** Creation time in epoch milliseconds. */\n  createdAt: number;\n\n  /** Whether the conversation sorts before unpinned entries. */\n  pinned: boolean;\n\n  /** Whether the conversation is retained outside the normal visible list. */\n  archived: boolean;\n\n  /** Owned chat controller disposed when the conversation is removed. */\n  chat: AIChatController;\n}",
+    "code": "export interface AIChatConversation {\r\n\r\n  /** Unique identity within this history store. */\r\n  id: string;\r\n\r\n  /** User-visible name preserved while the conversation is retained. */\r\n  title: string;\r\n\r\n  /** Application scope identity, independent of the native provider session. */\r\n  applicationId?: string;\r\n\r\n  /** Creation time in epoch milliseconds. */\r\n  createdAt: number;\r\n\r\n  /** Whether the conversation sorts before unpinned entries. */\r\n  pinned: boolean;\r\n\r\n  /** Whether the conversation is retained outside the normal visible list. */\r\n  archived: boolean;\r\n\r\n  /** Owned chat controller disposed when the conversation is removed. */\r\n  chat: AIChatController;\r\n}",
     "properties": [
       {
         "name": "id",
@@ -1554,7 +1554,7 @@
   "AIChatHistoryController": {
     "description": "Public type declared in packages/core/src/modules/chat/controllers/aiChatHistory.ts.",
     "usage": "Import AIChatHistoryController from @frame/core/modules/chat. The definition below is the source contract; optional fields may be omitted.",
-    "code": "export type AIChatHistoryController = Pick<\n  ChatHistoryController,\n  keyof ChatHistoryController\n>;",
+    "code": "export type AIChatHistoryController = Pick<\r\n  ChatHistoryController,\r\n  keyof ChatHistoryController\r\n>;",
     "properties": [],
     "package": "@frame/core/modules/chat"
   }

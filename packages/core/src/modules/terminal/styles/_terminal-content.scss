@@ -1,0 +1,43 @@
+.view-content:has(> :is(.frame-terminal-view, .frame-terminal)) {
+  display: flex;
+  flex-direction: column;
+  height: var(--frame-view-content-has-is-frame-terminal-view-height, 100%);
+  min-height: var(
+    --frame-view-content-has-is-frame-terminal-view-min-height,
+    0
+  );
+  overflow: hidden;
+}
+
+.frame-terminal-error {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-terminal-error-gap, 6px);
+  padding: var(--frame-terminal-error-padding, 4px 8px);
+  color: var(--frame-terminal-error-color, #f48771);
+  overflow-wrap: anywhere;
+}
+
+.frame-terminal-error > span {
+  flex: 1;
+}
+
+.frame-terminal-empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--frame-terminal-empty-gap, 8px);
+  width: var(--frame-terminal-empty-width, 100%);
+  color: var(--frame-muted, #999);
+}
+
+.frame-terminal-empty > p {
+  margin: 0;
+}
+
+.frame-terminal-empty .frame-terminal-error {
+  max-width: 48ch;
+  text-align: center;
+  flex: none;
+}

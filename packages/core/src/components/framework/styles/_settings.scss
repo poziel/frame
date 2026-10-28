@@ -1,0 +1,77 @@
+// Preserve shared setting controls before shell/modal specializations.
+
+.workbench {
+  position: relative;
+}
+
+.view-bar {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-tree-row {
+  display: flex;
+  min-height: var(--frame-settings-tree-row-min-height, 28px);
+  align-items: center;
+  border-radius: var(
+    --frame-settings-tree-row-border-radius,
+    var(--frame-radius-medium)
+  );
+}
+
+.settings-tree-row.selected {
+  background: var(--frame-settings-tree-row-selected-background, #ffffff0b);
+  color: var(--frame-settings-tree-row-selected-color, #fff);
+  font-weight: var(--frame-settings-tree-row-selected-font-weight, 600);
+}
+
+.settings-tree-row > button:last-child {
+  flex: 1;
+  padding: var(--frame-settings-tree-row-button-last-child-padding, 5px 3px);
+  text-align: left;
+  min-width: var(--frame-settings-tree-row-button-last-child-min-width, 0);
+}
+
+.settings-disclosure,
+.settings-disclosure-spacer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 20px;
+  width: var(--frame-settings-disclosure-width, 20px);
+}
+
+.frame-modal :is(button, input, select, textarea) {
+  font: inherit;
+}
+
+.frame-modal button:not([role='checkbox']) {
+  border: var(--frame-modal-button-border, 0);
+  background: var(--frame-modal-button-background-2, none);
+  color: inherit;
+  cursor: pointer;
+}
+
+.frame-modal button:disabled {
+  cursor: default;
+}
+
+.frame-modal :is(button, input, select, textarea):focus-visible {
+  outline: 1px solid var(--frame-accent);
+  outline-offset: var(--frame-modal-is-button-outline-offset, -1px);
+}
+
+.frame-modal .settings-content p {
+  margin-top: var(--frame-modal-settings-content-p-margin-top, 0);
+}
+
+.frame-modal .settings-tree-row:hover {
+  background: var(--frame-modal-settings-tree-row-hover-background, #ffffff08);
+}
+
+.frame-modal
+  .setting-field
+  :is(select, textarea, input:not([type='checkbox'])) {
+  border: var(--frame-modal-setting-field-is-select-border, 1px solid #3c4246);
+  background: var(--frame-modal-setting-field-is-select-background, #1b1d1e);
+}

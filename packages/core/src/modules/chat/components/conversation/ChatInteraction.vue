@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '../../styles/index.css';
+import '../../styles/index.scss';
 import {computed, reactive, ref, useId} from 'vue';
 import {
   FrameButton,
@@ -105,7 +105,7 @@ function summary(question: ChatQuestion) {
 
 <template>
   <div
-    class="frame-chat-interaction"
+    class="frame-chat-interaction frame-chat-event-surface"
     :class="{pending}"
     :aria-label="
       part.type === 'approval' ? 'Approval request' : 'Question request'
@@ -125,7 +125,10 @@ function summary(question: ChatQuestion) {
     </div>
     <p class="frame-chat-event-text">{{ part.text }}</p>
     <template v-if="part.type === 'approval'">
-      <p v-if="part.detail" class="frame-chat-event-detail">
+      <p
+        v-if="part.detail"
+        class="frame-chat-event-detail frame-chat-event-meta"
+      >
         {{ part.detail }}
       </p>
       <div v-if="pending" class="frame-chat-event-actions">
@@ -163,10 +166,16 @@ function summary(question: ChatQuestion) {
           {{ question.text
           }}<span v-if="question.required === false"> (optional)</span>
         </legend>
-        <p v-if="question.multiple" class="frame-chat-event-detail">
+        <p
+          v-if="question.multiple"
+          class="frame-chat-event-detail frame-chat-event-meta"
+        >
           Select all that apply.
         </p>
-        <div v-if="question.multiple" class="frame-chat-question-choices">
+        <div
+          v-if="question.multiple"
+          class="frame-chat-question-choices frame-chat-answer-stack"
+        >
           <FrameCheckbox
             v-for="choice in question.choices"
             :key="choice.id"
@@ -188,7 +197,9 @@ function summary(question: ChatQuestion) {
           :label="question.text"
           @update:model-value="selected.set(question.id, [$event])"
         />
-        <label v-if="customVisible(question)" class="frame-chat-custom-answer"
+        <label
+          v-if="customVisible(question)"
+          class="frame-chat-custom-answer frame-chat-answer-stack"
           ><span>{{
             question.multiple ? 'Additional answer' : 'Your answer'
           }}</span
@@ -216,3 +227,86 @@ function summary(question: ChatQuestion) {
     </dl>
   </div>
 </template>
+
+<style lang="scss">
+@use '../../styles/event-layout';
+
+.frame-chat-event-heading {
+  @include event-layout.heading-layout;
+}
+
+.frame-chat-interaction.pending {
+  border-color: var(--frame-accent, #0078d4);
+}
+
+.frame-chat-event-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.frame-chat-question {
+  border: 0;
+  padding: 0;
+  margin: 16px 0;
+  min-width: 0;
+}
+
+.frame-chat-question legend {
+  padding: 0;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.frame-chat-answer-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.frame-chat-custom-answer {
+  margin-top: 10px;
+}
+
+.frame-chat-question .frame-checkbox {
+  align-items: flex-start;
+}
+
+.frame-chat-question small {
+  display: block;
+  color: var(--frame-muted, #999);
+}
+
+.frame-chat-question .frame-choice-item {
+  white-space: normal;
+  text-align: start;
+}
+
+.frame-chat-custom-answer textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.frame-chat-answers {
+  margin: 10px 0 0;
+}
+
+.frame-chat-answers dt {
+  font-weight: 500;
+}
+
+.frame-chat-answers dd {
+  margin: 4px 0 12px;
+  white-space: pre-wrap;
+}
+
+.frame-chat-event-result {
+  margin-bottom: 0;
+}
+.frame-chat-event-heading > span {
+  color: var(--frame-muted, #999);
+  font-size: var(--frame-chat-event-meta-size, 11px);
+}
+</style>

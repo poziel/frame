@@ -145,7 +145,7 @@ No public content slots; all internal children are generated.
 
 ### Sources and version
 
-Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/toggle-group), its [Markdown reference](https://reka-ui.com/docs/components/toggle-group.md), and [Frame implementation](../../../packages/core/src/components/actions/FrameToggleGroup.vue). Styling comes from [controls.css](../../../packages/core/src/components/forms/shared/controls.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
+Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/toggle-group), its [Markdown reference](https://reka-ui.com/docs/components/toggle-group.md), and [Frame implementation](../../../packages/core/src/components/actions/FrameToggleGroup.vue). Styling comes from [controls.scss](../../../packages/core/src/components/forms/styles/controls.scss) and [shared styles](../../../packages/core/src/styles/index.scss). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
 
 ## Styling
 

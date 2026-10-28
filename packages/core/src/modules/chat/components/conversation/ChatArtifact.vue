@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '../../styles/index.css';
+import '../../styles/index.scss';
 import {computed, onBeforeUnmount, ref, watch} from 'vue';
 import {
   FrameButton,
@@ -201,3 +201,97 @@ async function download() {
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.frame-chat-artifact {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 8px;
+  padding: 10px;
+  border: 1px solid var(--frame-border, #ffffff24);
+  border-radius: var(--frame-chat-artifact-radius, 15px);
+  background: var(--frame-surface, #181818);
+}
+
+.frame-chat-artifact-thumbnail {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--frame-text, #ccc) 5%, transparent);
+  color: var(--frame-muted, #999);
+  overflow: hidden;
+}
+
+.frame-chat-artifact-thumbnail img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.frame-chat-artifact-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 2px;
+}
+
+.frame-chat-artifact-info strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.frame-chat-artifact-info > span,
+.frame-chat-artifact-info small {
+  color: var(--frame-muted, #999);
+  font-size: var(--frame-chat-event-meta-size, 11px);
+  overflow-wrap: anywhere;
+}
+
+.frame-chat-artifact-info > span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.frame-chat-artifact-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.frame-chat-artifact-actions .frame-button {
+  font-size: 11px;
+}
+
+.frame-chat-artifact-dialog {
+  width: min(880px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 48px);
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.frame-chat-artifact-dialog .frame-viewer-content {
+  min-height: 160px;
+  max-height: 65dvh;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.frame-chat-artifact-dialog .frame-viewer-image {
+  max-height: var(--frame-chat-image-max-height, 320px);
+}
+</style>

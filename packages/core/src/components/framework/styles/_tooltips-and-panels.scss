@@ -1,0 +1,169 @@
+.main-column {
+  flex: 1;
+  min-width: var(--frame-main-column-min-width, 0);
+  min-height: var(--frame-main-column-min-height, 0);
+  display: flex;
+  flex-direction: column;
+  gap: var(--frame-main-column-gap, 6px);
+}
+
+.tooltip-trigger {
+  display: inline-flex;
+  align-items: center;
+  min-width: var(--frame-tooltip-trigger-min-width, 0);
+}
+
+.frame-tooltip {
+  position: fixed;
+  z-index: 30;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: var(--frame-tooltip-gap, 12px);
+  max-width: var(--frame-tooltip-max-width, calc(100vw - 12px));
+  padding: var(--frame-tooltip-padding, 5px 8px);
+  border: var(--frame-tooltip-border, 1px solid var(--frame-line));
+  border-radius: var(
+    --frame-tooltip-border-radius,
+    var(--frame-control-radius)
+  );
+  background: var(--frame-tooltip-background, var(--frame-overlay-background));
+  color: var(--frame-tooltip-color, var(--frame-control-text));
+  box-shadow: var(--frame-tooltip-box-shadow, 0 3px 12px #0005);
+  font-size: var(--frame-tooltip-font-size, 11px);
+  line-height: var(--frame-tooltip-line-height, 18px);
+}
+
+.frame-tooltip kbd {
+  font-size: var(--frame-tooltip-kbd-font-size, 10px);
+  color: var(--frame-tooltip-kbd-color, #a2adb2);
+  border: var(--frame-tooltip-kbd-border, 0);
+  background: var(--frame-tooltip-kbd-background, none);
+  padding: var(--frame-tooltip-kbd-padding, 0);
+}
+
+.view-bar {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: var(--frame-view-rail-gap, var(--frame-activity-rail-gap, 4px));
+  padding-top: var(
+    --frame-view-rail-padding-top,
+    var(--frame-activity-rail-padding-top, 5px)
+  );
+}
+
+.rail-button {
+  position: relative;
+  width: var(--frame-rail-button-width, 32px);
+  height: var(--frame-rail-button-height, 34px);
+  display: grid;
+  place-items: center;
+  border-radius: var(
+    --frame-rail-button-border-radius,
+    var(--frame-radius-medium)
+  );
+  color: var(--frame-rail-button-color, #949ea4);
+  font-size: var(--frame-rail-button-font-size, 13px);
+}
+
+.rail-button:hover {
+  background: var(--frame-rail-button-hover-background, #ffffff09);
+}
+
+.rail-button.selected {
+  color: var(--frame-rail-button-selected-color, #ffffff);
+  background: var(--frame-rail-button-selected-background, #333333);
+}
+
+.panel-log {
+  padding-top: var(--frame-panel-log-padding-top, 10px);
+}
+
+.panel-log > div {
+  align-items: baseline;
+  white-space: pre-wrap;
+}
+
+.panel-log time {
+  flex-shrink: 0;
+}
+
+.side-log {
+  padding: var(--frame-side-log-padding, 0);
+  font-family: inherit;
+  font-size: var(--frame-side-log-font-size, 11px);
+}
+
+.side-log > div {
+  display: block;
+  border-bottom: var(--frame-side-log-div-border-bottom, 1px solid #ffffff05);
+  padding: var(--frame-side-log-div-padding, 8px 0);
+}
+
+.side-log time {
+  display: block;
+  font-size: var(--frame-side-log-time-font-size, 10px);
+  line-height: var(--frame-side-log-time-line-height, 1.5);
+}
+
+.bottom-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 260px;
+  min-height: var(--frame-bottom-panel-min-height, 100px);
+  max-height: var(--frame-bottom-panel-max-height, 55%);
+  border: 1px solid var(--frame-line);
+  border-radius: var(
+    --frame-bottom-panel-border-radius,
+    var(--frame-radius-large)
+  );
+  overflow: hidden;
+  background: var(--frame-surface);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-panel-header-gap, 8px);
+  min-height: var(--frame-panel-header-min-height, 34px);
+  padding: var(--frame-panel-header-padding, 0 7px);
+}
+
+.panel-tabs {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-panel-tabs-gap, 3px);
+  flex: 1;
+  overflow-x: auto;
+}
+
+.panel-tabs button {
+  flex-shrink: 0;
+  padding: var(--frame-panel-tabs-button-padding, 4px 8px);
+  font-size: var(--frame-panel-tabs-button-font-size, 11px);
+  line-height: var(--frame-panel-tabs-button-line-height, 17px);
+  color: var(--frame-panel-tabs-button-color, #959fa5);
+  border-radius: var(
+    --frame-panel-tabs-button-border-radius,
+    var(--frame-radius-medium)
+  );
+  white-space: nowrap;
+}
+
+.panel-tabs button:hover {
+  color: var(--frame-panel-tabs-button-hover-color, #d7dcde);
+  background: var(--frame-panel-tabs-button-hover-background, #ffffff06);
+}
+
+.panel-tabs button[aria-selected='true'] {
+  color: var(--frame-panel-tabs-button-color-2, #e0e3e4);
+  background: var(--frame-panel-tabs-button-background, #313638);
+}
+
+.panel-content {
+  flex: 1;
+  min-height: var(--frame-panel-content-min-height, 0);
+  overflow: auto;
+  outline-offset: var(--frame-panel-content-outline-offset, -2px);
+}

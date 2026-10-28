@@ -104,7 +104,7 @@ No additional Frame-only events; see the part tables for declared or forwarded e
 
 ### Sources and version
 
-Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/toggle), its [Markdown reference](https://reka-ui.com/docs/components/toggle.md), and [Frame implementation](../../../packages/core/src/components/actions/FrameToggle.vue). Styling comes from [controls.css](../../../packages/core/src/components/forms/shared/controls.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
+Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/toggle), its [Markdown reference](https://reka-ui.com/docs/components/toggle.md), and [Frame implementation](../../../packages/core/src/components/actions/FrameToggle.vue). Styling comes from [controls.scss](../../../packages/core/src/components/forms/styles/controls.scss) and [shared styles](../../../packages/core/src/styles/index.scss). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
 
 ## Styling
 

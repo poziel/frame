@@ -10,7 +10,7 @@ importing the module and constructing controllers start no process.
 | `services/xterm/terminalSurface.ts` | One retained `TerminalSurface` renderer and the controller/session surface cache                                     |
 | `integrations/terminalView.ts`      | Explicit Frame view definition and toolbar action integration                                                        |
 | `components/`                       | Vue session management and renderer presentation                                                                     |
-| `styles/index.css`                  | Module presentation styles; xterm keeps its engine stylesheet import                                                 |
+| `styles/index.scss`                 | Module presentation styles; xterm keeps its engine stylesheet import                                                 |
 
 ## Ownership and lifecycle
 

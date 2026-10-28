@@ -1,0 +1,10 @@
+.frame-file-input {
+  display: none;
+}
+.frame-file-errors {
+  color: var(--frame-danger);
+  overflow-wrap: anywhere;
+}
+.frame-file-errors:empty {
+  display: none;
+}

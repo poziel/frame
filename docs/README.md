@@ -38,6 +38,7 @@ For independent sortable rows, see [reorder lists](shell/reorder-list.md).
 - [Component documentation](components/README.md): basic form controls, examples, API, behavior, and styling.
 - [Layout](configuration/layout.md): region visibility, placement, sizing, Zen, and overlay boundaries.
 - [Theme tokens](styling/theme-variables.md): shared colors, spacing, fonts, and component tokens.
+- [Style architecture](styling/style-architecture.md): maintained SCSS ownership, entry points, CSS exceptions, and contributor workflow.
 - [Theme files](styling/theme-files.md): JSON, JSONC, JSON5, YAML, TOML and INI; nested and dotted token paths.
 - [Notifier](reference/notifier.md): explicit typed notifications and ID-based subscriptions.
 - [Packages](reference/packages.md): Core, Features, Tailwind, and Docs boundaries.

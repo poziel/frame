@@ -1,0 +1,61 @@
+.canvas-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: var(--frame-canvas-container-min-height, 0);
+  min-width: var(--frame-canvas-container-min-width, 0);
+  border: 1px solid var(--frame-line);
+  border-radius: var(
+    --frame-canvas-container-border-radius,
+    var(--frame-radius-large)
+  );
+  background: var(--frame-canvas);
+  overflow: hidden;
+}
+
+.count {
+  margin-left: var(--frame-count-margin-left, 7px);
+  font-size: var(--frame-count-font-size, 10px);
+  color: var(--frame-muted);
+}
+
+.panel-log {
+  overflow: auto;
+  padding: var(--frame-panel-log-padding, 5px 12px 12px);
+  font-family: var(--frame-font-mono);
+  font-size: var(--frame-panel-log-font-size, 11px);
+}
+
+.panel-log > div {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-panel-log-div-gap, 12px);
+  line-height: var(--frame-panel-log-div-line-height, 24px);
+}
+
+.panel-log time {
+  color: var(--frame-panel-log-time-color, #77858a);
+}
+
+.panel-log svg {
+  color: var(--frame-panel-log-svg-color, #82988a);
+}
+
+// Canvas and pane workspaces share the same flex/overflow contract.
+.frame-workspace-surface {
+  display: flex;
+  flex: 1;
+  min-height: var(
+    --frame-WorkspaceCanvas-exposes-a-slot-future-tools-occupy-this-surface-workspace-min-height,
+    0
+  );
+  min-width: var(
+    --frame-WorkspaceCanvas-exposes-a-slot-future-tools-occupy-this-surface-workspace-min-width,
+    0
+  );
+  overflow: auto;
+  outline-offset: var(
+    --frame-WorkspaceCanvas-exposes-a-slot-future-tools-occupy-this-surface-workspace-outline-offset,
+    -3px
+  );
+}

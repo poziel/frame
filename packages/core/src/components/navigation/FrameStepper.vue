@@ -13,7 +13,7 @@ import {
 import type {StepperRootProps, StepperRootEmits} from 'reka-ui';
 import type {FrameStepItem} from './stepperTypes';
 import FrameIcon from '../data-display/FrameIcon.vue';
-import '../shared/general-b.css';
+import './styles/navigation.scss';
 
 const props = defineProps<
   StepperRootProps & {items?: FrameStepItem[]; label?: string}
@@ -28,7 +28,7 @@ const forwarded = useForwardPropsEmits(root, emit);
 <template>
   <StepperRoot
     v-bind="forwarded"
-    class="frame-stepper"
+    class="frame-stepper frame-navigation-text"
     :aria-label="label"
     v-slot="state"
     ><slot v-bind="state"
@@ -40,7 +40,7 @@ const forwarded = useForwardPropsEmits(root, emit);
         :completed="item.completed"
         class="frame-stepper-item"
         v-slot="{state: stepState}"
-        ><StepperTrigger class="frame-stepper-trigger"
+        ><StepperTrigger class="frame-stepper-trigger frame-navigation-focus"
           ><StepperIndicator class="frame-stepper-indicator"
             ><FrameIcon
               v-if="stepState === 'completed'"
@@ -61,3 +61,65 @@ const forwarded = useForwardPropsEmits(root, emit);
           class="frame-stepper-separator" /></StepperItem></slot
   ></StepperRoot>
 </template>
+
+<style lang="scss">
+.frame-stepper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.frame-stepper-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.frame-stepper-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  text-align: start;
+  font: inherit;
+  border-radius: var(--frame-control-radius, var(--frame-radius-medium));
+}
+
+.frame-stepper-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--frame-control-border, #555);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.frame-stepper-item[data-state='active'] .frame-stepper-indicator,
+.frame-stepper-item[data-state='completed'] .frame-stepper-indicator {
+  border-color: var(--frame-accent, #007acc);
+  color: var(--frame-accent, #007acc);
+}
+
+.frame-stepper-title {
+  display: block;
+  font-weight: 600;
+}
+
+.frame-stepper-description {
+  display: block;
+  font-size: 0.9em;
+  color: var(--frame-muted, #888);
+}
+
+.frame-stepper-separator {
+  flex: 1;
+  height: 1px;
+  background: var(--frame-control-border, #555);
+}
+</style>

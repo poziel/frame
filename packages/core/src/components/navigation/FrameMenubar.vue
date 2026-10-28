@@ -6,7 +6,7 @@ import type {FrameMenubarItem, FrameMenubarAction} from './menubarTypes';
 import type {FrameMenuItem} from './generalMenu';
 import {normalizeMenuItems} from './generalMenu';
 import MenubarEntry from './MenubarEntry.vue';
-import '../shared/general-b.css';
+import './styles/navigation.scss';
 
 const props = withDefaults(
   defineProps<
@@ -120,7 +120,7 @@ function select(item: FrameMenuItem) {
     v-bind="forwarded"
     :loop="loop ?? true"
     v-model="openValue"
-    class="frame-menubar"
+    class="frame-menubar frame-navigation-text frame-navigation-list-layout frame-shell-label"
     :aria-label="label"
     ><slot
       ><div class="menubar-groups"
@@ -150,7 +150,7 @@ function select(item: FrameMenuItem) {
         @dismiss="openValue = ''" /></slot
     ><div
       ref="measure"
-      class="menubar-measure menubar-groups"
+      class="menubar-measure menubar-groups frame-menu-measure"
       aria-hidden="true"
       inert
       ><button

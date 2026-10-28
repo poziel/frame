@@ -10,7 +10,8 @@ agents; do not maintain a separate copy of the rules in prompts or AGENTS.md.
    spacing, method parameters, and the Google baseline.
 2. [Vue components](vue.md): script, template, style, and component contracts.
 3. [HTML](html.md): semantic markup, accessibility, and whitespace.
-4. [CSS](css.md): readable rules, theme tokens, selectors, and cascade safety.
+4. [CSS and SCSS](css.md): explicit shared classes, embedded component styles,
+   cohesive mixins/functions, composition, runtime tokens, and cascade safety.
 5. [Formatting and checks](formatting.md): the supported commands, scope,
    configuration, and enforcement limits.
 
@@ -18,6 +19,9 @@ Read the language guide for every language you change. For Vue single-file
 components, read the TypeScript, Vue, HTML, and CSS guides together. Product
 architecture and ownership still come from the root AGENTS.md and the library
 documentation; formatting rules do not replace those contracts.
+
+For stylesheet locations and entry-point order, read the maintained
+[style architecture](../../styling/style-architecture.md).
 
 ## Precedence
 

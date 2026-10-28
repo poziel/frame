@@ -1,14 +1,35 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { DateFieldRoot, DateFieldInput, useForwardPropsEmits, type DateFieldRootProps, type DateFieldRootEmits } from 'reka-ui';
-import '../shared/dates.css';
-const props = defineProps<DateFieldRootProps & { label?: string }>();
+import {computed} from 'vue';
+import {
+  DateFieldRoot,
+  DateFieldInput,
+  useForwardPropsEmits,
+  type DateFieldRootProps,
+  type DateFieldRootEmits,
+} from 'reka-ui';
+import '../styles/dates.scss';
+
+const props = defineProps<DateFieldRootProps & {label?: string}>();
 const emit = defineEmits<DateFieldRootEmits>();
-const rootProps = computed(() => { const { label, ...rest } = props; return rest; });
+const rootProps = computed(() => {
+  const {label, ...rest} = props;
+  return rest;
+});
 const forwarded = useForwardPropsEmits(rootProps, emit);
 </script>
 <template>
-  <DateFieldRoot v-bind="forwarded" :aria-label="label" class="frame-date-field" v-slot="{ segments }">
-  <DateFieldInput v-for="(segment, index) in segments" :key="'' + index" :part="segment.part"  class="frame-date-segment">{{ segment.value }}</DateFieldInput>
+  <DateFieldRoot
+    v-bind="forwarded"
+    :aria-label="label"
+    class="frame-date-field frame-input-surface frame-input-focus-within frame-date-text"
+    v-slot="{segments}"
+  >
+    <DateFieldInput
+      v-for="(segment, index) in segments"
+      :key="'' + index"
+      :part="segment.part"
+      class="frame-date-segment"
+      >{{ segment.value }}</DateFieldInput
+    >
   </DateFieldRoot>
 </template>

@@ -118,7 +118,7 @@ function update(id: string, value: string | boolean | number) {
     ></div
   >
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .frame-settings-surface {
   display: flex;
   flex-direction: column;
@@ -137,5 +137,50 @@ function update(id: string, value: string | boolean | number) {
   line-height: var(--frame-settings-description-line-height, 1.5);
   white-space: normal;
   overflow-wrap: anywhere;
+}
+</style>
+
+<style lang="scss">
+.frame-settings {
+  display: grid;
+  grid-template-columns: minmax(140px, 210px) minmax(0, 1fr);
+  height: var(--frame-settings-height, 100%);
+  min-height: var(--frame-settings-min-height, 0);
+}
+
+.frame-settings .settings-navigation {
+  overflow: auto;
+  padding: var(--frame-settings-settings-navigation-padding, 18px 8px);
+  border-right: 1px solid var(--frame-line);
+}
+
+.frame-settings .settings-content {
+  overflow: auto;
+  padding: var(--frame-settings-settings-content-padding, 24px 30px);
+  min-width: var(--frame-settings-settings-content-min-width, 0);
+}
+
+.settings-content h2 {
+  font-size: var(--frame-settings-content-h2-font-size, 24px);
+  font-weight: var(--frame-settings-content-h2-font-weight, 600);
+  margin: var(--frame-settings-content-h2-margin, 0 0 24px);
+}
+
+@media (max-width: 600px) {
+  .frame-settings {
+    grid-template-columns: 135px minmax(0, 1fr);
+  }
+  .frame-settings .settings-content {
+    padding: var(--frame-settings-settings-content-padding-2, 18px 14px);
+  }
+}
+
+.frame-settings .settings-navigation,
+.frame-settings .settings-content {
+  height: var(--frame-settings-settings-navigation-height, 100%);
+}
+
+.frame-settings .settings-navigation {
+  padding: var(--frame-settings-settings-navigation-padding-2, 18px 14px);
 }
 </style>

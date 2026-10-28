@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import '../../styles/index.css';
 import {useFrame} from '../../../../index';
 import CodeEditor from '../../components/CodeEditor.vue';
 
@@ -24,7 +23,7 @@ const label =
     />
   </section>
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .frame-settings-json {
   display: flex;
   flex-direction: column;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '../../styles/index.css';
+import '../../styles/index.scss';
 import {onBeforeUnmount, ref, watch} from 'vue';
 import {ViewerPdfController} from '../../controllers/viewerPdfController';
 
@@ -23,7 +23,10 @@ onBeforeUnmount(viewer.dispose);
 </script>
 <template>
   <div class="frame-viewer-pdf" :aria-busy="busy">
-    <nav class="frame-viewer-toolbar" aria-label="PDF controls">
+    <nav
+      class="frame-viewer-toolbar frame-viewer-control-row"
+      aria-label="PDF controls"
+    >
       <button class="frame-viewer-button" :disabled="page <= 1" @click="page--"
         >Previous</button
       >
@@ -65,3 +68,26 @@ onBeforeUnmount(viewer.dispose);
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.frame-viewer-pdf {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: var(--frame-gap, 6px);
+}
+
+.frame-viewer-pdf-page {
+  overflow: auto;
+  flex: 1;
+  min-height: 0;
+  text-align: center;
+}
+
+.frame-viewer-pdf-page canvas {
+  display: block;
+  margin: 0 auto;
+  background: white;
+}
+</style>

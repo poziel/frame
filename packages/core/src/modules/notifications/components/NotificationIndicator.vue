@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import '../styles/index.css';
 import {FrameIconButton} from '../../../index';
 import type {NotificationHistory} from '../controllers/notificationHistory';
 
@@ -15,3 +14,9 @@ defineProps<{history: NotificationHistory}>();
     @click="history.toggle()"
   />
 </template>
+
+<style lang="scss">
+.notification-toggle {
+  flex-shrink: 0;
+}
+</style>

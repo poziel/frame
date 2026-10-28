@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '../styles/index.css';
+import '../styles/index.scss';
 import {computed, onBeforeUnmount, onMounted, ref, watch} from 'vue';
 import {FrameIcon} from '../../../index';
 import type {TerminalController} from '../controllers/terminal';
@@ -99,3 +99,48 @@ defineExpose({
     >
   </div>
 </template>
+
+<style lang="scss">
+.frame-terminal {
+  display: flex;
+  flex-direction: column;
+  width: var(--frame-terminal-width, 100%);
+  height: var(--frame-terminal-height, 100%);
+  min-height: var(--frame-terminal-min-height, 0);
+  min-width: var(--frame-terminal-min-width, 0);
+  background: var(--frame-terminal-background, #181818);
+}
+
+.frame-terminal-host {
+  flex: 1;
+  min-height: var(--frame-terminal-host-min-height, 0);
+  min-width: var(--frame-terminal-host-min-width, 0);
+  overflow: hidden;
+  padding: var(--frame-terminal-host-padding, 7px 9px);
+}
+
+.frame-terminal-screen {
+  height: var(--frame-terminal-screen-height, 100%);
+  width: var(--frame-terminal-screen-width, 100%);
+}
+
+.frame-terminal-status {
+  flex-shrink: 0;
+  margin: var(--frame-terminal-status-margin, 0);
+  padding: var(--frame-terminal-status-padding, 4px 9px);
+  color: var(--frame-muted, #999);
+  font-size: var(--frame-terminal-status-font-size, 12px);
+}
+
+.frame-terminal {
+  position: relative;
+}
+
+.frame-terminal-failure {
+  position: absolute;
+  inset: 0;
+  padding: var(--frame-space-4, 16px);
+  box-sizing: border-box;
+  background: var(--frame-terminal-background, var(--frame-bg, #181818));
+}
+</style>

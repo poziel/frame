@@ -1,0 +1,122 @@
+.panel-action-separator {
+  flex: none;
+  width: var(--frame-panel-action-separator-width, 1px);
+  height: var(--frame-panel-action-separator-height, 16px);
+  margin: var(--frame-panel-action-separator-margin, 0 6px);
+  background: var(--frame-line);
+}
+.layout-grid > .region-maximized {
+  background: var(--frame-surface);
+}
+
+.rail-badge {
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-end: 1px;
+  min-width: 15px;
+  height: 15px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 3px;
+  border-radius: 999px;
+  font: 10px/1 var(--frame-font-body);
+  background: var(--frame-accent);
+  color: var(--frame-accent-foreground);
+  pointer-events: none;
+}
+
+/* Activity placement and size are independent preferences, including in compact shell layouts. */
+.view-bar .tooltip-trigger {
+  flex-shrink: 0;
+}
+.view-bar.view-bar-compact .rail-button {
+  width: var(
+    --frame-view-compact-button-width,
+    var(--frame-activity-compact-button-width, 26px)
+  );
+  height: var(
+    --frame-view-compact-button-height,
+    var(--frame-activity-compact-button-height, 28px)
+  );
+  font-size: 11px;
+}
+.view-bar .rail-button > :is(svg, .frame-icon) {
+  width: var(
+    --frame-view-icon-size,
+    var(--frame-activity-icon-size, 28px)
+  ) !important;
+  height: var(
+    --frame-view-icon-size,
+    var(--frame-activity-icon-size, 28px)
+  ) !important;
+}
+.view-bar.view-bar-compact .rail-button > :is(svg, .frame-icon) {
+  width: var(
+    --frame-view-compact-icon-size,
+    var(--frame-activity-compact-icon-size, 18px)
+  ) !important;
+  height: var(
+    --frame-view-compact-icon-size,
+    var(--frame-activity-compact-icon-size, 18px)
+  ) !important;
+}
+.layout-grid > .primary-region:is(.view-bar-top, .view-bar-bottom) {
+  flex-direction: column;
+}
+.layout-grid > .primary-region.view-bar-bottom {
+  flex-direction: column-reverse;
+}
+.layout-grid .primary-region:is(.view-bar-top, .view-bar-bottom) > .view-bar {
+  flex-direction: row;
+  flex: 0 0 var(--view-bar-height);
+  width: 100%;
+  height: var(--view-bar-height);
+  min-width: 0;
+  min-height: 0;
+  padding: 4px;
+  gap: var(--frame-gap, 6px);
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid var(--frame-line);
+  border-radius: var(--frame-panel-radius);
+}
+.layout-grid .primary-region:is(.view-bar-top, .view-bar-bottom) > .side-panel {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: calc(var(--workspace-height) - var(--view-bar-height));
+  margin-top: 0;
+  border-radius: var(--frame-panel-radius);
+}
+.layout-grid.primary-right > .primary-region.view-bar-top > .view-bar,
+.layout-grid > .primary-region.view-bar-top > .view-bar {
+  border-left: 1px solid var(--frame-line);
+  border-right: 1px solid var(--frame-line);
+  border-radius: var(--frame-panel-radius) var(--frame-panel-radius) 0 0;
+  border-bottom-color: transparent;
+}
+.layout-grid.primary-right > .primary-region.view-bar-bottom > .view-bar,
+.layout-grid > .primary-region.view-bar-bottom > .view-bar {
+  border-left: 1px solid var(--frame-line);
+  border-right: 1px solid var(--frame-line);
+  border-radius: 0 0 var(--frame-panel-radius) var(--frame-panel-radius);
+  border-top-color: transparent;
+}
+.layout-grid.primary-right > .primary-region.view-bar-top > .side-panel,
+.layout-grid > .primary-region.view-bar-top > .side-panel {
+  border-radius: 0 0 var(--frame-panel-radius) var(--frame-panel-radius);
+}
+.layout-grid.primary-right > .primary-region.view-bar-bottom > .side-panel,
+.layout-grid > .primary-region.view-bar-bottom > .side-panel {
+  border-radius: var(--frame-panel-radius) var(--frame-panel-radius) 0 0;
+}
+.layout-grid > .primary-region.horizontal-collapsed > .view-bar {
+  border: 1px solid var(--frame-line);
+  border-radius: var(--frame-panel-radius);
+}
+.layout-grid .primary-region > .view-bar.view-bar-horizontal.view-bar-compact {
+  padding: 3px;
+}

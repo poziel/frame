@@ -1,15 +1,11 @@
-import {readFileSync, writeFileSync} from 'node:fs';
+import {readFileSync, readdirSync, writeFileSync} from 'node:fs';
 import {resolve, relative} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {compile} from 'sass';
+import {compileStyleSource} from '../../core/scripts/compile-style-source';
 import data from '../src/examples/documentation/contracts.json';
 
 const root = resolve(import.meta.dir, '../../..');
-const sharedFiles = [
-  'packages/core/src/style.css',
-  ...['editor', 'terminal', 'chat', 'viewer', 'notifications'].map(
-    (name) => `packages/core/src/modules/${name}/styles/index.css`
-  ),
-  'packages/core/src/themes/generated/default.css',
-];
 const defaults = readFileSync(
   resolve(root, 'packages/core/src/themes/generated/default.css'),
   'utf8'
@@ -20,6 +16,31 @@ const semantic = Object.fromEntries(
     m[2],
   ])
 );
+
+const styleCache = new Map<string, {source: string; css: string}[]>();
+
+/** Compiles styles before scanning so Sass composition and nesting are visible. */
+function styles(file: string): {source: string; css: string}[] {
+  if (file.includes('?')) {
+    return [{source: file.split('?', 1)[0]!, css: compileStyleSource(file)}];
+  }
+  const cached = styleCache.get(file);
+  if (cached) return cached;
+  if (file.endsWith('.scss')) {
+    const result = compile(file);
+    // Scan each owner after its composition entry so source links identify the
+    // declaration's maintained file rather than only the top-level entry.
+    const sheets = result.loadedUrls.map((url) => {
+      const source = fileURLToPath(url);
+      return {source, css: compile(source).css};
+    });
+    styleCache.set(file, sheets);
+    return sheets;
+  }
+  const sheets = [{source: file, css: compileStyleSource(file)}];
+  styleCache.set(file, sheets);
+  return sheets;
+}
 function variables(value: string) {
   const found: {name: string; value: string}[] = [];
   for (const match of value.matchAll(/var\((--frame-[\w-]+)/g)) {
@@ -45,20 +66,28 @@ function variables(value: string) {
   }
   return found;
 }
+// Build-time inspection includes every maintained owner: shared selectors may
+// be consumed by siblings, not only by directly imported components.
+const core = resolve(root, 'packages/core/src');
+const styleOwners = readdirSync(core, {recursive: true})
+  .map(String)
+  .filter((file) => /\.(s?css|vue)$/.test(file))
+  .sort()
+  .flatMap((file) => styles(resolve(core, file)));
+const maintainedStyles = [
+  ...new Map(styleOwners.map((sheet) => [sheet.source, sheet])).values(),
+];
 const result: Record<string, unknown> = {};
 for (const [file] of Object.entries(data.contracts)) {
-  const source =
-    readFileSync(resolve(root, file), 'utf8') +
-    (/FrameQuick(Input|Panel)\.vue$/.test(file)
-      ? '\n' +
-        readFileSync(
-          resolve(
-            root,
-            'packages/core/src/components/framework/QuickOverlay.vue'
-          ),
-          'utf8'
-        )
-      : '');
+  const sources = [
+    ...(/FrameQuick(Pick|Panel)\.vue$/.test(file)
+      ? ['packages/core/src/components/framework/QuickOverlay.vue']
+      : []),
+    file,
+  ];
+  const source = sources
+    .map((entry) => readFileSync(resolve(root, entry), 'utf8'))
+    .join('\n');
   const classes = [
     ...new Set(
       [...source.matchAll(/(?<!:)class=["']([^"']+)["']/g)]
@@ -72,11 +101,10 @@ for (const [file] of Object.entries(data.contracts)) {
     ).test(selector.replace(/:(?:not|has)\([^)]*\)/g, ''));
   const tokens = new Map<string, unknown>();
   const publicClasses = new Map<string, unknown>();
-  const imports = [...source.matchAll(/import\s+['"]([^'"]+\.css)['"]/g)].map(
-    (match) => resolve(root, file, '..', match[1]!)
-  );
-  for (const cssFile of [...sharedFiles, ...imports, file]) {
-    const css = readFileSync(resolve(root, cssFile), 'utf8');
+  for (const {source: cssFile, css} of [
+    ...maintainedStyles,
+    ...sources.flatMap((entry) => styles(resolve(root, entry))),
+  ]) {
     for (const rule of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
       const selector = rule[1]!.trim();
       if (

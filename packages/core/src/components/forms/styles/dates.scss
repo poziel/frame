@@ -1,0 +1,132 @@
+@use './input-surfaces';
+
+.frame-date-text {
+  font-family: var(--frame-font-body);
+  font-size: var(--frame-font-size-body);
+  color: var(--frame-text);
+  box-sizing: border-box;
+}
+.frame-calendar {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--frame-gap);
+  padding: var(--frame-content-padding);
+  background: var(--frame-surface);
+  border: 1px solid var(--frame-line);
+  border-radius: var(--frame-control-radius);
+}
+.frame-date-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--frame-gap);
+}
+.frame-date-heading {
+  font-weight: 600;
+  text-align: center;
+  flex: 1;
+}
+.frame-date-months {
+  display: flex;
+  gap: var(--frame-content-padding);
+  flex-wrap: wrap;
+}
+.frame-date-grid {
+  border-collapse: collapse;
+}
+.frame-date-weekday {
+  color: var(--frame-muted);
+  font-weight: 400;
+  font-size: 0.9em;
+  padding: var(--frame-control-padding-y);
+}
+.frame-date-day,
+.frame-date-nav {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: transparent;
+  border-radius: var(--frame-control-radius);
+  cursor: pointer;
+  padding: var(--frame-control-padding-y) var(--frame-control-padding-x);
+  min-height: 28px;
+  min-width: 28px;
+  text-align: center;
+}
+.frame-date-day:hover,
+.frame-date-nav:hover {
+  background: var(--frame-menu-hover);
+}
+.frame-date-day:focus-visible,
+.frame-date-nav:focus-visible,
+.frame-date-segment:focus-visible {
+  outline: 2px solid var(--frame-accent);
+  outline-offset: 1px;
+}
+.frame-date-day[data-selected],
+.frame-date-day[data-selection-start],
+.frame-date-day[data-selection-end] {
+  background: var(--frame-accent);
+  color: var(--frame-accent-foreground, #fff);
+}
+.frame-date-day[data-highlighted] {
+  background: color-mix(in srgb, var(--frame-accent) 25%, transparent);
+}
+.frame-date-day[data-today] {
+  box-shadow: inset 0 0 0 1px var(--frame-accent);
+}
+.frame-date-day[data-outside-view] {
+  color: var(--frame-muted);
+}
+.frame-date-day[data-disabled],
+.frame-date-day[data-unavailable],
+.frame-date-nav:disabled,
+.frame-date-field[data-disabled] {
+  opacity: 0.45;
+  cursor: default;
+}
+.frame-date-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: var(--frame-control-padding-y) var(--frame-control-padding-x);
+  background: var(--frame-control-background);
+  border: 1px solid var(--frame-control-border);
+  border-radius: var(--frame-control-radius);
+}
+.frame-date-field:focus-within {
+  border-color: var(--frame-accent);
+}
+.frame-date-field[data-invalid] {
+  border-color: var(--frame-danger, #f48771);
+}
+.frame-date-segment {
+  padding: 2px;
+  white-space: nowrap;
+  border-radius: var(--frame-control-radius);
+  font-variant-numeric: tabular-nums;
+}
+.frame-date-segment[data-placeholder] {
+  color: var(--frame-muted);
+}
+.frame-date-separator {
+  padding: 0 var(--frame-gap);
+  color: var(--frame-muted);
+}
+.frame-date-picker {
+  display: inline-flex;
+}
+.frame-date-popover {
+  z-index: 100;
+  overflow: auto;
+  background: var(--frame-overlay-background);
+  border-radius: var(--frame-panel-radius);
+  box-shadow: var(--frame-overlay-shadow);
+}
+.frame-date-popover {
+  pointer-events: auto;
+}
+/* A popup calendar lets its frosted outer surface show through. */
+.frame-date-popover .frame-calendar {
+  background: transparent;
+}

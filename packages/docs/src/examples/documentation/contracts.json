@@ -313,7 +313,7 @@
     "packages/core/src/components/forms/FrameFileUpload.vue": {
       "name": "FrameFileUpload",
       "source": "packages/core/src/components/forms/FrameFileUpload.vue",
-      "sourceHash": "2eeafdc2624b94007e4b8ed583fdb0fb2e8d6e4ade93d36a84627ed7cfb22fec",
+      "sourceHash": "9e2412aecc21472f7203a123548f5bb4b0a56a1b6061c5c43527c02cf8b9bb3d",
       "props": [
         {
           "name": "accept",
@@ -484,7 +484,7 @@
     "packages/core/src/components/forms/FrameFileDropZone.vue": {
       "name": "FrameFileDropZone",
       "source": "packages/core/src/components/forms/FrameFileDropZone.vue",
-      "sourceHash": "7893a9aff94e715df8c952bbf78053a1b17e61d5cba6fdba0dce60b8cc31dbd2",
+      "sourceHash": "e74d28f36fb17b51e0af0f07ba9c106d89f2592f0b30a7de8f371caa53646d41",
       "props": [
         {
           "name": "accept",
@@ -658,7 +658,7 @@
     "packages/core/src/modules/viewer/components/UniversalViewer.vue": {
       "name": "UniversalViewer",
       "source": "packages/core/src/modules/viewer/components/UniversalViewer.vue",
-      "sourceHash": "73bee4daeb5a295da9f605663dd2a103f2ecd566bf9c37a7528781d76e93cc22",
+      "sourceHash": "35a951b67feb21d54b1efaef7bddee5703465b7eca9a40593a73b42f622bcd5a",
       "props": [
         {
           "name": "open",
@@ -714,7 +714,7 @@
         "  DialogPortal",
         "    DialogOverlay.frame-viewer-backdrop",
         "    DialogContent.frame-viewer-dialog",
-        "      header.frame-viewer-header",
+        "      header.frame-viewer-header.frame-viewer-control-row",
         "        DialogTitle.frame-viewer-title",
         "        DialogClose.frame-viewer-button.frame-viewer-close",
         "      UniversalViewerContent",
@@ -725,7 +725,7 @@
     "packages/core/src/modules/viewer/components/UniversalViewerContent.vue": {
       "name": "UniversalViewerContent",
       "source": "packages/core/src/modules/viewer/components/UniversalViewerContent.vue",
-      "sourceHash": "62eb3924829e443065316ba2e38d2b364995563f28bb36824f65af809711fa90",
+      "sourceHash": "51e1ff2856b20dcd74034e497dad97432740639148accc1f1cf0058811d90984",
       "props": [
         {
           "name": "file",
@@ -765,12 +765,12 @@
         "  p",
         "  p",
         "  template",
-        "    div.frame-viewer-toolbar",
+        "    div.frame-viewer-toolbar.frame-viewer-control-row",
         "      button.frame-viewer-button",
         "    FrameCodeBlock.frame-viewer-code",
         "    pre.frame-viewer-text",
-        "    img.frame-viewer-image",
-        "    video.frame-viewer-video",
+        "    img.frame-viewer-image.frame-viewer-media",
+        "    video.frame-viewer-video.frame-viewer-media",
         "    PdfViewer",
         "    p"
       ],
@@ -779,7 +779,7 @@
     "packages/core/src/components/actions/FrameButton.vue": {
       "name": "FrameButton",
       "source": "packages/core/src/components/actions/FrameButton.vue",
-      "sourceHash": "287f9c65d0b68f00ae535e5269f79232c20a218855b47ee686b368134afa7f13",
+      "sourceHash": "08dbc5b34e8d482e4e2b92313adeee8d0fe5b0bfab8720bc375ba029791399e0",
       "props": [
         {
           "name": "tooltip",
@@ -809,10 +809,10 @@
         },
         {
           "name": "variant",
-          "type": "\"ghost\" | \"primary\" | \"secondary\"",
+          "type": "'ghost' | 'primary' | 'secondary'",
           "default": {
             "kind": "literal",
-            "value": "\"ghost\""
+            "value": "'ghost'"
           },
           "description": "Selects the visual variant.",
           "options": [
@@ -856,10 +856,10 @@
         },
         {
           "name": "type",
-          "type": "\"button\" | \"submit\" | \"reset\"",
+          "type": "'button' | 'submit' | 'reset'",
           "default": {
             "kind": "literal",
-            "value": "\"button\""
+            "value": "'button'"
           },
           "description": "Native input/button behavior.",
           "options": [
@@ -924,7 +924,7 @@
     "packages/core/src/components/actions/FrameIconButton.vue": {
       "name": "FrameIconButton",
       "source": "packages/core/src/components/actions/FrameIconButton.vue",
-      "sourceHash": "19793db35b7810a11c6cc7f627ed9b0e13f2b3f6389af998bfaad37aecb59181",
+      "sourceHash": "78dfac7be7955951762cf9c3dfe6e732719832cbdb06b443d0a77ee22fe3ad86",
       "props": [
         {
           "name": "label",
@@ -970,7 +970,7 @@
         },
         {
           "name": "variant",
-          "type": "\"ghost\" | \"icon\"",
+          "type": "'ghost' | 'icon'",
           "default": {
             "kind": "omitted"
           },
@@ -1028,8 +1028,8 @@
           "name": "iconRatio",
           "type": "number",
           "default": {
-            "kind": "derived",
-            "expression": ".62"
+            "kind": "literal",
+            "value": "0.62"
           },
           "description": "Icon Ratio configuration for this component; see its Features examples for usage.",
           "control": "number",
@@ -1069,10 +1069,10 @@
         },
         {
           "name": "tooltipPlacement",
-          "type": "\"top\" | \"bottom\" | \"left\" | \"right\"",
+          "type": "'top' | 'bottom' | 'left' | 'right'",
           "default": {
             "kind": "literal",
-            "value": "\"bottom\""
+            "value": "'bottom'"
           },
           "description": "Tooltip Placement configuration for this component; see its Features examples for usage.",
           "options": [
@@ -1151,7 +1151,7 @@
     "packages/core/src/components/forms/FrameTextField.vue": {
       "name": "FrameTextField",
       "source": "packages/core/src/components/forms/FrameTextField.vue",
-      "sourceHash": "3da9871fb3454672e52f94111b4ee6c02ec85ae542938a1353ac0882f96e98dd",
+      "sourceHash": "61aeb2214c3a23b167b152a11274a27625d8555e34a73a78f2fbbe846ca0c33b",
       "props": [
         {
           "name": "tooltip",
@@ -1194,7 +1194,7 @@
           "type": "InputTypeHTMLAttribute",
           "default": {
             "kind": "literal",
-            "value": "\"text\""
+            "value": "'text'"
           },
           "description": "Native input/button behavior.",
           "options": [
@@ -1283,7 +1283,7 @@
       "structure": [
         "FrameControlTooltip",
         "  template",
-        "    input.frame-text-input",
+        "    input.frame-text-input.frame-input-surface.frame-input-focus-within",
         "  template",
         "    slot"
       ],
@@ -1292,7 +1292,7 @@
     "packages/core/src/components/forms/FrameCheckbox.vue": {
       "name": "FrameCheckbox",
       "source": "packages/core/src/components/forms/FrameCheckbox.vue",
-      "sourceHash": "20926a435a8291ead34e2d404d335f1f2e01fa780c809c745eb7a7a5e85385ba",
+      "sourceHash": "107b6c263e6d115574e8eefa73a4690d2ba585496a6d6e4039623311ce2be10d",
       "props": [
         {
           "name": "tooltip",
@@ -1380,7 +1380,7 @@
         "Label.frame-checkbox",
         "  FrameControlTooltip",
         "    template",
-        "      CheckboxRoot.frame-check-control",
+        "      CheckboxRoot.frame-check-control.frame-control-surface.frame-control-action.frame-control-focus.frame-control-disabled",
         "        CheckboxIndicator.frame-check-indicator",
         "          FrameIcon",
         "    template",
@@ -1393,7 +1393,7 @@
     "packages/core/src/components/forms/FrameSelect.vue": {
       "name": "FrameSelect",
       "source": "packages/core/src/components/forms/FrameSelect.vue",
-      "sourceHash": "c3338a2e9d66a962770b03ce4e98f8665ab23b1b0719f9d0a726fde3b2059fec",
+      "sourceHash": "44f87f121766fbcbd278ebd478a9e7d87cef3764d1b8199834415b566ade5920",
       "props": [
         {
           "name": "tooltip",
@@ -1479,7 +1479,7 @@
           "type": "string",
           "default": {
             "kind": "literal",
-            "value": "\"Select an option\""
+            "value": "'Select an option'"
           },
           "description": "Visible or accessible label for the control.",
           "control": "text",
@@ -1529,11 +1529,11 @@
         "  template",
         "    span.frame-select-anchor",
         "      SelectRoot",
-        "        SelectTrigger.frame-select",
+        "        SelectTrigger.frame-select.frame-input-surface.frame-input-focus-visible",
         "          span",
         "          FrameIcon",
         "        SelectPortal",
-        "          SelectContent.frame-select-popup.frame-reka-select-popup.frame-select-content",
+        "          SelectContent.frame-select-popup.frame-reka-select-popup.frame-select-content.frame-overlay-surface.frame-overlay-interactive",
         "            div",
         "              SelectViewport.frame-select-options",
         "                template",
@@ -1556,7 +1556,7 @@
     "packages/core/src/components/forms/FrameSlider.vue": {
       "name": "FrameSlider",
       "source": "packages/core/src/components/forms/FrameSlider.vue",
-      "sourceHash": "268e08e7f9c2a9ee9b60819d5e270ec2684dbf13f2c9362446e98f31edbcaac5",
+      "sourceHash": "65c8dd1bd026c7685a3917fbfbc7f24667037020b119eeaeee055afe82662ff6",
       "props": [
         {
           "name": "modelValue",
@@ -1655,10 +1655,10 @@
       "slots": [],
       "methods": [],
       "structure": [
-        "SliderRoot.frame-slider.frame-slider-root",
+        "SliderRoot.frame-slider.frame-slider-root.frame-control-disabled",
         "  SliderTrack.frame-slider-track",
         "    SliderRange.frame-slider-range",
-        "  SliderThumb.frame-slider-thumb",
+        "  SliderThumb.frame-slider-thumb.frame-control-focus",
         "input"
       ],
       "forwardsAttrs": true
@@ -1666,7 +1666,7 @@
     "packages/core/src/components/forms/colors/FrameColorPicker.vue": {
       "name": "FrameColorPicker",
       "source": "packages/core/src/components/forms/colors/FrameColorPicker.vue",
-      "sourceHash": "a8f7e7453f288ff2d219c4ab32264fde56fa5e8cffe03ab4b8454a686471cd93",
+      "sourceHash": "537e3c2d6d084fa41265e4420cbe423c422956af4cbdb79cc2e6be3cf6b9cb3f",
       "props": [
         {
           "name": "modelValue",
@@ -1739,7 +1739,7 @@
         "    PopoverTrigger.frame-color-picker.frame-color-trigger",
         "      ColorSwatch.frame-color-trigger-swatch",
         "  PopoverPortal",
-        "    PopoverContent.frame-color-picker-popover",
+        "    PopoverContent.frame-color-picker-popover.frame-overlay-surface",
         "      FrameHsvRectangle",
         "      FrameColorField"
       ],
@@ -1748,7 +1748,7 @@
     "packages/core/src/components/forms/FrameTextArea.vue": {
       "name": "FrameTextArea",
       "source": "packages/core/src/components/forms/FrameTextArea.vue",
-      "sourceHash": "dc658105adfc8da6a730dab9bbbc2de994d62d1b6b5cc0742b762529391e5c7f",
+      "sourceHash": "c2296235ad9ad1ca251435daae8d0ad3603b92bd0d194033822f983590f460e7",
       "props": [
         {
           "name": "tooltip",
@@ -1781,7 +1781,7 @@
           "type": "string",
           "default": {
             "kind": "literal",
-            "value": "\"\""
+            "value": "''"
           },
           "description": "Controlled value. Updates are emitted through update:modelValue; the application owns the value.",
           "control": "text",
@@ -1856,7 +1856,7 @@
         "FrameControlTooltip",
         "  template",
         "    Primitive",
-        "      textarea.frame-text-area",
+        "      textarea.frame-text-area.frame-input-surface.frame-input-focus-within",
         "  template",
         "    slot"
       ],
@@ -1865,7 +1865,7 @@
     "packages/core/src/components/framework/SettingControl.vue": {
       "name": "SettingControl",
       "source": "packages/core/src/components/framework/SettingControl.vue",
-      "sourceHash": "36867895f48c18d159337813dc4e6af069ba4141bb5e71d8a56d324acefaab71",
+      "sourceHash": "4fdde803e237643a85784ee73cb35b5de125a490c72332ae5a19cbdcc572f573",
       "props": [
         {
           "name": "setting",
@@ -1923,7 +1923,7 @@
     "packages/core/src/components/data-display/FrameIcon.vue": {
       "name": "FrameIcon",
       "source": "packages/core/src/components/data-display/FrameIcon.vue",
-      "sourceHash": "bcb290d328b58c771a7a94c4b6c97527068ef7ba2b8a8d3772e12cda1ee36221",
+      "sourceHash": "4ac1282be1d5678a02c5c114984487642b6ed911e34c0c27737229bae2cf9999",
       "props": [
         {
           "name": "tooltip",
@@ -2037,7 +2037,7 @@
     "packages/core/src/components/overlays/FrameTooltip.vue": {
       "name": "FrameTooltip",
       "source": "packages/core/src/components/overlays/FrameTooltip.vue",
-      "sourceHash": "56700588234f85821b98511e430000b54ac689b7ca6c45dd8df2ddad0303707b",
+      "sourceHash": "767c0a27d35c41a8227b8625c11000f6388bc97bb066ed980aa20e4ba1a64de3",
       "props": [
         {
           "name": "text",
@@ -2073,7 +2073,7 @@
         },
         {
           "name": "placement",
-          "type": "'top'|'bottom'|'left'|'right'",
+          "type": "'top' | 'bottom' | 'left' | 'right'",
           "default": {
             "kind": "literal",
             "value": "'bottom'"
@@ -2194,7 +2194,7 @@
         "      TooltipAnchor",
         "        slot",
         "    TooltipPortal",
-        "      TooltipContent.frame-tooltip",
+        "      TooltipContent.frame-tooltip.frame-overlay-surface.frame-box-scope.frame-shell-text",
         "        slot",
         "          span",
         "        kbd"
@@ -2204,7 +2204,7 @@
     "packages/core/src/components/navigation/FrameDropdownMenu.vue": {
       "name": "FrameDropdownMenu",
       "source": "packages/core/src/components/navigation/FrameDropdownMenu.vue",
-      "sourceHash": "ef42b1ba26a32f00e8da5dd14a1a9f8d7f7ed71c9cda898653ea18aab8da7500",
+      "sourceHash": "f9108bdb9ab2f6a1b9d7a1aba3558af09029e64c3a72308868a5a18a7d83cf26",
       "props": [
         {
           "name": "defaultOpen",
@@ -2276,7 +2276,7 @@
         },
         {
           "name": "itemAlignment",
-          "type": "\"left\" | \"center\" | \"right\"",
+          "type": "'left' | 'center' | 'right'",
           "default": {
             "kind": "omitted"
           },
@@ -2301,7 +2301,7 @@
         },
         {
           "name": "point",
-          "type": "{x:number;y:number}",
+          "type": "{x: number; y: number}",
           "default": {
             "kind": "omitted"
           },
@@ -2311,7 +2311,7 @@
         },
         {
           "name": "placement",
-          "type": "\"bottom\"|\"right\"",
+          "type": "'bottom' | 'right'",
           "default": {
             "kind": "omitted"
           },
@@ -2455,7 +2455,7 @@
         "      slot",
         "        button.frame-general-button",
         "  DropdownMenuPortal",
-        "    DropdownMenuContent.frame-menu",
+        "    DropdownMenuContent.frame-menu.frame-overlay-surface.frame-overlay-interactive.frame-box-scope.frame-control-scope.frame-shell-text.frame-scroll-scope",
         "      slot",
         "      MenuList",
         "        template",
@@ -2471,7 +2471,7 @@
     "packages/core/src/components/navigation/ContextMenu.vue": {
       "name": "ContextMenu",
       "source": "packages/core/src/components/navigation/ContextMenu.vue",
-      "sourceHash": "b2a1af69dcd751e1617ebf15bfa17c24182c313acbcec1204132b78ed180753e",
+      "sourceHash": "0a38777a5228aacf25771f9252f27a59425048d7b28fd1d4ba4ad7b6bcce9944",
       "props": [
         {
           "name": "items",
@@ -2539,7 +2539,7 @@
     "packages/core/src/components/layout/ResizablePane.vue": {
       "name": "ResizablePane",
       "source": "packages/core/src/components/layout/ResizablePane.vue",
-      "sourceHash": "71e93f4227a695955f88cde9a63ab1ee877f02a93b41a13073c54e506ca904ee",
+      "sourceHash": "08771a1e3bac9b683feb72f669b569b717782a65b5f600d1adc6ec3aa08dbbe8",
       "props": [
         {
           "name": "modelValue",
@@ -2553,10 +2553,10 @@
         },
         {
           "name": "axis",
-          "type": "\"x\" | \"y\"",
+          "type": "'x' | 'y'",
           "default": {
             "kind": "literal",
-            "value": "\"x\""
+            "value": "'x'"
           },
           "description": "Axis configuration for this component; see its Features examples for usage.",
           "options": [
@@ -2604,7 +2604,7 @@
           "type": "string",
           "default": {
             "kind": "literal",
-            "value": "\"Resize panes\""
+            "value": "'Resize panes'"
           },
           "description": "Visible or accessible label for the control.",
           "control": "text",
@@ -2658,7 +2658,7 @@
     "packages/core/src/components/layout/ResizeHandle.vue": {
       "name": "ResizeHandle",
       "source": "packages/core/src/components/layout/ResizeHandle.vue",
-      "sourceHash": "28101d4f968042b7d42f61f0432939ed2608bddac5f1bc6b9b804dbf26b2d45f",
+      "sourceHash": "c89d7d0bed7758b54fea882577e709a4cbf6a76b0e3443442d2b11caa9888350",
       "props": [
         {
           "name": "label",
@@ -2783,7 +2783,7 @@
     "packages/core/src/components/framework/FrameModal.vue": {
       "name": "FrameModal",
       "source": "packages/core/src/components/framework/FrameModal.vue",
-      "sourceHash": "780400e267c15227a48bc724313285b4459fa953ed0477654aa07a54355f4f88",
+      "sourceHash": "819fb88db30e7cf67134932958724827bb2939a7216f45a68a053d437751d2e6",
       "props": [
         {
           "name": "title",
@@ -2977,10 +2977,10 @@
       "structure": [
         "DialogRoot",
         "  Teleport",
-        "    div.frame-modal-layer",
+        "    div.frame-modal-layer.frame-overlay-interactive",
         "      div.frame-modal-backdrop",
         "      DialogContent",
-        "        section.frame-modal",
+        "        section.frame-modal.frame-overlay-surface.frame-scroll-scope",
         "          header.frame-modal-header",
         "            component.modal-icon",
         "            DialogTitle",
@@ -3003,7 +3003,7 @@
     "packages/core/src/components/framework/FrameSettings.vue": {
       "name": "FrameSettings",
       "source": "packages/core/src/components/framework/FrameSettings.vue",
-      "sourceHash": "2930672b7b146273bcf9040eaa31ba03a42494bbb2aa49d351f3a8e4f2da14f9",
+      "sourceHash": "872aa4495e6a9ff96367bbcd95ea5cb76b791398607e32e42b896bd483ead267",
       "props": [],
       "emits": [],
       "slots": [
@@ -3039,7 +3039,7 @@
     "packages/core/src/components/feedback/FrameNotifications.vue": {
       "name": "FrameNotifications",
       "source": "packages/core/src/components/feedback/FrameNotifications.vue",
-      "sourceHash": "76be1c1d4ec0922f06d384662bdd29861494bdfd59c175d0270ad8bda8760a3b",
+      "sourceHash": "7969feeae5df01b3ee5d2f8f5de88ae38f9c9ef1960132cba92b1df044b45fe3",
       "props": [
         {
           "name": "bottom",
@@ -3056,8 +3056,8 @@
       "slots": [],
       "methods": [],
       "structure": [
-        "section.frame-notifications",
-        "  article.frame-notification",
+        "section.frame-notifications.frame-overlay-interactive",
+        "  article.frame-notification.frame-overlay-surface",
         "    FrameIcon.frame-notification-severity",
         "    div.frame-notification-content",
         "      strong",
@@ -3071,7 +3071,7 @@
     "packages/core/src/modules/notifications/components/NotificationPanel.vue": {
       "name": "NotificationPanel",
       "source": "packages/core/src/modules/notifications/components/NotificationPanel.vue",
-      "sourceHash": "d54b2108b1283b9e5c4136e81f82b6b409f7b08c0d797b5019478c82372df88e",
+      "sourceHash": "fa86f2ee0af825c37060c8bb7225c09ff01bfa3dbbce401c7e64cd58627d3e9c",
       "props": [
         {
           "name": "frame",
@@ -3148,7 +3148,7 @@
     "packages/core/src/modules/notifications/components/NotificationIndicator.vue": {
       "name": "NotificationIndicator",
       "source": "packages/core/src/modules/notifications/components/NotificationIndicator.vue",
-      "sourceHash": "f0aa5294d8637ce3f6356d338385941daa35fe4284096a00ec8e79413e19a9ba",
+      "sourceHash": "fcca04a2caa272dfcbd952729e09bf1ad1ac72d50b501f67174561e727399c43",
       "props": [
         {
           "name": "history",
@@ -3174,7 +3174,7 @@
     "packages/core/src/components/framework/FrameQuickPick.vue": {
       "name": "FrameQuickPick",
       "source": "packages/core/src/components/framework/FrameQuickPick.vue",
-      "sourceHash": "7624a1ec69d1cdf00a887b74f016d19ddb590dce1507705e1b57af919ccb3668",
+      "sourceHash": "217fc69f01660bdf4cfc370e506f3344e1ef18c105688e1c88a1bde77c691e1f",
       "props": [
         {
           "name": "items",
@@ -3377,7 +3377,7 @@
     "packages/core/src/components/framework/FrameQuickPanel.vue": {
       "name": "FrameQuickPanel",
       "source": "packages/core/src/components/framework/FrameQuickPanel.vue",
-      "sourceHash": "4e543b149af19ec39bb286e1c1a4cb525a7d9db5e66bdad12d1af43eaa1ee512",
+      "sourceHash": "c19348804c85a4b5f53020c26d17d834dd7123a878e0963cf6df9396f395ce72",
       "props": [
         {
           "name": "title",
@@ -3391,7 +3391,7 @@
         },
         {
           "name": "position",
-          "type": "\"top\" | \"center\"",
+          "type": "'top' | 'center'",
           "default": {
             "kind": "omitted"
           },
@@ -3442,7 +3442,7 @@
     "packages/core/src/components/framework/FrameShell.vue": {
       "name": "FrameShell",
       "source": "packages/core/src/components/framework/FrameShell.vue",
-      "sourceHash": "be417a670dd8efd666a1defcf5cc8c14ad6073fe7b81bd8e4ff7109831a3a3a7",
+      "sourceHash": "f886675d0466f0958a046ab39bbc4d948e3da18fbf174f25b37df68a716f1571",
       "props": [
         {
           "name": "frame",
@@ -3564,7 +3564,7 @@
       ],
       "methods": [],
       "structure": [
-        "div.workbench",
+        "div.workbench.frame-box-scope.frame-control-scope.frame-shell-text.frame-scroll-scope",
         "  a.skip-link",
         "  TitleBar",
         "  div.workbench-layout",
@@ -3615,7 +3615,7 @@
         "      template",
         "        slot",
         "  Teleport",
-        "    div.frame-overlay-host",
+        "    div.frame-overlay-host.frame-shell-text",
         "  Teleport",
         "    FrameNotifications",
         "    div.frame-custom-overlays",
@@ -3649,7 +3649,7 @@
     "packages/core/src/components/framework/WorkspacePanes.vue": {
       "name": "WorkspacePanes",
       "source": "packages/core/src/components/framework/WorkspacePanes.vue",
-      "sourceHash": "1e5188bd739e53d36a328baf64923b013999c1003c816112f3710ff07959055a",
+      "sourceHash": "88f6acc6fb982f735d4b52ccb3645f0fb611818fd4c183a3b8ec49ee6bfa2be4",
       "props": [],
       "emits": [],
       "slots": [
@@ -3686,7 +3686,7 @@
       ],
       "methods": [],
       "structure": [
-        "main.workspace.workspace-panes",
+        "main.workspace.workspace-panes.frame-workspace-surface",
         "  WorkspacePaneLayout",
         "  div",
         "  template",
@@ -3716,14 +3716,14 @@
     "packages/core/src/components/framework/SidePanel.vue": {
       "name": "SidePanel",
       "source": "packages/core/src/components/framework/SidePanel.vue",
-      "sourceHash": "ebbfc7f15ea9ee497d84e9c3518ee1f17c24b76b3f1b211292e3390ebf5e51bb",
+      "sourceHash": "1c84cdf7722eb41efd6c80c38651ef66a8b86a9c3b814ab2170f70637129ccb8",
       "props": [
         {
           "name": "region",
-          "type": "\"primary\" | \"secondary\"",
+          "type": "'primary' | 'secondary'",
           "default": {
             "kind": "literal",
-            "value": "\"primary\""
+            "value": "'primary'"
           },
           "description": "Region configuration for this component; see its Features examples for usage.",
           "options": [
@@ -3820,7 +3820,7 @@
       "structure": [
         "aside.side-panel",
         "  DockRegion.frame-dock-anchor-content",
-        "    header.section-header",
+        "    header.section-header.frame-shell-label",
         "      h2.side-title",
         "      PanelActions",
         "      slot",
@@ -3834,7 +3834,7 @@
     "packages/core/src/components/framework/ViewSections.vue": {
       "name": "ViewSections",
       "source": "packages/core/src/components/framework/ViewSections.vue",
-      "sourceHash": "eccee2dd86aaca589d34a0406048b964a377c287b8b5126df82cd5411abc61c5",
+      "sourceHash": "a25402d8bc0619af94c2a4096b00e7530872e757552c5dff1a39a79f02cff63c",
       "props": [
         {
           "name": "viewId",
@@ -3863,7 +3863,7 @@
       "structure": [
         "div.panel-sections.view-sections",
         "  section.panel-section",
-        "    header",
+        "    header.frame-shell-label",
         "      button.section-toggle",
         "        FrameIcon.section-chevron",
         "        component.tab-icon",
@@ -3879,7 +3879,7 @@
     "packages/core/src/components/framework/NavigationBar.vue": {
       "name": "NavigationBar",
       "source": "packages/core/src/components/framework/NavigationBar.vue",
-      "sourceHash": "b45e650346700be63a6e4a310a38b000edfff3ce724c7acdca89318d64c0a833",
+      "sourceHash": "a55a107a190dbf29e680f05b421e22574b05c88b490e767a77981a967579a692",
       "props": [],
       "emits": [],
       "slots": [],
@@ -3896,7 +3896,7 @@
         "            button.frame-bar-item",
         "              BarItemContent",
         "          DropdownMenuPortal",
-        "            DropdownMenuContent.frame-menu.navigation-menu",
+        "            DropdownMenuContent.frame-menu.navigation-menu.frame-overlay-surface.frame-overlay-interactive.frame-box-scope.frame-control-scope.frame-shell-text.frame-scroll-scope",
         "              NavigationItemMenu",
         "        component.frame-bar-item",
         "          BarItemContent",
@@ -3905,7 +3905,7 @@
         "      DropdownMenuTrigger",
         "        button.frame-bar-item.nav-overflow",
         "      DropdownMenuPortal",
-        "        DropdownMenuContent.frame-menu.navigation-menu",
+        "        DropdownMenuContent.frame-menu.navigation-menu.frame-overlay-surface.frame-overlay-interactive.frame-box-scope.frame-control-scope.frame-shell-text.frame-scroll-scope",
         "          NavigationItemMenu",
         "  button.frame-bar-item.nav-collapse",
         "    span.bar-icon-slot",
@@ -3924,7 +3924,7 @@
     "packages/core/src/components/framework/NavigationItemMenu.vue": {
       "name": "NavigationItemMenu",
       "source": "packages/core/src/components/framework/NavigationItemMenu.vue",
-      "sourceHash": "9f3d807c5e97df6038fe648da7d6ee022829725c5d112a5d8316cbfc8c079562",
+      "sourceHash": "fa689945d665a7641f5ac3ae3b57cfebebe5793f2d9691497f76b8bea71fca88",
       "props": [
         {
           "name": "items",
@@ -3960,7 +3960,7 @@
         "      BarItemContent",
         "      span",
         "    DropdownMenuPortal",
-        "      DropdownMenuSubContent.frame-menu.navigation-menu",
+        "      DropdownMenuSubContent.frame-menu.navigation-menu.frame-overlay-surface.frame-overlay-interactive.frame-box-scope.frame-control-scope.frame-shell-text.frame-scroll-scope",
         "        NavigationItemMenu",
         "  DropdownMenuItem",
         "    a.navigation-menu-item",
@@ -3973,14 +3973,14 @@
     "packages/core/src/components/feedback/FrameLoader.vue": {
       "name": "FrameLoader",
       "source": "packages/core/src/components/feedback/FrameLoader.vue",
-      "sourceHash": "d640b7ddf8d606b44edd936ec0b90cfa98de934a91fe6086b0d38ca167cd33a4",
+      "sourceHash": "14e71a89fd0655335b3dc55e7e495fbed8da87116a96e59873307ac7df2e8591",
       "props": [
         {
           "name": "variant",
           "type": "FrameLoaderVariant",
           "default": {
             "kind": "literal",
-            "value": "\"ring\""
+            "value": "'ring'"
           },
           "description": "Selects the visual variant.",
           "options": [
@@ -4050,7 +4050,7 @@
           "type": "string",
           "default": {
             "kind": "literal",
-            "value": "\"var(--frame-accent, #0078d4)\""
+            "value": "'var(--frame-accent, #0078d4)'"
           },
           "description": "Color configuration for this component; see its Features examples for usage.",
           "control": "text",
@@ -4101,7 +4101,7 @@
           "type": "string",
           "default": {
             "kind": "literal",
-            "value": "\"Loading…\""
+            "value": "'Loading…'"
           },
           "description": "Visible or accessible label for the control.",
           "control": "text",
@@ -4131,7 +4131,7 @@
     "packages/core/src/components/feedback/FrameLoading.vue": {
       "name": "FrameLoading",
       "source": "packages/core/src/components/feedback/FrameLoading.vue",
-      "sourceHash": "e4fe9a6e35edabf345c8bd353645ded4f091a7fb53caadf9c8dc6290fbab424a",
+      "sourceHash": "1637d38fd72599a3f38386c11eec6d4f93fda43bf885d8b03fd5481b2d57b010",
       "props": [
         {
           "name": "active",
@@ -4158,7 +4158,7 @@
           "type": "FrameLoadingTextPosition",
           "default": {
             "kind": "literal",
-            "value": "\"below\""
+            "value": "'below'"
           },
           "description": "Placement of loading text relative to its animation.",
           "options": [
@@ -4369,7 +4369,7 @@
     "packages/core/src/components/data-display/FrameCodeBlock.vue": {
       "name": "FrameCodeBlock",
       "source": "packages/core/src/components/data-display/FrameCodeBlock.vue",
-      "sourceHash": "f3ead06d4af87a401b84f5ddf4b61cba2b2d9ac576beb54eda87fa8cc48a5b8c",
+      "sourceHash": "268699a7d4331633265fda1813ecac80f660a73fc4defaa8ee36c38afc6e602e",
       "props": [
         {
           "name": "code",
@@ -4386,7 +4386,7 @@
           "type": "string",
           "default": {
             "kind": "literal",
-            "value": "\"text\""
+            "value": "'text'"
           },
           "description": "A Shiki language name or alias. Unknown languages are displayed as plain text.",
           "control": "text",
@@ -4543,7 +4543,7 @@
           "type": "string",
           "default": {
             "kind": "literal",
-            "value": "\"Code block\""
+            "value": "'Code block'"
           },
           "description": "Visible or accessible label for the control.",
           "control": "text",
@@ -4579,7 +4579,7 @@
     "packages/core/src/modules/editor/components/CodeEditor.vue": {
       "name": "CodeEditor",
       "source": "packages/core/src/modules/editor/components/CodeEditor.vue",
-      "sourceHash": "3aaf8530c491112104a229a349cc06efe6422cb018eec8fbe5e1db724d42e680",
+      "sourceHash": "eee2984f912ad9b1fb5feb73bc6b59a1521f268519cba31449246ebc6e63d551",
       "props": [
         {
           "name": "modelValue",
@@ -4808,7 +4808,7 @@
     "packages/core/src/modules/terminal/components/Terminal.vue": {
       "name": "Terminal",
       "source": "packages/core/src/modules/terminal/components/Terminal.vue",
-      "sourceHash": "506bf007469f20a0046e1851dac6b749abcc7132fbd6b5085e6dd7c30be2ea86",
+      "sourceHash": "ee18c73a06d83b1df6da952a0e7ad8a3d797acfde9f45dfc8fa3a60cc7675831",
       "props": [
         {
           "name": "terminal",
@@ -4951,7 +4951,7 @@
     "packages/core/src/modules/terminal/components/TerminalView.vue": {
       "name": "TerminalView",
       "source": "packages/core/src/modules/terminal/components/TerminalView.vue",
-      "sourceHash": "6497431e6291025e58ed1d9e721dd16e25e17249fe7ba1dcaeb770e1ba157bcc",
+      "sourceHash": "15607bbcd66518315f16908c58aeec3bdb7bdcda3c703f0a9e11ba1f4fc31c47",
       "props": [
         {
           "name": "terminal",
@@ -5057,7 +5057,7 @@
       ],
       "structure": [
         "div.frame-terminal-view",
-        "  header.frame-terminal-toolbar",
+        "  header.frame-terminal-toolbar.frame-terminal-controls",
         "    span.frame-terminal-title",
         "      FrameIcon",
         "    FrameTooltip",
@@ -5069,18 +5069,18 @@
         "    FrameIconButton",
         "  FrameMenu",
         "  FrameMenu",
-        "  div.frame-terminal-search",
+        "  div.frame-terminal-search.frame-terminal-controls",
         "    FrameTextField",
         "    span",
         "    FrameIconButton",
         "    FrameIconButton",
         "    FrameIconButton",
-        "  div.frame-terminal-rename",
+        "  div.frame-terminal-rename.frame-terminal-controls",
         "    label",
         "    FrameTextField",
         "    FrameButton",
         "    FrameIconButton",
-        "  div.frame-terminal-color",
+        "  div.frame-terminal-color.frame-terminal-controls",
         "    label",
         "    FrameColorPicker",
         "    FrameButton",
@@ -5112,7 +5112,7 @@
     "packages/core/src/modules/chat/components/AIChat.vue": {
       "name": "AIChat",
       "source": "packages/core/src/modules/chat/components/AIChat.vue",
-      "sourceHash": "333671bb8a7fbdf1e5eaf7b3af58901875fe4454f9654af9d7b47ef09fa561ac",
+      "sourceHash": "02e8969c57b59bb96252319128714155c3b3016c29bd2e26709ad253a1d74e8a",
       "props": [
         {
           "name": "chat",
@@ -5351,7 +5351,7 @@
     "packages/core/src/modules/chat/components/AIHistory.vue": {
       "name": "AIHistory",
       "source": "packages/core/src/modules/chat/components/AIHistory.vue",
-      "sourceHash": "46ea5c39b31759497f264c64655ab6d58b9a3818b23b9006bc284b02a48b137d",
+      "sourceHash": "0b62e113b24c0d937d9d766229ea71e258d2d9cd72ae2265ae8efd2544e1fb64",
       "props": [
         {
           "name": "history",
@@ -5504,7 +5504,7 @@
     "packages/core/src/modules/chat/components/AIPrompt.vue": {
       "name": "AIPrompt",
       "source": "packages/core/src/modules/chat/components/AIPrompt.vue",
-      "sourceHash": "81f6efd36decf71dfe2bfa9569ac4730e7d0fc20514da3ea9a9aac90349709aa",
+      "sourceHash": "f20e108f08ccef9dfeffcdd50e09e270c544681344b65bdd2749f4b6a142baad",
       "props": [
         {
           "name": "modelValue",
@@ -5708,7 +5708,7 @@
     "packages/core/src/modules/chat/components/AIConversation.vue": {
       "name": "AIConversation",
       "source": "packages/core/src/modules/chat/components/AIConversation.vue",
-      "sourceHash": "899e5fa8771623bb60dda2e25b3a881468aecf37f705ef2e887e50209ffdc709",
+      "sourceHash": "50c36495a5c42fc9685168518676b00f21bbf1c6bc2e8cdf9c4e2bb852a7523a",
       "props": [
         {
           "name": "chat",
@@ -5935,7 +5935,7 @@
     "packages/core/src/components/forms/FrameAutocomplete.vue": {
       "name": "FrameAutocomplete",
       "source": "packages/core/src/components/forms/FrameAutocomplete.vue",
-      "sourceHash": "4bbeb510239c2aeaab84f666651f30813530f9771cc9fcab4c8eb1f8c6ca96f7",
+      "sourceHash": "bc9a9ef1bf4d879a68645d44cd6150a7dc3a904e1474bbef6a71aed024f33cdb",
       "props": [
         {
           "name": "modelValue",
@@ -6193,9 +6193,9 @@
         "  AutocompleteAnchor",
         "    div",
         "      AutocompleteInput",
-        "        FrameTextField.frame-autocomplete-input",
+        "        FrameTextField.frame-autocomplete-input.frame-input-surface.frame-input-focus-within",
         "  AutocompletePortal",
-        "    AutocompleteContent.frame-advanced-popup",
+        "    AutocompleteContent.frame-advanced-popup.frame-overlay-surface",
         "      AutocompleteItem.frame-advanced-option",
         "      AutocompleteEmpty.frame-field-description"
       ],
@@ -6204,7 +6204,7 @@
     "packages/core/src/components/forms/FrameField.vue": {
       "name": "FrameField",
       "source": "packages/core/src/components/forms/FrameField.vue",
-      "sourceHash": "32f2a89c4504b113ad35a4061959a00a4c0366509c4d699fe8015c3fe7b1474f",
+      "sourceHash": "0f9f80c4b2100627b138a2c613c4ee831cc2cd0ec127c1e2642c7b5319ff7365",
       "props": [
         {
           "name": "name",
@@ -6441,7 +6441,7 @@
     "packages/core/src/components/forms/FrameFieldGroup.vue": {
       "name": "FrameFieldGroup",
       "source": "packages/core/src/components/forms/FrameFieldGroup.vue",
-      "sourceHash": "5a691666c271099231361a67c3df3357d928ad0b337a8c7829697d31980a71e3",
+      "sourceHash": "fc16d4738b04bdd72260a63136dabfa515d8c5554bd3c7dc5dcecc899a9e3bed",
       "props": [
         {
           "name": "disabled",
@@ -6478,7 +6478,7 @@
       ],
       "methods": [],
       "structure": [
-        "div.frame-input-group",
+        "div.frame-input-group.frame-input-surface",
         "  span.frame-input-addon",
         "    slot",
         "  div.frame-input-group-control",
@@ -6491,7 +6491,7 @@
     "packages/core/src/components/forms/FrameForm.vue": {
       "name": "FrameForm",
       "source": "packages/core/src/components/forms/FrameForm.vue",
-      "sourceHash": "3ab523cf3ba280b0ef8c63273c0134e8f2c85137d348a2db432e5e99308eb774",
+      "sourceHash": "8706c72a41170cff78dd4a5f8452acc029b7442bf47557ed6e56cdf00ca94796",
       "props": [
         {
           "name": "errors",
@@ -6599,7 +6599,7 @@
     "packages/core/src/components/forms/FrameRating.vue": {
       "name": "FrameRating",
       "source": "packages/core/src/components/forms/FrameRating.vue",
-      "sourceHash": "ecd7fa31cf42a4aa724649914726389da2b5201bef81f31a7935db6c5fc327c0",
+      "sourceHash": "6c5455b9dfb0e723ebc430cb1e391906a62a40375447db34eb85d2735d00198d",
       "props": [
         {
           "name": "defaultValue",
@@ -6805,7 +6805,7 @@
       "structure": [
         "RatingRoot.frame-rating",
         "  RatingItem.frame-rating-item",
-        "    RatingItemIndicator.frame-rating-step",
+        "    RatingItemIndicator.frame-rating-step.frame-advanced-focus",
         "      slot"
       ],
       "forwardsAttrs": true
@@ -6813,7 +6813,7 @@
     "packages/core/src/components/forms/FrameTagGroup.vue": {
       "name": "FrameTagGroup",
       "source": "packages/core/src/components/forms/FrameTagGroup.vue",
-      "sourceHash": "9f467f91aa932f8d67e83e50bf99349d099982772abb8d482c4cf5174ce962f8",
+      "sourceHash": "10a9c5f8e1ccb15034aa49309cc4a058b3d6db92299d05676e01074455fd7eb9",
       "props": [
         {
           "name": "modelValue",
@@ -6978,7 +6978,7 @@
         },
         {
           "name": "items",
-          "type": "readonly { value: string; label: string; disabled?: boolean }[]",
+          "type": "readonly {value: string; label: string; disabled?: boolean}[]",
           "default": {
             "kind": "required"
           },
@@ -7005,16 +7005,16 @@
       "methods": [],
       "structure": [
         "TagGroupRoot.frame-tag-group",
-        "  TagGroupItem.frame-tag",
+        "  TagGroupItem.frame-tag.frame-advanced-focus",
         "    TagGroupItemText",
-        "    TagGroupItemDelete.frame-tag-delete"
+        "    TagGroupItemDelete.frame-tag-delete.frame-advanced-focus"
       ],
       "forwardsAttrs": true
     },
     "packages/core/src/components/forms/FrameLabel.vue": {
       "name": "FrameLabel",
       "source": "packages/core/src/components/forms/FrameLabel.vue",
-      "sourceHash": "27354683343541f2a02df16207e892a696bee33fb7113bb7ce796f74da41465f",
+      "sourceHash": "fadc27759fae19f571b66aacfd0957752bdf820af1facb171ef044aa7948609a",
       "props": [
         {
           "name": "for",
@@ -7046,7 +7046,7 @@
     "packages/core/src/components/forms/FrameCheckboxGroup.vue": {
       "name": "FrameCheckboxGroup",
       "source": "packages/core/src/components/forms/FrameCheckboxGroup.vue",
-      "sourceHash": "b7bab3f8ac11ad73040ca987ac899cff0c11202fd643025e45616b2ba7768f26",
+      "sourceHash": "77f1e703b20f4073508a31b64cc5c6bf4f93d308821c8a97bee9763c4e7d1859",
       "props": [
         {
           "name": "modelValue",
@@ -7105,8 +7105,8 @@
       "structure": [
         "CheckboxGroupRoot.frame-choice-group",
         "  template",
-        "    Label.frame-form-inline",
-        "      CheckboxRoot.frame-check-control",
+        "    Label.frame-form-inline.frame-form-inline-layout",
+        "      CheckboxRoot.frame-check-control.frame-control-surface.frame-control-action.frame-control-focus.frame-control-disabled",
         "        CheckboxIndicator.frame-check-indicator",
         "          FrameIcon",
         "      span",
@@ -7117,7 +7117,7 @@
     "packages/core/src/components/forms/colors/FrameColorArea.vue": {
       "name": "FrameColorArea",
       "source": "packages/core/src/components/forms/colors/FrameColorArea.vue",
-      "sourceHash": "82cefbe956a6805e2f789ada7fc243aa36a4f7ba795c8293980e5df478030fca",
+      "sourceHash": "efd3ded4b053774fb0f51c6cacddbab2223f5136c7285ab0b46cba897f759864",
       "props": [
         {
           "name": "modelValue",
@@ -7351,7 +7351,7 @@
         "FrameHsvArea",
         "ColorAreaRoot.frame-color-area",
         "  ColorAreaArea.frame-color-plane",
-        "    ColorAreaThumb.frame-color-thumb"
+        "    ColorAreaThumb.frame-color-thumb.frame-advanced-focus"
       ],
       "forwardsAttrs": true
     },
@@ -7610,7 +7610,7 @@
     "packages/core/src/components/forms/colors/FrameColorField.vue": {
       "name": "FrameColorField",
       "source": "packages/core/src/components/forms/colors/FrameColorField.vue",
-      "sourceHash": "0b0e2d927213e6b64986a7835fd8605670725587c21565a31289eba573c92782",
+      "sourceHash": "f8d4b367b82b56667f66ea475b33864dafc8916391b03a745ef130c8f296c9ef",
       "props": [
         {
           "name": "modelValue",
@@ -7824,14 +7824,14 @@
       "structure": [
         "ColorFieldRoot.frame-color-field",
         "  ColorFieldInput",
-        "    FrameTextField.frame-color-field-input"
+        "    FrameTextField.frame-color-field-input.frame-input-surface.frame-input-focus-within"
       ],
       "forwardsAttrs": true
     },
     "packages/core/src/components/forms/colors/FrameColorSlider.vue": {
       "name": "FrameColorSlider",
       "source": "packages/core/src/components/forms/colors/FrameColorSlider.vue",
-      "sourceHash": "6241b7de52ca2735f74906f2ff4eb9b206fc42c45561d0d197cb1c9741ca9ee3",
+      "sourceHash": "63d88a7e2859e03a870f476e0f0ea475c13c9352bcf778e5158f1e1ef7b33518",
       "props": [
         {
           "name": "modelValue",
@@ -8059,14 +8059,14 @@
       "structure": [
         "ColorSliderRoot.frame-color-slider",
         "  ColorSliderTrack.frame-color-track",
-        "    ColorSliderThumb.frame-color-thumb"
+        "    ColorSliderThumb.frame-color-thumb.frame-advanced-focus"
       ],
       "forwardsAttrs": true
     },
     "packages/core/src/components/forms/colors/FrameColorSwatch.vue": {
       "name": "FrameColorSwatch",
       "source": "packages/core/src/components/forms/colors/FrameColorSwatch.vue",
-      "sourceHash": "b80f3c1e769c3a018d2373d16e328abd2a1b1b693d865068d46e2b7ea70c467e",
+      "sourceHash": "549fee6de4f446d4aca016196737aa224010d05534f67ee6e2e4f7596f7f0a5e",
       "props": [
         {
           "name": "color",
@@ -8153,7 +8153,7 @@
     "packages/core/src/components/forms/colors/FrameColorSwatchPicker.vue": {
       "name": "FrameColorSwatchPicker",
       "source": "packages/core/src/components/forms/colors/FrameColorSwatchPicker.vue",
-      "sourceHash": "3dee2be10840bcc9765c76dcb37b1aee10904d7d49e655bde861c6e9763ae6fe",
+      "sourceHash": "a2d72b4c5884518b4d84b49fa454742b65280af0b918319bc13e34c4d6ef5830",
       "props": [
         {
           "name": "defaultValue",
@@ -8375,7 +8375,7 @@
         "span",
         "  ColorSwatchPickerRoot.frame-swatch-picker",
         "    FocusOwnership",
-        "    ColorSwatchPickerItem.frame-swatch-item",
+        "    ColorSwatchPickerItem.frame-swatch-item.frame-advanced-focus",
         "      ColorSwatchPickerItemSwatch.frame-color-swatch",
         "      ColorSwatchPickerItemIndicator.frame-swatch-indicator"
       ],
@@ -8384,7 +8384,7 @@
     "packages/core/src/components/forms/FrameCombobox.vue": {
       "name": "FrameCombobox",
       "source": "packages/core/src/components/forms/FrameCombobox.vue",
-      "sourceHash": "aab54ecb665b70314d5a7ea38b11e1c4320bf4802ec7daffa51e4ec87b84c47b",
+      "sourceHash": "b8e730b0007c0e24257942174870a5e7f873a6e1af2cc0f3f603a1b66838caff",
       "props": [
         {
           "name": "modelValue",
@@ -8483,12 +8483,12 @@
       "methods": [],
       "structure": [
         "ComboboxRoot",
-        "  ComboboxAnchor.frame-combobox-anchor",
+        "  ComboboxAnchor.frame-combobox-anchor.frame-form-inline-layout.frame-input-surface.frame-input-focus-within",
         "    ComboboxInput",
         "      FrameTextField.frame-combobox-input",
-        "    ComboboxTrigger.frame-control-button",
+        "    ComboboxTrigger.frame-control-button.frame-control-surface.frame-control-action.frame-control-focus.frame-control-disabled",
         "  ComboboxPortal",
-        "    ComboboxContent.frame-select-popup.frame-reka-select-popup",
+        "    ComboboxContent.frame-select-popup.frame-reka-select-popup.frame-overlay-surface.frame-overlay-interactive",
         "      ComboboxViewport.frame-select-options",
         "        ComboboxEmpty",
         "        template",
@@ -8504,7 +8504,7 @@
     "packages/core/src/components/forms/FrameEditable.vue": {
       "name": "FrameEditable",
       "source": "packages/core/src/components/forms/FrameEditable.vue",
-      "sourceHash": "023b3f32760ac49cb61c3c2441344111d5d7f15b4024b847da698c0b340489f6",
+      "sourceHash": "29b30d00474712e8409df29e39cfef7b21a91cbf2a93dda646ed8ef56973c1c5",
       "props": [
         {
           "name": "tooltip",
@@ -8576,7 +8576,7 @@
         },
         {
           "name": "submitMode",
-          "type": "'both'|'enter'",
+          "type": "'both' | 'enter'",
           "default": {
             "kind": "literal",
             "value": "'both'"
@@ -8591,7 +8591,7 @@
         },
         {
           "name": "activationMode",
-          "type": "'focus'|'dblclick'|'none'",
+          "type": "'focus' | 'dblclick' | 'none'",
           "default": {
             "kind": "literal",
             "value": "'focus'"
@@ -8668,9 +8668,9 @@
         "  template",
         "    EditableRoot.frame-editable",
         "      EditableArea",
-        "        EditablePreview.frame-form-input",
+        "        EditablePreview.frame-form-input.frame-control-surface.frame-control-focus.frame-input-surface.frame-input-focus-within",
         "        EditableInput",
-        "          FrameTextField.frame-editable-input",
+        "          FrameTextField.frame-editable-input.frame-input-surface.frame-input-focus-within",
         "  template",
         "    slot"
       ],
@@ -8679,7 +8679,7 @@
     "packages/core/src/components/forms/FrameListbox.vue": {
       "name": "FrameListbox",
       "source": "packages/core/src/components/forms/FrameListbox.vue",
-      "sourceHash": "482c3d8e8e32bc985d9cd3ac8b965dc5f79badc1f6cc6f089852a961fd3a9814",
+      "sourceHash": "5c768be39fe4879106f8985935a401368b7d4177b344482c5e6cc5c6d3618b1d",
       "props": [
         {
           "name": "modelValue",
@@ -8750,7 +8750,7 @@
         "ListboxRoot.frame-choice-group",
         "  ListboxContent",
         "    template",
-        "      ListboxItem.frame-choice-item",
+        "      ListboxItem.frame-choice-item.frame-control-surface.frame-control-action.frame-control-focus.frame-control-disabled",
         "        span",
         "        small",
         "      div.frame-select-separator"
@@ -8760,7 +8760,7 @@
     "packages/core/src/components/forms/FrameNumberField.vue": {
       "name": "FrameNumberField",
       "source": "packages/core/src/components/forms/FrameNumberField.vue",
-      "sourceHash": "6d2ff4ce33b4fc8bc7df886662d263d213a6bab6e3908ffad90adc5a7ce53d26",
+      "sourceHash": "770468c4c48e3126ed86b055996b8fed4876ece6a55ba1d6e9c7eb626a0ba30f",
       "props": [
         {
           "name": "tooltip",
@@ -8910,18 +8910,18 @@
       ],
       "methods": [],
       "structure": [
-        "div.frame-number-field",
+        "div.frame-number-field.frame-form-inline-layout.frame-input-surface.frame-input-focus-within",
         "  FrameTextField.frame-number-native",
         "    template",
         "      slot",
-        "NumberFieldRoot.frame-number-field",
-        "  NumberFieldDecrement.frame-control-button",
+        "NumberFieldRoot.frame-number-field.frame-form-inline-layout.frame-input-surface.frame-input-focus-within",
+        "  NumberFieldDecrement.frame-control-button.frame-control-surface.frame-control-action.frame-control-focus.frame-control-disabled",
         "    FrameIcon",
         "  NumberFieldInput",
-        "    FrameTextField.frame-form-input",
+        "    FrameTextField.frame-form-input.frame-control-surface.frame-control-focus.frame-input-surface.frame-input-focus-within",
         "      template",
         "        slot",
-        "  NumberFieldIncrement.frame-control-button",
+        "  NumberFieldIncrement.frame-control-button.frame-control-surface.frame-control-action.frame-control-focus.frame-control-disabled",
         "    FrameIcon"
       ],
       "forwardsAttrs": false
@@ -8929,7 +8929,7 @@
     "packages/core/src/components/forms/FrameScrubField.vue": {
       "name": "FrameScrubField",
       "source": "packages/core/src/components/forms/FrameScrubField.vue",
-      "sourceHash": "9ad975cdcd2ae54db5f293a13014d1b014092e90dd04a3458dd2f9b598f2eb79",
+      "sourceHash": "16aa3b3c2d5183e2ff85afff13e26e172e245b077ea00aa19179029d02757e7c",
       "props": [
         {
           "name": "modelValue",
@@ -9036,16 +9036,16 @@
       "slots": [],
       "methods": [],
       "structure": [
-        "NumberFieldRoot.frame-number-field.frame-scrub-field",
+        "NumberFieldRoot.frame-number-field.frame-scrub-field.frame-form-inline-layout.frame-input-surface.frame-input-focus-within",
         "  NumberFieldInput.frame-scrub-backing",
-        "  FrameTextField.frame-form-input.frame-scrub-input",
+        "  FrameTextField.frame-form-input.frame-scrub-input.frame-control-surface.frame-control-focus.frame-input-surface.frame-input-focus-within",
         "  button.frame-scrub-display",
         "    span.frame-scrub-fill",
         "    span.frame-scrub-text",
         "  span.frame-scrub-steppers",
-        "    NumberFieldIncrement.frame-control-button",
+        "    NumberFieldIncrement.frame-control-button.frame-control-surface.frame-control-action.frame-control-focus.frame-control-disabled",
         "      FrameIcon",
-        "    NumberFieldDecrement.frame-control-button",
+        "    NumberFieldDecrement.frame-control-button.frame-control-surface.frame-control-action.frame-control-focus.frame-control-disabled",
         "      FrameIcon"
       ],
       "forwardsAttrs": true
@@ -9053,7 +9053,7 @@
     "packages/core/src/components/forms/FramePinField.vue": {
       "name": "FramePinField",
       "source": "packages/core/src/components/forms/FramePinField.vue",
-      "sourceHash": "2cf3840894269ef96ba9d2ca44ec00b4e91efc59a7cca272a7832e0d2fb2f29c",
+      "sourceHash": "345fc2390aa59c9ac01afdae4c61034ec4e34bacac8ed6c54d8aba5336e8eee7",
       "props": [
         {
           "name": "modelValue",
@@ -9131,16 +9131,16 @@
       "slots": [],
       "methods": [],
       "structure": [
-        "PinInputRoot.frame-pin-input",
+        "PinInputRoot.frame-pin-input.frame-form-inline-layout",
         "  PinInputInput",
-        "    FrameTextField.frame-pin-entry"
+        "    FrameTextField.frame-pin-entry.frame-input-surface.frame-input-focus-within"
       ],
       "forwardsAttrs": true
     },
     "packages/core/src/components/forms/FrameRadioGroup.vue": {
       "name": "FrameRadioGroup",
       "source": "packages/core/src/components/forms/FrameRadioGroup.vue",
-      "sourceHash": "e78f4bc919495e6595ee750e5c2ddb420fdef44e83f5a35f2273cf3f4228374b",
+      "sourceHash": "e77fad75231c728c7e4ecb163d66650703c12087cc5d3db3e8544d04ff60a141",
       "props": [
         {
           "name": "modelValue",
@@ -9199,7 +9199,7 @@
       "structure": [
         "RadioGroupRoot.frame-choice-group",
         "  template",
-        "    RadioGroupItem.frame-choice-item",
+        "    RadioGroupItem.frame-choice-item.frame-control-surface.frame-control-action.frame-control-focus.frame-control-disabled",
         "      RadioGroupIndicator.frame-radio-indicator",
         "      span",
         "      small",
@@ -9210,7 +9210,7 @@
     "packages/core/src/components/forms/FrameSwitch.vue": {
       "name": "FrameSwitch",
       "source": "packages/core/src/components/forms/FrameSwitch.vue",
-      "sourceHash": "1f28a774585edc2df963a90d3f9c9e30f859a75130f748d2869783917ea863ec",
+      "sourceHash": "a83171707a74625f72c8c13180afa80ff36fa7146cf664640c51f925306791b3",
       "props": [
         {
           "name": "tooltip",
@@ -9295,10 +9295,10 @@
       ],
       "methods": [],
       "structure": [
-        "Label.frame-form-inline",
+        "Label.frame-form-inline.frame-form-inline-layout",
         "  FrameControlTooltip",
         "    template",
-        "      SwitchRoot.frame-switch",
+        "      SwitchRoot.frame-switch.frame-control-focus.frame-control-disabled",
         "        SwitchThumb.frame-switch-thumb",
         "    template",
         "      slot",
@@ -9309,7 +9309,7 @@
     "packages/core/src/components/forms/FrameTagField.vue": {
       "name": "FrameTagField",
       "source": "packages/core/src/components/forms/FrameTagField.vue",
-      "sourceHash": "126584e7e77b2f1fc51265ca4bc04d6659ef77afcc3aaf89a3ae3bfd3b81d214",
+      "sourceHash": "544775d6a47adf169cc1021f9a374620394de49926ca84d61f128b649e5b3340",
       "props": [
         {
           "name": "modelValue",
@@ -9364,10 +9364,10 @@
       "slots": [],
       "methods": [],
       "structure": [
-        "TagsInputRoot.frame-tags-input",
+        "TagsInputRoot.frame-tags-input.frame-form-inline-layout.frame-input-surface.frame-input-focus-within",
         "  TagsInputItem.frame-tags-input-item",
         "    TagsInputItemText",
-        "    TagsInputItemDelete.frame-control-button",
+        "    TagsInputItemDelete.frame-control-button.frame-control-surface.frame-control-action.frame-control-focus.frame-control-disabled",
         "  TagsInputInput",
         "    FrameTextField.frame-tags-entry"
       ],
@@ -9376,7 +9376,7 @@
     "packages/core/src/components/actions/FrameToggle.vue": {
       "name": "FrameToggle",
       "source": "packages/core/src/components/actions/FrameToggle.vue",
-      "sourceHash": "d87b6baa30c06a8f32e545d8608c18e5713e3a9e75e5e2229d41852001a43703",
+      "sourceHash": "88ada121e86e8a0434a143a19bb233d05f677761aab8128c84974515412e9f8f",
       "props": [
         {
           "name": "modelValue",
@@ -9429,7 +9429,7 @@
       ],
       "methods": [],
       "structure": [
-        "Toggle.frame-toggle",
+        "Toggle.frame-toggle.frame-control-surface.frame-control-action.frame-control-focus.frame-control-disabled",
         "  slot"
       ],
       "forwardsAttrs": true
@@ -9437,7 +9437,7 @@
     "packages/core/src/components/actions/FrameToggleGroup.vue": {
       "name": "FrameToggleGroup",
       "source": "packages/core/src/components/actions/FrameToggleGroup.vue",
-      "sourceHash": "f01dc8c8c1d7403e9ef55436b6c332d5d38e592417a0eb25b87242461f88367d",
+      "sourceHash": "300e5986168ff7753ef34c76576f2303371c1e379327cce48c6c7593124da4fa",
       "props": [
         {
           "name": "modelValue",
@@ -9507,7 +9507,7 @@
       "structure": [
         "ToggleGroupRoot.frame-choice-group",
         "  template",
-        "    ToggleGroupItem.frame-choice-item",
+        "    ToggleGroupItem.frame-choice-item.frame-control-surface.frame-control-action.frame-control-focus.frame-control-disabled",
         "      span",
         "      small",
         "    div.frame-select-separator"
@@ -9517,7 +9517,7 @@
     "packages/core/src/components/forms/dates-and-times/FrameCalendar.vue": {
       "name": "FrameCalendar",
       "source": "packages/core/src/components/forms/dates-and-times/FrameCalendar.vue",
-      "sourceHash": "4d3376d0f930281eb4005628532a98f354ce2ee136e136ae0da200fb65139523",
+      "sourceHash": "663d4d14bd55cfb7413f0a851a6af353e823fb0a178d53a7ccebdf8ae8bc8c92",
       "props": [
         {
           "name": "defaultValue",
@@ -9882,7 +9882,7 @@
       ],
       "methods": [],
       "structure": [
-        "CalendarRoot.frame-calendar",
+        "CalendarRoot.frame-calendar.frame-date-text",
         "  CalendarHeader.frame-date-header",
         "    CalendarPrev.frame-date-nav",
         "    CalendarHeading.frame-date-heading",
@@ -9903,7 +9903,7 @@
     "packages/core/src/components/forms/dates-and-times/FrameRangeCalendar.vue": {
       "name": "FrameRangeCalendar",
       "source": "packages/core/src/components/forms/dates-and-times/FrameRangeCalendar.vue",
-      "sourceHash": "7cc2073ba730bc9645f549328857a149bf9a8fd4a008da0c8548a67db012f348",
+      "sourceHash": "d6fa0e912b5ab8b61678f74010167fcc9d2730b5e692945ddbdde4c78efe4fd6",
       "props": [
         {
           "name": "defaultPlaceholder",
@@ -10317,7 +10317,7 @@
       ],
       "methods": [],
       "structure": [
-        "RangeCalendarRoot.frame-calendar",
+        "RangeCalendarRoot.frame-calendar.frame-date-text",
         "  RangeCalendarHeader.frame-date-header",
         "    RangeCalendarPrev.frame-date-nav",
         "    RangeCalendarHeading.frame-date-heading",
@@ -10338,7 +10338,7 @@
     "packages/core/src/components/forms/dates-and-times/FrameDateField.vue": {
       "name": "FrameDateField",
       "source": "packages/core/src/components/forms/dates-and-times/FrameDateField.vue",
-      "sourceHash": "09d1219c83c25fedfbd57737518c1c94993c36067e3f509b739c75425faf79fe",
+      "sourceHash": "7aff2d1fa04a8576e9142f117d13eac79bafc35718a0a05829085c0e49ccc514",
       "props": [
         {
           "name": "defaultValue",
@@ -10638,7 +10638,7 @@
       "slots": [],
       "methods": [],
       "structure": [
-        "DateFieldRoot.frame-date-field",
+        "DateFieldRoot.frame-date-field.frame-input-surface.frame-input-focus-within.frame-date-text",
         "  DateFieldInput.frame-date-segment"
       ],
       "forwardsAttrs": true
@@ -10646,7 +10646,7 @@
     "packages/core/src/components/forms/dates-and-times/FrameDatePicker.vue": {
       "name": "FrameDatePicker",
       "source": "packages/core/src/components/forms/dates-and-times/FrameDatePicker.vue",
-      "sourceHash": "58550507c2fa7fb63a85615758e3635cdbbb2e7040d0f20e222409fb1fd3bce5",
+      "sourceHash": "72e3f5bcca297a9a6b3ed685b2b1a9e1b9cf86643f75b4f42efd8c383f3b9b3c",
       "props": [
         {
           "name": "dir",
@@ -11058,11 +11058,11 @@
         "DatePickerRoot",
         "  span.frame-date-picker",
         "    DatePickerAnchor",
-        "      DatePickerField.frame-date-field",
+        "      DatePickerField.frame-date-field.frame-input-surface.frame-input-focus-within.frame-date-text",
         "        DatePickerInput.frame-date-segment",
         "        DatePickerTrigger.frame-date-nav",
-        "  DatePickerContent.frame-date-popover",
-        "    DatePickerCalendar.frame-calendar",
+        "  DatePickerContent.frame-date-popover.frame-overlay-surface.frame-date-text",
+        "    DatePickerCalendar.frame-calendar.frame-date-text",
         "      DatePickerHeader.frame-date-header",
         "        DatePickerPrev.frame-date-nav",
         "        DatePickerHeading.frame-date-heading",
@@ -11083,7 +11083,7 @@
     "packages/core/src/components/forms/dates-and-times/FrameDateRangeField.vue": {
       "name": "FrameDateRangeField",
       "source": "packages/core/src/components/forms/dates-and-times/FrameDateRangeField.vue",
-      "sourceHash": "4b43dcc62e885cf215221e7b9d0e280a66f042c1981bc4afe71bc5be6edf875e",
+      "sourceHash": "9a3175c4dab1742493aac37a8619aa5fa0bc775c738e46ab00ff4414b46c1843",
       "props": [
         {
           "name": "defaultValue",
@@ -11372,7 +11372,7 @@
       "slots": [],
       "methods": [],
       "structure": [
-        "DateRangeFieldRoot.frame-date-field",
+        "DateRangeFieldRoot.frame-date-field.frame-input-surface.frame-input-focus-within.frame-date-text",
         "  DateRangeFieldInput.frame-date-segment",
         "  span.frame-date-separator",
         "  DateRangeFieldInput.frame-date-segment"
@@ -11382,7 +11382,7 @@
     "packages/core/src/components/forms/dates-and-times/FrameDateRangePicker.vue": {
       "name": "FrameDateRangePicker",
       "source": "packages/core/src/components/forms/dates-and-times/FrameDateRangePicker.vue",
-      "sourceHash": "d8bac9f432958457146c093f035dbcbd896572a64a7151e24e7975e3fb650294",
+      "sourceHash": "7605f86383d644accf51b97edea344d294ed0811cc358746234047fd4ef387bb",
       "props": [
         {
           "name": "dir",
@@ -11837,13 +11837,13 @@
         "DateRangePickerRoot",
         "  span.frame-date-picker",
         "    DateRangePickerAnchor",
-        "      DateRangePickerField.frame-date-field",
+        "      DateRangePickerField.frame-date-field.frame-input-surface.frame-input-focus-within.frame-date-text",
         "        DateRangePickerInput.frame-date-segment",
         "        span.frame-date-separator",
         "        DateRangePickerInput.frame-date-segment",
         "        DateRangePickerTrigger.frame-date-nav",
-        "  DateRangePickerContent.frame-date-popover",
-        "    DateRangePickerCalendar.frame-calendar",
+        "  DateRangePickerContent.frame-date-popover.frame-overlay-surface.frame-date-text",
+        "    DateRangePickerCalendar.frame-calendar.frame-date-text",
         "      DateRangePickerHeader.frame-date-header",
         "        DateRangePickerPrev.frame-date-nav",
         "        DateRangePickerHeading.frame-date-heading",
@@ -11864,7 +11864,7 @@
     "packages/core/src/components/forms/dates-and-times/FrameTimeField.vue": {
       "name": "FrameTimeField",
       "source": "packages/core/src/components/forms/dates-and-times/FrameTimeField.vue",
-      "sourceHash": "690559b738502e7ba14a46621a61b77522b6b9919291717f1637513bf02283b0",
+      "sourceHash": "e2d5e4532d13f83a1e90069f027d728c8e2c75d80447009d3d64c5cd6377b5b9",
       "props": [
         {
           "name": "defaultValue",
@@ -12149,7 +12149,7 @@
       "slots": [],
       "methods": [],
       "structure": [
-        "TimeFieldRoot.frame-date-field",
+        "TimeFieldRoot.frame-date-field.frame-input-surface.frame-input-focus-within.frame-date-text",
         "  TimeFieldInput.frame-date-segment"
       ],
       "forwardsAttrs": true
@@ -12157,7 +12157,7 @@
     "packages/core/src/components/forms/dates-and-times/FrameTimeRangeField.vue": {
       "name": "FrameTimeRangeField",
       "source": "packages/core/src/components/forms/dates-and-times/FrameTimeRangeField.vue",
-      "sourceHash": "eacb7c6b1739b0a6c6768b8f782f480e1430bfb915e10a8436f3405c3cd84bce",
+      "sourceHash": "0e5462cd8e43fc4e9ae5bb08a17d77fd35b956050756973199c587e1197ad51a",
       "props": [
         {
           "name": "dir",
@@ -12443,7 +12443,7 @@
       "slots": [],
       "methods": [],
       "structure": [
-        "TimeRangeFieldRoot.frame-date-field",
+        "TimeRangeFieldRoot.frame-date-field.frame-input-surface.frame-input-focus-within.frame-date-text",
         "  TimeRangeFieldInput.frame-date-segment",
         "  span.frame-date-separator",
         "  TimeRangeFieldInput.frame-date-segment"
@@ -12453,7 +12453,7 @@
     "packages/core/src/components/forms/dates-and-times/FrameMonthPicker.vue": {
       "name": "FrameMonthPicker",
       "source": "packages/core/src/components/forms/dates-and-times/FrameMonthPicker.vue",
-      "sourceHash": "07e9bb8d99f65f1ced23fea7a3ef09760270476651b4894bfd32ae73585f884f",
+      "sourceHash": "23e205c93b46dbf7e37559572cb88c357e8135cc7bd15419c3c4a6d8899709ca",
       "props": [
         {
           "name": "defaultValue",
@@ -12744,7 +12744,7 @@
       ],
       "methods": [],
       "structure": [
-        "MonthPickerRoot.frame-calendar",
+        "MonthPickerRoot.frame-calendar.frame-date-text",
         "  MonthPickerHeader.frame-date-header",
         "    MonthPickerPrev.frame-date-nav",
         "    MonthPickerHeading.frame-date-heading",
@@ -12762,7 +12762,7 @@
     "packages/core/src/components/forms/dates-and-times/FrameMonthRangePicker.vue": {
       "name": "FrameMonthRangePicker",
       "source": "packages/core/src/components/forms/dates-and-times/FrameMonthRangePicker.vue",
-      "sourceHash": "87aba40474fd9156ec569923a625451ed43061ef3895f72c921946b4c0dfc567",
+      "sourceHash": "14bf297bd1e4a845243d9b82c9447e66768c3817e5408006dcf762cbbb51da72",
       "props": [
         {
           "name": "defaultPlaceholder",
@@ -13084,7 +13084,7 @@
       ],
       "methods": [],
       "structure": [
-        "MonthRangePickerRoot.frame-calendar",
+        "MonthRangePickerRoot.frame-calendar.frame-date-text",
         "  MonthRangePickerHeader.frame-date-header",
         "    MonthRangePickerPrev.frame-date-nav",
         "    MonthRangePickerHeading.frame-date-heading",
@@ -13102,7 +13102,7 @@
     "packages/core/src/components/forms/dates-and-times/FrameYearPicker.vue": {
       "name": "FrameYearPicker",
       "source": "packages/core/src/components/forms/dates-and-times/FrameYearPicker.vue",
-      "sourceHash": "301fdf303fe8ebac17e4285d09a4f83d5b089a185730d3d658d85951f8cfc444",
+      "sourceHash": "db778837c2233745a14a709086ab1c60945c9d86b7b58d8d40ef10e763fc4c5c",
       "props": [
         {
           "name": "defaultValue",
@@ -13404,7 +13404,7 @@
       ],
       "methods": [],
       "structure": [
-        "YearPickerRoot.frame-calendar",
+        "YearPickerRoot.frame-calendar.frame-date-text",
         "  YearPickerHeader.frame-date-header",
         "    YearPickerPrev.frame-date-nav",
         "    YearPickerHeading.frame-date-heading",
@@ -13422,7 +13422,7 @@
     "packages/core/src/components/forms/dates-and-times/FrameYearRangePicker.vue": {
       "name": "FrameYearRangePicker",
       "source": "packages/core/src/components/forms/dates-and-times/FrameYearRangePicker.vue",
-      "sourceHash": "b2711ba6666d8fb07766afeb80b91ba3e3c370d5f270c268f04032af85b4ee0d",
+      "sourceHash": "1b8a1101bf64d59e691aefe6eb52966e186b5d263511d44cd6ab57a32097684a",
       "props": [
         {
           "name": "defaultPlaceholder",
@@ -13755,7 +13755,7 @@
       ],
       "methods": [],
       "structure": [
-        "YearRangePickerRoot.frame-calendar",
+        "YearRangePickerRoot.frame-calendar.frame-date-text",
         "  YearRangePickerHeader.frame-date-header",
         "    YearRangePickerPrev.frame-date-nav",
         "    YearRangePickerHeading.frame-date-heading",
@@ -13773,7 +13773,7 @@
     "packages/core/src/components/layout/FrameAccordion.vue": {
       "name": "FrameAccordion",
       "source": "packages/core/src/components/layout/FrameAccordion.vue",
-      "sourceHash": "5466bc3602764d4cc9e0452cdbabb83a86eec78f30fe4011538565569f0e0d30",
+      "sourceHash": "3b4b64a639e8e334f0e7cb0e297dc05ced7497ea2ba16de8cd48579f4f67251b",
       "props": [
         {
           "name": "items",
@@ -13964,15 +13964,15 @@
       ],
       "methods": [],
       "structure": [
-        "AccordionRoot.frame-accordion",
+        "AccordionRoot.frame-accordion.frame-layout-text",
         "  slot",
         "    AccordionItem.frame-accordion-item",
         "      AccordionHeader.frame-accordion-header",
-        "        AccordionTrigger.frame-accordion-trigger",
+        "        AccordionTrigger.frame-accordion-trigger.frame-disclosure-trigger.frame-layout-focus.frame-layout-disabled",
         "          slot",
         "          FrameIcon.frame-accordion-chevron",
         "      AccordionContent.frame-accordion-content",
-        "        div.frame-accordion-body",
+        "        div.frame-accordion-body.frame-disclosure-content",
         "          slot"
       ],
       "forwardsAttrs": true
@@ -13980,7 +13980,7 @@
     "packages/core/src/components/layout/FrameAspectRatio.vue": {
       "name": "FrameAspectRatio",
       "source": "packages/core/src/components/layout/FrameAspectRatio.vue",
-      "sourceHash": "733ab40386475d5e659ed01120c1af2ab74a1341d2890f1467e4d0695d14d7aa",
+      "sourceHash": "16373baebaaf86e850faba1556508daa647be12257bc321b0ea9343b3191c2e0",
       "props": [
         {
           "name": "ratio",
@@ -14056,7 +14056,7 @@
     "packages/core/src/components/data-display/FrameAvatar.vue": {
       "name": "FrameAvatar",
       "source": "packages/core/src/components/data-display/FrameAvatar.vue",
-      "sourceHash": "56cfbe4a0b222740dbaf3172b042ea0e96eee628cf8ad5bf38cf20ce69993395",
+      "sourceHash": "b9c999375d0a99adfbe74f49f1f205eebedb8060b7a8d5690a3401107ce26e6e",
       "props": [
         {
           "name": "src",
@@ -14200,7 +14200,7 @@
       ],
       "methods": [],
       "structure": [
-        "AvatarRoot.frame-avatar",
+        "AvatarRoot.frame-avatar.frame-layout-text",
         "  AvatarImage.frame-avatar-image",
         "  AvatarFallback.frame-avatar-fallback",
         "    slot"
@@ -14210,7 +14210,7 @@
     "packages/core/src/components/layout/FrameCollapsible.vue": {
       "name": "FrameCollapsible",
       "source": "packages/core/src/components/layout/FrameCollapsible.vue",
-      "sourceHash": "96c224ec672eb706a1d9f9fb1ba39343e5e53bcca6313ff03815115d9f753315",
+      "sourceHash": "464e3c3836b47c303144d941cd3a877e2049b6bc34b378b5215a17918015b6b8",
       "props": [
         {
           "name": "label",
@@ -14333,11 +14333,11 @@
       ],
       "methods": [],
       "structure": [
-        "CollapsibleRoot.frame-collapsible",
-        "  CollapsibleTrigger.frame-collapsible-trigger",
+        "CollapsibleRoot.frame-collapsible.frame-layout-text",
+        "  CollapsibleTrigger.frame-collapsible-trigger.frame-disclosure-trigger.frame-layout-focus.frame-layout-disabled",
         "    slot",
         "      FrameIcon",
-        "  CollapsibleContent.frame-collapsible-content",
+        "  CollapsibleContent.frame-collapsible-content.frame-disclosure-content",
         "    slot"
       ],
       "forwardsAttrs": true
@@ -14345,7 +14345,7 @@
     "packages/core/src/components/navigation/FramePagination.vue": {
       "name": "FramePagination",
       "source": "packages/core/src/components/navigation/FramePagination.vue",
-      "sourceHash": "74c4f3c405f66b89fc280895de1cc2039685c640a9819526cd63ac50418ba015",
+      "sourceHash": "f4ec12b1268f34ef8cfeaf7f83b8c27834824dcffdb16f1e0c532f813b823531",
       "props": [
         {
           "name": "page",
@@ -14484,20 +14484,20 @@
       ],
       "methods": [],
       "structure": [
-        "PaginationRoot.frame-pagination",
+        "PaginationRoot.frame-pagination.frame-layout-text",
         "  slot",
         "    PaginationList.frame-pagination-list",
-        "      PaginationFirst.frame-pagination-button",
+        "      PaginationFirst.frame-pagination-button.frame-layout-focus.frame-layout-disabled",
         "        FrameIcon",
         "        FrameIcon",
-        "      PaginationPrev.frame-pagination-button",
+        "      PaginationPrev.frame-pagination-button.frame-layout-focus.frame-layout-disabled",
         "        FrameIcon",
         "      template",
-        "        PaginationListItem.frame-pagination-button",
+        "        PaginationListItem.frame-pagination-button.frame-layout-focus.frame-layout-disabled",
         "        PaginationEllipsis.frame-pagination-ellipsis",
-        "      PaginationNext.frame-pagination-button",
+        "      PaginationNext.frame-pagination-button.frame-layout-focus.frame-layout-disabled",
         "        FrameIcon",
-        "      PaginationLast.frame-pagination-button",
+        "      PaginationLast.frame-pagination-button.frame-layout-focus.frame-layout-disabled",
         "        FrameIcon",
         "        FrameIcon"
       ],
@@ -14506,7 +14506,7 @@
     "packages/core/src/components/feedback/FrameProgress.vue": {
       "name": "FrameProgress",
       "source": "packages/core/src/components/feedback/FrameProgress.vue",
-      "sourceHash": "19ff77fa91daa502c054795a7620e5e0bd107a236c1be4acbb86a49df7a3610e",
+      "sourceHash": "bd0d48f93fee5d21fd46ece463048daa595a0f18816dff22e76b885c280aa044",
       "props": [
         {
           "name": "modelValue",
@@ -14627,7 +14627,7 @@
     "packages/core/src/components/layout/FrameScrollArea.vue": {
       "name": "FrameScrollArea",
       "source": "packages/core/src/components/layout/FrameScrollArea.vue",
-      "sourceHash": "1fab3ad873a3b072ca13619218a23e31b95e99d3a21bca370ab14a8313d92ece",
+      "sourceHash": "17dac4d465a4c57d61ddab1e08e076395f46a27b49a342be012e3894e259fd3b",
       "props": [
         {
           "name": "orientation",
@@ -14757,8 +14757,8 @@
       ],
       "methods": [],
       "structure": [
-        "ScrollAreaRoot.frame-scroll-area",
-        "  ScrollAreaViewport.frame-scroll-area-viewport",
+        "ScrollAreaRoot.frame-scroll-area.frame-layout-text",
+        "  ScrollAreaViewport.frame-scroll-area-viewport.frame-layout-focus",
         "    slot",
         "  ScrollAreaScrollbar.frame-scroll-area-scrollbar",
         "    ScrollAreaThumb.frame-scroll-area-thumb",
@@ -14771,7 +14771,7 @@
     "packages/core/src/components/layout/FrameSeparator.vue": {
       "name": "FrameSeparator",
       "source": "packages/core/src/components/layout/FrameSeparator.vue",
-      "sourceHash": "8108e0ff76c7a30faa7fe303b6588ae3623a23eaa72dbb5de1eab1fbf5616bdc",
+      "sourceHash": "8a299394dc5dde905b970e5307d68ee738b80ca21763059a50d3a75493dc5fc1",
       "props": [
         {
           "name": "orientation",
@@ -14863,7 +14863,7 @@
     "packages/core/src/components/navigation/FrameTabs.vue": {
       "name": "FrameTabs",
       "source": "packages/core/src/components/navigation/FrameTabs.vue",
-      "sourceHash": "c8c7349d841f4f61c07ef98ef7dbd60e993d4d4a8cf363843e5ffe80a1dcf313",
+      "sourceHash": "2e0f178ed3730cced676a3e4659ab3fa1eceade1769854ed568c0aff1fd4e979",
       "props": [
         {
           "name": "defaultValue",
@@ -15044,7 +15044,7 @@
       ],
       "methods": [],
       "structure": [
-        "TabsRoot.frame-tabs",
+        "TabsRoot.frame-tabs.frame-navigation-text",
         "  slot",
         "    TabsList.frame-tabs-list",
         "      TabsTrigger.frame-tabs-trigger",
@@ -15058,7 +15058,7 @@
     "packages/core/src/components/navigation/FrameStepper.vue": {
       "name": "FrameStepper",
       "source": "packages/core/src/components/navigation/FrameStepper.vue",
-      "sourceHash": "6c9e0cf8b3b9dc6b53ad2a814b7534bef932f049607ba2314e6771b53dc353db",
+      "sourceHash": "80a889b88d69dc3d3a043eb75735da4826861c53ddb2e63317415da91655c722",
       "props": [
         {
           "name": "defaultValue",
@@ -15209,10 +15209,10 @@
       ],
       "methods": [],
       "structure": [
-        "StepperRoot.frame-stepper",
+        "StepperRoot.frame-stepper.frame-navigation-text",
         "  slot",
         "    StepperItem.frame-stepper-item",
-        "      StepperTrigger.frame-stepper-trigger",
+        "      StepperTrigger.frame-stepper-trigger.frame-navigation-focus",
         "        StepperIndicator.frame-stepper-indicator",
         "          FrameIcon",
         "          template",
@@ -15226,7 +15226,7 @@
     "packages/core/src/components/actions/FrameToolbar.vue": {
       "name": "FrameToolbar",
       "source": "packages/core/src/components/actions/FrameToolbar.vue",
-      "sourceHash": "7f0183fe79c7e2a923481bd9bedbf182820f5985e7743e0dfae00b791316f19d",
+      "sourceHash": "77175cc395488fa459136f3ced2097a0edefbe3ec47f2c66ec0395f37e3deedd",
       "props": [
         {
           "name": "orientation",
@@ -15356,13 +15356,13 @@
       ],
       "methods": [],
       "structure": [
-        "ToolbarRoot.frame-toolbar",
+        "ToolbarRoot.frame-toolbar.frame-navigation-text.frame-navigation-list-layout",
         "  slot",
         "    template",
         "      ToolbarSeparator.frame-toolbar-separator",
-        "      ToolbarLink.frame-toolbar-button",
+        "      ToolbarLink.frame-toolbar-button.frame-navigation-control.frame-navigation-focus",
         "        FrameIcon",
-        "      ToolbarButton.frame-toolbar-button",
+        "      ToolbarButton.frame-toolbar-button.frame-navigation-control.frame-navigation-focus",
         "        FrameIcon"
       ],
       "forwardsAttrs": true
@@ -15370,7 +15370,7 @@
     "packages/core/src/components/data-display/FrameTree.vue": {
       "name": "FrameTree",
       "source": "packages/core/src/components/data-display/FrameTree.vue",
-      "sourceHash": "fcf108b4c4b47769f1497ca9b1ebc5666ce36650e5331867598351e48068dcad",
+      "sourceHash": "254411db3c2273926e4449339fdbeada552aab35ce17b7310da002c491ff345b",
       "props": [
         {
           "name": "dir",
@@ -15623,9 +15623,9 @@
       ],
       "methods": [],
       "structure": [
-        "TreeRoot.frame-tree",
+        "TreeRoot.frame-tree.frame-navigation-text",
         "  slot",
-        "    TreeItem.frame-tree-item",
+        "    TreeItem.frame-tree-item.frame-navigation-focus",
         "      slot",
         "        FrameIcon",
         "        span.frame-tree-indent",
@@ -15637,7 +15637,7 @@
     "packages/core/src/components/layout/FrameSplitter.vue": {
       "name": "FrameSplitter",
       "source": "packages/core/src/components/layout/FrameSplitter.vue",
-      "sourceHash": "b146dc4e4c65ea4caa54b0a399fdb12be60a397125155df178db2ef17cadac43",
+      "sourceHash": "f101bafdbb0572da7c5612e7b317c7295eb3f339e80e673498e14d18422cd903",
       "props": [
         {
           "name": "id",
@@ -15787,10 +15787,10 @@
       ],
       "methods": [],
       "structure": [
-        "SplitterGroup.frame-splitter",
+        "SplitterGroup.frame-splitter.frame-navigation-text",
         "  slot",
         "    template",
-        "      SplitterResizeHandle.frame-splitter-handle",
+        "      SplitterResizeHandle.frame-splitter-handle.frame-navigation-focus",
         "      SplitterPanel.frame-splitter-panel",
         "        slot"
       ],
@@ -15799,7 +15799,7 @@
     "packages/core/src/components/navigation/FrameNavigationMenu.vue": {
       "name": "FrameNavigationMenu",
       "source": "packages/core/src/components/navigation/FrameNavigationMenu.vue",
-      "sourceHash": "36af3613f2b6d88ff057fb7977ab60966d095e6d15a38c265af842963b2ae2e6",
+      "sourceHash": "438d474eea52bba0b73e1f17e1bbc21b42507e116d181e9ec78f2e833adb7f56",
       "props": [
         {
           "name": "modelValue",
@@ -16010,24 +16010,24 @@
       ],
       "methods": [],
       "structure": [
-        "NavigationMenuRoot.frame-navigation-menu",
+        "NavigationMenuRoot.frame-navigation-menu.frame-navigation-text",
         "  slot",
-        "    NavigationMenuList.frame-navigation-list",
+        "    NavigationMenuList.frame-navigation-list.frame-navigation-list-layout",
         "      NavigationMenuItem.frame-navigation-item",
         "        template",
-        "          NavigationMenuTrigger.frame-navigation-trigger",
+        "          NavigationMenuTrigger.frame-navigation-trigger.frame-navigation-control.frame-navigation-focus",
         "            FrameIcon",
-        "          NavigationMenuContent.frame-navigation-content",
+        "          NavigationMenuContent.frame-navigation-content.frame-navigation-surface.frame-overlay-surface",
         "            slot",
-        "              NavigationMenuLink.frame-navigation-link",
-        "        NavigationMenuLink.frame-navigation-link"
+        "              NavigationMenuLink.frame-navigation-link.frame-navigation-control.frame-navigation-focus",
+        "        NavigationMenuLink.frame-navigation-link.frame-navigation-control.frame-navigation-focus"
       ],
       "forwardsAttrs": true
     },
     "packages/core/src/components/navigation/FrameMenubar.vue": {
       "name": "FrameMenubar",
       "source": "packages/core/src/components/navigation/FrameMenubar.vue",
-      "sourceHash": "75446bb02171d1b00e50874e4fb4185c2de9ea5e1fad9b8c592ae3e5e9dc0823",
+      "sourceHash": "bf8991dc5842f84cb0a49fcadbe74d39348113dc68fe0c4f828aaf0799bf20fa",
       "props": [
         {
           "name": "modelValue",
@@ -16178,14 +16178,14 @@
       ],
       "methods": [],
       "structure": [
-        "MenubarRoot.frame-menubar",
+        "MenubarRoot.frame-menubar.frame-navigation-text.frame-navigation-list-layout.frame-shell-label",
         "  slot",
         "    div.menubar-groups",
         "      MenubarEntry",
         "        template",
         "          slot",
         "    MenubarEntry.menubar-overflow",
-        "  div.menubar-measure.menubar-groups",
+        "  div.menubar-measure.menubar-groups.frame-menu-measure",
         "    button",
         "    button"
       ],
@@ -16194,7 +16194,7 @@
     "packages/core/src/components/overlays/FrameDialog.vue": {
       "name": "FrameDialog",
       "source": "packages/core/src/components/overlays/FrameDialog.vue",
-      "sourceHash": "a906b92681d64c01d545261911d77b8a38cd2768dba74d296cd8afb880d7ea38",
+      "sourceHash": "5acdfbdeac57398c9831919006178c72a1d7cd530608c55f0058014f15bf3491",
       "props": [
         {
           "name": "title",
@@ -16394,7 +16394,7 @@
         "  DialogPortal",
         "    DialogOverlay.frame-general-backdrop",
         "    div.frame-general-layer",
-        "      DialogContent.frame-general-dialog.frame-advanced-popup",
+        "      DialogContent.frame-general-dialog.frame-advanced-popup.frame-general-surface.frame-overlay-surface",
         "        DialogTitle.frame-general-title",
         "        DialogDescription.frame-general-description",
         "        slot",
@@ -16407,7 +16407,7 @@
     "packages/core/src/components/overlays/FrameAlertDialog.vue": {
       "name": "FrameAlertDialog",
       "source": "packages/core/src/components/overlays/FrameAlertDialog.vue",
-      "sourceHash": "dd26b422220ac4c17922d94c4541d0c03dc3119aa0f797ca0eae62f1cad09f07",
+      "sourceHash": "de84fdbb61d225089283015b586989b41e77498797fc309677658d69badc06a9",
       "props": [
         {
           "name": "title",
@@ -16575,7 +16575,7 @@
         "  AlertDialogPortal",
         "    AlertDialogOverlay.frame-general-backdrop",
         "    div.frame-general-layer",
-        "      AlertDialogContent.frame-general-dialog.frame-advanced-popup",
+        "      AlertDialogContent.frame-general-dialog.frame-advanced-popup.frame-general-surface.frame-overlay-surface",
         "        AlertDialogTitle.frame-general-title",
         "        AlertDialogDescription.frame-general-description",
         "        slot",
@@ -16589,7 +16589,7 @@
     "packages/core/src/components/overlays/FrameDrawer.vue": {
       "name": "FrameDrawer",
       "source": "packages/core/src/components/overlays/FrameDrawer.vue",
-      "sourceHash": "88abe1bafa1a75430c1ea13c220bd9e2043f93a2e5eaadfa1f6a8b3bc54ca8ad",
+      "sourceHash": "74e4e6e60e4e0cf2d1781073a9ef990c9fe948de1aef9cc5570652ecced3d162",
       "props": [
         {
           "name": "title",
@@ -16839,7 +16839,7 @@
         "  DrawerPortal",
         "    DrawerOverlay.frame-general-backdrop",
         "    div.frame-general-layer.frame-general-drawer-layer",
-        "      DrawerContent.frame-general-dialog.frame-advanced-popup.frame-general-drawer",
+        "      DrawerContent.frame-general-dialog.frame-advanced-popup.frame-general-drawer.frame-general-surface.frame-overlay-surface",
         "        DrawerTitle.frame-general-title",
         "        DrawerDescription.frame-general-description",
         "        slot",
@@ -16852,7 +16852,7 @@
     "packages/core/src/components/overlays/FramePopover.vue": {
       "name": "FramePopover",
       "source": "packages/core/src/components/overlays/FramePopover.vue",
-      "sourceHash": "cf9e523bb21bf2daf45c276a109fecc30018156f4105d388b72586268c772dbf",
+      "sourceHash": "642ff2100b1bf8b4027e737b82e7ce64d210c564a3a1db36fb45888efbcd4f75",
       "props": [
         {
           "name": "triggerLabel",
@@ -16981,7 +16981,7 @@
         "      slot",
         "        button.frame-general-button",
         "  PopoverPortal",
-        "    PopoverContent.frame-general-popup.frame-advanced-popup",
+        "    PopoverContent.frame-general-popup.frame-advanced-popup.frame-general-surface.frame-overlay-surface",
         "      slot",
         "      PopoverClose.frame-general-button",
         "        slot",
@@ -16992,7 +16992,7 @@
     "packages/core/src/components/overlays/FrameHoverCard.vue": {
       "name": "FrameHoverCard",
       "source": "packages/core/src/components/overlays/FrameHoverCard.vue",
-      "sourceHash": "375904914ec65d6554e5b9cb39db45c9a635b366834960e37acb5b8385c3e43c",
+      "sourceHash": "72982788347c74dd227013cee22b67cc70edd9f3236018ea863ea4ef4861e095",
       "props": [
         {
           "name": "triggerLabel",
@@ -17101,7 +17101,7 @@
         "      slot",
         "        button.frame-general-button",
         "  HoverCardPortal",
-        "    HoverCardContent.frame-general-popup.frame-advanced-popup",
+        "    HoverCardContent.frame-general-popup.frame-advanced-popup.frame-general-surface.frame-overlay-surface",
         "      slot",
         "      HoverCardArrow.frame-general-arrow"
       ],
@@ -17110,7 +17110,7 @@
     "packages/core/src/components/navigation/FrameContextMenu.vue": {
       "name": "FrameContextMenu",
       "source": "packages/core/src/components/navigation/FrameContextMenu.vue",
-      "sourceHash": "5020442957e89dc545b7cb11798fd92ce49bcfe9c890d29dd22f243c8603455a",
+      "sourceHash": "655dc3febbc06e805a383bab0674346f5eb5c838134477af76b87b9ee8970668",
       "props": [
         {
           "name": "pressOpenDelay",
@@ -17182,7 +17182,7 @@
         },
         {
           "name": "itemAlignment",
-          "type": "\"left\" | \"center\" | \"right\"",
+          "type": "'left' | 'center' | 'right'",
           "default": {
             "kind": "omitted"
           },
@@ -17207,7 +17207,7 @@
         },
         {
           "name": "point",
-          "type": "{x:number;y:number}",
+          "type": "{x: number; y: number}",
           "default": {
             "kind": "omitted"
           },
@@ -17217,7 +17217,7 @@
         },
         {
           "name": "placement",
-          "type": "\"bottom\"|\"right\"",
+          "type": "'bottom' | 'right'",
           "default": {
             "kind": "omitted"
           },
@@ -17353,7 +17353,7 @@
         "      slot",
         "        button.frame-general-button",
         "  ContextMenuPortal",
-        "    ContextMenuContent.frame-menu",
+        "    ContextMenuContent.frame-menu.frame-overlay-surface.frame-overlay-interactive.frame-box-scope.frame-control-scope.frame-shell-text.frame-scroll-scope",
         "      slot",
         "      MenuList",
         "        template",
@@ -17367,7 +17367,7 @@
     "packages/core/src/components/feedback/FrameToast.vue": {
       "name": "FrameToast",
       "source": "packages/core/src/components/feedback/FrameToast.vue",
-      "sourceHash": "8d78631c66651efe8480e96c7158ac59233376d5892dcf91ccaf7b5f43034ed0",
+      "sourceHash": "0c51947da9a26dce257820268e00e322acc6e11bef5514cd567cd1848ccd4537",
       "props": [
         {
           "name": "title",
@@ -17602,7 +17602,7 @@
         "ToastProvider",
         "  ToastPortal",
         "    div.frame-general-toast-layer",
-        "      ToastRoot.frame-general-toast",
+        "      ToastRoot.frame-general-toast.frame-general-surface.frame-overlay-surface",
         "        ToastTitle.frame-general-title",
         "        ToastDescription.frame-general-description",
         "        slot",

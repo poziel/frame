@@ -59,7 +59,7 @@ const searchInput = ref<HTMLInputElement>();
     >
   </div>
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .settings-presentation {
   display: flex;
   flex-direction: column;

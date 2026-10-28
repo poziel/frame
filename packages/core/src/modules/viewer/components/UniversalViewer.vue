@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '../styles/index.css';
+import '../styles/index.scss';
 import {
   DialogRoot,
   DialogPortal,
@@ -35,7 +35,7 @@ const emit = defineEmits<{
         :aria-describedby="undefined"
         @interact-outside.prevent
       >
-        <header class="frame-viewer-header">
+        <header class="frame-viewer-header frame-viewer-control-row">
           <DialogTitle class="frame-viewer-title">{{
             file ? viewerFileName(file) : 'Document viewer'
           }}</DialogTitle>
@@ -55,3 +55,46 @@ const emit = defineEmits<{
     </DialogPortal>
   </DialogRoot>
 </template>
+
+<style lang="scss">
+.frame-viewer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--frame-viewer-z-index, 1000);
+  background: var(--frame-viewer-backdrop, rgb(0 0 0 / 80%));
+  backdrop-filter: blur(var(--frame-viewer-blur, 10px));
+}
+
+.frame-viewer-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: var(--frame-viewer-z-index, 1000);
+  display: flex;
+  flex-direction: column;
+  padding: var(--frame-content-padding, 12px);
+  color: var(--frame-text);
+  font: var(--frame-font-size-body, 12px) var(--frame-font-body, sans-serif);
+}
+
+.frame-viewer-header {
+  flex: none;
+  justify-content: space-between;
+  margin-bottom: var(--frame-gap, 6px);
+}
+
+.frame-viewer-title {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  flex: 1;
+}
+
+.frame-viewer-close {
+  font-size: 24px;
+  line-height: 1;
+}
+</style>

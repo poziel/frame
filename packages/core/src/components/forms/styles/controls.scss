@@ -1,0 +1,315 @@
+@use './input-surfaces';
+/* Standalone controls share the shell theme without requiring a Frame instance. */
+.frame-form-inline-layout {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--frame-gap, 6px);
+}
+.frame-control-surface {
+  font: inherit;
+  color: var(--frame-text, #ccc);
+  background: var(--frame-surface, #242424);
+  border: 1px solid var(--frame-line, #454545);
+  border-radius: var(--frame-control-radius, var(--frame-radius-medium));
+  padding: var(--frame-control-padding-y, 5px)
+    var(--frame-control-padding-x, 10px);
+}
+.frame-form-input {
+  border-radius: var(--frame-form-input-radius, var(--frame-input-radius));
+  min-width: 0;
+  box-sizing: border-box;
+  color: var(--frame-control-text, #d4d4d4);
+  background: var(--frame-control-background, #1d1d1d);
+  border-color: var(--frame-control-border, #3c4246);
+}
+.frame-control-action {
+  cursor: pointer;
+}
+.frame-control-focus:focus-visible {
+  outline: 1px solid var(--frame-accent, #0078d4);
+  outline-offset: 2px;
+}
+.frame-control-disabled[data-disabled] {
+  opacity: 0.45;
+  cursor: default;
+}
+.frame-check-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  padding: 0;
+  line-height: 1;
+}
+.frame-check-control[data-state='checked'] {
+  background: var(--frame-accent, #0078d4);
+  border-color: var(--frame-accent, #0078d4);
+  color: var(--frame-accent-foreground, #fff);
+}
+.frame-check-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-check-indicator svg {
+  stroke: currentColor;
+  stroke-width: 0.65;
+  stroke-linejoin: round;
+}
+.frame-choice-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--frame-gap, 6px);
+}
+.frame-choice-group > [role='listbox'],
+.frame-choice-group > [data-reka-listbox-content] {
+  display: flex;
+  flex-direction: column;
+}
+.frame-choice-item {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-gap, 6px);
+  text-align: left;
+}
+.frame-choice-item[data-state='on'],
+.frame-choice-item[data-state='checked'],
+.frame-choice-item[data-highlighted],
+.frame-toggle[data-state='on'] {
+  background: var(--frame-accent, #0078d4);
+}
+.frame-choice-item small {
+  color: var(--frame-muted, #999);
+}
+.frame-number-field > .frame-form-input {
+  width: 7em;
+  text-align: center;
+}
+.frame-select-popup.frame-reka-select-popup {
+  position: relative;
+  min-width: var(
+    --reka-select-trigger-width,
+    var(--reka-combobox-trigger-width, 160px)
+  );
+  max-height: var(--reka-select-content-available-height, 320px);
+  pointer-events: auto;
+  font: inherit;
+  color: var(--frame-text, #ccc);
+  background: var(--frame-overlay-background);
+  border-color: var(--frame-line, #454545);
+  border-radius: var(--frame-control-radius, var(--frame-radius-medium));
+  box-shadow: var(--frame-overlay-shadow, 0 6px 18px #0005);
+}
+.frame-select-options .frame-reka-select-item {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-gap, 6px);
+  padding: 4px 8px;
+  min-height: 24px;
+  outline: none;
+  cursor: pointer;
+}
+.frame-select-options .frame-reka-select-item[data-highlighted] {
+  background: var(--frame-accent, #0078d4);
+  color: var(--frame-text, #fff);
+}
+.frame-select-options .frame-reka-select-item[data-disabled] {
+  opacity: 0.4;
+  cursor: default;
+}
+.frame-select-separator {
+  height: 1px;
+  margin: 5px 0;
+  background: var(--frame-line, #454545);
+}
+/* Keep browser constraint validation while the visible Reka control owns focus. */
+.frame-control-validation {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+}
+
+/* One themed surface for the number input and its optional attached controls. */
+.frame-number-field {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0;
+  box-sizing: border-box;
+  min-width: 0;
+  height: 30px;
+  border: 1px solid var(--frame-control-border, var(--frame-line));
+  border-radius: var(--frame-input-radius);
+  background: var(--frame-control-background, var(--frame-surface));
+  color: var(--frame-control-text, var(--frame-text));
+}
+.frame-number-field > .frame-form-input {
+  width: 7em;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: right;
+  outline: none;
+  padding: 2px 6px;
+}
+.frame-number-field .frame-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 26px;
+  min-width: 0;
+  width: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+}
+.frame-number-field > .frame-control-button:first-child {
+  border-right: 1px solid var(--frame-control-border, var(--frame-line));
+  border-radius: inherit;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.frame-number-field > .frame-control-button:last-child {
+  border-left: 1px solid var(--frame-control-border, var(--frame-line));
+  border-radius: inherit;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.frame-number-field .frame-control-button:hover:not([data-disabled]) {
+  background: var(--frame-menu-hover, var(--frame-line));
+}
+.frame-number-field .frame-control-button:focus-visible {
+  outline: 1px solid var(--frame-accent);
+  outline-offset: -2px;
+}
+.frame-number-field[data-size='compact'] {
+  height: 24px;
+}
+.frame-number-field[data-size='compact'] .frame-control-button {
+  flex-basis: 18px;
+  width: 18px;
+}
+.frame-number-field[data-size='compact'] > .frame-form-input {
+  padding: 1px 4px;
+  font-size: inherit;
+}
+.frame-number-steppers {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 22px;
+  border-left: 1px solid var(--frame-control-border, var(--frame-line));
+}
+.frame-number-field .frame-number-steppers > .frame-control-button {
+  flex: 1 1 0;
+  width: 100%;
+  min-height: 0;
+}
+.frame-number-steppers > .frame-control-button + .frame-control-button {
+  border-top: 1px solid var(--frame-control-border, var(--frame-line));
+}
+.frame-number-field[data-size='compact'] .frame-number-steppers {
+  flex-basis: 16px;
+}
+.frame-number-field[data-disabled] {
+  opacity: 0.45;
+}
+.frame-number-field[data-disabled] .frame-control-button {
+  opacity: 1;
+  cursor: default;
+}
+
+.frame-input-group-control
+  > :is(
+    .frame-text-input,
+    .frame-number-field,
+    .frame-date-field,
+    .frame-combobox-anchor,
+    .frame-select,
+    .frame-text-area
+  ) {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
+
+/* Select and combobox popups share viewport, option and separator presentation. */
+.frame-select-popup {
+  position: fixed;
+  z-index: 125;
+  display: flex;
+  flex-direction: column;
+  color: var(--frame-select-popup-color, #d4d4d4);
+  background: var(
+    --frame-select-popup-background,
+    var(--frame-overlay-background)
+  );
+  border: var(
+    --frame-select-popup-border,
+    1px solid var(--frame-select-border-color, #454545)
+  );
+  border-radius: var(
+    --frame-select-popup-border-radius,
+    var(--frame-radius-small)
+  );
+  box-shadow: var(--frame-select-popup-box-shadow, 0 6px 18px #0005);
+  font: var(--frame-select-popup-font, 12px system-ui, sans-serif);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.frame-select-options {
+  overflow: auto;
+  min-height: var(--frame-select-options-min-height, 0);
+  scrollbar-width: none;
+}
+.frame-select-options > div {
+  display: flex;
+  gap: var(--frame-select-options-div-gap, 8px);
+  align-items: center;
+  padding: var(--frame-select-options-div-padding, 4px 8px);
+  cursor: pointer;
+  min-height: var(--frame-select-options-div-min-height, 24px);
+  box-sizing: border-box;
+}
+.frame-select-options .active:not(.disabled) {
+  background: var(
+    --frame-select-options-active-not-disabled-background,
+    #087caa
+  );
+  color: var(--frame-select-options-active-not-disabled-color, white);
+}
+.frame-select-options .disabled {
+  opacity: var(--frame-select-options-disabled-opacity, 0.4);
+  cursor: default;
+}
+.frame-select-options small {
+  color: var(--frame-select-options-small-color, #999);
+  font-size: var(--frame-select-options-small-font-size, 11px);
+}
+.frame-select-options .active small {
+  color: inherit;
+}
+
+.frame-select-options > .frame-select-separator {
+  padding: var(--frame-select-options-frame-select-separator-padding, 0);
+  min-height: var(
+    --frame-select-options-frame-select-separator-min-height,
+    1px
+  );
+  height: var(--frame-select-options-frame-select-separator-height, 1px);
+  margin: var(--frame-select-options-frame-select-separator-margin, 5px 0);
+  background: var(--frame-line, #3c4246);
+  cursor: default;
+}

@@ -9,7 +9,7 @@ and in memory. The factory and component exports remain available at that entry.
 | `integrations/notificationHistoryBindings.ts` | Toolbar/status registrations, indicator placement, badges, and cleanup                |
 | `types/notificationHistoryTypes.ts`           | Shared options, state, retained entry, and indicator location contracts               |
 | `components/`                                 | History panel and standalone indicator rendering                                      |
-| `styles/index.css`                            | History and indicator presentation styles                                             |
+| `components/NotificationPanel.vue`            | History and indicator presentation styles                                             |
 
 ## State and lifecycle ownership
 

@@ -1,0 +1,23 @@
+.layout-grid.primary-right .primary-region.edge-regions > .view-bar {
+  border: 1px solid var(--frame-line);
+}
+
+.layout-grid > .primary-region {
+  pointer-events: none;
+}
+.layout-grid .primary-region > .view-bar,
+.layout-grid .primary-region > .side-panel {
+  pointer-events: auto;
+}
+.layout-grid .primary-region.without-rail > .side-panel {
+  border-radius: var(
+    --frame-layout-grid-primary-region-without-rail-side-panel-border-radius,
+    var(--frame-radius-large)
+  );
+}
+.compact .layout-grid .primary-region.without-rail > .side-panel {
+  border-radius: var(
+    --frame-compact-layout-grid-primary-region-without-rail-side-panel-border-radius,
+    0
+  );
+}

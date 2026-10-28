@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '../styles/index.css';
+import '../styles/index.scss';
 import {computed, nextTick, ref, useId} from 'vue';
 import {
   FrameButton,
@@ -203,3 +203,92 @@ function send(value: {text: string; attachments: ChatAttachment[]}) {
     </FrameDialog>
   </section>
 </template>
+
+<style lang="scss">
+.frame-chat-history {
+  padding: var(--frame-ai-history-padding, 12px);
+  font-size: var(--frame-font-size, 13px);
+}
+
+.frame-chat-history ul {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+
+.frame-chat-history li {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.frame-chat-history li > .frame-button {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  justify-content: flex-start;
+}
+
+.frame-chat-history-empty {
+  color: var(--frame-muted);
+  line-height: 1.6;
+}
+
+.frame-ai-history {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+}
+
+.frame-ai-history > .frame-chat-history {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+}
+
+.frame-ai-history-prompt {
+  flex: none;
+  min-width: 0;
+  padding: var(--frame-ai-history-prompt-padding, 12px);
+}
+
+.frame-ai-history-footer {
+  flex: none;
+  padding: var(--frame-ai-history-footer-padding, 0 12px);
+}
+
+.frame-ai-history-footer .frame-ai-history-archive {
+  color: var(--frame-muted);
+  font-size: var(--frame-ai-history-archive-font-size, 11px);
+}
+
+.frame-chat-history li > .frame-general-anchor {
+  display: block;
+  min-width: 0;
+  width: 100%;
+}
+
+.frame-chat-history .frame-chat-history-row {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-ai-history-row-gap, 6px);
+  width: 100%;
+  min-width: 0;
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.frame-chat-history-row > span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.frame-chat-history-row[aria-current='page'] {
+  background: var(--frame-list-selection-background, #ffffff12);
+}
+</style>

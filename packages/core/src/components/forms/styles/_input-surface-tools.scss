@@ -1,0 +1,31 @@
+// Bind a text surface to its component overrides and shared runtime defaults.
+@mixin text-surface-variables($prefix) {
+  --_frame-input-border: var(
+    --frame-#{$prefix}-border,
+    var(--frame-input-border, 1px solid var(--frame-control-border))
+  );
+  --_frame-input-border-radius: var(
+    --frame-#{$prefix}-border-radius,
+    var(--frame-input-radius)
+  );
+  --_frame-input-hover-border: var(
+    --frame-#{$prefix}-hover-border,
+    var(--frame-input-hover-border, 1px solid var(--frame-control-border))
+  );
+  --_frame-input-hover-outline: var(
+    --frame-#{$prefix}-hover-outline,
+    var(--frame-input-hover-outline, none)
+  );
+  --_frame-input-focus-border: var(
+    --frame-#{$prefix}-focus-border,
+    var(--frame-input-focus-border, 1px solid var(--frame-accent))
+  );
+  --_frame-input-focus-outline: var(
+    --frame-#{$prefix}-focus-outline,
+    var(--frame-input-focus-outline, 1px solid var(--frame-accent))
+  );
+  --_frame-input-outline-offset: var(
+    --frame-#{$prefix}-outline-offset,
+    var(--frame-input-outline-offset, 0px)
+  );
+}

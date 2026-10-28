@@ -4,7 +4,7 @@ import {TreeRoot, TreeItem, useForwardPropsEmits} from 'reka-ui';
 import type {TreeRootProps, TreeRootEmits} from 'reka-ui';
 import type {FrameTreeItem} from './treeTypes';
 import FrameIcon from './FrameIcon.vue';
-import '../shared/general-b.css';
+import '../navigation/styles/navigation.scss';
 
 const props = defineProps<
   Omit<TreeRootProps<FrameTreeItem, FrameTreeItem, boolean>, 'getKey'> & {
@@ -23,7 +23,7 @@ const forwarded = useForwardPropsEmits(root, emit);
   <TreeRoot
     v-bind="forwarded"
     :get-key="root.getKey"
-    class="frame-tree"
+    class="frame-tree frame-navigation-text"
     :aria-label="label"
     v-slot="state"
     ><slot v-bind="state"
@@ -32,7 +32,7 @@ const forwarded = useForwardPropsEmits(root, emit);
         :key="item._id"
         v-bind="item.bind"
         :disabled="item.value.disabled"
-        class="frame-tree-item"
+        class="frame-tree-item frame-navigation-focus"
         :style="{paddingInlineStart: `${(item.level - 1) * 18 + 8}px`}"
         v-slot="itemState"
         ><slot name="item" :item="item.value" v-bind="itemState"
@@ -48,3 +48,24 @@ const forwarded = useForwardPropsEmits(root, emit);
     ></TreeRoot
   >
 </template>
+
+<style lang="scss">
+.frame-tree {
+  padding: 4px;
+  margin: 0;
+  list-style: none;
+}
+.frame-tree-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 4px 8px;
+  border-radius: var(--frame-control-radius, var(--frame-radius-medium));
+  cursor: default;
+}
+.frame-tree-indent {
+  width: 16px;
+  flex-shrink: 0;
+}
+</style>

@@ -95,10 +95,10 @@ Frame supplies this part in its anatomy. Availability below refers to configurat
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `string \| Component` | No independent Frame prop | `div` (Reka) | Internal | Frame fixes Primitive asChild around a native input/textarea; element replacement is not a supported API. |
-| `asChild` | `boolean` | No independent Frame prop | `true` (Frame internal composition) | Internal | Frame fixes Primitive asChild around a native input/textarea; element replacement is not a supported API. |
+| Prop      | Reka type             | Frame type                | Required/default                    | Availability | Description                                                                                               |
+| --------- | --------------------- | ------------------------- | ----------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------- |
+| `as`      | `string \| Component` | No independent Frame prop | `div` (Reka)                        | Internal     | Frame fixes Primitive asChild around a native input/textarea; element replacement is not a supported API. |
+| `asChild` | `boolean`             | No independent Frame prop | `true` (Frame internal composition) | Internal     | Frame fixes Primitive asChild around a native input/textarea; element replacement is not a supported API. |
 
 #### Emits
 
@@ -106,26 +106,26 @@ No component-defined emits on this part. Native listeners are separate from comp
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | No scoped fields listed | Frame supplies the internal composition; no public part slot |
+| Upstream slot | Scoped field            | Frame availability                                           |
+| ------------- | ----------------------- | ------------------------------------------------------------ |
+| default       | No scoped fields listed | Frame supplies the internal composition; no public part slot |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
+| Attribute      | Value/presence           | Meaning                                                                                                     |
+| -------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------- |
 | Native element | No Reka state attributes | Use native :disabled/:read-only/:focus-visible/validation selectors; caller data-* attributes pass through. |
 
 ### Frame additions
 
 #### Props
 
-| Prop | Type | Required/default | Description |
-| --- | --- | --- | --- |
-| `modelValue` | `string \| number` | `''` | Native input value; numbers are emitted for nonempty number inputs, otherwise strings. |
-| `type` | `InputTypeHTMLAttribute` | `text` | Native input type. |
-| `disabled` | `boolean` | `false` | Disable native interaction. |
-| `placeholder` | `string` | `Unset` | Empty-field hint. |
+| Prop          | Type                     | Required/default | Description                                                                            |
+| ------------- | ------------------------ | ---------------- | -------------------------------------------------------------------------------------- |
+| `modelValue`  | `string \| number`       | `''`             | Native input value; numbers are emitted for nonempty number inputs, otherwise strings. |
+| `type`        | `InputTypeHTMLAttribute` | `text`           | Native input type.                                                                     |
+| `disabled`    | `boolean`                | `false`          | Disable native interaction.                                                            |
+| `placeholder` | `string`                 | `Unset`          | Empty-field hint.                                                                      |
 
 #### Slots
 
@@ -133,20 +133,20 @@ No additional public Frame slots.
 
 #### Emits
 
-| Emit | Payload | When |
-| --- | --- | --- |
+| Emit              | Payload          | When                                                                                      |
+| ----------------- | ---------------- | ----------------------------------------------------------------------------------------- |
 | update:modelValue | string \| number | Each native input event; host must retain the value through v-model or an update handler. |
 
 #### Exposed methods
 
-| Member | Type | Behavior |
-| --- | --- | --- |
-| focus | `() => void` | Focus native control once mounted. |
+| Member  | Type                                            | Behavior                                                                                                       |
+| ------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| focus   | `() => void`                                    | Focus native control once mounted.                                                                             |
 | element | `Ref<HTMLInputElement \| undefined>` internally | Native ref exposed through a Vue component ref; public instance access unwraps refs. Unavailable before mount. |
 
 ### Sources and version
 
-[FrameTextField.vue](../../../packages/core/src/components/forms/FrameTextField.vue) renders a native input through Reka Primitive. Styling lives in [style.css](../../../packages/core/src/style.css).
+[FrameTextField.vue](../../../packages/core/src/components/forms/FrameTextField.vue) renders a native input through Reka Primitive. Styling lives in [styles/index.scss](../../../packages/core/src/styles/index.scss).
 
 #### Reka comparison and state hooks
 
@@ -160,27 +160,27 @@ Compared with the live Primitive reference and installed Reka `2.11.0` source. S
 
 ### Parts and selectors
 
-| Selector | Part | Placement/attribute target |
-| --- | --- | --- |
+| Selector            | Part         | Placement/attribute target               |
+| ------------------- | ------------ | ---------------------------------------- |
 | `.frame-text-input` | Native input | Caller class/style targets this element. |
 
 The native input is the styling target; its font is inherited.
 
 ### Variables
 
-| Token key | Variable | Value kind | Default/fallback | Part/effect | Scope/limits | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| `--frame-control-background` | `--frame-control-background` | color | Catalog: `#1d1d1d` | Native input background | Shared across controls using this variable. | Control background. |
-| `--frame-control-border` | `--frame-control-border` | color | Catalog: `var(--frame-border-color)` | Native input border | Shared across controls using this variable. | Control border. |
-| `--frame-control-text` | `--frame-control-text` | color | Catalog: `#d4d4d4` | Native input color | Shared across controls using this variable. | Control text. |
-| `--frame-input-radius` | `--frame-input-radius` | length | Catalog: `var(--frame-menu-border-radius)` | Native input border-radius | Shared across controls using this variable. | Input radius. |
-| CSS only | `--frame-text-input-background` | color | CSS fallback: `var(--frame-control-background)` | Native input background | Local to matching component rules. CSS only; not in JSON allowlist. | Text input background. |
-| CSS only | `--frame-text-input-border` | border shorthand | CSS fallback: `1px solid var(--frame-control-border)` | Native input border | Local to matching component rules. CSS only; not in JSON allowlist. | Text input border. |
-| CSS only | `--frame-text-input-border-radius` | length / CSS length expression | CSS fallback: `var(--frame-input-radius)` | Native input border-radius | Local to matching component rules. CSS only; not in JSON allowlist. | Text input border radius. |
-| CSS only | `--frame-text-input-color` | color | CSS fallback: `var(--frame-control-text)` | Native input color | Local to matching component rules. CSS only; not in JSON allowlist. | Text input color. |
-| CSS only | `--frame-text-input-disabled-opacity` | opacity number | CSS fallback: `.45` | Native input opacity | Local to matching component rules. CSS only; not in JSON allowlist. State rules: :disabled. | Text input disabled opacity. |
-| CSS only | `--frame-text-input-min-height` | length / CSS length expression | CSS fallback: `28px` | Native input min-height | Local to matching component rules. CSS only; not in JSON allowlist. | Text input min height. |
-| CSS only | `--frame-text-input-padding` | CSS spacing | CSS fallback: `6px 8px` | Native input padding | Local to matching component rules. CSS only; not in JSON allowlist. | Text input padding. |
-| CSS only | `--frame-text-input-width` | length / CSS length expression | CSS fallback: `min(100%, 340px)` | Native input width | Local to matching component rules. CSS only; not in JSON allowlist. | Text input width. |
+| Token key                    | Variable                              | Value kind                     | Default/fallback                                      | Part/effect                | Scope/limits                                                                                | Description                  |
+| ---------------------------- | ------------------------------------- | ------------------------------ | ----------------------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------- |
+| `--frame-control-background` | `--frame-control-background`          | color                          | Catalog: `#1d1d1d`                                    | Native input background    | Shared across controls using this variable.                                                 | Control background.          |
+| `--frame-control-border`     | `--frame-control-border`              | color                          | Catalog: `var(--frame-border-color)`                  | Native input border        | Shared across controls using this variable.                                                 | Control border.              |
+| `--frame-control-text`       | `--frame-control-text`                | color                          | Catalog: `#d4d4d4`                                    | Native input color         | Shared across controls using this variable.                                                 | Control text.                |
+| `--frame-input-radius`       | `--frame-input-radius`                | length                         | Catalog: `var(--frame-menu-border-radius)`            | Native input border-radius | Shared across controls using this variable.                                                 | Input radius.                |
+| CSS only                     | `--frame-text-input-background`       | color                          | CSS fallback: `var(--frame-control-background)`       | Native input background    | Local to matching component rules. CSS only; not in JSON allowlist.                         | Text input background.       |
+| CSS only                     | `--frame-text-input-border`           | border shorthand               | CSS fallback: `1px solid var(--frame-control-border)` | Native input border        | Local to matching component rules. CSS only; not in JSON allowlist.                         | Text input border.           |
+| CSS only                     | `--frame-text-input-border-radius`    | length / CSS length expression | CSS fallback: `var(--frame-input-radius)`             | Native input border-radius | Local to matching component rules. CSS only; not in JSON allowlist.                         | Text input border radius.    |
+| CSS only                     | `--frame-text-input-color`            | color                          | CSS fallback: `var(--frame-control-text)`             | Native input color         | Local to matching component rules. CSS only; not in JSON allowlist.                         | Text input color.            |
+| CSS only                     | `--frame-text-input-disabled-opacity` | opacity number                 | CSS fallback: `.45`                                   | Native input opacity       | Local to matching component rules. CSS only; not in JSON allowlist. State rules: :disabled. | Text input disabled opacity. |
+| CSS only                     | `--frame-text-input-min-height`       | length / CSS length expression | CSS fallback: `28px`                                  | Native input min-height    | Local to matching component rules. CSS only; not in JSON allowlist.                         | Text input min height.       |
+| CSS only                     | `--frame-text-input-padding`          | CSS spacing                    | CSS fallback: `6px 8px`                               | Native input padding       | Local to matching component rules. CSS only; not in JSON allowlist.                         | Text input padding.          |
+| CSS only                     | `--frame-text-input-width`            | length / CSS length expression | CSS fallback: `min(100%, 340px)`                      | Native input width         | Local to matching component rules. CSS only; not in JSON allowlist.                         | Text input width.            |
 
 See [theme variables](../../styling/theme-variables.md) for theme authoring.

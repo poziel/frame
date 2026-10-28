@@ -1,0 +1,21 @@
+.frame-menubar {
+  padding: 0;
+  gap: 0;
+}
+
+.frame-menubar .menubar-groups > button,
+.frame-menubar > button {
+  min-height: 0;
+  border: 0;
+  line-height: normal;
+  background: transparent;
+  font: inherit;
+  height: var(--frame-menubar-button-height, 25px);
+  padding: var(--frame-menubar-button-padding, 0 8px);
+  color: var(--frame-menubar-button-color, #a9a9a9);
+  font-size: var(--frame-menubar-button-font-size, 12px);
+}
+
+.frame-menubar button[data-state='open'] {
+  background: var(--frame-menubar-button-hover-background, #ffffff0b);
+}

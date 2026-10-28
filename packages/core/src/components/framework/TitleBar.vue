@@ -580,3 +580,364 @@ const emit = defineEmits<{commands: []; execute: [id: string]}>();
     />
   </header>
 </template>
+<style lang="scss">
+.titlebar-leading {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding-left: var(--frame-titlebar-leading-padding-left, 6px);
+}
+
+.titlebar-drag {
+  align-self: stretch;
+  flex: 1;
+  min-width: var(--frame-titlebar-drag-min-width, 12px);
+}
+
+.titlebar-layout {
+  display: flex;
+  padding-right: var(--frame-titlebar-layout-padding-right, 8px);
+  gap: var(--frame-titlebar-layout-gap, 2px);
+}
+
+.titlebar-layout > .context-menu-target {
+  display: flex;
+}
+
+.titlebar-center {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-titlebar-center-gap, 6px);
+  min-width: var(--frame-titlebar-center-min-width, 0);
+  flex: 0 1 600px;
+}
+
+.titlebar-center .command-tooltip,
+.titlebar-center .titlebar-text {
+  flex: 1;
+  min-width: var(--frame-titlebar-center-command-tooltip-min-width, 0);
+}
+
+.titlebar-navigation {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-titlebar-navigation-gap, 2px);
+  flex: none;
+}
+
+.titlebar-leading > .titlebar-navigation {
+  margin-left: var(--frame-titlebar-center-gap, 6px);
+}
+
+.titlebar-center button.frame-button.workspace-command {
+  min-width: 0;
+}
+
+.titlebar-navigation button:disabled {
+  opacity: var(--frame-titlebar-navigation-button-disabled-opacity, 0.35);
+  cursor: default;
+}
+
+@media (max-width: 700px) {
+  .titlebar-center {
+    flex-basis: 260px;
+  }
+}
+
+@media (max-width: 540px) {
+  .titlebar-center {
+    flex-basis: 180px;
+    gap: var(--frame-titlebar-center-gap-2, 2px);
+  }
+}
+
+.titlebar-center > * {
+  pointer-events: auto;
+}
+</style>
+
+<style lang="scss">
+/* Title and status are part of the app background, without separators. */
+.titlebar {
+  display: flex;
+  align-items: center;
+  min-width: var(
+    --frame-Title-and-status-are-part-of-the-app-background-min-width,
+    0
+  );
+  background: var(--frame-bg);
+  user-select: none;
+  position: relative;
+  z-index: 5;
+}
+
+.titlebar-leading {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding-left: var(--frame-titlebar-leading-padding-left, 6px);
+}
+
+.app-mark {
+  flex-shrink: 0;
+  width: var(--frame-app-mark-width, 28px);
+  display: grid;
+  place-items: center;
+}
+
+.titlebar button.frame-button.titlebar-button {
+  width: var(--frame-titlebar-button-width, 28px);
+  height: var(--frame-titlebar-button-height, 26px);
+  border-radius: var(
+    --frame-titlebar-button-border-radius,
+    var(--frame-radius-medium)
+  );
+  display: inline-grid;
+  place-items: center;
+  color: var(--frame-titlebar-button-color, #959b9e);
+}
+
+.titlebar button.frame-button.titlebar-button:hover {
+  background: var(--frame-titlebar-button-hover-background, #ffffff0b);
+}
+
+.titlebar button.frame-button.titlebar-button[aria-expanded='true'] {
+  color: var(--frame-titlebar-button-color-2, #d4d6d7);
+}
+
+.titlebar-drag {
+  align-self: stretch;
+  flex: 1;
+  min-width: var(--frame-titlebar-drag-min-width, 12px);
+}
+
+.titlebar button.frame-button.workspace-command {
+  flex: 0 1 370px;
+  min-width: var(--frame-workspace-command-min-width, 100px);
+  height: var(--frame-workspace-command-height, 24px);
+  border: var(
+    --frame-workspace-command-border,
+    1px solid var(--frame-command-border-color, #303335)
+  );
+  border-radius: var(
+    --frame-workspace-command-border-radius,
+    var(--frame-radius-large)
+  );
+  padding: var(--frame-workspace-command-padding, 0 9px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--frame-workspace-command-gap, 12px);
+  font-size: var(--frame-workspace-command-font-size, 11px);
+  color: var(--frame-workspace-command-color, #959b9e);
+  background: var(--frame-workspace-command-background, #1b1d1e);
+}
+
+.titlebar button.frame-button.workspace-command > span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.titlebar button.frame-button.workspace-command:hover {
+  border-color: var(--frame-workspace-command-hover-border-color, #45494b);
+}
+
+.command-context {
+  color: var(--frame-command-context-color, #777f83);
+}
+
+.titlebar-layout {
+  display: flex;
+  padding-right: var(--frame-titlebar-layout-padding-right, 8px);
+  gap: var(--frame-titlebar-layout-gap, 2px);
+}
+
+.window-controls {
+  display: flex;
+  align-self: stretch;
+}
+
+.titlebar button.frame-button.window-control {
+  width: var(--frame-window-control-width, 36px);
+  display: grid;
+  place-items: center;
+  color: var(--frame-window-control-color, #a8acae);
+}
+
+.titlebar button.frame-button.window-control:hover:not(:disabled) {
+  background: var(
+    --frame-window-control-hover-not-disabled-background,
+    #ffffff0f
+  );
+}
+
+.titlebar button.frame-button.window-close:hover:not(:disabled) {
+  background: var(--frame-window-close-hover-not-disabled-background, #c42b1c);
+  color: var(--frame-window-close-hover-not-disabled-color, white);
+}
+
+.titlebar button.frame-button.window-control:disabled {
+  opacity: var(--frame-window-control-disabled-opacity, 0.4);
+}
+
+.command-tooltip {
+  flex: 0 1 520px;
+  min-width: var(--frame-command-tooltip-min-width-2, 100px);
+}
+
+.titlebar button.frame-button.workspace-command {
+  flex: initial;
+  width: var(--frame-workspace-command-width, 100%);
+}
+
+.window-controls > .tooltip-trigger {
+  align-self: stretch;
+}
+
+.titlebar button.frame-button.window-control {
+  height: var(--frame-window-control-height, 100%);
+}
+
+@media (max-width: 700px) {
+  .command-tooltip {
+    flex-basis: 260px;
+  }
+}
+
+@media (max-width: 540px) {
+  .command-tooltip {
+    flex-basis: 140px;
+    min-width: var(--frame-command-tooltip-min-width, 70px);
+  }
+}
+
+@media (min-width: 701px) {
+  .titlebar > .command-tooltip {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(
+      --frame-titlebar-command-tooltip-width,
+      min(600px, calc(100% - 430px))
+    );
+  }
+}
+
+@media (min-width: 701px) {
+  .titlebar > .command-tooltip,
+  .titlebar > .titlebar-text {
+    width: var(
+      --frame-titlebar-command-tooltip-width-3,
+      min(600px, calc(100% - 580px))
+    );
+  }
+}
+
+.titlebar-layout > .context-menu-target {
+  display: flex;
+}
+
+.titlebar-center {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-titlebar-center-gap, 6px);
+  min-width: var(--frame-titlebar-center-min-width, 0);
+  flex: 0 1 600px;
+}
+
+.titlebar-center .command-tooltip,
+.titlebar-center .titlebar-text {
+  flex: 1;
+  min-width: var(--frame-titlebar-center-command-tooltip-min-width, 0);
+}
+
+.titlebar-navigation {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-titlebar-navigation-gap, 2px);
+  flex: none;
+}
+
+.titlebar-leading > .titlebar-navigation {
+  margin-left: var(--frame-titlebar-center-gap, 6px);
+}
+
+.titlebar-center button.frame-button.workspace-command {
+  min-width: 0;
+}
+
+.titlebar-navigation button:disabled {
+  opacity: var(--frame-titlebar-navigation-button-disabled-opacity, 0.35);
+  cursor: default;
+}
+
+@media (min-width: 701px) {
+  .titlebar > .titlebar-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(
+      --frame-titlebar-titlebar-center-width,
+      min(600px, calc(100% - 580px))
+    );
+  }
+}
+
+@media (max-width: 700px) {
+  .titlebar-center {
+    flex-basis: 260px;
+  }
+}
+
+@media (max-width: 540px) {
+  .titlebar-center {
+    flex-basis: 180px;
+    gap: var(--frame-titlebar-center-gap-2, 2px);
+  }
+}
+
+/* Shell dimensions specialize the shared controls without changing their interaction behavior. */
+.titlebar button.frame-button.window-control {
+  aspect-ratio: auto;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.titlebar button.frame-button.workspace-command {
+  min-height: 0;
+}
+
+.titlebar button.frame-button.titlebar-button.frame-icon-button-labeled {
+  width: auto;
+  inline-size: auto;
+  display: inline-flex;
+}
+
+/* Title and control sizes retain one position and scale at every window width. */
+.titlebar > .titlebar-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 0;
+  pointer-events: none;
+}
+
+.titlebar-center > * {
+  pointer-events: auto;
+}
+
+.titlebar > .titlebar-center .titlebar-text {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+}
+
+.titlebar > .window-controls,
+.titlebar > .titlebar-layout {
+  flex-shrink: 0;
+}
+</style>

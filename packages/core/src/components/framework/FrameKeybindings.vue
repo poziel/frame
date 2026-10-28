@@ -228,7 +228,7 @@ function showConflicts() {
     </FrameDialog>
   </section>
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .frame-keybindings {
   box-sizing: border-box;
   display: flex;

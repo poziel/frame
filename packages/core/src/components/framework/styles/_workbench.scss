@@ -1,0 +1,7 @@
+.workbench {
+  height: var(--frame-workbench-height, 100dvh);
+  display: grid;
+  grid-template-rows: 34px minmax(0, 1fr) 24px;
+  overflow: hidden;
+  background: var(--frame-bg);
+}

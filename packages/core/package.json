@@ -42,7 +42,8 @@
     "src/modules/README.md"
   ],
   "sideEffects": [
-    "**/*.css"
+    "**/*.css",
+    "**/*.scss"
   ],
   "peerDependencies": {
     "vue": "^3.5.13"
@@ -71,12 +72,13 @@
     "build": "bun run tokens:generate && vite build && vue-tsc -p tsconfig.json && bun ../../scripts/check-library-boundary.ts"
   },
   "devDependencies": {
+    "@iconify-json/codicon": "^1.2.75",
+    "@types/markdown-it": "^14.2.0",
     "@vitejs/plugin-vue": "^6.0.7",
+    "sass": "^1.106.1",
     "typescript": "~6.0.3",
     "vite": "^8.0.16",
-    "vue-tsc": "^3.3.5",
-    "@iconify-json/codicon": "^1.2.75",
     "vue": "^3.5.13",
-    "@types/markdown-it": "^14.2.0"
+    "vue-tsc": "^3.3.5"
   }
 }

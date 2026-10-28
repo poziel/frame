@@ -1,4 +1,4 @@
-import './styles/index.css';
+import './styles/index.scss';
 
 export {default as AIChat} from './components/AIChat.vue';
 export {createAIChat} from './controllers/aiChat';

@@ -1,0 +1,28 @@
+.frame-viewer-control-row {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-gap, 6px);
+  flex-wrap: wrap;
+}
+
+.frame-viewer-button {
+  color: var(--frame-text);
+  background: var(--frame-surface, #181818);
+  border: 1px solid var(--frame-line, #333);
+  border-radius: var(--frame-control-radius, 3px);
+  padding: var(--frame-control-padding-y, 5px)
+    var(--frame-control-padding-x, 10px);
+  font: inherit;
+  cursor: pointer;
+}
+
+.frame-viewer-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.frame-viewer-button:focus-visible,
+.frame-viewer-content :focus-visible {
+  outline: 2px solid var(--frame-accent);
+  outline-offset: 2px;
+}

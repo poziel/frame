@@ -1,0 +1,109 @@
+.frame-navigation-surface {
+  z-index: 50;
+  min-width: 180px;
+  padding: 5px;
+  border: 1px solid var(--frame-control-border, #555);
+  border-radius: var(--frame-control-radius, var(--frame-radius-medium));
+  background: var(
+    --frame-menu-background,
+    var(--frame-control-background, #252526)
+  );
+  color: var(--frame-control-text, var(--frame-text));
+  box-shadow: var(--frame-overlay-shadow, 0 6px 18px rgba(0, 0, 0, 0.2));
+}
+
+.frame-navigation-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 4px 10px;
+  border: 1px solid transparent;
+  border-radius: var(--frame-control-radius, var(--frame-radius-medium));
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.frame-navigation-text {
+  font-family: var(--frame-font-body, sans-serif);
+  font-size: var(--frame-font-size-body, 13px);
+  color: var(--frame-control-text, var(--frame-text));
+  box-sizing: border-box;
+}
+.frame-navigation-list-layout {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+}
+.frame-toolbar-button:hover,
+.frame-navigation-trigger:hover,
+.frame-navigation-link:hover,
+.frame-menubar-trigger:hover,
+.frame-menubar-item[data-highlighted],
+.frame-tree-item:hover {
+  background: var(--frame-hover-background, rgba(127, 127, 127, 0.12));
+}
+.frame-menubar-trigger[data-state='open'],
+.frame-navigation-trigger[data-state='open'],
+.frame-tree-item[data-selected] {
+  color: var(--frame-accent, #007acc);
+  background: var(--frame-selection-background, rgba(0, 122, 204, 0.15));
+}
+.frame-navigation-focus:focus-visible {
+  outline: 2px solid var(--frame-focus-border, var(--frame-accent, #007acc));
+  outline-offset: 2px;
+}
+.frame-tabs-trigger:disabled,
+.frame-toolbar-button:disabled,
+.frame-menubar-trigger:disabled,
+.frame-navigation-trigger:disabled,
+[aria-disabled='true'].frame-navigation-link,
+.frame-tree-item[data-disabled],
+.frame-stepper-item[data-disabled] {
+  opacity: var(--frame-disabled-opacity, 0.5);
+  cursor: default;
+}
+.frame-toolbar[data-orientation='vertical'],
+.frame-stepper[data-orientation='vertical'] {
+  flex-direction: column;
+  align-items: stretch;
+}
+.frame-menubar-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 6px 9px;
+  border-radius: var(--frame-control-radius, var(--frame-radius-medium));
+  outline: none;
+  cursor: default;
+  font: inherit;
+}
+.frame-menubar-item[data-disabled] {
+  opacity: var(--frame-disabled-opacity, 0.5);
+}
+.frame-menubar-item kbd {
+  font: inherit;
+  font-size: 0.85em;
+  color: var(--frame-muted, #888);
+}
+.frame-menubar-separator {
+  height: 1px;
+  background: var(--frame-control-border, #555);
+  margin: 4px;
+}
+
+// Both shell and independent menubars need a noninteractive measurement row.
+.frame-menu-measure {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  width: max-content;
+  inset: 0 auto auto 0;
+}

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import '../styles/index.css';
 import {onBeforeUnmount, onMounted, ref, watch} from 'vue';
 import type * as Monaco from 'monaco-editor';
 import type {
@@ -67,3 +66,28 @@ defineExpose({
     >
   </div>
 </template>
+
+<style lang="scss">
+.frame-code-editor {
+  position: relative;
+  width: var(--frame-code-editor-width, 100%);
+  height: var(--frame-code-editor-height, 100%);
+  min-width: var(--frame-code-editor-min-width, 0);
+  min-height: var(--frame-code-editor-min-height, 0);
+  overflow: hidden;
+}
+
+.frame-code-editor-host {
+  width: var(--frame-code-editor-host-width, 100%);
+  height: var(--frame-code-editor-host-height, 100%);
+}
+
+.frame-code-editor-status {
+  position: absolute;
+  inset: 0;
+  margin: var(--frame-code-editor-status-margin, 0);
+  padding: var(--frame-code-editor-status-padding, 12px);
+  background: var(--frame-bg, #1e1e1e);
+  color: var(--frame-fg, #d4d4d4);
+}
+</style>

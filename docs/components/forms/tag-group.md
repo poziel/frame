@@ -190,7 +190,7 @@ No public content slots; all internal children are generated.
 
 ### Sources and version
 
-Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/tag-group), its [Markdown reference](https://reka-ui.com/docs/components/tag-group.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameTagGroup.vue). Styling comes from [advanced.css](../../../packages/core/src/components/forms/shared/advanced.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
+Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/tag-group), its [Markdown reference](https://reka-ui.com/docs/components/tag-group.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameTagGroup.vue). Styling comes from [advanced.scss](../../../packages/core/src/components/forms/styles/advanced.scss) and [shared styles](../../../packages/core/src/styles/index.scss). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
 
 ## Styling
 

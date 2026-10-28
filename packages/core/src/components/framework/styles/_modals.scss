@@ -1,0 +1,26 @@
+.frame-modal button:not([role='checkbox']) {
+  font: inherit;
+  cursor: pointer;
+  border: var(--frame-modal-button-border, 0);
+  background: var(--frame-modal-button-background, transparent);
+  color: inherit;
+}
+
+.frame-modal button:focus-visible,
+.frame-modal-header:focus-visible,
+.frame-modal :is(input, select, textarea):focus-visible {
+  outline: 1px solid var(--frame-accent);
+  outline-offset: var(--frame-modal-button-focus-visible-outline-offset, -1px);
+}
+
+.frame-modal button:not([role='checkbox']):hover {
+  background: var(--frame-modal-button-hover-background, #ffffff09);
+}
+
+.frame-menu {
+  z-index: 120;
+}
+
+.frame-tooltip {
+  z-index: 145;
+}

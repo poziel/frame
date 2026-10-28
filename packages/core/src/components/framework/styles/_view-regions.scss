@@ -1,0 +1,116 @@
+.view-sections {
+  min-height: var(
+    --frame-view-sections-min-height,
+    var(--frame-activity-sections-min-height, 80px)
+  );
+}
+
+.nested-view-content > .view-host {
+  min-height: var(--frame-nested-view-content-view-host-min-height, 100%);
+}
+
+.menu-drop-placeholder {
+  color: var(--frame-muted);
+  padding: var(--frame-menu-drop-placeholder-padding, 12px);
+  font-size: var(--frame-menu-drop-placeholder-font-size, 11px);
+}
+
+/* Rail and sidebar draw their own contours, including beside spanning regions. */
+.layout-grid > .primary-region {
+  border: var(--frame-Rail-and-sidebar-draw-their-own-contours-border, 0);
+  border-radius: var(
+    --frame-Rail-and-sidebar-draw-their-own-contours-border-radius,
+    0
+  );
+  background: var(
+    --frame-Rail-and-sidebar-draw-their-own-contours-background,
+    transparent
+  );
+  overflow: visible;
+}
+
+.primary-region.edge-regions,
+.primary-right .primary-region.edge-regions {
+  clip-path: none;
+}
+
+.layout-grid .primary-region > .view-bar {
+  box-sizing: border-box;
+  border: 1px solid var(--frame-line);
+  border-radius: var(
+    --frame-layout-grid-primary-region-view-bar-border-radius,
+    var(--frame-radius-large)
+  );
+  background: var(--frame-surface);
+}
+
+.layout-grid .primary-region > .side-panel {
+  border: 1px solid var(--frame-line);
+  border-radius: var(
+    --frame-layout-grid-primary-region-side-panel-border-radius,
+    var(--frame-radius-large)
+  );
+  background: var(--frame-surface);
+}
+
+.primary-region.expanded:not(.edge-regions) > .view-bar {
+  border-right: var(
+    --frame-primary-region-expanded-not-edge-regions-view-bar-border-right,
+    1px solid transparent
+  );
+  border-radius: var(
+    --frame-primary-region-expanded-not-edge-regions-view-bar-border-radius,
+    var(--frame-radius-large) 0 0 var(--frame-radius-large)
+  );
+}
+
+.primary-region.expanded:not(.edge-regions) > .side-panel {
+  border-radius: var(
+    --frame-primary-region-expanded-not-edge-regions-side-panel-border-radius,
+    0 var(--frame-radius-large) var(--frame-radius-large) 0
+  );
+}
+
+.primary-right .primary-region.expanded:not(.edge-regions) > .view-bar {
+  border-right: 1px solid var(--frame-line);
+  border-left: var(
+    --frame-primary-right-primary-region-expanded-not-edge-regions-view-bar-border-left,
+    1px solid transparent
+  );
+  border-radius: var(
+    --frame-primary-right-primary-region-expanded-not-edge-regions-view-bar-border-radius,
+    0 var(--frame-radius-large) var(--frame-radius-large) 0
+  );
+}
+
+.primary-right .primary-region.expanded:not(.edge-regions) > .side-panel {
+  border-radius: var(
+    --frame-primary-right-primary-region-expanded-not-edge-regions-side-panel-border-radius,
+    var(--frame-radius-large) 0 0 var(--frame-radius-large)
+  );
+}
+
+.compact .layout-grid .primary-region > .view-bar,
+.compact .layout-grid .primary-region > .side-panel {
+  border-radius: var(
+    --frame-compact-layout-grid-primary-region-view-bar-border-radius,
+    0
+  );
+}
+
+.empty-view-region {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--frame-empty-view-region-min-height, 80px);
+  padding: var(--frame-empty-view-region-padding, 20px);
+  color: var(--frame-muted);
+  text-align: center;
+  font-size: var(--frame-empty-view-region-font-size, 12px);
+}
+
+.dragging-views,
+.dragging-views * {
+  cursor: grabbing !important;
+}

@@ -24,7 +24,7 @@ classes remain behind the lazy renderer import and are internal implementations.
 - `services/`: request-owned resources and pure file-detection helpers.
 - `services/pdf/`: worker-backed PDF document resources.
 - `types/`: portable source contracts and ambient worker declarations.
-- `styles/index.css`: unchanged shared viewer presentation.
+- `styles/index.scss`: unchanged shared viewer presentation.
 
 `services/viewer.ts` keeps its existing type re-exports for internal consumers.
 Type detection, file-name resolution, and byte sniffing remain pure functions;

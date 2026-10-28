@@ -1,0 +1,64 @@
+.frame-chat-text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-width: var(--frame-chat-text-max-width, 100%);
+  margin-bottom: var(--frame-chat-text-margin-bottom, 8px);
+}
+
+.frame-chat-error {
+  color: var(--frame-chat-error-color, #f48771);
+}
+
+// Transcript children span multiple components. Keep this reset before event
+// surfaces and commentary so their own margins retain the original precedence.
+.frame-chat-work-events > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.frame-chat-event-surface {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 12px;
+  padding: var(--frame-chat-event-padding, 12px);
+  border: 1px solid var(--frame-border, #ffffff24);
+  border-radius: var(--frame-chat-event-radius, 6px);
+  background: var(--frame-surface, #181818);
+  overflow-wrap: anywhere;
+}
+
+.frame-chat-event-meta {
+  color: var(--frame-muted, #999);
+  font-size: var(--frame-chat-event-meta-size, 11px);
+}
+
+.frame-chat-event-text {
+  margin: 8px 0;
+  white-space: pre-wrap;
+}
+
+.frame-chat-event-detail {
+  margin: 6px 0;
+}
+
+.frame-chat-attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--frame-chat-attachments-gap, 5px);
+  margin-bottom: var(--frame-chat-attachments-margin-bottom, 6px);
+  max-width: var(--frame-chat-attachments-max-width, 100%);
+}
+
+.frame-chat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--frame-chat-chip-gap, 5px);
+  border-radius: var(--frame-chat-chip-border-radius, 4px);
+  background: var(--frame-chat-chip-background, #ffffff0b);
+  border: var(--frame-chat-chip-border, 1px solid #ffffff16);
+  padding: var(--frame-chat-chip-padding, 2px 6px);
+  font-size: var(--frame-chat-chip-font-size, 11px);
+  overflow-wrap: anywhere;
+  max-width: var(--frame-chat-chip-max-width, 100%);
+}

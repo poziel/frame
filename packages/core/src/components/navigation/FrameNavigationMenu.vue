@@ -12,7 +12,7 @@ import {
 import type {NavigationMenuRootProps, NavigationMenuRootEmits} from 'reka-ui';
 import type {FrameNavigationItem} from './navigationMenuTypes';
 import FrameIcon from '../data-display/FrameIcon.vue';
-import '../shared/general-b.css';
+import './styles/navigation.scss';
 
 const props = defineProps<
   NavigationMenuRootProps & {items?: FrameNavigationItem[]; label?: string}
@@ -27,10 +27,11 @@ const forwarded = useForwardPropsEmits(root, emit);
 <template>
   <NavigationMenuRoot
     v-bind="forwarded"
-    class="frame-navigation-menu"
+    class="frame-navigation-menu frame-navigation-text"
     :aria-label="label"
     ><slot
-      ><NavigationMenuList class="frame-navigation-list"
+      ><NavigationMenuList
+        class="frame-navigation-list frame-navigation-list-layout"
         ><NavigationMenuItem
           v-for="item in items"
           :key="item.value"
@@ -39,10 +40,11 @@ const forwarded = useForwardPropsEmits(root, emit);
           ><template v-if="item.children?.length"
             ><NavigationMenuTrigger
               :disabled="item.disabled"
-              class="frame-navigation-trigger"
+              class="frame-navigation-trigger frame-navigation-control frame-navigation-focus"
               >{{ item.label
               }}<FrameIcon name="chevron-down" /></NavigationMenuTrigger
-            ><NavigationMenuContent class="frame-navigation-content"
+            ><NavigationMenuContent
+              class="frame-navigation-content frame-navigation-surface frame-overlay-surface"
               ><slot name="content" :item="item"
                 ><NavigationMenuLink
                   v-for="child in item.children"
@@ -50,7 +52,7 @@ const forwarded = useForwardPropsEmits(root, emit);
                   :href="child.disabled ? undefined : child.href"
                   :aria-disabled="child.disabled || undefined"
                   :tabindex="child.disabled ? -1 : undefined"
-                  class="frame-navigation-link"
+                  class="frame-navigation-link frame-navigation-control frame-navigation-focus"
                   @click="child.disabled && $event.preventDefault()"
                   >{{ child.label }}</NavigationMenuLink
                 ></slot
@@ -61,7 +63,7 @@ const forwarded = useForwardPropsEmits(root, emit);
             :href="item.disabled ? undefined : item.href"
             :aria-disabled="item.disabled || undefined"
             :tabindex="item.disabled ? -1 : undefined"
-            class="frame-navigation-link"
+            class="frame-navigation-link frame-navigation-control frame-navigation-focus"
             @click="item.disabled && $event.preventDefault()"
             >{{ item.label }}</NavigationMenuLink
           ></NavigationMenuItem
@@ -70,3 +72,25 @@ const forwarded = useForwardPropsEmits(root, emit);
     ></NavigationMenuRoot
   >
 </template>
+
+<style lang="scss">
+.frame-navigation-item {
+  position: relative;
+}
+
+.frame-navigation-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.frame-navigation-content > .frame-navigation-link {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.frame-navigation-list[data-orientation='vertical'] {
+  flex-direction: column;
+  align-items: stretch;
+}
+</style>

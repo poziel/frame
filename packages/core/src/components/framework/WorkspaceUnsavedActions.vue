@@ -15,3 +15,12 @@ defineProps<{
     @click="respond(true)"
   />
 </template>
+
+<style lang="scss">
+.workspace-unsaved-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+</style>

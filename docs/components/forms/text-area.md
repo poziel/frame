@@ -73,10 +73,10 @@ Frame supplies this part in its anatomy. Availability below refers to configurat
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `string \| Component` | No independent Frame prop | `div` (Reka) | Internal | Frame fixes Primitive asChild around a native input/textarea; element replacement is not a supported API. |
-| `asChild` | `boolean` | No independent Frame prop | `true` (Frame internal composition) | Internal | Frame fixes Primitive asChild around a native input/textarea; element replacement is not a supported API. |
+| Prop      | Reka type             | Frame type                | Required/default                    | Availability | Description                                                                                               |
+| --------- | --------------------- | ------------------------- | ----------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------- |
+| `as`      | `string \| Component` | No independent Frame prop | `div` (Reka)                        | Internal     | Frame fixes Primitive asChild around a native input/textarea; element replacement is not a supported API. |
+| `asChild` | `boolean`             | No independent Frame prop | `true` (Frame internal composition) | Internal     | Frame fixes Primitive asChild around a native input/textarea; element replacement is not a supported API. |
 
 #### Emits
 
@@ -84,26 +84,26 @@ No component-defined emits on this part. Native listeners are separate from comp
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | No scoped fields listed | Frame supplies the internal composition; no public part slot |
+| Upstream slot | Scoped field            | Frame availability                                           |
+| ------------- | ----------------------- | ------------------------------------------------------------ |
+| default       | No scoped fields listed | Frame supplies the internal composition; no public part slot |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
+| Attribute      | Value/presence           | Meaning                                                                                                     |
+| -------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------- |
 | Native element | No Reka state attributes | Use native :disabled/:read-only/:focus-visible/validation selectors; caller data-* attributes pass through. |
 
 ### Frame additions
 
 #### Props
 
-| Prop | Type | Required/default | Description |
-| --- | --- | --- | --- |
-| `modelValue` | `string` | `''` | Native textarea value. |
-| `disabled` | `boolean` | `false` | Disable native interaction. |
-| `placeholder` | `string` | `Unset` | Empty-field hint. |
-| `rows` | `number` | `4` | Native row count; CSS minimum height still applies. |
+| Prop          | Type      | Required/default | Description                                         |
+| ------------- | --------- | ---------------- | --------------------------------------------------- |
+| `modelValue`  | `string`  | `''`             | Native textarea value.                              |
+| `disabled`    | `boolean` | `false`          | Disable native interaction.                         |
+| `placeholder` | `string`  | `Unset`          | Empty-field hint.                                   |
+| `rows`        | `number`  | `4`              | Native row count; CSS minimum height still applies. |
 
 #### Slots
 
@@ -111,20 +111,20 @@ No additional public Frame slots.
 
 #### Emits
 
-| Emit | Payload | When |
-| --- | --- | --- |
-| update:modelValue | string | Each native input event; host must retain the value through v-model or an update handler. |
+| Emit              | Payload | When                                                                                      |
+| ----------------- | ------- | ----------------------------------------------------------------------------------------- |
+| update:modelValue | string  | Each native input event; host must retain the value through v-model or an update handler. |
 
 #### Exposed methods
 
-| Member | Type | Behavior |
-| --- | --- | --- |
-| focus | `() => void` | Focus native control once mounted. |
+| Member  | Type                                               | Behavior                                                                                                       |
+| ------- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| focus   | `() => void`                                       | Focus native control once mounted.                                                                             |
 | element | `Ref<HTMLTextAreaElement \| undefined>` internally | Native ref exposed through a Vue component ref; public instance access unwraps refs. Unavailable before mount. |
 
 ### Sources and version
 
-[FrameTextArea.vue](../../../packages/core/src/components/forms/FrameTextArea.vue) renders a native textarea through Reka Primitive. Styling lives in [style.css](../../../packages/core/src/style.css).
+[FrameTextArea.vue](../../../packages/core/src/components/forms/FrameTextArea.vue) renders a native textarea through Reka Primitive. Styling lives in [styles/index.scss](../../../packages/core/src/styles/index.scss).
 
 #### Reka comparison and state hooks
 
@@ -138,26 +138,26 @@ Compared with the live Primitive reference and installed Reka `2.11.0` source. S
 
 ### Parts and selectors
 
-| Selector | Part | Placement/attribute target |
-| --- | --- | --- |
+| Selector           | Part            | Placement/attribute target               |
+| ------------------ | --------------- | ---------------------------------------- |
 | `.frame-text-area` | Native textarea | Caller class/style targets this element. |
 
 The native textarea is the target. Vertical resizing is enabled; there is no dedicated resize prop.
 
 ### Variables
 
-| Token key | Variable | Value kind | Default/fallback | Part/effect | Scope/limits | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| `--frame-control-background` | `--frame-control-background` | color | Catalog: `#1d1d1d` | Native textarea background | Shared across controls using this variable. | Control background. |
-| `--frame-control-border` | `--frame-control-border` | color | Catalog: `var(--frame-border-color)` | Native textarea border | Shared across controls using this variable. | Control border. |
-| `--frame-control-text` | `--frame-control-text` | color | Catalog: `#d4d4d4` | Native textarea color | Shared across controls using this variable. | Control text. |
-| `--frame-input-radius` | `--frame-input-radius` | length | Catalog: `var(--frame-menu-border-radius)` | Native textarea border-radius | Shared across controls using this variable. | Input radius. |
-| CSS only | `--frame-text-area-background` | color | CSS fallback: `var(--frame-control-background)` | Native textarea background | Local to matching component rules. CSS only; not in JSON allowlist. | Text area background. |
-| CSS only | `--frame-text-area-border` | border shorthand | CSS fallback: `1px solid var(--frame-control-border)` | Native textarea border | Local to matching component rules. CSS only; not in JSON allowlist. | Text area border. |
-| CSS only | `--frame-text-area-border-radius` | length / CSS length expression | CSS fallback: `var(--frame-input-radius)` | Native textarea border-radius | Local to matching component rules. CSS only; not in JSON allowlist. | Text area border radius. |
-| CSS only | `--frame-text-area-color` | color | CSS fallback: `var(--frame-control-text)` | Native textarea color | Local to matching component rules. CSS only; not in JSON allowlist. | Text area color. |
-| CSS only | `--frame-text-area-min-height` | length / CSS length expression | CSS fallback: `90px` | Native textarea min-height | Local to matching component rules. CSS only; not in JSON allowlist. | Text area min height. |
-| CSS only | `--frame-text-area-padding` | CSS spacing | CSS fallback: `8px` | Native textarea padding | Local to matching component rules. CSS only; not in JSON allowlist. | Text area padding. |
-| CSS only | `--frame-text-area-width` | length / CSS length expression | CSS fallback: `min(100%, 460px)` | Native textarea width | Local to matching component rules. CSS only; not in JSON allowlist. | Text area width. |
+| Token key                    | Variable                          | Value kind                     | Default/fallback                                      | Part/effect                   | Scope/limits                                                        | Description              |
+| ---------------------------- | --------------------------------- | ------------------------------ | ----------------------------------------------------- | ----------------------------- | ------------------------------------------------------------------- | ------------------------ |
+| `--frame-control-background` | `--frame-control-background`      | color                          | Catalog: `#1d1d1d`                                    | Native textarea background    | Shared across controls using this variable.                         | Control background.      |
+| `--frame-control-border`     | `--frame-control-border`          | color                          | Catalog: `var(--frame-border-color)`                  | Native textarea border        | Shared across controls using this variable.                         | Control border.          |
+| `--frame-control-text`       | `--frame-control-text`            | color                          | Catalog: `#d4d4d4`                                    | Native textarea color         | Shared across controls using this variable.                         | Control text.            |
+| `--frame-input-radius`       | `--frame-input-radius`            | length                         | Catalog: `var(--frame-menu-border-radius)`            | Native textarea border-radius | Shared across controls using this variable.                         | Input radius.            |
+| CSS only                     | `--frame-text-area-background`    | color                          | CSS fallback: `var(--frame-control-background)`       | Native textarea background    | Local to matching component rules. CSS only; not in JSON allowlist. | Text area background.    |
+| CSS only                     | `--frame-text-area-border`        | border shorthand               | CSS fallback: `1px solid var(--frame-control-border)` | Native textarea border        | Local to matching component rules. CSS only; not in JSON allowlist. | Text area border.        |
+| CSS only                     | `--frame-text-area-border-radius` | length / CSS length expression | CSS fallback: `var(--frame-input-radius)`             | Native textarea border-radius | Local to matching component rules. CSS only; not in JSON allowlist. | Text area border radius. |
+| CSS only                     | `--frame-text-area-color`         | color                          | CSS fallback: `var(--frame-control-text)`             | Native textarea color         | Local to matching component rules. CSS only; not in JSON allowlist. | Text area color.         |
+| CSS only                     | `--frame-text-area-min-height`    | length / CSS length expression | CSS fallback: `90px`                                  | Native textarea min-height    | Local to matching component rules. CSS only; not in JSON allowlist. | Text area min height.    |
+| CSS only                     | `--frame-text-area-padding`       | CSS spacing                    | CSS fallback: `8px`                                   | Native textarea padding       | Local to matching component rules. CSS only; not in JSON allowlist. | Text area padding.       |
+| CSS only                     | `--frame-text-area-width`         | length / CSS length expression | CSS fallback: `min(100%, 460px)`                      | Native textarea width         | Local to matching component rules. CSS only; not in JSON allowlist. | Text area width.         |
 
 See [theme variables](../../styling/theme-variables.md) for theme authoring.

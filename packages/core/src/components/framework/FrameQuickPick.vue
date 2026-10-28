@@ -250,7 +250,7 @@ defineExpose({element, focus: () => input.value?.focus()});
   </QuickOverlay>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .picker-heading {
   padding: 6px 12px;
   border-top: 1px solid var(--frame-border);
@@ -274,5 +274,103 @@ defineExpose({element, focus: () => input.value?.focus()});
 .palette-input :deep(input) {
   min-width: 0;
   flex: 1;
+}
+</style>
+
+<style lang="scss">
+.palette-input {
+  flex-shrink: 0;
+  padding-bottom: var(--frame-palette-input-padding-bottom, 5px);
+}
+
+.palette-results {
+  overflow: auto;
+  min-height: var(--frame-palette-results-min-height, 0);
+}
+
+.command-result {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-command-result-gap, 10px);
+  min-height: var(--frame-command-result-min-height, 23px);
+  padding: var(--frame-command-result-padding, 2px 7px);
+  border-radius: var(
+    --frame-command-result-border-radius,
+    var(--frame-radius-medium)
+  );
+  cursor: pointer;
+  font-size: var(--frame-command-result-font-size, 12px);
+}
+
+.command-result.active {
+  background: var(--frame-command-result-active-background, #344b57);
+  color: var(--frame-command-result-active-color, #f0f4f6);
+}
+
+.command-label {
+  flex-shrink: 0;
+}
+
+.command-result small {
+  flex: 1;
+  min-width: var(--frame-command-result-small-min-width, 0);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: var(--frame-command-result-small-font-size, 10px);
+  color: var(--frame-command-result-small-color, #8f9ba1);
+}
+
+.command-result.active small {
+  color: inherit;
+}
+
+.command-result kbd {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: var(--frame-command-result-kbd-font-size, 9px);
+  line-height: var(--frame-command-result-kbd-line-height, 14px);
+  background: var(--frame-command-result-kbd-background, #ffffff08);
+  border-color: var(--frame-command-result-kbd-border-color, #ffffff10);
+}
+
+.command-result.disabled {
+  color: var(--frame-command-result-disabled-color, #68747a);
+  cursor: default;
+}
+
+.no-results {
+  color: var(--frame-no-results-color, #99a6ad);
+  font-size: var(--frame-no-results-font-size, 12px);
+  padding: var(--frame-no-results-padding, 10px 7px);
+}
+
+@media (max-width: 540px) {
+  .command-result {
+    font-size: var(--frame-command-result-font-size-2, 11px);
+  }
+  .command-result small {
+    display: none;
+  }
+  .command-label {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+.quick-input-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+}
+
+.quick-input-icon > * {
+  width: 16px;
+  height: 16px;
 }
 </style>

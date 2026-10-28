@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '../styles/index.css';
+import '../styles/index.scss';
 import {computed, nextTick, onMounted, ref, watch} from 'vue';
 import {
   FrameDropdownMenu,
@@ -247,3 +247,137 @@ defineExpose({focus, measure});
     />
   </form>
 </template>
+
+<style lang="scss">
+.frame-ai-prompt {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: min(100%, var(--frame-ai-prompt-min-width, 280px));
+  color: var(--frame-text, #ccc);
+  font: var(
+    --frame-ai-prompt-font,
+    13px/1.6 var(--frame-font-body, sans-serif)
+  );
+}
+
+.frame-chat-composer {
+  position: relative;
+  isolation: isolate;
+  flex-shrink: 0;
+  border: var(--frame-chat-composer-border, 1px solid #ffffff24);
+  border-radius: var(--frame-chat-composer-border-radius, 7px);
+  background: var(--frame-surface, #181818);
+  padding: var(--frame-chat-composer-padding, 8px);
+}
+
+.frame-chat-composer.populated,
+.frame-chat-composer:focus-within,
+.frame-chat-composer.rewinding {
+  border-color: var(--frame-accent, #0078d4);
+}
+
+.frame-chat-composer textarea {
+  display: block;
+  resize: none;
+  width: var(--frame-chat-composer-textarea-width, 100%);
+  min-height: var(--frame-chat-composer-textarea-min-height, 42px);
+  max-height: var(--frame-chat-composer-textarea-max-height, 180px);
+  padding: var(--frame-chat-composer-textarea-padding, 2px);
+  border: var(--frame-chat-composer-textarea-border, 0);
+  outline: var(--frame-chat-composer-textarea-outline, none);
+  box-shadow: var(--frame-chat-composer-textarea-box-shadow, none);
+  background: var(--frame-chat-composer-textarea-background, transparent);
+  color: inherit;
+  font: inherit;
+  line-height: var(--frame-chat-composer-textarea-line-height, 1.6);
+}
+
+.frame-chat-composer textarea.frame-text-area {
+  --frame-text-area-border: var(--frame-chat-composer-textarea-border, 0);
+  --frame-text-area-hover-border: var(--frame-chat-composer-textarea-border, 0);
+  --frame-text-area-focus-border: var(--frame-chat-composer-textarea-border, 0);
+  --frame-text-area-hover-outline: var(
+    --frame-chat-composer-textarea-outline,
+    none
+  );
+  --frame-text-area-focus-outline: var(
+    --frame-chat-composer-textarea-outline,
+    none
+  );
+}
+
+.frame-chat-composer textarea::placeholder {
+  color: var(--frame-muted, #999);
+}
+
+.frame-chat-composer-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-chat-composer-actions-gap, 4px);
+  padding-top: var(--frame-chat-composer-actions-padding-top, 5px);
+}
+
+.frame-chat-spacer {
+  flex: 1;
+}
+
+.frame-chat-send:not(:disabled) {
+  border-radius: var(--frame-chat-send-not-disabled-border-radius, 50%);
+  background: var(--frame-accent, #0078d4);
+  color: var(--frame-chat-send-not-disabled-color, white);
+}
+
+.frame-chat-file-input {
+  display: none;
+}
+
+@property --frame-chat-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.frame-chat-composer.busy::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: var(--frame-chat-composer-busy-before-padding, 1px);
+  background: conic-gradient(
+    from var(--frame-chat-angle),
+    transparent 55%,
+    var(--frame-chat-composer-busy-color, var(--frame-accent, #0078d4)) 83%,
+    var(
+        --frame-chat-composer-busy-highlight,
+        color-mix(
+          in srgb,
+          var(--frame-chat-composer-busy-color, var(--frame-accent, #0078d4))
+            65%,
+          white
+        )
+      )
+      96%,
+    transparent
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box exclude,
+    linear-gradient(#fff 0 0);
+  pointer-events: none;
+  animation: frame-chat-orbit 2.5s linear infinite;
+}
+
+@keyframes frame-chat-orbit {
+  to {
+    --frame-chat-angle: 360deg;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .frame-chat-composer.busy::before {
+    animation: none;
+    background: var(
+      --frame-chat-composer-busy-color,
+      var(--frame-accent, #0078d4)
+    );
+  }
+}
+</style>

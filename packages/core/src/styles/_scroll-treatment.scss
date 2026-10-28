@@ -1,0 +1,11 @@
+/* Shared scroll treatment for all shell and application-owned scroll areas. */
+:where(.frame-scroll-scope),
+:where(.frame-scroll-scope) * {
+  scrollbar-width: none;
+}
+:where(.frame-scroll-scope)::-webkit-scrollbar,
+:where(.frame-scroll-scope) ::-webkit-scrollbar {
+  display: none;
+  width: var(--frame-where-workbench-width, 0);
+  height: var(--frame-where-workbench-height, 0);
+}

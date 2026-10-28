@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '../styles/index.css';
+import '../styles/index.scss';
 import {
   computed,
   nextTick,
@@ -369,7 +369,10 @@ defineExpose({
 </script>
 <template>
   <div class="frame-terminal-view">
-    <header v-if="toolbar" class="frame-terminal-toolbar">
+    <header
+      v-if="toolbar"
+      class="frame-terminal-toolbar frame-terminal-controls"
+    >
       <span class="frame-terminal-title"
         ><FrameIcon name="terminal" />{{ active?.name ?? 'Terminal' }}</span
       >
@@ -434,7 +437,7 @@ defineExpose({
     />
     <div
       v-if="showSearch"
-      class="frame-terminal-search"
+      class="frame-terminal-search frame-terminal-controls"
       @keydown.esc.stop="searchClose"
     >
       <FrameTextField
@@ -458,7 +461,7 @@ defineExpose({
       <FrameIconButton label="Next match" icon="arrow-down" @click="search()" />
       <FrameIconButton label="Close search" icon="close" @click="searchClose" />
     </div>
-    <div v-if="renameId" class="frame-terminal-rename">
+    <div v-if="renameId" class="frame-terminal-rename frame-terminal-controls">
       <label :for="`${localId}-rename`">Terminal name</label
       ><FrameTextField
         :id="`${localId}-rename`"
@@ -477,7 +480,7 @@ defineExpose({
     </div>
     <div
       v-if="colorSession"
-      class="frame-terminal-color"
+      class="frame-terminal-color frame-terminal-controls"
       @keydown.esc.stop="finishColor"
     >
       <label :for="`${localId}-color`">Color for {{ colorSession.name }}</label
@@ -678,3 +681,273 @@ defineExpose({
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.frame-terminal-view {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: var(--frame-terminal-view-height, 100%);
+  min-height: var(--frame-terminal-view-min-height, 0);
+  min-width: var(--frame-terminal-view-min-width, 0);
+  box-sizing: border-box;
+  overflow: hidden;
+  background: var(--frame-surface, #181818);
+  color: var(--frame-terminal-view-color, #ccc);
+  font-size: var(--frame-terminal-view-font-size, 12px);
+}
+
+.frame-terminal-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-terminal-toolbar-gap, 4px);
+  padding: var(--frame-terminal-toolbar-padding, 3px 6px);
+  flex-shrink: 0;
+}
+
+.frame-terminal-toolbar {
+  border-bottom: 1px solid var(--frame-line, #2b2b2b);
+  flex-wrap: wrap;
+}
+
+.frame-terminal-title {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-terminal-title-gap, 6px);
+  flex: 1;
+  min-width: var(--frame-terminal-title-min-width, 70px);
+}
+
+.frame-terminal-toolbar .frame-select {
+  width: var(--frame-terminal-toolbar-frame-select-width, 160px);
+}
+
+.frame-terminal-search {
+  justify-content: flex-end;
+}
+
+.frame-terminal-search .frame-text-input {
+  width: var(--frame-terminal-search-frame-text-input-width, min(240px, 60%));
+}
+
+.frame-terminal-rename {
+  flex-wrap: wrap;
+}
+
+.frame-terminal-body {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  flex: 1;
+  min-height: var(--frame-terminal-body-min-height, 0);
+  min-width: var(--frame-terminal-body-min-width, 0);
+  overflow: hidden;
+}
+
+.frame-terminal-body.with-tabs {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.frame-terminal-panes {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  grid-column: 1;
+  grid-row: 1;
+  min-width: var(--frame-terminal-panes-min-width, 0);
+  min-height: var(--frame-terminal-panes-min-height, 0);
+  overflow: hidden;
+}
+
+.with-tabs > .frame-terminal-panes {
+  grid-row: 2;
+}
+
+.frame-terminal-pane {
+  grid-row: 1;
+  min-width: var(--frame-terminal-pane-min-width, 0);
+  min-height: var(--frame-terminal-pane-min-height, 0);
+  overflow: hidden;
+  border-bottom: var(
+    --frame-terminal-pane-border-bottom,
+    1px solid transparent
+  );
+}
+
+.frame-terminal-pane:not(:first-child) {
+  border-left: 1px solid var(--frame-line, #2b2b2b);
+}
+
+.frame-terminal-panes > .frame-terminal-pane-resize {
+  position: relative;
+  grid-row: 1;
+  justify-self: center;
+}
+
+.frame-terminal-body > .frame-terminal-sidebar-resize {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+}
+
+.frame-terminal-pane.active {
+  border-bottom-color: var(--frame-accent, #0078d4);
+}
+
+.frame-terminal-sidebar {
+  grid-column: 3;
+  grid-row: 1;
+  min-width: var(--frame-terminal-sidebar-min-width, 0);
+  min-height: var(--frame-terminal-sidebar-min-height, 0);
+  box-sizing: border-box;
+  overflow: auto;
+  border-left: 1px solid var(--frame-line, #2b2b2b);
+  padding: var(--frame-terminal-sidebar-padding, 4px);
+}
+
+.frame-terminal-tabs {
+  display: flex;
+  grid-column: 1;
+  grid-row: 1;
+  min-width: var(--frame-terminal-tabs-min-width, 0);
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-bottom: 1px solid var(--frame-line, #2b2b2b);
+}
+
+.frame-terminal-tabs .frame-terminal-session-group {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.frame-terminal-tabs
+  .frame-terminal-session-group
+  + .frame-terminal-session-group {
+  border-left: 1px solid var(--frame-line, #2b2b2b);
+}
+
+.frame-terminal-tabs .frame-terminal-session {
+  flex: 0 0 160px;
+  width: var(--frame-terminal-tabs-frame-terminal-session-width, 160px);
+  min-width: var(--frame-terminal-tabs-frame-terminal-session-min-width, 100px);
+  max-width: var(--frame-terminal-tabs-frame-terminal-session-max-width, 200px);
+  border-radius: var(
+    --frame-terminal-tabs-frame-terminal-session-border-radius,
+    0
+  );
+  border-bottom: var(
+    --frame-terminal-tabs-frame-terminal-session-border-bottom,
+    1px solid transparent
+  );
+}
+
+.frame-terminal-tabs .frame-terminal-session.active {
+  border-bottom-color: var(--frame-accent, #0078d4);
+}
+
+.frame-terminal-session {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: var(--frame-terminal-session-min-height, 28px);
+  border-radius: var(--frame-terminal-session-border-radius, 3px);
+}
+
+.frame-terminal-session.active {
+  background: var(--frame-terminal-session-active-background, #ffffff0c);
+}
+
+.frame-terminal-session-label {
+  display: flex;
+  flex: 1;
+  min-width: var(--frame-terminal-session-label-min-width, 0);
+}
+
+.frame-terminal-session-select {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-terminal-session-select-gap, 5px);
+  width: var(--frame-terminal-session-select-width, 100%);
+  min-width: var(--frame-terminal-session-select-min-width, 0);
+  min-height: var(--frame-terminal-session-select-min-height, 28px);
+  padding: var(--frame-terminal-session-select-padding, 5px);
+  border: var(--frame-terminal-session-select-border, 0);
+  color: inherit;
+  background: var(--frame-terminal-session-select-background, none);
+  text-align: left;
+  cursor: pointer;
+}
+
+.frame-terminal-session-select span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.frame-terminal-session-select small {
+  color: var(--frame-muted, #999);
+}
+
+.frame-terminal-session-close {
+  display: none;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+}
+
+.frame-terminal-session:hover .frame-terminal-session-close,
+.frame-terminal-session:focus-within .frame-terminal-session-close {
+  display: block;
+}
+
+.frame-terminal-session:hover .frame-terminal-session-select,
+.frame-terminal-session:focus-within .frame-terminal-session-select {
+  padding-right: var(
+    --frame-terminal-session-hover-frame-terminal-session-select-padding-right,
+    30px
+  );
+}
+
+.frame-terminal-sidebar .split-group .frame-terminal-session-select {
+  padding-left: var(
+    --frame-terminal-sidebar-split-group-frame-terminal-session-select-padding-left,
+    22px
+  );
+}
+
+.frame-terminal-sidebar .split-group .frame-terminal-session::before {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  border-left: 1px solid var(--frame-muted, #8e9496);
+}
+
+.frame-terminal-sidebar
+  .split-group
+  .frame-terminal-session:first-child::before {
+  top: 50%;
+}
+
+.frame-terminal-sidebar
+  .split-group
+  .frame-terminal-session:last-child::before {
+  bottom: 50%;
+}
+
+.frame-terminal-sidebar .split-group .frame-terminal-session::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  left: 8px;
+  top: 50%;
+  width: var(
+    --frame-terminal-sidebar-split-group-frame-terminal-session-after-width,
+    8px
+  );
+  border-top: 1px solid var(--frame-muted, #8e9496);
+}
+</style>

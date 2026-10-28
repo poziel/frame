@@ -1,0 +1,35 @@
+.frame-menubar {
+  display: flex;
+  align-items: center;
+  min-width: var(--frame-menubar-min-width, 0);
+}
+
+.menubar-groups {
+  display: flex;
+  align-items: center;
+}
+
+.frame-menubar button {
+  color: var(--frame-menubar-button-color, #a9a9a9);
+  height: var(--frame-menubar-button-height, 25px);
+  padding: var(--frame-menubar-button-padding, 0 8px);
+  border-radius: var(
+    --frame-menubar-button-border-radius,
+    var(--frame-radius-medium)
+  );
+  font-size: var(--frame-menubar-button-font-size, 12px);
+  white-space: nowrap;
+}
+
+.frame-menubar button:hover,
+.frame-menubar button.active {
+  background: var(--frame-menubar-button-hover-background, #ffffff0b);
+}
+
+.menubar-overflow {
+  display: none;
+}
+
+.menubar-overflow.needed {
+  display: block;
+}

@@ -34,9 +34,11 @@ import WorkspaceUnsavedActions from './WorkspaceUnsavedActions.vue';
 import FrameModal from './FrameModal.vue';
 import ViewDragOverlay from './ViewDragOverlay.vue';
 import type {FrameMenuItem} from '../navigation/generalMenu';
-import '../../style.css';
-import './styles/shell-sidebars.css';
-import './styles/panel-docking.css';
+import '../../styles/index.scss';
+// Keep the legacy canvas class contract in shell CSS without mounting its view.
+import './WorkspaceCanvas.vue?vue&type=style&index=0&lang.scss';
+import './styles/shell-sidebars.scss';
+import './styles/panel-docking.scss';
 import {
   layoutGeometry,
   maximizedRegionBounds,
@@ -676,7 +678,7 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="root"
-    class="workbench"
+    class="workbench frame-box-scope frame-control-scope frame-shell-text frame-scroll-scope"
     :data-frame-overlay-host="`${contentId}-overlays`"
     :inert="frame.modals.length > 0 || undefined"
     @contextmenu.prevent
@@ -1069,7 +1071,7 @@ onBeforeUnmount(() => {
       ><div
         :id="`${contentId}-overlays`"
         ref="overlayHost"
-        class="frame-overlay-host"
+        class="frame-overlay-host frame-shell-text"
         :style="overlayStyle"
     /></Teleport>
     <Teleport :to="overlayHost ?? 'body'"

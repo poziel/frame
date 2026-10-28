@@ -1,5 +1,3 @@
-import './styles/index.css';
-
 export {
   createNotificationHistory,
   NotificationHistoryController,

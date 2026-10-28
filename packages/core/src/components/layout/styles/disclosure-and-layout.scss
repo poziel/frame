@@ -1,0 +1,34 @@
+.frame-layout-text {
+  font-family: var(--frame-font-body);
+  font-size: var(--frame-font-size-body);
+  color: var(--frame-text);
+}
+.frame-disclosure-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--frame-gap);
+  width: 100%;
+  border: 0;
+  background: var(--frame-disclosure-background, var(--frame-surface));
+  color: inherit;
+  font: inherit;
+  padding: var(--frame-content-padding);
+  text-align: start;
+  cursor: pointer;
+}
+.frame-disclosure-trigger:hover {
+  background: var(--frame-disclosure-hover, var(--frame-menu-hover));
+}
+.frame-layout-focus:focus-visible {
+  outline: 2px solid var(--frame-accent);
+  outline-offset: -2px;
+}
+.frame-layout-disabled:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.frame-disclosure-content {
+  padding: var(--frame-content-padding);
+  background: var(--frame-disclosure-content-background, var(--frame-canvas));
+}

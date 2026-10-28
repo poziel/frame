@@ -305,7 +305,7 @@ onBeforeUnmount(() => {
   <DialogRoot :open="active" :modal="false"
     ><Teleport :to="target"
       ><div
-        class="frame-modal-layer"
+        class="frame-modal-layer frame-overlay-interactive"
         :style="layerStyle"
         :inert="!active || undefined"
         @contextmenu.prevent
@@ -322,7 +322,7 @@ onBeforeUnmount(() => {
             ref="dialog"
             :aria-modal="active ? true : undefined"
             tabindex="-1"
-            class="frame-modal"
+            class="frame-modal frame-overlay-surface frame-scroll-scope"
             :class="{maximized, 'no-drag': !draggable}"
             :style="style"
           >
@@ -394,3 +394,182 @@ onBeforeUnmount(() => {
     ><FrameFocusOwner
   /></DialogRoot>
 </template>
+
+<style lang="scss">
+@use '../../styles/mixins/surfaces';
+
+.frame-modal-layer {
+  position: fixed;
+  inset: 0;
+  font: var(--frame-modal-layer-font, 12px system-ui);
+  color: var(--frame-modal-layer-color, #d0d2d4);
+}
+
+.frame-modal-layer,
+.frame-modal-layer * {
+  box-sizing: border-box;
+}
+
+.frame-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--frame-modal-backdrop-background, #0006);
+}
+
+.frame-modal {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  @include surfaces.framed-surface(
+    1px solid var(--frame-line),
+    var(--frame-panel-radius),
+    var(--frame-overlay-background)
+  );
+  backdrop-filter: var(--frame-overlay-backdrop-filter);
+  box-shadow: var(--frame-overlay-shadow);
+  outline: var(--frame-modal-outline, none);
+}
+
+.frame-modal-header {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-modal-header-gap, 8px);
+  padding: var(--frame-modal-header-padding, 0 8px 0 12px);
+  min-height: var(--frame-modal-header-min-height, 34px);
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--frame-line);
+  border-radius: var(
+    --frame-modal-header-border-radius,
+    var(--frame-radius-large) var(--frame-radius-large) 0 0
+  );
+  background: var(--frame-surface);
+  cursor: move;
+  touch-action: none;
+  user-select: none;
+}
+
+.frame-modal-header h2 {
+  font: inherit;
+  margin: var(--frame-modal-header-h2-margin, 0);
+  font-weight: var(--frame-modal-header-h2-font-weight, 500);
+  flex: 1;
+  min-width: var(--frame-modal-header-h2-min-width, 0);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modal-icon {
+  width: var(--frame-modal-icon-width, 16px);
+  height: var(--frame-modal-icon-height, 16px);
+}
+
+.frame-modal-content {
+  min-height: var(--frame-modal-content-min-height, 0);
+  flex: 1;
+  overflow: auto;
+}
+
+.modal-resize {
+  position: absolute;
+  touch-action: none;
+}
+
+.modal-resize.n,
+.modal-resize.s {
+  height: var(--frame-modal-resize-n-height, 8px);
+  left: 10px;
+  right: 10px;
+  cursor: ns-resize;
+}
+
+.modal-resize.n {
+  top: -4px;
+}
+
+.modal-resize.s {
+  bottom: -4px;
+}
+
+.modal-resize.e,
+.modal-resize.w {
+  width: var(--frame-modal-resize-e-width, 8px);
+  top: 10px;
+  bottom: 10px;
+  cursor: ew-resize;
+}
+
+.modal-resize.e {
+  right: -4px;
+}
+
+.modal-resize.w {
+  left: -4px;
+}
+
+.modal-resize.ne,
+.modal-resize.nw,
+.modal-resize.se,
+.modal-resize.sw {
+  width: var(--frame-modal-resize-ne-width, 16px);
+  height: var(--frame-modal-resize-ne-height, 16px);
+}
+
+.modal-resize.ne {
+  top: -5px;
+  right: -5px;
+  cursor: nesw-resize;
+}
+
+.modal-resize.nw {
+  top: -5px;
+  left: -5px;
+  cursor: nwse-resize;
+}
+
+.modal-resize.se {
+  bottom: -5px;
+  right: -5px;
+  cursor: nwse-resize;
+}
+
+.modal-resize.sw {
+  bottom: -5px;
+  left: -5px;
+  cursor: nesw-resize;
+}
+
+.frame-modal {
+  color: var(--frame-modal-color, #d4d4d4);
+}
+
+.frame-modal-content {
+  padding: var(--frame-modal-content-padding, 0);
+}
+
+.frame-modal.no-drag .frame-modal-header {
+  cursor: default;
+  touch-action: auto;
+}
+
+.frame-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--frame-modal-footer-gap, 8px);
+  padding: var(--frame-modal-footer-padding, 8px 12px);
+  min-height: var(--frame-modal-header-min-height, 34px);
+  flex-shrink: 0;
+  border-top: 1px solid var(--frame-line);
+  border-radius: 0 0 var(--frame-radius-large) var(--frame-radius-large);
+  background: var(--frame-surface);
+}
+
+.frame-modal-header-separator {
+  align-self: stretch;
+  width: var(--frame-modal-header-separator-width, 1px);
+  margin: var(--frame-modal-header-separator-margin, 7px 2px);
+  background: var(--frame-line);
+  flex-shrink: 0;
+}
+</style>

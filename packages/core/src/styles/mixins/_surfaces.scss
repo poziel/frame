@@ -1,0 +1,12 @@
+// A framed surface owns its contour and fill; content spacing stays with its owner.
+@mixin framed-surface($border, $radius, $background) {
+  border: $border;
+  border-radius: $radius;
+  background: $background;
+}
+
+// Keep the prefixed fallback paired with the standard frosted-overlay effect.
+@mixin overlay-backdrop {
+  -webkit-backdrop-filter: var(--frame-overlay-backdrop-filter);
+  backdrop-filter: var(--frame-overlay-backdrop-filter);
+}

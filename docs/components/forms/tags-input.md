@@ -78,48 +78,48 @@ Frame supplies this part in its anatomy. Availability below refers to configurat
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `addOnBlur` | `boolean` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Commit tag draft on blur. |
-| `addOnPaste` | `boolean` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Commit pasted tag text. |
-| `addOnTab` | `boolean` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Commit tag draft on Tab. |
-| `as` | `AsTag \| Component` | Same upstream type; undeclared in Frame | `"div"` (Reka) | Forwarded / limited | Changes Root composition, not individual children; can break Frame fixed anatomy. |
-| `asChild` | `boolean` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / limited | Changes Root composition, not individual children; can break Frame fixed anatomy. |
-| `convertValue` | `((value: string) => T)` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / limited | Use string results; object values are lost through Frame String normalization. |
-| `defaultValue` | `T[]` | Same upstream type; undeclared in Frame | `[]` (Reka) | Forwarded / ineffective | Frame supplies the controlled model; this does not establish uncontrolled Frame state. |
-| `delimiter` | `string \| RegExp` | Same upstream type; undeclared in Frame | `","` (Reka) | Forwarded | String or RegExp that commits/splits tags. |
-| `dir` | `"ltr" \| "rtl"` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Reading/navigation direction. |
-| `disabled` | `boolean` | `boolean` | `false` | Declared | Prevent interaction. |
-| `displayValue` | `((value: T) => string)` | Same upstream type; undeclared in Frame | `value.toString()` (Reka) | Forwarded | Format tag display text. |
-| `duplicate` | `boolean` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / limited | Root may accept duplicates, but Frame keys chips by value; keep host values unique. |
-| `id` | `string` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Element or form-control identity. |
-| `max` | `number` | Same upstream type; undeclared in Frame | `0` (Reka) | Forwarded | Maximum number of user-added tags; zero means unlimited. Does not sanitize host-assigned arrays. |
-| `modelValue` | `T[] \| null` | `string[]` | `Required` | Changed | Required string array; entries normalize with String. |
-| `name` | `string` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Native submitted field name. |
-| `required` | `boolean` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Native required-value constraint. |
+| Prop           | Reka type                | Frame type                              | Required/default            | Availability            | Description                                                                                      |
+| -------------- | ------------------------ | --------------------------------------- | --------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------ |
+| `addOnBlur`    | `boolean`                | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Commit tag draft on blur.                                                                        |
+| `addOnPaste`   | `boolean`                | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Commit pasted tag text.                                                                          |
+| `addOnTab`     | `boolean`                | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Commit tag draft on Tab.                                                                         |
+| `as`           | `AsTag \| Component`     | Same upstream type; undeclared in Frame | `"div"` (Reka)              | Forwarded / limited     | Changes Root composition, not individual children; can break Frame fixed anatomy.                |
+| `asChild`      | `boolean`                | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / limited     | Changes Root composition, not individual children; can break Frame fixed anatomy.                |
+| `convertValue` | `((value: string) => T)` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / limited     | Use string results; object values are lost through Frame String normalization.                   |
+| `defaultValue` | `T[]`                    | Same upstream type; undeclared in Frame | `[]` (Reka)                 | Forwarded / ineffective | Frame supplies the controlled model; this does not establish uncontrolled Frame state.           |
+| `delimiter`    | `string \| RegExp`       | Same upstream type; undeclared in Frame | `","` (Reka)                | Forwarded               | String or RegExp that commits/splits tags.                                                       |
+| `dir`          | `"ltr" \| "rtl"`         | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Reading/navigation direction.                                                                    |
+| `disabled`     | `boolean`                | `boolean`                               | `false`                     | Declared                | Prevent interaction.                                                                             |
+| `displayValue` | `((value: T) => string)` | Same upstream type; undeclared in Frame | `value.toString()` (Reka)   | Forwarded               | Format tag display text.                                                                         |
+| `duplicate`    | `boolean`                | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / limited     | Root may accept duplicates, but Frame keys chips by value; keep host values unique.              |
+| `id`           | `string`                 | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Element or form-control identity.                                                                |
+| `max`          | `number`                 | Same upstream type; undeclared in Frame | `0` (Reka)                  | Forwarded               | Maximum number of user-added tags; zero means unlimited. Does not sanitize host-assigned arrays. |
+| `modelValue`   | `T[] \| null`            | `string[]`                              | `Required`                  | Changed                 | Required string array; entries normalize with String.                                            |
+| `name`         | `string`                 | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Native submitted field name.                                                                     |
+| `required`     | `boolean`                | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Native required-value constraint.                                                                |
 
 #### Emits
 
-| Emit | Reka payload | Frame payload | Availability | Behavior |
-| --- | --- | --- | --- | --- |
-| `addTag` | `[payload: T]` | Underlying Root value | Forwarded listener | Undeclared Root listener after accepting a tag; payload is before Frame normalization. |
-| `invalid` | `[payload: T]` | Underlying Root value | Forwarded listener | Undeclared Root listener for a rejected addition, not native form validation. |
-| `removeTag` | `[payload: T]` | Underlying Root value | Forwarded listener | Undeclared Root listener after removing a tag; payload is before Frame normalization. |
-| `update:modelValue` | `[payload: T[]]` | string[] | Declared / changed | Controlled-model update using the conversion described on modelValue above. Not a cancellable event. |
+| Emit                | Reka payload     | Frame payload         | Availability       | Behavior                                                                                             |
+| ------------------- | ---------------- | --------------------- | ------------------ | ---------------------------------------------------------------------------------------------------- |
+| `addTag`            | `[payload: T]`   | Underlying Root value | Forwarded listener | Undeclared Root listener after accepting a tag; payload is before Frame normalization.               |
+| `invalid`           | `[payload: T]`   | Underlying Root value | Forwarded listener | Undeclared Root listener for a rejected addition, not native form validation.                        |
+| `removeTag`         | `[payload: T]`   | Underlying Root value | Forwarded listener | Undeclared Root listener after removing a tag; payload is before Frame normalization.                |
+| `update:modelValue` | `[payload: T[]]` | string[]              | Declared / changed | Controlled-model update using the conversion described on modelValue above. Not a cancellable event. |
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | `modelValue: string \| number \| bigint \| Record<string, any>` | Internal; payload not forwarded to callers |
+| Upstream slot | Scoped field                                                    | Frame availability                         |
+| ------------- | --------------------------------------------------------------- | ------------------------------------------ |
+| default       | `modelValue: string \| number \| bigint \| Record<string, any>` | Internal; payload not forwarded to callers |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
-| data-invalid | Present for rejected draft state | No automatic error message. |
-| data-disabled | Present when disabled | Root disabled state. |
-| data-focused | Present when focus is within | Includes child controls. |
+| Attribute     | Value/presence                   | Meaning                     |
+| ------------- | -------------------------------- | --------------------------- |
+| data-invalid  | Present for rejected draft state | No automatic error message. |
+| data-disabled | Present when disabled            | Root disabled state.        |
+| data-focused  | Present when focus is within     | Includes child controls.    |
 
 #### Configuration notes
 
@@ -139,12 +139,12 @@ Frame supplies this part in its anatomy. Availability below refers to configurat
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | No independent Frame prop | `"div"` (Reka) | Internal | Rendered element/component. Not independently configurable through Frame. |
-| `asChild` | `boolean` | No independent Frame prop | Unset in upstream reference | Internal | Merge behavior into the supplied child element. Not independently configurable through Frame. |
-| `disabled` | `boolean` | No independent Frame prop | Unset in upstream reference | Internal | Derived from group/option disabled state. |
-| `value` | `string \| number \| bigint \| Record<string, any>` | No independent Frame prop | `Required upstream` (Reka) | Internal | Derived from option.value. |
+| Prop       | Reka type                                           | Frame type                | Required/default            | Availability | Description                                                                                   |
+| ---------- | --------------------------------------------------- | ------------------------- | --------------------------- | ------------ | --------------------------------------------------------------------------------------------- |
+| `as`       | `AsTag \| Component`                                | No independent Frame prop | `"div"` (Reka)              | Internal     | Rendered element/component. Not independently configurable through Frame.                     |
+| `asChild`  | `boolean`                                           | No independent Frame prop | Unset in upstream reference | Internal     | Merge behavior into the supplied child element. Not independently configurable through Frame. |
+| `disabled` | `boolean`                                           | No independent Frame prop | Unset in upstream reference | Internal     | Derived from group/option disabled state.                                                     |
+| `value`    | `string \| number \| bigint \| Record<string, any>` | No independent Frame prop | `Required upstream` (Reka)  | Internal     | Derived from option.value.                                                                    |
 
 #### Emits
 
@@ -152,16 +152,16 @@ No component-defined emits on this part. Native listeners are separate from comp
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | No scoped fields listed | Frame supplies the internal composition; no public part slot |
+| Upstream slot | Scoped field            | Frame availability                                           |
+| ------------- | ----------------------- | ------------------------------------------------------------ |
+| default       | No scoped fields listed | Frame supplies the internal composition; no public part slot |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
-| data-state | active / inactive | Tag keyboard-navigation selection, not collection membership. |
-| data-disabled | Present when disabled | Tag/delete disabled state. |
+| Attribute     | Value/presence        | Meaning                                                       |
+| ------------- | --------------------- | ------------------------------------------------------------- |
+| data-state    | active / inactive     | Tag keyboard-navigation selection, not collection membership. |
+| data-disabled | Present when disabled | Tag/delete disabled state.                                    |
 
 ### ItemText
 
@@ -169,10 +169,10 @@ Frame supplies this part in its anatomy. Availability below refers to configurat
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | No independent Frame prop | `"span"` (Reka) | Internal | Rendered element/component. Not independently configurable through Frame. |
-| `asChild` | `boolean` | No independent Frame prop | Unset in upstream reference | Internal | Merge behavior into the supplied child element. Not independently configurable through Frame. |
+| Prop      | Reka type            | Frame type                | Required/default            | Availability | Description                                                                                   |
+| --------- | -------------------- | ------------------------- | --------------------------- | ------------ | --------------------------------------------------------------------------------------------- |
+| `as`      | `AsTag \| Component` | No independent Frame prop | `"span"` (Reka)             | Internal     | Rendered element/component. Not independently configurable through Frame.                     |
+| `asChild` | `boolean`            | No independent Frame prop | Unset in upstream reference | Internal     | Merge behavior into the supplied child element. Not independently configurable through Frame. |
 
 #### Emits
 
@@ -180,15 +180,15 @@ No component-defined emits on this part. Native listeners are separate from comp
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | No scoped fields listed | Frame supplies the internal composition; no public part slot |
+| Upstream slot | Scoped field            | Frame availability                                           |
+| ------------- | ----------------------- | ------------------------------------------------------------ |
+| default       | No scoped fields listed | Frame supplies the internal composition; no public part slot |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
-| — | None supplied by this part | Label/text/separator parts do not add checked/open state markers. |
+| Attribute | Value/presence             | Meaning                                                           |
+| --------- | -------------------------- | ----------------------------------------------------------------- |
+| —         | None supplied by this part | Label/text/separator parts do not add checked/open state markers. |
 
 ### ItemDelete
 
@@ -196,10 +196,10 @@ Frame supplies this part in its anatomy. Availability below refers to configurat
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | No independent Frame prop | `"button"` (Reka) | Internal | Rendered element/component. Not independently configurable through Frame. |
-| `asChild` | `boolean` | No independent Frame prop | Unset in upstream reference | Internal | Merge behavior into the supplied child element. Not independently configurable through Frame. |
+| Prop      | Reka type            | Frame type                | Required/default            | Availability | Description                                                                                   |
+| --------- | -------------------- | ------------------------- | --------------------------- | ------------ | --------------------------------------------------------------------------------------------- |
+| `as`      | `AsTag \| Component` | No independent Frame prop | `"button"` (Reka)           | Internal     | Rendered element/component. Not independently configurable through Frame.                     |
+| `asChild` | `boolean`            | No independent Frame prop | Unset in upstream reference | Internal     | Merge behavior into the supplied child element. Not independently configurable through Frame. |
 
 #### Emits
 
@@ -207,16 +207,16 @@ No component-defined emits on this part. Native listeners are separate from comp
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | No scoped fields listed | Frame supplies the internal composition; no public part slot |
+| Upstream slot | Scoped field            | Frame availability                                           |
+| ------------- | ----------------------- | ------------------------------------------------------------ |
+| default       | No scoped fields listed | Frame supplies the internal composition; no public part slot |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
-| data-state | active / inactive | Tag keyboard-navigation selection, not collection membership. |
-| data-disabled | Present when disabled | Tag/delete disabled state. |
+| Attribute     | Value/presence        | Meaning                                                       |
+| ------------- | --------------------- | ------------------------------------------------------------- |
+| data-state    | active / inactive     | Tag keyboard-navigation selection, not collection membership. |
+| data-disabled | Present when disabled | Tag/delete disabled state.                                    |
 
 ### Input
 
@@ -224,13 +224,13 @@ Frame supplies this part in its anatomy. Availability below refers to configurat
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | No independent Frame prop | `"input"` (Reka) | Internal | Rendered element/component. Not independently configurable through Frame. |
-| `asChild` | `boolean` | No independent Frame prop | Unset in upstream reference | Internal | Merge behavior into the supplied child element. Not independently configurable through Frame. |
-| `autoFocus` | `boolean` | No independent Frame prop | Unset in upstream reference | Internal | Autofocus the tag textbox. Not independently configurable through Frame. |
-| `maxLength` | `number` | No independent Frame prop | Unset in upstream reference | Internal | Textbox character limit. Not independently configurable through Frame. |
-| `placeholder` | `string` | No independent Frame prop | Unset in upstream reference | Internal | Routed from Frame placeholder prop. |
+| Prop          | Reka type            | Frame type                | Required/default            | Availability | Description                                                                                   |
+| ------------- | -------------------- | ------------------------- | --------------------------- | ------------ | --------------------------------------------------------------------------------------------- |
+| `as`          | `AsTag \| Component` | No independent Frame prop | `"input"` (Reka)            | Internal     | Rendered element/component. Not independently configurable through Frame.                     |
+| `asChild`     | `boolean`            | No independent Frame prop | Unset in upstream reference | Internal     | Merge behavior into the supplied child element. Not independently configurable through Frame. |
+| `autoFocus`   | `boolean`            | No independent Frame prop | Unset in upstream reference | Internal     | Autofocus the tag textbox. Not independently configurable through Frame.                      |
+| `maxLength`   | `number`             | No independent Frame prop | Unset in upstream reference | Internal     | Textbox character limit. Not independently configurable through Frame.                        |
+| `placeholder` | `string`             | No independent Frame prop | Unset in upstream reference | Internal     | Routed from Frame placeholder prop.                                                           |
 
 #### Emits
 
@@ -238,14 +238,14 @@ No component-defined emits on this part. Native listeners are separate from comp
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | No scoped fields listed | Frame supplies the internal composition; no public part slot |
+| Upstream slot | Scoped field            | Frame availability                                           |
+| ------------- | ----------------------- | ------------------------------------------------------------ |
+| default       | No scoped fields listed | Frame supplies the internal composition; no public part slot |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
+| Attribute    | Value/presence                   | Meaning                                          |
+| ------------ | -------------------------------- | ------------------------------------------------ |
 | data-invalid | Present for rejected draft state | Textbox uses native disabled, not data-disabled. |
 
 ### Omitted parts
@@ -256,10 +256,10 @@ TagsInputClear is not rendered. Its as/asChild and default content slot are not 
 
 #### Props
 
-| Prop | Type | Required/default | Description |
-| --- | --- | --- | --- |
-| `label` | `string` | `Unset` | Accessible name routed to the textbox. |
-| `placeholder` | `string` | `Unset` | Explicitly routed to the textbox, not just Root. |
+| Prop          | Type     | Required/default | Description                                      |
+| ------------- | -------- | ---------------- | ------------------------------------------------ |
+| `label`       | `string` | `Unset`          | Accessible name routed to the textbox.           |
+| `placeholder` | `string` | `Unset`          | Explicitly routed to the textbox, not just Root. |
 
 #### Slots
 
@@ -275,40 +275,40 @@ No Frame-defined methods or internal Reka refs are exposed.
 
 ### Sources and version
 
-[FrameTagField.vue](../../../packages/core/src/components/forms/FrameTagField.vue) and [controls.css](../../../packages/core/src/components/forms/shared/controls.css) define Frame behavior. Compared with the official [Reka Tags Input reference](https://reka-ui.com/docs/components/tags-input.md) and installed Reka `2.11.0`.
+[FrameTagField.vue](../../../packages/core/src/components/forms/FrameTagField.vue) and [controls.scss](../../../packages/core/src/components/forms/styles/controls.scss) define Frame behavior. Compared with the official [Reka Tags Input reference](https://reka-ui.com/docs/components/tags-input.md) and installed Reka `2.11.0`.
 
 ## Styling
 
 ### Parts and selectors
 
-| Selector | Part | Placement/attribute target |
-| --- | --- | --- |
-| `.frame-tags-input` | Root | Caller class/style targets this element. |
-| `.frame-tags-input-item` | Tag item | Internal part; caller attributes do not target it independently. |
-| `.frame-form-input` | Input cell/textbox | Internal part; caller attributes do not target it independently. |
-| `.frame-control-button` | Action button | Internal part; caller attributes do not target it independently. |
+| Selector                 | Part               | Placement/attribute target                                       |
+| ------------------------ | ------------------ | ---------------------------------------------------------------- |
+| `.frame-tags-input`      | Root               | Caller class/style targets this element.                         |
+| `.frame-tags-input-item` | Tag item           | Internal part; caller attributes do not target it independently. |
+| `.frame-form-input`      | Input cell/textbox | Internal part; caller attributes do not target it independently. |
+| `.frame-control-button`  | Action button      | Internal part; caller attributes do not target it independently. |
 
 Chips wrap inside Root. Item active/inactive is keyboard navigation state.
 
 ### Variables
 
-| Token key | Variable | Value kind | Default/fallback | Part/effect | Scope/limits | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| `--frame-accent` | `--frame-accent` | color | Catalog: `#0078d4`; CSS fallback: `#0078d4` | Input cell/textbox, Action button outline | Shared across controls using this variable. State rules: :focus-visible. | Accent. |
-| `--frame-control-background` | `--frame-control-background` | color | Catalog: `#1d1d1d`; CSS fallback: `#1d1d1d` | Input cell/textbox background | Shared across controls using this variable. | Control background. |
-| `--frame-control-border` | `--frame-control-border` | color | Catalog: `var(--frame-border-color)`; CSS fallback: `#3c4246` | Input cell/textbox border-color; Root border-color | Shared across controls using this variable. | Control border. |
-| `--frame-control-padding-x` | `--frame-control-padding-x` | length | Catalog: `calc(var(--frame-spacing-unit) * 2.5)`; CSS fallback: `10px` | Input cell/textbox, Action button padding; Tag item padding-left | Shared across controls using this variable. | Control padding x. |
-| `--frame-control-padding-y` | `--frame-control-padding-y` | length | Catalog: `calc(var(--frame-spacing-unit) * 1.25)`; CSS fallback: `5px` | Input cell/textbox, Action button padding; Root padding | Shared across controls using this variable. | Control padding y. |
-| `--frame-control-radius` | `--frame-control-radius` | length | Catalog: `var(--frame-radius-medium)`; CSS fallback: `var(--frame-radius-medium)` | Action button border-radius; Root border-radius; Tag item border-radius | Shared across controls using this variable. | Control radius. |
-| `--frame-control-text` | `--frame-control-text` | color | Catalog: `#d4d4d4`; CSS fallback: `#d4d4d4` | Input cell/textbox color | Shared across controls using this variable. | Control text. |
-| CSS only | `--frame-form-input-radius` | length / CSS length expression | CSS fallback: `var(--frame-input-radius)` | Input cell/textbox border-radius | Shared across controls using this variable. CSS only; not in JSON allowlist. | Form input radius. |
-| `--frame-gap` | `--frame-gap` | length | Catalog: `calc(var(--frame-spacing-unit) * 1.5)`; CSS fallback: `6px` | Root gap; Tag item gap | Shared across controls using this variable. | Gap. |
-| `--frame-input-radius` | `--frame-input-radius` | length | Catalog: `var(--frame-menu-border-radius)` | Input cell/textbox border-radius; Root border-radius | Shared across controls using this variable. | Input radius. |
-| `--frame-line` | `--frame-line` | color | Catalog: `#2b2b2b`; CSS fallback: `#454545` | Action button border; Root border; Tag item background | Shared across controls using this variable. | Line. |
-| `--frame-radius-medium` | `--frame-radius-medium` | length | Catalog: `4px` | Action button border-radius; Root border-radius; Tag item border-radius | Shared across controls using this variable. | Radius medium. |
-| `--frame-surface` | `--frame-surface` | color | Catalog: `#181818`; CSS fallback: `#242424` | Action button background | Shared across controls using this variable. | Surface. |
-| CSS only | `--frame-tags-input-border-color` | color | CSS fallback: `var(--frame-control-border)` | Root border-color | Shared across controls using this variable. CSS only; not in JSON allowlist. | Tags input border color. |
-| CSS only | `--frame-tags-input-radius` | length / CSS length expression | CSS fallback: `var(--frame-input-radius)` | Root border-radius | Shared across controls using this variable. CSS only; not in JSON allowlist. | Tags input radius. |
-| `--frame-text` | `--frame-text` | color | Catalog: `#cccccc`; CSS fallback: `#ccc` | Action button color | Shared across controls using this variable. | Text. |
+| Token key                    | Variable                          | Value kind                     | Default/fallback                                                                  | Part/effect                                                             | Scope/limits                                                                 | Description              |
+| ---------------------------- | --------------------------------- | ------------------------------ | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ------------------------ |
+| `--frame-accent`             | `--frame-accent`                  | color                          | Catalog: `#0078d4`; CSS fallback: `#0078d4`                                       | Input cell/textbox, Action button outline                               | Shared across controls using this variable. State rules: :focus-visible.     | Accent.                  |
+| `--frame-control-background` | `--frame-control-background`      | color                          | Catalog: `#1d1d1d`; CSS fallback: `#1d1d1d`                                       | Input cell/textbox background                                           | Shared across controls using this variable.                                  | Control background.      |
+| `--frame-control-border`     | `--frame-control-border`          | color                          | Catalog: `var(--frame-border-color)`; CSS fallback: `#3c4246`                     | Input cell/textbox border-color; Root border-color                      | Shared across controls using this variable.                                  | Control border.          |
+| `--frame-control-padding-x`  | `--frame-control-padding-x`       | length                         | Catalog: `calc(var(--frame-spacing-unit) * 2.5)`; CSS fallback: `10px`            | Input cell/textbox, Action button padding; Tag item padding-left        | Shared across controls using this variable.                                  | Control padding x.       |
+| `--frame-control-padding-y`  | `--frame-control-padding-y`       | length                         | Catalog: `calc(var(--frame-spacing-unit) * 1.25)`; CSS fallback: `5px`            | Input cell/textbox, Action button padding; Root padding                 | Shared across controls using this variable.                                  | Control padding y.       |
+| `--frame-control-radius`     | `--frame-control-radius`          | length                         | Catalog: `var(--frame-radius-medium)`; CSS fallback: `var(--frame-radius-medium)` | Action button border-radius; Root border-radius; Tag item border-radius | Shared across controls using this variable.                                  | Control radius.          |
+| `--frame-control-text`       | `--frame-control-text`            | color                          | Catalog: `#d4d4d4`; CSS fallback: `#d4d4d4`                                       | Input cell/textbox color                                                | Shared across controls using this variable.                                  | Control text.            |
+| CSS only                     | `--frame-form-input-radius`       | length / CSS length expression | CSS fallback: `var(--frame-input-radius)`                                         | Input cell/textbox border-radius                                        | Shared across controls using this variable. CSS only; not in JSON allowlist. | Form input radius.       |
+| `--frame-gap`                | `--frame-gap`                     | length                         | Catalog: `calc(var(--frame-spacing-unit) * 1.5)`; CSS fallback: `6px`             | Root gap; Tag item gap                                                  | Shared across controls using this variable.                                  | Gap.                     |
+| `--frame-input-radius`       | `--frame-input-radius`            | length                         | Catalog: `var(--frame-menu-border-radius)`                                        | Input cell/textbox border-radius; Root border-radius                    | Shared across controls using this variable.                                  | Input radius.            |
+| `--frame-line`               | `--frame-line`                    | color                          | Catalog: `#2b2b2b`; CSS fallback: `#454545`                                       | Action button border; Root border; Tag item background                  | Shared across controls using this variable.                                  | Line.                    |
+| `--frame-radius-medium`      | `--frame-radius-medium`           | length                         | Catalog: `4px`                                                                    | Action button border-radius; Root border-radius; Tag item border-radius | Shared across controls using this variable.                                  | Radius medium.           |
+| `--frame-surface`            | `--frame-surface`                 | color                          | Catalog: `#181818`; CSS fallback: `#242424`                                       | Action button background                                                | Shared across controls using this variable.                                  | Surface.                 |
+| CSS only                     | `--frame-tags-input-border-color` | color                          | CSS fallback: `var(--frame-control-border)`                                       | Root border-color                                                       | Shared across controls using this variable. CSS only; not in JSON allowlist. | Tags input border color. |
+| CSS only                     | `--frame-tags-input-radius`       | length / CSS length expression | CSS fallback: `var(--frame-input-radius)`                                         | Root border-radius                                                      | Shared across controls using this variable. CSS only; not in JSON allowlist. | Tags input radius.       |
+| `--frame-text`               | `--frame-text`                    | color                          | Catalog: `#cccccc`; CSS fallback: `#ccc`                                          | Action button color                                                     | Shared across controls using this variable.                                  | Text.                    |
 
 See [theme variables](../../styling/theme-variables.md) for theme authoring.

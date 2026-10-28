@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '../../styles/index.css';
+import '../../styles/index.scss';
 import {computed, nextTick, ref, watch} from 'vue';
 import type {AIChatController, ChatMessage} from '../../controllers/aiChat';
 import {
@@ -116,3 +116,97 @@ const duration = computed(() =>
     <ChatEvent v-else :part="part" :chat="chat" :now="now" />
   </template>
 </template>
+
+<style lang="scss">
+.frame-chat-pending {
+  color: var(--frame-muted, #999);
+  font-size: var(--frame-chat-event-meta-size, 11px);
+}
+
+.frame-chat-turn-status {
+  color: var(--frame-muted, #999);
+  font-size: var(--frame-chat-event-meta-size, 11px);
+}
+
+.frame-chat-thought {
+  color: var(--frame-muted, #999);
+  font-size: var(--frame-chat-thought-font-size, 12px);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.frame-chat-work {
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 var(--frame-chat-work-gap, 10px);
+}
+
+.frame-chat-work-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  cursor: pointer;
+  list-style: none;
+  color: var(--frame-muted, #999);
+  font-size: var(--frame-chat-event-meta-size, 11px);
+}
+
+.frame-chat-work-summary::-webkit-details-marker {
+  display: none;
+}
+
+.frame-chat-work-summary::before {
+  content: '';
+  flex: 0 0 5px;
+  height: 5px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+  align-self: center;
+}
+
+.frame-chat-work[open] > .frame-chat-work-summary::before {
+  transform: rotate(135deg);
+}
+
+.frame-chat-work-summary:focus-visible {
+  outline: 1px solid var(--frame-accent, #0078d4);
+  outline-offset: 4px;
+}
+
+.frame-chat-work-duration {
+  cursor: default;
+}
+
+.frame-chat-work-duration::before {
+  display: none;
+}
+
+.frame-chat-work-outcome {
+  color: var(--frame-chat-error-color, #f48771);
+}
+
+.frame-chat-work-events {
+  display: flex;
+  flex-direction: column;
+  gap: var(--frame-chat-work-event-gap, 6px);
+  padding: var(--frame-chat-work-padding, 8px 0 2px 12px);
+  border-left: 1px solid var(--frame-border, #ffffff24);
+  margin: 8px 0 0 2px;
+}
+
+.frame-chat-current-thought {
+  color: var(--frame-muted, #999);
+  font-size: var(--frame-chat-thought-font-size, 12px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.frame-chat-intermediate {
+  color: var(--frame-text, #ccc);
+}
+</style>

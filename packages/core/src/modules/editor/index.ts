@@ -1,5 +1,3 @@
-import './styles/index.css';
-
 export {default as CodeEditor} from './components/CodeEditor.vue';
 export {createCodeEditor, EditorController} from './controllers/codeEditor';
 export type {

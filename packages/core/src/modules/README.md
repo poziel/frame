@@ -1,6 +1,6 @@
 # Core modules
 
-Optional modules ship in the same `@frame/core` package. Import only the modules your application uses. Each module owns its components, controllers, styles, and backend interfaces. Module entry points import their styles automatically. Monaco, PDF.js, and xterm are automatic package dependencies; no separate engine installation is required. The main `@frame/core` entry does not import modules. Monaco and PDF support load lazily when their surfaces are used.
+Optional modules ship in the same `@frame/core` package. Import only the modules your application uses. Each module owns its components, controllers, styles, and backend interfaces. Private styles travel with their Vue components; modules with shared presentation import their own style entry automatically. Monaco, PDF.js, and xterm are automatic package dependencies; no separate engine installation is required. The main `@frame/core` entry does not import modules. Monaco and PDF support load lazily when their surfaces are used.
 
 ## Shared module structure
 
@@ -17,19 +17,19 @@ public entry point, a local guide, and the responsibility folders below:
   integrations/
   types/
   styles/
-    index.css
+    index.scss
 ```
 
 | Location        | Responsibility                                                                               |
 | --------------- | -------------------------------------------------------------------------------------------- |
-| `index.ts`      | Supported public exports and the module's `styles/index.css` import                          |
+| `index.ts`      | Supported public exports and, when needed, the module's shared `styles/index.scss` import    |
 | `README.md`     | Module-specific file map, ownership, and integration notes                                   |
 | `components/`   | Vue surfaces and their private visual parts                                                  |
 | `controllers/`  | Stateful behavior and owned lifecycle, whether currently implemented as factories or classes |
 | `services/`     | Supporting operations such as engines, transports, parsing, and detection                    |
 | `integrations/` | Connections to Frame capabilities, views, settings, or other shell contributions             |
 | `types/`        | Contracts shared across module responsibilities and ambient declarations                     |
-| `styles/`       | Module-owned CSS; `index.css` is the common stylesheet entry                                 |
+| `styles/`       | Shared module SCSS and Sass tools, when needed; private styles stay in Vue components        |
 
 These are the standard root folder names for future modules. Create a folder
 when it has a meaningful responsibility; do not add empty directories or invent

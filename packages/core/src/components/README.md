@@ -14,7 +14,7 @@ Reusable components are grouped by purpose. The documentation catalog uses the s
 | `feedback/`              | Progress, loading, notifications, and toasts                   |
 | `overlays/`              | Reusable dialogs, drawers, popovers, hover cards, and tooltips |
 
-`framework/` holds application presentation components and their helpers. `shared/` holds existing cross-group component contracts and styles. Their documentation pages appear under **General**. Private helpers with a clear group live beside the controls that use them; helpers shared by framework components live in `framework/`. These folders organize source files, not state ownership or public package entry points.
+`framework/` holds application presentation components and their helpers. `shared/` holds existing cross-group component contracts. Their documentation pages appear under **General**. Private helpers with a clear group live beside the controls that use them; helpers shared by framework components live in `framework/`. Family styles live in each family's `styles/` folder; private styles stay in the SFC or an adjacent owned SCSS file. See the [style architecture](../../../../docs/styling/style-architecture.md) for composition and ordering. These folders organize source files, not state ownership or public package entry points.
 
 When adding a grouped component, add its name to the inventory and export it through `../index.ts` as appropriate. Consumers continue importing from `@frame/core`. Optional modules live in `../../modules/` with their own documentation catalog.
 

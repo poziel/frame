@@ -62,38 +62,38 @@ Frame supplies this part in its anatomy. Availability below refers to configurat
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | Same upstream type; undeclared in Frame | `button` (Reka) | Forwarded / limited | Changes Root composition, not individual children; can break Frame fixed anatomy. |
-| `asChild` | `boolean` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / limited | Changes Root composition, not individual children; can break Frame fixed anatomy. |
-| `defaultValue` | `T` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / ineffective | Frame supplies the controlled model; this does not establish uncontrolled Frame state. |
-| `disabled` | `boolean` | `boolean` | `false` | Declared | Prevent interaction. |
-| `falseValue` | `T` | Same upstream type; undeclared in Frame | `false` (Reka) | Forwarded / unsupported | Custom values cannot preserve the Frame boolean model contract. |
-| `id` | `string` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Element or form-control identity. |
-| `modelValue` | `null \| T` | `boolean` | `false` | Changed | Boolean public type; custom forwarded values are not normalized. |
-| `name` | `string` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Native submitted field name. |
-| `required` | `boolean` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Native required-value constraint. |
-| `trueValue` | `T` | Same upstream type; undeclared in Frame | `true` (Reka) | Forwarded / unsupported | Custom values cannot preserve the Frame boolean model contract. |
-| `value` | `string` | Same upstream type; undeclared in Frame | `"on"` (Reka) | Forwarded | Option identity or submitted checked value. |
+| Prop           | Reka type            | Frame type                              | Required/default            | Availability            | Description                                                                            |
+| -------------- | -------------------- | --------------------------------------- | --------------------------- | ----------------------- | -------------------------------------------------------------------------------------- |
+| `as`           | `AsTag \| Component` | Same upstream type; undeclared in Frame | `button` (Reka)             | Forwarded / limited     | Changes Root composition, not individual children; can break Frame fixed anatomy.      |
+| `asChild`      | `boolean`            | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / limited     | Changes Root composition, not individual children; can break Frame fixed anatomy.      |
+| `defaultValue` | `T`                  | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / ineffective | Frame supplies the controlled model; this does not establish uncontrolled Frame state. |
+| `disabled`     | `boolean`            | `boolean`                               | `false`                     | Declared                | Prevent interaction.                                                                   |
+| `falseValue`   | `T`                  | Same upstream type; undeclared in Frame | `false` (Reka)              | Forwarded / unsupported | Custom values cannot preserve the Frame boolean model contract.                        |
+| `id`           | `string`             | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Element or form-control identity.                                                      |
+| `modelValue`   | `null \| T`          | `boolean`                               | `false`                     | Changed                 | Boolean public type; custom forwarded values are not normalized.                       |
+| `name`         | `string`             | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Native submitted field name.                                                           |
+| `required`     | `boolean`            | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Native required-value constraint.                                                      |
+| `trueValue`    | `T`                  | Same upstream type; undeclared in Frame | `true` (Reka)               | Forwarded / unsupported | Custom values cannot preserve the Frame boolean model contract.                        |
+| `value`        | `string`             | Same upstream type; undeclared in Frame | `"on"` (Reka)               | Forwarded               | Option identity or submitted checked value.                                            |
 
 #### Emits
 
-| Emit | Reka payload | Frame payload | Availability | Behavior |
-| --- | --- | --- | --- | --- |
-| `update:modelValue` | `[payload: T]` | boolean | Declared / changed | Controlled-model update using the conversion described on modelValue above. Not a cancellable event. |
+| Emit                | Reka payload   | Frame payload | Availability       | Behavior                                                                                             |
+| ------------------- | -------------- | ------------- | ------------------ | ---------------------------------------------------------------------------------------------------- |
+| `update:modelValue` | `[payload: T]` | boolean       | Declared / changed | Controlled-model update using the conversion described on modelValue above. Not a cancellable event. |
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | `modelValue: T` | Internal; payload not forwarded to callers |
-| default | `checked: boolean` | Internal; payload not forwarded to callers |
+| Upstream slot | Scoped field       | Frame availability                         |
+| ------------- | ------------------ | ------------------------------------------ |
+| default       | `modelValue: T`    | Internal; payload not forwarded to callers |
+| default       | `checked: boolean` | Internal; payload not forwarded to callers |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
-| data-state | checked / unchecked | Current checked/on state. |
+| Attribute     | Value/presence        | Meaning                    |
+| ------------- | --------------------- | -------------------------- |
+| data-state    | checked / unchecked   | Current checked/on state.  |
 | data-disabled | Present when disabled | Underlying disabled state. |
 
 #### Configuration notes
@@ -116,10 +116,10 @@ Frame supplies this part in its anatomy. Availability below refers to configurat
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | No independent Frame prop | `"span"` (Reka) | Internal | Rendered element/component. Not independently configurable through Frame. |
-| `asChild` | `boolean` | No independent Frame prop | Unset in upstream reference | Internal | Merge behavior into the supplied child element. Not independently configurable through Frame. |
+| Prop      | Reka type            | Frame type                | Required/default            | Availability | Description                                                                                   |
+| --------- | -------------------- | ------------------------- | --------------------------- | ------------ | --------------------------------------------------------------------------------------------- |
+| `as`      | `AsTag \| Component` | No independent Frame prop | `"span"` (Reka)             | Internal     | Rendered element/component. Not independently configurable through Frame.                     |
+| `asChild` | `boolean`            | No independent Frame prop | Unset in upstream reference | Internal     | Merge behavior into the supplied child element. Not independently configurable through Frame. |
 
 #### Emits
 
@@ -127,15 +127,15 @@ No component-defined emits on this part. Native listeners are separate from comp
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | No scoped fields listed | Frame supplies the internal composition; no public part slot |
+| Upstream slot | Scoped field            | Frame availability                                           |
+| ------------- | ----------------------- | ------------------------------------------------------------ |
+| default       | No scoped fields listed | Frame supplies the internal composition; no public part slot |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
-| data-state | checked / unchecked | Current checked/on state. |
+| Attribute     | Value/presence        | Meaning                    |
+| ------------- | --------------------- | -------------------------- |
+| data-state    | checked / unchecked   | Current checked/on state.  |
 | data-disabled | Present when disabled | Underlying disabled state. |
 
 ### Label
@@ -144,11 +144,11 @@ Frame supplies this part in its anatomy. Availability below refers to configurat
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | No independent Frame prop | `"label"` (Reka) | Internal | Rendered element/component. Not independently configurable through Frame. |
-| `asChild` | `boolean` | No independent Frame prop | Unset in upstream reference | Internal | Merge behavior into the supplied child element. Not independently configurable through Frame. |
-| `for` | `string` | No independent Frame prop | Unset in upstream reference | Internal | Associated control ID. Not independently configurable through Frame. |
+| Prop      | Reka type            | Frame type                | Required/default            | Availability | Description                                                                                   |
+| --------- | -------------------- | ------------------------- | --------------------------- | ------------ | --------------------------------------------------------------------------------------------- |
+| `as`      | `AsTag \| Component` | No independent Frame prop | `"label"` (Reka)            | Internal     | Rendered element/component. Not independently configurable through Frame.                     |
+| `asChild` | `boolean`            | No independent Frame prop | Unset in upstream reference | Internal     | Merge behavior into the supplied child element. Not independently configurable through Frame. |
+| `for`     | `string`             | No independent Frame prop | Unset in upstream reference | Internal     | Associated control ID. Not independently configurable through Frame.                          |
 
 #### Emits
 
@@ -156,29 +156,29 @@ No component-defined emits on this part. Native listeners are separate from comp
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | No scoped fields listed | Frame supplies the internal composition; no public part slot |
+| Upstream slot | Scoped field            | Frame availability                                           |
+| ------------- | ----------------------- | ------------------------------------------------------------ |
+| default       | No scoped fields listed | Frame supplies the internal composition; no public part slot |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
-| — | None supplied by this part | Label/text/separator parts do not add checked/open state markers. |
+| Attribute | Value/presence             | Meaning                                                           |
+| --------- | -------------------------- | ----------------------------------------------------------------- |
+| —         | None supplied by this part | Label/text/separator parts do not add checked/open state markers. |
 
 ### Frame additions
 
 #### Props
 
-| Prop | Type | Required/default | Description |
-| --- | --- | --- | --- |
-| `label` | `string` | `Unset` | Inline label text; replaced by the default slot. |
+| Prop    | Type     | Required/default | Description                                      |
+| ------- | -------- | ---------------- | ------------------------------------------------ |
+| `label` | `string` | `Unset`          | Inline label text; replaced by the default slot. |
 
 #### Slots
 
-| Slot | Payload | Fallback | Placement |
-| --- | --- | --- | --- |
-| default | None | label prop | Beside the interactive Root, inside the outer Label; does not customize Indicator/Thumb. |
+| Slot    | Payload | Fallback   | Placement                                                                                |
+| ------- | ------- | ---------- | ---------------------------------------------------------------------------------------- |
+| default | None    | label prop | Beside the interactive Root, inside the outer Label; does not customize Indicator/Thumb. |
 
 #### Emits
 
@@ -190,7 +190,7 @@ No Frame-defined methods or internal Reka refs are exposed.
 
 ### Sources and version
 
-[FrameSwitch.vue](../../../packages/core/src/components/forms/FrameSwitch.vue) composes Reka SwitchRoot, SwitchThumb, and Label. Styling lives in [controls.css](../../../packages/core/src/components/forms/shared/controls.css).
+[FrameSwitch.vue](../../../packages/core/src/components/forms/FrameSwitch.vue) composes Reka SwitchRoot, SwitchThumb, and Label. Styling lives in [controls.scss](../../../packages/core/src/components/forms/styles/controls.scss).
 
 Compared with the [Reka Switch reference](https://reka-ui.com/docs/components/switch.md) and installed Reka `2.11.0` source. See the [coverage review](../../reference/reka-coverage.md).
 
@@ -198,24 +198,24 @@ Compared with the [Reka Switch reference](https://reka-ui.com/docs/components/sw
 
 ### Parts and selectors
 
-| Selector | Part | Placement/attribute target |
-| --- | --- | --- |
-| `.frame-form-inline` | Label/container | Outer label; caller class/style goes to the interactive child instead. |
-| `.frame-switch` | Switch button | Caller class/style targets this element. |
-| `.frame-switch-thumb` | Thumb | Internal part; caller attributes do not target it independently. |
+| Selector              | Part            | Placement/attribute target                                             |
+| --------------------- | --------------- | ---------------------------------------------------------------------- |
+| `.frame-form-inline`  | Label/container | Outer label; caller class/style goes to the interactive child instead. |
+| `.frame-switch`       | Switch button   | Caller class/style targets this element.                               |
+| `.frame-switch-thumb` | Thumb           | Internal part; caller attributes do not target it independently.       |
 
 Track/thumb dimensions are fixed in the shared rule. State belongs to the root/thumb, not the outer label.
 
 ### Variables
 
-| Token key | Variable | Value kind | Default/fallback | Part/effect | Scope/limits | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| `--frame-accent` | `--frame-accent` | color | Catalog: `#0078d4`; CSS fallback: `#0078d4` | Switch button outline; Switch button background | Shared across controls using this variable. State rules: :focus-visible, [data-state=checked]. | Accent. |
-| `--frame-duration` | `--frame-duration` | duration | Catalog: `150ms`; CSS fallback: `150ms` | Thumb transition | Shared across controls using this variable. | Duration. |
-| `--frame-ease` | `--frame-ease` | ease | Catalog: `ease-out`; CSS fallback: `ease-out` | Thumb transition | Shared across controls using this variable. | Ease. |
-| `--frame-gap` | `--frame-gap` | length | Catalog: `calc(var(--frame-spacing-unit) * 1.5)`; CSS fallback: `6px` | Label/container gap | Shared across controls using this variable. | Gap. |
-| `--frame-line` | `--frame-line` | color | Catalog: `#2b2b2b`; CSS fallback: `#454545` | Switch button border | Shared across controls using this variable. | Line. |
-| `--frame-surface` | `--frame-surface` | color | Catalog: `#181818`; CSS fallback: `#242424` | Switch button background | Shared across controls using this variable. | Surface. |
-| `--frame-text` | `--frame-text` | color | Catalog: `#cccccc`; CSS fallback: `#ccc` | Thumb background | Shared across controls using this variable. | Text. |
+| Token key          | Variable           | Value kind | Default/fallback                                                      | Part/effect                                     | Scope/limits                                                                                   | Description |
+| ------------------ | ------------------ | ---------- | --------------------------------------------------------------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------- |
+| `--frame-accent`   | `--frame-accent`   | color      | Catalog: `#0078d4`; CSS fallback: `#0078d4`                           | Switch button outline; Switch button background | Shared across controls using this variable. State rules: :focus-visible, [data-state=checked]. | Accent.     |
+| `--frame-duration` | `--frame-duration` | duration   | Catalog: `150ms`; CSS fallback: `150ms`                               | Thumb transition                                | Shared across controls using this variable.                                                    | Duration.   |
+| `--frame-ease`     | `--frame-ease`     | ease       | Catalog: `ease-out`; CSS fallback: `ease-out`                         | Thumb transition                                | Shared across controls using this variable.                                                    | Ease.       |
+| `--frame-gap`      | `--frame-gap`      | length     | Catalog: `calc(var(--frame-spacing-unit) * 1.5)`; CSS fallback: `6px` | Label/container gap                             | Shared across controls using this variable.                                                    | Gap.        |
+| `--frame-line`     | `--frame-line`     | color      | Catalog: `#2b2b2b`; CSS fallback: `#454545`                           | Switch button border                            | Shared across controls using this variable.                                                    | Line.       |
+| `--frame-surface`  | `--frame-surface`  | color      | Catalog: `#181818`; CSS fallback: `#242424`                           | Switch button background                        | Shared across controls using this variable.                                                    | Surface.    |
+| `--frame-text`     | `--frame-text`     | color      | Catalog: `#cccccc`; CSS fallback: `#ccc`                              | Thumb background                                | Shared across controls using this variable.                                                    | Text.       |
 
 See [theme variables](../../styling/theme-variables.md) for theme authoring.

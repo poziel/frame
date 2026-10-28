@@ -1,0 +1,143 @@
+.panel-section > header {
+  padding: var(--frame-panel-section-header-padding, 3px 8px 3px 2px);
+}
+
+.panel-section > header > .panel-actions {
+  visibility: hidden;
+}
+
+.panel-section.expanded:hover > header > .panel-actions,
+.panel-section.expanded:focus-within > header > .panel-actions {
+  visibility: visible;
+}
+
+.workspace-pane-content > .pane-placeholder {
+  display: grid;
+  place-items: center;
+  flex: 1;
+  min-height: var(
+    --frame-workspace-pane-content-pane-placeholder-min-height,
+    0
+  );
+  padding: var(--frame-workspace-pane-content-pane-placeholder-padding, 0);
+}
+
+/* Collection views consume their host's available height, including when nested. */
+.shell-sidebar > .side-panel {
+  overflow: hidden;
+}
+
+.side-content {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.side-content > .view-host {
+  height: 100%;
+}
+
+.view-host {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.panel-content.view-host {
+  overflow: hidden;
+}
+
+/* Only leaf bodies scroll; their headers and containing collections stay fixed. */
+.view-host > .view-content {
+  height: 100%;
+  min-height: 0;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.nested-view-content {
+  overflow: hidden;
+}
+
+.side-panel > .section-header,
+.side-panel .frame-dock-content > .section-header {
+  flex-shrink: 0;
+}
+
+.side-content:has(> .view-content > .view-sections),
+.panel-content:has(> .view-content > .view-sections),
+.view-host:has(> .view-content > .view-sections),
+.view-content:has(> .view-sections) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: var(
+    --frame-side-content-has-view-content-view-sections-min-height,
+    0
+  );
+  overflow: hidden;
+}
+
+.view-sections {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: var(
+    --frame-view-sections-min-height-2,
+    var(--frame-activity-sections-min-height-2, 0)
+  );
+  overflow: hidden;
+}
+
+.view-sections > .panel-section {
+  flex: 0 0 auto;
+  min-height: var(
+    --frame-view-sections-panel-section-min-height,
+    var(--frame-activity-sections-panel-section-min-height, 0)
+  );
+}
+
+.view-sections > .panel-section > header {
+  box-sizing: border-box;
+}
+
+.view-sections > .panel-section > .nested-view-content {
+  min-height: var(
+    --frame-view-sections-panel-section-nested-view-content-min-height,
+    var(
+      --frame-activity-sections-panel-section-nested-view-content-min-height,
+      0
+    )
+  );
+}
+
+.nested-view-content > .view-host {
+  min-height: var(--frame-nested-view-content-view-host-min-height-2, 0);
+  height: var(--frame-nested-view-content-view-host-height, 100%);
+}
+
+.view-sections > .panel-section > .resize-handle {
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: var(
+    --frame-view-sections-panel-section-resize-handle-width,
+    var(--frame-activity-sections-panel-section-resize-handle-width, 100%)
+  );
+  margin: var(
+    --frame-view-sections-panel-section-resize-handle-margin,
+    var(--frame-activity-sections-panel-section-resize-handle-margin, 0)
+  );
+}
+
+.side-content:has(> .view-host > .view-content > .view-sections) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: var(
+    --frame-side-content-has-view-host-view-content-view-sections-min-height,
+    0
+  );
+  overflow: hidden;
+}

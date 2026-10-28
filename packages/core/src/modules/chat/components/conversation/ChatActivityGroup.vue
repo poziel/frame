@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '../../styles/index.css';
+import '../../styles/index.scss';
 import {computed, nextTick, ref, watch} from 'vue';
 import type {AIChatController} from '../../controllers/aiChat';
 import {
@@ -61,7 +61,7 @@ watch(running, (count, previous) => {
     <summary ref="summary" class="frame-chat-activity-group-summary">
       <span
         >{{ label
-        }}<span class="frame-chat-event-detail">
+        }}<span class="frame-chat-event-detail frame-chat-event-meta">
           ({{ !group.activities.length ? 'No activities yet' : timing?.duration
           }}<template v-if="failed">, {{ failed }} failed</template
           ><template v-if="cancelled">, {{ cancelled }} cancelled</template
@@ -80,3 +80,42 @@ watch(running, (count, previous) => {
     </div>
   </details>
 </template>
+
+<style lang="scss">
+.frame-chat-activity-group {
+  min-width: 0;
+}
+
+.frame-chat-activity-group-summary {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px;
+  cursor: pointer;
+  color: var(--frame-muted, #999);
+  font-size: var(--frame-chat-event-meta-size, 11px);
+}
+
+.frame-chat-activity-group-summary .frame-chat-event-detail {
+  margin: 0;
+}
+
+.frame-chat-activity-list {
+  padding: 3px 0;
+}
+
+.frame-chat-activity-list .frame-chat-activity {
+  border: 0;
+  background: transparent;
+  padding: 3px 0;
+  margin: 0;
+  color: var(--frame-muted, #999);
+  font-size: var(--frame-chat-event-meta-size, 11px);
+  line-height: 1.5;
+}
+
+.frame-chat-activity-group-summary:focus-visible {
+  outline: 1px solid var(--frame-accent, #0078d4);
+  outline-offset: 3px;
+}
+</style>

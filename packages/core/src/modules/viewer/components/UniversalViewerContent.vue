@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '../styles/index.css';
+import '../styles/index.scss';
 import {computed, defineAsyncComponent, onBeforeUnmount, ref, watch} from 'vue';
 import {FrameCodeBlock} from '../../../index';
 import {viewerFileName} from '../services/viewer';
@@ -46,7 +46,9 @@ onBeforeUnmount(viewer.dispose);
     <p v-if="busy" role="status">Loading document…</p>
     <p v-else-if="failure" role="alert">{{ failure }}</p>
     <template v-else-if="type">
-      <div v-if="type.hasSource" class="frame-viewer-toolbar"
+      <div
+        v-if="type.hasSource"
+        class="frame-viewer-toolbar frame-viewer-control-row"
         ><button
           class="frame-viewer-button"
           :aria-pressed="sourceMode"
@@ -69,7 +71,7 @@ onBeforeUnmount(viewer.dispose);
         >{{ text }}</pre>
       <img
         v-else-if="type.kind === 'image'"
-        class="frame-viewer-image"
+        class="frame-viewer-image frame-viewer-media"
         :src="url"
         :alt="name"
         @error="
@@ -84,7 +86,7 @@ onBeforeUnmount(viewer.dispose);
         v-else-if="type.kind === 'video'"
         ref="video"
         :key="url"
-        class="frame-viewer-video"
+        class="frame-viewer-video frame-viewer-media"
         :src="url"
         controls
         preload="metadata"
@@ -106,3 +108,43 @@ onBeforeUnmount(viewer.dispose);
     </template>
   </section>
 </template>
+
+<style lang="scss">
+.frame-viewer-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  gap: var(--frame-gap, 6px);
+  color: var(--frame-text);
+}
+
+.frame-viewer-media {
+  display: block;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  flex: 1;
+}
+
+.frame-viewer-text {
+  margin: 0;
+  padding: var(--frame-content-padding, 12px);
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: var(--frame-font-mono, monospace);
+  background: var(--frame-canvas, #101112);
+  flex: 1;
+}
+
+.frame-viewer-code {
+  flex: 1;
+  min-height: 0;
+}
+</style>
