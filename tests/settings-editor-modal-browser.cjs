@@ -57,7 +57,7 @@ const path = require('node:path');
     await page.waitForFunction(() => JSON.parse(fixture.saved())['editor.fontSize'] === 26 && !fixture.frame.settings.json.dirty.value);
     assert.equal(await page.evaluate(() => window.hostSaves), 0);
     assert.equal(await modal.getByRole('button', { name: 'Save', exact: true }).isDisabled(), true);
-    await page.screenshot({ path: 'output/playwright/settings-json-modal.png' });
+    await page.screenshot({ path: '.ai-workspace/playwright/settings-json-modal.png' });
     assert.deepEqual(errors, []);
     console.log('Settings modal checks passed: same dialog and maximized state, header separator/order, discard, dirty Save, Ctrl+S, file title, and no editor toolbar.');
   } finally { await browser.close(); }

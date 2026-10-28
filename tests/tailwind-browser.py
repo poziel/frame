@@ -119,7 +119,7 @@ try:
         assert palette("#preset-secondary") == ["rgb(234, 234, 234)", "rgb(32, 32, 32)"]
         assert palette(".status-bar") == ["rgb(250, 250, 253)", "rgb(96, 96, 96)"]
         assert palette(".view-bar .rail-button.selected") == ["rgb(214, 214, 214)", "rgb(32, 32, 32)"]
-        output = Path(__file__).resolve().parent.parent / "output/themes"
+        output = Path(__file__).resolve().parent.parent / ".ai-workspace/themes"
         output.mkdir(parents=True, exist_ok=True)
         page.screenshot(path=str(output / "vscode-light-2026.png"), full_page=True)
         page.get_by_role("button", name="Preview popup", exact=True).click()
@@ -183,7 +183,7 @@ try:
         assert page.locator(".frame-overlay-host").count() == 0
         assert not errors, errors
         browser.close()
-        print("Tailwind verified: scales, imports, isolation, portals, cleanup; Light 2026 selected-row regression; High Contrast Black/White text, button, focus, quick-input and popup checks; raw JSON and UI switching. Previews: output/themes/.")
+        print("Tailwind verified: scales, imports, isolation, portals, cleanup; Light 2026 selected-row regression; High Contrast Black/White text, button, focus, quick-input and popup checks; raw JSON and UI switching. Previews: .ai-workspace/themes/.")
 finally:
     server.shutdown()
     server.server_close()

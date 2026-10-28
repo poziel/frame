@@ -23,3 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 .tmp/
+
+# AI workspace and generated artifacts
+/.ai-workspace/
+/.playwright-cli/
+/output/

@@ -39,7 +39,7 @@ const path = require('node:path');
   assert.equal(await row.locator('.settings-modified-bar').count(),0);
   await page.evaluate(()=>fixture.frame.settings.set('layout.theme','dark'));
   await page.locator('[data-setting-id="layout.density"]').click({position:{x:100,y:8}});assert.equal(await page.locator('[data-setting-id="layout.density"]').evaluate(el=>el.matches(':focus-within')),true);
-  await page.screenshot({path:'output/playwright/settings-fields-refined.png'});
+  await page.screenshot({path:'.ai-workspace/playwright/settings-fields-refined.png'});
   await page.setViewportSize({width:720,height:720});await row.hover();metrics=await check();assert.equal(metrics.inside,true);assert.equal(metrics.aligned,true);
   const long=page.locator('[data-setting-id="layout.long"]');assert.equal(await long.locator('.setting-description').evaluate(el=>getComputedStyle(el).margin),'0px');
   await row.evaluate(el=>{el.dir='rtl';});await row.hover();

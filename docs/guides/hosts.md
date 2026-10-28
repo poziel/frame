@@ -97,7 +97,7 @@ Use one stable Frame instance per shell. Multiple frames may use different host 
 - Core no longer detects Tauri. Pass `host: createTauriHost()` to retain native controls.
 - Normal `@frame/core` and stylesheet imports stay unchanged.
 - Terminal creation requires `createTerminal({ backend })`; the terminal UI requires its controller. There is no automatic native backend. Pass `openUrl: frame.host.external?.openUrl` for host-aware terminal links.
-- Rust PTY code and native examples are extracted to the separate Frame Native companion. `packages/docs` is browser-only.
+- Host-independent Rust PTY and agent libraries live in [Frame Server](https://github.com/poziel/frame-server). Tauri applications use `createTauriTerminalBackend()` from `@frame/tauri/terminal` and register its [Rust bridge](../../packages/tauri/README.md#optional-terminal-bridge). The former Frame Native companion retains recovery sources; `packages/docs` remains browser-only.
 
 ## Controller implementation
 

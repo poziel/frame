@@ -54,6 +54,6 @@ async page => {
   await page.evaluate(() => window.richChatFixture.chat.stop());
   check(await page.locator('.frame-chat-message.assistant').last().locator('.frame-chat-work').evaluate(element => element.tagName === 'P'), 'Stopped turn with no retained work must not offer an empty disclosure');
   if (errors.length) throw new Error(errors.join('\n'));
-  await page.getByRole('region', { name: 'AI chat' }).screenshot({ path: 'output/playwright/ai-chat-work-disclosure.png' });
+  await page.getByRole('region', { name: 'AI chat' }).screenshot({ path: '.ai-workspace/playwright/ai-chat-work-disclosure.png' });
   return 'Live work header, automatic collapse, visible final answer/documents, compact thoughts, keyboard reopen, focus, copy and failed/stopped turns passed.';
 }

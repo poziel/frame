@@ -6,7 +6,7 @@ import {
   readFileSync,
   writeFileSync,
 } from 'node:fs';
-import {resolve} from 'node:path';
+import {basename, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 // Stage publishable manifests without changing workspace names or imports.
@@ -35,7 +35,11 @@ for (const name of packages) {
   }
   const stage = mkdtempSync(resolve(output, `${name}-`));
   for (const file of manifest.files) {
-    cpSync(resolve(source, file), resolve(stage, file), {recursive: true});
+    cpSync(resolve(source, file), resolve(stage, file), {
+      recursive: true,
+      filter: (path) =>
+        !['target', 'node_modules', '.git'].includes(basename(path)),
+    });
   }
   manifest.name = `@poziel/frame-${name}`;
   manifest.version = packageVersion;

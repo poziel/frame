@@ -25,6 +25,7 @@
       "@frame/electron": ["../packages/electron/dist/index.d.ts"],
       "@frame/electron/*": ["../packages/electron/dist/*.d.ts"],
       "@frame/tauri": ["../packages/tauri/dist/index.d.ts"],
+      "@frame/tauri/*": ["../packages/tauri/dist/*.d.ts"],
       "@frame/core": ["../packages/core/dist/types/index.d.ts"],
       "@frame/core/modules/*": [
         "../packages/core/dist/types/modules/*/index.d.ts"

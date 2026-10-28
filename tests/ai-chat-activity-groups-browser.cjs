@@ -51,6 +51,6 @@ async page => {
   await chat.locator('.frame-chat-work-summary').click();
   check(await groups.count() === 2 && await thought.count() === 0, 'Reopened history must retain groups without archived thought blocks');
   if (errors.length) throw new Error(errors.join('\n'));
-  await chat.screenshot({ path: 'output/playwright/ai-chat-activity-groups.png' });
+  await chat.screenshot({ path: '.ai-workspace/playwright/ai-chat-activity-groups.png' });
   return 'Activity grouping, commentary boundaries, concurrent output, single changing bottom thought, clear and completed collapse passed.';
 }

@@ -32,6 +32,6 @@ Core distributes JavaScript, CSS, declarations, tokens, and notices. The package
 
 [License sources](../licenses/THIRD_PARTY_NOTICES.md) stay under `docs/licenses`; the Core build copies notices into its distributable. Consumers do not need the Docs application or repository branding directory to render Frame.
 
-Frame builds without Rust. Docs stays in `packages/docs` and runs only in the browser. Native terminal execution and native examples live in the separate Frame Native companion. See [host integration](../guides/hosts.md).
+Frame's TypeScript packages build without Rust. Docs stays in `packages/docs` and runs only in the browser. Host-independent terminal and agent execution libraries live in [Frame Server](https://github.com/poziel/frame-server), with optional native adapters enabled through their `tauri` Cargo features. Frame provides the TypeScript halves through `@frame/tauri/terminal` and `@frame/tauri/agents`; its npm package contains no Rust sources. The former Frame Native companion retains recovery material. See [host integration](../guides/hosts.md).
 
 Core's reusable components are organized by purpose in [component folders](../../packages/core/src/components/README.md). Framework presentation components live in `components/framework/` and appear under General in the documentation. The shared inventory keeps documentation categories and physical folders aligned; public imports remain through `@frame/core`.

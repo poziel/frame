@@ -45,10 +45,10 @@ async page => {
   for (let i = 0; i < 14; i++) await sash.press('ArrowRight');
   const dimensions = await chat.evaluate(element => ({ width: element.clientWidth, scroll: element.scrollWidth }));
   check(dimensions.width <= 340 && dimensions.scroll <= dimensions.width + 1, `Narrow chat overflow: ${JSON.stringify(dimensions)}`);
-  await chat.screenshot({ path: 'output/playwright/ai-chat-playground-narrow.png' });
+  await chat.screenshot({ path: '.ai-workspace/playwright/ai-chat-playground-narrow.png' });
   await page.getByRole('button', { name: 'Hide primary sidebar', exact: true }).click();
   await page.setViewportSize({ width: 1380, height: 1000 });
-  await page.screenshot({ path: 'output/playwright/ai-chat-playground.png' });
+  await page.screenshot({ path: '.ai-workspace/playwright/ai-chat-playground.png' });
   check(await work.evaluate(element => element.scrollWidth <= element.clientWidth + 1), 'Playground must fit its workspace width');
   return { result: 'Keyboard input, multiple questions, focus retention, denial, cancellation, active-turn retention and narrow layout passed.', dimensions };
 }

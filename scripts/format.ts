@@ -38,6 +38,7 @@ class FormattingCommand {
     'output',
     'coverage',
     '.tmp',
+    '.ai-workspace',
     '.playwright-cli',
     '.agents',
     '.codex',

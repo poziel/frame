@@ -71,7 +71,7 @@ async page => {
   await work.getByRole('button', { name: 'End turn', exact: true }).click();
   check(!(await assistant.locator('details.frame-chat-work').evaluate(element => element.open)), 'Retained work must still collapse');
   if (errors.length) throw new Error(errors.join('\n'));
-  await chat.screenshot({ path: 'output/playwright/ai-chat-polished-files.png' });
+  await chat.screenshot({ path: '.ai-workspace/playwright/ai-chat-polished-files.png' });
   await page.goto('http://localhost:1420/@fs/D:/Dev/1-codes/frame/tests/fixtures/chat-rich/index.html');
   await page.getByRole('textbox', { name: 'Message', exact: true }).fill('Standalone preview');
   await page.getByRole('textbox', { name: 'Message', exact: true }).press('Enter');

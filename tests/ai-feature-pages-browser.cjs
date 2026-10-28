@@ -23,6 +23,6 @@ async page => {
   check(page.url().endsWith('#/features/ai-chat'), 'Legacy view page should redirect to the complete assistant page');
   await page.goto('http://localhost:1420/#/features/ai-conversation');
   await page.getByRole('heading', { name: 'Display one conversation', exact: true }).waitFor();
-  await page.screenshot({path:'output/playwright/ai-conversation-docs-refined.png'});
+  await page.screenshot({path:'.ai-workspace/playwright/ai-conversation-docs-refined.png'});
   return 'All four AI pages share generated API/structure/theming docs and independent demos without leaked sidebars.';
 }

@@ -128,6 +128,6 @@ const path=require('node:path');
   assert.equal(ownership.ok,false,'named-slot ownership must apply in the same tick as splitting');
   await first.getByLabel('Host pane content').waitFor();
   assert.deepEqual(errors,[]);
-  await page.screenshot({path:'output/workspace-tabs.png',fullPage:true});
+  await page.screenshot({path:'.ai-workspace/workspace-tabs.png',fullPage:true});
   console.log('Workspace tab browser checks passed');
 }finally{await browser.close();}})().catch(e=>{console.error(e);process.exit(1);});

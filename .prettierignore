@@ -6,6 +6,7 @@ output/
 coverage/
 .git/
 .tmp/
+.ai-workspace/
 .playwright-cli/
 .agents/
 .codex/

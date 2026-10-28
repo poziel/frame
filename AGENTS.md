@@ -45,6 +45,12 @@ For each change, identify which responsibility it serves. A feature can include 
 
 ## Verification and working practices
 
+- Put all AI-generated working output in the root `.ai-workspace/` directory:
+  screenshots, logs, reports, scratch scripts, downloaded references, and other
+  temporary artifacts. Create it when needed and keep its contents untracked.
+  Configure tools and test artifact paths to write there instead of `output/`
+  or the repository root. Maintained project source, tests, and documentation
+  belong in their normal locations.
 - Preserve unrelated and uncommitted work. Make targeted edits; do not commit, push, or publish unless requested.
 - For public behavior, test host API calls as well as UI interactions. Relevant cases include multiple Frame instances, disabled features, repeated registration/opening, state retention, disposal, and portals. Choose checks appropriate to the change rather than running every browser suite indiscriminately.
 - Available checks: `bun test`, `bun run build:library`, `bun run check:modules`, `bun run check:consumer`, and `bun run build`. Build library outputs before checking consumers against them.
