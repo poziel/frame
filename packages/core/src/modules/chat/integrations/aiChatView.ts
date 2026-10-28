@@ -4,14 +4,19 @@ import AIChat from '../components/AIChat.vue';
 import type {AIChatController} from '../controllers/aiChat';
 import type {AIChatHistoryController} from '../controllers/aiChatHistory';
 
+/** Caller-owned controllers presented by an explicitly registered chat view. */
 export interface AIChatViewOptions {
 
+  /** Unique view registration ID within the receiving Frame instance. */
   id: string;
 
+  /** View selector label; defaults to AI chat when omitted. */
   label?: string;
 
+  /** Existing caller-owned chat; supply this or a conversation history. */
   chat?: AIChatController;
 
+  /** Existing caller-owned history; registration does not create conversations. */
   history?: AIChatHistoryController;
 }
 

@@ -58,21 +58,68 @@ Use visible text describing the field, rather than only an icon. A placeholder i
 
 Short follow-up examples reuse the Basic usage setup unless they include their own script. Styles load once per application; these controls need no Frame instance.
 
+### Focus an associated field
+
+Activate the label to focus the input whose ID matches its for value.
+
+<!-- frame:example id="label.association" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameLabel, FrameTextField } from '@frame/core';
+const fieldValue = ref('Project name');
+</script>
+<template>
+<FrameLabel  :for="&quot;guide-name&quot;">  <template #default><span v-text="&quot;Project name&quot;" /></template></FrameLabel><FrameTextField :id="&quot;guide-name&quot;" v-model="fieldValue" />
+</template>
+```
+
 ## APIs
+
+<!-- frame:generated api="label" -->
+
+### FrameLabel
+
+Source: `packages/core/src/components/forms/FrameLabel.vue`
+
+#### Properties
+
+| Name  | Type                  | Default | Description                                        |
+| ----- | --------------------- | ------- | -------------------------------------------------- |
+| `for` | `string \| undefined` | Omitted | Id of the form control associated with this label. |
+
+#### Events
+
+No declared entries.
+
+#### Slots
+
+| Name      | Parameters | Return type  | Description            |
+| --------- | ---------- | ------------ | ---------------------- |
+| `default` | `None`     | `VNodeChild` | Visible label content. |
+
+#### Exposed API
+
+No declared entries.
+
+<!-- /frame:generated -->
+
+### Composition and upstream reference
 
 The tables separate Reka types from the actual Frame contract. Declared APIs are typed by Frame; forwarded attributes reach only the named part; internal parts cannot be configured independently. Defaults labeled Reka belong to the underlying reference.
 
-### Root
+#### Root
 
 Frame supplies this part in its anatomy. Availability below refers to configuration through the Frame wrapper, not direct use of a Reka export.
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | Same upstream type; undeclared in Frame | `"label"` (Reka) | Forwarded | Rendered element/component. |
-| `asChild` | `boolean` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Merge behavior into the supplied child element. |
-| `for` | `string` | `string` | `Unset` | Declared | Associated control ID. |
+| Prop      | Reka type            | Frame type                              | Required/default            | Availability | Description                                     |
+| --------- | -------------------- | --------------------------------------- | --------------------------- | ------------ | ----------------------------------------------- |
+| `as`      | `AsTag \| Component` | Same upstream type; undeclared in Frame | `"label"` (Reka)            | Forwarded    | Rendered element/component.                     |
+| `asChild` | `boolean`            | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded    | Merge behavior into the supplied child element. |
+| `for`     | `string`             | `string`                                | `Unset`                     | Declared     | Associated control ID.                          |
 
 #### Emits
 
@@ -84,9 +131,9 @@ No component-defined emits on this part. Native listeners are separate from comp
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
-| — | None supplied by this part | Label/text/separator parts do not add checked/open state markers. |
+| Attribute | Value/presence             | Meaning                                                           |
+| --------- | -------------------------- | ----------------------------------------------------------------- |
+| —         | None supplied by this part | Label/text/separator parts do not add checked/open state markers. |
 
 #### Wrapper boundaries
 
@@ -94,7 +141,7 @@ Reka Label documents `for`, `as` (default `'label'`), and `asChild`. Frame decla
 
 Reka Label declares no component model, update event, or state slot payload. Frame also adds none. There are no label-specific checked/disabled/open data attributes; use native control state on the associated input. Attributes such as `data-testid` are caller-owned and simply pass through.
 
-### Frame additions
+#### Frame additions
 
 #### Props
 
@@ -112,7 +159,7 @@ No component model or additional Frame-only emits.
 
 No Frame-defined methods or internal Reka refs are exposed.
 
-### Sources and version
+#### Sources and version
 
 [FrameLabel.vue](../../../packages/core/src/components/forms/FrameLabel.vue) wraps Reka Label. Only `for` is declared as a Frame prop.
 
@@ -120,15 +167,27 @@ Compared with the [Reka Label reference](https://reka-ui.com/docs/components/lab
 
 ## Styling
 
-### Parts and selectors
+Use the shared theme variables in application content. Component-specific declarations and their defaults are listed below.
 
-| Selector | Part | Placement/attribute target |
-| --- | --- | --- |
+<!-- frame:generated styles="label" -->
+
+No declared entries.
+
+Expressions are preserved as written; their computed values depend on the active theme and component state.
+
+<!-- /frame:generated -->
+
+### Additional styling guidance
+
+#### Parts and selectors
+
+| Selector       | Part  | Placement/attribute target               |
+| -------------- | ----- | ---------------------------------------- |
 | `.frame-label` | Label | Caller class/style targets this element. |
 
 The label inherits its parent typography/color and has no dedicated component variables.
 
-### Variables
+#### Variables
 
 No directly consumed component variables. Label text inherits the surrounding styling; there is no dedicated JSON key or CSS variable to list.
 

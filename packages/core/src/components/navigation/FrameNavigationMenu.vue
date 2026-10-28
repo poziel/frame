@@ -15,7 +15,12 @@ import FrameIcon from '../data-display/FrameIcon.vue';
 import '../shared/general-b.css';
 
 const props = defineProps<
-  NavigationMenuRootProps & {items?: FrameNavigationItem[]; label?: string}
+  NavigationMenuRootProps & {
+    /** Items rendered by the built-in composition; a default slot replaces that composition. */
+    items?: FrameNavigationItem[];
+    /** Accessible name for this component and its built-in control or region. */
+    label?: string;
+  }
 >();
 const emit = defineEmits<NavigationMenuRootEmits>();
 const root = computed(() => {
@@ -23,6 +28,14 @@ const root = computed(() => {
   return rest;
 });
 const forwarded = useForwardPropsEmits(root, emit);
+defineSlots<{
+  /** Replaces the built-in navigation list. */ default?(): unknown;
+  /** Replaces one submenu's generated child links. */ content?(
+    props: {
+    item: FrameNavigationItem;
+  }
+  ): unknown;
+}>();
 </script>
 <template>
   <NavigationMenuRoot

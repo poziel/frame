@@ -62,11 +62,137 @@ This example reuses Basic usage state. The host still retains free text; opening
 <FrameAutocomplete v-model="value" label="Language" :options="['Vue', 'Rust']" open-on-focus />
 ```
 
+### Free text with suggestions
+
+Select a fruit, or type a new name and leave the field. The text remains the value even without a match.
+
+<!-- frame:example id="autocomplete.free-text" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameAutocomplete } from '@frame/core';
+const demoModelValue = ref("");
+const demoOptions = [
+  "Apple",
+  "Apricot",
+  "Banana",
+  "Blueberry",
+  "Grapes"
+];
+const demoOpenOnFocus = true;
+</script>
+<template>
+<FrameAutocomplete v-model="demoModelValue" :options="demoOptions" :label="&quot;Fruit&quot;" :placeholder="&quot;Type or choose a fruit&quot;" :open-on-focus="demoOpenOnFocus" />
+</template>
+```
+
+### Filtered suggestions and empty results
+
+Start with “ap”, then replace it with “pear”. The list narrows and displays its empty message when nothing matches.
+
+<!-- frame:example id="autocomplete.matching" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameAutocomplete } from '@frame/core';
+const demoModelValue = ref("ap");
+const demoOptions = [
+  "Apple",
+  "Apricot",
+  "Banana",
+  "Blueberry",
+  "Grapes"
+];
+const demoOpenOnFocus = true;
+</script>
+<template>
+<FrameAutocomplete v-model="demoModelValue" :options="demoOptions" :label="&quot;Fruit search&quot;" :open-on-focus="demoOpenOnFocus" />
+</template>
+```
+
+### Open on focus
+
+Tab into the input to see suggestions before typing. This suits short lists users may want to browse.
+
+<!-- frame:example id="autocomplete.focus-behavior" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameAutocomplete } from '@frame/core';
+const demoModelValue = ref("");
+const demoOptions = [
+  "Apple",
+  "Apricot",
+  "Banana",
+  "Blueberry",
+  "Grapes"
+];
+const demoOpenOnFocus = true;
+const demoOpenOnClick = true;
+</script>
+<template>
+<FrameAutocomplete v-model="demoModelValue" :options="demoOptions" :label="&quot;Browse suggestions&quot;" :open-on-focus="demoOpenOnFocus" :open-on-click="demoOpenOnClick" />
+</template>
+```
+
 ## APIs
+
+<!-- frame:generated api="autocomplete" -->
+
+### FrameAutocomplete
+
+Source: `packages/core/src/components/forms/FrameAutocomplete.vue`
+
+#### Properties
+
+| Name                    | Type                              | Default  | Description                                                                                                                                                                                          |
+| ----------------------- | --------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `modelValue`            | `string \| undefined`             | Omitted  | The controlled value of the Autocomplete (the input text). Can be bound with `v-model`.                                                                                                              |
+| `defaultValue`          | `string \| undefined`             | Omitted  | The value of the autocomplete when initially rendered. Use when you do not need to control the state.                                                                                                |
+| `open`                  | `boolean \| undefined`            | false    | The controlled open state of the Autocomplete. Can be bound with `v-model:open`.                                                                                                                     |
+| `defaultOpen`           | `boolean \| undefined`            | false    | The open state of the autocomplete when it is initially rendered. Use when you do not need to control its open state.                                                                                |
+| `disabled`              | `boolean \| undefined`            | false    | When `true`, prevents the user from interacting with autocomplete                                                                                                                                    |
+| `dir`                   | `Direction \| undefined`          | Omitted  | The reading direction of the autocomplete when applicable.                                                                                                                                           |
+| `name`                  | `string \| undefined`             | Omitted  | The name of the field. Submitted with its owning form as part of a name/value pair.                                                                                                                  |
+| `required`              | `boolean \| undefined`            | false    | When `true`, indicates that the user must set the value before the owning form can be submitted.                                                                                                     |
+| `resetSearchTermOnBlur` | `boolean \| undefined`            | false    | Whether to reset the searchTerm when the Autocomplete input blurred defaultValue: `false`                                                                                                            |
+| `openOnFocus`           | `boolean \| undefined`            | false    | Whether to open the autocomplete when the input is focused defaultValue: `false`                                                                                                                     |
+| `openOnClick`           | `boolean \| undefined`            | false    | Whether to open the autocomplete when the input is clicked defaultValue: `false`                                                                                                                     |
+| `ignoreFilter`          | `boolean \| undefined`            | false    | When `true`, disable the default filters                                                                                                                                                             |
+| `highlightOnHover`      | `boolean \| undefined`            | false    | When `true`, hover over item will trigger highlight                                                                                                                                                  |
+| `loop`                  | `boolean \| undefined`            | false    | When `true`, keyboard navigation will loop from last item to first, and vice versa.                                                                                                                  |
+| `asChild`               | `boolean \| undefined`            | false    | Change the default rendered element for the one passed as a child, merging their props and behavior. Read our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details. |
+| `as`                    | `Component \| AsTag \| undefined` | "div"    | The element or component this component should render as. Can be overwritten by `asChild`. defaultValue: "div"                                                                                       |
+| `options`               | `readonly string[]`               | Required | Text suggestions filtered against the current input value.                                                                                                                                           |
+| `label`                 | `string`                          | Required | Accessible name of the autocomplete input.                                                                                                                                                           |
+| `placeholder`           | `string \| undefined`             | Omitted  | Hint displayed while the editable value is empty.                                                                                                                                                    |
+
+#### Events
+
+| Name                | Parameters                                                   | Return type | Description                                                           |
+| ------------------- | ------------------------------------------------------------ | ----------- | --------------------------------------------------------------------- |
+| `update:modelValue` | `value: string`                                              | `void`      | Event handler called when the value changes.                          |
+| `update:open`       | `value: boolean`                                             | `void`      | Event handler called when the open state of the autocomplete changes. |
+| `highlight`         | `payload: { ref: HTMLElement; value: string; } \| undefined` | `void`      | Event handler when highlighted element changes.                       |
+
+#### Slots
+
+No declared entries.
+
+#### Exposed API
+
+No declared entries.
+
+<!-- /frame:generated -->
+
+### Composition and upstream reference
 
 Defaults below are Reka reference defaults unless a Frame override is stated. Declared means a typed Frame prop/event; Forwarded means attribute/listener fallthrough to the named part; Internal means generated by Frame; Absent means not routed or composed. Generic upstream `T`/`AcceptableValue` describes Reka, not a promise of arbitrary option values in Frame.
 
-### Root
+#### Root
 
 #### Props
 
@@ -114,7 +240,7 @@ Defaults below are Reka reference defaults unless a Frame override is stated. De
 
 Frame does not defineExpose or forward the internal Reka instance. Do not depend on internal Reka methods/refs through a Frame component ref.
 
-### Anchor
+#### Anchor
 
 #### Props
 
@@ -136,7 +262,7 @@ Underlying default content has no documented scoped fields. Frame generates this
 
 No component state data attributes are defined on this part. Inherited native/ARIA attributes are not data attributes.
 
-### Input
+#### Input
 
 #### Props
 
@@ -164,7 +290,7 @@ Underlying default content has no documented scoped fields. Frame generates this
 | --------------- | ----------------------- | -------------------------- |
 | `data-disabled` | `Present when disabled` | ListboxFilter input state. |
 
-### Portal
+#### Portal
 
 #### Props
 
@@ -187,7 +313,7 @@ Underlying default content has no documented scoped fields. Frame generates this
 
 No component state data attributes are defined on this part. Inherited native/ARIA attributes are not data attributes.
 
-### Content
+#### Content
 
 #### Props
 
@@ -243,7 +369,7 @@ Underlying default content has no documented scoped fields. Frame generates this
 | `data-side`  | `top \| right \| bottom \| left` | Resolved popper placement. |
 | `data-align` | `start \| center \| end`         | Resolved popper alignment. |
 
-### Item
+#### Item
 
 #### Props
 
@@ -275,7 +401,7 @@ Underlying default content has no documented scoped fields. Frame generates this
 | `data-highlighted` | `Present when highlighted` | Active navigation item.                  |
 | `data-disabled`    | `Present when disabled`    | Option interaction state.                |
 
-### Empty
+#### Empty
 
 #### Props
 
@@ -296,11 +422,11 @@ Underlying default content has no documented scoped fields. Frame generates this
 
 No component state data attributes are defined on this part. Inherited native/ARIA attributes are not data attributes.
 
-### Omitted parts
+#### Omitted parts
 
 `Trigger`, `Cancel`, `Viewport`, `Group`, `Label`, `Separator`, `Arrow`, `Virtualizer` are not rendered by this wrapper. Their props, slots, presence controls, and composition APIs are not available through Frame. See the [Reka reference](https://reka-ui.com/docs/components/autocomplete).
 
-### Frame additions
+#### Frame additions
 
 #### Props
 
@@ -318,13 +444,53 @@ No additional Frame-only events; see the part tables for declared or forwarded e
 
 No public content slots; all internal children are generated.
 
-### Sources and version
+#### Sources and version
 
 Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/autocomplete), its [Markdown reference](https://reka-ui.com/docs/components/autocomplete.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameAutocomplete.vue). Styling comes from [advanced.css](../../../packages/core/src/components/forms/shared/advanced.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
 
 ## Styling
 
-### Parts and selectors
+Use the shared theme variables in application content. Component-specific declarations and their defaults are listed below.
+
+<!-- frame:generated styles="autocomplete" -->
+
+| CSS variable                                | Theme path                                | Default expression                                                                       | Purpose                                                                                                      | Context                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--frame-input-border`                      | `frame.input.border`                      | `1px solid     var(--frame-control-border)`                                              | Fallback for: Resting border of the autocomplete text entry.                                                 | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-autocomplete-input-border`         | `frame.autocomplete.input.border`         | `var(     --frame-input-border,     1px solid     var(--frame-control-border)   )`       | Resting border of the autocomplete text entry.                                                               | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-autocomplete-input-border-radius`  | `frame.autocomplete.input.border.radius`  | `var(     --frame-input-radius   )`                                                      | Corner radius of the autocomplete text entry.                                                                | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-input-hover-border`                | `frame.input.hover.border`                | `1px solid     var(--frame-control-border)`                                              | Fallback for: Border while the pointer hovers over the autocomplete text entry.                              | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-autocomplete-input-hover-border`   | `frame.autocomplete.input.hover.border`   | `var(     --frame-input-hover-border,     1px solid     var(--frame-control-border)   )` | Border while the pointer hovers over the autocomplete text entry.                                            | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-input-hover-outline`               | `frame.input.hover.outline`               | `none`                                                                                   | Fallback for: Outline while the pointer hovers over the autocomplete text entry.                             | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-autocomplete-input-hover-outline`  | `frame.autocomplete.input.hover.outline`  | `var(     --frame-input-hover-outline,     none   )`                                     | Outline while the pointer hovers over the autocomplete text entry.                                           | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-input-focus-border`                | `frame.input.focus.border`                | `1px solid var(--frame-accent)`                                                          | Fallback for: Border while focus is within the autocomplete text entry.                                      | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-autocomplete-input-focus-border`   | `frame.autocomplete.input.focus.border`   | `var(     --frame-input-focus-border,     1px solid var(--frame-accent)   )`             | Border while focus is within the autocomplete text entry.                                                    | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-input-focus-outline`               | `frame.input.focus.outline`               | `1px solid var(--frame-accent)`                                                          | Fallback for: Focus outline of the autocomplete text entry.                                                  | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-autocomplete-input-focus-outline`  | `frame.autocomplete.input.focus.outline`  | `var(     --frame-input-focus-outline,     1px solid var(--frame-accent)   )`            | Focus outline of the autocomplete text entry.                                                                | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-input-outline-offset`              | `frame.input.outline.offset`              | `0px`                                                                                    | Fallback for: Offset between the outline and the autocomplete text entry.                                    | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-autocomplete-input-outline-offset` | `frame.autocomplete.input.outline.offset` | `var(     --frame-input-outline-offset,     0px   )`                                     | Offset between the outline and the autocomplete text entry.                                                  | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-control-border`                    | `frame.control.border`                    | `var(--frame-border-color)`                                                              | Resting border color of form controls, independently overridable from menu borders.                          | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-input-radius`                      | `frame.input.radius`                      | `var(--frame-menu-border-radius)`                                                        | Shared corner radius for text fields, text areas, selects, and composed input surfaces.                      | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-accent`                            | `frame.accent`                            | `#0078d4`                                                                                | Shared interaction color for keyboard focus, active actions, and accent-filled controls.                     | `.frame-autocomplete-input`                                                                                                                                                                                                                                                                                                                              |
+| `--frame-overlay-backdrop-filter`           | `frame.overlay.backdrop.filter`           | `blur(10px) saturate(110%)`                                                              | Blur and saturation treatment behind shared translucent floating surfaces.                                   | `:is(   .frame-menu,   .frame-select-popup,   .palette,   .frame-modal,   .frame-date-popover,   .frame-color-picker-popover,   .frame-advanced-popup,   .frame-general-dialog,   .frame-general-popup,   .frame-general-menu,   .frame-general-toast,   .frame-navigation-content,   .frame-menubar-content,   .frame-tooltip,   .frame-notification )` |
+| `--frame-muted`                             | `frame.muted`                             | `#8e9496`                                                                                | Secondary foreground for descriptions, hints, and visually subordinate content.                              | `.frame-field-description`                                                                                                                                                                                                                                                                                                                               |
+| `--frame-menu-border`                       | `frame.menu.border`                       | `var(--frame-border-color)`                                                              | Border color around floating menus, independently overridable from control borders.                          | `.frame-advanced-popup`                                                                                                                                                                                                                                                                                                                                  |
+| `--frame-control-radius`                    | `frame.control.radius`                    | `var(--frame-radius-medium)`                                                             | Shared corner radius of buttons and ordinary controls; text-entry surfaces may use the input radius instead. | `.frame-advanced-popup`                                                                                                                                                                                                                                                                                                                                  |
+| `--frame-menu-background`                   | `frame.menu.background`                   | `var(--frame-overlay-background)`                                                        | Surface behind floating menu containers, following the shared overlay background.                            | `.frame-advanced-popup`                                                                                                                                                                                                                                                                                                                                  |
+| `--frame-text`                              | `frame.text`                              | `#cccccc`                                                                                | Primary foreground for readable text and icons across shell and application content.                         | `.frame-advanced-popup`                                                                                                                                                                                                                                                                                                                                  |
+| `--frame-overlay-shadow`                    | `frame.overlay.shadow`                    | `0 14px 50px #0006`                                                                      | Elevation shadow separating floating overlays from underlying content.                                       | `.frame-advanced-popup`                                                                                                                                                                                                                                                                                                                                  |
+| `--frame-font-body`                         | `frame.font.body`                         | `"Segoe UI", sans-serif`                                                                 | Primary font family inherited by shell content and ordinary controls.                                        | `.frame-advanced-popup`                                                                                                                                                                                                                                                                                                                                  |
+| `--frame-font-size-body`                    | `frame.font.size.body`                    | `12px`                                                                                   | Base text size inherited by shell content and ordinary controls.                                             | `.frame-advanced-popup`                                                                                                                                                                                                                                                                                                                                  |
+| `--frame-control-radius`                    | `frame.control.radius`                    | `var(--frame-radius-medium)`                                                             | Shared corner radius of buttons and ordinary controls; text-entry surfaces may use the input radius instead. | `.frame-advanced-option`                                                                                                                                                                                                                                                                                                                                 |
+| `--frame-menu-hover`                        | `frame.menu.hover`                        | `#303336`                                                                                | Neutral hover and highlight fill for ordinary menu rows.                                                     | `.frame-advanced-option[data-highlighted]`                                                                                                                                                                                                                                                                                                               |
+
+Expressions are preserved as written; their computed values depend on the active theme and component state.
+
+<!-- /frame:generated -->
+
+### Additional styling guidance
+
+#### Parts and selectors
 
 | Selector                   | Part              | Placement                                                                        |
 | -------------------------- | ----------------- | -------------------------------------------------------------------------------- |
@@ -336,7 +502,7 @@ Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https:
 
 Input minimum height is 28px and width is min(100%, 340px). Popup padding, row padding, collision inset, and height cap are currently fixed.
 
-### Variables
+#### Variables
 
 | Token key                         | Variable                          | Value kind | Default/fallback                                                                                 | Part/effect                                                                  | Scope/limits                                                                             | Description                                                                        |
 | --------------------------------- | --------------------------------- | ---------- | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |

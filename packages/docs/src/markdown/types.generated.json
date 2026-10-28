@@ -1,0 +1,2135 @@
+{
+  "AcceptableValue": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "code": "type AcceptableValue = string | number | bigint | Record<string, any> | null;",
+    "properties": []
+  },
+  "AIChatController": {
+    "description": "Public type declared in packages/core/src/modules/chat/controllers/aiChat.ts.",
+    "code": "export type AIChatController = Pick<ChatController, keyof ChatController>;",
+    "properties": []
+  },
+  "AIChatConversation": {
+    "description": "Public interface declared in packages/core/src/modules/chat/controllers/aiChatHistory.ts.",
+    "code": "export interface AIChatConversation {\n\n  /** Unique identity within this history store. */\n  id: string;\n\n  /** User-visible name preserved while the conversation is retained. */\n  title: string;\n\n  /** Application scope identity, independent of the native provider session. */\n  applicationId?: string;\n\n  /** Creation time in epoch milliseconds. */\n  createdAt: number;\n\n  /** Whether the conversation sorts before unpinned entries. */\n  pinned: boolean;\n\n  /** Whether the conversation is retained outside the normal visible list. */\n  archived: boolean;\n\n  /** Owned chat controller disposed when the conversation is removed. */\n  chat: AIChatController;\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {"name": "title", "type": "string", "description": "Visible heading."},
+      {
+        "name": "applicationId",
+        "type": "string",
+        "description": "Application Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "createdAt",
+        "type": "number",
+        "description": "Created At configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "pinned",
+        "type": "boolean",
+        "description": "Pinned configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "archived",
+        "type": "boolean",
+        "description": "Archived configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "chat",
+        "type": "AIChatController",
+        "description": "Application-owned chat controller. Requests start only when explicitly sent."
+      }
+    ]
+  },
+  "AIChatHistoryController": {
+    "description": "Public type declared in packages/core/src/modules/chat/controllers/aiChatHistory.ts.",
+    "code": "export type AIChatHistoryController = Pick<\n  ChatHistoryController,\n  keyof ChatHistoryController\n>;",
+    "properties": []
+  },
+  "AlertDialogContentProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "interface AlertDialogContentProps extends DialogContentProps {}",
+    "properties": []
+  },
+  "AsTag": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "type AsTag = 'a' | 'button' | 'div' | 'form' | 'h2' | 'h3' | 'img' | 'input' | 'label' | 'li' | 'nav' | 'ol' | 'p' | 'span' | 'svg' | 'ul' | 'template' | ({} & string);",
+    "properties": []
+  },
+  "AvatarImageProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "interface AvatarImageProps extends PrimitiveProps {\n  src: string;\n  referrerPolicy?: ImgHTMLAttributes['referrerpolicy'];\n  crossOrigin?: ImgHTMLAttributes['crossorigin'];\n}",
+    "properties": [
+      {
+        "name": "src",
+        "type": "string",
+        "description": "Src configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "referrerPolicy",
+        "type": "ImgHTMLAttributes['referrerpolicy']",
+        "description": "Referrer Policy configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "crossOrigin",
+        "type": "ImgHTMLAttributes['crossorigin']",
+        "description": "Cross Origin configuration for this component; see its Features examples for usage."
+      }
+    ]
+  },
+  "ChatAttachment": {
+    "description": "Public interface declared in packages/core/src/modules/chat/types/chatTypes.ts.",
+    "code": "export interface ChatAttachment {\n\n  /**\n   * Stable identity used to address this entry within its owning message or\n   * schema.\n   */\n  id: string;\n\n  /** Display name supplied by the host. */\n  name: string;\n\n  /** Distinguishes file, folder, and application-context references. */\n  kind: 'file' | 'folder' | 'context';\n\n  /**\n   * Optional browser File objects retained by reference; copying clones only\n   * the list.\n   */\n  files?: File[];\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "description": "Icon name, optionally including its Iconify collection prefix."
+      },
+      {
+        "name": "kind",
+        "type": "'file' | 'folder' | 'context'",
+        "description": "Kind configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "files",
+        "type": "File[]",
+        "description": "Files configuration for this component; see its Features examples for usage."
+      }
+    ]
+  },
+  "ChatMessage": {
+    "description": "Public interface declared in packages/core/src/modules/chat/types/chatTypes.ts.",
+    "code": "export interface ChatMessage {\n\n  /**\n   * Stable identity used to address this entry within its owning message or\n   * schema.\n   */\n  id: string;\n\n  /** Conversation role identifying the entry as user or assistant content. */\n  role: 'user' | 'assistant';\n\n  /** Creation timestamp in milliseconds since the Unix epoch. */\n  createdAt: number;\n\n  /** Content parts retained in their original event order. */\n  parts: ChatPart[];\n\n  /**\n   * Host-selected attachment references associated with this entry or request.\n   */\n  attachments: ChatAttachment[];\n\n  /** Whether the entry is pending, complete, stopped, or failed. */\n  status: 'pending' | 'complete' | 'stopped' | 'error';\n\n  /**\n   * Completion timestamp in milliseconds since the Unix epoch, when finished.\n   */\n  finishedAt?: number;\n\n  /** Failure explanation retained when the message finishes with an error. */\n  error?: string;\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "role",
+        "type": "'user' | 'assistant'",
+        "description": "Role configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "createdAt",
+        "type": "number",
+        "description": "Created At configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "parts",
+        "type": "ChatPart[]",
+        "description": "Parts configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "attachments",
+        "type": "ChatAttachment[]",
+        "description": "Attachments configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "status",
+        "type": "'pending' | 'complete' | 'stopped' | 'error'",
+        "description": "Status configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "finishedAt",
+        "type": "number",
+        "description": "Finished At configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "description": "Error configuration for this component; see its Features examples for usage."
+      }
+    ]
+  },
+  "ChatResponder": {
+    "description": "Public type declared in packages/core/src/modules/chat/types/chatTypes.ts.",
+    "code": "export type ChatResponder = (\n  request: ChatRequest,\n  response: ChatResponseWriter\n) => void | Promise<void>;",
+    "properties": []
+  },
+  "CodeBlockTheme": {
+    "description": "Runtime enum containing every theme bundled with the installed Shiki version.",
+    "code": "import { CodeBlockTheme } from '@frame/core';\nconst theme = CodeBlockTheme.DarkPlus;",
+    "properties": [
+      {
+        "name": "CodeBlockTheme.Andromeeda",
+        "type": "\"andromeeda\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.AuroraX",
+        "type": "\"aurora-x\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.AyuDark",
+        "type": "\"ayu-dark\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.AyuLight",
+        "type": "\"ayu-light\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.AyuMirage",
+        "type": "\"ayu-mirage\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.CatppuccinFrappe",
+        "type": "\"catppuccin-frappe\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.CatppuccinLatte",
+        "type": "\"catppuccin-latte\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.CatppuccinMacchiato",
+        "type": "\"catppuccin-macchiato\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.CatppuccinMocha",
+        "type": "\"catppuccin-mocha\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.DarkPlus",
+        "type": "\"dark-plus\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.Dracula",
+        "type": "\"dracula\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.DraculaSoft",
+        "type": "\"dracula-soft\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.EverforestDark",
+        "type": "\"everforest-dark\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.EverforestLight",
+        "type": "\"everforest-light\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.GithubDark",
+        "type": "\"github-dark\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.GithubDarkDefault",
+        "type": "\"github-dark-default\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.GithubDarkDimmed",
+        "type": "\"github-dark-dimmed\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.GithubDarkHighContrast",
+        "type": "\"github-dark-high-contrast\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.GithubLight",
+        "type": "\"github-light\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.GithubLightDefault",
+        "type": "\"github-light-default\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.GithubLightHighContrast",
+        "type": "\"github-light-high-contrast\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.GruvboxDarkHard",
+        "type": "\"gruvbox-dark-hard\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.GruvboxDarkMedium",
+        "type": "\"gruvbox-dark-medium\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.GruvboxDarkSoft",
+        "type": "\"gruvbox-dark-soft\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.GruvboxLightHard",
+        "type": "\"gruvbox-light-hard\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.GruvboxLightMedium",
+        "type": "\"gruvbox-light-medium\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.GruvboxLightSoft",
+        "type": "\"gruvbox-light-soft\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.Horizon",
+        "type": "\"horizon\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.HorizonBright",
+        "type": "\"horizon-bright\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.Houston",
+        "type": "\"houston\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.KanagawaDragon",
+        "type": "\"kanagawa-dragon\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.KanagawaLotus",
+        "type": "\"kanagawa-lotus\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.KanagawaWave",
+        "type": "\"kanagawa-wave\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.Laserwave",
+        "type": "\"laserwave\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.LightPlus",
+        "type": "\"light-plus\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.MaterialTheme",
+        "type": "\"material-theme\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.MaterialThemeDarker",
+        "type": "\"material-theme-darker\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.MaterialThemeLighter",
+        "type": "\"material-theme-lighter\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.MaterialThemeOcean",
+        "type": "\"material-theme-ocean\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.MaterialThemePalenight",
+        "type": "\"material-theme-palenight\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.MinDark",
+        "type": "\"min-dark\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.MinLight",
+        "type": "\"min-light\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.Monokai",
+        "type": "\"monokai\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.NightOwl",
+        "type": "\"night-owl\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.NightOwlLight",
+        "type": "\"night-owl-light\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.Nord",
+        "type": "\"nord\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.OneDarkPro",
+        "type": "\"one-dark-pro\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.OneLight",
+        "type": "\"one-light\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.Plastic",
+        "type": "\"plastic\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.Poimandres",
+        "type": "\"poimandres\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.Red",
+        "type": "\"red\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.RosePine",
+        "type": "\"rose-pine\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.RosePineDawn",
+        "type": "\"rose-pine-dawn\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.RosePineMoon",
+        "type": "\"rose-pine-moon\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.SlackDark",
+        "type": "\"slack-dark\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.SlackOchin",
+        "type": "\"slack-ochin\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.SnazzyLight",
+        "type": "\"snazzy-light\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.SolarizedDark",
+        "type": "\"solarized-dark\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.SolarizedLight",
+        "type": "\"solarized-light\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.Synthwave84",
+        "type": "\"synthwave-84\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.TokyoNight",
+        "type": "\"tokyo-night\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.Vesper",
+        "type": "\"vesper\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.VitesseBlack",
+        "type": "\"vitesse-black\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.VitesseDark",
+        "type": "\"vitesse-dark\"",
+        "description": "Available syntax highlighting theme."
+      },
+      {
+        "name": "CodeBlockTheme.VitesseLight",
+        "type": "\"vitesse-light\"",
+        "description": "Available syntax highlighting theme."
+      }
+    ]
+  },
+  "CodeEditorController": {
+    "description": "Public interface declared in packages/core/src/modules/editor/types/codeEditorTypes.ts.",
+    "code": "export interface CodeEditorController {\n\n  /** Readonly reactive reference to the currently attached Monaco surface. */\n  readonly instance: Readonly<\n    ShallowRef<Monaco.editor.IStandaloneCodeEditor | undefined>\n  >;\n\n  /** Focuses the mounted surface, returning false before attachment. */\n  focus(): boolean;\n\n  /** Runs Monaco undo on the mounted surface. */\n  undo(): boolean;\n\n  /** Runs Monaco redo on the mounted surface. */\n  redo(): boolean;\n\n  /** Opens the mounted editor’s find widget. */\n  find(): boolean;\n\n  /** Replaces the complete model within undo boundaries, including read-only models. */\n  replaceCode(code: string): boolean;\n\n  /** Runs a supported Monaco action; returns false when unavailable. */\n  runAction(id: string): Promise<boolean>;\n\n  /** Runs the registered document formatter when supported. */\n  format(): Promise<boolean>;\n\n  /** Recomputes the mounted editor layout. */\n  layout(): void;\n\n  /** Used by CodeEditor to claim one mounted surface. Returns an idempotent release. */\n  attach(instance: Monaco.editor.IStandaloneCodeEditor): () => void;\n}",
+    "properties": [
+      {
+        "name": "instance",
+        "type": "Readonly<\r\n    ShallowRef<Monaco.editor.IStandaloneCodeEditor | undefined>\r\n  >",
+        "description": "Readonly reactive reference to the currently attached Monaco surface."
+      }
+    ]
+  },
+  "CodeEditorOptions": {
+    "description": "Public type declared in packages/core/src/modules/editor/types/codeEditorTypes.ts.",
+    "code": "export type CodeEditorOptions = Omit<\n  Monaco.editor.IStandaloneEditorConstructionOptions,\n  'value' | 'model' | 'language' | 'theme'\n> &\n  Monaco.editor.ITextModelUpdateOptions;",
+    "properties": []
+  },
+  "Color": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "type Color = RGBColor | HSLColor | HSBColor;",
+    "properties": []
+  },
+  "ColorChannel": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "type ColorChannel = RGBChannel | HSLChannel | HSBChannel;",
+    "properties": []
+  },
+  "ColorSpace": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "type ColorSpace = 'rgb' | 'hsl' | 'hsb';",
+    "properties": []
+  },
+  "CommandPrefix": {
+    "description": "Public interface declared in packages/core/src/framework/commands/commandPrefixes.ts.",
+    "code": "export interface CommandPrefix {\n\n  /** Unique single-symbol prefix used to enter this command category. */\n  prefix: string;\n\n  /** Human-readable category label. */\n  label: string;\n\n  /** Optional search hint displayed inside this category. */\n  placeholder?: string;\n}",
+    "properties": [
+      {
+        "name": "prefix",
+        "type": "string",
+        "description": "Prefix configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "description": "Hint displayed when the field is empty."
+      }
+    ]
+  },
+  "ContextMenuContentProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "interface ContextMenuContentProps extends Omit<MenuContentProps, 'side' | 'sideOffset' | 'align' | 'arrowPadding' | 'updatePositionStrategy'> {}",
+    "properties": []
+  },
+  "DataOrientation": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "code": "type DataOrientation = 'vertical' | 'horizontal';",
+    "properties": []
+  },
+  "DateRange": {
+    "description": "Start and end date values used by range calendars, fields and pickers.",
+    "code": "import { CalendarDate, type DateRange } from '@frame/core';\nconst range: DateRange = { start: new CalendarDate(2026, 10, 21), end: new CalendarDate(2026, 10, 26) };",
+    "properties": [
+      {
+        "name": "start",
+        "type": "DateValue | undefined",
+        "description": "A structured value, or undefined while this end of the range is incomplete.",
+        "reference": "DateValue"
+      },
+      {
+        "name": "end",
+        "type": "DateValue | undefined",
+        "description": "A structured value, or undefined while this end of the range is incomplete.",
+        "reference": "DateValue"
+      }
+    ]
+  },
+  "DateStep": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "code": "type DateStep = {\n  year?: number;\n  month?: number;\n  day?: number;\n  hour?: number;\n  minute?: number;\n  second?: number;\n  millisecond?: number;\n};",
+    "properties": []
+  },
+  "DateValue": {
+    "description": "Calendar-aware date model used by calendar, date, month and year controls.",
+    "code": "import { CalendarDate, type DateValue } from '@frame/core';\nconst date: DateValue = new CalendarDate(2026, 10, 21);",
+    "properties": [
+      {
+        "name": "year",
+        "type": "number",
+        "description": "A numeric part of the structured calendar or time value. Use exported constructors and parsers to create values."
+      },
+      {
+        "name": "month",
+        "type": "number",
+        "description": "A numeric part of the structured calendar or time value. Use exported constructors and parsers to create values."
+      },
+      {
+        "name": "day",
+        "type": "number",
+        "description": "A numeric part of the structured calendar or time value. Use exported constructors and parsers to create values."
+      }
+    ]
+  },
+  "DialogContentProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "interface DialogContentProps extends Omit<DialogContentImplProps, 'trapFocus'> {\n  /**\n   * Used to force mounting when more control is needed. Useful when\n   * controlling animation with Vue animation libraries.\n   */\n  forceMount?: boolean;\n}",
+    "properties": [
+      {
+        "name": "forceMount",
+        "type": "boolean",
+        "description": "Force Mount configuration for this component; see its Features examples for usage."
+      }
+    ]
+  },
+  "Direction": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "code": "type Direction = 'ltr' | 'rtl';",
+    "properties": []
+  },
+  "DrawerContentProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "interface DrawerContentProps extends Omit<DrawerContentImplProps, 'trapFocus'> {\n  forceMount?: boolean;\n}",
+    "properties": [
+      {
+        "name": "forceMount",
+        "type": "boolean",
+        "description": "Force Mount configuration for this component; see its Features examples for usage."
+      }
+    ]
+  },
+  "DrawerModal": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "type DrawerModal = boolean | 'trap-focus';",
+    "properties": []
+  },
+  "DrawerSnapPoint": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "type DrawerSnapPoint = number | string;",
+    "properties": []
+  },
+  "DropdownMenuContentProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "interface DropdownMenuContentProps extends MenuContentProps {}",
+    "properties": []
+  },
+  "FieldValidateFn": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "type FieldValidateFn = (value: unknown, formValues: Record<string, unknown>) => FieldValidateResult | Promise<FieldValidateResult>;",
+    "properties": []
+  },
+  "FieldValidationMode": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "type FieldValidationMode = 'onSubmit' | 'onBlur' | 'onChange';",
+    "properties": []
+  },
+  "FrameAccordionItem": {
+    "description": "Public interface declared in packages/core/src/components/layout/FrameAccordion.vue.ts.",
+    "code": "export interface FrameAccordionItem { value: string; title: string; description?: string; disabled?: boolean }",
+    "properties": [
+      {
+        "name": "value",
+        "type": "string",
+        "description": "Value configuration for this component; see its Features examples for usage."
+      },
+      {"name": "title", "type": "string", "description": "Visible heading."},
+      {
+        "name": "description",
+        "type": "string",
+        "description": "Description configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      }
+    ]
+  },
+  "FrameLoaderVariant": {
+    "description": "Public type declared in packages/core/src/components/feedback/loading.ts.",
+    "code": "export type FrameLoaderVariant = keyof typeof frameLoaderNames;",
+    "properties": []
+  },
+  "FrameLoadingTextPosition": {
+    "description": "Public type declared in packages/core/src/components/feedback/loading.ts.",
+    "code": "export type FrameLoadingTextPosition = \"above\" | \"below\" | \"left\" | \"right\";",
+    "properties": []
+  },
+  "FrameMenubarItem": {
+    "description": "Public interface declared in packages/core/src/components/navigation/menubarTypes.ts.",
+    "code": "export interface FrameMenubarItem {\n\n  /** Stable selection value identifying this top-level menu. */\n  value: string;\n\n  /** Visible top-level trigger label. */\n  label: string;\n\n  /** Prevents user activation of the menu trigger. */\n  disabled?: boolean;\n\n  /** Ordered actions normalized into the menu's displayed entries. */\n  items: FrameMenubarAction[];\n}",
+    "properties": [
+      {
+        "name": "value",
+        "type": "string",
+        "description": "Value configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      },
+      {
+        "name": "items",
+        "type": "FrameMenubarAction[]",
+        "description": "Ordered application-owned entries."
+      }
+    ]
+  },
+  "FrameMenuItem": {
+    "description": "A typed command-menu entry, shared by FrameMenu, ContextMenu, and the Manage menu. A menu item is either an action/submenu or a separator.",
+    "code": "import type { FrameMenuItem } from '@frame/core';\nconst items: FrameMenuItem[] = [\n  { id: 'save', label: 'Save', command: 'app.save', shortcut: 'Ctrl+S' },\n  { id: 'view', label: 'View', children: [{ id: 'outline', label: 'Outline' }] },\n  { id: 'divider', type: 'separator' },\n  { id: 'autosave', label: 'Autosave', checked: true },\n];",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Required unique ID within this menu."
+      },
+      {
+        "name": "type",
+        "type": "\"item\" | \"separator\"",
+        "description": "Omit or use item for choices; separator for a non-selectable divider."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Required text for a choice; separators do not use it."
+      },
+      {
+        "name": "command",
+        "type": "string",
+        "description": "Optional registered command ID. The host handles selection/dispatch."
+      },
+      {
+        "name": "shortcut",
+        "type": "string",
+        "description": "Optional display hint; does not install a shortcut."
+      },
+      {
+        "name": "children",
+        "type": "readonly FrameMenuItem[]",
+        "description": "Nested FrameMenuItem[] submenu.",
+        "reference": "FrameMenuItem"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Skips pointer/keyboard selection."
+      },
+      {
+        "name": "checked",
+        "type": "boolean",
+        "description": "Optional checkbox state; application updates the value."
+      },
+      {
+        "name": "visibility",
+        "type": "boolean",
+        "description": "Use the hover/focus visibility indicator."
+      }
+    ]
+  },
+  "FrameNavigationItem": {
+    "description": "Public interface declared in packages/core/src/components/navigation/navigationMenuTypes.ts.",
+    "code": "export interface FrameNavigationItem {\n\n  /** Stable item value forwarded to the navigation menu primitive. */\n  value: string;\n\n  /** Visible link text or submenu trigger label. */\n  label: string;\n\n  /** Link destination used when this entry has no submenu children. */\n  href?: string;\n\n  /** Blocks navigation or submenu activation without removing the entry. */\n  disabled?: boolean;\n\n  /** Links shown in the default submenu, or supplied to its custom content slot. */\n  children?: FrameNavigationItem[];\n}",
+    "properties": [
+      {
+        "name": "value",
+        "type": "string",
+        "description": "Value configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "description": "Href configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      },
+      {
+        "name": "children",
+        "type": "FrameNavigationItem[]",
+        "description": "Nested application-owned contributions."
+      }
+    ]
+  },
+  "FrameOptions": {
+    "description": "Optional built-in features chosen when creating an isolated Frame instance.",
+    "code": "const frame = createFrame({ navigation: true, settings: true, notifications: true });",
+    "properties": [
+      {
+        "name": "navigation",
+        "type": "boolean",
+        "description": "Enable page/view navigation history and the Back/Forward arrows. Default false."
+      },
+      {
+        "name": "settings",
+        "type": "boolean",
+        "description": "Enable built-in Settings UI. Default true."
+      },
+      {
+        "name": "notifications",
+        "type": "boolean",
+        "description": "Enable transient notifications. Default true."
+      },
+      {
+        "name": "toolbar",
+        "type": "ToolbarOptions",
+        "description": "Initial title-bar control visibility; runtime changes use frame.toolbar.",
+        "reference": "ToolbarOptions"
+      },
+      {
+        "name": "primaryViewBar",
+        "type": "PrimaryViewBarOptions",
+        "description": "Initial view-bar position, size, hidden items and badges; runtime changes use frame.primaryViewBar.",
+        "reference": "PrimaryViewBarOptions"
+      },
+      {
+        "name": "secondaryViewBar",
+        "type": "SecondaryViewBarOptions",
+        "description": "Initial secondary view-bar display, size, position, and item visibility.",
+        "reference": "SecondaryViewBarOptions"
+      },
+      {
+        "name": "panelViewBar",
+        "type": "PanelViewBarOptions",
+        "description": "Panel view-item presentation, independent of its container.",
+        "reference": "PanelViewBarOptions"
+      },
+      {
+        "name": "navigationBar",
+        "type": "boolean | NavigationBarOptions",
+        "description": "Optional navigation-only bar; supports all four docking edges.",
+        "reference": "NavigationBarOptions"
+      },
+      {
+        "name": "status",
+        "type": "StatusOptions",
+        "description": "Initial status text, bar visibility, hidden items and hidden badges; runtime changes use frame.status.",
+        "reference": "StatusOptions"
+      }
+    ]
+  },
+  "FrameSplitPanel": {
+    "description": "Public interface declared in packages/core/src/components/layout/splitterTypes.ts.",
+    "code": "export interface FrameSplitPanel extends SplitterPanelProps {\n\n  /** Resize-handle name and fallback panel text when content is omitted. */\n  label?: string;\n\n  /** Fallback text displayed when the panel slot is not supplied. */\n  content?: string;\n}",
+    "properties": [
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "description": "Content configuration for this component; see its Features examples for usage."
+      }
+    ]
+  },
+  "FrameStepItem": {
+    "description": "Public interface declared in packages/core/src/components/navigation/stepperTypes.ts.",
+    "code": "export interface FrameStepItem {\n\n  /** Step value forwarded to Reka and displayed in the default indicator. */\n  step: number;\n\n  /** Visible step title. */\n  label: string;\n\n  /** Optional supporting text displayed below the title. */\n  description?: string;\n\n  /** Prevents user activation of this step. */\n  disabled?: boolean;\n\n  /** Explicit completion state forwarded to the underlying step item. */\n  completed?: boolean;\n}",
+    "properties": [
+      {
+        "name": "step",
+        "type": "number",
+        "description": "Increment used by the control."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "description": "Description configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      },
+      {
+        "name": "completed",
+        "type": "boolean",
+        "description": "Completed configuration for this component; see its Features examples for usage."
+      }
+    ]
+  },
+  "FrameTabItem": {
+    "description": "Public interface declared in packages/core/src/components/navigation/tabsTypes.ts.",
+    "code": "export interface FrameTabItem {\n\n  /** Stable selection value shared by the trigger and corresponding panel. */\n  value: string | number;\n\n  /** Visible text in the default tab trigger. */\n  label: string;\n\n  /** Prevents activation of this trigger while retaining its panel definition. */\n  disabled?: boolean;\n\n  /** Fallback panel text when the content slot is not supplied. */\n  content?: string;\n\n  /** Optional icon displayed before the default trigger label. */\n  icon?: string;\n}",
+    "properties": [
+      {
+        "name": "value",
+        "type": "string | number",
+        "description": "Value configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "description": "Content configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "description": "Optional leading icon; provide an accessible label for icon-only actions."
+      }
+    ]
+  },
+  "FrameToolbarItem": {
+    "description": "Public interface declared in packages/core/src/components/actions/toolbarTypes.ts.",
+    "code": "export interface FrameToolbarItem {\n\n  /** Stable rendering identity within the toolbar. */\n  id: string;\n\n  /** Visible text for a button or link; unused when rendering a separator. */\n  label: string;\n\n  /** Optional icon displayed before a non-separator label. */\n  icon?: string;\n\n  /** Prevents activation and renders a button instead of an active link. */\n  disabled?: boolean;\n\n  /** Link destination used when the item is enabled and not a separator. */\n  href?: string;\n\n  /** Renders a structural separator instead of a button or link. */\n  separator?: boolean;\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "description": "Optional leading icon; provide an accessible label for icon-only actions."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "description": "Href configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "separator",
+        "type": "boolean",
+        "description": "Separator configuration for this component; see its Features examples for usage."
+      }
+    ]
+  },
+  "FrameTreeItem": {
+    "description": "Public interface declared in packages/core/src/components/data-display/treeTypes.ts.",
+    "code": "export interface FrameTreeItem {\n\n  /** Default rendering and selection key, unless getKey overrides it. */\n  id: string;\n\n  /** Visible label in the default tree row. */\n  label: string;\n\n  /** Optional row icon, independent of the expansion indicator. */\n  icon?: string;\n\n  /** Disables interaction with this item through the underlying tree primitive. */\n  disabled?: boolean;\n\n  /** Descendants consumed by the tree's item-flattening behavior. */\n  children?: FrameTreeItem[];\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "description": "Optional leading icon; provide an accessible label for icon-only actions."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Prevents user interaction while retaining the current value."
+      },
+      {
+        "name": "children",
+        "type": "FrameTreeItem[]",
+        "description": "Nested application-owned contributions."
+      }
+    ]
+  },
+  "Granularity": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "code": "type Granularity = 'day' | 'hour' | 'minute' | 'second';",
+    "properties": []
+  },
+  "HourCycle": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "code": "type HourCycle = 12 | 24 | undefined;",
+    "properties": []
+  },
+  "HoverCardContentProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "interface HoverCardContentProps extends HoverCardContentImplProps {\n  /**\n   * Used to force mounting when more control is needed. Useful when\n   * controlling animation with Vue animation libraries.\n   */\n  forceMount?: boolean;\n}",
+    "properties": [
+      {
+        "name": "forceMount",
+        "type": "boolean",
+        "description": "Force Mount configuration for this component; see its Features examples for usage."
+      }
+    ]
+  },
+  "Matcher": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "code": "type Matcher = (date: DateValue$2) => boolean;",
+    "properties": []
+  },
+  "ModalDefinition": {
+    "description": "Public object contract exported by @frame/core.",
+    "code": "export interface ModalDefinition {\n  id: string;\n  title: string;\n  component: Component;\n  props?: Record<string, unknown>;\n  icon?: Component;\n  actions?: readonly PanelAction[];\n  width?: number;\n  height?: number;\n  maximized?: boolean;\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Stable identifier used for registration, lookup, and disposal."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "description": "Visible heading for the dialog, category, or picker."
+      },
+      {
+        "name": "component",
+        "type": "Component",
+        "description": "Vue component rendered as the custom content."
+      },
+      {
+        "name": "props",
+        "type": "Record<string, unknown> | undefined",
+        "description": "Values passed as props to the content component."
+      },
+      {
+        "name": "icon",
+        "type": "Component | undefined",
+        "description": "Optional Vue component rendered as the contribution icon."
+      },
+      {
+        "name": "actions",
+        "type": "readonly PanelAction[] | undefined",
+        "description": "Header actions displayed for this contribution.",
+        "reference": "PanelAction"
+      },
+      {
+        "name": "width",
+        "type": "number | undefined",
+        "description": "Initial dialog width in pixels; constrained to the available workbench."
+      },
+      {
+        "name": "height",
+        "type": "number | undefined",
+        "description": "Initial dialog height in pixels; constrained to the available workbench."
+      },
+      {
+        "name": "maximized",
+        "type": "boolean | undefined",
+        "description": "Open the dialog maximized within the workbench."
+      }
+    ]
+  },
+  "NavigationActionItem": {
+    "description": "Public interface declared in packages/core/src/framework/views/navigationItems.ts.",
+    "code": "export interface NavigationActionItem extends NamedNavigationItem {\n\n  /** Discriminant selecting the supported item behavior. */\n  type: 'action';\n\n  /** Action invoked when this contribution is activated. */\n  run: () => void | Promise<void>;\n\n  /** Static or reactive indication that this navigation destination is selected. */\n  active?: boolean | (() => boolean);\n}",
+    "properties": [
+      {
+        "name": "type",
+        "type": "'action'",
+        "description": "Native input/button behavior."
+      },
+      {
+        "name": "run",
+        "type": "() => void | Promise<void>",
+        "description": "Run configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "active",
+        "type": "boolean | (() => boolean)",
+        "description": "Shows the loading presentation while retaining the mounted content."
+      }
+    ]
+  },
+  "NavigationBarOptions": {
+    "description": "Initial optional navigation-bar presentation and docking.",
+    "code": "const frame = createFrame({ navigationBar: { position: 'left', display: 'both', size: 'compact' } });",
+    "properties": [
+      {
+        "name": "allowAddSeparator",
+        "type": "boolean",
+        "description": "Opt-in user separator creation; defaults to false."
+      },
+      {
+        "name": "collapsed",
+        "type": "boolean",
+        "description": "Independent collapsed state for vertical icons-and-text navigation; defaults false."
+      },
+      {
+        "name": "position",
+        "type": "'top' | 'bottom' | 'left' | 'right'",
+        "description": "Dock outside the entire workbench body; defaults to top."
+      },
+      {
+        "name": "visible",
+        "type": "boolean",
+        "description": "An options object shows the bar unless false."
+      },
+      {
+        "name": "display",
+        "type": "'icons' | 'text' | 'both'",
+        "description": "Works in every docking orientation."
+      },
+      {
+        "name": "justification",
+        "type": "'left' | 'center' | 'right'",
+        "description": "Side-docked item alignment; defaults to left on either side. Also controlled by setJustification."
+      },
+      {
+        "name": "size",
+        "type": "'default' | 'compact'",
+        "description": "Independent of overall shell density."
+      },
+      {
+        "name": "hidden / hiddenBadges",
+        "type": "readonly string[]",
+        "description": "Initial navigation-item presentation preferences."
+      }
+    ]
+  },
+  "NavigationItem": {
+    "description": "A navigation-only union: action, link, dropdown, or separator. Navigation items never own sidebar/panel content.",
+    "code": "frame.registerNavigationItem({ id: 'home', type: 'link', label: 'Home', href: '#/home' });",
+    "properties": [
+      {
+        "name": "type",
+        "type": "'action' | 'link' | 'dropdown' | 'separator'",
+        "description": "Explicit behavior discriminator."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Unique throughout one navigation tree; separate from view ids."
+      },
+      {
+        "name": "run",
+        "type": "() => void | Promise<void>",
+        "description": "Required only for an action."
+      },
+      {
+        "name": "href / onNavigate",
+        "type": "string / optional callback",
+        "description": "A link destination and optional host router integration."
+      },
+      {
+        "name": "items",
+        "type": "readonly NavigationItem[]",
+        "description": "Required for dropdowns; nested dropdowns are supported."
+      }
+    ]
+  },
+  "NotificationAction": {
+    "description": "An optional labeled application action displayed inside a notification.",
+    "code": "frame.notify({ title: 'Review requested', action: { label: 'Open settings', run: () => frame.openSettings() } });",
+    "properties": [
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible action-button text."
+      },
+      {
+        "name": "run",
+        "type": "() => void | Promise<void>",
+        "description": "Runs on activation. A thrown error or rejected promise displays an error notification."
+      }
+    ]
+  },
+  "NotificationHistory": {
+    "description": "An optional in-memory store from @frame/core/modules/notifications. It retains notification events independently of core notification expiry.",
+    "code": "import { createNotificationHistory } from '@frame/core/modules/notifications';\nconst history = createNotificationHistory(frame, { limit: 200 });\nhistory.toggle();\n// onBeforeUnmount(() => history.dispose());",
+    "properties": [
+      {
+        "name": "state.open",
+        "type": "boolean",
+        "description": "Controls the optional history panel visibility."
+      },
+      {
+        "name": "state.items",
+        "type": "HistoryNotification[]",
+        "description": "Newest-first history entries with independent numeric historyId keys and expanded state; bounded by limit."
+      },
+      {
+        "name": "toggle",
+        "type": "() => void",
+        "description": "Toggles panel visibility."
+      },
+      {
+        "name": "dismiss",
+        "type": "(historyId: number) => void",
+        "description": "Removes one history entry without dismissing an active core notification."
+      },
+      {
+        "name": "clear",
+        "type": "() => void",
+        "description": "Clears history without changing active notifications."
+      },
+      {
+        "name": "dispose",
+        "type": "() => void",
+        "description": "Unsubscribes, clears history, and closes its panel."
+      }
+    ]
+  },
+  "NotificationOptions": {
+    "description": "Public interface declared in packages/core/src/framework/views/notifications.ts.",
+    "code": "export interface NotificationOptions {\n\n  /** Stable identity used to address this contribution. */\n  id?: string;\n\n  /** Heading displayed by the owning presentation. */\n  title: string;\n\n  /** Semantic severity used to style the notification. */\n  severity?: NotificationSeverity;\n\n  /** Optional expanded notification content. */\n  details?: string;\n\n  /** Optional application source identifying the notification origin. */\n  source?: string;\n\n  /** Optional host priority annotation retained with the notification. */\n  priority?: string;\n\n  /** Dismissal delay in milliseconds; zero keeps the notification persistent. */\n  duration?: number;\n\n  /** Optional application action offered by the notification. */\n  action?: NotificationAction;\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {"name": "title", "type": "string", "description": "Visible heading."},
+      {
+        "name": "severity",
+        "type": "NotificationSeverity",
+        "description": "Severity configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "details",
+        "type": "string",
+        "description": "Details configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "source",
+        "type": "string",
+        "description": "Source configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "priority",
+        "type": "string",
+        "description": "Priority configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "duration",
+        "type": "number",
+        "description": "Duration configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "action",
+        "type": "NotificationAction",
+        "description": "Action configuration for this component; see its Features examples for usage."
+      }
+    ]
+  },
+  "NotificationSeverity": {
+    "description": "Public type declared in packages/core/src/framework/views/notifications.ts.",
+    "code": "export type NotificationSeverity = 'info' | 'success' | 'warning' | 'error';",
+    "properties": []
+  },
+  "Orientation": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "type Orientation = 'vertical' | 'horizontal';",
+    "properties": []
+  },
+  "PanelAction": {
+    "description": "Public object contract exported by @frame/core.",
+    "code": "export interface PanelAction { id: string; label: string; icon?: Component; run: () => void; disabled?: boolean }",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Stable identifier used for registration, lookup, and disposal."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible text shown in the corresponding control or view."
+      },
+      {
+        "name": "icon",
+        "type": "Component | undefined",
+        "description": "Optional Vue component rendered as the contribution icon."
+      },
+      {
+        "name": "run",
+        "type": "() => void",
+        "description": "Callback invoked when the user activates the action."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean | undefined",
+        "description": "Prevents activation or editing when true."
+      }
+    ]
+  },
+  "PanelDefinition": {
+    "description": "Public object contract exported by @frame/core.",
+    "code": "export interface PanelDefinition {\n  id: string;\n  label: string;\n  icon?: Component;\n  actions?: readonly PanelAction[];\n  padded?: boolean;\n  draggable?: boolean;\n  movable?: boolean;\n  collapsed?: boolean;\n  component?: Component;\n  children?: readonly PanelDefinition[];\n  props?: Record<string, unknown>;\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Stable identifier used for registration, lookup, and disposal."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible text shown in the corresponding control or view."
+      },
+      {
+        "name": "icon",
+        "type": "Component | undefined",
+        "description": "Optional Vue component rendered as the contribution icon."
+      },
+      {
+        "name": "actions",
+        "type": "readonly PanelAction[] | undefined",
+        "description": "Header actions displayed for this contribution.",
+        "reference": "PanelAction"
+      },
+      {
+        "name": "padded",
+        "type": "boolean | undefined",
+        "description": "Controls internal view-content padding."
+      },
+      {
+        "name": "draggable",
+        "type": "boolean | undefined",
+        "description": "Allows dragging this view when shell interaction policies also allow it."
+      },
+      {
+        "name": "movable",
+        "type": "boolean | undefined",
+        "description": "Allows moving this view between regions or collections."
+      },
+      {
+        "name": "collapsed",
+        "type": "boolean | undefined",
+        "description": "Initial collapsed state for a section in a view collection."
+      },
+      {
+        "name": "component",
+        "type": "Component | undefined",
+        "description": "Vue component rendered as the custom content."
+      },
+      {
+        "name": "children",
+        "type": "readonly PanelDefinition[] | undefined",
+        "description": "Nested definitions shown as child categories or view sections."
+      },
+      {
+        "name": "props",
+        "type": "Record<string, unknown> | undefined",
+        "description": "Values passed as props to the content component."
+      }
+    ]
+  },
+  "PanelGroupStorage": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "type PanelGroupStorage = {\n  getItem: (name: string) => string | null;\n  setItem: (name: string, value: string) => void;\n};",
+    "properties": []
+  },
+  "PanelViewBarOptions": {
+    "description": "Presentation of panel view items, separate from panel docking/alignment.",
+    "code": "const frame = createFrame({ panelViewBar: { visible: true, size: 'compact', display: 'both' } });",
+    "properties": [
+      {
+        "name": "allowAddSeparator",
+        "type": "boolean",
+        "description": "Opt-in user separator creation; defaults to false."
+      },
+      {
+        "name": "visible",
+        "type": "boolean",
+        "description": "Hides only the selector when false; retains panel content."
+      },
+      {
+        "name": "size",
+        "type": "'default' | 'compact'",
+        "description": "Panel view-bar item size."
+      },
+      {
+        "name": "display",
+        "type": "'icons' | 'text' | 'both'",
+        "description": "Panel view-item display."
+      },
+      {
+        "name": "hidden / hiddenBadges",
+        "type": "readonly string[]",
+        "description": "Initial view-item or badge visibility."
+      }
+    ]
+  },
+  "PopoverContentProps": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "interface PopoverContentProps extends PopoverContentImplProps {\n  /**\n   * Used to force mounting when more control is needed. Useful when\n   * controlling animation with Vue animation libraries.\n   */\n  forceMount?: boolean;\n}",
+    "properties": [
+      {
+        "name": "forceMount",
+        "type": "boolean",
+        "description": "Force Mount configuration for this component; see its Features examples for usage."
+      }
+    ]
+  },
+  "PrimaryViewBarController": {
+    "description": "Per-instance view-bar presentation, visibility, and badge controls.",
+    "code": "frame.primaryViewBar.setPosition('top');\nframe.primaryViewBar.setSize('compact');\nframe.primaryViewBar.movePrimarySide('right');\nconst position = frame.primaryViewBar.position.value;",
+    "properties": [
+      {
+        "name": "position / size",
+        "type": "ComputedRef<ViewBarPosition> / ComputedRef<ViewBarSize>",
+        "description": "Reactive current presentation. Read .value in script."
+      },
+      {
+        "name": "setPosition",
+        "type": "(position: ViewBarPosition) => boolean",
+        "description": "Change placement or hide; non-hidden positions show the bar.",
+        "reference": "ViewBarPosition"
+      },
+      {
+        "name": "setSize",
+        "type": "(size: ViewBarSize) => boolean",
+        "description": "Change only view item size.",
+        "reference": "ViewBarSize"
+      },
+      {
+        "name": "movePrimarySide",
+        "type": "(side: 'left' | 'right') => boolean",
+        "description": "Move the primary sidebar and view-bar presentation together."
+      },
+      {
+        "name": "setVisible / setBadgeVisible / setBadge",
+        "type": "methods",
+        "description": "Control registered contributions by their view/action key; hiding does not dispose content."
+      }
+    ]
+  },
+  "PrimaryViewBarOptions": {
+    "description": "Initial view-bar presentation and contribution visibility, scoped to the Frame instance.",
+    "code": "const frame = createFrame({ primaryViewBar: { position: 'top', size: 'compact' } });\nframe.primaryViewBar.setPosition('bottom');\nframe.primaryViewBar.setSize('default');\nframe.primaryViewBar.movePrimarySide('right');",
+    "properties": [
+      {
+        "name": "allowAddSeparator",
+        "type": "boolean",
+        "description": "Opt-in user separator creation; defaults to false."
+      },
+      {
+        "name": "position",
+        "type": "ViewBarPosition",
+        "description": "Initial placement or hidden state; defaults to default.",
+        "reference": "ViewBarPosition"
+      },
+      {
+        "name": "size",
+        "type": "ViewBarSize",
+        "description": "Initial item size; defaults to default. Independent of position and shell density.",
+        "reference": "ViewBarSize"
+      },
+      {
+        "name": "hidden",
+        "type": "readonly string[]",
+        "description": "Contributions whose view item or badge begins hidden."
+      },
+      {
+        "name": "hiddenBadges",
+        "type": "readonly string[]",
+        "description": "Contributions whose view item or badge begins hidden."
+      }
+    ]
+  },
+  "QuickPickItem": {
+    "description": "Public object contract exported by @frame/core.",
+    "code": "export interface QuickPickItem {\n  id: string;\n  label: string;\n  detail?: string;\n  shortcut?: string;\n  disabled?: boolean;\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Stable identifier used for registration, lookup, and disposal."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible text shown in the corresponding control or view."
+      },
+      {
+        "name": "detail",
+        "type": "string | undefined",
+        "description": "Secondary text shown alongside the picker label."
+      },
+      {
+        "name": "shortcut",
+        "type": "string | undefined",
+        "description": "Displayed keyboard shortcut hint; does not register a shortcut."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean | undefined",
+        "description": "Prevents activation or editing when true."
+      }
+    ]
+  },
+  "QuickPickOptions": {
+    "description": "Options for the always-searchable frame.showQuickPick service.",
+    "code": "export interface QuickPickOptions {\n  title?: string;\n  placeholder?: string;\n}",
+    "properties": [
+      {
+        "name": "title",
+        "type": "string | undefined",
+        "description": "Visible heading for the dialog, category, or picker."
+      },
+      {
+        "name": "placeholder",
+        "type": "string | undefined",
+        "description": "Prompt shown in the empty picker search field."
+      }
+    ]
+  },
+  "ScrollType": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "type ScrollType = 'auto' | 'always' | 'scroll' | 'hover' | 'glimpse';",
+    "properties": []
+  },
+  "SecondaryViewBarOptions": {
+    "description": "Initial secondary sidebar view-bar presentation and item preferences.",
+    "code": "const frame = createFrame({ secondaryViewBar: { position: 'top', display: 'both', size: 'default' } });",
+    "properties": [
+      {
+        "name": "allowAddSeparator",
+        "type": "boolean",
+        "description": "Opt-in user separator creation; defaults to false."
+      },
+      {
+        "name": "position",
+        "type": "ViewBarPosition",
+        "description": "Defaults to top; default follows the outer sidebar edge.",
+        "reference": "ViewBarPosition"
+      },
+      {
+        "name": "display",
+        "type": "'icons' | 'text' | 'both'",
+        "description": "Available in vertical and horizontal placements."
+      },
+      {
+        "name": "size",
+        "type": "ViewBarSize",
+        "description": "Independent default or compact item sizing.",
+        "reference": "ViewBarSize"
+      },
+      {
+        "name": "hidden / hiddenBadges",
+        "type": "readonly string[]",
+        "description": "Initial secondary-view or badge visibility."
+      }
+    ]
+  },
+  "SelectItem": {
+    "description": "The shared runtime base for SelectOption and SelectSeparator. In TypeScript, SelectItem is the union of these two concrete classes.",
+    "code": "import { SelectOption, SelectSeparator, type SelectItem } from '@frame/core';\nconst options: SelectItem[] = [\n  new SelectOption({ value: 'local', label: 'Local' }),\n  new SelectSeparator('remote-group'),\n  new SelectOption({ value: 'remote', label: 'Remote', description: 'Sync online.' }),\n];",
+    "properties": [
+      {
+        "name": "option",
+        "type": "SelectOption",
+        "description": "Value-bearing choice, optionally disabled.",
+        "reference": "SelectOption"
+      },
+      {
+        "name": "separator",
+        "type": "SelectSeparator",
+        "description": "Non-selectable group divider.",
+        "reference": "SelectSeparator"
+      }
+    ]
+  },
+  "SelectOption": {
+    "description": "A runtime class extending SelectItem. Represents a selectable value.",
+    "code": "import { SelectOption } from '@frame/core';\nconst option = new SelectOption({ value: 'remote', label: 'Remote', detail: 'Cloud', description: 'Sync online.', disabled: false });",
+    "properties": [
+      {
+        "name": "value",
+        "type": "string",
+        "description": "Required value emitted by v-model when selected."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Required visible option text."
+      },
+      {
+        "name": "description",
+        "type": "string | undefined",
+        "description": "Optional explanation below the list for the active option."
+      },
+      {
+        "name": "detail",
+        "type": "string | undefined",
+        "description": "Optional secondary inline text."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean | undefined",
+        "description": "When true, pointer selection and keyboard navigation skip this option."
+      }
+    ]
+  },
+  "SelectSeparator": {
+    "description": "A runtime class extending SelectItem. Represents a non-selectable divider.",
+    "code": "import { SelectSeparator } from '@frame/core';\nconst divider = new SelectSeparator('remote-group');",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Stable unique key supplied to the constructor."
+      },
+      {
+        "name": "type",
+        "type": "readonly \"separator\"",
+        "description": "Automatically initialized discriminant used to skip selection."
+      }
+    ]
+  },
+  "SettingDefinition": {
+    "description": "Metadata used by the settings system to assemble a form. Individual components such as FrameSlider and FrameTextArea do not require this object.",
+    "code": "import type { SettingDefinition } from '@frame/core';\nconst setting: SettingDefinition = {\n  id: 'volume', label: 'Volume', type: 'range', default: 50, min: 0, max: 100,\n  onChange: value => { preferences.volume = Number(value); },\n};",
+    "properties": [
+      {
+        "name": "id / label",
+        "type": "string",
+        "description": "Unique setting identifier and visible label."
+      },
+      {
+        "name": "type",
+        "type": "\"text\" | \"textarea\" | \"number\" | \"checkbox\" | \"select\" | \"range\" | \"color\"",
+        "description": "text, textarea, number, checkbox, select, range, color."
+      },
+      {
+        "name": "default",
+        "type": "SettingValue",
+        "description": "Initial/reset value: string, boolean, or number.",
+        "reference": "SettingValue"
+      },
+      {
+        "name": "description / placeholder",
+        "type": "string",
+        "description": "Optional supporting text."
+      },
+      {
+        "name": "options",
+        "type": "readonly SelectItem[]",
+        "description": "SelectItem[] for selects; may contain separators.",
+        "reference": "SelectItem"
+      },
+      {
+        "name": "min / max / step",
+        "type": "number",
+        "description": "Numeric control bounds and increment."
+      },
+      {
+        "name": "getValue / onChange",
+        "type": "(() => SettingValue) / ((value: SettingValue) => void)",
+        "description": "Connect a reactive preference store and persistence.",
+        "reference": "SettingValue"
+      },
+      {"name": "disabled", "type": "boolean", "description": "Disables edits."}
+    ]
+  },
+  "SettingsSection": {
+    "description": "Public object contract exported by @frame/core.",
+    "code": "export interface SettingsSection { id: string; title: string; description?: string; settings?: readonly SettingDefinition[]; children?: readonly SettingsSection[] }",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Stable identifier used for registration, lookup, and disposal."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "description": "Visible heading for the dialog, category, or picker."
+      },
+      {
+        "name": "description",
+        "type": "string | undefined",
+        "description": "Supporting explanatory text displayed beneath the heading."
+      },
+      {
+        "name": "settings",
+        "type": "readonly SettingDefinition[] | undefined",
+        "description": "Settings definitions rendered in this category.",
+        "reference": "SettingDefinition"
+      },
+      {
+        "name": "children",
+        "type": "readonly SettingsSection[] | undefined",
+        "description": "Nested definitions shown as child categories or view sections."
+      }
+    ]
+  },
+  "SettingValue": {
+    "description": "Public value type exported by @frame/core.",
+    "code": "export type SettingValue = string | number | boolean;",
+    "properties": [
+      {
+        "name": "value",
+        "type": "string | number | boolean",
+        "description": "Supported literal values for this contract."
+      }
+    ]
+  },
+  "SidePanelDefinition": {
+    "description": "Public interface declared in packages/core/src/framework/views/shellViewContainer.ts.",
+    "code": "export interface SidePanelDefinition extends PanelDefinition {\n\n  /** Optional icon rendered beside the contribution. */\n  icon?: Component;\n\n  /** Whether this view contributes an activity-rail selector. */\n  showInRail?: boolean;\n}",
+    "properties": [
+      {
+        "name": "icon",
+        "type": "Component",
+        "description": "Optional leading icon; provide an accessible label for icon-only actions."
+      },
+      {
+        "name": "showInRail",
+        "type": "boolean",
+        "description": "Show In Rail configuration for this component; see its Features examples for usage."
+      }
+    ]
+  },
+  "SingleOrMultipleType": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "code": "type SingleOrMultipleType = 'single' | 'multiple';",
+    "properties": []
+  },
+  "StatusController": {
+    "description": "Frame-owned text/button registration, side placement and centered application status.",
+    "code": "frame.status.register({ id: 'app.save', kind: 'button', label: 'Save', text: 'Save', side: 'right', run: save });\nframe.status.set('Saving document');\nframe.status.show('Could not save', { severity: 'error', duration: 4000 });",
+    "properties": [
+      {
+        "name": "register",
+        "type": "(item: StatusItemDefinition) => () => void",
+        "description": "Register a text or button item and return an idempotent disposer."
+      },
+      {
+        "name": "update",
+        "type": "(id: string, patch: StatusItemUpdate) => boolean",
+        "description": "Update an item; getter-backed values remain owned by their source."
+      },
+      {
+        "name": "move",
+        "type": "(id: string, side: \"left\" | \"right\") => boolean",
+        "description": "Move a side item without replacing its registration."
+      },
+      {
+        "name": "setVisible / setBadgeVisible",
+        "type": "(id: string, visible: boolean) => boolean",
+        "description": "Control item and badge presentation independently."
+      },
+      {
+        "name": "set",
+        "type": "(text: string) => void",
+        "description": "Update the persistent center status."
+      },
+      {
+        "name": "show",
+        "type": "(text: string, options?: StatusMessageOptions) => () => void",
+        "description": "Show temporary status text. Defaults to 4000 ms, then restores the persistent status."
+      },
+      {
+        "name": "clear",
+        "type": "() => void",
+        "description": "Clear persistent and temporary status text."
+      },
+      {
+        "name": "setBarVisible",
+        "type": "(visible: boolean) => boolean",
+        "description": "Show or hide the entire status bar through its existing layout state."
+      }
+    ]
+  },
+  "StatusOptions": {
+    "description": "Initial presentation for the three-section status bar owned by a Frame instance.",
+    "code": "const frame = createFrame({ status: { message: 'Ready', visible: true, hidden: ['app.version'], hiddenBadges: [] } });",
+    "properties": [
+      {
+        "name": "message",
+        "type": "string",
+        "description": "Initial persistent center text. Defaults to Ready."
+      },
+      {
+        "name": "visible",
+        "type": "boolean",
+        "description": "Initial status-bar visibility. Defaults to true."
+      },
+      {
+        "name": "hidden",
+        "type": "readonly string[]",
+        "description": "Ids whose item presentation starts hidden."
+      },
+      {
+        "name": "hiddenBadges",
+        "type": "readonly string[]",
+        "description": "Ids whose badges start hidden."
+      }
+    ]
+  },
+  "StringOrNumber": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "code": "type StringOrNumber = string | number;",
+    "properties": []
+  },
+  "SwipeDirection": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "type SwipeDirection = 'up' | 'down' | 'left' | 'right';",
+    "properties": []
+  },
+  "TagGroupSelectionMode": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "type TagGroupSelectionMode = 'none' | 'single' | 'multiple';",
+    "properties": []
+  },
+  "TerminalController": {
+    "description": "Public type declared in packages/core/src/modules/terminal/controllers/terminal.ts.",
+    "code": "export type TerminalController = Pick<\n  TerminalSessionController,\n  keyof TerminalSessionController\n>;",
+    "properties": []
+  },
+  "TerminalSessionLayout": {
+    "description": "Public type declared in packages/core/src/modules/terminal/types/terminalTypes.ts.",
+    "code": "export type TerminalSessionLayout = 'sidebar' | 'tabs';",
+    "properties": []
+  },
+  "TimeRange": {
+    "description": "Start and end time values controlled by the application.",
+    "code": "import { Time, type TimeRange } from '@frame/core';\nconst range: TimeRange = { start: new Time(9, 30), end: new Time(17) };",
+    "properties": [
+      {
+        "name": "start",
+        "type": "TimeValue | undefined",
+        "description": "A structured value, or undefined while this end of the range is incomplete.",
+        "reference": "TimeValue"
+      },
+      {
+        "name": "end",
+        "type": "TimeValue | undefined",
+        "description": "A structured value, or undefined while this end of the range is incomplete.",
+        "reference": "TimeValue"
+      }
+    ]
+  },
+  "TimeValue": {
+    "description": "Structured time model used by the time field; it is not a formatted display string.",
+    "code": "import { Time, type TimeValue } from '@frame/core';\nconst time: TimeValue = new Time(9, 30);",
+    "properties": [
+      {
+        "name": "hour",
+        "type": "number",
+        "description": "A numeric part of the structured calendar or time value. Use exported constructors and parsers to create values."
+      },
+      {
+        "name": "minute",
+        "type": "number",
+        "description": "A numeric part of the structured calendar or time value. Use exported constructors and parsers to create values."
+      },
+      {
+        "name": "second",
+        "type": "number",
+        "description": "A numeric part of the structured calendar or time value. Use exported constructors and parsers to create values."
+      }
+    ]
+  },
+  "ToastObject": {
+    "description": "Public interface declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index3.d.ts.",
+    "code": "interface ToastObject<Data extends object = any> {\n  /** The unique identifier for the toast. */\n  id: string;\n  /** Whether the toast is open. Closed toasts stay in the list until their exit animation ends. */\n  open: boolean;\n  /** The title of the toast. Rendered by `ToastTitle` when it has no slot content. */\n  title?: string;\n  /** The description of the toast. Rendered by `ToastDescription` when it has no slot content. */\n  description?: string;\n  /**\n   * The sensitivity of the toast for accessibility purposes. Overrides the `type` prop of `ToastRoot`.\n   * `foreground` toasts are announced immediately, `background` toasts politely.\n   */\n  type?: 'foreground' | 'background';\n  /** The status of the toast. Exposed as `data-status` on `ToastRoot`. */\n  status?: ToastStatus;\n  /**\n   * Time in milliseconds before the toast is dismissed automatically. Overrides\n   * the `duration` of `ToastRoot` and `ToastProvider`. `0` or `Infinity` keeps it open.\n   */\n  duration?: number;\n  /** Props for `ToastAction` inside the toast. */\n  actionProps?: ToastActionOptions;\n  /** Props for `ToastPositioner`, used to anchor the toast to an element. */\n  positionerProps?: ToastPositionerOptions;\n  /** Custom data for the toast. */\n  data?: Data;\n  /** Called when the toast is closed. */\n  onClose?: () => void;\n  /** Called when the toast is removed from the list, after its exit animation. */\n  onRemove?: () => void;\n  /** Increments whenever the toast is updated, or added again with the same `id`. */\n  updateKey: number;\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "description": "Open configuration for this component; see its Features examples for usage."
+      },
+      {"name": "title", "type": "string", "description": "Visible heading."},
+      {
+        "name": "description",
+        "type": "string",
+        "description": "Description configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "type",
+        "type": "'foreground' | 'background'",
+        "description": "Native input/button behavior."
+      },
+      {
+        "name": "status",
+        "type": "ToastStatus",
+        "description": "Status configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "duration",
+        "type": "number",
+        "description": "Duration configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "actionProps",
+        "type": "ToastActionOptions",
+        "description": "Action Props configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "positionerProps",
+        "type": "ToastPositionerOptions",
+        "description": "Positioner Props configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "data",
+        "type": "Data",
+        "description": "Data configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "description": "On Close configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "onRemove",
+        "type": "() => void",
+        "description": "On Remove configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "updateKey",
+        "type": "number",
+        "description": "Update Key configuration for this component; see its Features examples for usage."
+      }
+    ]
+  },
+  "ToolbarOptions": {
+    "description": "Initial visibility of instance-owned title-bar controls.",
+    "code": "const frame = createFrame({ toolbar: { primary: true, commandCenter: false } });\nframe.toolbar.setVisible('bottom', true);",
+    "properties": [
+      {
+        "name": "customize",
+        "type": "boolean",
+        "description": "Whether this title-bar control is rendered; hiding it does not disable its command."
+      },
+      {
+        "name": "primary",
+        "type": "boolean",
+        "description": "Whether this title-bar control is rendered; hiding it does not disable its command."
+      },
+      {
+        "name": "bottom",
+        "type": "boolean",
+        "description": "Whether this title-bar control is rendered; hiding it does not disable its command."
+      },
+      {
+        "name": "secondary",
+        "type": "boolean",
+        "description": "Whether this title-bar control is rendered; hiding it does not disable its command."
+      },
+      {
+        "name": "commandCenter",
+        "type": "boolean",
+        "description": "Whether this title-bar control is rendered; hiding it does not disable its command."
+      },
+      {
+        "name": "layoutControls",
+        "type": "boolean",
+        "description": "Whether this title-bar control is rendered; hiding it does not disable its command."
+      }
+    ]
+  },
+  "ViewBadge": {
+    "description": "Public type declared in packages/core/src/framework/views/primaryViewBar.ts.",
+    "code": "export type ViewBadge = string | number;",
+    "properties": []
+  },
+  "ViewBarPosition": {
+    "description": "View-bar placement or visibility selected through options or frame.primaryViewBar.setPosition.",
+    "code": "import type { ViewBarPosition } from '@frame/core';\nconst position: ViewBarPosition = 'top';\nframe.primaryViewBar.setPosition(position);",
+    "properties": [
+      {
+        "name": "default",
+        "type": "literal",
+        "description": "Normal view bar placement."
+      },
+      {
+        "name": "top / bottom",
+        "type": "literal",
+        "description": "Horizontal view-bar placement."
+      },
+      {
+        "name": "hidden",
+        "type": "literal",
+        "description": "Hide through layout.primaryViewBarVisible while retaining the last visible position."
+      }
+    ]
+  },
+  "ViewBarSize": {
+    "description": "View item size, independent of view-bar placement and overall shell density.",
+    "code": "import type { ViewBarSize } from '@frame/core';\nconst size: ViewBarSize = 'compact';\nframe.primaryViewBar.setSize(size);",
+    "properties": [
+      {
+        "name": "default / compact",
+        "type": "literal",
+        "description": "Normal or compact view item sizing."
+      }
+    ]
+  },
+  "ViewContentSlot": {
+    "description": "Public interface declared in packages/core/src/framework/views/shellViewContainer.ts.",
+    "code": "export interface ViewContentSlot {\n\n  /** Host-supplied Vue component rendered for this contribution. */\n  component: Component;\n\n  /** Properties forwarded to the host-supplied component. */\n  props?: Record<string, unknown>;\n\n  /** Whether the surface applies its standard content padding. */\n  padded?: boolean;\n}",
+    "properties": [
+      {
+        "name": "component",
+        "type": "Component",
+        "description": "Component configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "props",
+        "type": "Record<string, unknown>",
+        "description": "Props configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "padded",
+        "type": "boolean",
+        "description": "Padded configuration for this component; see its Features examples for usage."
+      }
+    ]
+  },
+  "ViewerFile": {
+    "description": "Public interface declared in packages/core/src/modules/viewer/types/viewerTypes.ts.",
+    "code": "export interface ViewerFile {\n\n  /** Portable bytes or a browser-fetchable URL; authentication stays host-owned. */\n  source: ViewerSource;\n\n  /** Explicit display name; otherwise resolved from File or URL. */\n  name?: string;\n\n  /** Explicit MIME type preferred over the supplied Blob or response metadata. */\n  mimeType?: string;\n\n  /** Optional syntax language override for code detection. */\n  language?: string;\n}",
+    "properties": [
+      {
+        "name": "source",
+        "type": "ViewerSource",
+        "description": "Source configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "description": "Icon name, optionally including its Iconify collection prefix."
+      },
+      {
+        "name": "mimeType",
+        "type": "string",
+        "description": "Mime Type configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "language",
+        "type": "string",
+        "description": "Syntax language identifier."
+      }
+    ]
+  },
+  "ViewRegion": {
+    "description": "Public type declared in packages/core/src/framework/views/shellViewContainer.ts.",
+    "code": "export type ViewRegion = 'primary' | 'secondary' | 'bottom';",
+    "properties": []
+  },
+  "WeekDayFormat": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "code": "type WeekDayFormat = 'narrow' | 'short' | 'long';",
+    "properties": []
+  },
+  "WeekStartsOn": {
+    "description": "Public type declared in node_modules/.bun/reka-ui@2.11.0+501eebc2bdcde416/node_modules/reka-ui/dist/index2.d.ts.",
+    "code": "type WeekStartsOn = 0 | 1 | 2 | 3 | 4 | 5 | 6;",
+    "properties": []
+  },
+  "WorkspaceBannerDefinition": {
+    "description": "Public interface declared in packages/core/src/framework/workspace/workspaceBanner.ts.",
+    "code": "export interface WorkspaceBannerDefinition {\n\n  /** Stable identity used to address this contribution. */\n  id: string;\n\n  /** Human-readable name displayed by the owning surface. */\n  label: string;\n\n  /** Host-supplied Vue component rendered for this contribution. */\n  component: Component;\n\n  /** Properties forwarded to the host-supplied component. */\n  props?: Record<string, unknown>;\n}",
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Id configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible or accessible label for the control."
+      },
+      {
+        "name": "component",
+        "type": "Component",
+        "description": "Component configuration for this component; see its Features examples for usage."
+      },
+      {
+        "name": "props",
+        "type": "Record<string, unknown>",
+        "description": "Props configuration for this component; see its Features examples for usage."
+      }
+    ]
+  },
+  "WorkspacePaneContent": {
+    "description": "Public object contract exported by @frame/core.",
+    "code": "export interface WorkspacePaneContent {\n  label: string;\n  component?: Component;\n  props?: Record<string, unknown>;\n}",
+    "properties": [
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Visible text shown in the corresponding control or view."
+      },
+      {
+        "name": "component",
+        "type": "Component | undefined",
+        "description": "Vue component rendered as the custom content."
+      },
+      {
+        "name": "props",
+        "type": "Record<string, unknown> | undefined",
+        "description": "Values passed as props to the content component."
+      }
+    ]
+  },
+  "WorkspaceSplitDirection": {
+    "description": "Public value type exported by @frame/core.",
+    "code": "export type WorkspaceSplitDirection = \"left\" | \"right\" | \"up\" | \"down\";",
+    "properties": [
+      {
+        "name": "value",
+        "type": "\"left\" | \"right\" | \"up\" | \"down\"",
+        "description": "Supported literal values for this contract."
+      }
+    ]
+  }
+}

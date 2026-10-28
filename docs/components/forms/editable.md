@@ -52,11 +52,106 @@ This example reuses Basic usage state. `submitMode` and `selectOnFocus` are forw
 <FrameEditable v-model="value" label="Project name" submit-mode="both" select-on-focus />
 ```
 
+### Edit in place
+
+Activate the text, change it, and leave the field to finish. Press Escape during editing to cancel.
+
+<!-- frame:example id="editable.inline" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameEditable } from '@frame/core';
+const demoModelValue = ref("Reka UI");
+</script>
+<template>
+<FrameEditable v-model="demoModelValue" :label="&quot;Project title&quot;" />
+</template>
+```
+
+### Save only with Enter
+
+Double-click to edit. Enter saves; clicking away or pressing Escape discards the draft.
+
+<!-- frame:example id="editable.enter-only" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameEditable } from '@frame/core';
+const demoModelValue = ref("Explicit commit");
+</script>
+<template>
+<FrameEditable v-model="demoModelValue" :label="&quot;Enter-only title&quot;" :activation-mode="&quot;dblclick&quot;" :submit-mode="&quot;enter&quot;" />
+</template>
+```
+
+### Start from an empty value
+
+The preview shows a placeholder until a title is entered. Placeholder text is not stored in the model.
+
+<!-- frame:example id="editable.empty" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameEditable } from '@frame/core';
+const demoModelValue = ref("");
+</script>
+<template>
+<FrameEditable v-model="demoModelValue" :placeholder="&quot;Click to add a title&quot;" :label="&quot;Untitled project&quot;" />
+</template>
+```
+
 ## APIs
+
+<!-- frame:generated api="editable" -->
+
+### FrameEditable
+
+Source: `packages/core/src/components/forms/FrameEditable.vue`
+
+#### Properties
+
+| Name                | Type                                                  | Default  | Description                                                                             |
+| ------------------- | ----------------------------------------------------- | -------- | --------------------------------------------------------------------------------------- |
+| `tooltip`           | `string \| false \| undefined`                        | Omitted  | Tooltip text; false disables it. When omitted, the native title attribute is used.      |
+| `tooltipPlacement`  | `"top" \| "bottom" \| "left" \| "right" \| undefined` | Omitted  | Preferred tooltip side; positioning falls back when space is limited.                   |
+| `modelValue`        | `string`                                              | Required | Text displayed in the preview and edited by the input.                                  |
+| `placeholder`       | `string \| undefined`                                 | Omitted  | Hint displayed while the editable value is empty.                                       |
+| `disabled`          | `boolean \| undefined`                                | false    | Prevents user interaction with the control.                                             |
+| `label`             | `string \| undefined`                                 | Omitted  | Accessible name of the editable input.                                                  |
+| `submitMode`        | `"both" \| "enter" \| undefined`                      | "both"   | both: Enter and leaving the field save; enter: only Enter saves. Escape always cancels. |
+| `activationMode`    | `"focus" \| "none" \| "dblclick" \| undefined`        | "focus"  | Interaction that enters editing; none requires explicit activation by the primitive.    |
+| `startWithEditMode` | `boolean \| undefined`                                | false    | Starts with the input active instead of the preview.                                    |
+| `selectOnFocus`     | `boolean \| undefined`                                | false    | Selects the editable text when the input receives focus.                                |
+
+#### Events
+
+| Name                | Parameters                              | Return type | Description                                                  |
+| ------------------- | --------------------------------------- | ----------- | ------------------------------------------------------------ |
+| `update:modelValue` | `value: string`                         | `void`      | Requests the new application-owned value after interaction.  |
+| `submit`            | `value: string`                         | `void`      | The edited text was committed.                               |
+| `cancel`            | `None`                                  | `void`      | Editing was cancelled and the preview is restored.           |
+| `update:state`      | `state: "submit" \| "cancel" \| "edit"` | `void`      | Editable presentation entered edit, submit, or cancel state. |
+
+#### Slots
+
+| Name      | Parameters | Return type  | Description                                    |
+| --------- | ---------- | ------------ | ---------------------------------------------- |
+| `tooltip` | `None`     | `VNodeChild` | Custom tooltip content for the editable field. |
+
+#### Exposed API
+
+No declared entries.
+
+<!-- /frame:generated -->
+
+### Composition and upstream reference
 
 Defaults below are Reka reference defaults unless a Frame override is stated. Declared means a typed Frame prop/event; Forwarded means attribute/listener fallthrough to the named part; Internal means generated by Frame; Absent means not routed or composed. Generic upstream `T`/`AcceptableValue` describes Reka, not a promise of arbitrary option values in Frame.
 
-### Root
+#### Root
 
 #### Props
 
@@ -109,7 +204,7 @@ Defaults below are Reka reference defaults unless a Frame override is stated. De
 
 Frame does not defineExpose or forward the internal Reka instance. Reka editing methods are internal; use the documented lifecycle props/events.
 
-### Area
+#### Area
 
 #### Props
 
@@ -137,7 +232,7 @@ Underlying default content has no documented scoped fields. Frame generates this
 | `data-readonly`          | `Present when read-only`   | State owned by EditableArea. |
 | `data-disabled`          | `Present when disabled`    | State owned by EditableArea. |
 
-### Preview
+#### Preview
 
 #### Props
 
@@ -160,7 +255,7 @@ Underlying default content has no documented scoped fields. Frame generates this
 | ------------------------ | -------------------------- | --------------------------------------------------------------------------- |
 | `data-placeholder-shown` | `Present when not editing` | Installed implementation marks preview mode, not just an empty placeholder. |
 
-### Input
+#### Input
 
 #### Props
 
@@ -184,11 +279,11 @@ Underlying default content has no documented scoped fields. Frame generates this
 | `data-disabled` | `Present when disabled`  | Native input disabled state.  |
 | `data-readonly` | `Present when read-only` | Native input read-only state. |
 
-### Omitted parts
+#### Omitted parts
 
 `Edit Trigger`, `Submit Trigger`, `Cancel Trigger` are not rendered by this wrapper. Their props, slots, presence controls, and composition APIs are not available through Frame. See the [Reka reference](https://reka-ui.com/docs/components/editable).
 
-### Frame additions
+#### Frame additions
 
 #### Props
 
@@ -204,13 +299,70 @@ No additional Frame-only events; see the part tables for declared or forwarded e
 
 No public content slots; all internal children are generated.
 
-### Sources and version
+#### Sources and version
 
 Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/editable), its [Markdown reference](https://reka-ui.com/docs/components/editable.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameEditable.vue). Styling comes from [controls.css](../../../packages/core/src/components/forms/shared/controls.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
 
 ## Styling
 
-### Parts and selectors
+Use the shared theme variables in application content. Component-specific declarations and their defaults are listed below.
+
+<!-- frame:generated styles="editable" -->
+
+| CSS variable                            | Theme path                            | Default expression                                                                       | Purpose                                                                                                                                                                 | Context                                                                                                                                                                    |
+| --------------------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--frame-input-border`                  | `frame.input.border`                  | `1px solid     var(--frame-control-border)`                                              | Fallback for: Resting border of the form input.                                                                                                                         | `.frame-form-input`                                                                                                                                                        |
+| `--frame-form-input-border`             | `frame.form.input.border`             | `var(     --frame-input-border,     1px solid     var(--frame-control-border)   )`       | Resting border of the form input.                                                                                                                                       | `.frame-form-input`                                                                                                                                                        |
+| `--frame-form-input-border-radius`      | `frame.form.input.border.radius`      | `var(--frame-input-radius)`                                                              | Corner radius of the form input.                                                                                                                                        | `.frame-form-input`                                                                                                                                                        |
+| `--frame-input-hover-border`            | `frame.input.hover.border`            | `1px solid     var(--frame-control-border)`                                              | Fallback for: Border while the pointer hovers over the form input.                                                                                                      | `.frame-form-input`                                                                                                                                                        |
+| `--frame-form-input-hover-border`       | `frame.form.input.hover.border`       | `var(     --frame-input-hover-border,     1px solid     var(--frame-control-border)   )` | Border while the pointer hovers over the form input.                                                                                                                    | `.frame-form-input`                                                                                                                                                        |
+| `--frame-input-hover-outline`           | `frame.input.hover.outline`           | `none`                                                                                   | Fallback for: Outline while the pointer hovers over the form input.                                                                                                     | `.frame-form-input`                                                                                                                                                        |
+| `--frame-form-input-hover-outline`      | `frame.form.input.hover.outline`      | `var(     --frame-input-hover-outline,     none   )`                                     | Outline while the pointer hovers over the form input.                                                                                                                   | `.frame-form-input`                                                                                                                                                        |
+| `--frame-input-focus-border`            | `frame.input.focus.border`            | `1px solid var(--frame-accent)`                                                          | Fallback for: Border while focus is within the form input.                                                                                                              | `.frame-form-input`                                                                                                                                                        |
+| `--frame-form-input-focus-border`       | `frame.form.input.focus.border`       | `var(     --frame-input-focus-border,     1px solid var(--frame-accent)   )`             | Border while focus is within the form input.                                                                                                                            | `.frame-form-input`                                                                                                                                                        |
+| `--frame-input-focus-outline`           | `frame.input.focus.outline`           | `1px solid var(--frame-accent)`                                                          | Fallback for: Focus outline of the form input.                                                                                                                          | `.frame-form-input`                                                                                                                                                        |
+| `--frame-form-input-focus-outline`      | `frame.form.input.focus.outline`      | `var(     --frame-input-focus-outline,     1px solid var(--frame-accent)   )`            | Focus outline of the form input.                                                                                                                                        | `.frame-form-input`                                                                                                                                                        |
+| `--frame-input-outline-offset`          | `frame.input.outline.offset`          | `0px`                                                                                    | Fallback for: Offset between the outline and the form input.                                                                                                            | `.frame-form-input`                                                                                                                                                        |
+| `--frame-form-input-outline-offset`     | `frame.form.input.outline.offset`     | `var(     --frame-input-outline-offset,     0px   )`                                     | Offset between the outline and the form input.                                                                                                                          | `.frame-form-input`                                                                                                                                                        |
+| `--frame-control-border`                | `frame.control.border`                | `var(--frame-border-color)`                                                              | Resting border color of form controls, independently overridable from menu borders.                                                                                     | `.frame-form-input`                                                                                                                                                        |
+| `--frame-input-radius`                  | `frame.input.radius`                  | `var(--frame-menu-border-radius)`                                                        | Shared corner radius for text fields, text areas, selects, and composed input surfaces.                                                                                 | `.frame-form-input`                                                                                                                                                        |
+| `--frame-accent`                        | `frame.accent`                        | `#0078d4`                                                                                | Shared interaction color for keyboard focus, active actions, and accent-filled controls.                                                                                | `.frame-form-input`                                                                                                                                                        |
+| `--frame-input-border`                  | `frame.input.border`                  | `1px solid     var(--frame-control-border)`                                              | Fallback for: Resting border of the editable text entry.                                                                                                                | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-editable-input-border`         | `frame.editable.input.border`         | `var(     --frame-input-border,     1px solid     var(--frame-control-border)   )`       | Resting border of the editable text entry.                                                                                                                              | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-editable-input-border-radius`  | `frame.editable.input.border.radius`  | `var(--frame-input-radius)`                                                              | Corner radius of the editable text entry.                                                                                                                               | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-input-hover-border`            | `frame.input.hover.border`            | `1px solid     var(--frame-control-border)`                                              | Fallback for: Border while the pointer hovers over the editable text entry.                                                                                             | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-editable-input-hover-border`   | `frame.editable.input.hover.border`   | `var(     --frame-input-hover-border,     1px solid     var(--frame-control-border)   )` | Border while the pointer hovers over the editable text entry.                                                                                                           | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-input-hover-outline`           | `frame.input.hover.outline`           | `none`                                                                                   | Fallback for: Outline while the pointer hovers over the editable text entry.                                                                                            | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-editable-input-hover-outline`  | `frame.editable.input.hover.outline`  | `var(     --frame-input-hover-outline,     none   )`                                     | Outline while the pointer hovers over the editable text entry.                                                                                                          | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-input-focus-border`            | `frame.input.focus.border`            | `1px solid var(--frame-accent)`                                                          | Fallback for: Border while focus is within the editable text entry.                                                                                                     | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-editable-input-focus-border`   | `frame.editable.input.focus.border`   | `var(     --frame-input-focus-border,     1px solid var(--frame-accent)   )`             | Border while focus is within the editable text entry.                                                                                                                   | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-input-focus-outline`           | `frame.input.focus.outline`           | `1px solid var(--frame-accent)`                                                          | Fallback for: Focus outline of the editable text entry.                                                                                                                 | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-editable-input-focus-outline`  | `frame.editable.input.focus.outline`  | `var(     --frame-input-focus-outline,     1px solid var(--frame-accent)   )`            | Focus outline of the editable text entry.                                                                                                                               | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-input-outline-offset`          | `frame.input.outline.offset`          | `0px`                                                                                    | Fallback for: Offset between the outline and the editable text entry.                                                                                                   | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-editable-input-outline-offset` | `frame.editable.input.outline.offset` | `var(     --frame-input-outline-offset,     0px   )`                                     | Offset between the outline and the editable text entry.                                                                                                                 | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-control-border`                | `frame.control.border`                | `var(--frame-border-color)`                                                              | Resting border color of form controls, independently overridable from menu borders.                                                                                     | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-input-radius`                  | `frame.input.radius`                  | `var(--frame-menu-border-radius)`                                                        | Shared corner radius for text fields, text areas, selects, and composed input surfaces.                                                                                 | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-accent`                        | `frame.accent`                        | `#0078d4`                                                                                | Shared interaction color for keyboard focus, active actions, and accent-filled controls.                                                                                | `.frame-editable-input`                                                                                                                                                    |
+| `--frame-text`                          | `frame.text`                          | `#ccc`                                                                                   | Foreground for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control.                                                       | `.frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control`                                                                        |
+| `--frame-surface`                       | `frame.surface`                       | `#242424`                                                                                | Background for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control.                                                       | `.frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control`                                                                        |
+| `--frame-line`                          | `frame.line`                          | `#454545`                                                                                | Border for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control.                                                           | `.frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control`                                                                        |
+| `--frame-control-radius`                | `frame.control.radius`                | `var(--frame-radius-medium)`                                                             | Corner radius for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control.                                                    | `.frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control`                                                                        |
+| `--frame-control-padding-y`             | `frame.control.padding.y`             | `5px`                                                                                    | Internal spacing for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control.                                                 | `.frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control`                                                                        |
+| `--frame-control-padding-x`             | `frame.control.padding.x`             | `10px`                                                                                   | Internal spacing for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control.                                                 | `.frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control`                                                                        |
+| `--frame-radius-medium`                 | `frame.radius.medium`                 | `4px`                                                                                    | Medium shared corner radius used by ordinary controls.                                                                                                                  | `.frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control`                                                                        |
+| `--frame-form-input-radius`             | `frame.form.input.radius`             | `var(--frame-input-radius)`                                                              | Corner radius of the legacy form input surface.                                                                                                                         | `.frame-form-input`                                                                                                                                                        |
+| `--frame-control-text`                  | `frame.control.text`                  | `#d4d4d4`                                                                                | Foreground for .frame-form-input.                                                                                                                                       | `.frame-form-input`                                                                                                                                                        |
+| `--frame-control-background`            | `frame.control.background`            | `#1d1d1d`                                                                                | Background for .frame-form-input.                                                                                                                                       | `.frame-form-input`                                                                                                                                                        |
+| `--frame-control-border`                | `frame.control.border`                | `#3c4246`                                                                                | Border color for .frame-form-input.                                                                                                                                     | `.frame-form-input`                                                                                                                                                        |
+| `--frame-accent`                        | `frame.accent`                        | `#0078d4`                                                                                | Outline for :is( .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control, .frame-switch, .frame-slider-thumb ):focus-visible. | `:is(   .frame-form-input,   .frame-control-button,   .frame-toggle,   .frame-choice-item,   .frame-check-control,   .frame-switch,   .frame-slider-thumb ):focus-visible` |
+
+Expressions are preserved as written; their computed values depend on the active theme and component state.
+
+<!-- /frame:generated -->
+
+### Additional styling guidance
+
+#### Parts and selectors
 
 | Selector            | Part              | Placement                                                                        |
 | ------------------- | ----------------- | -------------------------------------------------------------------------------- |
@@ -219,7 +371,7 @@ Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https:
 
 Preview and Input share form-input styles and inherited typography; there are no dedicated editable geometry tokens.
 
-### Variables
+#### Variables
 
 | Token key                    | Variable                     | Value kind | Default/fallback                                                                          | Part/effect                     | Scope/limits                                                                         | Description                           |
 | ---------------------------- | ---------------------------- | ---------- | ----------------------------------------------------------------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------- |

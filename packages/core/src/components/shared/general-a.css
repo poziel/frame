@@ -1,37 +1,308 @@
-.frame-accordion,.frame-collapsible,.frame-pagination,.frame-avatar,.frame-scroll-area{font-family:var(--frame-font-body);font-size:var(--frame-font-size-body);color:var(--frame-text)}
-.frame-accordion{border:1px solid var(--frame-accordion-border,var(--frame-line));border-radius:var(--frame-control-radius);overflow:hidden;width:100%}
-.frame-accordion-item+.frame-accordion-item{border-top:1px solid var(--frame-accordion-border,var(--frame-line))}
-.frame-accordion-header{margin:0;font:inherit}
-.frame-accordion-trigger,.frame-collapsible-trigger{display:flex;align-items:center;justify-content:space-between;gap:var(--frame-gap);width:100%;border:0;background:var(--frame-disclosure-background,var(--frame-surface));color:inherit;font:inherit;padding:var(--frame-content-padding);text-align:start;cursor:pointer}
-.frame-accordion-trigger:hover,.frame-collapsible-trigger:hover{background:var(--frame-disclosure-hover,var(--frame-menu-hover))}
-.frame-accordion-trigger:focus-visible,.frame-collapsible-trigger:focus-visible,.frame-pagination-button:focus-visible,.frame-scroll-area-viewport:focus-visible{outline:2px solid var(--frame-accent);outline-offset:-2px}
-.frame-accordion-trigger:disabled,.frame-collapsible-trigger:disabled,.frame-pagination-button:disabled{opacity:.5;cursor:not-allowed}
-.frame-accordion-chevron{transition:transform var(--frame-duration) var(--frame-ease)}
-.frame-accordion-trigger[data-state=open] .frame-accordion-chevron{transform:rotate(180deg)}
-.frame-accordion-body,.frame-collapsible-content{padding:var(--frame-content-padding);background:var(--frame-disclosure-content-background,var(--frame-canvas))}
-.frame-collapsible{border:1px solid var(--frame-line);border-radius:var(--frame-control-radius);overflow:hidden}
-.frame-aspect-ratio{overflow:hidden;background:var(--frame-aspect-ratio-background,var(--frame-surface));color:var(--frame-text)}
-.frame-aspect-ratio>img,.frame-aspect-ratio>video{width:100%;height:100%;object-fit:cover}
-.frame-avatar{display:inline-flex;position:relative;width:var(--frame-avatar-size,36px);height:var(--frame-avatar-size,36px);overflow:hidden;border-radius:var(--frame-avatar-radius,50%);background:var(--frame-avatar-background,var(--frame-control-background));vertical-align:middle;flex-shrink:0}
-.frame-avatar-image{width:100%;height:100%;object-fit:cover}
-.frame-avatar-fallback{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-weight:600;color:var(--frame-avatar-color,var(--frame-text))}
-.frame-pagination-list{display:flex;align-items:center;gap:var(--frame-gap);flex-wrap:wrap}
-.frame-pagination-button{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 var(--frame-control-padding-x);border:1px solid var(--frame-control-border);border-radius:var(--frame-control-radius);font:inherit;background:var(--frame-pagination-background,var(--frame-control-background));color:var(--frame-control-text);cursor:pointer}
-.frame-pagination-button:hover{background:var(--frame-menu-hover)}
-.frame-pagination-button[data-selected]{background:var(--frame-accent);color:var(--frame-accent-foreground);border-color:var(--frame-accent)}
-.frame-pagination-ellipsis{display:inline-flex;align-items:center;justify-content:center;min-width:30px}
-.frame-progress{position:relative;height:var(--frame-progress-height,6px);overflow:hidden;border-radius:var(--frame-control-radius);background:var(--frame-progress-track,var(--frame-line))}
-.frame-progress-indicator{height:100%;background:var(--frame-progress-color,var(--frame-accent));transition:width var(--frame-duration) var(--frame-ease)}
-.frame-progress[data-state=indeterminate] .frame-progress-indicator{width:35%;animation:frame-progress-indeterminate 1.5s ease-in-out infinite}
-@keyframes frame-progress-indeterminate{from{transform:translateX(-100%)}to{transform:translateX(385%)}}
-.frame-scroll-area{position:relative;overflow:hidden;height:var(--frame-scroll-area-height,200px)}
-.frame-scroll-area-viewport{width:100%;height:100%;border-radius:inherit}
-.frame-scroll-area-scrollbar{display:flex;touch-action:none;user-select:none;padding:2px;background:var(--frame-scrollbar-background,transparent)}
-.frame-scroll-area-scrollbar[data-orientation=vertical]{width:10px}
-.frame-scroll-area-scrollbar[data-orientation=horizontal]{height:10px;flex-direction:column}
-.frame-scroll-area-thumb{position:relative;flex:1;border-radius:var(--frame-control-radius);background:var(--frame-scrollbar-thumb,var(--frame-muted))}
-.frame-scroll-area-corner{background:var(--frame-scrollbar-background,transparent)}
-.frame-separator{background:var(--frame-separator-color,var(--frame-line));flex-shrink:0}
-.frame-separator[data-orientation=horizontal]{height:1px;width:100%}
-.frame-separator[data-orientation=vertical]{width:1px;align-self:stretch;min-height:1em}
-@media(prefers-reduced-motion:reduce){.frame-progress-indicator,.frame-accordion-chevron{transition:none}.frame-progress[data-state=indeterminate] .frame-progress-indicator{animation:none;width:100%;opacity:.5}}
+.frame-accordion,
+.frame-collapsible,
+.frame-pagination,
+.frame-avatar,
+.frame-scroll-area {
+  font-family: var(--frame-font-body);
+  font-size: var(--frame-font-size-body);
+  color: var(--frame-text);
+}
+.frame-accordion {
+  /* Border color around the accordion and between its sections. @token --frame-accordion-border */
+  --_frame-default-accordion-border: var(--frame-line);
+  border: 1px solid
+    var(--frame-accordion-border, var(--_frame-default-accordion-border));
+  border-radius: var(--frame-control-radius);
+  overflow: hidden;
+  width: 100%;
+}
+.frame-accordion-item + .frame-accordion-item {
+  /* Border color around the accordion and between its sections. @token --frame-accordion-border */
+  --_frame-default-accordion-border: var(--frame-line);
+  border-top: 1px solid
+    var(--frame-accordion-border, var(--_frame-default-accordion-border));
+}
+.frame-accordion-header {
+  margin: 0;
+  font: inherit;
+}
+.frame-accordion-trigger,
+.frame-collapsible-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--frame-gap);
+  width: 100%;
+  border: 0; /* Resting surface shared by accordion and collapsible triggers. @token --frame-disclosure-background */
+  --_frame-default-disclosure-background: var(--frame-surface);
+  background: var(
+    --frame-disclosure-background,
+    var(--_frame-default-disclosure-background)
+  );
+  color: inherit;
+  font: inherit;
+  padding: var(--frame-content-padding);
+  text-align: start;
+  cursor: pointer;
+}
+.frame-accordion-trigger:hover,
+.frame-collapsible-trigger:hover {
+  /* Pointer hover surface shared by disclosure triggers. @token --frame-disclosure-hover */
+  --_frame-default-disclosure-hover: var(--frame-menu-hover);
+  background: var(
+    --frame-disclosure-hover,
+    var(--_frame-default-disclosure-hover)
+  );
+}
+.frame-accordion-trigger:focus-visible,
+.frame-collapsible-trigger:focus-visible,
+.frame-pagination-button:focus-visible,
+.frame-scroll-area-viewport:focus-visible {
+  outline: 2px solid var(--frame-accent);
+  outline-offset: -2px;
+}
+.frame-accordion-trigger:disabled,
+.frame-collapsible-trigger:disabled,
+.frame-pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.frame-accordion-chevron {
+  transition: transform var(--frame-duration) var(--frame-ease);
+}
+.frame-accordion-trigger[data-state='open'] .frame-accordion-chevron {
+  transform: rotate(180deg);
+}
+.frame-accordion-body,
+.frame-collapsible-content {
+  padding: var(
+    --frame-content-padding
+  ); /* Surface behind expanded disclosure content. @token --frame-disclosure-content-background */
+  --_frame-default-disclosure-content-background: var(--frame-canvas);
+  background: var(
+    --frame-disclosure-content-background,
+    var(--_frame-default-disclosure-content-background)
+  );
+}
+.frame-collapsible {
+  border: 1px solid var(--frame-line);
+  border-radius: var(--frame-control-radius);
+  overflow: hidden;
+}
+.frame-aspect-ratio {
+  overflow: hidden;
+  /* Surface behind aspect-ratio content. @token --frame-aspect-ratio-background */
+  --_frame-default-aspect-ratio-background-133: var(--frame-surface);
+  background: var(
+    --frame-aspect-ratio-background,
+    var(--_frame-default-aspect-ratio-background-133)
+  );
+  color: var(--frame-text);
+}
+.frame-aspect-ratio > img,
+.frame-aspect-ratio > video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.frame-avatar {
+  display: inline-flex;
+  position: relative;
+  /* Equal width and height of the avatar surface. @token --frame-avatar-size */
+  --_frame-default-avatar-size-134: 36px;
+  width: var(--frame-avatar-size, var(--_frame-default-avatar-size-134));
+  /* Equal width and height of the avatar surface. @token --frame-avatar-size */
+  --_frame-default-avatar-size-135: 36px;
+  height: var(--frame-avatar-size, var(--_frame-default-avatar-size-135));
+  overflow: hidden;
+  /* Corner radius of the avatar surface. @token --frame-avatar-radius */
+  --_frame-default-avatar-radius-136: 50%;
+  border-radius: var(
+    --frame-avatar-radius,
+    var(--_frame-default-avatar-radius-136)
+  );
+  /* Surface behind the avatar image or fallback. @token --frame-avatar-background */
+  --_frame-default-avatar-background-137: var(--frame-control-background);
+  background: var(
+    --frame-avatar-background,
+    var(--_frame-default-avatar-background-137)
+  );
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.frame-avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.frame-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-weight: 600;
+  /* Foreground of the avatar fallback. @token --frame-avatar-color */
+  --_frame-default-avatar-color-138: var(--frame-text);
+  color: var(--frame-avatar-color, var(--_frame-default-avatar-color-138));
+}
+.frame-pagination-list {
+  display: flex;
+  align-items: center;
+  gap: var(--frame-gap);
+  flex-wrap: wrap;
+}
+.frame-pagination-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 var(--frame-control-padding-x);
+  border: 1px solid var(--frame-control-border);
+  border-radius: var(--frame-control-radius);
+  font: inherit;
+  /* Resting surface of a pagination button. @token --frame-pagination-background */
+  --_frame-default-pagination-background-139: var(--frame-control-background);
+  background: var(
+    --frame-pagination-background,
+    var(--_frame-default-pagination-background-139)
+  );
+  color: var(--frame-control-text);
+  cursor: pointer;
+}
+.frame-pagination-button:hover {
+  background: var(--frame-menu-hover);
+}
+.frame-pagination-button[data-selected] {
+  background: var(--frame-accent);
+  color: var(--frame-accent-foreground);
+  border-color: var(--frame-accent);
+}
+.frame-pagination-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+}
+.frame-progress {
+  position: relative;
+  /* Thickness of the progress track. @token --frame-progress-height */
+  --_frame-default-progress-height-140: 6px;
+  height: var(
+    --frame-progress-height,
+    var(--_frame-default-progress-height-140)
+  );
+  overflow: hidden;
+  border-radius: var(--frame-control-radius);
+  /* Surface of the unfilled progress track. @token --frame-progress-track */
+  --_frame-default-progress-track-141: var(--frame-line);
+  background: var(
+    --frame-progress-track,
+    var(--_frame-default-progress-track-141)
+  );
+}
+.frame-progress-indicator {
+  height: 100%;
+  /* Fill of the progress indicator. @token --frame-progress-color */
+  --_frame-default-progress-color-142: var(--frame-accent);
+  background: var(
+    --frame-progress-color,
+    var(--_frame-default-progress-color-142)
+  );
+  transition: width var(--frame-duration) var(--frame-ease);
+}
+.frame-progress[data-state='indeterminate'] .frame-progress-indicator {
+  width: 35%;
+  animation: frame-progress-indeterminate 1.5s ease-in-out infinite;
+}
+@keyframes frame-progress-indeterminate {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(385%);
+  }
+}
+.frame-scroll-area {
+  position: relative;
+  overflow: hidden;
+  /* Preferred height of the scrollable content area. @token --frame-scroll-area-height */
+  --_frame-default-scroll-area-height-143: 200px;
+  height: var(
+    --frame-scroll-area-height,
+    var(--_frame-default-scroll-area-height-143)
+  );
+}
+.frame-scroll-area-viewport {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+.frame-scroll-area-scrollbar {
+  display: flex;
+  touch-action: none;
+  user-select: none;
+  padding: 2px;
+  /* Surface behind the scrollbar thumb and at the corner. @token --frame-scrollbar-background */
+  --_frame-default-scrollbar-background-144: transparent;
+  background: var(
+    --frame-scrollbar-background,
+    var(--_frame-default-scrollbar-background-144)
+  );
+}
+.frame-scroll-area-scrollbar[data-orientation='vertical'] {
+  width: 10px;
+}
+.frame-scroll-area-scrollbar[data-orientation='horizontal'] {
+  height: 10px;
+  flex-direction: column;
+}
+.frame-scroll-area-thumb {
+  position: relative;
+  flex: 1;
+  border-radius: var(--frame-control-radius);
+  /* Fill of the draggable scrollbar thumb. @token --frame-scrollbar-thumb */
+  --_frame-default-scrollbar-thumb-145: var(--frame-muted);
+  background: var(
+    --frame-scrollbar-thumb,
+    var(--_frame-default-scrollbar-thumb-145)
+  );
+}
+.frame-scroll-area-corner {
+  /* Surface behind the scrollbar thumb and at the corner. @token --frame-scrollbar-background */
+  --_frame-default-scrollbar-background-146: transparent;
+  background: var(
+    --frame-scrollbar-background,
+    var(--_frame-default-scrollbar-background-146)
+  );
+}
+.frame-separator {
+  /* Color of the horizontal or vertical separator. @token --frame-separator-color */
+  --_frame-default-separator-color-147: var(--frame-line);
+  background: var(
+    --frame-separator-color,
+    var(--_frame-default-separator-color-147)
+  );
+  flex-shrink: 0;
+}
+.frame-separator[data-orientation='horizontal'] {
+  height: 1px;
+  width: 100%;
+}
+.frame-separator[data-orientation='vertical'] {
+  width: 1px;
+  align-self: stretch;
+  min-height: 1em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .frame-progress-indicator,
+  .frame-accordion-chevron {
+    transition: none;
+  }
+  .frame-progress[data-state='indeterminate'] .frame-progress-indicator {
+    animation: none;
+    width: 100%;
+    opacity: 0.5;
+  }
+}

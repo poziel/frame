@@ -1,94 +1,833 @@
 @import './inputSurfaces.css';
 /* Standalone controls share the shell theme without requiring a Frame instance. */
-.frame-form-inline,.frame-number-field,.frame-pin-input,.frame-tags-input,.frame-combobox-anchor{display:inline-flex;align-items:center;gap:var(--frame-gap,6px)}
-.frame-form-input,.frame-control-button,.frame-toggle,.frame-choice-item,.frame-check-control{font:inherit;color:var(--frame-text,#ccc);background:var(--frame-surface,#242424);border:1px solid var(--frame-line,#454545);border-radius:var(--frame-control-radius,var(--frame-radius-medium));padding:var(--frame-control-padding-y,5px) var(--frame-control-padding-x,10px)}
-.frame-form-input{border-radius:var(--frame-form-input-radius,var(--frame-input-radius));min-width:0;box-sizing:border-box;color:var(--frame-control-text,#d4d4d4);background:var(--frame-control-background,#1d1d1d);border-color:var(--frame-control-border,#3c4246)}.frame-control-button,.frame-toggle,.frame-choice-item,.frame-check-control{cursor:pointer}
-:is(.frame-form-input,.frame-control-button,.frame-toggle,.frame-choice-item,.frame-check-control,.frame-switch,.frame-slider-thumb):focus-visible{outline:1px solid var(--frame-accent,#0078d4);outline-offset:2px}
-:is(.frame-control-button,.frame-toggle,.frame-choice-item,.frame-check-control,.frame-switch,.frame-slider-root)[data-disabled]{opacity:.45;cursor:default}
-.frame-check-control{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;flex:0 0 18px;padding:0;line-height:1}
-.frame-check-control[data-state=checked]{background:var(--frame-accent,#0078d4);border-color:var(--frame-accent,#0078d4);color:var(--frame-accent-foreground,#fff)}
-.frame-check-indicator{display:flex;align-items:center;justify-content:center}
-.frame-check-indicator svg{stroke:currentColor;stroke-width:.65;stroke-linejoin:round}
-.frame-switch{display:inline-flex;align-items:center;width:32px;height:18px;border:1px solid var(--frame-line,#454545);border-radius:999px;background:var(--frame-surface,#242424);padding:2px;box-sizing:border-box;cursor:pointer}
-.frame-switch[data-state=checked]{background:var(--frame-accent,#0078d4)}.frame-switch-thumb{display:block;width:12px;height:12px;border-radius:50%;background:var(--frame-text,#ccc);transition:transform var(--frame-duration,150ms) var(--frame-ease,ease-out)}.frame-switch-thumb[data-state=checked]{transform:translateX(14px)}
-.frame-slider-root{position:relative;display:flex;align-items:center;height:20px;touch-action:none;user-select:none}.frame-slider-track{position:relative;flex:1;height:4px;background:var(--frame-line,#454545);border-radius:999px}.frame-slider-range{position:absolute;height:100%;background:var(--frame-accent,#0078d4)}.frame-slider-thumb{display:block;width:12px;height:12px;border-radius:50%;background:var(--frame-text,#ccc)}
-.frame-choice-group{display:flex;flex-wrap:wrap;gap:var(--frame-gap,6px)}.frame-choice-group>[role=listbox],.frame-choice-group>[data-reka-listbox-content]{display:flex;flex-direction:column}.frame-choice-item{display:flex;align-items:center;gap:var(--frame-gap,6px);text-align:left}.frame-choice-item[data-state=on],.frame-choice-item[data-state=checked],.frame-choice-item[data-highlighted],.frame-toggle[data-state=on]{background:var(--frame-accent,#0078d4)}.frame-choice-item small{color:var(--frame-muted,#999)}
-.frame-pin-input>.frame-form-input{width:2.5em;text-align:center}.frame-number-field>.frame-form-input{width:7em;text-align:center}.frame-tags-input{flex-wrap:wrap;padding:var(--frame-control-padding-y,5px);border:1px solid var(--frame-line,#454545);border-radius:var(--frame-control-radius,var(--frame-radius-medium))}.frame-tags-input-item{display:inline-flex;align-items:center;gap:var(--frame-gap,6px);background:var(--frame-line,#454545);border-radius:var(--frame-control-radius,var(--frame-radius-medium));padding-left:var(--frame-control-padding-x,10px)}
-.frame-select-popup.frame-reka-select-popup{position:relative;min-width:var(--reka-select-trigger-width,var(--reka-combobox-trigger-width,160px));max-height:var(--reka-select-content-available-height,320px);pointer-events:auto;font:inherit;color:var(--frame-text,#ccc);background:var(--frame-overlay-background);border-color:var(--frame-line,#454545);border-radius:var(--frame-control-radius,var(--frame-radius-medium));box-shadow:var(--frame-overlay-shadow,0 6px 18px #0005)}
-.frame-select-options .frame-reka-select-item{display:flex;align-items:center;gap:var(--frame-gap,6px);padding:4px 8px;min-height:24px;outline:none;cursor:pointer}.frame-select-options .frame-reka-select-item[data-highlighted]{background:var(--frame-accent,#0078d4);color:var(--frame-text,#fff)}.frame-select-options .frame-reka-select-item[data-disabled]{opacity:.4;cursor:default}.frame-select-separator{height:1px;margin:5px 0;background:var(--frame-line,#454545)}
+.frame-form-inline,
+.frame-number-field,
+.frame-pin-input,
+.frame-tags-input,
+.frame-combobox-anchor {
+  display: inline-flex;
+  align-items: center;
+  /* Space between children for .frame-form-inline, .frame-number-field, .frame-pin-input, .frame-tags-input, .frame-combobox-anchor. @token --frame-gap */
+  --_frame-default-gap-35b08a2146: 6px;
+  gap: var(--frame-gap, var(--_frame-default-gap-35b08a2146));
+}
+.frame-form-input,
+.frame-control-button,
+.frame-toggle,
+.frame-choice-item,
+.frame-check-control {
+  font: inherit;
+  /* Foreground for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control. @token --frame-text */
+  --_frame-default-text-11eec91da6: #ccc;
+  color: var(--frame-text, var(--_frame-default-text-11eec91da6));
+  /* Background for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control. @token --frame-surface */
+  --_frame-default-surface-63d5630960: #242424;
+  background: var(--frame-surface, var(--_frame-default-surface-63d5630960));
+  /* Border for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control. @token --frame-line */
+  --_frame-default-line-ff02b7d326: #454545;
+  border: 1px solid var(--frame-line, var(--_frame-default-line-ff02b7d326));
+  /* Corner radius for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control. @token --frame-control-radius */
+  --_frame-default-control-radius-99f2371f33: var(--frame-radius-medium);
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-99f2371f33)
+  );
+  /* Internal spacing for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control. @token --frame-control-padding-y */
+  --_frame-default-control-padding-y-6f187fc61a: 5px;
+  /* Internal spacing for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control. @token --frame-control-padding-x */
+  --_frame-default-control-padding-x-a7f84e125c: 10px;
+  padding: var(
+      --frame-control-padding-y,
+      var(--_frame-default-control-padding-y-6f187fc61a)
+    )
+    var(
+      --frame-control-padding-x,
+      var(--_frame-default-control-padding-x-a7f84e125c)
+    );
+}
+.frame-form-input {
+  /* Corner radius of the legacy form input surface. @token --frame-form-input-radius */
+  --_frame-default-form-input-radius-99: var(--frame-input-radius);
+  border-radius: var(
+    --frame-form-input-radius,
+    var(--_frame-default-form-input-radius-99)
+  );
+  min-width: 0;
+  box-sizing: border-box;
+  /* Foreground for .frame-form-input. @token --frame-control-text */
+  --_frame-default-control-text-2e67396f40: #d4d4d4;
+  color: var(
+    --frame-control-text,
+    var(--_frame-default-control-text-2e67396f40)
+  );
+  /* Background for .frame-form-input. @token --frame-control-background */
+  --_frame-default-control-background-e1b39ac626: #1d1d1d;
+  background: var(
+    --frame-control-background,
+    var(--_frame-default-control-background-e1b39ac626)
+  );
+  /* Border color for .frame-form-input. @token --frame-control-border */
+  --_frame-default-control-border-b1b8a4c3b3: #3c4246;
+  border-color: var(
+    --frame-control-border,
+    var(--_frame-default-control-border-b1b8a4c3b3)
+  );
+}
+.frame-control-button,
+.frame-toggle,
+.frame-choice-item,
+.frame-check-control {
+  cursor: pointer;
+}
+:is(
+  .frame-form-input,
+  .frame-control-button,
+  .frame-toggle,
+  .frame-choice-item,
+  .frame-check-control,
+  .frame-switch,
+  .frame-slider-thumb
+):focus-visible {
+  /* Outline for :is( .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control, .frame-switch, .frame-slider-thumb ):focus-visible. @token --frame-accent */
+  --_frame-default-accent-b32497e0a2: #0078d4;
+  outline: 1px solid
+    var(--frame-accent, var(--_frame-default-accent-b32497e0a2));
+  outline-offset: 2px;
+}
+:is(
+  .frame-control-button,
+  .frame-toggle,
+  .frame-choice-item,
+  .frame-check-control,
+  .frame-switch,
+  .frame-slider-root
+)[data-disabled] {
+  opacity: 0.45;
+  cursor: default;
+}
+.frame-check-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  padding: 0;
+  line-height: 1;
+}
+.frame-check-control[data-state='checked'] {
+  /* Background for .frame-check-control[data-state='checked']. @token --frame-accent */
+  --_frame-default-accent-485192ecbd: #0078d4;
+  background: var(--frame-accent, var(--_frame-default-accent-485192ecbd));
+  /* Border color for .frame-check-control[data-state='checked']. @token --frame-accent */
+  --_frame-default-accent-e891a83819: #0078d4;
+  border-color: var(--frame-accent, var(--_frame-default-accent-e891a83819));
+  /* Foreground for .frame-check-control[data-state='checked']. @token --frame-accent-foreground */
+  --_frame-default-accent-foreground-55f53c865b: #fff;
+  color: var(
+    --frame-accent-foreground,
+    var(--_frame-default-accent-foreground-55f53c865b)
+  );
+}
+.frame-check-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-check-indicator svg {
+  stroke: currentColor;
+  stroke-width: 0.65;
+  stroke-linejoin: round;
+}
+.frame-switch {
+  display: inline-flex;
+  align-items: center;
+  width: 32px;
+  height: 18px; /* Border color of the switch track. @token --frame-line */
+  --_frame-default-line: #454545;
+  border: 1px solid var(--frame-line, var(--_frame-default-line));
+  border-radius: 999px; /* Unchecked switch track surface. @token --frame-surface */
+  --_frame-default-surface: #242424;
+  background: var(--frame-surface, var(--_frame-default-surface));
+  padding: 2px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.frame-switch[data-state='checked'] {
+  /* Checked switch track surface. @token --frame-accent */
+  --_frame-default-accent: #0078d4;
+  background: var(--frame-accent, var(--_frame-default-accent));
+}
+.frame-switch-thumb {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%; /* Switch thumb foreground. @token --frame-text */
+  --_frame-default-text: #ccc;
+  background: var(
+    --frame-text,
+    var(--_frame-default-text)
+  ); /* Duration of the switch thumb movement. @token --frame-duration */
+  --_frame-default-duration: 150ms; /* Timing curve of the switch thumb movement. @token --frame-ease */
+  --_frame-default-ease: ease-out;
+  transition: transform var(--frame-duration, var(--_frame-default-duration))
+    var(--frame-ease, var(--_frame-default-ease));
+}
+.frame-switch-thumb[data-state='checked'] {
+  transform: translateX(14px);
+}
+.frame-slider-root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 20px;
+  touch-action: none;
+  user-select: none;
+}
+.frame-slider-track {
+  position: relative;
+  flex: 1;
+  height: 4px;
+  /* Background for .frame-slider-track. @token --frame-line */
+  --_frame-default-line-e2de98838e: #454545;
+  background: var(--frame-line, var(--_frame-default-line-e2de98838e));
+  border-radius: 999px;
+}
+.frame-slider-range {
+  position: absolute;
+  height: 100%;
+  /* Background for .frame-slider-range. @token --frame-accent */
+  --_frame-default-accent-037564a729: #0078d4;
+  background: var(--frame-accent, var(--_frame-default-accent-037564a729));
+}
+.frame-slider-thumb {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  /* Background for .frame-slider-thumb. @token --frame-text */
+  --_frame-default-text-71711d32c8: #ccc;
+  background: var(--frame-text, var(--_frame-default-text-71711d32c8));
+}
+.frame-choice-group {
+  display: flex;
+  flex-wrap: wrap;
+  /* Space between children for .frame-choice-group. @token --frame-gap */
+  --_frame-default-gap-8951ae0e78: 6px;
+  gap: var(--frame-gap, var(--_frame-default-gap-8951ae0e78));
+}
+.frame-choice-group > [role='listbox'],
+.frame-choice-group > [data-reka-listbox-content] {
+  display: flex;
+  flex-direction: column;
+}
+.frame-choice-item {
+  display: flex;
+  align-items: center;
+  /* Space between children for .frame-choice-item. @token --frame-gap */
+  --_frame-default-gap-cda0a3104f: 6px;
+  gap: var(--frame-gap, var(--_frame-default-gap-cda0a3104f));
+  text-align: left;
+}
+.frame-choice-item[data-state='on'],
+.frame-choice-item[data-state='checked'],
+.frame-choice-item[data-highlighted],
+.frame-toggle[data-state='on'] {
+  /* Background for .frame-choice-item[data-state='on'], .frame-choice-item[data-state='checked'], .frame-choice-item[data-highlighted], .frame-toggle[data-state='on']. @token --frame-accent */
+  --_frame-default-accent-e1868bfed3: #0078d4;
+  background: var(--frame-accent, var(--_frame-default-accent-e1868bfed3));
+}
+.frame-choice-item small {
+  /* Foreground for .frame-choice-item small. @token --frame-muted */
+  --_frame-default-muted-74c5fb58d7: #999;
+  color: var(--frame-muted, var(--_frame-default-muted-74c5fb58d7));
+}
+.frame-pin-input > .frame-form-input {
+  width: 2.5em;
+  text-align: center;
+}
+.frame-number-field > .frame-form-input {
+  width: 7em;
+  text-align: center;
+}
+.frame-tags-input {
+  flex-wrap: wrap;
+  /* Internal spacing for .frame-tags-input. @token --frame-control-padding-y */
+  --_frame-default-control-padding-y-e00d87d601: 5px;
+  padding: var(
+    --frame-control-padding-y,
+    var(--_frame-default-control-padding-y-e00d87d601)
+  );
+  /* Border for .frame-tags-input. @token --frame-line */
+  --_frame-default-line-2665b96ef9: #454545;
+  border: 1px solid var(--frame-line, var(--_frame-default-line-2665b96ef9));
+  /* Corner radius for .frame-tags-input. @token --frame-control-radius */
+  --_frame-default-control-radius-60fc0b29c3: var(--frame-radius-medium);
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-60fc0b29c3)
+  );
+}
+.frame-tags-input-item {
+  display: inline-flex;
+  align-items: center;
+  /* Space between children for .frame-tags-input-item. @token --frame-gap */
+  --_frame-default-gap-3d618a29a2: 6px;
+  gap: var(--frame-gap, var(--_frame-default-gap-3d618a29a2));
+  /* Background for .frame-tags-input-item. @token --frame-line */
+  --_frame-default-line-7cf98c5752: #454545;
+  background: var(--frame-line, var(--_frame-default-line-7cf98c5752));
+  /* Corner radius for .frame-tags-input-item. @token --frame-control-radius */
+  --_frame-default-control-radius-6c4673a1ca: var(--frame-radius-medium);
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-6c4673a1ca)
+  );
+  /* Left internal spacing for .frame-tags-input-item. @token --frame-control-padding-x */
+  --_frame-default-control-padding-x-f6da8bf1dd: 10px;
+  padding-left: var(
+    --frame-control-padding-x,
+    var(--_frame-default-control-padding-x-f6da8bf1dd)
+  );
+}
+.frame-select-popup.frame-reka-select-popup {
+  position: relative;
+  min-width: var(
+    --reka-select-trigger-width,
+    var(--reka-combobox-trigger-width, 160px)
+  );
+  max-height: var(--reka-select-content-available-height, 320px);
+  pointer-events: auto;
+  font: inherit;
+  /* Foreground for .frame-select-popup.frame-reka-select-popup. @token --frame-text */
+  --_frame-default-text-588023466b: #ccc;
+  color: var(--frame-text, var(--_frame-default-text-588023466b));
+  background: var(--frame-overlay-background);
+  /* Border color for .frame-select-popup.frame-reka-select-popup. @token --frame-line */
+  --_frame-default-line-cdaabbb022: #454545;
+  border-color: var(--frame-line, var(--_frame-default-line-cdaabbb022));
+  /* Corner radius for .frame-select-popup.frame-reka-select-popup. @token --frame-control-radius */
+  --_frame-default-control-radius-0acfe35eb0: var(--frame-radius-medium);
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-0acfe35eb0)
+  );
+  /* Elevation shadow for .frame-select-popup.frame-reka-select-popup. @token --frame-overlay-shadow */
+  --_frame-default-overlay-shadow-c818b823ef: 0 6px 18px #0005;
+  box-shadow: var(
+    --frame-overlay-shadow,
+    var(--_frame-default-overlay-shadow-c818b823ef)
+  );
+}
+.frame-select-options .frame-reka-select-item {
+  display: flex;
+  align-items: center;
+  /* Space between children for .frame-select-options .frame-reka-select-item. @token --frame-gap */
+  --_frame-default-gap-dbcb4b18a8: 6px;
+  gap: var(--frame-gap, var(--_frame-default-gap-dbcb4b18a8));
+  padding: 4px 8px;
+  min-height: 24px;
+  outline: none;
+  cursor: pointer;
+}
+.frame-select-options .frame-reka-select-item[data-highlighted] {
+  /* Background for .frame-select-options .frame-reka-select-item[data-highlighted]. @token --frame-accent */
+  --_frame-default-accent-304801f5eb: #0078d4;
+  background: var(--frame-accent, var(--_frame-default-accent-304801f5eb));
+  /* Foreground for .frame-select-options .frame-reka-select-item[data-highlighted]. @token --frame-text */
+  --_frame-default-text-e531feab10: #fff;
+  color: var(--frame-text, var(--_frame-default-text-e531feab10));
+}
+.frame-select-options .frame-reka-select-item[data-disabled] {
+  opacity: 0.4;
+  cursor: default;
+}
+.frame-select-separator {
+  height: 1px;
+  margin: 5px 0;
+  /* Background for .frame-select-separator. @token --frame-line */
+  --_frame-default-line-c512b09d96: #454545;
+  background: var(--frame-line, var(--_frame-default-line-c512b09d96));
+}
 
 /* Keep browser constraint validation while the visible Reka control owns focus. */
-.frame-control-validation{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;border:0!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;pointer-events:none!important}
+.frame-control-validation {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+}
 
 /* FrameSelect shares menu surface defaults and quick-action selection, with local overrides. */
 .frame-select-popup.frame-reka-select-popup.frame-select-content {
- width:var(--reka-select-trigger-width);min-width:var(--reka-select-trigger-width);
- background:var(--frame-select-popup-background,var(--frame-menu-background));
- border:var(--frame-select-popup-border,1px solid var(--frame-menu-border));
- border-radius:var(--frame-select-popup-border-radius,var(--frame-menu-border-radius,var(--frame-radius-large)));
- box-shadow:var(--frame-select-popup-box-shadow,var(--frame-menu-box-shadow,0 6px 22px #0005));
- backdrop-filter:var(--frame-select-popup-backdrop-filter,blur(18px) saturate(110%));
+  width: var(--reka-select-trigger-width);
+  min-width: var(--reka-select-trigger-width);
+  /* Surface behind the select option list. @token --frame-select-popup-background */
+  --_frame-default-select-popup-background-100: var(--frame-menu-background);
+  background: var(
+    --frame-select-popup-background,
+    var(--_frame-default-select-popup-background-100)
+  );
+  /* Border around the select popup. @token --frame-select-popup-border */
+  --_frame-default-select-popup-border-101: 1px solid var(--frame-menu-border);
+  border: var(
+    --frame-select-popup-border,
+    var(--_frame-default-select-popup-border-101)
+  );
+  /* Fallback for: Corner radius of the select popup. @token --frame-menu-border-radius */
+  --_frame-default-menu-border-radius-8fac327441: var(--frame-radius-large);
+  /* Corner radius of the select popup. @token --frame-select-popup-border-radius */
+  --_frame-default-select-popup-border-radius-102: var(
+    --frame-menu-border-radius,
+    var(--_frame-default-menu-border-radius-8fac327441)
+  );
+  border-radius: var(
+    --frame-select-popup-border-radius,
+    var(--_frame-default-select-popup-border-radius-102)
+  );
+  /* Fallback for: Elevation shadow of the select popup. @token --frame-menu-box-shadow */
+  --_frame-default-menu-box-shadow-9bbfe7b8d5: 0 6px 22px #0005;
+  /* Elevation shadow of the select popup. @token --frame-select-popup-box-shadow */
+  --_frame-default-select-popup-box-shadow-103: var(
+    --frame-menu-box-shadow,
+    var(--_frame-default-menu-box-shadow-9bbfe7b8d5)
+  );
+  box-shadow: var(
+    --frame-select-popup-box-shadow,
+    var(--_frame-default-select-popup-box-shadow-103)
+  );
+  /* Backdrop treatment behind the select popup. @token --frame-select-popup-backdrop-filter */
+  --_frame-default-select-popup-backdrop-filter-104: blur(18px) saturate(110%);
+  backdrop-filter: var(
+    --frame-select-popup-backdrop-filter,
+    var(--_frame-default-select-popup-backdrop-filter-104)
+  );
 }
-.frame-select-content .frame-select-options { padding:var(--frame-select-options-padding,var(--frame-menu-padding,var(--frame-spacing-small,4px)));box-sizing:border-box; }
+.frame-select-content .frame-select-options {
+  /* Fallback for: Inset around the list of select options. Used when --frame-menu-padding is unset. @token --frame-spacing-small */
+  --_frame-default-spacing-small-9af1b4d654: 4px;
+  /* Fallback for: Inset around the list of select options. @token --frame-menu-padding */
+  --_frame-default-menu-padding-abdc7e3fde: var(
+    --frame-spacing-small,
+    var(--_frame-default-spacing-small-9af1b4d654)
+  );
+  /* Inset around the list of select options. @token --frame-select-options-padding */
+  --_frame-default-select-options-padding-105: var(
+    --frame-menu-padding,
+    var(--_frame-default-menu-padding-abdc7e3fde)
+  );
+  padding: var(
+    --frame-select-options-padding,
+    var(--_frame-default-select-options-padding-105)
+  );
+  box-sizing: border-box;
+}
 .frame-select-content .frame-select-options .frame-reka-select-item {
- padding:var(--frame-select-item-padding,var(--frame-menu-row-button-padding,3px 6px));
- min-height:var(--frame-select-item-min-height,var(--frame-menu-row-button-min-height,25px));
- border:1px solid transparent;border-radius:var(--frame-select-item-radius,var(--frame-menu-row-button-border-radius,var(--frame-radius-medium)));
- font-size:var(--frame-select-item-font-size,var(--frame-menu-row-button-font-size,12px));
+  /* Fallback for: Internal spacing of each select option row. @token --frame-menu-row-button-padding */
+  --_frame-default-menu-row-button-padding-19043f90c7: 3px 6px;
+  /* Internal spacing of each select option row. @token --frame-select-item-padding */
+  --_frame-default-select-item-padding-106: var(
+    --frame-menu-row-button-padding,
+    var(--_frame-default-menu-row-button-padding-19043f90c7)
+  );
+  padding: var(
+    --frame-select-item-padding,
+    var(--_frame-default-select-item-padding-106)
+  );
+  /* Fallback for: Minimum height of a select option row. @token --frame-menu-row-button-min-height */
+  --_frame-default-menu-row-button-min-height-6ac256a59a: 25px;
+  /* Minimum height of a select option row. @token --frame-select-item-min-height */
+  --_frame-default-select-item-min-height-107: var(
+    --frame-menu-row-button-min-height,
+    var(--_frame-default-menu-row-button-min-height-6ac256a59a)
+  );
+  min-height: var(
+    --frame-select-item-min-height,
+    var(--_frame-default-select-item-min-height-107)
+  );
+  border: 1px solid transparent;
+  /* Fallback for: Corner radius of a select option row. @token --frame-menu-row-button-border-radius */
+  --_frame-default-menu-row-button-border-radius-37f3ed5642: var(
+    --frame-radius-medium
+  );
+  /* Corner radius of a select option row. @token --frame-select-item-radius */
+  --_frame-default-select-item-radius-108: var(
+    --frame-menu-row-button-border-radius,
+    var(--_frame-default-menu-row-button-border-radius-37f3ed5642)
+  );
+  border-radius: var(
+    --frame-select-item-radius,
+    var(--_frame-default-select-item-radius-108)
+  );
+  /* Fallback for: Text size in a select option row. @token --frame-menu-row-button-font-size */
+  --_frame-default-menu-row-button-font-size-b48ad4dfcb: 12px;
+  /* Text size in a select option row. @token --frame-select-item-font-size */
+  --_frame-default-select-item-font-size-109: var(
+    --frame-menu-row-button-font-size,
+    var(--_frame-default-menu-row-button-font-size-b48ad4dfcb)
+  );
+  font-size: var(
+    --frame-select-item-font-size,
+    var(--_frame-default-select-item-font-size-109)
+  );
 }
-.frame-select-content .frame-select-options .frame-reka-select-item[data-highlighted]:not([data-disabled]) {
- background:var(--frame-select-item-highlight-background,var(--frame-quick-selection,var(--frame-accent)));
- color:var(--frame-select-item-highlight-color,var(--frame-accent-foreground));outline:none;
+.frame-select-content
+  .frame-select-options
+  .frame-reka-select-item[data-highlighted]:not([data-disabled]) {
+  /* Fallback for: Surface of an enabled highlighted select option. @token --frame-quick-selection */
+  --_frame-default-quick-selection-dec6ef6beb: var(--frame-accent);
+  /* Surface of an enabled highlighted select option. @token --frame-select-item-highlight-background */
+  --_frame-default-select-item-highlight-background-110: var(
+    --frame-quick-selection,
+    var(--_frame-default-quick-selection-dec6ef6beb)
+  );
+  background: var(
+    --frame-select-item-highlight-background,
+    var(--_frame-default-select-item-highlight-background-110)
+  );
+  /* Foreground of an enabled highlighted select option. @token --frame-select-item-highlight-color */
+  --_frame-default-select-item-highlight-color-111: var(
+    --frame-accent-foreground
+  );
+  color: var(
+    --frame-select-item-highlight-color,
+    var(--_frame-default-select-item-highlight-color-111)
+  );
+  outline: none;
 }
-.frame-select-content .frame-reka-select-item[data-highlighted] small { color:inherit; }
-.frame-select-content .frame-select-description { display:grid;border-color:var(--frame-menu-border); }
-.frame-select-content .frame-select-description > span { grid-area:1 / 1;overflow-wrap:anywhere; }
-.frame-select-description-measure { visibility:hidden;pointer-events:none; }
-@media (prefers-reduced-transparency:reduce) {
- .frame-select-popup.frame-reka-select-popup.frame-select-content { backdrop-filter:none;background:var(--frame-select-popup-solid-background,var(--frame-surface)); }
+.frame-select-content .frame-reka-select-item[data-highlighted] small {
+  color: inherit;
+}
+.frame-select-content .frame-select-description {
+  display: grid;
+  border-color: var(--frame-menu-border);
+}
+.frame-select-content .frame-select-description > span {
+  grid-area: 1 / 1;
+  overflow-wrap: anywhere;
+}
+.frame-select-description-measure {
+  visibility: hidden;
+  pointer-events: none;
+}
+@media (prefers-reduced-transparency: reduce) {
+  .frame-select-popup.frame-reka-select-popup.frame-select-content {
+    backdrop-filter: none;
+    /* Opaque select popup surface when reduced transparency is requested. @token --frame-select-popup-solid-background */
+    --_frame-default-select-popup-solid-background-112: var(--frame-surface);
+    background: var(
+      --frame-select-popup-solid-background,
+      var(--_frame-default-select-popup-solid-background-112)
+    );
+  }
 }
 
-.frame-tags-input { border-color:var(--frame-tags-input-border-color,var(--frame-control-border));border-radius:var(--frame-tags-input-radius,var(--frame-input-radius)); }
+.frame-tags-input {
+  /* Border color of the tag entry container. @token --frame-tags-input-border-color */
+  --_frame-default-tags-input-border-color-113: var(--frame-control-border);
+  border-color: var(
+    --frame-tags-input-border-color,
+    var(--_frame-default-tags-input-border-color-113)
+  );
+  /* Corner radius of the tag entry container. @token --frame-tags-input-radius */
+  --_frame-default-tags-input-radius-114: var(--frame-input-radius);
+  border-radius: var(
+    --frame-tags-input-radius,
+    var(--_frame-default-tags-input-radius-114)
+  );
+}
 
 /* One themed surface for the number input and its optional attached controls. */
-.frame-number-field { display:inline-flex; align-items:stretch; gap:0; box-sizing:border-box; min-width:0; height:30px; border:1px solid var(--frame-control-border,var(--frame-line)); border-radius:var(--frame-input-radius); background:var(--frame-control-background,var(--frame-surface)); color:var(--frame-control-text,var(--frame-text)); }
+.frame-number-field {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0;
+  box-sizing: border-box;
+  min-width: 0;
+  height: 30px;
+  /* Border for .frame-number-field. @token --frame-control-border */
+  --_frame-default-control-border-f38e153d3a: var(--frame-line);
+  border: 1px solid
+    var(--frame-control-border, var(--_frame-default-control-border-f38e153d3a));
+  border-radius: var(--frame-input-radius);
+  /* Background for .frame-number-field. @token --frame-control-background */
+  --_frame-default-control-background-5152e7530b: var(--frame-surface);
+  background: var(
+    --frame-control-background,
+    var(--_frame-default-control-background-5152e7530b)
+  );
+  /* Foreground for .frame-number-field. @token --frame-control-text */
+  --_frame-default-control-text-3c0bb6871a: var(--frame-text);
+  color: var(
+    --frame-control-text,
+    var(--_frame-default-control-text-3c0bb6871a)
+  );
+}
 
-.frame-number-field > .frame-form-input { width:7em; flex:1 1 0; min-width:0; max-width:none; border:0; border-radius:0; background:transparent; text-align:right; outline:none; padding:2px 6px; }
-.frame-number-field .frame-control-button { display:flex; align-items:center; justify-content:center; flex:0 0 26px; min-width:0; width:26px; padding:0; border:0; border-radius:0; background:transparent; color:inherit; }
-.frame-number-field > .frame-control-button:first-child { border-right:1px solid var(--frame-control-border,var(--frame-line)); border-radius:inherit; border-top-right-radius:0; border-bottom-right-radius:0; }
-.frame-number-field > .frame-control-button:last-child { border-left:1px solid var(--frame-control-border,var(--frame-line)); border-radius:inherit; border-top-left-radius:0; border-bottom-left-radius:0; }
-.frame-number-field .frame-control-button:hover:not([data-disabled]) { background:var(--frame-menu-hover,var(--frame-line)); }
-.frame-number-field .frame-control-button:focus-visible { outline:1px solid var(--frame-accent); outline-offset:-2px; }
-.frame-number-field[data-size=compact] { height:24px; }
-.frame-number-field[data-size=compact] .frame-control-button { flex-basis:18px; width:18px; }
-.frame-number-field[data-size=compact] > .frame-form-input { padding:1px 4px; font-size:inherit; }
-.frame-number-steppers { display:flex; flex-direction:column; flex:0 0 22px; border-left:1px solid var(--frame-control-border,var(--frame-line)); }
-.frame-number-field .frame-number-steppers > .frame-control-button { flex:1 1 0; width:100%; min-height:0; }
-.frame-number-steppers > .frame-control-button + .frame-control-button { border-top:1px solid var(--frame-control-border,var(--frame-line)); }
-.frame-number-field[data-size=compact] .frame-number-steppers { flex-basis:16px; }
-.frame-number-field[data-disabled] { opacity:.45; }
-.frame-number-field[data-disabled] .frame-control-button { opacity:1; cursor:default; }
+.frame-number-field > .frame-form-input {
+  width: 7em;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: right;
+  outline: none;
+  padding: 2px 6px;
+}
+.frame-number-field .frame-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 26px;
+  min-width: 0;
+  width: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+}
+.frame-number-field > .frame-control-button:first-child {
+  /* Right border for .frame-number-field > .frame-control-button:first-child. @token --frame-control-border */
+  --_frame-default-control-border-0294bf3f8b: var(--frame-line);
+  border-right: 1px solid
+    var(--frame-control-border, var(--_frame-default-control-border-0294bf3f8b));
+  border-radius: inherit;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.frame-number-field > .frame-control-button:last-child {
+  /* Left border for .frame-number-field > .frame-control-button:last-child. @token --frame-control-border */
+  --_frame-default-control-border-2701397c09: var(--frame-line);
+  border-left: 1px solid
+    var(--frame-control-border, var(--_frame-default-control-border-2701397c09));
+  border-radius: inherit;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.frame-number-field .frame-control-button:hover:not([data-disabled]) {
+  /* Background for .frame-number-field .frame-control-button:hover:not([data-disabled]). @token --frame-menu-hover */
+  --_frame-default-menu-hover-4223ad9c76: var(--frame-line);
+  background: var(
+    --frame-menu-hover,
+    var(--_frame-default-menu-hover-4223ad9c76)
+  );
+}
+.frame-number-field .frame-control-button:focus-visible {
+  outline: 1px solid var(--frame-accent);
+  outline-offset: -2px;
+}
+.frame-number-field[data-size='compact'] {
+  height: 24px;
+}
+.frame-number-field[data-size='compact'] .frame-control-button {
+  flex-basis: 18px;
+  width: 18px;
+}
+.frame-number-field[data-size='compact'] > .frame-form-input {
+  padding: 1px 4px;
+  font-size: inherit;
+}
+.frame-number-steppers {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 22px;
+  /* Left border for .frame-number-steppers. @token --frame-control-border */
+  --_frame-default-control-border-0cadbf4f87: var(--frame-line);
+  border-left: 1px solid
+    var(--frame-control-border, var(--_frame-default-control-border-0cadbf4f87));
+}
+.frame-number-field .frame-number-steppers > .frame-control-button {
+  flex: 1 1 0;
+  width: 100%;
+  min-height: 0;
+}
+.frame-number-steppers > .frame-control-button + .frame-control-button {
+  /* Top border for .frame-number-steppers > .frame-control-button + .frame-control-button. @token --frame-control-border */
+  --_frame-default-control-border-ae9453bb8a: var(--frame-line);
+  border-top: 1px solid
+    var(--frame-control-border, var(--_frame-default-control-border-ae9453bb8a));
+}
+.frame-number-field[data-size='compact'] .frame-number-steppers {
+  flex-basis: 16px;
+}
+.frame-number-field[data-disabled] {
+  opacity: 0.45;
+}
+.frame-number-field[data-disabled] .frame-control-button {
+  opacity: 1;
+  cursor: default;
+}
 
-.frame-number-field[data-controls=stacked] > .frame-number-native { width:100%; max-width:none; min-width:0; flex:1 1 0; height:100%; padding:1px 0 1px 6px; background:transparent; box-sizing:border-box; text-align:right; }
-.frame-number-native::-webkit-inner-spin-button { margin:0; padding:0; opacity:1; background:transparent; }
-.frame-input-group { display:inline-flex; align-items:stretch; width:var(--frame-input-group-width,min(100%,340px)); min-width:0; background:var(--frame-input-group-background,var(--frame-control-background)); color:var(--frame-control-text); box-sizing:border-box; }
-.frame-input-group-control { display:flex; flex:1; min-width:0; }
-.frame-input-group-control > :is(.frame-text-input,.frame-number-field,.frame-date-field,.frame-combobox-anchor,.frame-select,.frame-text-area) { flex:1; width:100%; min-width:0; max-width:none; }
-.frame-input-addon { display:flex; align-items:center; flex:0 0 auto; padding:var(--frame-input-group-addon-padding,0 var(--frame-spacing-small,4px)); color:var(--frame-input-group-addon-color,var(--frame-muted)); }
-.frame-pin-input > .frame-pin-entry { width:2.5em; text-align:center; }
-.frame-tags-input .frame-tags-entry { flex:1; width:6em; min-width:4em; }
-.frame-autocomplete-input { width:min(100%,340px); }
+.frame-number-field[data-controls='stacked'] > .frame-number-native {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  flex: 1 1 0;
+  height: 100%;
+  padding: 1px 0 1px 6px;
+  background: transparent;
+  box-sizing: border-box;
+  text-align: right;
+}
+.frame-number-native::-webkit-inner-spin-button {
+  margin: 0;
+  padding: 0;
+  opacity: 1;
+  background: transparent;
+}
+.frame-input-group {
+  display: inline-flex;
+  align-items: stretch;
+  /* Preferred width of the grouped input surface. @token --frame-input-group-width */
+  --_frame-default-input-group-width-115: min(100%, 340px);
+  width: var(
+    --frame-input-group-width,
+    var(--_frame-default-input-group-width-115)
+  );
+  min-width: 0;
+  /* Surface behind the grouped input and its addons. @token --frame-input-group-background */
+  --_frame-default-input-group-background-116: var(--frame-control-background);
+  background: var(
+    --frame-input-group-background,
+    var(--_frame-default-input-group-background-116)
+  );
+  color: var(--frame-control-text);
+  box-sizing: border-box;
+}
+.frame-input-group-control {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+.frame-input-group-control
+  > :is(
+    .frame-text-input,
+    .frame-number-field,
+    .frame-date-field,
+    .frame-combobox-anchor,
+    .frame-select,
+    .frame-text-area
+  ) {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
+.frame-input-addon {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  /* Fallback for: Internal spacing of an input prefix or suffix addon. @token --frame-spacing-small */
+  --_frame-default-spacing-small-c3374ea47b: 4px;
+  /* Internal spacing of an input prefix or suffix addon. @token --frame-input-group-addon-padding */
+  --_frame-default-input-group-addon-padding-117: 0
+    var(--frame-spacing-small, var(--_frame-default-spacing-small-c3374ea47b));
+  padding: var(
+    --frame-input-group-addon-padding,
+    var(--_frame-default-input-group-addon-padding-117)
+  );
+  /* Foreground of an input prefix or suffix addon. @token --frame-input-group-addon-color */
+  --_frame-default-input-group-addon-color-118: var(--frame-muted);
+  color: var(
+    --frame-input-group-addon-color,
+    var(--_frame-default-input-group-addon-color-118)
+  );
+}
+.frame-pin-input > .frame-pin-entry {
+  width: 2.5em;
+  text-align: center;
+}
+.frame-tags-input .frame-tags-entry {
+  flex: 1;
+  width: 6em;
+  min-width: 4em;
+}
+.frame-autocomplete-input {
+  width: min(100%, 340px);
+}
 
-.frame-number-field > .frame-number-native:disabled {opacity:1;}
+.frame-number-field > .frame-number-native:disabled {
+  opacity: 1;
+}
 
-.frame-scrub-field { width:var(--frame-scrub-field-width,100%);height:var(--frame-scrub-field-height,28px);overflow:hidden; }
-.frame-scrub-field > .frame-scrub-display { flex:1;position:relative;min-width:0;min-height:0;padding:2px 6px;border:0;background:transparent;color:inherit;font:inherit;cursor:ew-resize;touch-action:none;user-select:none;border-radius:0; }
-.frame-scrub-fill { position:absolute;inset:0 auto 0 0;background:var(--frame-scrub-field-fill,var(--frame-line));pointer-events:none; }
-.frame-scrub-text { position:relative;pointer-events:none; }
-.frame-scrub-field .frame-scrub-display:focus-visible { outline:0; }
-.frame-scrub-steppers { display:flex;flex-direction:column;flex:0 0 18px;border-inline-start:1px solid var(--frame-control-border); }
-.frame-scrub-field .frame-scrub-steppers > .frame-control-button { flex:1 1 0;width:100%;min-height:0; }
-.frame-scrub-field > .frame-scrub-input { text-align:center; width:0;flex:1;min-width:0;max-width:none; }
-.frame-scrub-field[data-disabled] .frame-scrub-display { cursor:default; }
+.frame-scrub-field {
+  /* Preferred width of the drag-adjustable numeric field. @token --frame-scrub-field-width */
+  --_frame-default-scrub-field-width-119: 100%;
+  width: var(
+    --frame-scrub-field-width,
+    var(--_frame-default-scrub-field-width-119)
+  );
+  /* Height of the drag-adjustable numeric field. @token --frame-scrub-field-height */
+  --_frame-default-scrub-field-height-120: 28px;
+  height: var(
+    --frame-scrub-field-height,
+    var(--_frame-default-scrub-field-height-120)
+  );
+  overflow: hidden;
+}
+.frame-scrub-field > .frame-scrub-display {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  padding: 2px 6px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: ew-resize;
+  touch-action: none;
+  user-select: none;
+  border-radius: 0;
+}
+.frame-scrub-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  /* Surface of the numeric value fill behind scrub field text. @token --frame-scrub-field-fill */
+  --_frame-default-scrub-field-fill-121: var(--frame-line);
+  background: var(
+    --frame-scrub-field-fill,
+    var(--_frame-default-scrub-field-fill-121)
+  );
+  pointer-events: none;
+}
+.frame-scrub-text {
+  position: relative;
+  pointer-events: none;
+}
+.frame-scrub-field .frame-scrub-display:focus-visible {
+  outline: 0;
+}
+.frame-scrub-steppers {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 18px;
+  border-inline-start: 1px solid var(--frame-control-border);
+}
+.frame-scrub-field .frame-scrub-steppers > .frame-control-button {
+  flex: 1 1 0;
+  width: 100%;
+  min-height: 0;
+}
+.frame-scrub-field > .frame-scrub-input {
+  text-align: center;
+  width: 0;
+  flex: 1;
+  min-width: 0;
+  max-width: none;
+}
+.frame-scrub-field[data-disabled] .frame-scrub-display {
+  cursor: default;
+}
 
-.frame-scrub-backing {display:none !important;}
+.frame-scrub-backing {
+  display: none !important;
+}

@@ -29,3 +29,19 @@ Click **Run demo example** in the workspace or **Try demo** beside the chat to s
 Stop, reset and application disposal cancel demo timers and pending input. Reset also releases generated files and restarts the example cycle. All content is scripted locally; no AI backend, external requests or project-file changes are involved. The work timeline does not render its left border until it has actual work or a current thought to display.
 
 Quick replies with no retained work show a plain duration rather than an empty dropdown. Activity groups show elapsed time; activity rows are compact, with syntax-aware code output controlled by **Output language**. Delivered files appear as thumbnail/icon cards with type/size, an in-app Open preview and a separate Download action.
+
+## Markdown documentation
+
+The website reads consumer articles from the repository `docs/` tree. Component,
+module and layout articles use Features, APIs and Styling sections; their
+Playground stays a Vue component. API descriptions come from TSDoc, and CSS
+token descriptions come from adjacent declaration comments.
+
+Run `bun run docs:contracts` at the repository root to rebuild references, or
+`bun run --cwd packages/docs docs:check` to detect stale output without writes.
+The normal website build runs generation automatically and emits complete raw
+Markdown under `dist/markdown/`, plus a website `llms.txt` index. The raw tree
+preserves repository-relative links, including package READMEs.
+
+See [documentation authoring](../../docs/components/component-documentation.md)
+for marker syntax, source comments, CSS declarations and coverage checks.

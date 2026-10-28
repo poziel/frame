@@ -9,17 +9,27 @@ import {
 } from '../services/xterm/terminalSurface';
 
 const props = defineProps<{
+  /** Caller-owned terminal controller; unmount detaches presentation without disposing the controller. */
   terminal: TerminalController;
+  /** Existing terminal session to attach; omission creates a session on mount. */
   sessionId?: string;
+  /** Profile used when creating a session because sessionId was omitted. */
   profile?: string;
+  /** Working directory passed to session creation when sessionId is omitted. */
   cwd?: string;
+  /** Accessible name or visible label for the rendered control. */
   label?: string;
+  /** External session error displayed alongside local attachment failures. */
   errorMessage?: string;
 }>();
 const emit = defineEmits<{
+  /** Reports successful terminal attachment and its controller/session identity. */
   ready: [controller: TerminalController, sessionId: string];
+  /** Reports focus entering this terminal session. */
   focus: [id: string];
+  /** Requests the terminal search interface. */
   find: [];
+  /** Reports a terminal creation or attachment failure. */
   error: [cause: unknown];
 }>();
 const controller = props.terminal;
@@ -64,11 +74,20 @@ function focus() {
   surface?.focus();
 }
 defineExpose({
+  /** Caller-owned controller currently attached to this component. */
   controller,
+
+  /** Focuses the active input or terminal surface without creating or disposing its owning controller. */
   focus,
+
+  /** Searches the attached terminal surface and returns whether a match was found. */
   search: (query: string, previous = false) =>
     surface?.search(query, previous) ?? false,
+
+  /** Clears the currently attached terminal session display through its controller. */
   clear: () => controller.clear(id.value),
+
+  /** Closes the attached session through the caller-owned terminal controller. */
   close: () => (id.value ? controller.close(id.value) : Promise.resolve()),
 });
 </script>

@@ -10,9 +10,16 @@ import FrameKeycap from '../data-display/FrameKeycap.vue';
 import FrameIconButton from '../actions/FrameIconButton.vue';
 
 const frame = useFrame();
-const props = defineProps<{search?: string; hideSearch?: boolean}>();
+const props = defineProps<{
+  /** Controlled filter query; omission keeps a component-local query. */
+  search?: string;
+  /** Hides the local search field so a host can provide its own filter control. */
+  hideSearch?: boolean;
+}>();
 const emit = defineEmits<{
+  /** Requests an updated controlled filter query. */
   'update:search': [value: string];
+  /** Requests focus in the host-provided search control. */
   'focus-search': [];
 }>();
 const ownSearch = ref('');
@@ -233,10 +240,20 @@ function showConflicts() {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: var(--frame-keybindings-gap, 12px);
+  /* Space between children for .frame-keybindings. @token --frame-keybindings-gap */
+  --_frame-default-keybindings-gap-866e0a3588: 12px;
+  gap: var(
+    --frame-keybindings-gap,
+    var(--_frame-default-keybindings-gap-866e0a3588)
+  );
   height: 100%;
   min-height: 0;
-  padding: var(--frame-keybindings-padding, 16px);
+  /* Internal spacing for .frame-keybindings. @token --frame-keybindings-padding */
+  --_frame-default-keybindings-padding-11b0e9a904: 16px;
+  padding: var(
+    --frame-keybindings-padding,
+    var(--_frame-default-keybindings-padding-11b0e9a904)
+  );
   color: var(--frame-text);
   font: inherit;
 }
@@ -244,10 +261,20 @@ function showConflicts() {
   box-sizing: border-box;
   width: 100%;
   padding: 8px 10px;
-  background: var(--frame-control-background, var(--frame-bg));
+  /* Background for .shortcut-search. @token --frame-control-background */
+  --_frame-default-control-background-b9ae3de79a: var(--frame-bg);
+  background: var(
+    --frame-control-background,
+    var(--_frame-default-control-background-b9ae3de79a)
+  );
   color: inherit;
   border: 1px solid var(--frame-border-color);
-  border-radius: var(--frame-radius-medium, 4px);
+  /* Corner radius for .shortcut-search. @token --frame-radius-medium */
+  --_frame-default-radius-medium-d2eb911727: 4px;
+  border-radius: var(
+    --frame-radius-medium,
+    var(--_frame-default-radius-medium-d2eb911727)
+  );
   font: inherit;
 }
 .shortcut-scroll {
@@ -266,16 +293,28 @@ th {
   position: sticky;
   top: 0;
   z-index: 2;
+  /* Background for th. Used when --frame-keybindings-header-background is unset. @token --frame-surface-solid */
+  --_frame-default-surface-solid-40b9a4572b: #202020;
+  /* Background for th. @token --frame-keybindings-header-background */
+  --_frame-default-keybindings-header-background-b34c4002e8: var(
+    --frame-surface-solid,
+    var(--_frame-default-surface-solid-40b9a4572b)
+  );
   background: var(
     --frame-keybindings-header-background,
-    var(--frame-surface-solid, #202020)
+    var(--_frame-default-keybindings-header-background-b34c4002e8)
   );
   color: var(--frame-text);
   font-weight: 600;
 }
 th,
 td {
-  padding: var(--frame-keybindings-cell-padding, 6px 10px);
+  /* Internal spacing for th, td. @token --frame-keybindings-cell-padding */
+  --_frame-default-keybindings-cell-padding-3d327e1530: 6px 10px;
+  padding: var(
+    --frame-keybindings-cell-padding,
+    var(--_frame-default-keybindings-cell-padding-3d327e1530)
+  );
   vertical-align: middle;
 }
 thead tr,
@@ -283,9 +322,13 @@ tbody tr {
   border-bottom: 1px solid var(--frame-border-color);
 }
 tr:nth-child(even) {
+  /* Background for tr:nth-child(even). @token --frame-keybindings-alternate-background */
+  --_frame-default-keybindings-alternate-background-fae16c87b8: var(
+    --frame-list-hover-background
+  );
   background: var(
     --frame-keybindings-alternate-background,
-    var(--frame-list-hover-background)
+    var(--_frame-default-keybindings-alternate-background-fae16c87b8)
   );
 }
 tbody tr:hover,
@@ -312,14 +355,29 @@ small {
   align-items: center;
   gap: 2px;
   white-space: nowrap;
-  color: var(--frame-keybindings-action-color, #d4d4d4);
+  /* Foreground for .shortcut-action-line. @token --frame-keybindings-action-color */
+  --_frame-default-keybindings-action-color-1c6d1c0a7e: #d4d4d4;
+  color: var(
+    --frame-keybindings-action-color,
+    var(--_frame-default-keybindings-action-color-1c6d1c0a7e)
+  );
 }
 .shortcut-action-line :deep(button) {
   flex: none;
 }
 .shortcut-action-line :deep(button:hover) {
-  color: var(--frame-keybindings-action-hover-color, #ffffff);
-  background: var(--frame-keybindings-action-hover-background, #3c3c3c);
+  /* Foreground for .shortcut-action-line :deep(button:hover). @token --frame-keybindings-action-hover-color */
+  --_frame-default-keybindings-action-hover-color-fc66766c48: #ffffff;
+  color: var(
+    --frame-keybindings-action-hover-color,
+    var(--_frame-default-keybindings-action-hover-color-fc66766c48)
+  );
+  /* Background for .shortcut-action-line :deep(button:hover). @token --frame-keybindings-action-hover-background */
+  --_frame-default-keybindings-action-hover-background-84a1e95e4a: #3c3c3c;
+  background: var(
+    --frame-keybindings-action-hover-background,
+    var(--_frame-default-keybindings-action-hover-background-84a1e95e4a)
+  );
 }
 .shortcut-actions :deep(button),
 .shortcut-binding-actions {
@@ -342,7 +400,12 @@ tr:focus-within .shortcut-binding-actions {
   vertical-align: middle;
 }
 .shortcut-when {
-  font-family: var(--frame-font-mono, monospace);
+  /* Font family for .shortcut-when. @token --frame-font-mono */
+  --_frame-default-font-mono-3920a95058: monospace;
+  font-family: var(
+    --frame-font-mono,
+    var(--_frame-default-font-mono-3920a95058)
+  );
   font-size: 0.9em;
   max-width: 320px;
   overflow: hidden;

@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 .tmp/
+
+# Local AI working artifacts
+.ai-workspace/

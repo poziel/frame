@@ -52,7 +52,17 @@ Start with getting started, configuration, and the guide for the area being chan
 
 Create a stable Frame instance per shell. Use its controllers rather than DOM queries or a second layout store. Keep business data and persistence in the host. Registration, opening, hiding, and disposal are separate operations.
 
-The proposed `.use(feature)` installer and `frame.views.primarySidebar` namespaces are not implemented. Optional Features currently expose explicit components and factories. Individual controls have their own props/events/slots; these shell guides cover how to place and coordinate content rather than every control's interactions.
+The typed `.use(moduleDescriptor)` installer and `editorModule` are implemented.
+Other module descriptors and `frame.views.primarySidebar` namespaces remain
+architectural proposals. Optional modules expose explicit components and
+factories. Individual controls have their own props/events/slots; these shell
+guides cover how to place and coordinate content.
+
+The website displays the same Markdown files used by offline readers. Browse
+the [layout articles](layouts/README.md), [component articles](components/README.md)
+and [generated public API references](reference/api.md). Their live previews and
+Playground tabs remain Vue components. Website builds also publish complete raw
+Markdown and an LLM reading index.
 
 - [Local AI agent connectors](guides/agent-connectors.md): connect the AI chat to Codex, Claude, Gemini, Copilot, or OpenCode through a native host.
 

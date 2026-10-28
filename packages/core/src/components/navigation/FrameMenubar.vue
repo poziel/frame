@@ -11,19 +11,28 @@ import '../shared/general-b.css';
 const props = withDefaults(
   defineProps<
     MenubarRootProps & {
+      /** Items rendered by the built-in composition; a default slot replaces that composition. */
       items?: FrameMenubarItem[];
+      /** Command-backed menu tree; takes precedence over the simpler items collection. */
       menus?: readonly FrameMenuItem[];
+      /** Accessible name for this component and its built-in control or region. */
       label?: string;
+      /** Maximum visible menu groups before overflow; defaults to no count limit. */
       maxVisible?: number;
+      /** Available width in pixels used to move overflowing groups into the overflow menu. */
       availableWidth?: number;
+      /** Accessible label for the overflow menu presentation. */
       popupLabel?: string;
     }
   >(),
   {maxVisible: Infinity}
 );
 const emit = defineEmits<{
+  /** Emitted when user interaction requests a new controlled value. */
   'update:modelValue': [value: string];
+  /** Emitted when a built-in menubar item action is selected. */
   action: [item: FrameMenubarAction];
+  /** Emitted with the command ID for a selected command-backed menu item. */
   execute: [id: string];
 }>();
 const root = computed(() => {
@@ -114,6 +123,20 @@ function select(item: FrameMenuItem) {
   if (item.command) emit('execute', item.command);
   emit('action', item);
 }
+defineSlots<{
+  /** Replaces all built-in menu groups and overflow presentation. */ default?(): unknown;
+  /** Additional content for one opened menu group. */ content?(
+    props: {
+    menu: {
+      value: string;
+      label: string;
+      disabled?: boolean;
+      action?: FrameMenuItem;
+      items: readonly FrameMenuItem[];
+    };
+  }
+  ): unknown;
+}>();
 </script>
 <template>
   <MenubarRoot

@@ -1,0 +1,3352 @@
+{
+  "general-accordion": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "items": [
+          {
+            "value": "profile",
+            "title": "Profile",
+            "description": "Manage the name shown in your workspace."
+          },
+          {
+            "value": "security",
+            "title": "Security",
+            "description": "Review access and sign-in preferences."
+          }
+        ],
+        "type": "single",
+        "collapsible": true,
+        "defaultValue": "profile"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "items": [
+          {
+            "value": "profile",
+            "title": "Profile",
+            "description": "Manage the name shown in your workspace."
+          },
+          {
+            "value": "security",
+            "title": "Security",
+            "description": "Review access and sign-in preferences."
+          }
+        ],
+        "type": "multiple",
+        "defaultValue": ["profile", "security"]
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "general-aspect-ratio": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "ratio": 1.7777777777777777
+      },
+      "slots": {
+        "default": "Video preview — 16:9"
+      },
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "ratio": 1
+      },
+      "slots": {
+        "default": "Artwork preview — 1:1"
+      },
+      "preview": true
+    }
+  },
+  "general-avatar": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "fallback": "JD",
+        "alt": "Jane Doe"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "src": "data:image/png;base64,invalid",
+        "fallback": "MK",
+        "alt": "Morgan Kim"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "general-collapsible": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "label": "Advanced project details"
+      },
+      "slots": {
+        "default": "Project location: /workspace/design-system"
+      },
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "label": "Build details",
+        "defaultOpen": true
+      },
+      "slots": {
+        "default": "Target: desktop. Output: application bundle."
+      },
+      "preview": true
+    }
+  },
+  "general-pagination": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "total": 120,
+        "itemsPerPage": 10,
+        "defaultPage": 1
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "total": 250,
+        "itemsPerPage": 25,
+        "defaultPage": 4
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "general-progress": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "modelValue": 65,
+        "max": 100
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "modelValue": null,
+        "max": 100
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "general-scroll-area": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "viewportLabel": "Recent project activity"
+      },
+      "slots": {
+        "default": "Recent activity\n\nProject created\n\nDesign reviewed\n\nChanges saved\n\nBuild queued\n\nBuild completed\n\nExport ready\n\nReview requested\n\nFeedback received\n\nRevision saved\n\nProject published"
+      },
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "orientation": "horizontal",
+        "viewportLabel": "Release timeline"
+      },
+      "slots": {
+        "default": "Planning → Research → Design → Prototyping → Implementation → Code review → Accessibility review → Integration testing → Packaging → Release candidate → Acceptance → Documentation → Release → Follow-up → Maintenance"
+      },
+      "preview": true
+    }
+  },
+  "general-separator": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "decorative": false,
+        "orientation": "horizontal"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "decorative": false,
+        "orientation": "vertical"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "general-tabs": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "items": [
+          {
+            "value": "overview",
+            "label": "Overview",
+            "content": "Project overview and recent changes."
+          },
+          {
+            "value": "activity",
+            "label": "Activity",
+            "content": "Recent activity in this project."
+          }
+        ],
+        "defaultValue": "overview",
+        "label": "Project sections"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "items": [
+          {
+            "value": "overview",
+            "label": "Overview",
+            "content": "Project overview and recent changes."
+          },
+          {
+            "value": "activity",
+            "label": "Activity",
+            "content": "Recent activity in this project."
+          }
+        ],
+        "defaultValue": "overview",
+        "activationMode": "manual",
+        "label": "Project sections"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "general-stepper": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "items": [
+          {
+            "step": 1,
+            "label": "Details"
+          },
+          {
+            "step": 2,
+            "label": "Review"
+          },
+          {
+            "step": 3,
+            "label": "Create"
+          }
+        ],
+        "defaultValue": 1,
+        "label": "Project setup"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "items": [
+          {
+            "step": 1,
+            "label": "Details",
+            "completed": true
+          },
+          {
+            "step": 2,
+            "label": "Review"
+          },
+          {
+            "step": 3,
+            "label": "Create"
+          }
+        ],
+        "defaultValue": 2,
+        "linear": false,
+        "label": "Project setup"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "general-toolbar": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "items": [
+          {
+            "id": "save",
+            "label": "Save",
+            "icon": "save"
+          },
+          {
+            "id": "export",
+            "label": "Export",
+            "icon": "export"
+          }
+        ],
+        "label": "Document actions"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "items": [
+          {
+            "id": "save",
+            "label": "Save",
+            "icon": "save"
+          },
+          {
+            "id": "sep",
+            "label": "",
+            "separator": true
+          },
+          {
+            "id": "publish",
+            "label": "Publish",
+            "disabled": true
+          }
+        ],
+        "label": "Document actions"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "general-tree": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "items": [
+          {
+            "id": "src",
+            "label": "Source",
+            "children": [
+              {
+                "id": "index",
+                "label": "index.ts"
+              },
+              {
+                "id": "app",
+                "label": "App.vue"
+              }
+            ]
+          },
+          {
+            "id": "readme",
+            "label": "README.md"
+          }
+        ],
+        "label": "Project files",
+        "defaultExpanded": ["src"]
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "items": [
+          {
+            "id": "src",
+            "label": "Source",
+            "children": [
+              {
+                "id": "index",
+                "label": "index.ts"
+              },
+              {
+                "id": "app",
+                "label": "App.vue"
+              }
+            ]
+          }
+        ],
+        "multiple": true,
+        "label": "Resources to export",
+        "defaultExpanded": ["src"]
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "general-splitter": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "direction": "horizontal",
+        "label": "Project panes",
+        "panels": [
+          {
+            "id": "explorer",
+            "label": "Explorer",
+            "defaultSize": 35,
+            "minSize": 20
+          },
+          {
+            "id": "editor",
+            "label": "Editor",
+            "defaultSize": 65,
+            "minSize": 30
+          }
+        ]
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "direction": "vertical",
+        "label": "Preview and output",
+        "panels": [
+          {
+            "id": "preview",
+            "label": "Preview",
+            "defaultSize": 60
+          },
+          {
+            "id": "output",
+            "label": "Output",
+            "defaultSize": 40
+          }
+        ]
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "general-navigation-menu": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "items": [
+          {
+            "value": "guides",
+            "label": "Guides",
+            "children": [
+              {
+                "value": "start",
+                "label": "Getting started",
+                "href": "#start"
+              },
+              {
+                "value": "themes",
+                "label": "Themes",
+                "href": "#themes"
+              }
+            ]
+          },
+          {
+            "value": "reference",
+            "label": "Reference",
+            "href": "#reference"
+          }
+        ],
+        "label": "Documentation navigation"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "items": [
+          {
+            "value": "project",
+            "label": "Project",
+            "children": [
+              {
+                "value": "overview",
+                "label": "Overview",
+                "href": "#overview"
+              },
+              {
+                "value": "activity",
+                "label": "Activity",
+                "href": "#activity"
+              }
+            ]
+          }
+        ],
+        "label": "Workspace navigation"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "general-menubar": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "items": [
+          {
+            "value": "file",
+            "label": "File",
+            "items": [
+              {
+                "id": "new",
+                "label": "New file",
+                "shortcut": "Ctrl+N"
+              },
+              {
+                "id": "save",
+                "label": "Save project",
+                "shortcut": "Ctrl+S"
+              },
+              {
+                "id": "remote",
+                "label": "Publish remotely",
+                "disabled": true
+              }
+            ]
+          },
+          {
+            "value": "view",
+            "label": "View",
+            "items": [
+              {
+                "id": "zoom",
+                "label": "Reset zoom"
+              }
+            ]
+          }
+        ],
+        "label": "Application menu"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "items": [
+          {
+            "value": "edit",
+            "label": "Edit",
+            "items": [
+              {
+                "id": "undo",
+                "label": "Undo",
+                "shortcut": "Ctrl+Z"
+              },
+              {
+                "id": "redo",
+                "label": "Redo",
+                "shortcut": "Ctrl+Y"
+              }
+            ]
+          }
+        ],
+        "label": "Edit menu"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "general-dialog": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "title": "Project details",
+        "description": "Review the project before continuing.",
+        "triggerLabel": "Review project"
+      },
+      "slots": {
+        "default": "Project: Design system. Target: Desktop."
+      },
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "title": "Reference details",
+        "description": "Supporting information for the current task.",
+        "triggerLabel": "Open reference",
+        "modal": false
+      },
+      "slots": {
+        "default": "Reference notes supplied by the host."
+      },
+      "preview": true
+    }
+  },
+  "general-alert-dialog": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "title": "Delete this draft?",
+        "description": "Deleting the draft cannot be undone.",
+        "triggerLabel": "Delete draft",
+        "confirmLabel": "Delete draft"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "title": "Replace existing export?",
+        "description": "A file with this name already exists.",
+        "triggerLabel": "Replace export",
+        "confirmLabel": "Replace file"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "general-drawer": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "title": "Project activity",
+        "description": "Recent changes in this workspace.",
+        "triggerLabel": "Show activity"
+      },
+      "slots": {
+        "default": "Design reviewed. Changes saved. Build ready."
+      },
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "title": "Export details",
+        "description": "Review output options before exporting.",
+        "triggerLabel": "Show export details"
+      },
+      "slots": {
+        "default": "Format: archive. Include: source and assets."
+      },
+      "preview": true
+    }
+  },
+  "general-popover": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "triggerLabel": "Project summary"
+      },
+      "slots": {
+        "default": "Design system · 12 files · Saved just now"
+      },
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "triggerLabel": "About exporting"
+      },
+      "slots": {
+        "default": "Exports include the current saved project state."
+      },
+      "preview": true
+    }
+  },
+  "general-hover-card": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "triggerLabel": "Jane Doe"
+      },
+      "slots": {
+        "default": "Jane Doe · Designer · Working on the component library."
+      },
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "triggerLabel": "Design system"
+      },
+      "slots": {
+        "default": "Shared project · 12 contributors · Updated today."
+      },
+      "preview": true
+    }
+  },
+  "general-dropdown-menu": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "triggerLabel": "Project actions",
+        "items": [
+          {
+            "id": "new",
+            "label": "New file",
+            "shortcut": "Ctrl+N"
+          },
+          {
+            "id": "save",
+            "label": "Save project",
+            "shortcut": "Ctrl+S"
+          },
+          {
+            "id": "remote",
+            "label": "Publish remotely",
+            "disabled": true
+          }
+        ]
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "triggerLabel": "Export",
+        "items": [
+          {
+            "id": "archive",
+            "label": "Download archive"
+          },
+          {
+            "id": "clipboard",
+            "label": "Copy summary"
+          }
+        ]
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "general-context-menu": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "triggerLabel": "Right-click project",
+        "items": [
+          {
+            "id": "new",
+            "label": "New file",
+            "shortcut": "Ctrl+N"
+          },
+          {
+            "id": "save",
+            "label": "Save project",
+            "shortcut": "Ctrl+S"
+          },
+          {
+            "id": "remote",
+            "label": "Publish remotely",
+            "disabled": true
+          }
+        ]
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "triggerLabel": "Right-click file",
+        "items": [
+          {
+            "id": "open",
+            "label": "Open file"
+          },
+          {
+            "id": "rename",
+            "label": "Rename file"
+          }
+        ]
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "general-toast": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "title": "Project saved",
+        "description": "Your changes were saved successfully.",
+        "duration": 8000,
+        "defaultOpen": false
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "title": "Draft archived",
+        "description": "The draft moved to the archive.",
+        "duration": 8000,
+        "defaultOpen": false,
+        "actionLabel": "Undo",
+        "actionAltText": "Restore the draft from the archive."
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "autocomplete": {
+    "free-text": {
+      "variant": "free-text",
+      "values": {
+        "modelValue": "",
+        "options": ["Apple", "Apricot", "Banana", "Blueberry", "Grapes"],
+        "label": "Fruit",
+        "placeholder": "Type or choose a fruit",
+        "openOnFocus": true
+      },
+      "slots": {},
+      "preview": true
+    },
+    "matching": {
+      "variant": "matching",
+      "values": {
+        "modelValue": "ap",
+        "options": ["Apple", "Apricot", "Banana", "Blueberry", "Grapes"],
+        "label": "Fruit search",
+        "openOnFocus": true
+      },
+      "slots": {},
+      "preview": true
+    },
+    "focus-behavior": {
+      "variant": "focus-behavior",
+      "values": {
+        "modelValue": "",
+        "options": ["Apple", "Apricot", "Banana", "Blueberry", "Grapes"],
+        "label": "Browse suggestions",
+        "openOnFocus": true,
+        "openOnClick": true
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "field": {
+    "description": {
+      "variant": "description",
+      "values": {
+        "name": "projectName",
+        "label": "Project name",
+        "description": "Use a short, recognizable name."
+      },
+      "slots": {},
+      "preview": true
+    },
+    "required": {
+      "variant": "required",
+      "values": {
+        "name": "projectName",
+        "label": "Required name",
+        "required": true,
+        "validationMode": "onBlur",
+        "description": "Clear this value, then leave the field."
+      },
+      "slots": {},
+      "preview": true
+    },
+    "external-error": {
+      "variant": "external-error",
+      "values": {
+        "name": "projectName",
+        "label": "Project name",
+        "error": "This project name is already taken."
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "input-group": {
+    "currency": {
+      "variant": "currency",
+      "values": {},
+      "slots": {
+        "prefix": "$",
+        "suffix": "USD"
+      },
+      "preview": true
+    },
+    "unit": {
+      "variant": "unit",
+      "values": {},
+      "slots": {
+        "suffix": "kg"
+      },
+      "preview": true
+    }
+  },
+  "form": {
+    "submit": {
+      "variant": "submit",
+      "values": {},
+      "slots": {
+        "default": "Submit project"
+      },
+      "preview": true
+    },
+    "server-error": {
+      "variant": "server-error",
+      "values": {
+        "errors": {
+          "projectName": "This name is already registered."
+        }
+      },
+      "slots": {
+        "default": "Save project"
+      },
+      "preview": true
+    },
+    "blur": {
+      "variant": "blur",
+      "values": {
+        "validationMode": "onBlur"
+      },
+      "slots": {
+        "default": "Save changes"
+      },
+      "preview": true
+    }
+  },
+  "rating": {
+    "fractional": {
+      "variant": "fractional",
+      "values": {
+        "modelValue": 3.5,
+        "length": 5,
+        "step": 0.5
+      },
+      "slots": {},
+      "preview": true
+    },
+    "preview": {
+      "variant": "preview",
+      "values": {
+        "modelValue": 2,
+        "length": 5,
+        "hoverable": true
+      },
+      "slots": {},
+      "preview": true
+    },
+    "clear": {
+      "variant": "clear",
+      "values": {
+        "modelValue": 4,
+        "length": 5,
+        "clearable": true
+      },
+      "slots": {},
+      "preview": true
+    },
+    "symbols": {
+      "variant": "symbols",
+      "values": {
+        "modelValue": 3,
+        "length": 5
+      },
+      "slots": {
+        "default": "♥"
+      },
+      "preview": true
+    }
+  },
+  "tag-group": {
+    "browse": {
+      "variant": "browse",
+      "values": {
+        "selectionMode": "none",
+        "items": [
+          {
+            "value": "apple",
+            "label": "Apple"
+          },
+          {
+            "value": "banana",
+            "label": "Banana"
+          },
+          {
+            "value": "blueberry",
+            "label": "Blueberry"
+          },
+          {
+            "value": "grapes",
+            "label": "Grapes"
+          }
+        ]
+      },
+      "slots": {},
+      "preview": true
+    },
+    "single": {
+      "variant": "single",
+      "values": {
+        "modelValue": "apple",
+        "selectionMode": "single",
+        "items": [
+          {
+            "value": "apple",
+            "label": "Apple"
+          },
+          {
+            "value": "banana",
+            "label": "Banana"
+          },
+          {
+            "value": "blueberry",
+            "label": "Blueberry"
+          },
+          {
+            "value": "grapes",
+            "label": "Grapes"
+          }
+        ]
+      },
+      "slots": {},
+      "preview": true
+    },
+    "multiple": {
+      "variant": "multiple",
+      "values": {
+        "modelValue": ["apple", "grapes"],
+        "selectionMode": "multiple",
+        "items": [
+          {
+            "value": "apple",
+            "label": "Apple"
+          },
+          {
+            "value": "banana",
+            "label": "Banana"
+          },
+          {
+            "value": "blueberry",
+            "label": "Blueberry"
+          },
+          {
+            "value": "grapes",
+            "label": "Grapes"
+          }
+        ]
+      },
+      "slots": {},
+      "preview": true
+    },
+    "required-selection": {
+      "variant": "required-selection",
+      "values": {
+        "modelValue": "apple",
+        "selectionMode": "single",
+        "disallowEmptySelection": true,
+        "items": [
+          {
+            "value": "apple",
+            "label": "Apple"
+          },
+          {
+            "value": "banana",
+            "label": "Banana"
+          },
+          {
+            "value": "blueberry",
+            "label": "Blueberry"
+          },
+          {
+            "value": "grapes",
+            "label": "Grapes"
+          }
+        ]
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "label": {
+    "association": {
+      "variant": "association",
+      "values": {
+        "for": "guide-name"
+      },
+      "slots": {
+        "default": "Project name"
+      },
+      "preview": true
+    }
+  },
+  "checkbox-group": {
+    "array": {
+      "variant": "array",
+      "values": {
+        "modelValue": ["apple", "grapes"],
+        "options": [
+          {
+            "value": "apple",
+            "label": "Apple"
+          },
+          {
+            "value": "banana",
+            "label": "Banana"
+          },
+          {
+            "value": "blueberry",
+            "label": "Blueberry"
+          },
+          {
+            "value": "grapes",
+            "label": "Grapes"
+          }
+        ],
+        "label": "Fruit selection"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "unavailable": {
+      "variant": "unavailable",
+      "values": {
+        "modelValue": ["apple"],
+        "options": [
+          {
+            "value": "apple",
+            "label": "Apple"
+          },
+          {
+            "value": "banana",
+            "label": "Banana",
+            "disabled": true
+          },
+          {
+            "value": "grapes",
+            "label": "Grapes"
+          }
+        ],
+        "label": "Available fruit"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "separators": {
+      "variant": "separators",
+      "values": {
+        "modelValue": ["apple"],
+        "options": [
+          {
+            "value": "apple",
+            "label": "Apple"
+          },
+          {
+            "value": "banana",
+            "label": "Banana"
+          },
+          {
+            "type": "separator",
+            "id": "berries"
+          },
+          {
+            "value": "blueberry",
+            "label": "Blueberry"
+          }
+        ],
+        "label": "Fruit and berries"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "color-area": {
+    "hsb-plane": {
+      "variant": "hsb-plane",
+      "values": {
+        "modelValue": "#0078d4",
+        "colorSpace": "hsb",
+        "xChannel": "saturation",
+        "yChannel": "brightness"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "hsl-plane": {
+      "variant": "hsl-plane",
+      "values": {
+        "modelValue": "#16a34a",
+        "colorSpace": "hsl",
+        "xChannel": "saturation",
+        "yChannel": "lightness"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "rgb-plane": {
+      "variant": "rgb-plane",
+      "values": {
+        "modelValue": "#8078d4",
+        "colorSpace": "rgb",
+        "xChannel": "red",
+        "yChannel": "green"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "color-hsv-rectangle": {
+    "compact": {
+      "variant": "compact",
+      "values": {
+        "modelValue": "#0078d4",
+        "size": 240
+      },
+      "slots": {},
+      "preview": true
+    },
+    "larger": {
+      "variant": "larger",
+      "values": {
+        "modelValue": "#0078d4",
+        "size": 360
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "color-hsv-wheel": {
+    "compact": {
+      "variant": "compact",
+      "values": {
+        "modelValue": "#0078d4",
+        "size": 240
+      },
+      "slots": {},
+      "preview": true
+    },
+    "larger": {
+      "variant": "larger",
+      "values": {
+        "modelValue": "#0078d4",
+        "size": 360
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "color-vhs-circle": {
+    "compact": {
+      "variant": "compact",
+      "values": {
+        "modelValue": "#0078d4",
+        "size": 240
+      },
+      "slots": {},
+      "preview": true
+    },
+    "larger": {
+      "variant": "larger",
+      "values": {
+        "modelValue": "#0078d4",
+        "size": 360
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "color-field": {
+    "hex-input": {
+      "variant": "hex-input",
+      "values": {
+        "modelValue": "#0078d4"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "hue-input": {
+      "variant": "hue-input",
+      "values": {
+        "modelValue": "#0078d4",
+        "colorSpace": "hsb",
+        "channel": "hue",
+        "step": 5
+      },
+      "slots": {},
+      "preview": true
+    },
+    "red-input": {
+      "variant": "red-input",
+      "values": {
+        "modelValue": "#8078d4",
+        "colorSpace": "rgb",
+        "channel": "red",
+        "step": 1
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "color-slider": {
+    "hue-track": {
+      "variant": "hue-track",
+      "values": {
+        "modelValue": "#0078d4",
+        "channel": "hue",
+        "colorSpace": "hsb"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "alpha-track": {
+      "variant": "alpha-track",
+      "values": {
+        "modelValue": "rgba(0, 120, 212, 0.6)",
+        "channel": "alpha",
+        "step": 0.05
+      },
+      "slots": {},
+      "preview": true
+    },
+    "vertical-track": {
+      "variant": "vertical-track",
+      "values": {
+        "modelValue": "#16a34a",
+        "colorSpace": "hsl",
+        "channel": "lightness",
+        "orientation": "vertical"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "color-swatch": {
+    "named-sample": {
+      "variant": "named-sample",
+      "values": {
+        "color": "#0078d4",
+        "label": "Application accent"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "alpha-sample": {
+      "variant": "alpha-sample",
+      "values": {
+        "color": "rgba(0, 120, 212, 0.5)",
+        "label": "Half-opacity accent"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "color-swatch-picker": {
+    "palette-selection": {
+      "variant": "palette-selection",
+      "values": {
+        "modelValue": "#0078d4",
+        "colors": ["#0078d4", "#16a34a", "#e05252", "#a855f7"]
+      },
+      "slots": {},
+      "preview": true
+    },
+    "vertical-palette": {
+      "variant": "vertical-palette",
+      "values": {
+        "modelValue": "#16a34a",
+        "colors": ["#0078d4", "#16a34a", "#e05252", "#a855f7"],
+        "orientation": "vertical"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "combobox": {
+    "search": {
+      "variant": "search",
+      "values": {
+        "modelValue": "apple",
+        "options": [
+          {
+            "value": "apple",
+            "label": "Apple"
+          },
+          {
+            "value": "banana",
+            "label": "Banana"
+          },
+          {
+            "value": "blueberry",
+            "label": "Blueberry"
+          },
+          {
+            "value": "grapes",
+            "label": "Grapes"
+          }
+        ],
+        "label": "Fruit",
+        "placeholder": "Search fruit"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "details": {
+      "variant": "details",
+      "values": {
+        "modelValue": "standard",
+        "options": [
+          {
+            "value": "standard",
+            "label": "Standard",
+            "detail": "Included"
+          },
+          {
+            "value": "express",
+            "label": "Express",
+            "detail": "Next day"
+          },
+          {
+            "value": "international",
+            "label": "International",
+            "detail": "Unavailable",
+            "disabled": true
+          }
+        ],
+        "label": "Delivery"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "sections": {
+      "variant": "sections",
+      "values": {
+        "modelValue": "apple",
+        "options": [
+          {
+            "value": "apple",
+            "label": "Apple"
+          },
+          {
+            "value": "banana",
+            "label": "Banana"
+          },
+          {
+            "type": "separator",
+            "id": "berries"
+          },
+          {
+            "value": "blueberry",
+            "label": "Blueberry"
+          }
+        ],
+        "label": "Fruit or berry"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "editable": {
+    "inline": {
+      "variant": "inline",
+      "values": {
+        "modelValue": "Reka UI",
+        "label": "Project title"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "enter-only": {
+      "variant": "enter-only",
+      "values": {
+        "modelValue": "Explicit commit",
+        "label": "Enter-only title",
+        "activationMode": "dblclick",
+        "submitMode": "enter"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "empty": {
+      "variant": "empty",
+      "values": {
+        "modelValue": "",
+        "placeholder": "Click to add a title",
+        "label": "Untitled project"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "listbox": {
+    "single": {
+      "variant": "single",
+      "values": {
+        "modelValue": "apple",
+        "options": [
+          {
+            "value": "apple",
+            "label": "Apple"
+          },
+          {
+            "value": "banana",
+            "label": "Banana"
+          },
+          {
+            "value": "blueberry",
+            "label": "Blueberry"
+          },
+          {
+            "value": "grapes",
+            "label": "Grapes"
+          }
+        ],
+        "label": "Fruit"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "multiple": {
+      "variant": "multiple",
+      "values": {
+        "modelValue": ["apple", "grapes"],
+        "multiple": true,
+        "options": [
+          {
+            "value": "apple",
+            "label": "Apple"
+          },
+          {
+            "value": "banana",
+            "label": "Banana"
+          },
+          {
+            "value": "blueberry",
+            "label": "Blueberry"
+          },
+          {
+            "value": "grapes",
+            "label": "Grapes"
+          }
+        ],
+        "label": "Fruit selection"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "disabled-option": {
+      "variant": "disabled-option",
+      "values": {
+        "modelValue": "apple",
+        "options": [
+          {
+            "value": "apple",
+            "label": "Apple"
+          },
+          {
+            "value": "banana",
+            "label": "Banana",
+            "disabled": true
+          },
+          {
+            "value": "grapes",
+            "label": "Grapes"
+          }
+        ],
+        "label": "Available fruit"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "number-field": {
+    "bounds": {
+      "variant": "bounds",
+      "values": {
+        "modelValue": 5,
+        "min": 1,
+        "max": 10,
+        "label": "Quantity"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "compact": {
+      "variant": "compact",
+      "values": {
+        "modelValue": 5,
+        "min": 0,
+        "max": 10,
+        "label": "Compact quantity",
+        "size": "compact",
+        "controls": "buttons"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "plain": {
+      "variant": "plain",
+      "values": {
+        "modelValue": 5,
+        "min": 0,
+        "max": 10,
+        "label": "Plain quantity",
+        "controls": "none"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "stacked": {
+      "variant": "stacked",
+      "values": {
+        "modelValue": 5,
+        "min": 0,
+        "max": 10,
+        "label": "Stacked quantity",
+        "controls": "stacked",
+        "size": "compact"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "fractional": {
+      "variant": "fractional",
+      "values": {
+        "modelValue": 1.5,
+        "min": 0,
+        "max": 4,
+        "step": 0.25,
+        "label": "Measurement"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "coarse": {
+      "variant": "coarse",
+      "values": {
+        "modelValue": 100,
+        "min": 50,
+        "max": 200,
+        "step": 25,
+        "label": "Zoom percent"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "scrub-field": {
+    "size": {
+      "variant": "size",
+      "values": {
+        "modelValue": 12,
+        "label": "Size",
+        "suffix": " px",
+        "min": 1,
+        "max": 256,
+        "step": 1
+      },
+      "slots": {},
+      "preview": true
+    },
+    "opacity": {
+      "variant": "opacity",
+      "values": {
+        "modelValue": 80,
+        "label": "Opacity",
+        "suffix": "%",
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "pin-input": {
+    "paste": {
+      "variant": "paste",
+      "values": {
+        "modelValue": [],
+        "length": 6,
+        "otp": true,
+        "label": "Verification code"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "length": {
+      "variant": "length",
+      "values": {
+        "modelValue": ["1", "2"],
+        "length": 4,
+        "label": "Access code"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "mask": {
+      "variant": "mask",
+      "values": {
+        "modelValue": [],
+        "length": 6,
+        "mask": true,
+        "label": "Private code"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "radio-group": {
+    "exclusive": {
+      "variant": "exclusive",
+      "values": {
+        "modelValue": "comfortable",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "comfortable",
+            "label": "Comfortable"
+          },
+          {
+            "value": "compact",
+            "label": "Compact"
+          }
+        ],
+        "label": "Density"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "details": {
+      "variant": "details",
+      "values": {
+        "modelValue": "standard",
+        "options": [
+          {
+            "value": "standard",
+            "label": "Standard",
+            "detail": "Included"
+          },
+          {
+            "value": "express",
+            "label": "Express",
+            "detail": "Next day"
+          },
+          {
+            "value": "international",
+            "label": "International",
+            "detail": "Unavailable",
+            "disabled": true
+          }
+        ],
+        "label": "Delivery"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "switch": {
+    "preference": {
+      "variant": "preference",
+      "values": {
+        "modelValue": false,
+        "label": "Airplane mode"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "label-slot": {
+      "variant": "label-slot",
+      "values": {
+        "modelValue": true
+      },
+      "slots": {
+        "default": "Enable automatic saving"
+      },
+      "preview": true
+    }
+  },
+  "tags-input": {
+    "add": {
+      "variant": "add",
+      "values": {
+        "modelValue": ["Apple", "Banana"],
+        "label": "Fruit tags",
+        "placeholder": "Add a fruit"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "remove": {
+      "variant": "remove",
+      "values": {
+        "modelValue": ["Apple", "Banana", "Blueberry"],
+        "label": "Editable tags",
+        "placeholder": "Add another"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "toggle": {
+    "pressed": {
+      "variant": "pressed",
+      "values": {
+        "modelValue": false,
+        "label": "Bold"
+      },
+      "slots": {
+        "default": "Bold"
+      },
+      "preview": true
+    }
+  },
+  "toggle-group": {
+    "single": {
+      "variant": "single",
+      "values": {
+        "modelValue": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "label": "Alignment"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "multiple": {
+      "variant": "multiple",
+      "values": {
+        "modelValue": ["bold"],
+        "multiple": true,
+        "options": [
+          {
+            "value": "bold",
+            "label": "Bold"
+          },
+          {
+            "value": "italic",
+            "label": "Italic"
+          },
+          {
+            "value": "underline",
+            "label": "Underline"
+          }
+        ],
+        "label": "Formatting"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "disabled-choice": {
+      "variant": "disabled-choice",
+      "values": {
+        "modelValue": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right",
+            "disabled": true
+          }
+        ],
+        "label": "Allowed alignment"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "calendar": {
+    "multiple-days": {
+      "variant": "multiple-days",
+      "values": {
+        "modelValue": ["2026-10-21", "2026-10-26"],
+        "multiple": true,
+        "label": "Training days"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "two-months": {
+      "variant": "two-months",
+      "values": {
+        "modelValue": "2026-10-21",
+        "numberOfMonths": 2,
+        "fixedWeeks": true,
+        "pagedNavigation": true,
+        "label": "Travel date"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "localized-week": {
+      "variant": "localized-week",
+      "values": {
+        "modelValue": "2026-10-21",
+        "locale": "fr-FR",
+        "weekStartsOn": 1,
+        "label": "Date du rendez-vous"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "range-calendar": {
+    "stay-dates": {
+      "variant": "stay-dates",
+      "values": {
+        "modelValue": {
+          "start": "2026-10-21",
+          "end": "2026-10-26"
+        },
+        "label": "Stay dates"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "bounded-stay": {
+      "variant": "bounded-stay",
+      "values": {
+        "modelValue": {
+          "start": "2026-10-21",
+          "end": "2026-10-26"
+        },
+        "minValue": "2026-10-01",
+        "maxValue": "2026-11-30",
+        "label": "Seasonal booking"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "adjacent-months": {
+      "variant": "adjacent-months",
+      "values": {
+        "modelValue": {
+          "start": "2026-10-28",
+          "end": "2026-11-04"
+        },
+        "numberOfMonths": 2,
+        "fixedWeeks": true,
+        "label": "Cross-month stay"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "date-field": {
+    "keyboard-date": {
+      "variant": "keyboard-date",
+      "values": {
+        "modelValue": "2026-10-21",
+        "label": "Appointment date",
+        "locale": "en-US"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "date-time": {
+      "variant": "date-time",
+      "values": {
+        "modelValue": "2026-10-21T14:30:00",
+        "granularity": "minute",
+        "hourCycle": 24,
+        "label": "Appointment date and time"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "localized-entry": {
+      "variant": "localized-entry",
+      "values": {
+        "modelValue": "2026-10-21",
+        "locale": "fr-FR",
+        "label": "Date du rendez-vous"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "date-picker": {
+    "typed-or-picked": {
+      "variant": "typed-or-picked",
+      "values": {
+        "modelValue": "2026-10-21",
+        "label": "Appointment date",
+        "triggerLabel": "Open appointment calendar"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "booking-limits": {
+      "variant": "booking-limits",
+      "values": {
+        "modelValue": "2026-10-21",
+        "minValue": "2026-10-01",
+        "maxValue": "2026-11-30",
+        "label": "Booking date"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "date-and-time": {
+      "variant": "date-and-time",
+      "values": {
+        "modelValue": "2026-10-21T14:30:00",
+        "granularity": "minute",
+        "hourCycle": 24,
+        "label": "Appointment date and time"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "date-range-field": {
+    "typed-stay": {
+      "variant": "typed-stay",
+      "values": {
+        "modelValue": {
+          "start": "2026-10-21",
+          "end": "2026-10-26"
+        },
+        "label": "Booking dates"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "meeting-interval": {
+      "variant": "meeting-interval",
+      "values": {
+        "modelValue": {
+          "start": "2026-10-21T09:00:00",
+          "end": "2026-10-21T11:30:00"
+        },
+        "granularity": "minute",
+        "hourCycle": 24,
+        "label": "Meeting interval"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "localized-interval": {
+      "variant": "localized-interval",
+      "values": {
+        "modelValue": {
+          "start": "2026-10-21",
+          "end": "2026-10-26"
+        },
+        "locale": "fr-FR",
+        "label": "Dates du séjour"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "date-range-picker": {
+    "booking-range": {
+      "variant": "booking-range",
+      "values": {
+        "modelValue": {
+          "start": "2026-10-21",
+          "end": "2026-10-26"
+        },
+        "label": "Booking dates",
+        "triggerLabel": "Open booking calendar"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "cross-month": {
+      "variant": "cross-month",
+      "values": {
+        "modelValue": {
+          "start": "2026-10-28",
+          "end": "2026-11-04"
+        },
+        "numberOfMonths": 2,
+        "fixedWeeks": true,
+        "label": "Cross-month booking"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "season": {
+      "variant": "season",
+      "values": {
+        "modelValue": {
+          "start": "2026-10-21",
+          "end": "2026-10-26"
+        },
+        "minValue": "2026-10-01",
+        "maxValue": "2026-11-30",
+        "label": "Available booking season"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "time-field": {
+    "twelve-hour": {
+      "variant": "twelve-hour",
+      "values": {
+        "modelValue": "09:30:00",
+        "locale": "en-US",
+        "hourCycle": 12,
+        "label": "Reminder time"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "seconds": {
+      "variant": "seconds",
+      "values": {
+        "modelValue": "09:30:15",
+        "hourCycle": 24,
+        "granularity": "second",
+        "label": "Precise schedule"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "time-bounds": {
+      "variant": "time-bounds",
+      "values": {
+        "modelValue": "09:30:00",
+        "minValue": "09:00:00",
+        "maxValue": "18:00:00",
+        "hourCycle": 24,
+        "label": "Office schedule"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "time-range-field": {
+    "twelve-hour": {
+      "variant": "twelve-hour",
+      "values": {
+        "modelValue": {
+          "start": "09:30:00",
+          "end": "17:00:00"
+        },
+        "locale": "en-US",
+        "hourCycle": 12,
+        "label": "Opening hours"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "seconds": {
+      "variant": "seconds",
+      "values": {
+        "modelValue": {
+          "start": "09:30:15",
+          "end": "10:00:45"
+        },
+        "hourCycle": 24,
+        "granularity": "second",
+        "label": "Precise schedule"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "time-bounds": {
+      "variant": "time-bounds",
+      "values": {
+        "modelValue": {
+          "start": "09:30:00",
+          "end": "17:00:00"
+        },
+        "minValue": "09:00:00",
+        "maxValue": "18:00:00",
+        "hourCycle": 24,
+        "label": "Office schedule"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "month-picker": {
+    "report-period": {
+      "variant": "report-period",
+      "values": {
+        "modelValue": "2026-01-01",
+        "label": "Reporting period"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "available-history": {
+      "variant": "available-history",
+      "values": {
+        "modelValue": "2026-01-01",
+        "minValue": "2024-01-01",
+        "maxValue": "2029-12-31",
+        "label": "Available reports"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "localized-months": {
+      "variant": "localized-months",
+      "values": {
+        "modelValue": "2026-01-01",
+        "locale": "fr-FR",
+        "label": "Période du rapport"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "comparison-periods": {
+      "variant": "comparison-periods",
+      "values": {
+        "modelValue": ["2025-01-01", "2025-06-01"],
+        "multiple": true,
+        "label": "Comparison periods"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "month-range-picker": {
+    "report-period": {
+      "variant": "report-period",
+      "values": {
+        "modelValue": {
+          "start": "2026-01-01",
+          "end": "2026-06-01"
+        },
+        "label": "Reporting period"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "available-history": {
+      "variant": "available-history",
+      "values": {
+        "modelValue": {
+          "start": "2026-01-01",
+          "end": "2026-06-01"
+        },
+        "minValue": "2024-01-01",
+        "maxValue": "2029-12-31",
+        "label": "Available reports"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "localized-months": {
+      "variant": "localized-months",
+      "values": {
+        "modelValue": {
+          "start": "2026-01-01",
+          "end": "2026-06-01"
+        },
+        "locale": "fr-FR",
+        "label": "Période du rapport"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "year-picker": {
+    "report-period": {
+      "variant": "report-period",
+      "values": {
+        "modelValue": "2026-01-01",
+        "label": "Reporting period"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "available-history": {
+      "variant": "available-history",
+      "values": {
+        "modelValue": "2026-01-01",
+        "minValue": "2024-01-01",
+        "maxValue": "2029-12-31",
+        "label": "Available reports"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "year-page": {
+      "variant": "year-page",
+      "values": {
+        "modelValue": "2026-01-01",
+        "yearsPerPage": 6,
+        "label": "Reporting years"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "comparison-periods": {
+      "variant": "comparison-periods",
+      "values": {
+        "modelValue": ["2025-01-01", "2027-01-01"],
+        "multiple": true,
+        "label": "Comparison periods"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "year-range-picker": {
+    "report-period": {
+      "variant": "report-period",
+      "values": {
+        "modelValue": {
+          "start": "2026-01-01",
+          "end": "2028-01-01"
+        },
+        "label": "Reporting period"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "available-history": {
+      "variant": "available-history",
+      "values": {
+        "modelValue": {
+          "start": "2026-01-01",
+          "end": "2028-01-01"
+        },
+        "minValue": "2024-01-01",
+        "maxValue": "2029-12-31",
+        "label": "Available reports"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "year-page": {
+      "variant": "year-page",
+      "values": {
+        "modelValue": {
+          "start": "2026-01-01",
+          "end": "2028-01-01"
+        },
+        "yearsPerPage": 6,
+        "label": "Reporting years"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "file-upload": {
+    "basic": {
+      "variant": "default",
+      "preview": true
+    }
+  },
+  "file-drop-zone": {
+    "basic": {
+      "variant": "default",
+      "preview": true
+    },
+    "overlay": {
+      "variant": "overlay",
+      "preview": true
+    }
+  },
+  "ai-prompt": {
+    "basic": {
+      "variant": "basic",
+      "preview": true
+    },
+    "attachments": {
+      "variant": "attachments",
+      "preview": false
+    },
+    "working": {
+      "variant": "working",
+      "preview": false
+    }
+  },
+  "ai-chat": {
+    "basic": {
+      "variant": "basic",
+      "preview": true
+    },
+    "view": {
+      "variant": "view",
+      "preview": false
+    }
+  },
+  "ai-history": {
+    "basic": {
+      "variant": "basic",
+      "preview": true
+    },
+    "actions": {
+      "variant": "actions",
+      "preview": false
+    }
+  },
+  "universal-viewer": {
+    "basic": {
+      "variant": "default",
+      "preview": true
+    }
+  },
+  "code-editor": {
+    "basic": {
+      "variant": "default",
+      "preview": true
+    },
+    "configured": {
+      "variant": "configured",
+      "values": {
+        "modelValue": "manual",
+        "label": "Example control",
+        "theme": "aurora-x"
+      },
+      "preview": true
+    }
+  },
+  "terminal": {
+    "basic": {
+      "variant": "default",
+      "preview": true
+    },
+    "configured": {
+      "variant": "configured",
+      "values": {
+        "terminal": "@terminal",
+        "label": "Local terminal"
+      },
+      "preview": true
+    }
+  },
+  "code-block": {
+    "original-playground": {
+      "variant": "default",
+      "preview": true
+    },
+    "read-source": {
+      "variant": "read-source",
+      "values": {
+        "code": "export function greet(name: string) {\n  return `Hello, ${name}`;\n}",
+        "language": "typescript",
+        "lineNumbers": true,
+        "label": "Greeting source"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "review-lines": {
+      "variant": "review-lines",
+      "values": {
+        "code": "const enabled = true;\nconst retries = 3;\nstart({ enabled, retries });",
+        "language": "typescript",
+        "lineNumbers": true,
+        "startLine": 40,
+        "highlightedLines": [41],
+        "label": "Configuration excerpt"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "wrap-config": {
+      "variant": "wrap-config",
+      "values": {
+        "code": "{\"workspace\":\"design-system\",\"description\":\"A workspace shared by the interface and application teams\"}",
+        "language": "json",
+        "wrap": true,
+        "copyable": true,
+        "label": "Workspace configuration"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "navigation": {
+    "basic": {
+      "variant": "default",
+      "preview": true
+    },
+    "configured": {
+      "variant": "configured",
+      "values": {
+        "frame": "@frame",
+        "titleText": "Example"
+      },
+      "preview": true
+    }
+  },
+  "ai-conversation": {
+    "basic": {
+      "variant": "basic",
+      "preview": true
+    },
+    "events": {
+      "variant": "events",
+      "preview": false
+    }
+  },
+  "loader": {
+    "original-playground": {
+      "variant": "default",
+      "preview": true
+    },
+    "inline-status": {
+      "variant": "inline-status",
+      "values": {
+        "variant": "ring",
+        "size": 24,
+        "label": "Saving project"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "large-progress": {
+      "variant": "large-progress",
+      "values": {
+        "variant": "tailspin",
+        "size": 40,
+        "label": "Loading workspace"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "quiet-motion": {
+      "variant": "quiet-motion",
+      "values": {
+        "variant": "ring",
+        "size": 32,
+        "speed": 0,
+        "label": "Waiting for connection"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "loading": {
+    "original-playground": {
+      "variant": "default",
+      "preview": true
+    },
+    "load-region": {
+      "variant": "load-region",
+      "values": {
+        "active": true,
+        "text": "Loading workspace",
+        "variant": "ring"
+      },
+      "slots": {
+        "default": "Workspace content remains mounted."
+      },
+      "preview": true
+    },
+    "ready-region": {
+      "variant": "ready-region",
+      "values": {
+        "active": false,
+        "text": "Loading workspace"
+      },
+      "slots": {
+        "default": "Workspace is ready."
+      },
+      "preview": true
+    },
+    "text-status": {
+      "variant": "text-status",
+      "values": {
+        "active": true,
+        "showLoader": false,
+        "text": "Waiting for a response…"
+      },
+      "slots": {
+        "default": "Application content"
+      },
+      "preview": true
+    }
+  },
+  "buttons": {
+    "primary-action": {
+      "variant": "primary-action",
+      "values": {
+        "variant": "primary",
+        "icon": "check"
+      },
+      "slots": {
+        "default": "Create project"
+      },
+      "preview": true
+    },
+    "secondary-action": {
+      "variant": "secondary-action",
+      "values": {
+        "variant": "secondary"
+      },
+      "slots": {
+        "default": "Save draft"
+      },
+      "preview": true
+    },
+    "quiet-action": {
+      "variant": "quiet-action",
+      "values": {
+        "variant": "ghost",
+        "icon": "refresh"
+      },
+      "slots": {
+        "default": "Refresh preview"
+      },
+      "preview": true
+    }
+  },
+  "icon-buttons": {
+    "toolbar-save": {
+      "variant": "toolbar-save",
+      "values": {
+        "label": "Save project",
+        "icon": "save",
+        "shortcut": "Ctrl+S"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "inspect-history": {
+      "variant": "inspect-history",
+      "values": {
+        "label": "History",
+        "icon": "history",
+        "tooltip": "Review recent workspace changes",
+        "tooltipPlacement": "right"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "larger-action": {
+      "variant": "larger-action",
+      "values": {
+        "label": "Add workspace",
+        "icon": "add",
+        "size": 36,
+        "iconSize": 22
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "text-input": {
+    "original-playground": {
+      "variant": "default",
+      "preview": true
+    },
+    "workspace-name": {
+      "variant": "workspace-name",
+      "values": {
+        "modelValue": "Design workspace",
+        "type": "text",
+        "placeholder": "Workspace name"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "filter-files": {
+      "variant": "filter-files",
+      "values": {
+        "modelValue": "",
+        "type": "search",
+        "placeholder": "Filter files…"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "numeric-limit": {
+      "variant": "numeric-limit",
+      "values": {
+        "modelValue": 25,
+        "type": "number",
+        "placeholder": "Maximum results"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "checkbox": {
+    "boolean": {
+      "variant": "boolean",
+      "values": {
+        "modelValue": false,
+        "label": "Accept terms and conditions"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "label-content": {
+      "variant": "label-content",
+      "values": {
+        "modelValue": true
+      },
+      "slots": {
+        "default": "Include release notes in this export"
+      },
+      "preview": true
+    }
+  },
+  "select": {
+    "typeahead": {
+      "variant": "typeahead",
+      "values": {
+        "modelValue": "apple",
+        "options": [
+          {
+            "value": "apple",
+            "label": "Apple"
+          },
+          {
+            "value": "banana",
+            "label": "Banana"
+          },
+          {
+            "value": "blueberry",
+            "label": "Blueberry"
+          },
+          {
+            "value": "grapes",
+            "label": "Grapes"
+          }
+        ],
+        "label": "Fruit"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "help": {
+      "variant": "help",
+      "values": {
+        "modelValue": "manual",
+        "defaultValue": "manual",
+        "options": [
+          {
+            "value": "manual",
+            "label": "Manual",
+            "detail": "Recommended",
+            "description": "Save only when you request it."
+          },
+          {
+            "value": "automatic",
+            "label": "Automatic",
+            "description": "Save changes as you work."
+          }
+        ],
+        "label": "Save mode"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "separators": {
+      "variant": "separators",
+      "values": {
+        "modelValue": "apple",
+        "options": [
+          {
+            "value": "apple",
+            "label": "Apple"
+          },
+          {
+            "value": "banana",
+            "label": "Banana"
+          },
+          {
+            "type": "separator",
+            "id": "berries"
+          },
+          {
+            "value": "blueberry",
+            "label": "Blueberry"
+          }
+        ],
+        "label": "Fruit or berry"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "disabled-choice": {
+      "variant": "disabled-choice",
+      "values": {
+        "modelValue": "apple",
+        "options": [
+          {
+            "value": "apple",
+            "label": "Apple"
+          },
+          {
+            "value": "banana",
+            "label": "Banana",
+            "disabled": true
+          },
+          {
+            "value": "grapes",
+            "label": "Grapes"
+          }
+        ],
+        "label": "Available fruit"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "slider": {
+    "continuous": {
+      "variant": "continuous",
+      "values": {
+        "modelValue": 35,
+        "min": 0,
+        "max": 100
+      },
+      "slots": {},
+      "preview": true
+    },
+    "steps": {
+      "variant": "steps",
+      "values": {
+        "modelValue": 50,
+        "min": 0,
+        "max": 100,
+        "step": 25
+      },
+      "slots": {},
+      "preview": true
+    },
+    "negative": {
+      "variant": "negative",
+      "values": {
+        "modelValue": -2,
+        "min": -10,
+        "max": 10,
+        "step": 1
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "color-picker": {
+    "original-playground": {
+      "variant": "default",
+      "preview": true
+    },
+    "project-accent": {
+      "variant": "project-accent",
+      "values": {
+        "modelValue": "#0078d4"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "stored-color": {
+      "variant": "stored-color",
+      "values": {
+        "modelValue": "#16a34a"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "text-area": {
+    "original-playground": {
+      "variant": "default",
+      "preview": true
+    },
+    "release-notes": {
+      "variant": "release-notes",
+      "values": {
+        "modelValue": "Changes in this release:\n• Faster workspace search\n• Improved keyboard navigation",
+        "rows": 5,
+        "placeholder": "Describe the release"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "review-comment": {
+      "variant": "review-comment",
+      "values": {
+        "modelValue": "",
+        "rows": 3,
+        "placeholder": "What should change before this is approved?"
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "setting-controls": {
+    "autosave-interval": {
+      "variant": "autosave-interval",
+      "values": {
+        "setting": {
+          "id": "autosave",
+          "label": "Autosave interval",
+          "type": "number",
+          "default": 30,
+          "min": 5,
+          "max": 300,
+          "step": 5,
+          "description": "Seconds between automatic saves."
+        },
+        "modelValue": 30
+      },
+      "slots": {},
+      "preview": true
+    },
+    "save-policy": {
+      "variant": "save-policy",
+      "values": {
+        "setting": {
+          "id": "save-mode",
+          "label": "Save policy",
+          "type": "select",
+          "default": "manual",
+          "options": [
+            {
+              "value": "manual",
+              "label": "Manual",
+              "description": "Save when requested."
+            },
+            {
+              "value": "automatic",
+              "label": "Automatic",
+              "description": "Save as you work."
+            }
+          ]
+        },
+        "modelValue": "manual"
+      },
+      "slots": {},
+      "preview": true
+    },
+    "notes": {
+      "variant": "notes",
+      "values": {
+        "setting": {
+          "id": "notes",
+          "label": "Workspace notes",
+          "type": "textarea",
+          "default": "",
+          "placeholder": "Add workspace notes"
+        },
+        "modelValue": "Keep this workspace focused."
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "icons": {
+    "file-icon": {
+      "variant": "file-icon",
+      "values": {
+        "name": "file-code",
+        "size": 20
+      },
+      "slots": {},
+      "preview": true
+    },
+    "action-icon": {
+      "variant": "action-icon",
+      "values": {
+        "name": "refresh",
+        "size": 16
+      },
+      "slots": {},
+      "preview": true
+    },
+    "explicit-pack": {
+      "variant": "explicit-pack",
+      "values": {
+        "name": "home",
+        "pack": "codicon",
+        "size": 24
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "tooltips": {
+    "basic": {
+      "variant": "default",
+      "values": {},
+      "preview": true
+    },
+    "configured": {
+      "variant": "configured",
+      "values": {
+        "disabled": true
+      },
+      "preview": true
+    }
+  },
+  "menus": {
+    "task-0": {
+      "variant": "default",
+      "values": {
+        "triggerLabel": "Project actions",
+        "items": [
+          {
+            "id": "new",
+            "label": "New file",
+            "shortcut": "Ctrl+N"
+          },
+          {
+            "id": "save",
+            "label": "Save project",
+            "shortcut": "Ctrl+S"
+          },
+          {
+            "id": "remote",
+            "label": "Publish remotely",
+            "disabled": true
+          }
+        ]
+      },
+      "slots": {},
+      "preview": true
+    },
+    "task-1": {
+      "variant": "default",
+      "values": {
+        "triggerLabel": "Export",
+        "items": [
+          {
+            "id": "archive",
+            "label": "Download archive"
+          },
+          {
+            "id": "clipboard",
+            "label": "Copy summary"
+          }
+        ]
+      },
+      "slots": {},
+      "preview": true
+    }
+  },
+  "context-menu": {
+    "basic": {
+      "variant": "default",
+      "values": {
+        "items": [
+          {
+            "id": "first",
+            "label": "First choice"
+          },
+          {
+            "id": "second",
+            "label": "Second choice"
+          }
+        ],
+        "label": "Example control"
+      },
+      "preview": true
+    },
+    "configured": {
+      "variant": "configured",
+      "values": {
+        "items": [
+          {
+            "id": "first",
+            "label": "First choice"
+          },
+          {
+            "id": "second",
+            "label": "Second choice"
+          }
+        ],
+        "label": "Example control",
+        "itemAlignment": "right"
+      },
+      "preview": true
+    }
+  },
+  "resizable-panes": {
+    "basic": {
+      "variant": "default",
+      "values": {
+        "modelValue": 40,
+        "label": "Example control"
+      },
+      "preview": true
+    },
+    "configured": {
+      "variant": "configured",
+      "values": {
+        "modelValue": 40,
+        "label": "Example control",
+        "axis": "y"
+      },
+      "preview": true
+    }
+  },
+  "resize-handle": {
+    "basic": {
+      "variant": "default",
+      "values": {
+        "label": "Example control",
+        "axis": "x",
+        "value": 24,
+        "min": 0,
+        "max": 300
+      },
+      "preview": true
+    },
+    "configured": {
+      "variant": "configured",
+      "values": {
+        "label": "Example control",
+        "axis": "y",
+        "value": 24,
+        "min": 0,
+        "max": 300
+      },
+      "preview": true
+    }
+  },
+  "modals": {
+    "basic": {
+      "variant": "default",
+      "values": {
+        "title": "Example dialog"
+      },
+      "preview": true
+    },
+    "configured": {
+      "variant": "configured",
+      "values": {
+        "title": "Example dialog",
+        "active": false
+      },
+      "preview": true
+    }
+  },
+  "settings": {
+    "basic": {
+      "variant": "default",
+      "preview": true
+    },
+    "configured": {
+      "variant": "configured",
+      "values": {},
+      "preview": true
+    }
+  },
+  "notifications": {
+    "basic": {
+      "variant": "default",
+      "preview": true
+    },
+    "configured": {
+      "variant": "configured",
+      "values": {
+        "bottom": 24
+      },
+      "preview": true
+    }
+  },
+  "notification-panel": {
+    "basic": {
+      "variant": "default",
+      "preview": true
+    },
+    "configured": {
+      "variant": "configured",
+      "values": {
+        "frame": "@frame",
+        "history": "@history",
+        "bottom": 24
+      },
+      "preview": true
+    }
+  },
+  "quick-input": {
+    "pick-command": {
+      "variant": "pick-command",
+      "values": {
+        "title": "Choose a command",
+        "placeholder": "Find a command…",
+        "items": [
+          {
+            "id": "open",
+            "label": "Open workspace",
+            "detail": "Choose a workspace folder"
+          },
+          {
+            "id": "save",
+            "label": "Save all files",
+            "shortcut": "Ctrl+Shift+S"
+          },
+          {
+            "id": "unavailable",
+            "label": "Connect remote",
+            "disabled": true
+          }
+        ]
+      },
+      "slots": {},
+      "preview": true
+    },
+    "choose-file": {
+      "variant": "choose-file",
+      "values": {
+        "title": "Open file",
+        "position": "center",
+        "items": [
+          {
+            "id": "src-app",
+            "label": "App.vue",
+            "detail": "src/App.vue"
+          },
+          {
+            "id": "test-app",
+            "label": "App.test.ts",
+            "detail": "tests/App.test.ts"
+          },
+          {
+            "id": "readme",
+            "label": "README.md",
+            "detail": "Project documentation"
+          }
+        ]
+      },
+      "slots": {},
+      "preview": true
+    },
+    "custom-item": {
+      "variant": "custom-item",
+      "values": {
+        "title": "Choose a workspace",
+        "items": [
+          {
+            "id": "design",
+            "label": "Design system",
+            "detail": "Shared interface components"
+          },
+          {
+            "id": "app",
+            "label": "Application",
+            "detail": "Product workspace"
+          }
+        ]
+      },
+      "slots": {
+        "item": "→ "
+      },
+      "preview": true
+    }
+  },
+  "quick-panel": {
+    "workspace-summary": {
+      "variant": "workspace-summary",
+      "values": {
+        "title": "Workspace summary"
+      },
+      "slots": {
+        "default": "Design system workspace · 12 active projects · Last saved just now."
+      },
+      "preview": true
+    },
+    "header-action": {
+      "variant": "header-action",
+      "values": {
+        "title": "Review changes"
+      },
+      "slots": {
+        "default": "All source files are saved. Review the changes before continuing.",
+        "header-actions": "Done"
+      },
+      "preview": true
+    },
+    "centered-summary": {
+      "variant": "centered-summary",
+      "values": {
+        "title": "Build summary",
+        "position": "center"
+      },
+      "slots": {
+        "default": "Build completed successfully. 24 modules checked, no errors.",
+        "header-actions": "Close summary"
+      },
+      "preview": true
+    }
+  },
+  "banner": {
+    "basic": {
+      "variant": "default",
+      "preview": true
+    },
+    "configured": {
+      "variant": "configured",
+      "values": {
+        "frame": "@frame",
+        "titleText": "Example"
+      },
+      "preview": true
+    }
+  },
+  "workspace": {
+    "basic": {
+      "variant": "default",
+      "preview": true
+    },
+    "configured": {
+      "variant": "configured",
+      "values": {},
+      "preview": true
+    }
+  },
+  "views": {
+    "basic": {
+      "variant": "default",
+      "preview": true
+    },
+    "configured": {
+      "variant": "configured",
+      "values": {
+        "title": "Example dialog",
+        "region": "secondary"
+      },
+      "preview": true
+    }
+  },
+  "navigation-items": {
+    "basic": {
+      "variant": "default",
+      "preview": true
+    },
+    "configured": {
+      "variant": "configured",
+      "values": {},
+      "preview": true
+    }
+  }
+}

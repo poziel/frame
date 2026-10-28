@@ -17,23 +17,37 @@ import QuickOverlay from './QuickOverlay.vue';
 
 const props = withDefaults(
   defineProps<{
+    /** Available quick-pick entries; disabled, heading, and separator rows cannot be accepted. */
     items: readonly QuickPickItem[];
+    /** Visible heading and accessible name for this presentation. */
     title: string;
+    /** Prompt shown when the input is empty. */
     placeholder?: string;
+    /** Preferred quick-input placement at the top or center of the owning shell. */
     position?: 'top' | 'center';
+    /** Quick-pick mode used to select the command operator and category behavior. */
     mode?: 'application' | 'frame' | 'pick';
+    /** Explicit active command-prefix category, overriding the mode-derived operator. */
     category?: string;
+    /** Enables filtering by the typed query unless explicitly false. */
     searchable?: boolean;
+    /** Initial input query for this picker presentation. */
     initialQuery?: string;
+    /** Initial highlighted entry ID, repaired when unavailable in the filtered results. */
     initialSelectedId?: string;
+    /** Available command-prefix categories; defaults to the Frame commands category. */
     categories?: readonly import('../../framework/commands/commandPrefixes').CommandPrefix[];
   }>(),
   {placeholder: 'Type to search…'}
 );
 const emit = defineEmits<{
+  /** Requests dismissal of this presentation without disposing its owning controller. */
   close: [];
+  /** Reports acceptance of an available quick-pick entry ID. */
   accept: [id: string];
+  /** Reports a command-prefix category change requested by input. */
   mode: [mode: string];
+  /** Reports the current query and highlighted entry for host restoration. */
   state: [state: {query: string; selectedId: string}];
 }>();
 const operator = computed(
@@ -135,7 +149,20 @@ function compositionKey(event: KeyboardEvent) {
   }
 }
 const element = computed(() => input.value?.element);
-defineExpose({element, focus: () => input.value?.focus()});
+defineExpose({
+  /** Search input element, when mounted, for host focus integration. */
+  element,
+  /** Focuses the active input or terminal surface without creating or disposing its owning controller. */
+  focus: () => input.value?.focus(),
+});
+defineSlots<{
+  /** Replaces one result row's content while retaining picker selection and accessibility behavior. */ item?(
+    props: {
+    item: QuickPickItem;
+    active: boolean;
+  }
+  ): unknown;
+}>();
 </script>
 <template>
   <QuickOverlay :title="title" :position="position" @close="emit('close')">
@@ -252,6 +279,8 @@ defineExpose({element, focus: () => input.value?.focus()});
 
 <style scoped>
 .picker-heading {
+  /* Inherited host separator-color alias for group headings in the quick picker. @token --frame-border @context */
+  /* Inherited host secondary-text alias for group headings in the quick picker. @token --frame-text-muted @context */
   padding: 6px 12px;
   border-top: 1px solid var(--frame-border);
   color: var(--frame-text-muted);
@@ -262,12 +291,21 @@ defineExpose({element, focus: () => input.value?.focus()});
 .palette-input {
   display: flex;
   align-items: center;
-  gap: var(--frame-spacing-unit, 4px);
+  /* Space between children for .palette-input. @token --frame-spacing-unit */
+  --_frame-default-spacing-unit-fb33760b58: 4px;
+  gap: var(--frame-spacing-unit, var(--_frame-default-spacing-unit-fb33760b58));
 }
 .quick-input-operator {
   color: var(--frame-text);
-  background: var(--frame-input-bg, var(--frame-overlay-background));
-  border-radius: var(--frame-radius-small, 3px);
+  /* Background for .quick-input-operator. @token --frame-input-bg */
+  --_frame-default-input-bg-b13a1ddb7f: var(--frame-overlay-background);
+  background: var(--frame-input-bg, var(--_frame-default-input-bg-b13a1ddb7f));
+  /* Corner radius for .quick-input-operator. @token --frame-radius-small */
+  --_frame-default-radius-small-a00d8c947a: 3px;
+  border-radius: var(
+    --frame-radius-small,
+    var(--_frame-default-radius-small-a00d8c947a)
+  );
   padding: 2px 8px;
   font-family: var(--frame-font-mono);
 }

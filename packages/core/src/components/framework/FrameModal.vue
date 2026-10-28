@@ -37,20 +37,35 @@ import {
 
 const props = withDefaults(
   defineProps<{
+    /** Visible heading and accessible name for this presentation. */
     title: string;
+    /** Vue icon component shown beside the presentation title. */
     icon?: Component;
+    /** Header action definitions; available actions overflow when the header cannot fit them. */
     actions?: readonly PanelAction[];
+    /** Optional element constraining modal geometry in addition to the owning overlay boundary. */
     bounds?: HTMLElement;
+    /** Whether this modal is the active interactive presentation; defaults to true. */
     active?: boolean;
+    /** Initial modal width in pixels, fitted to the available bounds. */
     width?: number;
+    /** Initial modal height in pixels, fitted to the available bounds. */
     height?: number;
+    /** Minimum modal height in pixels, subject to the available bounds. */
     minHeight?: number;
+    /** Initial maximized presentation state. */
     maximized?: boolean;
+    /** Content padding in pixels or a CSS shorthand; omission uses the modal theme token. */
     contentPadding?: number | string;
+    /** Allows moving the modal with pointer and keyboard controls; defaults to true. */
     draggable?: boolean;
+    /** Allows changing modal size with pointer and keyboard controls; defaults to true. */
     resizable?: boolean;
+    /** Offers modal maximize and restore interaction; defaults to true. */
     maximizable?: boolean;
+    /** Displays the title-bar close button; defaults to true. */
     showCloseButton?: boolean;
+    /** Stacking position within the owning modal overlay layer; defaults to zero. */
     layer?: number;
   }>(),
   {
@@ -62,7 +77,10 @@ const props = withDefaults(
     showCloseButton: true,
   }
 );
-const emit = defineEmits<{close: []}>();
+const emit = defineEmits<{
+  /** Requests dismissal of this presentation without disposing its owning controller. */
+  close: [];
+}>();
 // Frame restores focus when a presentation is disposed, not when another modal activates.
 const FrameFocusOwner = defineComponent({
   setup() {
@@ -300,6 +318,11 @@ onBeforeUnmount(() => {
         previousFocus.focus();
     });
 });
+defineSlots<{
+  /** Modal body rendered within the configured content padding. */ default?(): unknown;
+  /** Additional title-bar controls before window actions. */ 'header-actions'?(): unknown;
+  /** Optional footer content; omission reserves no footer area. */ footer?(): unknown;
+}>();
 </script>
 <template>
   <DialogRoot :open="active" :modal="false"

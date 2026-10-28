@@ -9,18 +9,27 @@ import AIPrompt from './AIPrompt.vue';
 
 const props = withDefaults(
   defineProps<{
+    /** Caller-owned conversation controller; unmounting this presentation does not dispose it. */
     chat: AIChatController;
+    /** Accessible name or visible label for the rendered control. */
     label?: string;
+    /** Prompt shown when the input is empty. */
     placeholder?: string;
     /** Empty-conversation text; the empty slot takes precedence. */
     emptyMessage?: string;
+    /** Horizontal alignment of user messages in the transcript. */
     userAlignment?: 'left' | 'right';
+    /** Horizontal alignment of assistant messages in the transcript. */
     assistantAlignment?: 'left' | 'right';
+    /** Additional host actions offered by the attachment menu. */
     attachmentActions?: readonly FrameMenuItem[];
+    /** Shows the speech action; the host handles the emitted speech request. */
     speechEnabled?: boolean;
     /** Hide unsupported actions for native provider sessions. */
     allowRewind?: boolean;
+    /** Offers conversation branching controls when supported. */
     allowFork?: boolean;
+    /** Offers file and folder attachment controls; files remain host-owned until submitted. */
     allowAttachments?: boolean;
   }>(),
   {
@@ -37,9 +46,13 @@ const props = withDefaults(
   }
 );
 const emit = defineEmits<{
+  /** Requests a conversation branch with its source message and preceding messages. */
   forge: [messages: ChatMessage[], source: ChatMessage];
+  /** Reports selection of an application attachment-menu action. */
   attachmentAction: [item: FrameMenuItem];
+  /** Requests host-managed speech input. */
   speech: [];
+  /** Reports copying a transcript message. */
   copy: [message: ChatMessage];
 }>();
 const composerInput = ref<{focus: () => void; measure: () => void}>();
@@ -196,7 +209,19 @@ watch(
 onBeforeUnmount(() => {
   if (timer) clearInterval(timer);
 });
-defineExpose({focus: () => composerInput.value?.focus()});
+defineExpose({
+  /** Focuses the active input or terminal surface without creating or disposing its owning controller. */
+  focus: () => composerInput.value?.focus(),
+});
+defineSlots<{
+  /** Empty transcript content replacing emptyMessage. */ empty?(): unknown;
+  /** Additional actions for one transcript message. */ 'message-actions'?(
+    props: {
+    message: ChatMessage;
+  }
+  ): unknown;
+  /** Additional composer actions passed to AIPrompt. */ 'composer-actions'?(): unknown;
+}>();
 </script>
 
 <template>

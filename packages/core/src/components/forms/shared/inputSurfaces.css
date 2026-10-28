@@ -1,142 +1,1168 @@
 /* Text-entry surfaces share defaults; selects expose a keyboard-only focus ring. */
 .frame-text-input {
- --_frame-input-border:var(--frame-text-input-border,var(--frame-input-border,1px solid var(--frame-control-border)));
- --_frame-input-border-radius:var(--frame-text-input-border-radius,var(--frame-input-radius));
- --_frame-input-hover-border:var(--frame-text-input-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
- --_frame-input-hover-outline:var(--frame-text-input-hover-outline,var(--frame-input-hover-outline,none));
- --_frame-input-focus-border:var(--frame-text-input-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
- --_frame-input-focus-outline:var(--frame-text-input-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
- --_frame-input-outline-offset:var(--frame-text-input-outline-offset,var(--frame-input-outline-offset,0px));
+  /* Fallback for: Resting border of the text input. @token --frame-input-border */
+  --_frame-default-input-border-252130f242: 1px solid
+    var(--frame-control-border);
+  /* Resting border of the text input. @token --frame-text-input-border */
+  --_frame-default-text-input-border-1: var(
+    --frame-input-border,
+    var(--_frame-default-input-border-252130f242)
+  );
+  --_frame-input-border: var(
+    --frame-text-input-border,
+    var(--_frame-default-text-input-border-1)
+  );
+  /* Corner radius of the text input. @token --frame-text-input-border-radius */
+  --_frame-default-text-input-border-radius-2: var(--frame-input-radius);
+  --_frame-input-border-radius: var(
+    --frame-text-input-border-radius,
+    var(--_frame-default-text-input-border-radius-2)
+  );
+  /* Fallback for: Border while the pointer hovers over the text input. @token --frame-input-hover-border */
+  --_frame-default-input-hover-border-2d187c47a6: 1px solid
+    var(--frame-control-border);
+  /* Border while the pointer hovers over the text input. @token --frame-text-input-hover-border */
+  --_frame-default-text-input-hover-border-3: var(
+    --frame-input-hover-border,
+    var(--_frame-default-input-hover-border-2d187c47a6)
+  );
+  --_frame-input-hover-border: var(
+    --frame-text-input-hover-border,
+    var(--_frame-default-text-input-hover-border-3)
+  );
+  /* Fallback for: Outline while the pointer hovers over the text input. @token --frame-input-hover-outline */
+  --_frame-default-input-hover-outline-8f2a45ae80: none;
+  /* Outline while the pointer hovers over the text input. @token --frame-text-input-hover-outline */
+  --_frame-default-text-input-hover-outline-4: var(
+    --frame-input-hover-outline,
+    var(--_frame-default-input-hover-outline-8f2a45ae80)
+  );
+  --_frame-input-hover-outline: var(
+    --frame-text-input-hover-outline,
+    var(--_frame-default-text-input-hover-outline-4)
+  );
+  /* Fallback for: Border while focus is within the text input. @token --frame-input-focus-border */
+  --_frame-default-input-focus-border-0435f9b5a7: 1px solid var(--frame-accent);
+  /* Border while focus is within the text input. @token --frame-text-input-focus-border */
+  --_frame-default-text-input-focus-border-5: var(
+    --frame-input-focus-border,
+    var(--_frame-default-input-focus-border-0435f9b5a7)
+  );
+  --_frame-input-focus-border: var(
+    --frame-text-input-focus-border,
+    var(--_frame-default-text-input-focus-border-5)
+  );
+  /* Fallback for: Focus outline of the text input. @token --frame-input-focus-outline */
+  --_frame-default-input-focus-outline-83b1eb84d6: 1px solid var(--frame-accent);
+  /* Focus outline of the text input. @token --frame-text-input-focus-outline */
+  --_frame-default-text-input-focus-outline-6: var(
+    --frame-input-focus-outline,
+    var(--_frame-default-input-focus-outline-83b1eb84d6)
+  );
+  --_frame-input-focus-outline: var(
+    --frame-text-input-focus-outline,
+    var(--_frame-default-text-input-focus-outline-6)
+  );
+  /* Fallback for: Offset between the outline and the text input. @token --frame-input-outline-offset */
+  --_frame-default-input-outline-offset-23b248891d: 0px;
+  /* Offset between the outline and the text input. @token --frame-text-input-outline-offset */
+  --_frame-default-text-input-outline-offset-7: var(
+    --frame-input-outline-offset,
+    var(--_frame-default-input-outline-offset-23b248891d)
+  );
+  --_frame-input-outline-offset: var(
+    --frame-text-input-outline-offset,
+    var(--_frame-default-text-input-outline-offset-7)
+  );
 }
 .frame-text-area {
- --_frame-input-border:var(--frame-text-area-border,var(--frame-input-border,1px solid var(--frame-control-border)));
- --_frame-input-border-radius:var(--frame-text-area-border-radius,var(--frame-input-radius));
- --_frame-input-hover-border:var(--frame-text-area-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
- --_frame-input-hover-outline:var(--frame-text-area-hover-outline,var(--frame-input-hover-outline,none));
- --_frame-input-focus-border:var(--frame-text-area-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
- --_frame-input-focus-outline:var(--frame-text-area-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
- --_frame-input-outline-offset:var(--frame-text-area-outline-offset,var(--frame-input-outline-offset,0px));
+  /* Fallback for: Resting border of the text area. @token --frame-input-border */
+  --_frame-default-input-border-b3a3364084: 1px solid
+    var(--frame-control-border);
+  /* Resting border of the text area. @token --frame-text-area-border */
+  --_frame-default-text-area-border-8: var(
+    --frame-input-border,
+    var(--_frame-default-input-border-b3a3364084)
+  );
+  --_frame-input-border: var(
+    --frame-text-area-border,
+    var(--_frame-default-text-area-border-8)
+  );
+  /* Corner radius of the text area. @token --frame-text-area-border-radius */
+  --_frame-default-text-area-border-radius-9: var(--frame-input-radius);
+  --_frame-input-border-radius: var(
+    --frame-text-area-border-radius,
+    var(--_frame-default-text-area-border-radius-9)
+  );
+  /* Fallback for: Border while the pointer hovers over the text area. @token --frame-input-hover-border */
+  --_frame-default-input-hover-border-3386a03ffa: 1px solid
+    var(--frame-control-border);
+  /* Border while the pointer hovers over the text area. @token --frame-text-area-hover-border */
+  --_frame-default-text-area-hover-border-10: var(
+    --frame-input-hover-border,
+    var(--_frame-default-input-hover-border-3386a03ffa)
+  );
+  --_frame-input-hover-border: var(
+    --frame-text-area-hover-border,
+    var(--_frame-default-text-area-hover-border-10)
+  );
+  /* Fallback for: Outline while the pointer hovers over the text area. @token --frame-input-hover-outline */
+  --_frame-default-input-hover-outline-a9a094aebb: none;
+  /* Outline while the pointer hovers over the text area. @token --frame-text-area-hover-outline */
+  --_frame-default-text-area-hover-outline-11: var(
+    --frame-input-hover-outline,
+    var(--_frame-default-input-hover-outline-a9a094aebb)
+  );
+  --_frame-input-hover-outline: var(
+    --frame-text-area-hover-outline,
+    var(--_frame-default-text-area-hover-outline-11)
+  );
+  /* Fallback for: Border while focus is within the text area. @token --frame-input-focus-border */
+  --_frame-default-input-focus-border-d23beb21c7: 1px solid var(--frame-accent);
+  /* Border while focus is within the text area. @token --frame-text-area-focus-border */
+  --_frame-default-text-area-focus-border-12: var(
+    --frame-input-focus-border,
+    var(--_frame-default-input-focus-border-d23beb21c7)
+  );
+  --_frame-input-focus-border: var(
+    --frame-text-area-focus-border,
+    var(--_frame-default-text-area-focus-border-12)
+  );
+  /* Fallback for: Focus outline of the text area. @token --frame-input-focus-outline */
+  --_frame-default-input-focus-outline-f9722f782f: 1px solid var(--frame-accent);
+  /* Focus outline of the text area. @token --frame-text-area-focus-outline */
+  --_frame-default-text-area-focus-outline-13: var(
+    --frame-input-focus-outline,
+    var(--_frame-default-input-focus-outline-f9722f782f)
+  );
+  --_frame-input-focus-outline: var(
+    --frame-text-area-focus-outline,
+    var(--_frame-default-text-area-focus-outline-13)
+  );
+  /* Fallback for: Offset between the outline and the text area. @token --frame-input-outline-offset */
+  --_frame-default-input-outline-offset-3cd4699528: 0px;
+  /* Offset between the outline and the text area. @token --frame-text-area-outline-offset */
+  --_frame-default-text-area-outline-offset-14: var(
+    --frame-input-outline-offset,
+    var(--_frame-default-input-outline-offset-3cd4699528)
+  );
+  --_frame-input-outline-offset: var(
+    --frame-text-area-outline-offset,
+    var(--_frame-default-text-area-outline-offset-14)
+  );
 }
 .frame-number-field {
- --_frame-input-border:var(--frame-number-field-border,var(--frame-input-border,1px solid var(--frame-control-border)));
- --_frame-input-border-radius:var(--frame-number-field-border-radius,var(--frame-input-radius));
- --_frame-input-hover-border:var(--frame-number-field-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
- --_frame-input-hover-outline:var(--frame-number-field-hover-outline,var(--frame-input-hover-outline,none));
- --_frame-input-focus-border:var(--frame-number-field-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
- --_frame-input-focus-outline:var(--frame-number-field-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
- --_frame-input-outline-offset:var(--frame-number-field-outline-offset,var(--frame-input-outline-offset,0px));
+  /* Fallback for: Resting border of the number field. @token --frame-input-border */
+  --_frame-default-input-border-5b002feb69: 1px solid
+    var(--frame-control-border);
+  /* Resting border of the number field. @token --frame-number-field-border */
+  --_frame-default-number-field-border-15: var(
+    --frame-input-border,
+    var(--_frame-default-input-border-5b002feb69)
+  );
+  --_frame-input-border: var(
+    --frame-number-field-border,
+    var(--_frame-default-number-field-border-15)
+  );
+  /* Corner radius of the number field. @token --frame-number-field-border-radius */
+  --_frame-default-number-field-border-radius-16: var(--frame-input-radius);
+  --_frame-input-border-radius: var(
+    --frame-number-field-border-radius,
+    var(--_frame-default-number-field-border-radius-16)
+  );
+  /* Fallback for: Border while the pointer hovers over the number field. @token --frame-input-hover-border */
+  --_frame-default-input-hover-border-267a96cd79: 1px solid
+    var(--frame-control-border);
+  /* Border while the pointer hovers over the number field. @token --frame-number-field-hover-border */
+  --_frame-default-number-field-hover-border-17: var(
+    --frame-input-hover-border,
+    var(--_frame-default-input-hover-border-267a96cd79)
+  );
+  --_frame-input-hover-border: var(
+    --frame-number-field-hover-border,
+    var(--_frame-default-number-field-hover-border-17)
+  );
+  /* Fallback for: Outline while the pointer hovers over the number field. @token --frame-input-hover-outline */
+  --_frame-default-input-hover-outline-8e6fb800f8: none;
+  /* Outline while the pointer hovers over the number field. @token --frame-number-field-hover-outline */
+  --_frame-default-number-field-hover-outline-18: var(
+    --frame-input-hover-outline,
+    var(--_frame-default-input-hover-outline-8e6fb800f8)
+  );
+  --_frame-input-hover-outline: var(
+    --frame-number-field-hover-outline,
+    var(--_frame-default-number-field-hover-outline-18)
+  );
+  /* Fallback for: Border while focus is within the number field. @token --frame-input-focus-border */
+  --_frame-default-input-focus-border-f114b9b73e: 1px solid var(--frame-accent);
+  /* Border while focus is within the number field. @token --frame-number-field-focus-border */
+  --_frame-default-number-field-focus-border-19: var(
+    --frame-input-focus-border,
+    var(--_frame-default-input-focus-border-f114b9b73e)
+  );
+  --_frame-input-focus-border: var(
+    --frame-number-field-focus-border,
+    var(--_frame-default-number-field-focus-border-19)
+  );
+  /* Fallback for: Focus outline of the number field. @token --frame-input-focus-outline */
+  --_frame-default-input-focus-outline-111eb6af43: 1px solid var(--frame-accent);
+  /* Focus outline of the number field. @token --frame-number-field-focus-outline */
+  --_frame-default-number-field-focus-outline-20: var(
+    --frame-input-focus-outline,
+    var(--_frame-default-input-focus-outline-111eb6af43)
+  );
+  --_frame-input-focus-outline: var(
+    --frame-number-field-focus-outline,
+    var(--_frame-default-number-field-focus-outline-20)
+  );
+  /* Fallback for: Offset between the outline and the number field. @token --frame-input-outline-offset */
+  --_frame-default-input-outline-offset-b6429aeda5: 0px;
+  /* Offset between the outline and the number field. @token --frame-number-field-outline-offset */
+  --_frame-default-number-field-outline-offset-21: var(
+    --frame-input-outline-offset,
+    var(--_frame-default-input-outline-offset-b6429aeda5)
+  );
+  --_frame-input-outline-offset: var(
+    --frame-number-field-outline-offset,
+    var(--_frame-default-number-field-outline-offset-21)
+  );
 }
 .frame-date-field {
- --_frame-input-border:var(--frame-date-field-border,var(--frame-input-border,1px solid var(--frame-control-border)));
- --_frame-input-border-radius:var(--frame-date-field-border-radius,var(--frame-input-radius));
- --_frame-input-hover-border:var(--frame-date-field-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
- --_frame-input-hover-outline:var(--frame-date-field-hover-outline,var(--frame-input-hover-outline,none));
- --_frame-input-focus-border:var(--frame-date-field-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
- --_frame-input-focus-outline:var(--frame-date-field-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
- --_frame-input-outline-offset:var(--frame-date-field-outline-offset,var(--frame-input-outline-offset,0px));
+  /* Fallback for: Resting border of the segmented date field. @token --frame-input-border */
+  --_frame-default-input-border-a16f99fbed: 1px solid
+    var(--frame-control-border);
+  /* Resting border of the segmented date field. @token --frame-date-field-border */
+  --_frame-default-date-field-border-22: var(
+    --frame-input-border,
+    var(--_frame-default-input-border-a16f99fbed)
+  );
+  --_frame-input-border: var(
+    --frame-date-field-border,
+    var(--_frame-default-date-field-border-22)
+  );
+  /* Corner radius of the segmented date field. @token --frame-date-field-border-radius */
+  --_frame-default-date-field-border-radius-23: var(--frame-input-radius);
+  --_frame-input-border-radius: var(
+    --frame-date-field-border-radius,
+    var(--_frame-default-date-field-border-radius-23)
+  );
+  /* Fallback for: Border while the pointer hovers over the segmented date field. @token --frame-input-hover-border */
+  --_frame-default-input-hover-border-216116eb67: 1px solid
+    var(--frame-control-border);
+  /* Border while the pointer hovers over the segmented date field. @token --frame-date-field-hover-border */
+  --_frame-default-date-field-hover-border-24: var(
+    --frame-input-hover-border,
+    var(--_frame-default-input-hover-border-216116eb67)
+  );
+  --_frame-input-hover-border: var(
+    --frame-date-field-hover-border,
+    var(--_frame-default-date-field-hover-border-24)
+  );
+  /* Fallback for: Outline while the pointer hovers over the segmented date field. @token --frame-input-hover-outline */
+  --_frame-default-input-hover-outline-6b07527672: none;
+  /* Outline while the pointer hovers over the segmented date field. @token --frame-date-field-hover-outline */
+  --_frame-default-date-field-hover-outline-25: var(
+    --frame-input-hover-outline,
+    var(--_frame-default-input-hover-outline-6b07527672)
+  );
+  --_frame-input-hover-outline: var(
+    --frame-date-field-hover-outline,
+    var(--_frame-default-date-field-hover-outline-25)
+  );
+  /* Fallback for: Border while focus is within the segmented date field. @token --frame-input-focus-border */
+  --_frame-default-input-focus-border-277537e884: 1px solid var(--frame-accent);
+  /* Border while focus is within the segmented date field. @token --frame-date-field-focus-border */
+  --_frame-default-date-field-focus-border-26: var(
+    --frame-input-focus-border,
+    var(--_frame-default-input-focus-border-277537e884)
+  );
+  --_frame-input-focus-border: var(
+    --frame-date-field-focus-border,
+    var(--_frame-default-date-field-focus-border-26)
+  );
+  /* Fallback for: Focus outline of the segmented date field. @token --frame-input-focus-outline */
+  --_frame-default-input-focus-outline-8a0b35586b: 1px solid var(--frame-accent);
+  /* Focus outline of the segmented date field. @token --frame-date-field-focus-outline */
+  --_frame-default-date-field-focus-outline-27: var(
+    --frame-input-focus-outline,
+    var(--_frame-default-input-focus-outline-8a0b35586b)
+  );
+  --_frame-input-focus-outline: var(
+    --frame-date-field-focus-outline,
+    var(--_frame-default-date-field-focus-outline-27)
+  );
+  /* Fallback for: Offset between the outline and the segmented date field. @token --frame-input-outline-offset */
+  --_frame-default-input-outline-offset-f05e82f966: 0px;
+  /* Offset between the outline and the segmented date field. @token --frame-date-field-outline-offset */
+  --_frame-default-date-field-outline-offset-28: var(
+    --frame-input-outline-offset,
+    var(--_frame-default-input-outline-offset-f05e82f966)
+  );
+  --_frame-input-outline-offset: var(
+    --frame-date-field-outline-offset,
+    var(--_frame-default-date-field-outline-offset-28)
+  );
 }
 .frame-advanced-input {
- --_frame-input-border:var(--frame-advanced-input-border,var(--frame-input-border,1px solid var(--frame-control-border)));
- --_frame-input-border-radius:var(--frame-advanced-input-border-radius,var(--frame-input-radius));
- --_frame-input-hover-border:var(--frame-advanced-input-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
- --_frame-input-hover-outline:var(--frame-advanced-input-hover-outline,var(--frame-input-hover-outline,none));
- --_frame-input-focus-border:var(--frame-advanced-input-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
- --_frame-input-focus-outline:var(--frame-advanced-input-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
- --_frame-input-outline-offset:var(--frame-advanced-input-outline-offset,var(--frame-input-outline-offset,0px));
+  /* Fallback for: Resting border of the advanced text entry. @token --frame-input-border */
+  --_frame-default-input-border-a3c8f7b1a0: 1px solid
+    var(--frame-control-border);
+  /* Resting border of the advanced text entry. @token --frame-advanced-input-border */
+  --_frame-default-advanced-input-border-29: var(
+    --frame-input-border,
+    var(--_frame-default-input-border-a3c8f7b1a0)
+  );
+  --_frame-input-border: var(
+    --frame-advanced-input-border,
+    var(--_frame-default-advanced-input-border-29)
+  );
+  /* Corner radius of the advanced text entry. @token --frame-advanced-input-border-radius */
+  --_frame-default-advanced-input-border-radius-30: var(--frame-input-radius);
+  --_frame-input-border-radius: var(
+    --frame-advanced-input-border-radius,
+    var(--_frame-default-advanced-input-border-radius-30)
+  );
+  /* Fallback for: Border while the pointer hovers over the advanced text entry. @token --frame-input-hover-border */
+  --_frame-default-input-hover-border-a59e2a580a: 1px solid
+    var(--frame-control-border);
+  /* Border while the pointer hovers over the advanced text entry. @token --frame-advanced-input-hover-border */
+  --_frame-default-advanced-input-hover-border-31: var(
+    --frame-input-hover-border,
+    var(--_frame-default-input-hover-border-a59e2a580a)
+  );
+  --_frame-input-hover-border: var(
+    --frame-advanced-input-hover-border,
+    var(--_frame-default-advanced-input-hover-border-31)
+  );
+  /* Fallback for: Outline while the pointer hovers over the advanced text entry. @token --frame-input-hover-outline */
+  --_frame-default-input-hover-outline-875ff30ee6: none;
+  /* Outline while the pointer hovers over the advanced text entry. @token --frame-advanced-input-hover-outline */
+  --_frame-default-advanced-input-hover-outline-32: var(
+    --frame-input-hover-outline,
+    var(--_frame-default-input-hover-outline-875ff30ee6)
+  );
+  --_frame-input-hover-outline: var(
+    --frame-advanced-input-hover-outline,
+    var(--_frame-default-advanced-input-hover-outline-32)
+  );
+  /* Fallback for: Border while focus is within the advanced text entry. @token --frame-input-focus-border */
+  --_frame-default-input-focus-border-89d578f706: 1px solid var(--frame-accent);
+  /* Border while focus is within the advanced text entry. @token --frame-advanced-input-focus-border */
+  --_frame-default-advanced-input-focus-border-33: var(
+    --frame-input-focus-border,
+    var(--_frame-default-input-focus-border-89d578f706)
+  );
+  --_frame-input-focus-border: var(
+    --frame-advanced-input-focus-border,
+    var(--_frame-default-advanced-input-focus-border-33)
+  );
+  /* Fallback for: Focus outline of the advanced text entry. @token --frame-input-focus-outline */
+  --_frame-default-input-focus-outline-76ba66c423: 1px solid var(--frame-accent);
+  /* Focus outline of the advanced text entry. @token --frame-advanced-input-focus-outline */
+  --_frame-default-advanced-input-focus-outline-34: var(
+    --frame-input-focus-outline,
+    var(--_frame-default-input-focus-outline-76ba66c423)
+  );
+  --_frame-input-focus-outline: var(
+    --frame-advanced-input-focus-outline,
+    var(--_frame-default-advanced-input-focus-outline-34)
+  );
+  /* Fallback for: Offset between the outline and the advanced text entry. @token --frame-input-outline-offset */
+  --_frame-default-input-outline-offset-e118d8a96d: 0px;
+  /* Offset between the outline and the advanced text entry. @token --frame-advanced-input-outline-offset */
+  --_frame-default-advanced-input-outline-offset-35: var(
+    --frame-input-outline-offset,
+    var(--_frame-default-input-outline-offset-e118d8a96d)
+  );
+  --_frame-input-outline-offset: var(
+    --frame-advanced-input-outline-offset,
+    var(--_frame-default-advanced-input-outline-offset-35)
+  );
 }
 .frame-form-input {
- --_frame-input-border:var(--frame-form-input-border,var(--frame-input-border,1px solid var(--frame-control-border)));
- --_frame-input-border-radius:var(--frame-form-input-border-radius,var(--frame-input-radius));
- --_frame-input-hover-border:var(--frame-form-input-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
- --_frame-input-hover-outline:var(--frame-form-input-hover-outline,var(--frame-input-hover-outline,none));
- --_frame-input-focus-border:var(--frame-form-input-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
- --_frame-input-focus-outline:var(--frame-form-input-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
- --_frame-input-outline-offset:var(--frame-form-input-outline-offset,var(--frame-input-outline-offset,0px));
+  /* Fallback for: Resting border of the form input. @token --frame-input-border */
+  --_frame-default-input-border-1b179ebd73: 1px solid
+    var(--frame-control-border);
+  /* Resting border of the form input. @token --frame-form-input-border */
+  --_frame-default-form-input-border-36: var(
+    --frame-input-border,
+    var(--_frame-default-input-border-1b179ebd73)
+  );
+  --_frame-input-border: var(
+    --frame-form-input-border,
+    var(--_frame-default-form-input-border-36)
+  );
+  /* Corner radius of the form input. @token --frame-form-input-border-radius */
+  --_frame-default-form-input-border-radius-37: var(--frame-input-radius);
+  --_frame-input-border-radius: var(
+    --frame-form-input-border-radius,
+    var(--_frame-default-form-input-border-radius-37)
+  );
+  /* Fallback for: Border while the pointer hovers over the form input. @token --frame-input-hover-border */
+  --_frame-default-input-hover-border-931aa2dc51: 1px solid
+    var(--frame-control-border);
+  /* Border while the pointer hovers over the form input. @token --frame-form-input-hover-border */
+  --_frame-default-form-input-hover-border-38: var(
+    --frame-input-hover-border,
+    var(--_frame-default-input-hover-border-931aa2dc51)
+  );
+  --_frame-input-hover-border: var(
+    --frame-form-input-hover-border,
+    var(--_frame-default-form-input-hover-border-38)
+  );
+  /* Fallback for: Outline while the pointer hovers over the form input. @token --frame-input-hover-outline */
+  --_frame-default-input-hover-outline-8f8d18353c: none;
+  /* Outline while the pointer hovers over the form input. @token --frame-form-input-hover-outline */
+  --_frame-default-form-input-hover-outline-39: var(
+    --frame-input-hover-outline,
+    var(--_frame-default-input-hover-outline-8f8d18353c)
+  );
+  --_frame-input-hover-outline: var(
+    --frame-form-input-hover-outline,
+    var(--_frame-default-form-input-hover-outline-39)
+  );
+  /* Fallback for: Border while focus is within the form input. @token --frame-input-focus-border */
+  --_frame-default-input-focus-border-1a6e82d949: 1px solid var(--frame-accent);
+  /* Border while focus is within the form input. @token --frame-form-input-focus-border */
+  --_frame-default-form-input-focus-border-40: var(
+    --frame-input-focus-border,
+    var(--_frame-default-input-focus-border-1a6e82d949)
+  );
+  --_frame-input-focus-border: var(
+    --frame-form-input-focus-border,
+    var(--_frame-default-form-input-focus-border-40)
+  );
+  /* Fallback for: Focus outline of the form input. @token --frame-input-focus-outline */
+  --_frame-default-input-focus-outline-d5fa39d78e: 1px solid var(--frame-accent);
+  /* Focus outline of the form input. @token --frame-form-input-focus-outline */
+  --_frame-default-form-input-focus-outline-41: var(
+    --frame-input-focus-outline,
+    var(--_frame-default-input-focus-outline-d5fa39d78e)
+  );
+  --_frame-input-focus-outline: var(
+    --frame-form-input-focus-outline,
+    var(--_frame-default-form-input-focus-outline-41)
+  );
+  /* Fallback for: Offset between the outline and the form input. @token --frame-input-outline-offset */
+  --_frame-default-input-outline-offset-980ec68933: 0px;
+  /* Offset between the outline and the form input. @token --frame-form-input-outline-offset */
+  --_frame-default-form-input-outline-offset-42: var(
+    --frame-input-outline-offset,
+    var(--_frame-default-input-outline-offset-980ec68933)
+  );
+  --_frame-input-outline-offset: var(
+    --frame-form-input-outline-offset,
+    var(--_frame-default-form-input-outline-offset-42)
+  );
 }
 .frame-combobox-anchor {
- --_frame-input-border:var(--frame-combobox-border,var(--frame-input-border,1px solid var(--frame-control-border)));
- --_frame-input-border-radius:var(--frame-combobox-border-radius,var(--frame-input-radius));
- --_frame-input-hover-border:var(--frame-combobox-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
- --_frame-input-hover-outline:var(--frame-combobox-hover-outline,var(--frame-input-hover-outline,none));
- --_frame-input-focus-border:var(--frame-combobox-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
- --_frame-input-focus-outline:var(--frame-combobox-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
- --_frame-input-outline-offset:var(--frame-combobox-outline-offset,var(--frame-input-outline-offset,0px));
+  /* Fallback for: Resting border of the combobox. @token --frame-input-border */
+  --_frame-default-input-border-b132cc7905: 1px solid
+    var(--frame-control-border);
+  /* Resting border of the combobox. @token --frame-combobox-border */
+  --_frame-default-combobox-border-43: var(
+    --frame-input-border,
+    var(--_frame-default-input-border-b132cc7905)
+  );
+  --_frame-input-border: var(
+    --frame-combobox-border,
+    var(--_frame-default-combobox-border-43)
+  );
+  /* Corner radius of the combobox. @token --frame-combobox-border-radius */
+  --_frame-default-combobox-border-radius-44: var(--frame-input-radius);
+  --_frame-input-border-radius: var(
+    --frame-combobox-border-radius,
+    var(--_frame-default-combobox-border-radius-44)
+  );
+  /* Fallback for: Border while the pointer hovers over the combobox. @token --frame-input-hover-border */
+  --_frame-default-input-hover-border-ac4db137e4: 1px solid
+    var(--frame-control-border);
+  /* Border while the pointer hovers over the combobox. @token --frame-combobox-hover-border */
+  --_frame-default-combobox-hover-border-45: var(
+    --frame-input-hover-border,
+    var(--_frame-default-input-hover-border-ac4db137e4)
+  );
+  --_frame-input-hover-border: var(
+    --frame-combobox-hover-border,
+    var(--_frame-default-combobox-hover-border-45)
+  );
+  /* Fallback for: Outline while the pointer hovers over the combobox. @token --frame-input-hover-outline */
+  --_frame-default-input-hover-outline-39b5edb923: none;
+  /* Outline while the pointer hovers over the combobox. @token --frame-combobox-hover-outline */
+  --_frame-default-combobox-hover-outline-46: var(
+    --frame-input-hover-outline,
+    var(--_frame-default-input-hover-outline-39b5edb923)
+  );
+  --_frame-input-hover-outline: var(
+    --frame-combobox-hover-outline,
+    var(--_frame-default-combobox-hover-outline-46)
+  );
+  /* Fallback for: Border while focus is within the combobox. @token --frame-input-focus-border */
+  --_frame-default-input-focus-border-eb9c418e7f: 1px solid var(--frame-accent);
+  /* Border while focus is within the combobox. @token --frame-combobox-focus-border */
+  --_frame-default-combobox-focus-border-47: var(
+    --frame-input-focus-border,
+    var(--_frame-default-input-focus-border-eb9c418e7f)
+  );
+  --_frame-input-focus-border: var(
+    --frame-combobox-focus-border,
+    var(--_frame-default-combobox-focus-border-47)
+  );
+  /* Fallback for: Focus outline of the combobox. @token --frame-input-focus-outline */
+  --_frame-default-input-focus-outline-fe0e8e4d35: 1px solid var(--frame-accent);
+  /* Focus outline of the combobox. @token --frame-combobox-focus-outline */
+  --_frame-default-combobox-focus-outline-48: var(
+    --frame-input-focus-outline,
+    var(--_frame-default-input-focus-outline-fe0e8e4d35)
+  );
+  --_frame-input-focus-outline: var(
+    --frame-combobox-focus-outline,
+    var(--_frame-default-combobox-focus-outline-48)
+  );
+  /* Fallback for: Offset between the outline and the combobox. @token --frame-input-outline-offset */
+  --_frame-default-input-outline-offset-feb021a017: 0px;
+  /* Offset between the outline and the combobox. @token --frame-combobox-outline-offset */
+  --_frame-default-combobox-outline-offset-49: var(
+    --frame-input-outline-offset,
+    var(--_frame-default-input-outline-offset-feb021a017)
+  );
+  --_frame-input-outline-offset: var(
+    --frame-combobox-outline-offset,
+    var(--_frame-default-combobox-outline-offset-49)
+  );
 }
 .frame-tags-input {
- --_frame-input-border:var(--frame-tags-input-border,var(--frame-input-border,1px solid var(--frame-control-border)));
- --_frame-input-border-radius:var(--frame-tags-input-border-radius,var(--frame-input-radius));
- --_frame-input-hover-border:var(--frame-tags-input-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
- --_frame-input-hover-outline:var(--frame-tags-input-hover-outline,var(--frame-input-hover-outline,none));
- --_frame-input-focus-border:var(--frame-tags-input-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
- --_frame-input-focus-outline:var(--frame-tags-input-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
- --_frame-input-outline-offset:var(--frame-tags-input-outline-offset,var(--frame-input-outline-offset,0px));
+  /* Fallback for: Resting border of the tag entry. @token --frame-input-border */
+  --_frame-default-input-border-19cb9bfd0e: 1px solid
+    var(--frame-control-border);
+  /* Resting border of the tag entry. @token --frame-tags-input-border */
+  --_frame-default-tags-input-border-50: var(
+    --frame-input-border,
+    var(--_frame-default-input-border-19cb9bfd0e)
+  );
+  --_frame-input-border: var(
+    --frame-tags-input-border,
+    var(--_frame-default-tags-input-border-50)
+  );
+  /* Corner radius of the tag entry. @token --frame-tags-input-border-radius */
+  --_frame-default-tags-input-border-radius-51: var(--frame-input-radius);
+  --_frame-input-border-radius: var(
+    --frame-tags-input-border-radius,
+    var(--_frame-default-tags-input-border-radius-51)
+  );
+  /* Fallback for: Border while the pointer hovers over the tag entry. @token --frame-input-hover-border */
+  --_frame-default-input-hover-border-c815976952: 1px solid
+    var(--frame-control-border);
+  /* Border while the pointer hovers over the tag entry. @token --frame-tags-input-hover-border */
+  --_frame-default-tags-input-hover-border-52: var(
+    --frame-input-hover-border,
+    var(--_frame-default-input-hover-border-c815976952)
+  );
+  --_frame-input-hover-border: var(
+    --frame-tags-input-hover-border,
+    var(--_frame-default-tags-input-hover-border-52)
+  );
+  /* Fallback for: Outline while the pointer hovers over the tag entry. @token --frame-input-hover-outline */
+  --_frame-default-input-hover-outline-7ebadd9fbf: none;
+  /* Outline while the pointer hovers over the tag entry. @token --frame-tags-input-hover-outline */
+  --_frame-default-tags-input-hover-outline-53: var(
+    --frame-input-hover-outline,
+    var(--_frame-default-input-hover-outline-7ebadd9fbf)
+  );
+  --_frame-input-hover-outline: var(
+    --frame-tags-input-hover-outline,
+    var(--_frame-default-tags-input-hover-outline-53)
+  );
+  /* Fallback for: Border while focus is within the tag entry. @token --frame-input-focus-border */
+  --_frame-default-input-focus-border-270865d233: 1px solid var(--frame-accent);
+  /* Border while focus is within the tag entry. @token --frame-tags-input-focus-border */
+  --_frame-default-tags-input-focus-border-54: var(
+    --frame-input-focus-border,
+    var(--_frame-default-input-focus-border-270865d233)
+  );
+  --_frame-input-focus-border: var(
+    --frame-tags-input-focus-border,
+    var(--_frame-default-tags-input-focus-border-54)
+  );
+  /* Fallback for: Focus outline of the tag entry. @token --frame-input-focus-outline */
+  --_frame-default-input-focus-outline-1553451323: 1px solid var(--frame-accent);
+  /* Focus outline of the tag entry. @token --frame-tags-input-focus-outline */
+  --_frame-default-tags-input-focus-outline-55: var(
+    --frame-input-focus-outline,
+    var(--_frame-default-input-focus-outline-1553451323)
+  );
+  --_frame-input-focus-outline: var(
+    --frame-tags-input-focus-outline,
+    var(--_frame-default-tags-input-focus-outline-55)
+  );
+  /* Fallback for: Offset between the outline and the tag entry. @token --frame-input-outline-offset */
+  --_frame-default-input-outline-offset-7c2eec1de9: 0px;
+  /* Offset between the outline and the tag entry. @token --frame-tags-input-outline-offset */
+  --_frame-default-tags-input-outline-offset-56: var(
+    --frame-input-outline-offset,
+    var(--_frame-default-input-outline-offset-7c2eec1de9)
+  );
+  --_frame-input-outline-offset: var(
+    --frame-tags-input-outline-offset,
+    var(--_frame-default-tags-input-outline-offset-56)
+  );
 }
 .frame-input-group {
- --_frame-input-border:var(--frame-input-group-border,var(--frame-input-border,1px solid var(--frame-control-border)));
- --_frame-input-border-radius:var(--frame-input-group-border-radius,var(--frame-input-radius));
- --_frame-input-hover-border:var(--frame-input-group-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
- --_frame-input-hover-outline:var(--frame-input-group-hover-outline,var(--frame-input-hover-outline,none));
- --_frame-input-focus-border:var(--frame-input-group-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
- --_frame-input-focus-outline:var(--frame-input-group-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
- --_frame-input-outline-offset:var(--frame-input-group-outline-offset,var(--frame-input-outline-offset,0px));
+  /* Fallback for: Resting border of the grouped input surface. @token --frame-input-border */
+  --_frame-default-input-border-9c24bfcb50: 1px solid
+    var(--frame-control-border);
+  /* Resting border of the grouped input surface. @token --frame-input-group-border */
+  --_frame-default-input-group-border-57: var(
+    --frame-input-border,
+    var(--_frame-default-input-border-9c24bfcb50)
+  );
+  --_frame-input-border: var(
+    --frame-input-group-border,
+    var(--_frame-default-input-group-border-57)
+  );
+  /* Corner radius of the grouped input surface. @token --frame-input-group-border-radius */
+  --_frame-default-input-group-border-radius-58: var(--frame-input-radius);
+  --_frame-input-border-radius: var(
+    --frame-input-group-border-radius,
+    var(--_frame-default-input-group-border-radius-58)
+  );
+  /* Fallback for: Border while the pointer hovers over the grouped input surface. @token --frame-input-hover-border */
+  --_frame-default-input-hover-border-f52e134bb8: 1px solid
+    var(--frame-control-border);
+  /* Border while the pointer hovers over the grouped input surface. @token --frame-input-group-hover-border */
+  --_frame-default-input-group-hover-border-59: var(
+    --frame-input-hover-border,
+    var(--_frame-default-input-hover-border-f52e134bb8)
+  );
+  --_frame-input-hover-border: var(
+    --frame-input-group-hover-border,
+    var(--_frame-default-input-group-hover-border-59)
+  );
+  /* Fallback for: Outline while the pointer hovers over the grouped input surface. @token --frame-input-hover-outline */
+  --_frame-default-input-hover-outline-0d9cc716cb: none;
+  /* Outline while the pointer hovers over the grouped input surface. @token --frame-input-group-hover-outline */
+  --_frame-default-input-group-hover-outline-60: var(
+    --frame-input-hover-outline,
+    var(--_frame-default-input-hover-outline-0d9cc716cb)
+  );
+  --_frame-input-hover-outline: var(
+    --frame-input-group-hover-outline,
+    var(--_frame-default-input-group-hover-outline-60)
+  );
+  /* Fallback for: Border while focus is within the grouped input surface. @token --frame-input-focus-border */
+  --_frame-default-input-focus-border-0380673398: 1px solid var(--frame-accent);
+  /* Border while focus is within the grouped input surface. @token --frame-input-group-focus-border */
+  --_frame-default-input-group-focus-border-61: var(
+    --frame-input-focus-border,
+    var(--_frame-default-input-focus-border-0380673398)
+  );
+  --_frame-input-focus-border: var(
+    --frame-input-group-focus-border,
+    var(--_frame-default-input-group-focus-border-61)
+  );
+  /* Fallback for: Focus outline of the grouped input surface. @token --frame-input-focus-outline */
+  --_frame-default-input-focus-outline-3952657b68: 1px solid var(--frame-accent);
+  /* Focus outline of the grouped input surface. @token --frame-input-group-focus-outline */
+  --_frame-default-input-group-focus-outline-62: var(
+    --frame-input-focus-outline,
+    var(--_frame-default-input-focus-outline-3952657b68)
+  );
+  --_frame-input-focus-outline: var(
+    --frame-input-group-focus-outline,
+    var(--_frame-default-input-group-focus-outline-62)
+  );
+  /* Fallback for: Offset between the outline and the grouped input surface. @token --frame-input-outline-offset */
+  --_frame-default-input-outline-offset-0cea285911: 0px;
+  /* Offset between the outline and the grouped input surface. @token --frame-input-group-outline-offset */
+  --_frame-default-input-group-outline-offset-63: var(
+    --frame-input-outline-offset,
+    var(--_frame-default-input-outline-offset-0cea285911)
+  );
+  --_frame-input-outline-offset: var(
+    --frame-input-group-outline-offset,
+    var(--_frame-default-input-group-outline-offset-63)
+  );
 }
 .frame-editable-input {
- --_frame-input-border:var(--frame-editable-input-border,var(--frame-input-border,1px solid var(--frame-control-border)));
- --_frame-input-border-radius:var(--frame-editable-input-border-radius,var(--frame-input-radius));
- --_frame-input-hover-border:var(--frame-editable-input-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
- --_frame-input-hover-outline:var(--frame-editable-input-hover-outline,var(--frame-input-hover-outline,none));
- --_frame-input-focus-border:var(--frame-editable-input-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
- --_frame-input-focus-outline:var(--frame-editable-input-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
- --_frame-input-outline-offset:var(--frame-editable-input-outline-offset,var(--frame-input-outline-offset,0px));
+  /* Fallback for: Resting border of the editable text entry. @token --frame-input-border */
+  --_frame-default-input-border-5870b0e035: 1px solid
+    var(--frame-control-border);
+  /* Resting border of the editable text entry. @token --frame-editable-input-border */
+  --_frame-default-editable-input-border-64: var(
+    --frame-input-border,
+    var(--_frame-default-input-border-5870b0e035)
+  );
+  --_frame-input-border: var(
+    --frame-editable-input-border,
+    var(--_frame-default-editable-input-border-64)
+  );
+  /* Corner radius of the editable text entry. @token --frame-editable-input-border-radius */
+  --_frame-default-editable-input-border-radius-65: var(--frame-input-radius);
+  --_frame-input-border-radius: var(
+    --frame-editable-input-border-radius,
+    var(--_frame-default-editable-input-border-radius-65)
+  );
+  /* Fallback for: Border while the pointer hovers over the editable text entry. @token --frame-input-hover-border */
+  --_frame-default-input-hover-border-c58b2e82eb: 1px solid
+    var(--frame-control-border);
+  /* Border while the pointer hovers over the editable text entry. @token --frame-editable-input-hover-border */
+  --_frame-default-editable-input-hover-border-66: var(
+    --frame-input-hover-border,
+    var(--_frame-default-input-hover-border-c58b2e82eb)
+  );
+  --_frame-input-hover-border: var(
+    --frame-editable-input-hover-border,
+    var(--_frame-default-editable-input-hover-border-66)
+  );
+  /* Fallback for: Outline while the pointer hovers over the editable text entry. @token --frame-input-hover-outline */
+  --_frame-default-input-hover-outline-7f31967c0e: none;
+  /* Outline while the pointer hovers over the editable text entry. @token --frame-editable-input-hover-outline */
+  --_frame-default-editable-input-hover-outline-67: var(
+    --frame-input-hover-outline,
+    var(--_frame-default-input-hover-outline-7f31967c0e)
+  );
+  --_frame-input-hover-outline: var(
+    --frame-editable-input-hover-outline,
+    var(--_frame-default-editable-input-hover-outline-67)
+  );
+  /* Fallback for: Border while focus is within the editable text entry. @token --frame-input-focus-border */
+  --_frame-default-input-focus-border-934b0a9ae5: 1px solid var(--frame-accent);
+  /* Border while focus is within the editable text entry. @token --frame-editable-input-focus-border */
+  --_frame-default-editable-input-focus-border-68: var(
+    --frame-input-focus-border,
+    var(--_frame-default-input-focus-border-934b0a9ae5)
+  );
+  --_frame-input-focus-border: var(
+    --frame-editable-input-focus-border,
+    var(--_frame-default-editable-input-focus-border-68)
+  );
+  /* Fallback for: Focus outline of the editable text entry. @token --frame-input-focus-outline */
+  --_frame-default-input-focus-outline-9d6e272891: 1px solid var(--frame-accent);
+  /* Focus outline of the editable text entry. @token --frame-editable-input-focus-outline */
+  --_frame-default-editable-input-focus-outline-69: var(
+    --frame-input-focus-outline,
+    var(--_frame-default-input-focus-outline-9d6e272891)
+  );
+  --_frame-input-focus-outline: var(
+    --frame-editable-input-focus-outline,
+    var(--_frame-default-editable-input-focus-outline-69)
+  );
+  /* Fallback for: Offset between the outline and the editable text entry. @token --frame-input-outline-offset */
+  --_frame-default-input-outline-offset-2199e03638: 0px;
+  /* Offset between the outline and the editable text entry. @token --frame-editable-input-outline-offset */
+  --_frame-default-editable-input-outline-offset-70: var(
+    --frame-input-outline-offset,
+    var(--_frame-default-input-outline-offset-2199e03638)
+  );
+  --_frame-input-outline-offset: var(
+    --frame-editable-input-outline-offset,
+    var(--_frame-default-editable-input-outline-offset-70)
+  );
 }
 .frame-autocomplete-input {
- --_frame-input-border:var(--frame-autocomplete-input-border,var(--frame-input-border,1px solid var(--frame-control-border)));
- --_frame-input-border-radius:var(--frame-autocomplete-input-border-radius,var(--frame-input-radius));
- --_frame-input-hover-border:var(--frame-autocomplete-input-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
- --_frame-input-hover-outline:var(--frame-autocomplete-input-hover-outline,var(--frame-input-hover-outline,none));
- --_frame-input-focus-border:var(--frame-autocomplete-input-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
- --_frame-input-focus-outline:var(--frame-autocomplete-input-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
- --_frame-input-outline-offset:var(--frame-autocomplete-input-outline-offset,var(--frame-input-outline-offset,0px));
+  /* Fallback for: Resting border of the autocomplete text entry. @token --frame-input-border */
+  --_frame-default-input-border-0c1bb124d5: 1px solid
+    var(--frame-control-border);
+  /* Resting border of the autocomplete text entry. @token --frame-autocomplete-input-border */
+  --_frame-default-autocomplete-input-border-71: var(
+    --frame-input-border,
+    var(--_frame-default-input-border-0c1bb124d5)
+  );
+  --_frame-input-border: var(
+    --frame-autocomplete-input-border,
+    var(--_frame-default-autocomplete-input-border-71)
+  );
+  /* Corner radius of the autocomplete text entry. @token --frame-autocomplete-input-border-radius */
+  --_frame-default-autocomplete-input-border-radius-72: var(
+    --frame-input-radius
+  );
+  --_frame-input-border-radius: var(
+    --frame-autocomplete-input-border-radius,
+    var(--_frame-default-autocomplete-input-border-radius-72)
+  );
+  /* Fallback for: Border while the pointer hovers over the autocomplete text entry. @token --frame-input-hover-border */
+  --_frame-default-input-hover-border-43bb3f2547: 1px solid
+    var(--frame-control-border);
+  /* Border while the pointer hovers over the autocomplete text entry. @token --frame-autocomplete-input-hover-border */
+  --_frame-default-autocomplete-input-hover-border-73: var(
+    --frame-input-hover-border,
+    var(--_frame-default-input-hover-border-43bb3f2547)
+  );
+  --_frame-input-hover-border: var(
+    --frame-autocomplete-input-hover-border,
+    var(--_frame-default-autocomplete-input-hover-border-73)
+  );
+  /* Fallback for: Outline while the pointer hovers over the autocomplete text entry. @token --frame-input-hover-outline */
+  --_frame-default-input-hover-outline-abca0f0493: none;
+  /* Outline while the pointer hovers over the autocomplete text entry. @token --frame-autocomplete-input-hover-outline */
+  --_frame-default-autocomplete-input-hover-outline-74: var(
+    --frame-input-hover-outline,
+    var(--_frame-default-input-hover-outline-abca0f0493)
+  );
+  --_frame-input-hover-outline: var(
+    --frame-autocomplete-input-hover-outline,
+    var(--_frame-default-autocomplete-input-hover-outline-74)
+  );
+  /* Fallback for: Border while focus is within the autocomplete text entry. @token --frame-input-focus-border */
+  --_frame-default-input-focus-border-8719b2f06e: 1px solid var(--frame-accent);
+  /* Border while focus is within the autocomplete text entry. @token --frame-autocomplete-input-focus-border */
+  --_frame-default-autocomplete-input-focus-border-75: var(
+    --frame-input-focus-border,
+    var(--_frame-default-input-focus-border-8719b2f06e)
+  );
+  --_frame-input-focus-border: var(
+    --frame-autocomplete-input-focus-border,
+    var(--_frame-default-autocomplete-input-focus-border-75)
+  );
+  /* Fallback for: Focus outline of the autocomplete text entry. @token --frame-input-focus-outline */
+  --_frame-default-input-focus-outline-041f9e05ed: 1px solid var(--frame-accent);
+  /* Focus outline of the autocomplete text entry. @token --frame-autocomplete-input-focus-outline */
+  --_frame-default-autocomplete-input-focus-outline-76: var(
+    --frame-input-focus-outline,
+    var(--_frame-default-input-focus-outline-041f9e05ed)
+  );
+  --_frame-input-focus-outline: var(
+    --frame-autocomplete-input-focus-outline,
+    var(--_frame-default-autocomplete-input-focus-outline-76)
+  );
+  /* Fallback for: Offset between the outline and the autocomplete text entry. @token --frame-input-outline-offset */
+  --_frame-default-input-outline-offset-b7e6d9cb76: 0px;
+  /* Offset between the outline and the autocomplete text entry. @token --frame-autocomplete-input-outline-offset */
+  --_frame-default-autocomplete-input-outline-offset-77: var(
+    --frame-input-outline-offset,
+    var(--_frame-default-input-outline-offset-b7e6d9cb76)
+  );
+  --_frame-input-outline-offset: var(
+    --frame-autocomplete-input-outline-offset,
+    var(--_frame-default-autocomplete-input-outline-offset-77)
+  );
 }
 .frame-color-field-input {
- --_frame-input-border:var(--frame-color-field-input-border,var(--frame-input-border,1px solid var(--frame-control-border)));
- --_frame-input-border-radius:var(--frame-color-field-input-border-radius,var(--frame-input-radius));
- --_frame-input-hover-border:var(--frame-color-field-input-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
- --_frame-input-hover-outline:var(--frame-color-field-input-hover-outline,var(--frame-input-hover-outline,none));
- --_frame-input-focus-border:var(--frame-color-field-input-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
- --_frame-input-focus-outline:var(--frame-color-field-input-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
- --_frame-input-outline-offset:var(--frame-color-field-input-outline-offset,var(--frame-input-outline-offset,0px));
+  /* Fallback for: Resting border of the color text entry. @token --frame-input-border */
+  --_frame-default-input-border-cf29932644: 1px solid
+    var(--frame-control-border);
+  /* Resting border of the color text entry. @token --frame-color-field-input-border */
+  --_frame-default-color-field-input-border-78: var(
+    --frame-input-border,
+    var(--_frame-default-input-border-cf29932644)
+  );
+  --_frame-input-border: var(
+    --frame-color-field-input-border,
+    var(--_frame-default-color-field-input-border-78)
+  );
+  /* Corner radius of the color text entry. @token --frame-color-field-input-border-radius */
+  --_frame-default-color-field-input-border-radius-79: var(
+    --frame-input-radius
+  );
+  --_frame-input-border-radius: var(
+    --frame-color-field-input-border-radius,
+    var(--_frame-default-color-field-input-border-radius-79)
+  );
+  /* Fallback for: Border while the pointer hovers over the color text entry. @token --frame-input-hover-border */
+  --_frame-default-input-hover-border-e482edff00: 1px solid
+    var(--frame-control-border);
+  /* Border while the pointer hovers over the color text entry. @token --frame-color-field-input-hover-border */
+  --_frame-default-color-field-input-hover-border-80: var(
+    --frame-input-hover-border,
+    var(--_frame-default-input-hover-border-e482edff00)
+  );
+  --_frame-input-hover-border: var(
+    --frame-color-field-input-hover-border,
+    var(--_frame-default-color-field-input-hover-border-80)
+  );
+  /* Fallback for: Outline while the pointer hovers over the color text entry. @token --frame-input-hover-outline */
+  --_frame-default-input-hover-outline-00e8921009: none;
+  /* Outline while the pointer hovers over the color text entry. @token --frame-color-field-input-hover-outline */
+  --_frame-default-color-field-input-hover-outline-81: var(
+    --frame-input-hover-outline,
+    var(--_frame-default-input-hover-outline-00e8921009)
+  );
+  --_frame-input-hover-outline: var(
+    --frame-color-field-input-hover-outline,
+    var(--_frame-default-color-field-input-hover-outline-81)
+  );
+  /* Fallback for: Border while focus is within the color text entry. @token --frame-input-focus-border */
+  --_frame-default-input-focus-border-c7f2beeecc: 1px solid var(--frame-accent);
+  /* Border while focus is within the color text entry. @token --frame-color-field-input-focus-border */
+  --_frame-default-color-field-input-focus-border-82: var(
+    --frame-input-focus-border,
+    var(--_frame-default-input-focus-border-c7f2beeecc)
+  );
+  --_frame-input-focus-border: var(
+    --frame-color-field-input-focus-border,
+    var(--_frame-default-color-field-input-focus-border-82)
+  );
+  /* Fallback for: Focus outline of the color text entry. @token --frame-input-focus-outline */
+  --_frame-default-input-focus-outline-4c1fc3e14c: 1px solid var(--frame-accent);
+  /* Focus outline of the color text entry. @token --frame-color-field-input-focus-outline */
+  --_frame-default-color-field-input-focus-outline-83: var(
+    --frame-input-focus-outline,
+    var(--_frame-default-input-focus-outline-4c1fc3e14c)
+  );
+  --_frame-input-focus-outline: var(
+    --frame-color-field-input-focus-outline,
+    var(--_frame-default-color-field-input-focus-outline-83)
+  );
+  /* Fallback for: Offset between the outline and the color text entry. @token --frame-input-outline-offset */
+  --_frame-default-input-outline-offset-223ea0904a: 0px;
+  /* Offset between the outline and the color text entry. @token --frame-color-field-input-outline-offset */
+  --_frame-default-color-field-input-outline-offset-84: var(
+    --frame-input-outline-offset,
+    var(--_frame-default-input-outline-offset-223ea0904a)
+  );
+  --_frame-input-outline-offset: var(
+    --frame-color-field-input-outline-offset,
+    var(--_frame-default-color-field-input-outline-offset-84)
+  );
 }
 .frame-pin-entry {
- --_frame-input-border:var(--frame-pin-entry-border,var(--frame-input-border,1px solid var(--frame-control-border)));
- --_frame-input-border-radius:var(--frame-pin-entry-border-radius,var(--frame-input-radius));
- --_frame-input-hover-border:var(--frame-pin-entry-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
- --_frame-input-hover-outline:var(--frame-pin-entry-hover-outline,var(--frame-input-hover-outline,none));
- --_frame-input-focus-border:var(--frame-pin-entry-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
- --_frame-input-focus-outline:var(--frame-pin-entry-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
- --_frame-input-outline-offset:var(--frame-pin-entry-outline-offset,var(--frame-input-outline-offset,0px));
+  /* Fallback for: Resting border of the individual PIN entry. @token --frame-input-border */
+  --_frame-default-input-border-c82520a73f: 1px solid
+    var(--frame-control-border);
+  /* Resting border of the individual PIN entry. @token --frame-pin-entry-border */
+  --_frame-default-pin-entry-border-85: var(
+    --frame-input-border,
+    var(--_frame-default-input-border-c82520a73f)
+  );
+  --_frame-input-border: var(
+    --frame-pin-entry-border,
+    var(--_frame-default-pin-entry-border-85)
+  );
+  /* Corner radius of the individual PIN entry. @token --frame-pin-entry-border-radius */
+  --_frame-default-pin-entry-border-radius-86: var(--frame-input-radius);
+  --_frame-input-border-radius: var(
+    --frame-pin-entry-border-radius,
+    var(--_frame-default-pin-entry-border-radius-86)
+  );
+  /* Fallback for: Border while the pointer hovers over the individual PIN entry. @token --frame-input-hover-border */
+  --_frame-default-input-hover-border-1acc25e380: 1px solid
+    var(--frame-control-border);
+  /* Border while the pointer hovers over the individual PIN entry. @token --frame-pin-entry-hover-border */
+  --_frame-default-pin-entry-hover-border-87: var(
+    --frame-input-hover-border,
+    var(--_frame-default-input-hover-border-1acc25e380)
+  );
+  --_frame-input-hover-border: var(
+    --frame-pin-entry-hover-border,
+    var(--_frame-default-pin-entry-hover-border-87)
+  );
+  /* Fallback for: Outline while the pointer hovers over the individual PIN entry. @token --frame-input-hover-outline */
+  --_frame-default-input-hover-outline-6ba2a60239: none;
+  /* Outline while the pointer hovers over the individual PIN entry. @token --frame-pin-entry-hover-outline */
+  --_frame-default-pin-entry-hover-outline-88: var(
+    --frame-input-hover-outline,
+    var(--_frame-default-input-hover-outline-6ba2a60239)
+  );
+  --_frame-input-hover-outline: var(
+    --frame-pin-entry-hover-outline,
+    var(--_frame-default-pin-entry-hover-outline-88)
+  );
+  /* Fallback for: Border while focus is within the individual PIN entry. @token --frame-input-focus-border */
+  --_frame-default-input-focus-border-c74ddc7b1a: 1px solid var(--frame-accent);
+  /* Border while focus is within the individual PIN entry. @token --frame-pin-entry-focus-border */
+  --_frame-default-pin-entry-focus-border-89: var(
+    --frame-input-focus-border,
+    var(--_frame-default-input-focus-border-c74ddc7b1a)
+  );
+  --_frame-input-focus-border: var(
+    --frame-pin-entry-focus-border,
+    var(--_frame-default-pin-entry-focus-border-89)
+  );
+  /* Fallback for: Focus outline of the individual PIN entry. @token --frame-input-focus-outline */
+  --_frame-default-input-focus-outline-b890c1ce87: 1px solid var(--frame-accent);
+  /* Focus outline of the individual PIN entry. @token --frame-pin-entry-focus-outline */
+  --_frame-default-pin-entry-focus-outline-90: var(
+    --frame-input-focus-outline,
+    var(--_frame-default-input-focus-outline-b890c1ce87)
+  );
+  --_frame-input-focus-outline: var(
+    --frame-pin-entry-focus-outline,
+    var(--_frame-default-pin-entry-focus-outline-90)
+  );
+  /* Fallback for: Offset between the outline and the individual PIN entry. @token --frame-input-outline-offset */
+  --_frame-default-input-outline-offset-ca62304356: 0px;
+  /* Offset between the outline and the individual PIN entry. @token --frame-pin-entry-outline-offset */
+  --_frame-default-pin-entry-outline-offset-91: var(
+    --frame-input-outline-offset,
+    var(--_frame-default-input-outline-offset-ca62304356)
+  );
+  --_frame-input-outline-offset: var(
+    --frame-pin-entry-outline-offset,
+    var(--_frame-default-pin-entry-outline-offset-91)
+  );
 }
 .frame-select {
- --_frame-input-border:var(--frame-select-border,var(--frame-input-border,1px solid var(--frame-control-border)));
- --_frame-input-border-radius:var(--frame-select-border-radius,var(--frame-input-radius));
- --_frame-input-hover-border:var(--frame-select-hover-border,var(--frame-input-hover-border,1px solid var(--frame-control-border)));
- --_frame-input-hover-outline:var(--frame-select-hover-outline,var(--frame-input-hover-outline,none));
- --_frame-input-focus-border:var(--frame-select-focus-border,var(--frame-input-focus-border,1px solid var(--frame-accent)));
- --_frame-input-focus-outline:var(--frame-select-focus-outline,var(--frame-input-focus-outline,1px solid var(--frame-accent)));
- --_frame-input-outline-offset:var(--frame-select-outline-offset,var(--frame-input-outline-offset,0px));
+  /* Fallback for: Resting border of the select trigger. @token --frame-input-border */
+  --_frame-default-input-border-5f678fadda: 1px solid
+    var(--frame-control-border);
+  /* Resting border of the select trigger. @token --frame-select-border */
+  --_frame-default-select-border-92: var(
+    --frame-input-border,
+    var(--_frame-default-input-border-5f678fadda)
+  );
+  --_frame-input-border: var(
+    --frame-select-border,
+    var(--_frame-default-select-border-92)
+  );
+  /* Corner radius of the select trigger. @token --frame-select-border-radius */
+  --_frame-default-select-border-radius-93: var(--frame-input-radius);
+  --_frame-input-border-radius: var(
+    --frame-select-border-radius,
+    var(--_frame-default-select-border-radius-93)
+  );
+  /* Fallback for: Border while the pointer hovers over the select trigger. @token --frame-input-hover-border */
+  --_frame-default-input-hover-border-d45420bf48: 1px solid
+    var(--frame-control-border);
+  /* Border while the pointer hovers over the select trigger. @token --frame-select-hover-border */
+  --_frame-default-select-hover-border-94: var(
+    --frame-input-hover-border,
+    var(--_frame-default-input-hover-border-d45420bf48)
+  );
+  --_frame-input-hover-border: var(
+    --frame-select-hover-border,
+    var(--_frame-default-select-hover-border-94)
+  );
+  /* Fallback for: Outline while the pointer hovers over the select trigger. @token --frame-input-hover-outline */
+  --_frame-default-input-hover-outline-8e5bb1dfc1: none;
+  /* Outline while the pointer hovers over the select trigger. @token --frame-select-hover-outline */
+  --_frame-default-select-hover-outline-95: var(
+    --frame-input-hover-outline,
+    var(--_frame-default-input-hover-outline-8e5bb1dfc1)
+  );
+  --_frame-input-hover-outline: var(
+    --frame-select-hover-outline,
+    var(--_frame-default-select-hover-outline-95)
+  );
+  /* Fallback for: Border when keyboard focus reaches the select trigger. @token --frame-input-focus-border */
+  --_frame-default-input-focus-border-02bb7320d0: 1px solid var(--frame-accent);
+  /* Border when keyboard focus reaches the select trigger. @token --frame-select-focus-border */
+  --_frame-default-select-focus-border-96: var(
+    --frame-input-focus-border,
+    var(--_frame-default-input-focus-border-02bb7320d0)
+  );
+  --_frame-input-focus-border: var(
+    --frame-select-focus-border,
+    var(--_frame-default-select-focus-border-96)
+  );
+  /* Fallback for: Outline when keyboard focus reaches the select trigger. @token --frame-input-focus-outline */
+  --_frame-default-input-focus-outline-5ca0302c8f: 1px solid var(--frame-accent);
+  /* Outline when keyboard focus reaches the select trigger. @token --frame-select-focus-outline */
+  --_frame-default-select-focus-outline-97: var(
+    --frame-input-focus-outline,
+    var(--_frame-default-input-focus-outline-5ca0302c8f)
+  );
+  --_frame-input-focus-outline: var(
+    --frame-select-focus-outline,
+    var(--_frame-default-select-focus-outline-97)
+  );
+  /* Fallback for: Offset between the outline and the select trigger. @token --frame-input-outline-offset */
+  --_frame-default-input-outline-offset-568eba56ae: 0px;
+  /* Offset between the outline and the select trigger. @token --frame-select-outline-offset */
+  --_frame-default-select-outline-offset-98: var(
+    --frame-input-outline-offset,
+    var(--_frame-default-input-outline-offset-568eba56ae)
+  );
+  --_frame-input-outline-offset: var(
+    --frame-select-outline-offset,
+    var(--_frame-default-select-outline-offset-98)
+  );
 }
-:is(.frame-text-input,.frame-text-area,.frame-number-field,.frame-date-field,.frame-advanced-input,.frame-form-input,.frame-combobox-anchor,.frame-tags-input,.frame-input-group,.frame-editable-input,.frame-autocomplete-input,.frame-color-field-input,.frame-pin-entry,.frame-select):not([data-invalid]):not([aria-invalid=true]) {border:var(--_frame-input-border);border-radius:var(--_frame-input-border-radius);outline:none;outline-offset:var(--_frame-input-outline-offset);}
-:is(.frame-text-input,.frame-text-area,.frame-number-field,.frame-date-field,.frame-advanced-input,.frame-form-input,.frame-combobox-anchor,.frame-tags-input,.frame-input-group,.frame-editable-input,.frame-autocomplete-input,.frame-color-field-input,.frame-pin-entry,.frame-select):not([data-invalid]):not([aria-invalid=true]):hover:not(:disabled):not([data-disabled]):not(:focus-within) {border:var(--_frame-input-hover-border);outline:var(--_frame-input-hover-outline);}
-:is(.frame-text-input,.frame-text-area,.frame-number-field,.frame-date-field,.frame-advanced-input,.frame-form-input,.frame-combobox-anchor,.frame-tags-input,.frame-editable-input,.frame-autocomplete-input,.frame-color-field-input,.frame-pin-entry):focus-within:not(:disabled):not([data-disabled]):not([data-invalid]):not([aria-invalid=true]),.frame-select:focus-visible:not(:disabled) {border:var(--_frame-input-focus-border);outline:var(--_frame-input-focus-outline);}
+:is(
+    .frame-text-input,
+    .frame-text-area,
+    .frame-number-field,
+    .frame-date-field,
+    .frame-advanced-input,
+    .frame-form-input,
+    .frame-combobox-anchor,
+    .frame-tags-input,
+    .frame-input-group,
+    .frame-editable-input,
+    .frame-autocomplete-input,
+    .frame-color-field-input,
+    .frame-pin-entry,
+    .frame-select
+  ):not([data-invalid]):not([aria-invalid='true']) {
+  border: var(--_frame-input-border);
+  border-radius: var(--_frame-input-border-radius);
+  outline: none;
+  outline-offset: var(--_frame-input-outline-offset);
+}
+:is(
+    .frame-text-input,
+    .frame-text-area,
+    .frame-number-field,
+    .frame-date-field,
+    .frame-advanced-input,
+    .frame-form-input,
+    .frame-combobox-anchor,
+    .frame-tags-input,
+    .frame-input-group,
+    .frame-editable-input,
+    .frame-autocomplete-input,
+    .frame-color-field-input,
+    .frame-pin-entry,
+    .frame-select
+  ):not([data-invalid]):not([aria-invalid='true']):hover:not(:disabled):not(
+    [data-disabled]
+  ):not(:focus-within) {
+  border: var(--_frame-input-hover-border);
+  outline: var(--_frame-input-hover-outline);
+}
+:is(
+    .frame-text-input,
+    .frame-text-area,
+    .frame-number-field,
+    .frame-date-field,
+    .frame-advanced-input,
+    .frame-form-input,
+    .frame-combobox-anchor,
+    .frame-tags-input,
+    .frame-editable-input,
+    .frame-autocomplete-input,
+    .frame-color-field-input,
+    .frame-pin-entry
+  ):focus-within:not(:disabled):not([data-disabled]):not([data-invalid]):not(
+    [aria-invalid='true']
+  ),
+.frame-select:focus-visible:not(:disabled) {
+  border: var(--_frame-input-focus-border);
+  outline: var(--_frame-input-focus-outline);
+}
 
 /* Composite text entries draw one outer surface, including on keyboard focus. */
-.frame-number-field > :is(.frame-form-input,.frame-text-input),
+.frame-number-field > :is(.frame-form-input, .frame-text-input),
 .frame-combobox-anchor > .frame-combobox-input,
 .frame-tags-input .frame-tags-entry,
-.frame-input-group > .frame-input-group-control > :is(.frame-text-input,.frame-text-area,.frame-number-field,.frame-date-field,.frame-combobox-anchor,.frame-select) {border:0 !important;border-radius:0;outline:none !important;background:transparent;}
-.frame-date-field > .frame-date-segment:focus-visible {outline:none;}
-.frame-input-group .frame-control-button:focus-visible {outline:none;}
+.frame-input-group
+  > .frame-input-group-control
+  > :is(
+    .frame-text-input,
+    .frame-text-area,
+    .frame-number-field,
+    .frame-date-field,
+    .frame-combobox-anchor,
+    .frame-select
+  ) {
+  border: 0 !important;
+  border-radius: 0;
+  outline: none !important;
+  background: transparent;
+}
+.frame-date-field > .frame-date-segment:focus-visible {
+  outline: none;
+}
+.frame-input-group .frame-control-button:focus-visible {
+  outline: none;
+}
 
 /* A grouped select follows the select's keyboard-only focus policy. */
-.frame-input-group:focus-within:not(:has(.frame-select:focus)):not([data-disabled]):not([data-invalid]):not([aria-invalid=true]),
-.frame-input-group:has(.frame-select:focus-visible):not([data-disabled]):not([data-invalid]):not([aria-invalid=true]) {border:var(--_frame-input-focus-border);outline:var(--_frame-input-focus-outline);}
+.frame-input-group:focus-within:not(:has(.frame-select:focus)):not(
+    [data-disabled]
+  ):not([data-invalid]):not([aria-invalid='true']),
+.frame-input-group:has(.frame-select:focus-visible):not([data-disabled]):not(
+    [data-invalid]
+  ):not([aria-invalid='true']) {
+  border: var(--_frame-input-focus-border);
+  outline: var(--_frame-input-focus-outline);
+}
