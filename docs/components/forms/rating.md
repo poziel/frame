@@ -58,11 +58,133 @@ This example reuses Basic usage state. The slot runs once per generated step; ke
 </FrameRating>
 ```
 
+### Half-step ratings
+
+Choose between whole and half scores while retaining five visible rating items.
+
+<!-- frame:example id="rating.fractional" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameRating } from '@frame/core';
+const demoModelValue = ref(3.5);
+const demoLength = 5;
+const demoStep = 0.5;
+</script>
+<template>
+<FrameRating v-model="demoModelValue" :length="demoLength" :step="demoStep" />
+</template>
+```
+
+### Preview before choosing
+
+Move over the stars to preview another score, then leave without clicking. The stored score stays unchanged.
+
+<!-- frame:example id="rating.preview" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameRating } from '@frame/core';
+const demoModelValue = ref(2);
+const demoLength = 5;
+const demoHoverable = true;
+</script>
+<template>
+<FrameRating v-model="demoModelValue" :length="demoLength" :hoverable="demoHoverable" />
+</template>
+```
+
+### Clear the current score
+
+Activate the currently selected score again to reset the rating to zero.
+
+<!-- frame:example id="rating.clear" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameRating } from '@frame/core';
+const demoModelValue = ref(4);
+const demoLength = 5;
+const demoClearable = true;
+</script>
+<template>
+<FrameRating v-model="demoModelValue" :length="demoLength" :clearable="demoClearable" />
+</template>
+```
+
+### Custom rating content
+
+Replace the default star through the slot while preserving the rating interaction.
+
+<!-- frame:example id="rating.symbols" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameRating } from '@frame/core';
+const demoModelValue = ref(3);
+const demoLength = 5;
+</script>
+<template>
+<FrameRating v-model="demoModelValue" :length="demoLength">
+  <template #default><span v-text="&quot;♥&quot;" /></template>
+</FrameRating>
+</template>
+```
+
 ## APIs
+
+<!-- frame:generated api="rating" -->
+
+### FrameRating
+
+Source: `packages/core/src/components/forms/FrameRating.vue`
+
+#### Properties
+
+| Name           | Type                                   | Default | Description                                                                                                                                                                                          |
+| -------------- | -------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `defaultValue` | `number \| undefined`                  | Omitted | The rating value when initially rendered. Use when you do not need to control the state of the rating.                                                                                               |
+| `modelValue`   | `number \| undefined`                  | Omitted | The controlled rating value. Can be bound with `v-model`.                                                                                                                                            |
+| `length`       | `number \| undefined`                  | Omitted | The number of rating items to render.                                                                                                                                                                |
+| `clearable`    | `boolean \| undefined`                 | false   | When `true`, clicking the currently selected rating resets the value to `0`.                                                                                                                         |
+| `hoverable`    | `boolean \| undefined`                 | false   | When `true`, the rating previews the value under the pointer on hover.                                                                                                                               |
+| `step`         | `1 \| 0.5 \| 0.25 \| 0.1 \| undefined` | Omitted | The granularity each rating item is divided into.                                                                                                                                                    |
+| `disabled`     | `boolean \| undefined`                 | false   | When `true`, prevents the user from interacting with radio items.                                                                                                                                    |
+| `name`         | `string \| undefined`                  | Omitted | The name of the field. Submitted with its owning form as part of a name/value pair.                                                                                                                  |
+| `required`     | `boolean \| undefined`                 | false   | When `true`, indicates that the user must set the value before the owning form can be submitted.                                                                                                     |
+| `asChild`      | `boolean \| undefined`                 | false   | Change the default rendered element for the one passed as a child, merging their props and behavior. Read our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details. |
+| `as`           | `Component \| AsTag \| undefined`      | "div"   | The element or component this component should render as. Can be overwritten by `asChild`. defaultValue: "div"                                                                                       |
+| `dir`          | `Direction \| undefined`               | Omitted | The reading direction of the combobox when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.                                         |
+| `loop`         | `boolean \| undefined`                 | false   | When `true`, keyboard navigation will loop from last item to first, and vice versa.                                                                                                                  |
+| `orientation`  | `DataOrientation \| undefined`         | Omitted | The orientation of the component.                                                                                                                                                                    |
+
+#### Events
+
+| Name                | Parameters        | Return type | Description                                 |
+| ------------------- | ----------------- | ----------- | ------------------------------------------- |
+| `update:modelValue` | `payload: number` | `void`      | Event handler called when the value changes |
+
+#### Slots
+
+| Name      | Parameters           | Return type  | Description                                    |
+| --------- | -------------------- | ------------ | ---------------------------------------------- |
+| `default` | `{ value: number; }` | `VNodeChild` | Content for a rating step; defaults to a star. |
+
+#### Exposed API
+
+No declared entries.
+
+<!-- /frame:generated -->
+
+### Composition and upstream reference
 
 Defaults below are Reka reference defaults unless a Frame override is stated. Declared means a typed Frame prop/event; Forwarded means attribute/listener fallthrough to the named part; Internal means generated by Frame; Absent means not routed or composed. Generic upstream `T`/`AcceptableValue` describes Reka, not a promise of arbitrary option values in Frame.
 
-### Root
+#### Root
 
 #### Props
 
@@ -106,7 +228,7 @@ Defaults below are Reka reference defaults unless a Frame override is stated. De
 
 Frame does not defineExpose or forward the internal Reka instance. Do not depend on internal Reka methods/refs through a Frame component ref.
 
-### Item
+#### Item
 
 #### Props
 
@@ -130,7 +252,7 @@ No component emits on this part. Native bubbling listeners are not additional co
 
 No component state data attributes are defined on this part. Inherited native/ARIA attributes are not data attributes.
 
-### ItemIndicator
+#### ItemIndicator
 
 #### Props
 
@@ -155,7 +277,7 @@ Underlying default content has no documented scoped fields. Frame generates this
 | `data-state`    | `active, otherwise absent` | Filled score or hover preview; aria-checked separately tracks selected radio. |
 | `data-disabled` | `Present when disabled`    | Underlying radio disabled state.                                              |
 
-### Frame additions
+#### Frame additions
 
 #### Props
 
@@ -169,13 +291,29 @@ No additional Frame-only events; see the part tables for declared or forwarded e
 
 `default`: `{ value: number }`, rendered inside each ItemIndicator; fallback is ★. This is the step value, not the entire Root slot payload.
 
-### Sources and version
+#### Sources and version
 
 Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/rating), its [Markdown reference](https://reka-ui.com/docs/components/rating.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameRating.vue). Styling comes from [advanced.css](../../../packages/core/src/components/forms/shared/advanced.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
 
 ## Styling
 
-### Parts and selectors
+Use the shared theme variables in application content. Component-specific declarations and their defaults are listed below.
+
+<!-- frame:generated styles="rating" -->
+
+| CSS variable     | Theme path     | Default expression | Purpose                                                                                  | Context                                                                                                                                             |
+| ---------------- | -------------- | ------------------ | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--frame-muted`  | `frame.muted`  | `#8e9496`          | Secondary foreground for descriptions, hints, and visually subordinate content.          | `.frame-rating-step`                                                                                                                                |
+| `--frame-accent` | `frame.accent` | `#0078d4`          | Shared interaction color for keyboard focus, active actions, and accent-filled controls. | `.frame-rating-step[data-state='active']`                                                                                                           |
+| `--frame-accent` | `frame.accent` | `#0078d4`          | Shared interaction color for keyboard focus, active actions, and accent-filled controls. | `:is(   .frame-advanced-input,   .frame-rating-step,   .frame-tag,   .frame-tag-delete,   .frame-color-thumb,   .frame-swatch-item ):focus-visible` |
+
+Expressions are preserved as written; their computed values depend on the active theme and component state.
+
+<!-- /frame:generated -->
+
+### Additional styling guidance
+
+#### Parts and selectors
 
 | Selector             | Part          | Placement                                                                        |
 | -------------------- | ------------- | -------------------------------------------------------------------------------- |
@@ -185,7 +323,7 @@ Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https:
 
 Items are fixed at 24 by 28px, with 3px group gaps and 24px indicator glyphs. Reka’s --reka-rating-item-step-* values are runtime geometry outputs, not Frame JSON override keys.
 
-### Variables
+#### Variables
 
 | Token key        | Variable         | Value kind | Default/fallback                                                  | Part/effect                                | Scope/limits                                                                                              | Description                                      |
 | ---------------- | ---------------- | ---------- | ----------------------------------------------------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |

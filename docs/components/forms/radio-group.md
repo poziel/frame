@@ -67,46 +67,145 @@ These examples reuse Basic usage state. The APIs tab explains which attributes a
 />
 ```
 
+### Mutually exclusive choices
+
+Select an option to replace the previous choice. Only one value is checked.
+
+<!-- frame:example id="radio-group.exclusive" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameRadioGroup } from '@frame/core';
+const demoModelValue = ref("comfortable");
+const demoOptions = [
+  {
+    "value": "default",
+    "label": "Default"
+  },
+  {
+    "value": "comfortable",
+    "label": "Comfortable"
+  },
+  {
+    "value": "compact",
+    "label": "Compact"
+  }
+];
+</script>
+<template>
+<FrameRadioGroup v-model="demoModelValue" :options="demoOptions" :label="&quot;Density&quot;" />
+</template>
+```
+
+### Explain available choices
+
+Details distinguish the choices; the disabled option remains visible without becoming selected.
+
+<!-- frame:example id="radio-group.details" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameRadioGroup } from '@frame/core';
+const demoModelValue = ref("standard");
+const demoOptions = [
+  {
+    "value": "standard",
+    "label": "Standard",
+    "detail": "Included"
+  },
+  {
+    "value": "express",
+    "label": "Express",
+    "detail": "Next day"
+  },
+  {
+    "value": "international",
+    "label": "International",
+    "detail": "Unavailable",
+    "disabled": true
+  }
+];
+</script>
+<template>
+<FrameRadioGroup v-model="demoModelValue" :options="demoOptions" :label="&quot;Delivery&quot;" />
+</template>
+```
+
 ## APIs
+
+<!-- frame:generated api="radio-group" -->
+
+### FrameRadioGroup
+
+Source: `packages/core/src/components/forms/FrameRadioGroup.vue`
+
+#### Properties
+
+| Name         | Type                    | Default  | Description                                                                    |
+| ------------ | ----------------------- | -------- | ------------------------------------------------------------------------------ |
+| `modelValue` | `string`                | Required | Current value owned by the application; updates are emitted after interaction. |
+| `options`    | `readonly SelectItem[]` | Required | Ordered selectable options and separators rendered by this control.            |
+| `disabled`   | `boolean \| undefined`  | false    | Prevents user interaction with the control.                                    |
+| `label`      | `string \| undefined`   | Omitted  | Accessible name of the control.                                                |
+
+#### Events
+
+| Name                | Parameters      | Return type | Description                                                 |
+| ------------------- | --------------- | ----------- | ----------------------------------------------------------- |
+| `update:modelValue` | `value: string` | `void`      | Requests the new application-owned value after interaction. |
+
+#### Slots
+
+No declared entries.
+
+#### Exposed API
+
+No declared entries.
+
+<!-- /frame:generated -->
+
+### Composition and upstream reference
 
 The tables separate Reka types from the actual Frame contract. Declared APIs are typed by Frame; forwarded attributes reach only the named part; internal parts cannot be configured independently. Defaults labeled Reka belong to the underlying reference.
 
-### Root
+#### Root
 
 Frame supplies this part in its anatomy. Availability below refers to configuration through the Frame wrapper, not direct use of a Reka export.
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | Same upstream type; undeclared in Frame | `"div"` (Reka) | Forwarded / limited | Changes Root composition, not individual children; can break Frame fixed anatomy. |
-| `asChild` | `boolean` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / limited | Changes Root composition, not individual children; can break Frame fixed anatomy. |
-| `defaultValue` | `AcceptableValue` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / ineffective | Frame supplies the controlled model; this does not establish uncontrolled Frame state. |
-| `dir` | `"ltr" \| "rtl"` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Reading/navigation direction. |
-| `disabled` | `boolean` | `boolean` | `false` | Declared | Prevent interaction. |
-| `loop` | `boolean` | Same upstream type; undeclared in Frame | `true` (Reka) | Forwarded | Wrap keyboard navigation at endpoints. |
-| `modelValue` | `AcceptableValue` | `string` | `Required` | Changed | Required string selection. |
-| `name` | `string` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Native submitted field name. |
-| `orientation` | `"vertical" \| "horizontal"` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded | Keyboard navigation orientation; does not set Frame flex layout. |
-| `required` | `boolean` | Same upstream type; undeclared in Frame | `false` (Reka) | Forwarded | Native required-value constraint. |
+| Prop           | Reka type                    | Frame type                              | Required/default            | Availability            | Description                                                                            |
+| -------------- | ---------------------------- | --------------------------------------- | --------------------------- | ----------------------- | -------------------------------------------------------------------------------------- |
+| `as`           | `AsTag \| Component`         | Same upstream type; undeclared in Frame | `"div"` (Reka)              | Forwarded / limited     | Changes Root composition, not individual children; can break Frame fixed anatomy.      |
+| `asChild`      | `boolean`                    | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / limited     | Changes Root composition, not individual children; can break Frame fixed anatomy.      |
+| `defaultValue` | `AcceptableValue`            | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded / ineffective | Frame supplies the controlled model; this does not establish uncontrolled Frame state. |
+| `dir`          | `"ltr" \| "rtl"`             | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Reading/navigation direction.                                                          |
+| `disabled`     | `boolean`                    | `boolean`                               | `false`                     | Declared                | Prevent interaction.                                                                   |
+| `loop`         | `boolean`                    | Same upstream type; undeclared in Frame | `true` (Reka)               | Forwarded               | Wrap keyboard navigation at endpoints.                                                 |
+| `modelValue`   | `AcceptableValue`            | `string`                                | `Required`                  | Changed                 | Required string selection.                                                             |
+| `name`         | `string`                     | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Native submitted field name.                                                           |
+| `orientation`  | `"vertical" \| "horizontal"` | Same upstream type; undeclared in Frame | Unset in upstream reference | Forwarded               | Keyboard navigation orientation; does not set Frame flex layout.                       |
+| `required`     | `boolean`                    | Same upstream type; undeclared in Frame | `false` (Reka)              | Forwarded               | Native required-value constraint.                                                      |
 
 #### Emits
 
-| Emit | Reka payload | Frame payload | Availability | Behavior |
-| --- | --- | --- | --- | --- |
-| `update:modelValue` | `[payload: AcceptableValue]` | string | Declared / changed | Controlled-model update using the conversion described on modelValue above. Not a cancellable event. |
+| Emit                | Reka payload                 | Frame payload | Availability       | Behavior                                                                                             |
+| ------------------- | ---------------------------- | ------------- | ------------------ | ---------------------------------------------------------------------------------------------------- |
+| `update:modelValue` | `[payload: AcceptableValue]` | string        | Declared / changed | Controlled-model update using the conversion described on modelValue above. Not a cancellable event. |
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | `modelValue: null \| string \| number \| bigint \| Record<string, any>` | Internal; payload not forwarded to callers |
+| Upstream slot | Scoped field                                                            | Frame availability                         |
+| ------------- | ----------------------------------------------------------------------- | ------------------------------------------ |
+| default       | `modelValue: null \| string \| number \| bigint \| Record<string, any>` | Internal; payload not forwarded to callers |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
-| data-disabled | Present when disabled | Group state. |
+| Attribute        | Value/presence                        | Meaning                 |
+| ---------------- | ------------------------------------- | ----------------------- |
+| data-disabled    | Present when disabled                 | Group state.            |
 | data-orientation | horizontal / vertical when configured | Roving-focus direction. |
 
 #### Configuration notes
@@ -117,55 +216,55 @@ Orientation controls keyboard semantics; it does not change `.frame-choice-group
 
 Use `aria-checked` or Item's `data-state` for selection. The default `.frame-choice-item[data-state='checked']` style highlights selected items. There is no popup/open state.
 
-### Item
+#### Item
 
 Frame supplies this part in its anatomy. Availability below refers to configuration through the Frame wrapper, not direct use of a Reka export.
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | No independent Frame prop | `"button"` (Reka) | Internal | Rendered element/component. Not independently configurable through Frame. |
-| `asChild` | `boolean` | No independent Frame prop | Unset in upstream reference | Internal | Merge behavior into the supplied child element. Not independently configurable through Frame. |
-| `disabled` | `boolean` | No independent Frame prop | `false` (Reka) | Internal | Derived from group/option disabled state. |
-| `id` | `string` | No independent Frame prop | Unset in upstream reference | Internal | Element or form-control identity. Not independently configurable through Frame. |
-| `name` | `string` | No independent Frame prop | Unset in upstream reference | Internal | Native submitted field name. Not independently configurable through Frame. |
-| `required` | `boolean` | No independent Frame prop | Unset in upstream reference | Internal | Native required-value constraint. Not independently configurable through Frame. |
-| `value` | `AcceptableValue` | No independent Frame prop | Unset in upstream reference | Internal | Derived from option.value. |
+| Prop       | Reka type            | Frame type                | Required/default            | Availability | Description                                                                                   |
+| ---------- | -------------------- | ------------------------- | --------------------------- | ------------ | --------------------------------------------------------------------------------------------- |
+| `as`       | `AsTag \| Component` | No independent Frame prop | `"button"` (Reka)           | Internal     | Rendered element/component. Not independently configurable through Frame.                     |
+| `asChild`  | `boolean`            | No independent Frame prop | Unset in upstream reference | Internal     | Merge behavior into the supplied child element. Not independently configurable through Frame. |
+| `disabled` | `boolean`            | No independent Frame prop | `false` (Reka)              | Internal     | Derived from group/option disabled state.                                                     |
+| `id`       | `string`             | No independent Frame prop | Unset in upstream reference | Internal     | Element or form-control identity. Not independently configurable through Frame.               |
+| `name`     | `string`             | No independent Frame prop | Unset in upstream reference | Internal     | Native submitted field name. Not independently configurable through Frame.                    |
+| `required` | `boolean`            | No independent Frame prop | Unset in upstream reference | Internal     | Native required-value constraint. Not independently configurable through Frame.               |
+| `value`    | `AcceptableValue`    | No independent Frame prop | Unset in upstream reference | Internal     | Derived from option.value.                                                                    |
 
 #### Emits
 
-| Emit | Reka payload | Frame payload | Availability | Behavior |
-| --- | --- | --- | --- | --- |
-| `select` | `[event: SelectEvent]` | Not exposed | Internal | Not emitted by the Frame wrapper and not routed from this internal part. |
+| Emit     | Reka payload           | Frame payload | Availability | Behavior                                                                 |
+| -------- | ---------------------- | ------------- | ------------ | ------------------------------------------------------------------------ |
+| `select` | `[event: SelectEvent]` | Not exposed   | Internal     | Not emitted by the Frame wrapper and not routed from this internal part. |
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | `checked: boolean` | Internal; payload not forwarded to callers |
-| default | `required: boolean` | Internal; payload not forwarded to callers |
-| default | `disabled: boolean` | Internal; payload not forwarded to callers |
+| Upstream slot | Scoped field        | Frame availability                         |
+| ------------- | ------------------- | ------------------------------------------ |
+| default       | `checked: boolean`  | Internal; payload not forwarded to callers |
+| default       | `required: boolean` | Internal; payload not forwarded to callers |
+| default       | `disabled: boolean` | Internal; payload not forwarded to callers |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
-| data-state | checked / unchecked | Current checked/on state. |
-| data-disabled | Present when disabled | Underlying disabled state. |
-| data-orientation | When configured | Roving item orientation. |
+| Attribute        | Value/presence        | Meaning                    |
+| ---------------- | --------------------- | -------------------------- |
+| data-state       | checked / unchecked   | Current checked/on state.  |
+| data-disabled    | Present when disabled | Underlying disabled state. |
+| data-orientation | When configured       | Roving item orientation.   |
 
-### Indicator
+#### Indicator
 
 Frame supplies this part in its anatomy. Availability below refers to configuration through the Frame wrapper, not direct use of a Reka export.
 
 #### Props
 
-| Prop | Reka type | Frame type | Required/default | Availability | Description |
-| --- | --- | --- | --- | --- | --- |
-| `as` | `AsTag \| Component` | No independent Frame prop | `"span"` (Reka) | Internal | Rendered element/component. Not independently configurable through Frame. |
-| `asChild` | `boolean` | No independent Frame prop | Unset in upstream reference | Internal | Merge behavior into the supplied child element. Not independently configurable through Frame. |
-| `forceMount` | `boolean` | No independent Frame prop | Unset in upstream reference | Internal | Keep the part mounted for presence/animation control. Not independently configurable through Frame. |
+| Prop         | Reka type            | Frame type                | Required/default            | Availability | Description                                                                                         |
+| ------------ | -------------------- | ------------------------- | --------------------------- | ------------ | --------------------------------------------------------------------------------------------------- |
+| `as`         | `AsTag \| Component` | No independent Frame prop | `"span"` (Reka)             | Internal     | Rendered element/component. Not independently configurable through Frame.                           |
+| `asChild`    | `boolean`            | No independent Frame prop | Unset in upstream reference | Internal     | Merge behavior into the supplied child element. Not independently configurable through Frame.       |
+| `forceMount` | `boolean`            | No independent Frame prop | Unset in upstream reference | Internal     | Keep the part mounted for presence/animation control. Not independently configurable through Frame. |
 
 #### Emits
 
@@ -173,25 +272,25 @@ No component-defined emits on this part. Native listeners are separate from comp
 
 #### Slots
 
-| Upstream slot | Scoped field | Frame availability |
-| --- | --- | --- |
-| default | No scoped fields listed | Frame supplies the internal composition; no public part slot |
+| Upstream slot | Scoped field            | Frame availability                                           |
+| ------------- | ----------------------- | ------------------------------------------------------------ |
+| default       | No scoped fields listed | Frame supplies the internal composition; no public part slot |
 
 #### Data attributes
 
-| Attribute | Value/presence | Meaning |
-| --- | --- | --- |
-| data-state | checked / unchecked during presence | Reflects owner state while mounted, including presence transitions. |
-| data-disabled | Present when disabled | Underlying disabled state. |
+| Attribute     | Value/presence                      | Meaning                                                             |
+| ------------- | ----------------------------------- | ------------------------------------------------------------------- |
+| data-state    | checked / unchecked during presence | Reflects owner state while mounted, including presence transitions. |
+| data-disabled | Present when disabled               | Underlying disabled state.                                          |
 
-### Frame additions
+#### Frame additions
 
 #### Props
 
-| Prop | Type | Required/default | Description |
-| --- | --- | --- | --- |
-| `options` | `readonly SelectItem[]` | `Required` | Generated radio choices and separators; labels/detail are rendered, descriptions are not. |
-| `label` | `string` | `Unset` | Accessible group name, not a visible heading. |
+| Prop      | Type                    | Required/default | Description                                                                               |
+| --------- | ----------------------- | ---------------- | ----------------------------------------------------------------------------------------- |
+| `options` | `readonly SelectItem[]` | `Required`       | Generated radio choices and separators; labels/detail are rendered, descriptions are not. |
+| `label`   | `string`                | `Unset`          | Accessible group name, not a visible heading.                                             |
 
 #### Slots
 
@@ -205,40 +304,71 @@ No additional Frame-only emits. The controlled model event is documented on Root
 
 No Frame-defined methods or internal Reka refs are exposed.
 
-### Sources and version
+#### Sources and version
 
 [FrameRadioGroup.vue](../../../packages/core/src/components/forms/FrameRadioGroup.vue) and [controls.css](../../../packages/core/src/components/forms/shared/controls.css) define the wrapper. Compared with the official [Reka Radio Group reference](https://reka-ui.com/docs/components/radio-group.md) and installed Reka `2.11.0`.
 
 ## Styling
 
-### Parts and selectors
+Use the shared theme variables in application content. Component-specific declarations and their defaults are listed below.
 
-| Selector | Part | Placement/attribute target |
-| --- | --- | --- |
-| `.frame-choice-group` | Group container | Caller class/style targets this element. |
-| `.frame-choice-item` | Radio item | Internal part; caller attributes do not target it independently. |
-| `.frame-radio-indicator` | Indicator | Internal part; caller attributes do not target it independently. |
-| `.frame-select-separator` | Separator | Internal part; caller attributes do not target it independently. |
+<!-- frame:generated styles="radio-group" -->
+
+| CSS variable                                               | Theme path                                               | Default expression           | Purpose                                                                                                                                                                 | Context                                                                                                                                                                    |
+| ---------------------------------------------------------- | -------------------------------------------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--frame-select-options-frame-select-separator-padding`    | `frame.select.options.frame.select.separator.padding`    | `0`                          | Internal spacing for .frame-select-options > .frame-select-separator.                                                                                                   | `.frame-select-options > .frame-select-separator`                                                                                                                          |
+| `--frame-select-options-frame-select-separator-min-height` | `frame.select.options.frame.select.separator.min.height` | `1px`                        | Minimum height for .frame-select-options > .frame-select-separator.                                                                                                     | `.frame-select-options > .frame-select-separator`                                                                                                                          |
+| `--frame-select-options-frame-select-separator-height`     | `frame.select.options.frame.select.separator.height`     | `1px`                        | Height for .frame-select-options > .frame-select-separator.                                                                                                             | `.frame-select-options > .frame-select-separator`                                                                                                                          |
+| `--frame-select-options-frame-select-separator-margin`     | `frame.select.options.frame.select.separator.margin`     | `5px     0`                  | Outer spacing for .frame-select-options > .frame-select-separator.                                                                                                      | `.frame-select-options > .frame-select-separator`                                                                                                                          |
+| `--frame-line`                                             | `frame.line`                                             | `#3c4246`                    | Background for .frame-select-options > .frame-select-separator.                                                                                                         | `.frame-select-options > .frame-select-separator`                                                                                                                          |
+| `--frame-text`                                             | `frame.text`                                             | `#ccc`                       | Foreground for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control.                                                       | `.frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control`                                                                        |
+| `--frame-surface`                                          | `frame.surface`                                          | `#242424`                    | Background for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control.                                                       | `.frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control`                                                                        |
+| `--frame-line`                                             | `frame.line`                                             | `#454545`                    | Border for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control.                                                           | `.frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control`                                                                        |
+| `--frame-control-radius`                                   | `frame.control.radius`                                   | `var(--frame-radius-medium)` | Corner radius for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control.                                                    | `.frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control`                                                                        |
+| `--frame-control-padding-y`                                | `frame.control.padding.y`                                | `5px`                        | Internal spacing for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control.                                                 | `.frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control`                                                                        |
+| `--frame-control-padding-x`                                | `frame.control.padding.x`                                | `10px`                       | Internal spacing for .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control.                                                 | `.frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control`                                                                        |
+| `--frame-radius-medium`                                    | `frame.radius.medium`                                    | `4px`                        | Medium shared corner radius used by ordinary controls.                                                                                                                  | `.frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control`                                                                        |
+| `--frame-accent`                                           | `frame.accent`                                           | `#0078d4`                    | Outline for :is( .frame-form-input, .frame-control-button, .frame-toggle, .frame-choice-item, .frame-check-control, .frame-switch, .frame-slider-thumb ):focus-visible. | `:is(   .frame-form-input,   .frame-control-button,   .frame-toggle,   .frame-choice-item,   .frame-check-control,   .frame-switch,   .frame-slider-thumb ):focus-visible` |
+| `--frame-gap`                                              | `frame.gap`                                              | `6px`                        | Space between children for .frame-choice-group.                                                                                                                         | `.frame-choice-group`                                                                                                                                                      |
+| `--frame-gap`                                              | `frame.gap`                                              | `6px`                        | Space between children for .frame-choice-item.                                                                                                                          | `.frame-choice-item`                                                                                                                                                       |
+| `--frame-accent`                                           | `frame.accent`                                           | `#0078d4`                    | Background for .frame-choice-item[data-state='on'], .frame-choice-item[data-state='checked'], .frame-choice-item[data-highlighted], .frame-toggle[data-state='on'].     | `.frame-choice-item[data-state='on'], .frame-choice-item[data-state='checked'], .frame-choice-item[data-highlighted], .frame-toggle[data-state='on']`                      |
+| `--frame-muted`                                            | `frame.muted`                                            | `#999`                       | Foreground for .frame-choice-item small.                                                                                                                                | `.frame-choice-item small`                                                                                                                                                 |
+| `--frame-line`                                             | `frame.line`                                             | `#454545`                    | Background for .frame-select-separator.                                                                                                                                 | `.frame-select-separator`                                                                                                                                                  |
+
+Expressions are preserved as written; their computed values depend on the active theme and component state.
+
+<!-- /frame:generated -->
+
+### Additional styling guidance
+
+#### Parts and selectors
+
+| Selector                  | Part            | Placement/attribute target                                       |
+| ------------------------- | --------------- | ---------------------------------------------------------------- |
+| `.frame-choice-group`     | Group container | Caller class/style targets this element.                         |
+| `.frame-choice-item`      | Radio item      | Internal part; caller attributes do not target it independently. |
+| `.frame-radio-indicator`  | Indicator       | Internal part; caller attributes do not target it independently. |
+| `.frame-select-separator` | Separator       | Internal part; caller attributes do not target it independently. |
 
 The group wraps with flex layout. Keyboard orientation does not impose a CSS column. The indicator has no dedicated size tokens.
 
-### Variables
+#### Variables
 
-| Token key | Variable | Value kind | Default/fallback | Part/effect | Scope/limits | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| `--frame-accent` | `--frame-accent` | color | Catalog: `#0078d4`; CSS fallback: `#0078d4` | Radio item outline; Radio item background | Shared across controls using this variable. State rules: :focus-visible, [data-state=on], [data-state=checked], [data-highlighted]. | Accent. |
-| `--frame-control-padding-x` | `--frame-control-padding-x` | length | Catalog: `calc(var(--frame-spacing-unit) * 2.5)`; CSS fallback: `10px` | Radio item padding | Shared across controls using this variable. | Control padding x. |
-| `--frame-control-padding-y` | `--frame-control-padding-y` | length | Catalog: `calc(var(--frame-spacing-unit) * 1.25)`; CSS fallback: `5px` | Radio item padding | Shared across controls using this variable. | Control padding y. |
-| `--frame-control-radius` | `--frame-control-radius` | length | Catalog: `var(--frame-radius-medium)`; CSS fallback: `var(--frame-radius-medium)` | Radio item border-radius | Shared across controls using this variable. | Control radius. |
-| `--frame-gap` | `--frame-gap` | length | Catalog: `calc(var(--frame-spacing-unit) * 1.5)`; CSS fallback: `6px` | Group container gap; Radio item gap | Shared across controls using this variable. | Gap. |
-| `--frame-line` | `--frame-line` | color | Catalog: `#2b2b2b`; CSS fallback: `#3c4246`; `#454545` | Separator background; Radio item border | Shared across controls using this variable. | Line. |
-| `--frame-muted` | `--frame-muted` | color | Catalog: `#8e9496`; CSS fallback: `#999` | Radio item color | Shared across controls using this variable. | Muted. |
-| `--frame-radius-medium` | `--frame-radius-medium` | length | Catalog: `4px` | Radio item border-radius | Shared across controls using this variable. | Radius medium. |
-| CSS only | `--frame-select-options-frame-select-separator-height` | length / CSS length expression | CSS fallback: `1px` | Separator height | Local to matching component rules. CSS only; not in JSON allowlist. | Select options frame select separator height. |
-| CSS only | `--frame-select-options-frame-select-separator-margin` | length / CSS length expression | CSS fallback: `5px 0` | Separator margin | Local to matching component rules. CSS only; not in JSON allowlist. | Select options frame select separator margin. |
-| CSS only | `--frame-select-options-frame-select-separator-min-height` | length / CSS length expression | CSS fallback: `1px` | Separator min-height | Local to matching component rules. CSS only; not in JSON allowlist. | Select options frame select separator min height. |
-| CSS only | `--frame-select-options-frame-select-separator-padding` | CSS spacing | CSS fallback: `0` | Separator padding | Local to matching component rules. CSS only; not in JSON allowlist. | Select options frame select separator padding. |
-| `--frame-surface` | `--frame-surface` | color | Catalog: `#181818`; CSS fallback: `#242424` | Radio item background | Shared across controls using this variable. | Surface. |
-| `--frame-text` | `--frame-text` | color | Catalog: `#cccccc`; CSS fallback: `#ccc` | Radio item color | Shared across controls using this variable. | Text. |
+| Token key                   | Variable                                                   | Value kind                     | Default/fallback                                                                  | Part/effect                               | Scope/limits                                                                                                                        | Description                                       |
+| --------------------------- | ---------------------------------------------------------- | ------------------------------ | --------------------------------------------------------------------------------- | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| `--frame-accent`            | `--frame-accent`                                           | color                          | Catalog: `#0078d4`; CSS fallback: `#0078d4`                                       | Radio item outline; Radio item background | Shared across controls using this variable. State rules: :focus-visible, [data-state=on], [data-state=checked], [data-highlighted]. | Accent.                                           |
+| `--frame-control-padding-x` | `--frame-control-padding-x`                                | length                         | Catalog: `calc(var(--frame-spacing-unit) * 2.5)`; CSS fallback: `10px`            | Radio item padding                        | Shared across controls using this variable.                                                                                         | Control padding x.                                |
+| `--frame-control-padding-y` | `--frame-control-padding-y`                                | length                         | Catalog: `calc(var(--frame-spacing-unit) * 1.25)`; CSS fallback: `5px`            | Radio item padding                        | Shared across controls using this variable.                                                                                         | Control padding y.                                |
+| `--frame-control-radius`    | `--frame-control-radius`                                   | length                         | Catalog: `var(--frame-radius-medium)`; CSS fallback: `var(--frame-radius-medium)` | Radio item border-radius                  | Shared across controls using this variable.                                                                                         | Control radius.                                   |
+| `--frame-gap`               | `--frame-gap`                                              | length                         | Catalog: `calc(var(--frame-spacing-unit) * 1.5)`; CSS fallback: `6px`             | Group container gap; Radio item gap       | Shared across controls using this variable.                                                                                         | Gap.                                              |
+| `--frame-line`              | `--frame-line`                                             | color                          | Catalog: `#2b2b2b`; CSS fallback: `#3c4246`; `#454545`                            | Separator background; Radio item border   | Shared across controls using this variable.                                                                                         | Line.                                             |
+| `--frame-muted`             | `--frame-muted`                                            | color                          | Catalog: `#8e9496`; CSS fallback: `#999`                                          | Radio item color                          | Shared across controls using this variable.                                                                                         | Muted.                                            |
+| `--frame-radius-medium`     | `--frame-radius-medium`                                    | length                         | Catalog: `4px`                                                                    | Radio item border-radius                  | Shared across controls using this variable.                                                                                         | Radius medium.                                    |
+| CSS only                    | `--frame-select-options-frame-select-separator-height`     | length / CSS length expression | CSS fallback: `1px`                                                               | Separator height                          | Local to matching component rules. CSS only; not in JSON allowlist.                                                                 | Select options frame select separator height.     |
+| CSS only                    | `--frame-select-options-frame-select-separator-margin`     | length / CSS length expression | CSS fallback: `5px 0`                                                             | Separator margin                          | Local to matching component rules. CSS only; not in JSON allowlist.                                                                 | Select options frame select separator margin.     |
+| CSS only                    | `--frame-select-options-frame-select-separator-min-height` | length / CSS length expression | CSS fallback: `1px`                                                               | Separator min-height                      | Local to matching component rules. CSS only; not in JSON allowlist.                                                                 | Select options frame select separator min height. |
+| CSS only                    | `--frame-select-options-frame-select-separator-padding`    | CSS spacing                    | CSS fallback: `0`                                                                 | Separator padding                         | Local to matching component rules. CSS only; not in JSON allowlist.                                                                 | Select options frame select separator padding.    |
+| `--frame-surface`           | `--frame-surface`                                          | color                          | Catalog: `#181818`; CSS fallback: `#242424`                                       | Radio item background                     | Shared across controls using this variable.                                                                                         | Surface.                                          |
+| `--frame-text`              | `--frame-text`                                             | color                          | Catalog: `#cccccc`; CSS fallback: `#ccc`                                          | Radio item color                          | Shared across controls using this variable.                                                                                         | Text.                                             |
 
 See [theme variables](../../styling/theme-variables.md) for theme authoring.

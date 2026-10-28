@@ -11,7 +11,12 @@ import type {FrameSplitPanel} from './splitterTypes';
 import '../shared/general-b.css';
 
 const props = defineProps<
-  SplitterGroupProps & {panels?: FrameSplitPanel[]; label?: string}
+  SplitterGroupProps & {
+    /** Panels rendered by the default composition, including their sizing constraints. */
+    panels?: FrameSplitPanel[];
+    /** Accessible name for this component and its built-in control or region. */
+    label?: string;
+  }
 >();
 const emit = defineEmits<SplitterGroupEmits>();
 const root = computed(() => {
@@ -23,6 +28,15 @@ function panelProps(panel: FrameSplitPanel) {
   const {label, content, ...rest} = panel;
   return rest;
 }
+defineSlots<{
+  /** Replaces the automatic panel and resize-handle composition. */ default?(): unknown;
+  /** Content for one configured panel, with its position in panels. */ panel?(
+    props: {
+    panel: FrameSplitPanel;
+    index: number;
+  }
+  ): unknown;
+}>();
 </script>
 <template>
   <SplitterGroup v-bind="forwarded" class="frame-splitter" :aria-label="label"

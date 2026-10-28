@@ -17,17 +17,25 @@ const props = withDefaults(
     chat?: AIChatController;
     /** Adds conversation selection, creation, and responsive history navigation. Takes precedence over chat. */
     history?: AIChatHistoryController;
+    /** Accessible name or visible label for the rendered control. */
     label?: string;
+    /** Prompt shown when the input is empty. */
     placeholder?: string;
     /** Empty-conversation text; the empty slot takes precedence. */
     emptyMessage?: string;
+    /** Horizontal alignment of user messages in the transcript. */
     userAlignment?: 'left' | 'right';
+    /** Horizontal alignment of assistant messages in the transcript. */
     assistantAlignment?: 'left' | 'right';
+    /** Additional host actions offered by the attachment menu. */
     attachmentActions?: readonly FrameMenuItem[];
+    /** Shows the speech action; the host handles the emitted speech request. */
     speechEnabled?: boolean;
     /** Hide unsupported actions for native provider sessions. */
     allowRewind?: boolean;
+    /** Offers conversation branching controls when supported. */
     allowFork?: boolean;
+    /** Offers file and folder attachment controls; files remain host-owned until submitted. */
     allowAttachments?: boolean;
     /** Adds application actions to the history row menu; emits historyAction. */
     historyActions?: (
@@ -37,10 +45,15 @@ const props = withDefaults(
   {label: 'AI chat', allowRewind: true, allowFork: true, allowAttachments: true}
 );
 const emit = defineEmits<{
+  /** Requests a conversation branch with its source message and preceding messages. */
   forge: [messages: ChatMessage[], source: ChatMessage];
+  /** Reports selection of an application attachment-menu action. */
   attachmentAction: [item: FrameMenuItem];
+  /** Requests host-managed speech input. */
   speech: [];
+  /** Reports copying a transcript message. */
   copy: [message: ChatMessage];
+  /** Reports a host history-menu action and its conversation. */
   historyAction: [item: FrameMenuItem, conversation: AIChatConversation];
 }>();
 const showingHistory = ref(!!props.history && !props.history.active.value);
@@ -63,12 +76,22 @@ async function openHistory() {
   historyView.value?.focus();
 }
 defineExpose({
+  /** Focuses the active input or terminal surface without creating or disposing its owning controller. */
   focus: () => {
     if (props.history && (showingHistory.value || !current.value))
       historyView.value?.focus();
     else conversation.value?.focus();
   },
 });
+defineSlots<{
+  /** Empty transcript content passed to the active conversation. */ empty?(): unknown;
+  /** Additional actions for one active transcript message. */ 'message-actions'?(
+    props: {
+    message: ChatMessage;
+  }
+  ): unknown;
+  /** Additional actions shared by conversation and new-conversation composers. */ 'composer-actions'?(): unknown;
+}>();
 </script>
 <template>
   <section

@@ -32,10 +32,15 @@ import Terminal from './Terminal.vue';
 
 const props = withDefaults(
   defineProps<{
+    /** Caller-owned terminal controller; unmount detaches presentation without disposing the controller. */
     terminal: TerminalController;
+    /** Displays the terminal toolbar; defaults to true. */
     toolbar?: boolean;
+    /** Creates an initial terminal session on mount when none exist; defaults to true. */
     autoStart?: boolean;
+    /** Initially offers the session selector sidebar; defaults to true. */
     sidebar?: boolean;
+    /** Initial session presentation arrangement; defaults to sidebar. */
     sessionLayout?: TerminalSessionLayout;
   }>(),
   {toolbar: true, autoStart: true, sidebar: true, sessionLayout: 'sidebar'}
@@ -358,10 +363,19 @@ onMounted(() =>
   })
 );
 defineExpose({
+  /** Creates a terminal session using the currently selected profile. */
   create,
+
+  /** Opens the search controls and focuses the terminal query input. */
   search: searchOpen,
+
+  /** Starts renaming the selected terminal session. */
   rename,
+
+  /** Opens the terminal actions menu using the supplied anchor or current selection. */
   openMenu,
+
+  /** Toggles the local terminal session selector presentation. */
   toggleSidebar: () => {
     showSidebar.value = !showSidebar.value;
   },

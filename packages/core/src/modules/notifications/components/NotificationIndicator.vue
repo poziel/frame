@@ -3,7 +3,10 @@ import '../styles/index.css';
 import {FrameIconButton} from '../../../index';
 import type {NotificationHistory} from '../controllers/notificationHistory';
 
-defineProps<{history: NotificationHistory}>();
+defineProps<{
+  /** Caller-owned notification history; this presentation does not dispose it. */
+  history: NotificationHistory;
+}>();
 </script>
 <template>
   <FrameIconButton

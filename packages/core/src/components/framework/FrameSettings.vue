@@ -53,6 +53,14 @@ function update(id: string, value: string | boolean | number) {
     error.value = reason instanceof Error ? reason.message : String(reason);
   }
 }
+defineSlots<{
+  /** Replaces a section's generated settings controls while retaining its owning Frame controller. */ default?(
+    props: {
+    section: import('../../framework/settings/settings').SettingsSection;
+    settings: import('../../framework/settings/settings').Settings;
+  }
+  ): unknown;
+}>();
 </script>
 <template>
   <div class="frame-settings-surface"
@@ -130,11 +138,28 @@ function update(id: string, value: string | boolean | number) {
   min-height: 0;
 }
 .settings-content > h2 {
-  margin-block: 0 var(--frame-settings-group-title-gap, 6px);
+  /* Value of margin-block for .settings-content > h2. @token --frame-settings-group-title-gap */
+  --_frame-default-settings-group-title-gap-a51deb3aac: 6px;
+  margin-block: 0
+    var(
+      --frame-settings-group-title-gap,
+      var(--_frame-default-settings-group-title-gap-a51deb3aac)
+    );
 }
 .settings-content > .setting-description {
-  margin: 0 0 var(--frame-settings-group-description-gap, 12px);
-  line-height: var(--frame-settings-description-line-height, 1.5);
+  /* Outer spacing for .settings-content > .setting-description. @token --frame-settings-group-description-gap */
+  --_frame-default-settings-group-description-gap-750f80c7ec: 12px;
+  margin: 0 0
+    var(
+      --frame-settings-group-description-gap,
+      var(--_frame-default-settings-group-description-gap-750f80c7ec)
+    );
+  /* Text line height for .settings-content > .setting-description. @token --frame-settings-description-line-height */
+  --_frame-default-settings-description-line-height-bc3bd710e9: 1.5;
+  line-height: var(
+    --frame-settings-description-line-height,
+    var(--_frame-default-settings-description-line-height-bc3bd710e9)
+  );
   white-space: normal;
   overflow-wrap: anywhere;
 }

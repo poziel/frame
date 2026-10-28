@@ -16,7 +16,12 @@ import FrameIcon from '../data-display/FrameIcon.vue';
 import '../shared/general-b.css';
 
 const props = defineProps<
-  StepperRootProps & {items?: FrameStepItem[]; label?: string}
+  StepperRootProps & {
+    /** Items rendered by the built-in composition; a default slot replaces that composition. */
+    items?: FrameStepItem[];
+    /** Accessible name for this component and its built-in control or region. */
+    label?: string;
+  }
 >();
 const emit = defineEmits<StepperRootEmits>();
 const root = computed(() => {
@@ -24,6 +29,23 @@ const root = computed(() => {
   return rest;
 });
 const forwarded = useForwardPropsEmits(root, emit);
+defineSlots<{
+  /** Replaces the generated steps with the root primitive's navigation state. */ default?(
+    props: {
+    modelValue: number | undefined;
+    totalSteps: number;
+    isNextDisabled: boolean;
+    isPrevDisabled: boolean;
+    isFirstStep: boolean;
+    isLastStep: boolean;
+    goToStep: (step: number) => void;
+    nextStep: () => void;
+    prevStep: () => void;
+    hasNext: () => boolean;
+    hasPrev: () => boolean;
+  }
+  ): unknown;
+}>();
 </script>
 <template>
   <StepperRoot

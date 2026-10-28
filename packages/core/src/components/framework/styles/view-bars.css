@@ -1,63 +1,511 @@
 /* Both sidebars use the same selector bar; geometry is owned by FrameShell. */
-.view-bar { position:relative; min-height:0; min-width:0; display:flex; flex-direction:column; }
-.view-bar-items { display:flex; flex-direction:column; flex:1 1 auto; min-height:0; min-width:0; overflow:auto; align-items:center; align-self:stretch; gap:var(--frame-view-rail-gap,var(--frame-activity-rail-gap,4px)); }
-.view-bar button.frame-button.rail-button { flex:0 0 auto; position:relative; }
-.view-bar-measure { position:absolute; visibility:hidden; pointer-events:none; inset-block-start:0; inset-inline-start:0; display:flex; gap:var(--frame-view-rail-gap,var(--frame-activity-rail-gap,4px)); width:max-content; height:0; overflow:hidden; }
-.view-bar.view-bar-horizontal { width:100%; min-width:0; flex-direction:row; overflow:hidden; }
-.view-bar.view-bar-horizontal .view-bar-items { flex-direction:row; align-items:center; gap:var(--frame-view-rail-gap,var(--frame-activity-rail-gap,4px)); overflow:hidden; }
-.view-bar.view-bar-horizontal button.frame-button.rail-button { width:auto; min-width:38px; height:38px; padding-inline:8px; display:inline-flex; align-items:center; justify-content:center; gap:6px; white-space:nowrap; }
-.view-bar.view-bar-horizontal.view-bar-display-icons button.frame-button.rail-button { width:38px;  }
-.view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button { min-width:30px; height:30px; padding-inline:6px; }
-.view-bar.view-bar-horizontal.view-bar-compact.view-bar-display-icons button.frame-button.rail-button { width:30px;  }
-.view-bar.view-bar-horizontal .bar-item-label { display:inline; }
-.view-bar.view-bar-horizontal .bar-item-badge { position:static; min-width:12px; margin-inline-start:2px; }
-.view-bar.view-bar-horizontal.view-bar-display-icons .bar-item-badge { position:absolute; margin:0; }
-.view-bar.view-bar-horizontal .view-bar-measure { flex-direction:row; }
-.secondary-view-bar { border-inline-start:1px solid var(--frame-line); }
-.secondary-view-bar.view-bar-horizontal { border-inline-start:0; }
-.view-bar-horizontal .view-bar-overflow { display:inline-flex; flex:0 0 auto; align-items:center; margin-inline-start:auto; padding-inline-start:var(--frame-view-overflow-padding,var(--frame-activity-overflow-padding,8px)); }
+.view-bar {
+  position: relative;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.view-bar-items {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  align-items: center;
+  align-self: stretch;
+  /* Space between children for .view-bar-items. Used when --frame-view-rail-gap is unset. @token --frame-activity-rail-gap */
+  --_frame-default-activity-rail-gap-504cdeac3d: 4px;
+  /* Space between children for .view-bar-items. @token --frame-view-rail-gap */
+  --_frame-default-view-rail-gap-656b7199ba: var(
+    --frame-activity-rail-gap,
+    var(--_frame-default-activity-rail-gap-504cdeac3d)
+  );
+  gap: var(
+    --frame-view-rail-gap,
+    var(--_frame-default-view-rail-gap-656b7199ba)
+  );
+}
+.view-bar button.frame-button.rail-button {
+  flex: 0 0 auto;
+  position: relative;
+}
+.view-bar-measure {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  display: flex;
+  /* Space between children for .view-bar-measure. Used when --frame-view-rail-gap is unset. @token --frame-activity-rail-gap */
+  --_frame-default-activity-rail-gap-64b8df51b1: 4px;
+  /* Space between children for .view-bar-measure. @token --frame-view-rail-gap */
+  --_frame-default-view-rail-gap-ed37298895: var(
+    --frame-activity-rail-gap,
+    var(--_frame-default-activity-rail-gap-64b8df51b1)
+  );
+  gap: var(
+    --frame-view-rail-gap,
+    var(--_frame-default-view-rail-gap-ed37298895)
+  );
+  width: max-content;
+  height: 0;
+  overflow: hidden;
+}
+.view-bar.view-bar-horizontal {
+  width: 100%;
+  min-width: 0;
+  flex-direction: row;
+  overflow: hidden;
+}
+.view-bar.view-bar-horizontal .view-bar-items {
+  flex-direction: row;
+  align-items: center;
+  /* Space between children for .view-bar.view-bar-horizontal .view-bar-items. Used when --frame-view-rail-gap is unset. @token --frame-activity-rail-gap */
+  --_frame-default-activity-rail-gap-56bd275fbb: 4px;
+  /* Space between children for .view-bar.view-bar-horizontal .view-bar-items. @token --frame-view-rail-gap */
+  --_frame-default-view-rail-gap-b950fd7f25: var(
+    --frame-activity-rail-gap,
+    var(--_frame-default-activity-rail-gap-56bd275fbb)
+  );
+  gap: var(
+    --frame-view-rail-gap,
+    var(--_frame-default-view-rail-gap-b950fd7f25)
+  );
+  overflow: hidden;
+}
+.view-bar.view-bar-horizontal button.frame-button.rail-button {
+  width: auto;
+  min-width: 38px;
+  height: 38px;
+  padding-inline: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.view-bar.view-bar-horizontal.view-bar-display-icons
+  button.frame-button.rail-button {
+  width: 38px;
+}
+.view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button {
+  min-width: 30px;
+  height: 30px;
+  padding-inline: 6px;
+}
+.view-bar.view-bar-horizontal.view-bar-compact.view-bar-display-icons
+  button.frame-button.rail-button {
+  width: 30px;
+}
+.view-bar.view-bar-horizontal .bar-item-label {
+  display: inline;
+}
+.view-bar.view-bar-horizontal .bar-item-badge {
+  position: static;
+  min-width: 12px;
+  margin-inline-start: 2px;
+}
+.view-bar.view-bar-horizontal.view-bar-display-icons .bar-item-badge {
+  position: absolute;
+  margin: 0;
+}
+.view-bar.view-bar-horizontal .view-bar-measure {
+  flex-direction: row;
+}
+.secondary-view-bar {
+  border-inline-start: 1px solid var(--frame-line);
+}
+.secondary-view-bar.view-bar-horizontal {
+  border-inline-start: 0;
+}
+.view-bar-horizontal .view-bar-overflow {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  margin-inline-start: auto;
+  /* Value of padding-inline-start for .view-bar-horizontal .view-bar-overflow. Used when --frame-view-overflow-padding is unset. @token --frame-activity-overflow-padding */
+  --_frame-default-activity-overflow-padding-691fcd4908: 8px;
+  /* Value of padding-inline-start for .view-bar-horizontal .view-bar-overflow. @token --frame-view-overflow-padding */
+  --_frame-default-view-overflow-padding-8be4aea05b: var(
+    --frame-activity-overflow-padding,
+    var(--_frame-default-activity-overflow-padding-691fcd4908)
+  );
+  padding-inline-start: var(
+    --frame-view-overflow-padding,
+    var(--_frame-default-view-overflow-padding-8be4aea05b)
+  );
+}
 
 /* Content determines targets; padding supplies the shared breathing room. */
 .view-bar button.frame-button.rail-button,
 .view-bar.view-bar-horizontal button.frame-button.rail-button,
 .view-bar.view-bar-compact button.frame-button.rail-button,
 .view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button {
- box-sizing:border-box;width:auto;min-width:0;max-width:none;height:auto;min-height:0;max-height:none;
- padding:var(--frame-view-item-padding,var(--frame-activity-item-padding,var(--frame-spacing-small,4px)));
+  box-sizing: border-box;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  /* Internal spacing for .view-bar button.frame-button.rail-button, .view-bar.view-bar-horizontal button.frame-button.rail-button, .view-bar.view-bar-compact button.frame-button.rail-button, .view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button. Used when --frame-view-item-padding and --frame-activity-item-padding is unset. @token --frame-spacing-small */
+  --_frame-default-spacing-small-870ea01b2b: 4px;
+  /* Internal spacing for .view-bar button.frame-button.rail-button, .view-bar.view-bar-horizontal button.frame-button.rail-button, .view-bar.view-bar-compact button.frame-button.rail-button, .view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button. Used when --frame-view-item-padding is unset. @token --frame-activity-item-padding */
+  --_frame-default-activity-item-padding-460b00b11f: var(
+    --frame-spacing-small,
+    var(--_frame-default-spacing-small-870ea01b2b)
+  );
+  /* Internal spacing for .view-bar button.frame-button.rail-button, .view-bar.view-bar-horizontal button.frame-button.rail-button, .view-bar.view-bar-compact button.frame-button.rail-button, .view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button. @token --frame-view-item-padding */
+  --_frame-default-view-item-padding-e3bafbe12f: var(
+    --frame-activity-item-padding,
+    var(--_frame-default-activity-item-padding-460b00b11f)
+  );
+  padding: var(
+    --frame-view-item-padding,
+    var(--_frame-default-view-item-padding-e3bafbe12f)
+  );
 }
-.view-bar-items,.view-bar-measure { gap:var(--frame-view-rail-gap,var(--frame-activity-rail-gap,var(--frame-spacing-small,4px))); }
+.view-bar-items,
+.view-bar-measure {
+  /* Space between children for .view-bar-items,.view-bar-measure. Used when --frame-view-rail-gap and --frame-activity-rail-gap is unset. @token --frame-spacing-small */
+  --_frame-default-spacing-small-bca994d069: 4px;
+  /* Space between children for .view-bar-items,.view-bar-measure. Used when --frame-view-rail-gap is unset. @token --frame-activity-rail-gap */
+  --_frame-default-activity-rail-gap-8b80bd3392: var(
+    --frame-spacing-small,
+    var(--_frame-default-spacing-small-bca994d069)
+  );
+  /* Space between children for .view-bar-items,.view-bar-measure. @token --frame-view-rail-gap */
+  --_frame-default-view-rail-gap-3511845c46: var(
+    --frame-activity-rail-gap,
+    var(--_frame-default-activity-rail-gap-8b80bd3392)
+  );
+  gap: var(
+    --frame-view-rail-gap,
+    var(--_frame-default-view-rail-gap-3511845c46)
+  );
+}
 
 /* Typography follows the activity density; flex aligns glyph boxes with labels. */
-.view-bar button.frame-button.rail-button { font-size:var(--frame-view-font-size,var(--frame-activity-font-size,14px));line-height:1; }
-.view-bar.view-bar-compact button.frame-button.rail-button { font-size:var(--frame-view-compact-font-size,var(--frame-activity-compact-font-size,11px));padding:var(--frame-view-compact-item-padding,var(--frame-activity-compact-item-padding,calc(var(--frame-spacing-small,4px) * 0.75))); }
-.view-bar.view-bar-horizontal button.frame-button.rail-button { gap:var(--frame-view-label-gap,var(--frame-activity-label-gap,var(--frame-spacing-small,4px))); }
-.view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button { gap:var(--frame-view-compact-label-gap,var(--frame-activity-compact-label-gap,var(--frame-view-label-gap,var(--frame-activity-label-gap,var(--frame-spacing-small,4px))))); }
-.view-bar.view-bar-horizontal .bar-item-label { display:inline-flex;align-items:center;line-height:1; }
-.view-bar button.frame-button.rail-button > :is(svg,.frame-icon) { display:block;flex-shrink:0; }
+.view-bar button.frame-button.rail-button {
+  /* Text size for .view-bar button.frame-button.rail-button. Used when --frame-view-font-size is unset. @token --frame-activity-font-size */
+  --_frame-default-activity-font-size-34d7334c0a: 14px;
+  /* Text size for .view-bar button.frame-button.rail-button. @token --frame-view-font-size */
+  --_frame-default-view-font-size-7c11c2a951: var(
+    --frame-activity-font-size,
+    var(--_frame-default-activity-font-size-34d7334c0a)
+  );
+  font-size: var(
+    --frame-view-font-size,
+    var(--_frame-default-view-font-size-7c11c2a951)
+  );
+  line-height: 1;
+}
+.view-bar.view-bar-compact button.frame-button.rail-button {
+  /* Text size for .view-bar.view-bar-compact button.frame-button.rail-button. Used when --frame-view-compact-font-size is unset. @token --frame-activity-compact-font-size */
+  --_frame-default-activity-compact-font-size-e7409c0e8f: 11px;
+  /* Text size for .view-bar.view-bar-compact button.frame-button.rail-button. @token --frame-view-compact-font-size */
+  --_frame-default-view-compact-font-size-c92439b179: var(
+    --frame-activity-compact-font-size,
+    var(--_frame-default-activity-compact-font-size-e7409c0e8f)
+  );
+  font-size: var(
+    --frame-view-compact-font-size,
+    var(--_frame-default-view-compact-font-size-c92439b179)
+  );
+  /* Internal spacing for .view-bar.view-bar-compact button.frame-button.rail-button. Used when --frame-view-compact-item-padding and --frame-activity-compact-item-padding is unset. @token --frame-spacing-small */
+  --_frame-default-spacing-small-b02eab1dbb: 4px;
+  /* Internal spacing for .view-bar.view-bar-compact button.frame-button.rail-button. Used when --frame-view-compact-item-padding is unset. @token --frame-activity-compact-item-padding */
+  --_frame-default-activity-compact-item-padding-7ac0022949: calc(
+    var(--frame-spacing-small, var(--_frame-default-spacing-small-b02eab1dbb)) *
+      0.75
+  );
+  /* Internal spacing for .view-bar.view-bar-compact button.frame-button.rail-button. @token --frame-view-compact-item-padding */
+  --_frame-default-view-compact-item-padding-24d67d0515: var(
+    --frame-activity-compact-item-padding,
+    var(--_frame-default-activity-compact-item-padding-7ac0022949)
+  );
+  padding: var(
+    --frame-view-compact-item-padding,
+    var(--_frame-default-view-compact-item-padding-24d67d0515)
+  );
+}
+.view-bar.view-bar-horizontal button.frame-button.rail-button {
+  /* Space between children for .view-bar.view-bar-horizontal button.frame-button.rail-button. Used when --frame-view-label-gap and --frame-activity-label-gap is unset. @token --frame-spacing-small */
+  --_frame-default-spacing-small-dbb46890db: 4px;
+  /* Space between children for .view-bar.view-bar-horizontal button.frame-button.rail-button. Used when --frame-view-label-gap is unset. @token --frame-activity-label-gap */
+  --_frame-default-activity-label-gap-91ebc5913d: var(
+    --frame-spacing-small,
+    var(--_frame-default-spacing-small-dbb46890db)
+  );
+  /* Space between children for .view-bar.view-bar-horizontal button.frame-button.rail-button. @token --frame-view-label-gap */
+  --_frame-default-view-label-gap-24466720a8: var(
+    --frame-activity-label-gap,
+    var(--_frame-default-activity-label-gap-91ebc5913d)
+  );
+  gap: var(
+    --frame-view-label-gap,
+    var(--_frame-default-view-label-gap-24466720a8)
+  );
+}
+.view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button {
+  /* Space between children for .view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button. Used when --frame-view-compact-label-gap and --frame-activity-compact-label-gap and --frame-view-label-gap and --frame-activity-label-gap is unset. @token --frame-spacing-small */
+  --_frame-default-spacing-small-811727c75b: 4px;
+  /* Space between children for .view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button. Used when --frame-view-compact-label-gap and --frame-activity-compact-label-gap and --frame-view-label-gap is unset. @token --frame-activity-label-gap */
+  --_frame-default-activity-label-gap-43ed4ac270: var(
+    --frame-spacing-small,
+    var(--_frame-default-spacing-small-811727c75b)
+  );
+  /* Space between children for .view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button. Used when --frame-view-compact-label-gap and --frame-activity-compact-label-gap is unset. @token --frame-view-label-gap */
+  --_frame-default-view-label-gap-719fdea040: var(
+    --frame-activity-label-gap,
+    var(--_frame-default-activity-label-gap-43ed4ac270)
+  );
+  /* Space between children for .view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button. Used when --frame-view-compact-label-gap is unset. @token --frame-activity-compact-label-gap */
+  --_frame-default-activity-compact-label-gap-9d72a80aac: var(
+    --frame-view-label-gap,
+    var(--_frame-default-view-label-gap-719fdea040)
+  );
+  /* Space between children for .view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button. @token --frame-view-compact-label-gap */
+  --_frame-default-view-compact-label-gap-76f7466501: var(
+    --frame-activity-compact-label-gap,
+    var(--_frame-default-activity-compact-label-gap-9d72a80aac)
+  );
+  gap: var(
+    --frame-view-compact-label-gap,
+    var(--_frame-default-view-compact-label-gap-76f7466501)
+  );
+}
+.view-bar.view-bar-horizontal .bar-item-label {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+.view-bar button.frame-button.rail-button > :is(svg, .frame-icon) {
+  display: block;
+  flex-shrink: 0;
+}
 
-.view-bar { --view-bar-icon-dimension:var(--frame-view-icon-size,var(--frame-activity-icon-size,28px)); }
-.view-bar.view-bar-compact { --view-bar-icon-dimension:var(--frame-view-compact-icon-size,var(--frame-activity-compact-icon-size,18px)); }
-.view-bar.view-bar-display-both { --view-bar-icon-dimension:var(--frame-view-labeled-icon-size,var(--frame-activity-labeled-icon-size,var(--frame-view-icon-size,var(--frame-activity-icon-size,28px)))); }
-.view-bar.view-bar-display-both.view-bar-compact { --view-bar-icon-dimension:var(--frame-view-compact-labeled-icon-size,var(--frame-activity-compact-labeled-icon-size,var(--frame-view-compact-icon-size,var(--frame-activity-compact-icon-size,18px)))); }
-.view-bar .bar-icon-slot { display:grid;place-items:center;flex:0 0 auto;inline-size:var(--view-bar-icon-dimension);block-size:var(--view-bar-icon-dimension);aspect-ratio:1; }
+.view-bar {
+  /* Default used by --view-bar-icon-dimension on .view-bar. Used when --frame-view-icon-size is unset. @token --frame-activity-icon-size */
+  --_frame-default-activity-icon-size-3b97628ab5: 28px;
+  /* Default used by --view-bar-icon-dimension on .view-bar. @token --frame-view-icon-size */
+  --_frame-default-view-icon-size-8bd30a791b: var(
+    --frame-activity-icon-size,
+    var(--_frame-default-activity-icon-size-3b97628ab5)
+  );
+  --view-bar-icon-dimension: var(
+    --frame-view-icon-size,
+    var(--_frame-default-view-icon-size-8bd30a791b)
+  );
+}
+.view-bar.view-bar-compact {
+  /* Default used by --view-bar-icon-dimension on .view-bar.view-bar-compact. Used when --frame-view-compact-icon-size is unset. @token --frame-activity-compact-icon-size */
+  --_frame-default-activity-compact-icon-size-56793e6020: 18px;
+  /* Default used by --view-bar-icon-dimension on .view-bar.view-bar-compact. @token --frame-view-compact-icon-size */
+  --_frame-default-view-compact-icon-size-b29ae3a44d: var(
+    --frame-activity-compact-icon-size,
+    var(--_frame-default-activity-compact-icon-size-56793e6020)
+  );
+  --view-bar-icon-dimension: var(
+    --frame-view-compact-icon-size,
+    var(--_frame-default-view-compact-icon-size-b29ae3a44d)
+  );
+}
+.view-bar.view-bar-display-both {
+  /* Default used by --view-bar-icon-dimension on .view-bar.view-bar-display-both. Used when --frame-view-labeled-icon-size and --frame-activity-labeled-icon-size and --frame-view-icon-size is unset. @token --frame-activity-icon-size */
+  --_frame-default-activity-icon-size-d01e34c838: 28px;
+  /* Default used by --view-bar-icon-dimension on .view-bar.view-bar-display-both. Used when --frame-view-labeled-icon-size and --frame-activity-labeled-icon-size is unset. @token --frame-view-icon-size */
+  --_frame-default-view-icon-size-9ab9e2e4b8: var(
+    --frame-activity-icon-size,
+    var(--_frame-default-activity-icon-size-d01e34c838)
+  );
+  /* Default used by --view-bar-icon-dimension on .view-bar.view-bar-display-both. Used when --frame-view-labeled-icon-size is unset. @token --frame-activity-labeled-icon-size */
+  --_frame-default-activity-labeled-icon-size-6bcf692d55: var(
+    --frame-view-icon-size,
+    var(--_frame-default-view-icon-size-9ab9e2e4b8)
+  );
+  /* Default used by --view-bar-icon-dimension on .view-bar.view-bar-display-both. @token --frame-view-labeled-icon-size */
+  --_frame-default-view-labeled-icon-size-9a2d82370c: var(
+    --frame-activity-labeled-icon-size,
+    var(--_frame-default-activity-labeled-icon-size-6bcf692d55)
+  );
+  --view-bar-icon-dimension: var(
+    --frame-view-labeled-icon-size,
+    var(--_frame-default-view-labeled-icon-size-9a2d82370c)
+  );
+}
+.view-bar.view-bar-display-both.view-bar-compact {
+  /* Default used by --view-bar-icon-dimension on .view-bar.view-bar-display-both.view-bar-compact. Used when --frame-view-compact-labeled-icon-size and --frame-activity-compact-labeled-icon-size and --frame-view-compact-icon-size is unset. @token --frame-activity-compact-icon-size */
+  --_frame-default-activity-compact-icon-size-3153703828: 18px;
+  /* Default used by --view-bar-icon-dimension on .view-bar.view-bar-display-both.view-bar-compact. Used when --frame-view-compact-labeled-icon-size and --frame-activity-compact-labeled-icon-size is unset. @token --frame-view-compact-icon-size */
+  --_frame-default-view-compact-icon-size-586d799c89: var(
+    --frame-activity-compact-icon-size,
+    var(--_frame-default-activity-compact-icon-size-3153703828)
+  );
+  /* Default used by --view-bar-icon-dimension on .view-bar.view-bar-display-both.view-bar-compact. Used when --frame-view-compact-labeled-icon-size is unset. @token --frame-activity-compact-labeled-icon-size */
+  --_frame-default-activity-compact-labeled-icon-size-3638edf019: var(
+    --frame-view-compact-icon-size,
+    var(--_frame-default-view-compact-icon-size-586d799c89)
+  );
+  /* Default used by --view-bar-icon-dimension on .view-bar.view-bar-display-both.view-bar-compact. @token --frame-view-compact-labeled-icon-size */
+  --_frame-default-view-compact-labeled-icon-size-3771bc10b7: var(
+    --frame-activity-compact-labeled-icon-size,
+    var(--_frame-default-activity-compact-labeled-icon-size-3638edf019)
+  );
+  --view-bar-icon-dimension: var(
+    --frame-view-compact-labeled-icon-size,
+    var(--_frame-default-view-compact-labeled-icon-size-3771bc10b7)
+  );
+}
+.view-bar .bar-icon-slot {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  inline-size: var(--view-bar-icon-dimension);
+  block-size: var(--view-bar-icon-dimension);
+  aspect-ratio: 1;
+}
 /* Contribution components may carry inline dimensions; normalize only inside the slot. */
-.view-bar .bar-icon-slot > :is(svg,.frame-icon) { display:block;width:100% !important;height:100% !important; }
-.view-bar.view-bar-display-icons button.frame-button.rail-button { aspect-ratio:1; }
-.view-bar.view-bar-display-both .bar-item-label { padding-inline-end:var(--frame-view-label-end-padding,var(--frame-activity-label-end-padding,var(--frame-icon-button-label-end-padding,2px))); }
+.view-bar .bar-icon-slot > :is(svg, .frame-icon) {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+.view-bar.view-bar-display-icons button.frame-button.rail-button {
+  aspect-ratio: 1;
+}
+.view-bar.view-bar-display-both .bar-item-label {
+  /* Value of padding-inline-end for .view-bar.view-bar-display-both .bar-item-label. Used when --frame-view-label-end-padding and --frame-activity-label-end-padding is unset. @token --frame-icon-button-label-end-padding */
+  --_frame-default-icon-button-label-end-padding-7832517098: 2px;
+  /* Value of padding-inline-end for .view-bar.view-bar-display-both .bar-item-label. Used when --frame-view-label-end-padding is unset. @token --frame-activity-label-end-padding */
+  --_frame-default-activity-label-end-padding-efc1ed6993: var(
+    --frame-icon-button-label-end-padding,
+    var(--_frame-default-icon-button-label-end-padding-7832517098)
+  );
+  /* Value of padding-inline-end for .view-bar.view-bar-display-both .bar-item-label. @token --frame-view-label-end-padding */
+  --_frame-default-view-label-end-padding-18a5617f49: var(
+    --frame-activity-label-end-padding,
+    var(--_frame-default-activity-label-end-padding-efc1ed6993)
+  );
+  padding-inline-end: var(
+    --frame-view-label-end-padding,
+    var(--_frame-default-view-label-end-padding-18a5617f49)
+  );
+}
 
-.view-bar.view-bar-horizontal.view-bar-display-both:not(.view-bar-compact) { --view-bar-icon-dimension:var(--frame-view-labeled-icon-size,var(--frame-activity-labeled-icon-size,22px)); }
+.view-bar.view-bar-horizontal.view-bar-display-both:not(.view-bar-compact) {
+  /* Default used by --view-bar-icon-dimension on .view-bar.view-bar-horizontal.view-bar-display-both:not(.view-bar-compact). Used when --frame-view-labeled-icon-size is unset. @token --frame-activity-labeled-icon-size */
+  --_frame-default-activity-labeled-icon-size-a74aacdc59: 22px;
+  /* Default used by --view-bar-icon-dimension on .view-bar.view-bar-horizontal.view-bar-display-both:not(.view-bar-compact). @token --frame-view-labeled-icon-size */
+  --_frame-default-view-labeled-icon-size-a9de39ba1e: var(
+    --frame-activity-labeled-icon-size,
+    var(--_frame-default-activity-labeled-icon-size-a74aacdc59)
+  );
+  --view-bar-icon-dimension: var(
+    --frame-view-labeled-icon-size,
+    var(--_frame-default-view-labeled-icon-size-a9de39ba1e)
+  );
+}
 
 /* Activity targets size to their glyph/label content while sharing FrameIconButton behavior. */
-.view-bar button.frame-button.rail-button { inline-size:auto;block-size:auto;aspect-ratio:auto;border:0;display:inline-flex;align-items:center;justify-content:center;color:var(--frame-rail-button-color,#949ea4); }
-.view-bar.view-bar-display-icons button.frame-button.rail-button { aspect-ratio:1; }
-.view-bar button.frame-button.rail-button.selected { color:var(--frame-rail-button-selected-color,#fff);background:var(--frame-rail-button-selected-background,#333); }
-.view-bar button.frame-button.rail-button.selected:not(:focus-visible) { outline:1px solid var(--frame-list-selection-border);outline-offset:-1px; }
-.view-bar.view-bar-display-icons button.frame-button.rail-button { padding:var(--frame-view-item-padding,var(--frame-activity-item-padding,var(--frame-spacing-small,4px))); }
-.view-bar.view-bar-display-icons.view-bar-compact button.frame-button.rail-button { padding:var(--frame-view-compact-item-padding,var(--frame-activity-compact-item-padding,calc(var(--frame-spacing-small,4px) * 0.75))); }
+.view-bar button.frame-button.rail-button {
+  inline-size: auto;
+  block-size: auto;
+  aspect-ratio: auto;
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Foreground for .view-bar button.frame-button.rail-button. @token --frame-rail-button-color */
+  --_frame-default-rail-button-color-1a5453fcc1: #949ea4;
+  color: var(
+    --frame-rail-button-color,
+    var(--_frame-default-rail-button-color-1a5453fcc1)
+  );
+}
+.view-bar.view-bar-display-icons button.frame-button.rail-button {
+  aspect-ratio: 1;
+}
+.view-bar button.frame-button.rail-button.selected {
+  /* Foreground for .view-bar button.frame-button.rail-button.selected. @token --frame-rail-button-selected-color */
+  --_frame-default-rail-button-selected-color-24f2f4e8bd: #fff;
+  color: var(
+    --frame-rail-button-selected-color,
+    var(--_frame-default-rail-button-selected-color-24f2f4e8bd)
+  );
+  /* Background for .view-bar button.frame-button.rail-button.selected. @token --frame-rail-button-selected-background */
+  --_frame-default-rail-button-selected-background-ab7fa848cf: #333;
+  background: var(
+    --frame-rail-button-selected-background,
+    var(--_frame-default-rail-button-selected-background-ab7fa848cf)
+  );
+}
+.view-bar button.frame-button.rail-button.selected:not(:focus-visible) {
+  outline: 1px solid var(--frame-list-selection-border);
+  outline-offset: -1px;
+}
+.view-bar.view-bar-display-icons button.frame-button.rail-button {
+  /* Internal spacing for .view-bar.view-bar-display-icons button.frame-button.rail-button. Used when --frame-view-item-padding and --frame-activity-item-padding is unset. @token --frame-spacing-small */
+  --_frame-default-spacing-small-a9d029308f: 4px;
+  /* Internal spacing for .view-bar.view-bar-display-icons button.frame-button.rail-button. Used when --frame-view-item-padding is unset. @token --frame-activity-item-padding */
+  --_frame-default-activity-item-padding-b990753275: var(
+    --frame-spacing-small,
+    var(--_frame-default-spacing-small-a9d029308f)
+  );
+  /* Internal spacing for .view-bar.view-bar-display-icons button.frame-button.rail-button. @token --frame-view-item-padding */
+  --_frame-default-view-item-padding-d60f8800f6: var(
+    --frame-activity-item-padding,
+    var(--_frame-default-activity-item-padding-b990753275)
+  );
+  padding: var(
+    --frame-view-item-padding,
+    var(--_frame-default-view-item-padding-d60f8800f6)
+  );
+}
+.view-bar.view-bar-display-icons.view-bar-compact
+  button.frame-button.rail-button {
+  /* Internal spacing for .view-bar.view-bar-display-icons.view-bar-compact button.frame-button.rail-button. Used when --frame-view-compact-item-padding and --frame-activity-compact-item-padding is unset. @token --frame-spacing-small */
+  --_frame-default-spacing-small-c0c1c890a2: 4px;
+  /* Internal spacing for .view-bar.view-bar-display-icons.view-bar-compact button.frame-button.rail-button. Used when --frame-view-compact-item-padding is unset. @token --frame-activity-compact-item-padding */
+  --_frame-default-activity-compact-item-padding-e310467bc9: calc(
+    var(--frame-spacing-small, var(--_frame-default-spacing-small-c0c1c890a2)) *
+      0.75
+  );
+  /* Internal spacing for .view-bar.view-bar-display-icons.view-bar-compact button.frame-button.rail-button. @token --frame-view-compact-item-padding */
+  --_frame-default-view-compact-item-padding-ebaac01673: var(
+    --frame-activity-compact-item-padding,
+    var(--_frame-default-activity-compact-item-padding-e310467bc9)
+  );
+  padding: var(
+    --frame-view-compact-item-padding,
+    var(--_frame-default-view-compact-item-padding-ebaac01673)
+  );
+}
 
-.view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button { padding:var(--frame-view-compact-item-padding,var(--frame-activity-compact-item-padding,calc(var(--frame-spacing-small,4px) * 0.75))); }
+.view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button {
+  /* Internal spacing for .view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button. Used when --frame-view-compact-item-padding and --frame-activity-compact-item-padding is unset. @token --frame-spacing-small */
+  --_frame-default-spacing-small-889315cd10: 4px;
+  /* Internal spacing for .view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button. Used when --frame-view-compact-item-padding is unset. @token --frame-activity-compact-item-padding */
+  --_frame-default-activity-compact-item-padding-127db71c1e: calc(
+    var(--frame-spacing-small, var(--_frame-default-spacing-small-889315cd10)) *
+      0.75
+  );
+  /* Internal spacing for .view-bar.view-bar-horizontal.view-bar-compact button.frame-button.rail-button. @token --frame-view-compact-item-padding */
+  --_frame-default-view-compact-item-padding-a28837c4ec: var(
+    --frame-activity-compact-item-padding,
+    var(--_frame-default-activity-compact-item-padding-127db71c1e)
+  );
+  padding: var(
+    --frame-view-compact-item-padding,
+    var(--_frame-default-view-compact-item-padding-a28837c4ec)
+  );
+}
 
-
-.view-bar { --bar-icon-size:var(--view-bar-icon-dimension); }
-.view-bar:not(.view-bar-horizontal) .bar-item-label { display:inline-flex; }
-
+.view-bar {
+  --bar-icon-size: var(--view-bar-icon-dimension);
+}
+.view-bar:not(.view-bar-horizontal) .bar-item-label {
+  display: inline-flex;
+}

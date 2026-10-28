@@ -73,7 +73,12 @@ const searchInput = ref<HTMLInputElement>();
 .preferences-toolbar {
   display: flex;
   align-items: center;
-  gap: var(--frame-modal-header-gap, 8px);
+  /* Space between children for .preferences-toolbar. @token --frame-modal-header-gap */
+  --_frame-default-modal-header-gap-6eb82ae436: 8px;
+  gap: var(
+    --frame-modal-header-gap,
+    var(--_frame-default-modal-header-gap-6eb82ae436)
+  );
   padding: 8px 10px;
   flex-shrink: 0;
 }
@@ -82,10 +87,20 @@ const searchInput = ref<HTMLInputElement>();
   flex: 1;
   min-width: 0;
   padding: 8px 10px;
-  background: var(--frame-control-background, var(--frame-bg));
+  /* Background for .preferences-search. @token --frame-control-background */
+  --_frame-default-control-background-3a95faa91f: var(--frame-bg);
+  background: var(
+    --frame-control-background,
+    var(--_frame-default-control-background-3a95faa91f)
+  );
   color: var(--frame-text);
   border: 1px solid var(--frame-border-color);
-  border-radius: var(--frame-radius-medium, 4px);
+  /* Corner radius for .preferences-search. @token --frame-radius-medium */
+  --_frame-default-radius-medium-48b47b16d5: 4px;
+  border-radius: var(
+    --frame-radius-medium,
+    var(--_frame-default-radius-medium-48b47b16d5)
+  );
   font: inherit;
 }
 .preferences-search:focus-visible {
@@ -95,7 +110,12 @@ const searchInput = ref<HTMLInputElement>();
 .settings-presentation-actions {
   display: flex;
   justify-content: flex-end;
-  gap: var(--frame-modal-header-gap, 8px);
+  /* Space between children for .settings-presentation-actions. @token --frame-modal-header-gap */
+  --_frame-default-modal-header-gap-70c5a4096d: 8px;
+  gap: var(
+    --frame-modal-header-gap,
+    var(--_frame-default-modal-header-gap-70c5a4096d)
+  );
   margin-left: auto;
 }
 </style>

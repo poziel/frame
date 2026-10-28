@@ -19,12 +19,15 @@ const props = withDefaults(
     busy?: boolean;
     /** Prevents editing, attachment selection, submission, and Stop. */
     disabled?: boolean;
+    /** Prompt shown when the input is empty. */
     placeholder?: string;
+    /** Accessible name or visible label for the rendered control. */
     label?: string;
     /** Extra context-menu choices reported through attachmentAction. */
     attachmentActions?: readonly FrameMenuItem[];
     /** Enables the voice button; the host handles the speech event. */
     speechEnabled?: boolean;
+    /** Offers file and folder attachment controls; files remain host-owned until submitted. */
     allowAttachments?: boolean;
   }>(),
   {
@@ -40,12 +43,19 @@ const props = withDefaults(
   }
 );
 const emit = defineEmits<{
+  /** Requests a new controlled value after input interaction. */
   'update:modelValue': [value: string];
+  /** Requests an updated attachment collection after selection or removal. */
   'update:attachments': [value: ChatAttachment[]];
+  /** Reports the draft text and attachments for host-controlled submission. */
   submit: [value: {text: string; attachments: ChatAttachment[]}];
+  /** Requests cancellation of the current response. */
   stop: [];
+  /** Requests cancellation of the current prompt interaction. */
   cancel: [];
+  /** Requests host-managed speech input. */
   speech: [];
+  /** Reports selection of an application attachment-menu action. */
   attachmentAction: [item: FrameMenuItem];
 }>();
 const input = ref<{element?: HTMLTextAreaElement; focus: () => void}>();
@@ -150,7 +160,16 @@ watch(
   () => nextTick(measure)
 );
 onMounted(measure);
-defineExpose({focus, measure});
+defineExpose({
+  /** Focuses the active input or terminal surface without creating or disposing its owning controller. */
+  focus,
+  /** Recalculates the draft input height after host content or layout changes. */
+  measure,
+});
+defineSlots<{
+  /** Content before the draft input, such as context chips. */ 'before-input'?(): unknown;
+  /** Additional composer actions before the send/stop controls. */ actions?(): unknown;
+}>();
 </script>
 <template>
   <form

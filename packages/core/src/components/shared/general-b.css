@@ -1,25 +1,540 @@
-.frame-tabs,.frame-stepper,.frame-toolbar,.frame-tree,.frame-splitter,.frame-navigation-menu,.frame-menubar{font-family:var(--frame-font-body, sans-serif);font-size:var(--frame-font-size-body,13px);color:var(--frame-control-text,var(--frame-text));box-sizing:border-box}
-.frame-toolbar,.frame-navigation-list,.frame-menubar{display:flex;align-items:center;gap:4px;margin:0;padding:4px;list-style:none}
-.frame-toolbar-button,.frame-navigation-trigger,.frame-navigation-link,.frame-menubar-trigger{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:30px;padding:4px 10px;border:1px solid transparent;border-radius:var(--frame-control-radius,var(--frame-radius-medium));color:inherit;background:transparent;font:inherit;text-decoration:none;cursor:pointer}
-.frame-toolbar-button:hover,.frame-navigation-trigger:hover,.frame-navigation-link:hover,.frame-menubar-trigger:hover,.frame-menubar-item[data-highlighted],.frame-tree-item:hover{background:var(--frame-hover-background,rgba(127,127,127,.12))}
-.frame-menubar-trigger[data-state=open],.frame-navigation-trigger[data-state=open],.frame-tree-item[data-selected]{color:var(--frame-accent,#007acc);background:var(--frame-selection-background,rgba(0,122,204,.15))}
-.frame-tabs-content{padding:16px 8px}
-.frame-tabs[data-orientation=vertical]{display:flex}.frame-tabs[data-orientation=vertical]>.frame-tabs-list{flex-direction:column;align-items:stretch}
-.frame-toolbar-button:focus-visible,.frame-navigation-link:focus-visible,.frame-navigation-trigger:focus-visible,.frame-menubar-trigger:focus-visible,.frame-tree-item:focus-visible,.frame-stepper-trigger:focus-visible,.frame-splitter-handle:focus-visible{outline:2px solid var(--frame-focus-border,var(--frame-accent,#007acc));outline-offset:2px}
-.frame-tabs-trigger:disabled,.frame-toolbar-button:disabled,.frame-menubar-trigger:disabled,.frame-navigation-trigger:disabled,[aria-disabled=true].frame-navigation-link,.frame-tree-item[data-disabled],.frame-stepper-item[data-disabled]{opacity:var(--frame-disabled-opacity,.5);cursor:default}
-.frame-toolbar[data-orientation=vertical],.frame-stepper[data-orientation=vertical]{flex-direction:column;align-items:stretch}.frame-toolbar-separator{width:1px;align-self:stretch;background:var(--frame-control-border,#555);margin:3px}.frame-toolbar[data-orientation=vertical]>.frame-toolbar-separator{height:1px;width:auto}
-.frame-stepper{display:flex;align-items:center;gap:12px}.frame-stepper-item{display:flex;align-items:center;gap:12px;flex:1}.frame-stepper-trigger{display:flex;align-items:center;gap:8px;padding:4px;background:transparent;color:inherit;border:0;text-align:start;font:inherit;border-radius:var(--frame-control-radius,var(--frame-radius-medium))}.frame-stepper-indicator{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border:1px solid var(--frame-control-border,#555);border-radius:50%;flex-shrink:0}.frame-stepper-item[data-state=active] .frame-stepper-indicator,.frame-stepper-item[data-state=completed] .frame-stepper-indicator{border-color:var(--frame-accent,#007acc);color:var(--frame-accent,#007acc)}.frame-stepper-title{display:block;font-weight:600}.frame-stepper-description{display:block;font-size:.9em;color:var(--frame-muted,#888)}.frame-stepper-separator{flex:1;height:1px;background:var(--frame-control-border,#555)}
-.frame-tree{padding:4px;margin:0;list-style:none}.frame-tree-item{display:flex;align-items:center;gap:6px;min-height:30px;padding:4px 8px;border-radius:var(--frame-control-radius,var(--frame-radius-medium));cursor:default}.frame-tree-indent{width:16px;flex-shrink:0}
-.frame-splitter{min-height:140px;min-width:160px}.frame-splitter-panel{padding:12px;box-sizing:border-box;overflow:auto}.frame-splitter-handle{position:relative;flex-shrink:0;background:var(--frame-control-border,#555);width:5px;border-radius:var(--frame-control-radius,var(--frame-radius-medium))}.frame-splitter-handle[data-orientation=vertical]{height:5px;width:auto}.frame-splitter-handle[data-state=drag],.frame-splitter-handle:hover{background:var(--frame-accent,#007acc)}
-.frame-navigation-item{position:relative}.frame-navigation-content,.frame-menubar-content{z-index:50;min-width:180px;padding:5px;border:1px solid var(--frame-control-border,#555);border-radius:var(--frame-control-radius,var(--frame-radius-medium));background:var(--frame-menu-background,var(--frame-control-background,#252526));color:var(--frame-control-text,var(--frame-text));box-shadow:var(--frame-overlay-shadow,0 6px 18px rgba(0,0,0,.2))}.frame-navigation-content{position:absolute;top:100%;left:0}.frame-navigation-content>.frame-navigation-link{display:flex;justify-content:flex-start}.frame-navigation-list[data-orientation=vertical]{flex-direction:column;align-items:stretch}.frame-menubar-item{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:6px 9px;border-radius:var(--frame-control-radius,var(--frame-radius-medium));outline:none;cursor:default;font:inherit}.frame-menubar-item[data-disabled]{opacity:var(--frame-disabled-opacity,.5)}.frame-menubar-item kbd{font:inherit;font-size:.85em;color:var(--frame-muted,#888)}.frame-menubar-separator{height:1px;background:var(--frame-control-border,#555);margin:4px}
+.frame-tabs,
+.frame-stepper,
+.frame-toolbar,
+.frame-tree,
+.frame-splitter,
+.frame-navigation-menu,
+.frame-menubar {
+  /* Font family for .frame-tabs, .frame-stepper, .frame-toolbar, .frame-tree, .frame-splitter, .frame-navigation-menu, .frame-menubar. @token --frame-font-body */
+  --_frame-default-font-body-84e892f96e: sans-serif;
+  font-family: var(
+    --frame-font-body,
+    var(--_frame-default-font-body-84e892f96e)
+  );
+  /* Text size for .frame-tabs, .frame-stepper, .frame-toolbar, .frame-tree, .frame-splitter, .frame-navigation-menu, .frame-menubar. @token --frame-font-size-body */
+  --_frame-default-font-size-body-fe078ec219: 13px;
+  font-size: var(
+    --frame-font-size-body,
+    var(--_frame-default-font-size-body-fe078ec219)
+  );
+  /* Foreground for .frame-tabs, .frame-stepper, .frame-toolbar, .frame-tree, .frame-splitter, .frame-navigation-menu, .frame-menubar. @token --frame-control-text */
+  --_frame-default-control-text-044272a0b6: var(--frame-text);
+  color: var(
+    --frame-control-text,
+    var(--_frame-default-control-text-044272a0b6)
+  );
+  box-sizing: border-box;
+}
+.frame-toolbar,
+.frame-navigation-list,
+.frame-menubar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+}
+.frame-toolbar-button,
+.frame-navigation-trigger,
+.frame-navigation-link,
+.frame-menubar-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 4px 10px;
+  border: 1px solid transparent;
+  /* Corner radius for .frame-toolbar-button, .frame-navigation-trigger, .frame-navigation-link, .frame-menubar-trigger. @token --frame-control-radius */
+  --_frame-default-control-radius-76f5728642: var(--frame-radius-medium);
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-76f5728642)
+  );
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.frame-toolbar-button:hover,
+.frame-navigation-trigger:hover,
+.frame-navigation-link:hover,
+.frame-menubar-trigger:hover,
+.frame-menubar-item[data-highlighted],
+.frame-tree-item:hover {
+  /* Background for .frame-toolbar-button:hover, .frame-navigation-trigger:hover, .frame-navigation-link:hover, .frame-menubar-trigger:hover, .frame-menubar-item[data-highlighted], .frame-tree-item:hover. @token --frame-hover-background */
+  --_frame-default-hover-background-b179b83de0: rgba(127, 127, 127, 0.12);
+  background: var(
+    --frame-hover-background,
+    var(--_frame-default-hover-background-b179b83de0)
+  );
+}
+.frame-menubar-trigger[data-state='open'],
+.frame-navigation-trigger[data-state='open'],
+.frame-tree-item[data-selected] {
+  /* Foreground for .frame-menubar-trigger[data-state='open'], .frame-navigation-trigger[data-state='open'], .frame-tree-item[data-selected]. @token --frame-accent */
+  --_frame-default-accent-10eb2a821a: #007acc;
+  color: var(--frame-accent, var(--_frame-default-accent-10eb2a821a));
+  /* Background for .frame-menubar-trigger[data-state='open'], .frame-navigation-trigger[data-state='open'], .frame-tree-item[data-selected]. @token --frame-selection-background */
+  --_frame-default-selection-background-d1f0aa54db: rgba(0, 122, 204, 0.15);
+  background: var(
+    --frame-selection-background,
+    var(--_frame-default-selection-background-d1f0aa54db)
+  );
+}
+.frame-tabs-content {
+  padding: 16px 8px;
+}
+.frame-tabs[data-orientation='vertical'] {
+  display: flex;
+}
+.frame-tabs[data-orientation='vertical'] > .frame-tabs-list {
+  flex-direction: column;
+  align-items: stretch;
+}
+.frame-toolbar-button:focus-visible,
+.frame-navigation-link:focus-visible,
+.frame-navigation-trigger:focus-visible,
+.frame-menubar-trigger:focus-visible,
+.frame-tree-item:focus-visible,
+.frame-stepper-trigger:focus-visible,
+.frame-splitter-handle:focus-visible {
+  /* Outline for .frame-toolbar-button:focus-visible, .frame-navigation-link:focus-visible, .frame-navigation-trigger:focus-visible, .frame-menubar-trigger:focus-visible, .frame-tree-item:focus-visible, .frame-stepper-trigger:focus-visible, .frame-splitter-handle:focus-visible. Used when --frame-focus-border is unset. @token --frame-accent */
+  --_frame-default-accent-ef251d72e0: #007acc;
+  /* Outline for .frame-toolbar-button:focus-visible, .frame-navigation-link:focus-visible, .frame-navigation-trigger:focus-visible, .frame-menubar-trigger:focus-visible, .frame-tree-item:focus-visible, .frame-stepper-trigger:focus-visible, .frame-splitter-handle:focus-visible. @token --frame-focus-border */
+  --_frame-default-focus-border-de221b8820: var(
+    --frame-accent,
+    var(--_frame-default-accent-ef251d72e0)
+  );
+  outline: 2px solid
+    var(--frame-focus-border, var(--_frame-default-focus-border-de221b8820));
+  outline-offset: 2px;
+}
+.frame-tabs-trigger:disabled,
+.frame-toolbar-button:disabled,
+.frame-menubar-trigger:disabled,
+.frame-navigation-trigger:disabled,
+[aria-disabled='true'].frame-navigation-link,
+.frame-tree-item[data-disabled],
+.frame-stepper-item[data-disabled] {
+  /* Opacity for .frame-tabs-trigger:disabled, .frame-toolbar-button:disabled, .frame-menubar-trigger:disabled, .frame-navigation-trigger:disabled, [aria-disabled='true'].frame-navigation-link, .frame-tree-item[data-disabled], .frame-stepper-item[data-disabled]. @token --frame-disabled-opacity */
+  --_frame-default-disabled-opacity-24108713a2: 0.5;
+  opacity: var(
+    --frame-disabled-opacity,
+    var(--_frame-default-disabled-opacity-24108713a2)
+  );
+  cursor: default;
+}
+.frame-toolbar[data-orientation='vertical'],
+.frame-stepper[data-orientation='vertical'] {
+  flex-direction: column;
+  align-items: stretch;
+}
+.frame-toolbar-separator {
+  width: 1px;
+  align-self: stretch;
+  /* Background for .frame-toolbar-separator. @token --frame-control-border */
+  --_frame-default-control-border-70a9ec99ca: #555;
+  background: var(
+    --frame-control-border,
+    var(--_frame-default-control-border-70a9ec99ca)
+  );
+  margin: 3px;
+}
+.frame-toolbar[data-orientation='vertical'] > .frame-toolbar-separator {
+  height: 1px;
+  width: auto;
+}
+.frame-stepper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.frame-stepper-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+.frame-stepper-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  text-align: start;
+  font: inherit;
+  /* Corner radius for .frame-stepper-trigger. @token --frame-control-radius */
+  --_frame-default-control-radius-c33761756d: var(--frame-radius-medium);
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-c33761756d)
+  );
+}
+.frame-stepper-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  /* Border for .frame-stepper-indicator. @token --frame-control-border */
+  --_frame-default-control-border-1ab755499e: #555;
+  border: 1px solid
+    var(--frame-control-border, var(--_frame-default-control-border-1ab755499e));
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.frame-stepper-item[data-state='active'] .frame-stepper-indicator,
+.frame-stepper-item[data-state='completed'] .frame-stepper-indicator {
+  /* Border color for .frame-stepper-item[data-state='active'] .frame-stepper-indicator, .frame-stepper-item[data-state='completed'] .frame-stepper-indicator. @token --frame-accent */
+  --_frame-default-accent-b4ae549006: #007acc;
+  border-color: var(--frame-accent, var(--_frame-default-accent-b4ae549006));
+  /* Foreground for .frame-stepper-item[data-state='active'] .frame-stepper-indicator, .frame-stepper-item[data-state='completed'] .frame-stepper-indicator. @token --frame-accent */
+  --_frame-default-accent-fbf37fa80e: #007acc;
+  color: var(--frame-accent, var(--_frame-default-accent-fbf37fa80e));
+}
+.frame-stepper-title {
+  display: block;
+  font-weight: 600;
+}
+.frame-stepper-description {
+  display: block;
+  font-size: 0.9em;
+  /* Foreground for .frame-stepper-description. @token --frame-muted */
+  --_frame-default-muted-1e7907e7d2: #888;
+  color: var(--frame-muted, var(--_frame-default-muted-1e7907e7d2));
+}
+.frame-stepper-separator {
+  flex: 1;
+  height: 1px;
+  /* Background for .frame-stepper-separator. @token --frame-control-border */
+  --_frame-default-control-border-10da2a1555: #555;
+  background: var(
+    --frame-control-border,
+    var(--_frame-default-control-border-10da2a1555)
+  );
+}
+.frame-tree {
+  padding: 4px;
+  margin: 0;
+  list-style: none;
+}
+.frame-tree-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 4px 8px;
+  /* Corner radius for .frame-tree-item. @token --frame-control-radius */
+  --_frame-default-control-radius-6095d9c9a1: var(--frame-radius-medium);
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-6095d9c9a1)
+  );
+  cursor: default;
+}
+.frame-tree-indent {
+  width: 16px;
+  flex-shrink: 0;
+}
+.frame-splitter {
+  min-height: 140px;
+  min-width: 160px;
+}
+.frame-splitter-panel {
+  padding: 12px;
+  box-sizing: border-box;
+  overflow: auto;
+}
+.frame-splitter-handle {
+  position: relative;
+  flex-shrink: 0;
+  /* Background for .frame-splitter-handle. @token --frame-control-border */
+  --_frame-default-control-border-10a78741d5: #555;
+  background: var(
+    --frame-control-border,
+    var(--_frame-default-control-border-10a78741d5)
+  );
+  width: 5px;
+  /* Corner radius for .frame-splitter-handle. @token --frame-control-radius */
+  --_frame-default-control-radius-8cbe57a562: var(--frame-radius-medium);
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-8cbe57a562)
+  );
+}
+.frame-splitter-handle[data-orientation='vertical'] {
+  height: 5px;
+  width: auto;
+}
+.frame-splitter-handle[data-state='drag'],
+.frame-splitter-handle:hover {
+  /* Background for .frame-splitter-handle[data-state='drag'], .frame-splitter-handle:hover. @token --frame-accent */
+  --_frame-default-accent-c79ce88510: #007acc;
+  background: var(--frame-accent, var(--_frame-default-accent-c79ce88510));
+}
+.frame-navigation-item {
+  position: relative;
+}
+.frame-navigation-content,
+.frame-menubar-content {
+  z-index: 50;
+  min-width: 180px;
+  padding: 5px;
+  /* Border for .frame-navigation-content, .frame-menubar-content. @token --frame-control-border */
+  --_frame-default-control-border-39578ef840: #555;
+  border: 1px solid
+    var(--frame-control-border, var(--_frame-default-control-border-39578ef840));
+  /* Corner radius for .frame-navigation-content, .frame-menubar-content. @token --frame-control-radius */
+  --_frame-default-control-radius-7b0e6fd313: var(--frame-radius-medium);
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-7b0e6fd313)
+  );
+  /* Background for .frame-navigation-content, .frame-menubar-content. Used when --frame-menu-background is unset. @token --frame-control-background */
+  --_frame-default-control-background-2878b7ca24: #252526;
+  /* Background for .frame-navigation-content, .frame-menubar-content. @token --frame-menu-background */
+  --_frame-default-menu-background-b9c7db3c7e: var(
+    --frame-control-background,
+    var(--_frame-default-control-background-2878b7ca24)
+  );
+  background: var(
+    --frame-menu-background,
+    var(--_frame-default-menu-background-b9c7db3c7e)
+  );
+  /* Foreground for .frame-navigation-content, .frame-menubar-content. @token --frame-control-text */
+  --_frame-default-control-text-6f393096fc: var(--frame-text);
+  color: var(
+    --frame-control-text,
+    var(--_frame-default-control-text-6f393096fc)
+  );
+  /* Elevation shadow for .frame-navigation-content, .frame-menubar-content. @token --frame-overlay-shadow */
+  --_frame-default-overlay-shadow-bb6f1b6b44: 0 6px 18px rgba(0, 0, 0, 0.2);
+  box-shadow: var(
+    --frame-overlay-shadow,
+    var(--_frame-default-overlay-shadow-bb6f1b6b44)
+  );
+}
+.frame-navigation-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+.frame-navigation-content > .frame-navigation-link {
+  display: flex;
+  justify-content: flex-start;
+}
+.frame-navigation-list[data-orientation='vertical'] {
+  flex-direction: column;
+  align-items: stretch;
+}
+.frame-menubar-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 6px 9px;
+  /* Corner radius for .frame-menubar-item. @token --frame-control-radius */
+  --_frame-default-control-radius-c3b7b469ef: var(--frame-radius-medium);
+  border-radius: var(
+    --frame-control-radius,
+    var(--_frame-default-control-radius-c3b7b469ef)
+  );
+  outline: none;
+  cursor: default;
+  font: inherit;
+}
+.frame-menubar-item[data-disabled] {
+  /* Opacity for .frame-menubar-item[data-disabled]. @token --frame-disabled-opacity */
+  --_frame-default-disabled-opacity-a5dc36f2ff: 0.5;
+  opacity: var(
+    --frame-disabled-opacity,
+    var(--_frame-default-disabled-opacity-a5dc36f2ff)
+  );
+}
+.frame-menubar-item kbd {
+  font: inherit;
+  font-size: 0.85em;
+  /* Foreground for .frame-menubar-item kbd. @token --frame-muted */
+  --_frame-default-muted-86f9553883: #888;
+  color: var(--frame-muted, var(--_frame-default-muted-86f9553883));
+}
+.frame-menubar-separator {
+  height: 1px;
+  /* Background for .frame-menubar-separator. @token --frame-control-border */
+  --_frame-default-control-border-4793964e87: #555;
+  background: var(
+    --frame-control-border,
+    var(--_frame-default-control-border-4793964e87)
+  );
+  margin: 4px;
+}
 
 /* Plain navigation tabs share the documentation's baseline/indicator treatment. */
-.frame-tabs > .frame-tabs-list { display:flex;list-style:none;gap:var(--frame-tabs-gap,20px);padding:var(--frame-tabs-list-padding,0);margin:0;min-width:0;overflow-x:auto;border-bottom:var(--frame-tabs-list-border,1px solid var(--frame-line));align-items:stretch; }
-.frame-tabs .frame-tabs-trigger { display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;text-decoration:none;cursor:pointer;flex-shrink:0;min-height:var(--frame-tabs-trigger-min-height,30px);padding:var(--frame-tabs-trigger-padding,12px 0);border:0;border-bottom:var(--frame-tabs-indicator-width,2px) solid transparent;border-radius:var(--frame-tabs-trigger-border-radius,0);background:var(--frame-tabs-trigger-background,transparent);color:var(--frame-tabs-trigger-color,var(--frame-text));white-space:nowrap; }
-.frame-tabs .frame-tabs-trigger:hover:not(:disabled) { background:var(--frame-tabs-trigger-hover-background,transparent);color:var(--frame-tabs-trigger-hover-color,var(--frame-text)); }
-.frame-tabs .frame-tabs-trigger[data-state=active] { background:var(--frame-tabs-trigger-selected-background,transparent);color:var(--frame-tabs-trigger-selected-color,var(--frame-text));border-bottom-color:var(--frame-tabs-indicator-color,var(--frame-accent)); }
-.frame-tabs .frame-tabs-trigger:focus-visible { outline:var(--frame-tabs-trigger-focus-outline,1px solid var(--frame-accent));outline-offset:var(--frame-tabs-trigger-outline-offset,-2px); }
-.frame-tabs > .frame-tabs-content { padding:var(--frame-tabs-content-padding,16px 0); }
-.frame-tabs[data-orientation=vertical] > .frame-tabs-list { border-bottom:0;border-inline-end:var(--frame-tabs-list-border,1px solid var(--frame-line));overflow-x:visible; }
-.frame-tabs[data-orientation=vertical] .frame-tabs-trigger { border-bottom:0;border-inline-end:var(--frame-tabs-indicator-width,2px) solid transparent;padding:var(--frame-tabs-vertical-trigger-padding,8px 12px); }
-.frame-tabs[data-orientation=vertical] .frame-tabs-trigger[data-state=active] { border-inline-end-color:var(--frame-tabs-indicator-color,var(--frame-accent)); }
+.frame-tabs > .frame-tabs-list {
+  display: flex;
+  list-style: none;
+  /* Space between tab triggers. @token --frame-tabs-gap */
+  --_frame-default-tabs-gap-148: 20px;
+  gap: var(--frame-tabs-gap, var(--_frame-default-tabs-gap-148));
+  /* Inset around the tab trigger list. @token --frame-tabs-list-padding */
+  --_frame-default-tabs-list-padding-149: 0;
+  padding: var(
+    --frame-tabs-list-padding,
+    var(--_frame-default-tabs-list-padding-149)
+  );
+  margin: 0;
+  min-width: 0;
+  overflow-x: auto;
+  /* Baseline border along the tab trigger list. @token --frame-tabs-list-border */
+  --_frame-default-tabs-list-border-150: 1px solid var(--frame-line);
+  border-bottom: var(
+    --frame-tabs-list-border,
+    var(--_frame-default-tabs-list-border-150)
+  );
+  align-items: stretch;
+}
+.frame-tabs .frame-tabs-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  /* Minimum height of a tab trigger. @token --frame-tabs-trigger-min-height */
+  --_frame-default-tabs-trigger-min-height-151: 30px;
+  min-height: var(
+    --frame-tabs-trigger-min-height,
+    var(--_frame-default-tabs-trigger-min-height-151)
+  );
+  /* Internal spacing of a horizontal tab trigger. @token --frame-tabs-trigger-padding */
+  --_frame-default-tabs-trigger-padding-152: 12px 0;
+  padding: var(
+    --frame-tabs-trigger-padding,
+    var(--_frame-default-tabs-trigger-padding-152)
+  );
+  border: 0;
+  /* Thickness of the selected-tab underline or side indicator. @token --frame-tabs-indicator-width */
+  --_frame-default-tabs-indicator-width-153: 2px;
+  border-bottom: var(
+      --frame-tabs-indicator-width,
+      var(--_frame-default-tabs-indicator-width-153)
+    )
+    solid transparent;
+  /* Corner radius of a tab trigger. @token --frame-tabs-trigger-border-radius */
+  --_frame-default-tabs-trigger-border-radius-154: 0;
+  border-radius: var(
+    --frame-tabs-trigger-border-radius,
+    var(--_frame-default-tabs-trigger-border-radius-154)
+  );
+  /* Resting surface of a tab trigger. @token --frame-tabs-trigger-background */
+  --_frame-default-tabs-trigger-background-155: transparent;
+  background: var(
+    --frame-tabs-trigger-background,
+    var(--_frame-default-tabs-trigger-background-155)
+  );
+  /* Resting foreground of a tab trigger. @token --frame-tabs-trigger-color */
+  --_frame-default-tabs-trigger-color-156: var(--frame-text);
+  color: var(
+    --frame-tabs-trigger-color,
+    var(--_frame-default-tabs-trigger-color-156)
+  );
+  white-space: nowrap;
+}
+.frame-tabs .frame-tabs-trigger:hover:not(:disabled) {
+  /* Pointer hover surface of an enabled tab trigger. @token --frame-tabs-trigger-hover-background */
+  --_frame-default-tabs-trigger-hover-background-157: transparent;
+  background: var(
+    --frame-tabs-trigger-hover-background,
+    var(--_frame-default-tabs-trigger-hover-background-157)
+  );
+  /* Pointer hover foreground of an enabled tab trigger. @token --frame-tabs-trigger-hover-color */
+  --_frame-default-tabs-trigger-hover-color-158: var(--frame-text);
+  color: var(
+    --frame-tabs-trigger-hover-color,
+    var(--_frame-default-tabs-trigger-hover-color-158)
+  );
+}
+.frame-tabs .frame-tabs-trigger[data-state='active'] {
+  /* Surface of the selected tab trigger. @token --frame-tabs-trigger-selected-background */
+  --_frame-default-tabs-trigger-selected-background-159: transparent;
+  background: var(
+    --frame-tabs-trigger-selected-background,
+    var(--_frame-default-tabs-trigger-selected-background-159)
+  );
+  /* Foreground of the selected tab trigger. @token --frame-tabs-trigger-selected-color */
+  --_frame-default-tabs-trigger-selected-color-160: var(--frame-text);
+  color: var(
+    --frame-tabs-trigger-selected-color,
+    var(--_frame-default-tabs-trigger-selected-color-160)
+  );
+  /* Color of the selected-tab underline or side indicator. @token --frame-tabs-indicator-color */
+  --_frame-default-tabs-indicator-color-161: var(--frame-accent);
+  border-bottom-color: var(
+    --frame-tabs-indicator-color,
+    var(--_frame-default-tabs-indicator-color-161)
+  );
+}
+.frame-tabs .frame-tabs-trigger:focus-visible {
+  /* Keyboard focus outline around a tab trigger. @token --frame-tabs-trigger-focus-outline */
+  --_frame-default-tabs-trigger-focus-outline-162: 1px solid var(--frame-accent);
+  outline: var(
+    --frame-tabs-trigger-focus-outline,
+    var(--_frame-default-tabs-trigger-focus-outline-162)
+  );
+  /* Offset between the tab trigger and its keyboard focus outline. @token --frame-tabs-trigger-outline-offset */
+  --_frame-default-tabs-trigger-outline-offset-163: -2px;
+  outline-offset: var(
+    --frame-tabs-trigger-outline-offset,
+    var(--_frame-default-tabs-trigger-outline-offset-163)
+  );
+}
+.frame-tabs > .frame-tabs-content {
+  /* Internal spacing of the selected tab content. @token --frame-tabs-content-padding */
+  --_frame-default-tabs-content-padding-164: 16px 0;
+  padding: var(
+    --frame-tabs-content-padding,
+    var(--_frame-default-tabs-content-padding-164)
+  );
+}
+.frame-tabs[data-orientation='vertical'] > .frame-tabs-list {
+  border-bottom: 0;
+  /* Baseline border along the tab trigger list. @token --frame-tabs-list-border */
+  --_frame-default-tabs-list-border-165: 1px solid var(--frame-line);
+  border-inline-end: var(
+    --frame-tabs-list-border,
+    var(--_frame-default-tabs-list-border-165)
+  );
+  overflow-x: visible;
+}
+.frame-tabs[data-orientation='vertical'] .frame-tabs-trigger {
+  border-bottom: 0;
+  /* Thickness of the selected-tab underline or side indicator. @token --frame-tabs-indicator-width */
+  --_frame-default-tabs-indicator-width-166: 2px;
+  border-inline-end: var(
+      --frame-tabs-indicator-width,
+      var(--_frame-default-tabs-indicator-width-166)
+    )
+    solid transparent;
+  /* Internal spacing of a vertical tab trigger. @token --frame-tabs-vertical-trigger-padding */
+  --_frame-default-tabs-vertical-trigger-padding-167: 8px 12px;
+  padding: var(
+    --frame-tabs-vertical-trigger-padding,
+    var(--_frame-default-tabs-vertical-trigger-padding-167)
+  );
+}
+.frame-tabs[data-orientation='vertical']
+  .frame-tabs-trigger[data-state='active'] {
+  /* Color of the selected-tab underline or side indicator. @token --frame-tabs-indicator-color */
+  --_frame-default-tabs-indicator-color-168: var(--frame-accent);
+  border-inline-end-color: var(
+    --frame-tabs-indicator-color,
+    var(--_frame-default-tabs-indicator-color-168)
+  );
+}

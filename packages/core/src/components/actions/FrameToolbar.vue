@@ -13,14 +13,27 @@ import FrameIcon from '../data-display/FrameIcon.vue';
 import '../shared/general-b.css';
 
 const props = defineProps<
-  ToolbarRootProps & {items?: FrameToolbarItem[]; label?: string}
+  ToolbarRootProps & {
+    /** Toolbar actions, links, and separators rendered when the default slot is absent. */
+    items?: FrameToolbarItem[];
+    /** Accessible name of the toolbar. */
+    label?: string;
+  }
 >();
-const emit = defineEmits<{action: [item: FrameToolbarItem]}>();
+const emit = defineEmits<{
+  /** The application action was activated. */
+  action: [item: FrameToolbarItem];
+}>();
 const root = computed(() => {
   const {items, label, ...rest} = props;
   return rest;
 });
 const forwarded = useForwardProps(root);
+
+defineSlots<{
+  /** Replaces the built-in toolbar items composition. */
+  default?(): unknown;
+}>();
 </script>
 <template>
   <ToolbarRoot v-bind="forwarded" class="frame-toolbar" :aria-label="label"

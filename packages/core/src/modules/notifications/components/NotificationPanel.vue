@@ -21,7 +21,14 @@ import type {
 } from '../controllers/notificationHistory';
 
 const props = withDefaults(
-  defineProps<{frame: Frame; history: NotificationHistory; bottom?: number}>(),
+  defineProps<{
+    /** Stable caller-owned Frame instance; shell state and service ownership remain with this root. */
+    frame: Frame;
+    /** Caller-owned notification history; this presentation does not dispose it. */
+    history: NotificationHistory;
+    /** Bottom inset in pixels for bottom-anchored notification placement; defaults to eight. */
+    bottom?: number;
+  }>(),
   {bottom: 8}
 );
 const frame = props.frame;
@@ -61,7 +68,10 @@ function choosePosition(event: MouseEvent) {
     : (event.currentTarget as HTMLElement);
 }
 
-const emit = defineEmits<{close: []}>();
+const emit = defineEmits<{
+  /** Requests dismissal of this presentation without disposing its owning controller. */
+  close: [];
+}>();
 const icons = {
   info: 'info',
   success: 'pass',

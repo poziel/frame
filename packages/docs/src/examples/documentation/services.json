@@ -32,10 +32,10 @@
         },
         "description": "Semantic severity used to style the notification.",
         "options": [
-          "error",
           "info",
           "success",
-          "warning"
+          "warning",
+          "error"
         ],
         "control": "text",
         "references": [
@@ -104,8 +104,9 @@
         "name": "frame.notify",
         "kind": "method",
         "parameters": "options: NotificationOptions",
-        "returns": "{ id: string; close: () => void }",
-        "description": "Call this public Frame API with application-owned configuration."
+        "signature": "(options: NotificationOptions): { id: string; close: () => void; }",
+        "returns": "{ id: string; close: () => void; }",
+        "description": "Shares the existing notifications.notify operation or state with the public shell API."
       }
     ]
   },
@@ -303,9 +304,10 @@
       {
         "name": "frame.openModal",
         "kind": "method",
-        "parameters": "options: ModalDefinition",
-        "returns": "{ id: string; close: () => void }",
-        "description": "Call this public Frame API with application-owned configuration."
+        "parameters": "modal: ModalDefinition",
+        "signature": "(modal: ModalDefinition): { id: string; close: () => void; }",
+        "returns": "{ id: string; close: () => void; }",
+        "description": "Opens or activates a modal, cancelling conflicting transient interactions."
       }
     ]
   },
@@ -399,9 +401,10 @@
       {
         "name": "frame.registerSettingsSection",
         "kind": "method",
-        "parameters": "options: SettingsSection",
+        "parameters": "section: SettingsSection, parentId?: string | undefined",
+        "signature": "(section: SettingsSection, parentId?: string): () => void",
         "returns": "() => void",
-        "description": "Call this public Frame API with application-owned configuration."
+        "description": "Shares the existing settings.register operation or state with the public shell API."
       }
     ]
   },
@@ -461,9 +464,10 @@
       {
         "name": "frame.registerBanner",
         "kind": "method",
-        "parameters": "options: WorkspaceBannerDefinition",
+        "parameters": "banner: WorkspaceBannerDefinition",
+        "signature": "(banner: WorkspaceBannerDefinition): () => void",
         "returns": "() => void",
-        "description": "Call this public Frame API with application-owned configuration."
+        "description": "Shares the existing registerWorkspaceBanner operation or state with the public shell API."
       }
     ]
   },
@@ -514,8 +518,9 @@
         "name": "frame.setWorkspacePane",
         "kind": "method",
         "parameters": "id: string, content: WorkspacePaneContent",
+        "signature": "(id: string, content: WorkspacePaneContent): void",
         "returns": "void",
-        "description": "Call this public Frame API with application-owned configuration."
+        "description": "Shares the existing workspace.setPane operation or state with the public shell API."
       }
     ]
   },
@@ -745,8 +750,9 @@
         "name": "frame.registerView",
         "kind": "method",
         "parameters": "input: SidePanelDefinition, region: ViewRegion",
+        "signature": "(input: SidePanelDefinition, region: ViewRegion): () => void",
         "returns": "() => void",
-        "description": "Call this public Frame API with application-owned configuration."
+        "description": "Registers a view tree, commands, and current region membership."
       }
     ]
   },
@@ -762,75 +768,22 @@
         },
         "description": "Discriminant selecting the supported item behavior.",
         "options": [
-          "action"
+          "action",
+          "link",
+          "dropdown",
+          "separator"
         ],
         "control": "text",
-        "references": []
-      },
-      {
-        "name": "run",
-        "type": "() => void | Promise<void>",
-        "default": {
-          "kind": "required"
-        },
-        "description": "Action invoked when this contribution is activated.",
-        "control": "fixture",
-        "references": [
-          "Promise"
-        ]
-      },
-      {
-        "name": "active",
-        "type": "boolean | (() => boolean)",
-        "default": {
-          "kind": "omitted"
-        },
-        "description": "Static or reactive indication that this navigation destination is selected.",
-        "control": "fixture",
         "references": []
       },
       {
         "name": "label",
         "type": "string",
         "default": {
-          "kind": "required"
+          "kind": "omitted"
         },
         "description": "Human-readable and accessible name for this contribution.",
         "control": "text",
-        "references": []
-      },
-      {
-        "name": "icon",
-        "type": "Component",
-        "default": {
-          "kind": "omitted"
-        },
-        "description": "Optional icon displayed with the contribution.",
-        "control": "fixture",
-        "references": [
-          "Component"
-        ]
-      },
-      {
-        "name": "badge",
-        "type": "ViewBadge",
-        "default": {
-          "kind": "omitted"
-        },
-        "description": "Optional badge supplied by the host contribution.",
-        "control": "json",
-        "references": [
-          "ViewBadge"
-        ]
-      },
-      {
-        "name": "disabled",
-        "type": "boolean",
-        "default": {
-          "kind": "omitted"
-        },
-        "description": "Whether activation is temporarily blocked while the item remains registered.",
-        "control": "boolean",
         "references": []
       },
       {
@@ -871,9 +824,10 @@
       {
         "name": "frame.registerNavigationItem",
         "kind": "method",
-        "parameters": "options: NavigationActionItem",
+        "parameters": "input: NavigationItem",
+        "signature": "(input: NavigationItem): () => void",
         "returns": "() => void",
-        "description": "Call this public Frame API with application-owned configuration."
+        "description": "Registers command-backed navigation actions with complete cleanup."
       }
     ]
   },
@@ -949,9 +903,10 @@
       {
         "name": "frame.showQuickPick",
         "kind": "method",
-        "parameters": "items: readonly QuickPickItem[], options?: QuickPickOptions",
-        "returns": "Promise<QuickPickItem | undefined>",
-        "description": "Call this public Frame API with application-owned configuration."
+        "parameters": "items: readonly T[], options?: QuickPickOptions",
+        "signature": "<T extends QuickPickItem>(items: readonly T[], options?: QuickPickOptions): Promise<T | undefined>",
+        "returns": "Promise<T | undefined>",
+        "description": "Opens explicit typed choices and resolves selection or cancellation."
       }
     ]
   },
@@ -965,7 +920,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Host callback that produces responses when the conversation explicitly\nsends.",
+        "description": "Host callback that produces responses when the conversation explicitly\r\nsends.",
         "control": "fixture",
         "references": [
           "ChatResponder"
@@ -1005,13 +960,6 @@
         "parameters": "",
         "returns": "ChatState",
         "description": "Reactive conversation state shared by its visual presentations."
-      },
-      {
-        "name": "dispose",
-        "kind": "method",
-        "parameters": "",
-        "returns": "void",
-        "description": "Permanently stops this conversation while leaving host services caller-owned."
       },
       {
         "name": "cancelRewind",
@@ -1068,6 +1016,13 @@
         "parameters": "id: string",
         "returns": "boolean",
         "description": "Cancels one interaction only in the active generation."
+      },
+      {
+        "name": "dispose",
+        "kind": "method",
+        "parameters": "",
+        "returns": "void",
+        "description": "Permanently stops this conversation while leaving host services caller-owned."
       }
     ],
     "emits": [],
@@ -1084,7 +1039,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Host callback that produces responses when the conversation explicitly\nsends.",
+        "description": "Host callback that produces responses when the conversation explicitly\r\nsends.",
         "control": "fixture",
         "references": [
           "ChatResponder"
@@ -1124,13 +1079,6 @@
         "parameters": "",
         "returns": "ChatState",
         "description": "Reactive conversation state shared by its visual presentations."
-      },
-      {
-        "name": "dispose",
-        "kind": "method",
-        "parameters": "",
-        "returns": "void",
-        "description": "Permanently stops this conversation while leaving host services caller-owned."
       },
       {
         "name": "cancelRewind",
@@ -1187,6 +1135,13 @@
         "parameters": "id: string",
         "returns": "boolean",
         "description": "Cancels one interaction only in the active generation."
+      },
+      {
+        "name": "dispose",
+        "kind": "method",
+        "parameters": "",
+        "returns": "void",
+        "description": "Permanently stops this conversation while leaving host services caller-owned."
       }
     ],
     "emits": [],
@@ -1203,7 +1158,7 @@
         "default": {
           "kind": "required"
         },
-        "description": "Id configuration for this component; see its Features examples for usage.",
+        "description": "Unique view registration ID within the receiving Frame instance.",
         "control": "fixture",
         "references": []
       },
@@ -1213,7 +1168,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Visible or accessible label for the control.",
+        "description": "View selector label; defaults to AI chat when omitted.",
         "control": "fixture",
         "references": []
       },
@@ -1223,7 +1178,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Application-owned chat controller. Requests start only when explicitly sent.",
+        "description": "Existing caller-owned chat; supply this or a conversation history.",
         "control": "fixture",
         "references": [
           "AIChatController"
@@ -1235,7 +1190,7 @@
         "default": {
           "kind": "omitted"
         },
-        "description": "Optional history store from createNotificationHistory, independent of active notifications.",
+        "description": "Existing caller-owned history; registration does not create conversations.",
         "control": "fixture",
         "references": [
           "AIChatHistoryController"
@@ -1301,32 +1256,18 @@
         "description": "Creates a class-backed history store through the existing public factory."
       },
       {
+        "name": "active",
+        "kind": "property",
+        "parameters": "",
+        "returns": "ComputedRef<AIChatConversation | undefined>",
+        "description": "Selected conversation in scope, including its retained chat state."
+      },
+      {
         "name": "dispose",
         "kind": "method",
         "parameters": "",
         "returns": "void",
         "description": "Disposes every owned chat exactly once and empties history."
-      },
-      {
-        "name": "activeId",
-        "kind": "property",
-        "parameters": "",
-        "returns": "ComputedRef<string | undefined>",
-        "description": "Readonly reactive identity of the selected conversation."
-      },
-      {
-        "name": "create",
-        "kind": "method",
-        "parameters": "title: string, applicationId: string | undefined",
-        "returns": "ShallowReactive<{ id: string; title: string; applicationId: string | undefined; createdAt: number; pinned: boolean; archived: boolean; chat: Raw<AIChatController>; }>",
-        "description": "Creates and owns a chat only on explicit request, then selects its conversation."
-      },
-      {
-        "name": "rename",
-        "kind": "method",
-        "parameters": "id: string, title: string",
-        "returns": "boolean",
-        "description": "Updates a conversation title after trimming and validating it."
       },
       {
         "name": "visible",
@@ -1343,18 +1284,18 @@
         "description": "Archived conversations retained in the current scope."
       },
       {
-        "name": "active",
-        "kind": "property",
-        "parameters": "",
-        "returns": "ComputedRef<AIChatConversation | undefined>",
-        "description": "Selected conversation in scope, including its retained chat state."
-      },
-      {
         "name": "conversations",
         "kind": "property",
         "parameters": "",
         "returns": "ComputedRef<AIChatConversation[]>",
         "description": "Snapshot of metadata entries; each entry retains its chat controller identity."
+      },
+      {
+        "name": "activeId",
+        "kind": "property",
+        "parameters": "",
+        "returns": "ComputedRef<string | undefined>",
+        "description": "Readonly reactive identity of the selected conversation."
       },
       {
         "name": "scope",
@@ -1364,11 +1305,25 @@
         "description": "Readonly reactive filter controlled through setScope."
       },
       {
+        "name": "create",
+        "kind": "method",
+        "parameters": "title: string, applicationId: string | undefined",
+        "returns": "ShallowReactive<{ id: string; title: string; applicationId: string | undefined; createdAt: number; pinned: boolean; archived: boolean; chat: Raw<AIChatController>; }>",
+        "description": "Creates and owns a chat only on explicit request, then selects its conversation."
+      },
+      {
         "name": "select",
         "kind": "method",
         "parameters": "id: string",
         "returns": "boolean",
         "description": "Selects an existing in-scope conversation without replacing its controller."
+      },
+      {
+        "name": "rename",
+        "kind": "method",
+        "parameters": "id: string, title: string",
+        "returns": "boolean",
+        "description": "Updates a conversation title after trimming and validating it."
       },
       {
         "name": "pin",

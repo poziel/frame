@@ -50,11 +50,17 @@ import {provideOverlayBoundary} from '../overlays/overlays';
 
 const props = withDefaults(
   defineProps<{
+    /** Stable caller-owned Frame instance; shell state and service ownership remain with this root. */
     frame: Frame;
+    /** Text displayed in the shell title or command-center area; defaults to Frame (Workspace). */
     titleText?: string;
+    /** Optional Vue component replacing the default application mark. */
     appIcon?: Component;
+    /** Accessible application name associated with the application icon. */
     appName?: string;
+    /** Displays the command-center search trigger; defaults to true. */
     showSearch?: boolean;
+    /** Application menu tree replacing the generated shell menus when supplied. */
     menuItems?: readonly FrameMenuItem[];
   }>(),
   {titleText: 'Frame (Workspace)', showSearch: true}
@@ -672,6 +678,42 @@ onBeforeUnmount(() => {
   frame.closeQuickInput();
   cleanups.reverse().forEach((cleanup) => cleanup());
 });
+defineSlots<{
+  /** Initial plain workspace-pane content; the Frame instance retains pane ownership. */ default?(
+    props: {
+    pane: import('../../framework/workspace/workspaceTypes').WorkspacePane;
+  }
+  ): unknown;
+  /** Content for additional plain workspace panes. */ 'workspace-pane'?(
+    props: {
+    pane: import('../../framework/workspace/workspaceTypes').WorkspacePane;
+  }
+  ): unknown;
+  /** Custom document-tab label with its current active state. */ 'workspace-tab'?(
+    props: {
+    tab: import('../../framework/workspace/workspaceTypes').WorkspaceTab;
+    active: boolean;
+  }
+  ): unknown;
+  /** Empty content for a tabbed pane. */ 'workspace-tab-empty'?(
+    props: {
+    pane: import('../../framework/workspace/workspaceTypes').WorkspacePane;
+  }
+  ): unknown;
+  /** Additional controls in a workspace tab strip. */ 'workspace-tab-actions'?(
+    props: {
+    pane: import('../../framework/workspace/workspaceTypes').WorkspacePane;
+  }
+  ): unknown;
+  /** Custom content in the leading status action area. */ 'status-leading-actions'?(): unknown;
+  /** Custom content in the trailing status action area. */ 'status-actions'?(): unknown;
+  /** Shell-bounded custom overlays; use target for nested teleports instead of body. */ overlays?(
+    props: {
+    bounds: import('../overlays/overlays').OverlayBounds;
+    target: HTMLElement | undefined;
+  }
+  ): unknown;
+}>();
 </script>
 <template>
   <div

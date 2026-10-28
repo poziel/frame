@@ -1,6 +1,18 @@
 # Frame theme tokens
 
-Frame owns the `--frame-*` namespace. Every Frame CSS variable is also a **token**, available in JSON, JSONC, JSON5, YAML, TOML and INI theme files. These are tokens, regardless of their serialization format. Applications can use `--app-*` (or a product prefix) for additional variables. Shared default values live in `packages/core/src/themes/generated/default.css`, exported as `@frame/core/tokens.css` and included in Core's normal stylesheet. Component defaults remain in their contextual CSS fallbacks. Tailwind is optional; the same variables work in ordinary CSS.
+Frame owns the `--frame-*` namespace. Every Frame CSS variable is also a **token**, available in JSON, JSONC, JSON5, YAML, TOML and INI theme files. These are tokens, regardless of their serialization format. Applications can use `--app-*` (or a product prefix) for additional variables. Shared default values live in `packages/core/src/themes/generated/default.css`, exported as `@frame/core/tokens.css` and included in Core's normal stylesheet. Component defaults are documented declarations in their owning stylesheets. Tailwind is optional; the same variables work in ordinary CSS.
+
+Contextual component defaults use private `--_frame-default-*` declarations at
+the consuming selector. Public `--frame-*` overrides retain precedence through
+`var(--frame-token, var(--_frame-default-token))`. This keeps defaults dependent
+on the active element's theme, including instance scopes and portals. Private
+default names are implementation details, not theme-file keys. CSS-wide values
+such as `inherit` remain at the consuming property because custom-property
+declarations give those keywords different cascade semantics.
+
+Component Styling tabs are generated from the declaration comments, expressions,
+and selector contexts. Expressions are not computed literals; inherited shared
+tokens and runtime geometry may have no local default declaration.
 
 See [theme file formats](theme-files.md) for equivalent examples in all six formats, nested/dotted paths, and browser file imports.
 

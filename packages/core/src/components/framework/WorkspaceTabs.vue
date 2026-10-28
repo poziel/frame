@@ -518,7 +518,7 @@ defineSlots<{
     @close="overflowAnchor = undefined"
     ><template #item-actions="{item}"
       ><FrameIconButton
-        v-if="w.canCloseTab(item.id)"
+        v-if="'label' in item && w.canCloseTab(item.id)"
         class="workspace-overflow-close"
         :label="`Close ${item.label}`"
         icon="close"

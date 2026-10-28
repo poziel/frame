@@ -22,28 +22,39 @@ const props = withDefaults(
     history: AIChatHistoryController;
     /** Includes the shared prompt for creating and sending a new conversation. */
     showPrompt?: boolean;
+    /** Prompt shown when the input is empty. */
     placeholder?: string;
     /** Adds row menu entries; selected host actions are emitted through action. */
     contextActions?: (
       conversation: AIChatConversation
     ) => readonly FrameMenuItem[];
+    /** Additional host actions offered by the attachment menu. */
     attachmentActions?: readonly FrameMenuItem[];
+    /** Shows the speech action; the host handles the emitted speech request. */
     speechEnabled?: boolean;
   }>(),
   {showPrompt: true, placeholder: 'Start a conversation…'}
 );
 const emit = defineEmits<{
+  /** Requests activation of the selected registered item ID. */
   select: [id: string];
+  /** Reports the newly created conversation. */
   create: [conversation: AIChatConversation];
+  /** Reports a selected application history-menu action and its conversation. */
   action: [item: FrameMenuItem, conversation: AIChatConversation];
+  /** Reports selection of an application attachment-menu action. */
   attachmentAction: [item: FrameMenuItem];
+  /** Requests host-managed speech input. */
   speech: [];
 }>();
 const draft = ref(''),
   attachments = ref<ChatAttachment[]>([]),
   showArchived = ref(false);
 const prompt = ref<{focus: () => void}>();
-defineExpose({focus: () => prompt.value?.focus()});
+defineExpose({
+  /** Focuses the active input or terminal surface without creating or disposing its owning controller. */
+  focus: () => prompt.value?.focus(),
+});
 const renameOpen = ref(false),
   renameTitle = ref(''),
   renameId = ref<string>();
@@ -108,6 +119,9 @@ function send(value: {text: string; attachments: ChatAttachment[]}) {
   emit('create', conversation);
   void conversation.chat.send();
 }
+defineSlots<{
+  /** Additional actions in the new-conversation composer. */ 'composer-actions'?(): unknown;
+}>();
 </script>
 <template>
   <section class="frame-ai-history" aria-label="AI history">

@@ -67,11 +67,109 @@ This example reuses Basic usage state and rejects whitespace-only names on blur.
 </FrameField>
 ```
 
+### Label and supporting text
+
+The description is connected to the input, keeping help text available while the user edits.
+
+<!-- frame:example id="field.description" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameField, FrameTextField } from '@frame/core';
+const fieldValue = ref('Project name');
+</script>
+<template>
+<FrameField :name="&quot;projectName&quot;" :label="&quot;Project name&quot;" :description="&quot;Use a short, recognizable name.&quot;"><FrameTextField v-model="fieldValue" /></FrameField>
+</template>
+```
+
+### Validate when leaving the field
+
+Clear the input and move focus away. Required validation displays feedback after blur.
+
+<!-- frame:example id="field.required" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameField, FrameTextField } from '@frame/core';
+const demoRequired = true;
+const fieldValue = ref('Project name');
+</script>
+<template>
+<FrameField :name="&quot;projectName&quot;" :label="&quot;Required name&quot;" :required="demoRequired" :validation-mode="&quot;onBlur&quot;" :description="&quot;Clear this value, then leave the field.&quot;"><FrameTextField v-model="fieldValue" /></FrameField>
+</template>
+```
+
+### Show an external error
+
+An explicit error marks the control invalid and supplies feedback from application validation.
+
+<!-- frame:example id="field.external-error" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameField, FrameTextField } from '@frame/core';
+const fieldValue = ref('Project name');
+</script>
+<template>
+<FrameField :name="&quot;projectName&quot;" :label="&quot;Project name&quot;" :error="&quot;This project name is already taken.&quot;"><FrameTextField v-model="fieldValue" /></FrameField>
+</template>
+```
+
 ## APIs
+
+<!-- frame:generated api="field" -->
+
+### FrameField
+
+Source: `packages/core/src/components/forms/FrameField.vue`
+
+#### Properties
+
+| Name                     | Type                                                  | Default    | Description                                                                                                                                                                                                                                                                                                                 |
+| ------------------------ | ----------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                   | `string \| undefined`                                 | Omitted    | The name of the field. Submitted with its owning form as part of a name/value pair, and used to match server `errors` on a `FormRoot`. Takes precedence over the `name` of the control.                                                                                                                                     |
+| `disabled`               | `boolean \| undefined`                                | false      | When `true`, prevents the user from interacting with the field's control. Takes precedence over the `disabled` of the control.                                                                                                                                                                                              |
+| `required`               | `boolean \| undefined`                                | false      | When `true`, indicates that the user must set the value before the owning form can be submitted.                                                                                                                                                                                                                            |
+| `invalid`                | `boolean \| undefined`                                | false      | When `true`, marks the field invalid regardless of its own validation. Useful when the field state is controlled by an external library.                                                                                                                                                                                    |
+| `dirty`                  | `boolean \| undefined`                                | false      | Whether the field's value has changed from its initial value. Useful when the field state is controlled by an external library.                                                                                                                                                                                             |
+| `touched`                | `boolean \| undefined`                                | false      | Whether the field has been touched (its control blurred). Useful when the field state is controlled by an external library.                                                                                                                                                                                                 |
+| `validate`               | `FieldValidateFn \| undefined`                        | Omitted    | Custom validation function. Return an error message (or array of messages) when invalid, or `null`/`undefined` when valid. Receives the control's value and the values of every named field in the owning form. Can be async, but an async `validate` does not prevent form submission when `validationMode` is `onSubmit`. |
+| `validationMode`         | `FieldValidationMode \| undefined`                    | "onSubmit" | When the field (re-)runs validation. Takes precedence over the `validationMode` of an ancestor `FormRoot`. - `onSubmit`: when the form is submitted, then on every change after that. - `onBlur`: when the control loses focus. - `onChange`: on every change to the control's value. defaultValue: "onSubmit"              |
+| `validationDebounceTime` | `number \| undefined`                                 | Omitted    | How long to wait (in ms) between `validate` calls when validating on change.                                                                                                                                                                                                                                                |
+| `asChild`                | `boolean \| undefined`                                | false      | Change the default rendered element for the one passed as a child, merging their props and behavior. Read our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.                                                                                                                        |
+| `as`                     | `Component \| AsTag \| undefined`                     | "div"      | The element or component this component should render as. Can be overwritten by `asChild`. defaultValue: "div"                                                                                                                                                                                                              |
+| `tooltip`                | `string \| false \| undefined`                        | Omitted    | Tooltip text; false disables it. When omitted, the native title attribute is used.                                                                                                                                                                                                                                          |
+| `tooltipPlacement`       | `"top" \| "bottom" \| "left" \| "right" \| undefined` | Omitted    | Preferred tooltip side; positioning falls back when space is limited.                                                                                                                                                                                                                                                       |
+| `label`                  | `string \| undefined`                                 | Omitted    | Label rendered before the slotted control.                                                                                                                                                                                                                                                                                  |
+| `description`            | `string \| undefined`                                 | Omitted    | Supporting description associated with the control.                                                                                                                                                                                                                                                                         |
+| `error`                  | `string \| undefined`                                 | Omitted    | Explicit validation error; also marks the field invalid.                                                                                                                                                                                                                                                                    |
+
+#### Events
+
+No declared entries.
+
+#### Slots
+
+| Name      | Parameters | Return type  | Description                                                                             |
+| --------- | ---------- | ------------ | --------------------------------------------------------------------------------------- |
+| `default` | `None`     | `VNodeChild` | Form control composed through the field primitive to associate labels and descriptions. |
+| `tooltip` | `None`     | `VNodeChild` | Custom tooltip content for the field.                                                   |
+
+#### Exposed API
+
+No declared entries.
+
+<!-- /frame:generated -->
+
+### Composition and upstream reference
 
 Defaults below are Reka reference defaults unless a Frame override is stated. Declared means a typed Frame prop/event; Forwarded means attribute/listener fallthrough to the named part; Internal means generated by Frame; Absent means not routed or composed. Generic upstream `T`/`AcceptableValue` describes Reka, not a promise of arbitrary option values in Frame.
 
-### Root
+#### Root
 
 #### Props
 
@@ -116,7 +214,7 @@ No component emits on this part. Native bubbling listeners are not additional co
 
 Frame does not defineExpose or forward the internal Reka instance. Reka’s validate(): boolean is therefore not a FrameField ref method.
 
-### Label
+#### Label
 
 #### Props
 
@@ -147,7 +245,7 @@ Underlying default content has no documented scoped fields. Frame generates this
 | `data-filled`   | `Present when true` | Nonempty value; shared on participating field parts.             |
 | `data-focused`  | `Present when true` | Control currently focused; shared on participating field parts.  |
 
-### Control
+#### Control
 
 #### Props
 
@@ -181,7 +279,7 @@ Underlying default content has no documented scoped fields. Frame passes caller 
 | `data-filled`   | `Present when true` | Nonempty value; shared on participating field parts.             |
 | `data-focused`  | `Present when true` | Control currently focused; shared on participating field parts.  |
 
-### Description
+#### Description
 
 #### Props
 
@@ -211,7 +309,7 @@ Underlying default content has no documented scoped fields. Frame generates this
 | `data-filled`   | `Present when true` | Nonempty value; shared on participating field parts.             |
 | `data-focused`  | `Present when true` | Control currently focused; shared on participating field parts.  |
 
-### Error
+#### Error
 
 #### Props
 
@@ -246,11 +344,11 @@ No component emits on this part. Native bubbling listeners are not additional co
 | `data-focused`  | `Present when true` | Control currently focused; shared on participating field parts.  |
 | `data-state`    | `open \| closed`    | Error presence state; closing can wait for animation.            |
 
-### Omitted parts
+#### Omitted parts
 
 `Validity` are not rendered by this wrapper. Their props, slots, presence controls, and composition APIs are not available through Frame. See the [Reka reference](https://reka-ui.com/docs/components/field).
 
-### Frame additions
+#### Frame additions
 
 #### Props
 
@@ -268,13 +366,31 @@ No additional Frame-only events; see the part tables for declared or forwarded e
 
 `default`: one control child merged through FieldControl asChild. No scoped payload. Label, Description and Error have no public slots.
 
-### Sources and version
+#### Sources and version
 
 Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/field), its [Markdown reference](https://reka-ui.com/docs/components/field.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameField.vue). Styling comes from [advanced.css](../../../packages/core/src/components/forms/shared/advanced.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
 
 ## Styling
 
-### Parts and selectors
+Use the shared theme variables in application content. Component-specific declarations and their defaults are listed below.
+
+<!-- frame:generated styles="field" -->
+
+| CSS variable     | Theme path     | Default expression                      | Purpose                                                                              | Context                                                           |
+| ---------------- | -------------- | --------------------------------------- | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| `--frame-gap`    | `frame.gap`    | `calc(var(--frame-spacing-unit) * 1.5)` | Standard space between related content items and control children.                   | `.frame-field`                                                    |
+| `--frame-text`   | `frame.text`   | `#cccccc`                               | Primary foreground for readable text and icons across shell and application content. | `.frame-field-label`                                              |
+| `--frame-muted`  | `frame.muted`  | `#8e9496`                               | Secondary foreground for descriptions, hints, and visually subordinate content.      | `.frame-field-description`                                        |
+| `--frame-danger` | `frame.danger` | `#f48771`                               | Foreground of field validation messages.                                             | `.frame-field-error`                                              |
+| `--frame-danger` | `frame.danger` | `#f48771`                               | Border color of a field marked invalid.                                              | `.frame-field [data-invalid], .frame-field [aria-invalid='true']` |
+
+Expressions are preserved as written; their computed values depend on the active theme and component state.
+
+<!-- /frame:generated -->
+
+### Additional styling guidance
+
+#### Parts and selectors
 
 | Selector                   | Part                                    | Placement                                                                        |
 | -------------------------- | --------------------------------------- | -------------------------------------------------------------------------------- |
@@ -285,7 +401,7 @@ Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https:
 
 Error/description font sizes are fixed at 11px; label weight is 500. The invalid descendant rule changes border-color, not every invalid child’s entire appearance.
 
-### Variables
+#### Variables
 
 | Token key        | Variable         | Value kind | Default/fallback                                                                                | Part/effect                                                       | Scope/limits                                                                         | Description                                                             |
 | ---------------- | ---------------- | ---------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |

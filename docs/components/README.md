@@ -1,43 +1,104 @@
-# Components
+# Frame components
 
-Frame components are imported from `@frame/core`. Load `@frame/core/style.css` once in your application. These form controls work without `createFrame()` or `FrameShell`.
+Each page contains Features, APIs and Styling. On the website, Playground opens the separate interactive demo.
 
-Start with the smallest control that fits your data:
-
-For keyboard combinations, use [FrameKeycap](keycap.md).
-
-For glyphs and compact actions, see [icon controls](icon-controls.md), including rotation, flips, and icon-only hover emphasis.
-
-| Component | Use it for |
-| --- | --- |
-| [FrameFileUpload / FrameFileDropZone](forms/file-upload.md) | Choosing files, visible drop targets, and invisible workspace drop overlays |
-| [FrameLabel](forms/label.md) | A visible label associated with a control |
-| [FrameTextField](forms/text-input.md) | One line of text, passwords, email, or a native numeric input |
-| [FrameTextArea](forms/text-area.md) | Multiple lines of plain text |
-| [FrameCheckbox](forms/checkbox.md) | An independent boolean choice, such as accepting terms |
-| [FrameSwitch](forms/switch.md) | A boolean setting presented as an on/off switch |
-| [FrameSelect](forms/select.md) | One string value chosen from a fixed list |
-| [FrameNumberField](forms/number-field.md) | Numeric quantities with parsing and step buttons |
-| [FrameRadioGroup](forms/radio-group.md) | One visible choice from a string-valued list |
-| [FrameCheckboxGroup](forms/checkbox-group.md) | Multiple string choices with group keyboard navigation |
-| [FramePinField](forms/pin-input.md) | A short code entered across individual cells |
-| [FrameTagField](forms/tags-input.md) | Adding and removing committed string tags |
-| [FrameAutocomplete](forms/autocomplete.md) | Free text with suggestions |
-| [FrameCombobox](forms/combobox.md) | Searching a fixed list for one string choice |
-| [FrameEditable](forms/editable.md) | Inline text editing with commit and cancellation |
-| [FrameField](forms/field.md) | Labels, descriptions, and validation around a control |
-| [FrameForm](forms/form.md) | Registered field validation and application submission |
-| [FrameListbox](forms/listbox.md) | An always-visible single or multiple selection list |
-| [FrameRating](forms/rating.md) | Numeric ratings with fractional steps |
-| [FrameSlider](forms/slider.md) | A numeric value adjusted on a horizontal track |
-| [FrameTagGroup](forms/tag-group.md) | Displaying, selecting, and removing existing tags |
-| [FrameToggle](forms/toggle.md) | A button with a boolean pressed state |
-| [FrameToggleGroup](forms/toggle-group.md) | Single or multiple pressed-state choices |
-
-Each page documents Frame's wrapper: its actual props, events, slots, and behavior. It does not imply that every underlying Reka option is part of Frame's public API. Values belong to the host; controls emit updates and do not save data or call a backend.
-
-Every component page follows three sections: Features, APIs, and Styling. Features contains anatomy and examples; APIs documents the individual parts and Frame additions; Styling maps selectors and override variables. The [Reka coverage review](../reference/reka-coverage.md) records the upstream comparison behind these references.
-
-The examples are ordinary Vue single-file components. Follow-up examples on a page reuse that page's setup unless stated otherwise. Markdown is the source documentation; live website examples can be added separately later.
-
-These pages cover the current Forms category and the standalone text, checkbox, select, and slider controls. Colors and dates/times are separate catalog categories and still need their own guides. See [theme variables](../styling/theme-variables.md) for shared tokens and [getting started](../guides/getting-started.md) for the application shell.
+- [Accordion](general-accordion.md)
+- [Aspect Ratio](general-aspect-ratio.md)
+- [Avatar](general-avatar.md)
+- [Collapsible](general-collapsible.md)
+- [Pagination](general-pagination.md)
+- [Progress](general-progress.md)
+- [Scroll Area](general-scroll-area.md)
+- [Separator](general-separator.md)
+- [Tabs](general-tabs.md)
+- [Stepper](general-stepper.md)
+- [Toolbar](general-toolbar.md)
+- [Tree](general-tree.md)
+- [Splitter](general-splitter.md)
+- [Navigation Menu](general-navigation-menu.md)
+- [Menubar](general-menubar.md)
+- [Dialog](general-dialog.md)
+- [Alert Dialog](general-alert-dialog.md)
+- [Drawer](general-drawer.md)
+- [Popover](general-popover.md)
+- [Hover Card](general-hover-card.md)
+- [Dropdown Menu](general-dropdown-menu.md)
+- [Context Menu](general-context-menu.md)
+- [Toast](general-toast.md)
+- [Autocomplete](forms/autocomplete.md)
+- [Field](forms/field.md)
+- [Field Group](input-group.md)
+- [Form](forms/form.md)
+- [Rating](forms/rating.md)
+- [Tag Group](forms/tag-group.md)
+- [Label](forms/label.md)
+- [Checkbox Group](forms/checkbox-group.md)
+- [Color Area](color-area.md)
+- [HSV Rectangle](color-hsv-rectangle.md)
+- [HSV Wheel](color-hsv-wheel.md)
+- [VHS Circle](color-vhs-circle.md)
+- [Color Field](color-field.md)
+- [Color Slider](color-slider.md)
+- [Color Swatch](color-swatch.md)
+- [Color Swatch Picker](color-swatch-picker.md)
+- [Combobox](forms/combobox.md)
+- [Editable](forms/editable.md)
+- [Listbox](forms/listbox.md)
+- [Number Field](forms/number-field.md)
+- [Scrub Field](scrub-field.md)
+- [Pin Field](forms/pin-input.md)
+- [Radio Group](forms/radio-group.md)
+- [Switch](forms/switch.md)
+- [Tag Field](forms/tags-input.md)
+- [Toggle](forms/toggle.md)
+- [Toggle Group](forms/toggle-group.md)
+- [Calendar](calendar.md)
+- [Range Calendar](range-calendar.md)
+- [Date Field](date-field.md)
+- [Date Picker](date-picker.md)
+- [Date Range Field](date-range-field.md)
+- [Date Range Picker](date-range-picker.md)
+- [Time Field](time-field.md)
+- [Time Range Field](time-range-field.md)
+- [Month Picker](month-picker.md)
+- [Month Range Picker](month-range-picker.md)
+- [Year Picker](year-picker.md)
+- [Year Range Picker](year-range-picker.md)
+- [File Upload](forms/file-upload.md)
+- [File Drop Zone](file-drop-zone.md)
+- [Prompt](ai-prompt.md)
+- [Assistant](ai-chat.md)
+- [History](ai-history.md)
+- [Universal File Viewer](universal-viewer.md)
+- [Code Editor](code-editor.md)
+- [Terminal](terminal.md)
+- [Code Block](code-block.md)
+- [Back And Forward](navigation.md)
+- [Conversation](ai-conversation.md)
+- [Loader](loader.md)
+- [Loading Region](loading.md)
+- [Buttons](buttons.md)
+- [Icon Buttons](icon-buttons.md)
+- [Text Field](forms/text-input.md)
+- [Checkboxes](forms/checkbox.md)
+- [Selects](forms/select.md)
+- [Sliders](forms/slider.md)
+- [Color Pickers](color-picker.md)
+- [Text Areas](forms/text-area.md)
+- [Settings Controls](setting-controls.md)
+- [Icons](icons.md)
+- [Tooltips](tooltips.md)
+- [Dropdown Menus](menus.md)
+- [Context Menus](context-menu.md)
+- [Resizable Panes](resizable-panes.md)
+- [Resize Handles](resize-handle.md)
+- [Modals](modals.md)
+- [Settings](settings.md)
+- [Notifications](notifications.md)
+- [Notification History](notification-panel.md)
+- [Quick Pick](quick-input.md)
+- [Quick Panel](quick-panel.md)
+- [Banner](banner.md)
+- [Workspace Panes](workspace.md)
+- [Views And Sections](views.md)
+- [Navigation Items](navigation-items.md)

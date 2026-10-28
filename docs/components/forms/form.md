@@ -58,11 +58,107 @@ FormRoot sets `novalidate` and coordinates native constraints through its regist
 
 Use actual submit buttons and one FrameField per named input. Native form attributes such as action, method, autocomplete, and aria-label fall through. Changing `as` away from a form also changes native submission semantics; retain the default for ordinary forms. Reka’s ref-level validate method is not forwarded by FrameForm.
 
+### Validate before submission
+
+Clear the project name and submit to see validation. Enter a name and submit again to see the collected values.
+
+<!-- frame:example id="form.submit" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameForm, FrameField, FrameTextField, FrameButton } from '@frame/core';
+const fieldValue = ref('Project name');
+const submitted = ref("");
+function submit(values: Record<string, unknown>, event: SubmitEvent) { event.preventDefault(); submitted.value = JSON.stringify(values); }
+</script>
+<template>
+<FrameForm  @form-submit="submit"><FrameField name="projectName" label="Project name" required><FrameTextField v-model="fieldValue" /></FrameField><FrameButton type="submit"><span v-text="&quot;Submit project&quot;" /></FrameButton><p role="status">{{ submitted }}</p></FrameForm>
+</template>
+```
+
+### Display a server error
+
+A server error is keyed by projectName. Editing that field clears its reported error.
+
+<!-- frame:example id="form.server-error" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameForm, FrameField, FrameTextField, FrameButton } from '@frame/core';
+const demoErrors = {
+  "projectName": "This name is already registered."
+};
+const fieldValue = ref('Project name');
+const submitted = ref("");
+function submit(values: Record<string, unknown>, event: SubmitEvent) { event.preventDefault(); submitted.value = JSON.stringify(values); }
+</script>
+<template>
+<FrameForm :errors="demoErrors" @form-submit="submit"><FrameField name="projectName" label="Project name" required><FrameTextField v-model="fieldValue" /></FrameField><FrameButton type="submit"><span v-text="&quot;Save project&quot;" /></FrameButton><p role="status">{{ submitted }}</p></FrameForm>
+</template>
+```
+
+### Set validation timing for the form
+
+Fields inherit blur validation from this form. Clear the input, then leave it to reveal the required message.
+
+<!-- frame:example id="form.blur" -->
+
+```vue
+<script setup lang="ts">
+import { h, ref, shallowRef, onBeforeUnmount } from 'vue';
+import { FrameForm, FrameField, FrameTextField, FrameButton } from '@frame/core';
+const fieldValue = ref('Project name');
+const submitted = ref("");
+function submit(values: Record<string, unknown>, event: SubmitEvent) { event.preventDefault(); submitted.value = JSON.stringify(values); }
+</script>
+<template>
+<FrameForm :validation-mode="&quot;onBlur&quot;" @form-submit="submit"><FrameField name="projectName" label="Project name" required><FrameTextField v-model="fieldValue" /></FrameField><FrameButton type="submit"><span v-text="&quot;Save changes&quot;" /></FrameButton><p role="status">{{ submitted }}</p></FrameForm>
+</template>
+```
+
 ## APIs
+
+<!-- frame:generated api="form" -->
+
+### FrameForm
+
+Source: `packages/core/src/components/forms/FrameForm.vue`
+
+#### Properties
+
+| Name             | Type                                              | Default    | Description                                                                                                                                                                                                                                                                             |
+| ---------------- | ------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `errors`         | `Record<string, string \| string[]> \| undefined` | Omitted    | A map of field `name` to server-side error message(s). Displayed by the matching `FieldRoot`'s `FieldError` until the user edits that field, or a new value for that key is provided.                                                                                                   |
+| `validationMode` | `FieldValidationMode \| undefined`                | "onSubmit" | When fields validate. The `validationMode` of a `FieldRoot` takes precedence over this. - `onSubmit`: when the form is submitted, then on every change after that. - `onBlur`: when a control loses focus. - `onChange`: on every change to a control's value. defaultValue: "onSubmit" |
+| `asChild`        | `boolean \| undefined`                            | false      | Change the default rendered element for the one passed as a child, merging their props and behavior. Read our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.                                                                                    |
+| `as`             | `Component \| AsTag \| undefined`                 | "div"      | The element or component this component should render as. Can be overwritten by `asChild`. defaultValue: "div"                                                                                                                                                                          |
+
+#### Events
+
+| Name         | Parameters                                            | Return type | Description                                                                                                                                                                                                                                                                                             |
+| ------------ | ----------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `submit`     | `event: SubmitEvent`                                  | `void`      | Emitted with the native submit event once every field has validated successfully. When any field is invalid, the native submission is prevented and this isn't emitted. Otherwise the form submits natively (e.g. to its `action`) unless you call `event.preventDefault()`, or listen to `formSubmit`. |
+| `formSubmit` | `values: Record<string, unknown>, event: SubmitEvent` | `void`      | Emitted after `submit` with the values of every named field. Listening to it prevents the native submission.                                                                                                                                                                                            |
+
+#### Slots
+
+| Name      | Parameters | Return type  | Description                          |
+| --------- | ---------- | ------------ | ------------------------------------ |
+| `default` | `None`     | `VNodeChild` | Form fields and submission controls. |
+
+#### Exposed API
+
+No declared entries.
+
+<!-- /frame:generated -->
+
+### Composition and upstream reference
 
 Defaults below are Reka reference defaults unless a Frame override is stated. Declared means a typed Frame prop/event; Forwarded means attribute/listener fallthrough to the named part; Internal means generated by Frame; Absent means not routed or composed. Generic upstream `T`/`AcceptableValue` describes Reka, not a promise of arbitrary option values in Frame.
 
-### Root
+#### Root
 
 #### Props
 
@@ -92,7 +188,7 @@ No component state data attributes are defined on this part. Inherited native/AR
 
 Frame does not defineExpose or forward the internal Reka instance. Reka’s validate(fieldName?: string): boolean is therefore not a FrameForm ref method.
 
-### Frame additions
+#### Frame additions
 
 #### Props
 
@@ -106,13 +202,27 @@ No additional Frame-only events; see the part tables for declared or forwarded e
 
 `default`: application form content; no scoped payload.
 
-### Sources and version
+#### Sources and version
 
 Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https://reka-ui.com/docs/components/form), its [Markdown reference](https://reka-ui.com/docs/components/form.md), and [Frame implementation](../../../packages/core/src/components/forms/FrameForm.vue). Styling comes from [advanced.css](../../../packages/core/src/components/forms/shared/advanced.css) and [shared styles](../../../packages/core/src/style.css). JSON availability comes from the [token catalog](../../../packages/core/src/themes/tokens/tokenCatalog.ts).
 
 ## Styling
 
-### Parts and selectors
+Use the shared theme variables in application content. Component-specific declarations and their defaults are listed below.
+
+<!-- frame:generated styles="form" -->
+
+| CSS variable              | Theme path              | Default expression                    | Purpose                                                                         | Context       |
+| ------------------------- | ----------------------- | ------------------------------------- | ------------------------------------------------------------------------------- | ------------- |
+| `--frame-content-padding` | `frame.content.padding` | `calc(var(--frame-spacing-unit) * 3)` | Standard inset around content in panels, disclosures, and application surfaces. | `.frame-form` |
+
+Expressions are preserved as written; their computed values depend on the active theme and component state.
+
+<!-- /frame:generated -->
+
+### Additional styling guidance
+
+#### Parts and selectors
 
 | Selector      | Part | Placement                                                                        |
 | ------------- | ---- | -------------------------------------------------------------------------------- |
@@ -120,7 +230,7 @@ Checked against installed `reka-ui@2.11.0`, the [official Reka reference](https:
 
 Root uses grid layout with the shared content-padding gap. It has no dedicated border, background, or submit-button tokens.
 
-### Variables
+#### Variables
 
 | Token key                 | Variable                  | Value kind | Default/fallback                                                                              | Part/effect | Scope/limits                                        | Description    |
 | ------------------------- | ------------------------- | ---------- | --------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------------- | -------------- |
